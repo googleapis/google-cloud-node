@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -341,7 +341,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -382,7 +382,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -439,7 +439,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addHealthCheck = stubSimpleCall(
         undefined,
@@ -511,7 +511,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -552,7 +552,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -609,7 +609,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addInstance = stubSimpleCall(
         undefined,
@@ -681,7 +681,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -722,7 +722,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -779,7 +779,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
@@ -848,7 +848,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TargetPool()
       );
@@ -888,7 +888,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TargetPool()
       );
@@ -943,7 +943,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -1011,7 +1011,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TargetPoolInstanceHealth()
       );
@@ -1052,7 +1052,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TargetPoolInstanceHealth()
       );
@@ -1109,7 +1109,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getHealth = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getHealth(request), expectedError);
@@ -1173,7 +1173,7 @@ describe('v1.TargetPoolsClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1209,7 +1209,7 @@ describe('v1.TargetPoolsClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1261,7 +1261,7 @@ describe('v1.TargetPoolsClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -1325,7 +1325,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1366,7 +1366,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1423,7 +1423,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeHealthCheck = stubSimpleCall(
         undefined,
@@ -1495,7 +1495,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1536,7 +1536,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1593,7 +1593,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeInstance = stubSimpleCall(
         undefined,
@@ -1665,7 +1665,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1706,7 +1706,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1763,7 +1763,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setBackup = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.setBackup(request), expectedError);
@@ -1832,7 +1832,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1873,7 +1873,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1930,7 +1930,7 @@ describe('v1.TargetPoolsClient', () => {
         ['targetPool']
       );
       request.targetPool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&target_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setSecurityPolicy = stubSimpleCall(
         undefined,
@@ -1992,7 +1992,7 @@ describe('v1.TargetPoolsClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         [
           'tuple_key_1',
@@ -2052,7 +2052,7 @@ describe('v1.TargetPoolsClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.aggregatedList.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2101,7 +2101,7 @@ describe('v1.TargetPoolsClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.TargetPool()),
         generateSampleMessage(new protos.google.cloud.compute.v1.TargetPool()),
@@ -2138,7 +2138,7 @@ describe('v1.TargetPoolsClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.TargetPool()),
         generateSampleMessage(new protos.google.cloud.compute.v1.TargetPool()),
@@ -2190,7 +2190,7 @@ describe('v1.TargetPoolsClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -2222,7 +2222,7 @@ describe('v1.TargetPoolsClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.TargetPool()),
         generateSampleMessage(new protos.google.cloud.compute.v1.TargetPool()),
@@ -2281,7 +2281,7 @@ describe('v1.TargetPoolsClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -2337,7 +2337,7 @@ describe('v1.TargetPoolsClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.TargetPool()),
         generateSampleMessage(new protos.google.cloud.compute.v1.TargetPool()),
@@ -2384,7 +2384,7 @@ describe('v1.TargetPoolsClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

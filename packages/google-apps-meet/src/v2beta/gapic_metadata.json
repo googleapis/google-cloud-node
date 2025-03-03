@@ -183,9 +183,36 @@
                 "updateSpace"
               ]
             },
+            "ConnectActiveConference": {
+              "methods": [
+                "connectActiveConference"
+              ]
+            },
             "EndActiveConference": {
               "methods": [
                 "endActiveConference"
+              ]
+            },
+            "CreateMember": {
+              "methods": [
+                "createMember"
+              ]
+            },
+            "GetMember": {
+              "methods": [
+                "getMember"
+              ]
+            },
+            "DeleteMember": {
+              "methods": [
+                "deleteMember"
+              ]
+            },
+            "ListMembers": {
+              "methods": [
+                "listMembers",
+                "listMembersStream",
+                "listMembersAsync"
               ]
             }
           }
@@ -208,9 +235,36 @@
                 "updateSpace"
               ]
             },
+            "ConnectActiveConference": {
+              "methods": [
+                "connectActiveConference"
+              ]
+            },
             "EndActiveConference": {
               "methods": [
                 "endActiveConference"
+              ]
+            },
+            "CreateMember": {
+              "methods": [
+                "createMember"
+              ]
+            },
+            "GetMember": {
+              "methods": [
+                "getMember"
+              ]
+            },
+            "DeleteMember": {
+              "methods": [
+                "deleteMember"
+              ]
+            },
+            "ListMembers": {
+              "methods": [
+                "listMembers",
+                "listMembersStream",
+                "listMembersAsync"
               ]
             }
           }

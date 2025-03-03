@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -534,8 +534,8 @@ export class WebhooksClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the webhook.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/webhooks/<Webhook ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/webhooks/<WebhookID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -626,7 +626,7 @@ export class WebhooksClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to create a webhook for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {google.cloud.dialogflow.cx.v3.Webhook} request.webhook
    *   Required. The webhook to create.
    * @param {object} [options]
@@ -812,8 +812,8 @@ export class WebhooksClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the webhook to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/webhooks/<Webhook ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/webhooks/<WebhookID>`.
    * @param {boolean} request.force
    *   This field has no effect for webhook not being used.
    *   For webhooks that are used by pages/flows/transition route groups:
@@ -916,7 +916,7 @@ export class WebhooksClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all webhooks for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1010,12 +1010,12 @@ export class WebhooksClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listWebhooks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all webhooks for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1062,7 +1062,7 @@ export class WebhooksClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all webhooks for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1211,7 +1211,7 @@ export class WebhooksClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1224,6 +1224,20 @@ export class WebhooksClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1260,6 +1274,13 @@ export class WebhooksClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1295,11 +1316,11 @@ export class WebhooksClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1308,6 +1329,20 @@ export class WebhooksClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1338,7 +1373,7 @@ export class WebhooksClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1351,6 +1386,20 @@ export class WebhooksClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

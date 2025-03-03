@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ function main() {
    */
 
   // Imports the Publish library
-  const {StreetViewPublishServiceClient} = require('@googlemaps/streetview-publishw-publishw-publishw-publishw-publishw-publish').v1;
+  const {StreetViewPublishServiceClient} = require('@googlemaps/streetview-publish').v1;
 
   // Instantiates a client
   const publishClient = new StreetViewPublishServiceClient();

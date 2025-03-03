@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. The playbook to list the examples from.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/playbooks/<Playbook ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
    */
   // const parent = 'abc123'
   /**
@@ -46,7 +46,7 @@ function main(parent) {
   // const pageToken = 'abc123'
   /**
    *  Optional. The language to list examples for.
-   *  If not specified, the agent's default language is used.
+   *  If not specified, list all examples under the playbook.
    *  Note: languages must be enabled in the agent before they can be used.
    */
   // const languageCode = 'abc123'

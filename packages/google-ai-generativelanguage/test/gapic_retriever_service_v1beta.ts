@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -408,7 +408,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Corpus()
       );
@@ -439,7 +439,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Corpus()
       );
@@ -486,7 +486,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCorpus = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getCorpus(request), expectedError);
@@ -536,7 +536,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['corpus', 'name']
       );
       request.corpus.name = defaultValue1;
-      const expectedHeaderRequestParams = `corpus.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `corpus.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Corpus()
       );
@@ -568,7 +568,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['corpus', 'name']
       );
       request.corpus.name = defaultValue1;
-      const expectedHeaderRequestParams = `corpus.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `corpus.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Corpus()
       );
@@ -616,7 +616,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['corpus', 'name']
       );
       request.corpus.name = defaultValue1;
-      const expectedHeaderRequestParams = `corpus.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `corpus.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCorpus = stubSimpleCall(
         undefined,
@@ -669,7 +669,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -700,7 +700,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -747,7 +747,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCorpus = stubSimpleCall(
         undefined,
@@ -799,7 +799,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.QueryCorpusResponse()
       );
@@ -830,7 +830,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.QueryCorpusResponse()
       );
@@ -877,7 +877,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryCorpus = stubSimpleCall(
         undefined,
@@ -929,7 +929,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Document()
       );
@@ -960,7 +960,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Document()
       );
@@ -1007,7 +1007,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDocument = stubSimpleCall(
         undefined,
@@ -1059,7 +1059,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Document()
       );
@@ -1090,7 +1090,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Document()
       );
@@ -1137,7 +1137,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDocument = stubSimpleCall(
         undefined,
@@ -1190,7 +1190,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['document', 'name']
       );
       request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `document.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Document()
       );
@@ -1222,7 +1222,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['document', 'name']
       );
       request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `document.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Document()
       );
@@ -1270,7 +1270,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['document', 'name']
       );
       request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `document.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDocument = stubSimpleCall(
         undefined,
@@ -1323,7 +1323,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1354,7 +1354,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1401,7 +1401,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDocument = stubSimpleCall(
         undefined,
@@ -1453,7 +1453,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.QueryDocumentResponse()
       );
@@ -1484,7 +1484,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.QueryDocumentResponse()
       );
@@ -1531,7 +1531,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryDocument = stubSimpleCall(
         undefined,
@@ -1583,7 +1583,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Chunk()
       );
@@ -1614,7 +1614,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Chunk()
       );
@@ -1661,7 +1661,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createChunk = stubSimpleCall(
         undefined,
@@ -1713,7 +1713,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.BatchCreateChunksResponse()
       );
@@ -1744,7 +1744,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.BatchCreateChunksResponse()
       );
@@ -1791,7 +1791,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCreateChunks = stubSimpleCall(
         undefined,
@@ -1843,7 +1843,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Chunk()
       );
@@ -1874,7 +1874,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Chunk()
       );
@@ -1921,7 +1921,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getChunk = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getChunk(request), expectedError);
@@ -1971,7 +1971,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['chunk', 'name']
       );
       request.chunk.name = defaultValue1;
-      const expectedHeaderRequestParams = `chunk.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `chunk.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Chunk()
       );
@@ -2003,7 +2003,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['chunk', 'name']
       );
       request.chunk.name = defaultValue1;
-      const expectedHeaderRequestParams = `chunk.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `chunk.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Chunk()
       );
@@ -2051,7 +2051,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['chunk', 'name']
       );
       request.chunk.name = defaultValue1;
-      const expectedHeaderRequestParams = `chunk.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `chunk.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateChunk = stubSimpleCall(
         undefined,
@@ -2104,7 +2104,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.BatchUpdateChunksResponse()
       );
@@ -2135,7 +2135,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.BatchUpdateChunksResponse()
       );
@@ -2182,7 +2182,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchUpdateChunks = stubSimpleCall(
         undefined,
@@ -2234,7 +2234,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2265,7 +2265,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2312,7 +2312,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteChunk = stubSimpleCall(
         undefined,
@@ -2364,7 +2364,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2395,7 +2395,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2442,7 +2442,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchDeleteChunks = stubSimpleCall(
         undefined,
@@ -2733,7 +2733,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ai.generativelanguage.v1beta.Document()
@@ -2772,7 +2772,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ai.generativelanguage.v1beta.Document()
@@ -2829,7 +2829,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDocuments = stubSimpleCall(
         undefined,
@@ -2860,7 +2860,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ai.generativelanguage.v1beta.Document()
@@ -2921,7 +2921,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDocuments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2971,7 +2971,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ai.generativelanguage.v1beta.Document()
@@ -3021,7 +3021,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDocuments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3064,7 +3064,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ai.generativelanguage.v1beta.Chunk()
@@ -3103,7 +3103,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ai.generativelanguage.v1beta.Chunk()
@@ -3158,7 +3158,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listChunks = stubSimpleCall(
         undefined,
@@ -3189,7 +3189,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ai.generativelanguage.v1beta.Chunk()
@@ -3250,7 +3250,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChunks.createStream = stubPageStreamingCall(
         undefined,
@@ -3302,7 +3302,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ai.generativelanguage.v1beta.Chunk()
@@ -3351,7 +3351,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChunks.asyncIterate = stubAsyncIterationCall(
         undefined,

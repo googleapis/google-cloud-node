@@ -40,12 +40,20 @@ module.exports = async ({ github, context }) => {
     const isBugTemplate = issue.data.body.includes("Link to the code that reproduces this issue");
 
     if (isBugTemplate) {
+        console.log(`Issue ${number} is a bug template`)
         try {
-            const link = issue.data.body.split("\n")[18].match(/(https?:\/\/g?i?s?t\.?github.com\/.*)/);
-            const isValidLink = (await fetch(link)).ok;
-            if (!isValidLink) {
-            await closeIssue(github, owner, repo, number);
-            }
+            const text = issue.data.body;
+            const match = text.match(/Link to the code that reproduces this issue. A link to a \*\*public\*\* Github Repository with a minimal reproduction/);
+            if (match) {
+                const nextLineIndex = text.indexOf('http', match.index);
+                const link = text.substring(nextLineIndex, text.indexOf('\n', nextLineIndex));
+                console.log(`Issue ${number} contains this link: ${link}`);
+                const isValidLink = (await fetch(link)).ok;
+                console.log(`Issue ${number} has a ${isValidLink ? "valid" : "invalid"} link`)
+                if (!isValidLink) {
+                    await closeIssue(github, owner, repo, number);
+                }
+              }            
         } catch (err) {
             await closeIssue(github, owner, repo, number);
         }

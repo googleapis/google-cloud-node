@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,11 @@ function main(name) {
    *  Format: `accounts/{account}`
    */
   // const name = 'abc123'
+  /**
+   *  Optional. If set to `true`, the account is deleted even if it provides
+   *  services to other accounts or has processed offers.
+   */
+  // const force = true
 
   // Imports the Accounts library
   const {AccountsServiceClient} = require('@google-shopping/accounts').v1beta;

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/googleapis/google-cloud-node/compare/appconnectors-v1.3.0...appconnectors-v1.3.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6011](https://github.com/googleapis/google-cloud-node/issues/6011)) ([ee865ff](https://github.com/googleapis/google-cloud-node/commit/ee865ff34a696fbd657e4cfb6cc4be2f6651f77a))
+
 ## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/appconnectors-v1.2.0...appconnectors-v1.3.0) (2024-05-21)
 
 

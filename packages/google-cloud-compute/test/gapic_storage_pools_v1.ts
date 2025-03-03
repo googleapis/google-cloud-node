@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -343,7 +343,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -384,7 +384,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -441,7 +441,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
@@ -510,7 +510,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.StoragePool()
       );
@@ -550,7 +550,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.StoragePool()
       );
@@ -605,7 +605,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -673,7 +673,7 @@ describe('v1.StoragePoolsClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -714,7 +714,7 @@ describe('v1.StoragePoolsClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -771,7 +771,7 @@ describe('v1.StoragePoolsClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -838,7 +838,7 @@ describe('v1.StoragePoolsClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -874,7 +874,7 @@ describe('v1.StoragePoolsClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -926,7 +926,7 @@ describe('v1.StoragePoolsClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -990,7 +990,7 @@ describe('v1.StoragePoolsClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -1031,7 +1031,7 @@ describe('v1.StoragePoolsClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -1088,7 +1088,7 @@ describe('v1.StoragePoolsClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -1160,7 +1160,7 @@ describe('v1.StoragePoolsClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -1202,7 +1202,7 @@ describe('v1.StoragePoolsClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -1259,7 +1259,7 @@ describe('v1.StoragePoolsClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -1331,7 +1331,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1372,7 +1372,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1429,7 +1429,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.update = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.update(request), expectedError);
@@ -1488,7 +1488,7 @@ describe('v1.StoragePoolsClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         [
           'tuple_key_1',
@@ -1548,7 +1548,7 @@ describe('v1.StoragePoolsClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.aggregatedList.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1597,7 +1597,7 @@ describe('v1.StoragePoolsClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.StoragePool()),
         generateSampleMessage(new protos.google.cloud.compute.v1.StoragePool()),
@@ -1634,7 +1634,7 @@ describe('v1.StoragePoolsClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.StoragePool()),
         generateSampleMessage(new protos.google.cloud.compute.v1.StoragePool()),
@@ -1686,7 +1686,7 @@ describe('v1.StoragePoolsClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -1718,7 +1718,7 @@ describe('v1.StoragePoolsClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.StoragePool()),
         generateSampleMessage(new protos.google.cloud.compute.v1.StoragePool()),
@@ -1777,7 +1777,7 @@ describe('v1.StoragePoolsClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1833,7 +1833,7 @@ describe('v1.StoragePoolsClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.StoragePool()),
         generateSampleMessage(new protos.google.cloud.compute.v1.StoragePool()),
@@ -1880,7 +1880,7 @@ describe('v1.StoragePoolsClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1933,7 +1933,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.StoragePoolDisk()
@@ -1982,7 +1982,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.StoragePoolDisk()
@@ -2047,7 +2047,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDisks = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listDisks(request), expectedError);
@@ -2085,7 +2085,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.StoragePoolDisk()
@@ -2155,7 +2155,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDisks.createStream = stubPageStreamingCall(
         undefined,
@@ -2216,7 +2216,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.StoragePoolDisk()
@@ -2274,7 +2274,7 @@ describe('v1.StoragePoolsClient', () => {
         ['storagePool']
       );
       request.storagePool = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&storage_pool=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&storage_pool=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDisks.asyncIterate = stubAsyncIterationCall(
         undefined,

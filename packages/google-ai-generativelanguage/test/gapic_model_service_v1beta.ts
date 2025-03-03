@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -355,7 +355,7 @@ describe('v1beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Model()
       );
@@ -386,7 +386,7 @@ describe('v1beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.Model()
       );
@@ -433,7 +433,7 @@ describe('v1beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getModel = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getModel(request), expectedError);
@@ -482,7 +482,7 @@ describe('v1beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.TunedModel()
       );
@@ -513,7 +513,7 @@ describe('v1beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.TunedModel()
       );
@@ -560,7 +560,7 @@ describe('v1beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTunedModel = stubSimpleCall(
         undefined,
@@ -613,7 +613,7 @@ describe('v1beta.ModelServiceClient', () => {
         ['tunedModel', 'name']
       );
       request.tunedModel.name = defaultValue1;
-      const expectedHeaderRequestParams = `tuned_model.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tuned_model.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.TunedModel()
       );
@@ -645,7 +645,7 @@ describe('v1beta.ModelServiceClient', () => {
         ['tunedModel', 'name']
       );
       request.tunedModel.name = defaultValue1;
-      const expectedHeaderRequestParams = `tuned_model.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tuned_model.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.TunedModel()
       );
@@ -693,7 +693,7 @@ describe('v1beta.ModelServiceClient', () => {
         ['tunedModel', 'name']
       );
       request.tunedModel.name = defaultValue1;
-      const expectedHeaderRequestParams = `tuned_model.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tuned_model.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTunedModel = stubSimpleCall(
         undefined,
@@ -746,7 +746,7 @@ describe('v1beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -777,7 +777,7 @@ describe('v1beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -824,7 +824,7 @@ describe('v1beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTunedModel = stubSimpleCall(
         undefined,

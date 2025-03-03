@@ -1,5 +1,23 @@
 # Changelog
 
+## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v5.0.0...gke-hub-v5.0.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6013](https://github.com/googleapis/google-cloud-node/issues/6013)) ([cd3a2d4](https://github.com/googleapis/google-cloud-node/commit/cd3a2d44fc7a9b3798346162ba19df1c748fba58))
+
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.5.0...gke-hub-v5.0.0) (2025-01-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* [gkehub] Update the configmanagement feature ([#5925](https://github.com/googleapis/google-cloud-node/issues/5925))
+
+### Features
+
+* [gkehub] Update the configmanagement feature ([#5925](https://github.com/googleapis/google-cloud-node/issues/5925)) ([95905ab](https://github.com/googleapis/google-cloud-node/commit/95905ab973a7cc74540201eec9a889cb450c3a39))
+
 ## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.4.0...gke-hub-v4.5.0) (2024-06-26)
 
 

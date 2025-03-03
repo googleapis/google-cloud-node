@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8559,6 +8559,941 @@
                             return ScheduleOptions;
                         })();
     
+                        v1.ScheduleOptionsV2 = (function() {
+    
+                            /**
+                             * Properties of a ScheduleOptionsV2.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @interface IScheduleOptionsV2
+                             * @property {google.cloud.bigquery.datatransfer.v1.ITimeBasedSchedule|null} [timeBasedSchedule] ScheduleOptionsV2 timeBasedSchedule
+                             * @property {google.cloud.bigquery.datatransfer.v1.IManualSchedule|null} [manualSchedule] ScheduleOptionsV2 manualSchedule
+                             * @property {google.cloud.bigquery.datatransfer.v1.IEventDrivenSchedule|null} [eventDrivenSchedule] ScheduleOptionsV2 eventDrivenSchedule
+                             */
+    
+                            /**
+                             * Constructs a new ScheduleOptionsV2.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @classdesc Represents a ScheduleOptionsV2.
+                             * @implements IScheduleOptionsV2
+                             * @constructor
+                             * @param {google.cloud.bigquery.datatransfer.v1.IScheduleOptionsV2=} [properties] Properties to set
+                             */
+                            function ScheduleOptionsV2(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ScheduleOptionsV2 timeBasedSchedule.
+                             * @member {google.cloud.bigquery.datatransfer.v1.ITimeBasedSchedule|null|undefined} timeBasedSchedule
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2
+                             * @instance
+                             */
+                            ScheduleOptionsV2.prototype.timeBasedSchedule = null;
+    
+                            /**
+                             * ScheduleOptionsV2 manualSchedule.
+                             * @member {google.cloud.bigquery.datatransfer.v1.IManualSchedule|null|undefined} manualSchedule
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2
+                             * @instance
+                             */
+                            ScheduleOptionsV2.prototype.manualSchedule = null;
+    
+                            /**
+                             * ScheduleOptionsV2 eventDrivenSchedule.
+                             * @member {google.cloud.bigquery.datatransfer.v1.IEventDrivenSchedule|null|undefined} eventDrivenSchedule
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2
+                             * @instance
+                             */
+                            ScheduleOptionsV2.prototype.eventDrivenSchedule = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * ScheduleOptionsV2 schedule.
+                             * @member {"timeBasedSchedule"|"manualSchedule"|"eventDrivenSchedule"|undefined} schedule
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2
+                             * @instance
+                             */
+                            Object.defineProperty(ScheduleOptionsV2.prototype, "schedule", {
+                                get: $util.oneOfGetter($oneOfFields = ["timeBasedSchedule", "manualSchedule", "eventDrivenSchedule"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ScheduleOptionsV2 instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IScheduleOptionsV2=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2} ScheduleOptionsV2 instance
+                             */
+                            ScheduleOptionsV2.create = function create(properties) {
+                                return new ScheduleOptionsV2(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ScheduleOptionsV2 message. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IScheduleOptionsV2} message ScheduleOptionsV2 message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ScheduleOptionsV2.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.timeBasedSchedule != null && Object.hasOwnProperty.call(message, "timeBasedSchedule"))
+                                    $root.google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule.encode(message.timeBasedSchedule, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.manualSchedule != null && Object.hasOwnProperty.call(message, "manualSchedule"))
+                                    $root.google.cloud.bigquery.datatransfer.v1.ManualSchedule.encode(message.manualSchedule, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.eventDrivenSchedule != null && Object.hasOwnProperty.call(message, "eventDrivenSchedule"))
+                                    $root.google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule.encode(message.eventDrivenSchedule, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ScheduleOptionsV2 message, length delimited. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IScheduleOptionsV2} message ScheduleOptionsV2 message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ScheduleOptionsV2.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ScheduleOptionsV2 message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2} ScheduleOptionsV2
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ScheduleOptionsV2.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.timeBasedSchedule = $root.google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.manualSchedule = $root.google.cloud.bigquery.datatransfer.v1.ManualSchedule.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.eventDrivenSchedule = $root.google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ScheduleOptionsV2 message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2} ScheduleOptionsV2
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ScheduleOptionsV2.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ScheduleOptionsV2 message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ScheduleOptionsV2.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.timeBasedSchedule != null && message.hasOwnProperty("timeBasedSchedule")) {
+                                    properties.schedule = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule.verify(message.timeBasedSchedule);
+                                        if (error)
+                                            return "timeBasedSchedule." + error;
+                                    }
+                                }
+                                if (message.manualSchedule != null && message.hasOwnProperty("manualSchedule")) {
+                                    if (properties.schedule === 1)
+                                        return "schedule: multiple values";
+                                    properties.schedule = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.datatransfer.v1.ManualSchedule.verify(message.manualSchedule);
+                                        if (error)
+                                            return "manualSchedule." + error;
+                                    }
+                                }
+                                if (message.eventDrivenSchedule != null && message.hasOwnProperty("eventDrivenSchedule")) {
+                                    if (properties.schedule === 1)
+                                        return "schedule: multiple values";
+                                    properties.schedule = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule.verify(message.eventDrivenSchedule);
+                                        if (error)
+                                            return "eventDrivenSchedule." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ScheduleOptionsV2 message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2} ScheduleOptionsV2
+                             */
+                            ScheduleOptionsV2.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2();
+                                if (object.timeBasedSchedule != null) {
+                                    if (typeof object.timeBasedSchedule !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2.timeBasedSchedule: object expected");
+                                    message.timeBasedSchedule = $root.google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule.fromObject(object.timeBasedSchedule);
+                                }
+                                if (object.manualSchedule != null) {
+                                    if (typeof object.manualSchedule !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2.manualSchedule: object expected");
+                                    message.manualSchedule = $root.google.cloud.bigquery.datatransfer.v1.ManualSchedule.fromObject(object.manualSchedule);
+                                }
+                                if (object.eventDrivenSchedule != null) {
+                                    if (typeof object.eventDrivenSchedule !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2.eventDrivenSchedule: object expected");
+                                    message.eventDrivenSchedule = $root.google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule.fromObject(object.eventDrivenSchedule);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ScheduleOptionsV2 message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2} message ScheduleOptionsV2
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ScheduleOptionsV2.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.timeBasedSchedule != null && message.hasOwnProperty("timeBasedSchedule")) {
+                                    object.timeBasedSchedule = $root.google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule.toObject(message.timeBasedSchedule, options);
+                                    if (options.oneofs)
+                                        object.schedule = "timeBasedSchedule";
+                                }
+                                if (message.manualSchedule != null && message.hasOwnProperty("manualSchedule")) {
+                                    object.manualSchedule = $root.google.cloud.bigquery.datatransfer.v1.ManualSchedule.toObject(message.manualSchedule, options);
+                                    if (options.oneofs)
+                                        object.schedule = "manualSchedule";
+                                }
+                                if (message.eventDrivenSchedule != null && message.hasOwnProperty("eventDrivenSchedule")) {
+                                    object.eventDrivenSchedule = $root.google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule.toObject(message.eventDrivenSchedule, options);
+                                    if (options.oneofs)
+                                        object.schedule = "eventDrivenSchedule";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ScheduleOptionsV2 to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ScheduleOptionsV2.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ScheduleOptionsV2
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ScheduleOptionsV2.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2";
+                            };
+    
+                            return ScheduleOptionsV2;
+                        })();
+    
+                        v1.TimeBasedSchedule = (function() {
+    
+                            /**
+                             * Properties of a TimeBasedSchedule.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @interface ITimeBasedSchedule
+                             * @property {string|null} [schedule] TimeBasedSchedule schedule
+                             * @property {google.protobuf.ITimestamp|null} [startTime] TimeBasedSchedule startTime
+                             * @property {google.protobuf.ITimestamp|null} [endTime] TimeBasedSchedule endTime
+                             */
+    
+                            /**
+                             * Constructs a new TimeBasedSchedule.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @classdesc Represents a TimeBasedSchedule.
+                             * @implements ITimeBasedSchedule
+                             * @constructor
+                             * @param {google.cloud.bigquery.datatransfer.v1.ITimeBasedSchedule=} [properties] Properties to set
+                             */
+                            function TimeBasedSchedule(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TimeBasedSchedule schedule.
+                             * @member {string} schedule
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule
+                             * @instance
+                             */
+                            TimeBasedSchedule.prototype.schedule = "";
+    
+                            /**
+                             * TimeBasedSchedule startTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule
+                             * @instance
+                             */
+                            TimeBasedSchedule.prototype.startTime = null;
+    
+                            /**
+                             * TimeBasedSchedule endTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule
+                             * @instance
+                             */
+                            TimeBasedSchedule.prototype.endTime = null;
+    
+                            /**
+                             * Creates a new TimeBasedSchedule instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.ITimeBasedSchedule=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule} TimeBasedSchedule instance
+                             */
+                            TimeBasedSchedule.create = function create(properties) {
+                                return new TimeBasedSchedule(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TimeBasedSchedule message. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.ITimeBasedSchedule} message TimeBasedSchedule message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TimeBasedSchedule.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.schedule != null && Object.hasOwnProperty.call(message, "schedule"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.schedule);
+                                if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TimeBasedSchedule message, length delimited. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.ITimeBasedSchedule} message TimeBasedSchedule message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TimeBasedSchedule.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TimeBasedSchedule message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule} TimeBasedSchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TimeBasedSchedule.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.schedule = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TimeBasedSchedule message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule} TimeBasedSchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TimeBasedSchedule.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TimeBasedSchedule message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TimeBasedSchedule.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.schedule != null && message.hasOwnProperty("schedule"))
+                                    if (!$util.isString(message.schedule))
+                                        return "schedule: string expected";
+                                if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                    if (error)
+                                        return "startTime." + error;
+                                }
+                                if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                    if (error)
+                                        return "endTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TimeBasedSchedule message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule} TimeBasedSchedule
+                             */
+                            TimeBasedSchedule.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule();
+                                if (object.schedule != null)
+                                    message.schedule = String(object.schedule);
+                                if (object.startTime != null) {
+                                    if (typeof object.startTime !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule.startTime: object expected");
+                                    message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                                }
+                                if (object.endTime != null) {
+                                    if (typeof object.endTime !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule.endTime: object expected");
+                                    message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TimeBasedSchedule message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule} message TimeBasedSchedule
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TimeBasedSchedule.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.schedule = "";
+                                    object.startTime = null;
+                                    object.endTime = null;
+                                }
+                                if (message.schedule != null && message.hasOwnProperty("schedule"))
+                                    object.schedule = message.schedule;
+                                if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                    object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                                if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                    object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TimeBasedSchedule to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TimeBasedSchedule.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TimeBasedSchedule
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TimeBasedSchedule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule";
+                            };
+    
+                            return TimeBasedSchedule;
+                        })();
+    
+                        v1.ManualSchedule = (function() {
+    
+                            /**
+                             * Properties of a ManualSchedule.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @interface IManualSchedule
+                             */
+    
+                            /**
+                             * Constructs a new ManualSchedule.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @classdesc Represents a ManualSchedule.
+                             * @implements IManualSchedule
+                             * @constructor
+                             * @param {google.cloud.bigquery.datatransfer.v1.IManualSchedule=} [properties] Properties to set
+                             */
+                            function ManualSchedule(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new ManualSchedule instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ManualSchedule
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IManualSchedule=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datatransfer.v1.ManualSchedule} ManualSchedule instance
+                             */
+                            ManualSchedule.create = function create(properties) {
+                                return new ManualSchedule(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ManualSchedule message. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.ManualSchedule.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ManualSchedule
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IManualSchedule} message ManualSchedule message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ManualSchedule.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ManualSchedule message, length delimited. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.ManualSchedule.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ManualSchedule
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IManualSchedule} message ManualSchedule message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ManualSchedule.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ManualSchedule message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ManualSchedule
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datatransfer.v1.ManualSchedule} ManualSchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ManualSchedule.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datatransfer.v1.ManualSchedule();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ManualSchedule message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ManualSchedule
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datatransfer.v1.ManualSchedule} ManualSchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ManualSchedule.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ManualSchedule message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ManualSchedule
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ManualSchedule.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ManualSchedule message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ManualSchedule
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datatransfer.v1.ManualSchedule} ManualSchedule
+                             */
+                            ManualSchedule.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datatransfer.v1.ManualSchedule)
+                                    return object;
+                                return new $root.google.cloud.bigquery.datatransfer.v1.ManualSchedule();
+                            };
+    
+                            /**
+                             * Creates a plain object from a ManualSchedule message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ManualSchedule
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.ManualSchedule} message ManualSchedule
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ManualSchedule.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this ManualSchedule to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ManualSchedule
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ManualSchedule.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ManualSchedule
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datatransfer.v1.ManualSchedule
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ManualSchedule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datatransfer.v1.ManualSchedule";
+                            };
+    
+                            return ManualSchedule;
+                        })();
+    
+                        v1.EventDrivenSchedule = (function() {
+    
+                            /**
+                             * Properties of an EventDrivenSchedule.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @interface IEventDrivenSchedule
+                             * @property {string|null} [pubsubSubscription] EventDrivenSchedule pubsubSubscription
+                             */
+    
+                            /**
+                             * Constructs a new EventDrivenSchedule.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @classdesc Represents an EventDrivenSchedule.
+                             * @implements IEventDrivenSchedule
+                             * @constructor
+                             * @param {google.cloud.bigquery.datatransfer.v1.IEventDrivenSchedule=} [properties] Properties to set
+                             */
+                            function EventDrivenSchedule(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EventDrivenSchedule pubsubSubscription.
+                             * @member {string} pubsubSubscription
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule
+                             * @instance
+                             */
+                            EventDrivenSchedule.prototype.pubsubSubscription = "";
+    
+                            /**
+                             * Creates a new EventDrivenSchedule instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IEventDrivenSchedule=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule} EventDrivenSchedule instance
+                             */
+                            EventDrivenSchedule.create = function create(properties) {
+                                return new EventDrivenSchedule(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EventDrivenSchedule message. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IEventDrivenSchedule} message EventDrivenSchedule message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EventDrivenSchedule.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.pubsubSubscription != null && Object.hasOwnProperty.call(message, "pubsubSubscription"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.pubsubSubscription);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EventDrivenSchedule message, length delimited. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IEventDrivenSchedule} message EventDrivenSchedule message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EventDrivenSchedule.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EventDrivenSchedule message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule} EventDrivenSchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EventDrivenSchedule.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.pubsubSubscription = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EventDrivenSchedule message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule} EventDrivenSchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EventDrivenSchedule.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EventDrivenSchedule message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EventDrivenSchedule.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.pubsubSubscription != null && message.hasOwnProperty("pubsubSubscription"))
+                                    if (!$util.isString(message.pubsubSubscription))
+                                        return "pubsubSubscription: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EventDrivenSchedule message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule} EventDrivenSchedule
+                             */
+                            EventDrivenSchedule.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule();
+                                if (object.pubsubSubscription != null)
+                                    message.pubsubSubscription = String(object.pubsubSubscription);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EventDrivenSchedule message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule} message EventDrivenSchedule
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EventDrivenSchedule.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.pubsubSubscription = "";
+                                if (message.pubsubSubscription != null && message.hasOwnProperty("pubsubSubscription"))
+                                    object.pubsubSubscription = message.pubsubSubscription;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EventDrivenSchedule to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EventDrivenSchedule.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for EventDrivenSchedule
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            EventDrivenSchedule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datatransfer.v1.EventDrivenSchedule";
+                            };
+    
+                            return EventDrivenSchedule;
+                        })();
+    
                         v1.UserInfo = (function() {
     
                             /**
@@ -8793,6 +9728,7 @@
                              * @property {google.protobuf.IStruct|null} [params] TransferConfig params
                              * @property {string|null} [schedule] TransferConfig schedule
                              * @property {google.cloud.bigquery.datatransfer.v1.IScheduleOptions|null} [scheduleOptions] TransferConfig scheduleOptions
+                             * @property {google.cloud.bigquery.datatransfer.v1.IScheduleOptionsV2|null} [scheduleOptionsV2] TransferConfig scheduleOptionsV2
                              * @property {number|null} [dataRefreshWindowDays] TransferConfig dataRefreshWindowDays
                              * @property {boolean|null} [disabled] TransferConfig disabled
                              * @property {google.protobuf.ITimestamp|null} [updateTime] TransferConfig updateTime
@@ -8804,6 +9740,7 @@
                              * @property {google.cloud.bigquery.datatransfer.v1.IEmailPreferences|null} [emailPreferences] TransferConfig emailPreferences
                              * @property {google.cloud.bigquery.datatransfer.v1.IUserInfo|null} [ownerInfo] TransferConfig ownerInfo
                              * @property {google.cloud.bigquery.datatransfer.v1.IEncryptionConfiguration|null} [encryptionConfiguration] TransferConfig encryptionConfiguration
+                             * @property {google.rpc.IStatus|null} [error] TransferConfig error
                              */
     
                             /**
@@ -8876,6 +9813,14 @@
                              * @instance
                              */
                             TransferConfig.prototype.scheduleOptions = null;
+    
+                            /**
+                             * TransferConfig scheduleOptionsV2.
+                             * @member {google.cloud.bigquery.datatransfer.v1.IScheduleOptionsV2|null|undefined} scheduleOptionsV2
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TransferConfig
+                             * @instance
+                             */
+                            TransferConfig.prototype.scheduleOptionsV2 = null;
     
                             /**
                              * TransferConfig dataRefreshWindowDays.
@@ -8965,6 +9910,14 @@
                              */
                             TransferConfig.prototype.encryptionConfiguration = null;
     
+                            /**
+                             * TransferConfig error.
+                             * @member {google.rpc.IStatus|null|undefined} error
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TransferConfig
+                             * @instance
+                             */
+                            TransferConfig.prototype.error = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -9050,6 +10003,10 @@
                                     $root.google.cloud.bigquery.datatransfer.v1.UserInfo.encode(message.ownerInfo, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                                 if (message.encryptionConfiguration != null && Object.hasOwnProperty.call(message, "encryptionConfiguration"))
                                     $root.google.cloud.bigquery.datatransfer.v1.EncryptionConfiguration.encode(message.encryptionConfiguration, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
+                                if (message.scheduleOptionsV2 != null && Object.hasOwnProperty.call(message, "scheduleOptionsV2"))
+                                    $root.google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2.encode(message.scheduleOptionsV2, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                                if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                    $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
                                 return writer;
                             };
     
@@ -9112,6 +10069,10 @@
                                             message.scheduleOptions = $root.google.cloud.bigquery.datatransfer.v1.ScheduleOptions.decode(reader, reader.uint32());
                                             break;
                                         }
+                                    case 31: {
+                                            message.scheduleOptionsV2 = $root.google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     case 12: {
                                             message.dataRefreshWindowDays = reader.int32();
                                             break;
@@ -9154,6 +10115,10 @@
                                         }
                                     case 28: {
                                             message.encryptionConfiguration = $root.google.cloud.bigquery.datatransfer.v1.EncryptionConfiguration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 32: {
+                                            message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -9219,6 +10184,11 @@
                                     if (error)
                                         return "scheduleOptions." + error;
                                 }
+                                if (message.scheduleOptionsV2 != null && message.hasOwnProperty("scheduleOptionsV2")) {
+                                    var error = $root.google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2.verify(message.scheduleOptionsV2);
+                                    if (error)
+                                        return "scheduleOptionsV2." + error;
+                                }
                                 if (message.dataRefreshWindowDays != null && message.hasOwnProperty("dataRefreshWindowDays"))
                                     if (!$util.isInteger(message.dataRefreshWindowDays))
                                         return "dataRefreshWindowDays: integer expected";
@@ -9274,6 +10244,11 @@
                                     if (error)
                                         return "encryptionConfiguration." + error;
                                 }
+                                if (message.error != null && message.hasOwnProperty("error")) {
+                                    var error = $root.google.rpc.Status.verify(message.error);
+                                    if (error)
+                                        return "error." + error;
+                                }
                                 return null;
                             };
     
@@ -9308,6 +10283,11 @@
                                     if (typeof object.scheduleOptions !== "object")
                                         throw TypeError(".google.cloud.bigquery.datatransfer.v1.TransferConfig.scheduleOptions: object expected");
                                     message.scheduleOptions = $root.google.cloud.bigquery.datatransfer.v1.ScheduleOptions.fromObject(object.scheduleOptions);
+                                }
+                                if (object.scheduleOptionsV2 != null) {
+                                    if (typeof object.scheduleOptionsV2 !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datatransfer.v1.TransferConfig.scheduleOptionsV2: object expected");
+                                    message.scheduleOptionsV2 = $root.google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2.fromObject(object.scheduleOptionsV2);
                                 }
                                 if (object.dataRefreshWindowDays != null)
                                     message.dataRefreshWindowDays = object.dataRefreshWindowDays | 0;
@@ -9383,6 +10363,11 @@
                                         throw TypeError(".google.cloud.bigquery.datatransfer.v1.TransferConfig.encryptionConfiguration: object expected");
                                     message.encryptionConfiguration = $root.google.cloud.bigquery.datatransfer.v1.EncryptionConfiguration.fromObject(object.encryptionConfiguration);
                                 }
+                                if (object.error != null) {
+                                    if (typeof object.error !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datatransfer.v1.TransferConfig.error: object expected");
+                                    message.error = $root.google.rpc.Status.fromObject(object.error);
+                                }
                                 return message;
                             };
     
@@ -9420,6 +10405,8 @@
                                     object.emailPreferences = null;
                                     object.scheduleOptions = null;
                                     object.encryptionConfiguration = null;
+                                    object.scheduleOptionsV2 = null;
+                                    object.error = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -9466,6 +10453,10 @@
                                 }
                                 if (message.encryptionConfiguration != null && message.hasOwnProperty("encryptionConfiguration"))
                                     object.encryptionConfiguration = $root.google.cloud.bigquery.datatransfer.v1.EncryptionConfiguration.toObject(message.encryptionConfiguration, options);
+                                if (message.scheduleOptionsV2 != null && message.hasOwnProperty("scheduleOptionsV2"))
+                                    object.scheduleOptionsV2 = $root.google.cloud.bigquery.datatransfer.v1.ScheduleOptionsV2.toObject(message.scheduleOptionsV2, options);
+                                if (message.error != null && message.hasOwnProperty("error"))
+                                    object.error = $root.google.rpc.Status.toObject(message.error, options);
                                 return object;
                             };
     

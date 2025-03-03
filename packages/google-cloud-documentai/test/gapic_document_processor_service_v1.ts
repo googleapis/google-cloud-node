@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -374,7 +374,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ProcessResponse()
       );
@@ -406,7 +406,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ProcessResponse()
       );
@@ -454,7 +454,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.processDocument = stubSimpleCall(
         undefined,
@@ -508,7 +508,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.FetchProcessorTypesResponse()
       );
@@ -541,7 +541,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.FetchProcessorTypesResponse()
       );
@@ -589,7 +589,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchProcessorTypes = stubSimpleCall(
         undefined,
@@ -643,7 +643,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ProcessorType()
       );
@@ -675,7 +675,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ProcessorType()
       );
@@ -723,7 +723,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProcessorType = stubSimpleCall(
         undefined,
@@ -777,7 +777,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.Processor()
       );
@@ -809,7 +809,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.Processor()
       );
@@ -857,7 +857,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProcessor = stubSimpleCall(
         undefined,
@@ -911,7 +911,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ProcessorVersion()
       );
@@ -944,7 +944,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ProcessorVersion()
       );
@@ -992,7 +992,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProcessorVersion = stubSimpleCall(
         undefined,
@@ -1046,7 +1046,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.Processor()
       );
@@ -1078,7 +1078,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.Processor()
       );
@@ -1126,7 +1126,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createProcessor = stubSimpleCall(
         undefined,
@@ -1180,7 +1180,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.Evaluation()
       );
@@ -1212,7 +1212,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.Evaluation()
       );
@@ -1260,7 +1260,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEvaluation = stubSimpleCall(
         undefined,
@@ -1314,7 +1314,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1348,7 +1348,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1403,7 +1403,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchProcessDocuments = stubLongRunningCall(
         undefined,
@@ -1438,7 +1438,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchProcessDocuments = stubLongRunningCall(
         undefined,
@@ -1517,7 +1517,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1551,7 +1551,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1606,7 +1606,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.trainProcessorVersion = stubLongRunningCall(
         undefined,
@@ -1641,7 +1641,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.trainProcessorVersion = stubLongRunningCall(
         undefined,
@@ -1720,7 +1720,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1754,7 +1754,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1809,7 +1809,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProcessorVersion = stubLongRunningCall(
         undefined,
@@ -1844,7 +1844,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProcessorVersion = stubLongRunningCall(
         undefined,
@@ -1923,7 +1923,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1957,7 +1957,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2012,7 +2012,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployProcessorVersion = stubLongRunningCall(
         undefined,
@@ -2047,7 +2047,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployProcessorVersion = stubLongRunningCall(
         undefined,
@@ -2126,7 +2126,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2160,7 +2160,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2215,7 +2215,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployProcessorVersion = stubLongRunningCall(
         undefined,
@@ -2250,7 +2250,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployProcessorVersion = stubLongRunningCall(
         undefined,
@@ -2330,7 +2330,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2364,7 +2364,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2419,7 +2419,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProcessor = stubLongRunningCall(
         undefined,
@@ -2451,7 +2451,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProcessor = stubLongRunningCall(
         undefined,
@@ -2530,7 +2530,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2564,7 +2564,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2619,7 +2619,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enableProcessor = stubLongRunningCall(
         undefined,
@@ -2651,7 +2651,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enableProcessor = stubLongRunningCall(
         undefined,
@@ -2730,7 +2730,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2764,7 +2764,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2819,7 +2819,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.disableProcessor = stubLongRunningCall(
         undefined,
@@ -2851,7 +2851,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.disableProcessor = stubLongRunningCall(
         undefined,
@@ -2930,7 +2930,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['processor']
       );
       request.processor = defaultValue1;
-      const expectedHeaderRequestParams = `processor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `processor=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2964,7 +2964,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['processor']
       );
       request.processor = defaultValue1;
-      const expectedHeaderRequestParams = `processor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `processor=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3019,7 +3019,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['processor']
       );
       request.processor = defaultValue1;
-      const expectedHeaderRequestParams = `processor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `processor=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setDefaultProcessorVersion = stubLongRunningCall(
         undefined,
@@ -3054,7 +3054,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['processor']
       );
       request.processor = defaultValue1;
-      const expectedHeaderRequestParams = `processor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `processor=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setDefaultProcessorVersion = stubLongRunningCall(
         undefined,
@@ -3134,7 +3134,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['humanReviewConfig']
       );
       request.humanReviewConfig = defaultValue1;
-      const expectedHeaderRequestParams = `human_review_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `human_review_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3168,7 +3168,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['humanReviewConfig']
       );
       request.humanReviewConfig = defaultValue1;
-      const expectedHeaderRequestParams = `human_review_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `human_review_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3223,7 +3223,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['humanReviewConfig']
       );
       request.humanReviewConfig = defaultValue1;
-      const expectedHeaderRequestParams = `human_review_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `human_review_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reviewDocument = stubLongRunningCall(
         undefined,
@@ -3255,7 +3255,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['humanReviewConfig']
       );
       request.humanReviewConfig = defaultValue1;
-      const expectedHeaderRequestParams = `human_review_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `human_review_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reviewDocument = stubLongRunningCall(
         undefined,
@@ -3334,7 +3334,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['processorVersion']
       );
       request.processorVersion = defaultValue1;
-      const expectedHeaderRequestParams = `processor_version=${defaultValue1}`;
+      const expectedHeaderRequestParams = `processor_version=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3368,7 +3368,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['processorVersion']
       );
       request.processorVersion = defaultValue1;
-      const expectedHeaderRequestParams = `processor_version=${defaultValue1}`;
+      const expectedHeaderRequestParams = `processor_version=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3423,7 +3423,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['processorVersion']
       );
       request.processorVersion = defaultValue1;
-      const expectedHeaderRequestParams = `processor_version=${defaultValue1}`;
+      const expectedHeaderRequestParams = `processor_version=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.evaluateProcessorVersion = stubLongRunningCall(
         undefined,
@@ -3458,7 +3458,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['processorVersion']
       );
       request.processorVersion = defaultValue1;
-      const expectedHeaderRequestParams = `processor_version=${defaultValue1}`;
+      const expectedHeaderRequestParams = `processor_version=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.evaluateProcessorVersion = stubLongRunningCall(
         undefined,
@@ -3538,7 +3538,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorType()
@@ -3579,7 +3579,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorType()
@@ -3635,7 +3635,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProcessorTypes = stubSimpleCall(
         undefined,
@@ -3667,7 +3667,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorType()
@@ -3728,7 +3728,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProcessorTypes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3778,7 +3778,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorType()
@@ -3828,7 +3828,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProcessorTypes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3872,7 +3872,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.Processor()
@@ -3912,7 +3912,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.Processor()
@@ -3968,7 +3968,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProcessors = stubSimpleCall(
         undefined,
@@ -4000,7 +4000,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.Processor()
@@ -4061,7 +4061,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProcessors.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4111,7 +4111,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.Processor()
@@ -4161,7 +4161,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProcessors.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4204,7 +4204,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorVersion()
@@ -4245,7 +4245,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorVersion()
@@ -4303,7 +4303,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProcessorVersions = stubSimpleCall(
         undefined,
@@ -4338,7 +4338,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorVersion()
@@ -4406,7 +4406,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProcessorVersions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4463,7 +4463,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorVersion()
@@ -4518,7 +4518,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProcessorVersions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4566,7 +4566,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.Evaluation()
@@ -4606,7 +4606,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.Evaluation()
@@ -4662,7 +4662,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEvaluations = stubSimpleCall(
         undefined,
@@ -4694,7 +4694,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.Evaluation()
@@ -4755,7 +4755,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEvaluations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4805,7 +4805,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.Evaluation()
@@ -4855,7 +4855,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEvaluations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

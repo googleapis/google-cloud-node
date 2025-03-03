@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -473,7 +473,7 @@ describe('v2.ServicesClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -504,7 +504,7 @@ describe('v2.ServicesClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -551,7 +551,7 @@ describe('v2.ServicesClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -603,7 +603,7 @@ describe('v2.ServicesClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -634,7 +634,7 @@ describe('v2.ServicesClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -681,7 +681,7 @@ describe('v2.ServicesClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -733,7 +733,7 @@ describe('v2.ServicesClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -765,7 +765,7 @@ describe('v2.ServicesClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -812,7 +812,7 @@ describe('v2.ServicesClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,

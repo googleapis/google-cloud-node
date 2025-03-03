@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,10 +16,16 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DataSourcesServiceClient} from '@google-shopping/datasources';
+import {
+  DataSourcesServiceClient,
+  FileUploadsServiceClient,
+} from '@google-shopping/datasources';
 
 // check that the client class type name can be used
 function doStuffWithDataSourcesServiceClient(client: DataSourcesServiceClient) {
+  client.close();
+}
+function doStuffWithFileUploadsServiceClient(client: FileUploadsServiceClient) {
   client.close();
 }
 
@@ -27,6 +33,9 @@ function main() {
   // check that the client instance can be created
   const dataSourcesServiceClient = new DataSourcesServiceClient();
   doStuffWithDataSourcesServiceClient(dataSourcesServiceClient);
+  // check that the client instance can be created
+  const fileUploadsServiceClient = new FileUploadsServiceClient();
+  doStuffWithFileUploadsServiceClient(fileUploadsServiceClient);
 }
 
 main();

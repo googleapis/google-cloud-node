@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -305,7 +305,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['sha1Fingerprint']
       );
       request.sha1Fingerprint = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&sha1_fingerprint=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&sha1_fingerprint=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation()
       );
@@ -347,7 +347,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['sha1Fingerprint']
       );
       request.sha1Fingerprint = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&sha1_fingerprint=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&sha1_fingerprint=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation()
       );
@@ -405,7 +405,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['sha1Fingerprint']
       );
       request.sha1Fingerprint = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&sha1_fingerprint=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&sha1_fingerprint=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
@@ -476,7 +476,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['sha1Fingerprint']
       );
       request.sha1Fingerprint = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&sha1_fingerprint=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&sha1_fingerprint=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SslCert()
       );
@@ -517,7 +517,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['sha1Fingerprint']
       );
       request.sha1Fingerprint = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&sha1_fingerprint=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&sha1_fingerprint=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SslCert()
       );
@@ -573,7 +573,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['sha1Fingerprint']
       );
       request.sha1Fingerprint = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&sha1_fingerprint=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&sha1_fingerprint=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -638,7 +638,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SslCertsInsertResponse()
       );
@@ -675,7 +675,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SslCertsInsertResponse()
       );
@@ -728,7 +728,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -789,7 +789,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SslCertsListResponse()
       );
@@ -825,7 +825,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SslCertsListResponse()
       );
@@ -876,7 +876,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);

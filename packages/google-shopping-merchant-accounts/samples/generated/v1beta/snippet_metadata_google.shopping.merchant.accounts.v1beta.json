@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-accounts",
-        "version": "0.1.0",
+        "version": "1.0.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -49,7 +49,7 @@
                     },
                     {
                         "name": "time_zone",
-                        "type": ".google.type.TimeZone"
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.shopping.merchant.accounts.v1beta.ListAccountIssuesResponse",
@@ -118,7 +118,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -163,14 +163,14 @@
             "regionTag": "merchantapi_v1beta_generated_AccountsService_DeleteAccount_async",
             "title": "AccountIssueService deleteAccount Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes the specified account regardless of its type: standalone, MCA or sub-account. Deleting an MCA leads to the deletion of all of its sub-accounts. Executing this method requires admin access.",
+            "description": " Deletes the specified account regardless of its type: standalone, MCA or sub-account. Deleting an MCA leads to the deletion of all of its sub-accounts. Executing this method requires admin access. The deletion succeeds only if the account does not provide services to any other account and has no processed offers. You can use the `force` parameter to override this.",
             "canonical": true,
             "file": "accounts_service.delete_account.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -182,6 +182,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.protobuf.Empty",
@@ -247,7 +251,7 @@
             "regionTag": "merchantapi_v1beta_generated_AccountsService_ListAccounts_async",
             "title": "AccountIssueService listAccounts Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists accounts accessible to the calling user and matching the constraints of the request such as page size or filters. This is not just listing the sub-accounts of an MCA, but all accounts the calling user has access to including other MCAs, linked accounts, standalone accounts and so on.",
+            "description": " Lists accounts accessible to the calling user and matching the constraints of the request such as page size or filters. This is not just listing the sub-accounts of an MCA, but all accounts the calling user has access to including other MCAs, linked accounts, standalone accounts and so on. If no filter is provided, then it returns accounts the user is directly added to.",
             "canonical": true,
             "file": "accounts_service.list_accounts.js",
             "language": "JAVASCRIPT",
@@ -467,6 +471,90 @@
                     "service": {
                         "shortName": "AccountTaxService",
                         "fullName": "google.shopping.merchant.accounts.v1beta.AccountTaxService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "merchantapi_v1beta_generated_AutofeedSettingsService_GetAutofeedSettings_async",
+            "title": "AccountIssueService getAutofeedSettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the autofeed settings of an account.",
+            "canonical": true,
+            "file": "autofeed_settings_service.get_autofeed_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetAutofeedSettings",
+                "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsService.GetAutofeedSettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.accounts.v1beta.AutofeedSettings",
+                "client": {
+                    "shortName": "AutofeedSettingsServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsServiceClient"
+                },
+                "method": {
+                    "shortName": "GetAutofeedSettings",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsService.GetAutofeedSettings",
+                    "service": {
+                        "shortName": "AutofeedSettingsService",
+                        "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "merchantapi_v1beta_generated_AutofeedSettingsService_UpdateAutofeedSettings_async",
+            "title": "AccountIssueService updateAutofeedSettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the autofeed settings of an account.",
+            "canonical": true,
+            "file": "autofeed_settings_service.update_autofeed_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateAutofeedSettings",
+                "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsService.UpdateAutofeedSettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "autofeed_settings",
+                        "type": ".google.shopping.merchant.accounts.v1beta.AutofeedSettings"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.accounts.v1beta.AutofeedSettings",
+                "client": {
+                    "shortName": "AutofeedSettingsServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateAutofeedSettings",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsService.UpdateAutofeedSettings",
+                    "service": {
+                        "shortName": "AutofeedSettingsService",
+                        "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsService"
                     }
                 }
             }
@@ -1458,7 +1546,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 55,
                     "type": "FULL"
                 }
             ],
@@ -1578,7 +1666,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 58,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],

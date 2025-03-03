@@ -1166,6 +1166,64 @@
         }
       }
     },
+    "PhoneNumbers": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PhoneNumbersClient",
+          "rpcs": {
+            "UpdatePhoneNumber": {
+              "methods": [
+                "updatePhoneNumber"
+              ]
+            },
+            "DeletePhoneNumber": {
+              "methods": [
+                "deletePhoneNumber"
+              ]
+            },
+            "UndeletePhoneNumber": {
+              "methods": [
+                "undeletePhoneNumber"
+              ]
+            },
+            "ListPhoneNumbers": {
+              "methods": [
+                "listPhoneNumbers",
+                "listPhoneNumbersStream",
+                "listPhoneNumbersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PhoneNumbersClient",
+          "rpcs": {
+            "UpdatePhoneNumber": {
+              "methods": [
+                "updatePhoneNumber"
+              ]
+            },
+            "DeletePhoneNumber": {
+              "methods": [
+                "deletePhoneNumber"
+              ]
+            },
+            "UndeletePhoneNumber": {
+              "methods": [
+                "undeletePhoneNumber"
+              ]
+            },
+            "ListPhoneNumbers": {
+              "methods": [
+                "listPhoneNumbers",
+                "listPhoneNumbersStream",
+                "listPhoneNumbersAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SessionEntityTypes": {
       "clients": {
         "grpc": {
@@ -1257,6 +1315,74 @@
             "DetectIntent": {
               "methods": [
                 "detectIntent"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SipTrunks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SipTrunksClient",
+          "rpcs": {
+            "CreateSipTrunk": {
+              "methods": [
+                "createSipTrunk"
+              ]
+            },
+            "DeleteSipTrunk": {
+              "methods": [
+                "deleteSipTrunk"
+              ]
+            },
+            "GetSipTrunk": {
+              "methods": [
+                "getSipTrunk"
+              ]
+            },
+            "UpdateSipTrunk": {
+              "methods": [
+                "updateSipTrunk"
+              ]
+            },
+            "ListSipTrunks": {
+              "methods": [
+                "listSipTrunks",
+                "listSipTrunksStream",
+                "listSipTrunksAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SipTrunksClient",
+          "rpcs": {
+            "CreateSipTrunk": {
+              "methods": [
+                "createSipTrunk"
+              ]
+            },
+            "DeleteSipTrunk": {
+              "methods": [
+                "deleteSipTrunk"
+              ]
+            },
+            "GetSipTrunk": {
+              "methods": [
+                "getSipTrunk"
+              ]
+            },
+            "UpdateSipTrunk": {
+              "methods": [
+                "updateSipTrunk"
+              ]
+            },
+            "ListSipTrunks": {
+              "methods": [
+                "listSipTrunks",
+                "listSipTrunksStream",
+                "listSipTrunksAsync"
               ]
             }
           }

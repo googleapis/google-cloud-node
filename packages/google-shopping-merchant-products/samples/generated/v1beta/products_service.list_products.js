@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ function main(parent) {
   /**
    *  The maximum number of products to return. The service may return fewer than
    *  this value.
-   *  The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *  The maximum value is 250; values above 250 will be coerced to 250.
    *  If unspecified, the maximum number of products will be returned.
    */
   // const pageSize = 1234

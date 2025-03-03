@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dlp",
-        "version": "5.10.0",
+        "version": "5.13.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -259,7 +259,7 @@
             "regionTag": "dlp_v2_generated_DlpService_ListInfoTypes_async",
             "title": "DlpService listInfoTypes Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns a list of the sensitive information types that DLP API supports. See https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference to learn more.",
+            "description": " Returns a list of the sensitive information types that the DLP API supports. See https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference to learn more.",
             "canonical": true,
             "file": "dlp_service.list_info_types.js",
             "language": "JAVASCRIPT",
@@ -2030,7 +2030,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 115,
+                    "end": 116,
                     "type": "FULL"
                 }
             ],

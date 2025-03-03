@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11629,6 +11629,7 @@
                          * @property {string|null} [logs] Preview logs
                          * @property {string|null} [tfVersion] Preview tfVersion
                          * @property {string|null} [tfVersionConstraint] Preview tfVersionConstraint
+                         * @property {Object.<string,string>|null} [annotations] Preview annotations
                          */
     
                         /**
@@ -11642,6 +11643,7 @@
                         function Preview(properties) {
                             this.labels = {};
                             this.tfErrors = [];
+                            this.annotations = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -11800,6 +11802,14 @@
                          */
                         Preview.prototype.tfVersionConstraint = null;
     
+                        /**
+                         * Preview annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.config.v1.Preview
+                         * @instance
+                         */
+                        Preview.prototype.annotations = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -11911,6 +11921,9 @@
                                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.tfVersion);
                             if (message.tfVersionConstraint != null && Object.hasOwnProperty.call(message, "tfVersionConstraint"))
                                 writer.uint32(/* id 19, wireType 2 =*/154).string(message.tfVersionConstraint);
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 20, wireType 2 =*/162).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -12040,6 +12053,29 @@
                                     }
                                 case 19: {
                                         message.tfVersionConstraint = reader.string();
+                                        break;
+                                    }
+                                case 20: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
                                         break;
                                     }
                                 default:
@@ -12189,6 +12225,14 @@
                                 properties._tfVersionConstraint = 1;
                                 if (!$util.isString(message.tfVersionConstraint))
                                     return "tfVersionConstraint: string expected";
+                            }
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
                             }
                             return null;
                         };
@@ -12358,6 +12402,13 @@
                                 message.tfVersion = String(object.tfVersion);
                             if (object.tfVersionConstraint != null)
                                 message.tfVersionConstraint = String(object.tfVersionConstraint);
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.config.v1.Preview.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -12376,8 +12427,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.tfErrors = [];
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.labels = {};
+                                object.annotations = {};
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.createTime = null;
@@ -12449,6 +12502,11 @@
                                 object.tfVersionConstraint = message.tfVersionConstraint;
                                 if (options.oneofs)
                                     object._tfVersionConstraint = "tfVersionConstraint";
+                            }
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
                             }
                             return object;
                         };

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -223,6 +223,12 @@ export class ReachabilityServiceClient {
     this.pathTemplates = {
       connectivityTestPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/global/connectivityTests/{test}'
+      ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      vpcFlowLogsConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}'
       ),
     };
 
@@ -804,7 +810,7 @@ export class ReachabilityServiceClient {
    *
    * If the endpoint specifications in `ConnectivityTest` are incomplete, the
    * reachability result returns a value of `AMBIGUOUS`. See the documentation
-   * in `ConnectivityTest` for for more details.
+   * in `ConnectivityTest` for more details.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1356,7 +1362,7 @@ export class ReachabilityServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConnectivityTests`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1735,7 +1741,7 @@ export class ReachabilityServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1748,6 +1754,20 @@ export class ReachabilityServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1784,6 +1804,13 @@ export class ReachabilityServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1819,11 +1846,11 @@ export class ReachabilityServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1832,6 +1859,20 @@ export class ReachabilityServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1862,7 +1903,7 @@ export class ReachabilityServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1875,6 +1916,20 @@ export class ReachabilityServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1920,6 +1975,90 @@ export class ReachabilityServiceClient {
     return this.pathTemplates.connectivityTestPathTemplate.match(
       connectivityTestName
     ).test;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified vpcFlowLogsConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} vpc_flow_logs_config
+   * @returns {string} Resource name string.
+   */
+  vpcFlowLogsConfigPath(
+    project: string,
+    location: string,
+    vpcFlowLogsConfig: string
+  ) {
+    return this.pathTemplates.vpcFlowLogsConfigPathTemplate.render({
+      project: project,
+      location: location,
+      vpc_flow_logs_config: vpcFlowLogsConfig,
+    });
+  }
+
+  /**
+   * Parse the project from VpcFlowLogsConfig resource.
+   *
+   * @param {string} vpcFlowLogsConfigName
+   *   A fully-qualified path representing VpcFlowLogsConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromVpcFlowLogsConfigName(vpcFlowLogsConfigName: string) {
+    return this.pathTemplates.vpcFlowLogsConfigPathTemplate.match(
+      vpcFlowLogsConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from VpcFlowLogsConfig resource.
+   *
+   * @param {string} vpcFlowLogsConfigName
+   *   A fully-qualified path representing VpcFlowLogsConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromVpcFlowLogsConfigName(vpcFlowLogsConfigName: string) {
+    return this.pathTemplates.vpcFlowLogsConfigPathTemplate.match(
+      vpcFlowLogsConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the vpc_flow_logs_config from VpcFlowLogsConfig resource.
+   *
+   * @param {string} vpcFlowLogsConfigName
+   *   A fully-qualified path representing VpcFlowLogsConfig resource.
+   * @returns {string} A string representing the vpc_flow_logs_config.
+   */
+  matchVpcFlowLogsConfigFromVpcFlowLogsConfigName(
+    vpcFlowLogsConfigName: string
+  ) {
+    return this.pathTemplates.vpcFlowLogsConfigPathTemplate.match(
+      vpcFlowLogsConfigName
+    ).vpc_flow_logs_config;
   }
 
   /**

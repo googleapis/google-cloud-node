@@ -1,5 +1,26 @@
 # Changelog
 
+## [3.14.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.13.0...dataplex-v3.14.0) (2025-02-12)
+
+
+### Features
+
+* [dataplex] Added value `NONE` to  the `SyncMode` enum ([#6022](https://github.com/googleapis/google-cloud-node/issues/6022)) ([b363570](https://github.com/googleapis/google-cloud-node/commit/b363570e21e346f39025d586d6851e5b9b8d2f67))
+
+## [3.13.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.12.0...dataplex-v3.13.0) (2025-01-11)
+
+
+### Features
+
+* [dataplex] A new field `force` is added to message `.google.cloud.dataplex.v1.DeleteDataScanRequest` ([#5902](https://github.com/googleapis/google-cloud-node/issues/5902)) ([cb0f5d4](https://github.com/googleapis/google-cloud-node/commit/cb0f5d4d13496f147d057c23fc7926bf4a133b7b))
+
+## [3.12.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.11.0...dataplex-v3.12.0) (2024-11-21)
+
+
+### Features
+
+* [dataplex] update Go Datastore import path ([#5818](https://github.com/googleapis/google-cloud-node/issues/5818)) ([020c59a](https://github.com/googleapis/google-cloud-node/commit/020c59a19460baff4ea7bbabef5d00d9becead94))
+
 ## [3.11.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.10.0...dataplex-v3.11.0) (2024-06-27)
 
 

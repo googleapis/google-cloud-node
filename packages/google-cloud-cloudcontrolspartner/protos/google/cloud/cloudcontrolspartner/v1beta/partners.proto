@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -108,8 +108,8 @@ message EkmMetadata {
     // EKM Partner Thales
     THALES = 3;
 
-    // EKM Partner Virtu
-    VIRTRU = 4;
+    // This enum value is never used.
+    VIRTRU = 4 [deprecated = true];
   }
 
   // The Cloud EKM partner.

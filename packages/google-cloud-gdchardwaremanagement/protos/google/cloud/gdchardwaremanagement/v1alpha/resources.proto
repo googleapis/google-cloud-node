@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -46,6 +46,21 @@ enum PowerSupply {
   POWER_SUPPLY_DC = 2;
 }
 
+// Entity is used to denote an organization or party.
+enum Entity {
+  // Entity is unspecified.
+  ENTITY_UNSPECIFIED = 0;
+
+  // Google.
+  GOOGLE = 1;
+
+  // Customer.
+  CUSTOMER = 2;
+
+  // Vendor.
+  VENDOR = 3;
+}
+
 // An order for GDC hardware.
 message Order {
   option (google.api.resource) = {
@@ -65,6 +80,10 @@ message Order {
 
     // Order has been submitted to Google.
     SUBMITTED = 2;
+
+    // All information required from the customer for fulfillment of the order
+    // is complete.
+    INFO_COMPLETE = 12;
 
     // Order has been accepted by Google.
     ACCEPTED = 3;
@@ -212,12 +231,18 @@ message Site {
   OrganizationContact organization_contact = 5
       [(google.api.field_behavior) = REQUIRED];
 
-  // Required. A URL to the Google Maps address location of the site.
+  // Optional. A URL to the Google Maps address location of the site.
   // An example value is `https://goo.gl/maps/xxxxxxxxx`.
-  string google_maps_pin_uri = 6 [(google.api.field_behavior) = REQUIRED];
+  string google_maps_pin_uri = 6 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The time periods when the site is accessible.
   // If this field is empty, the site is accessible at all times.
+  //
+  // This field is used by Google to schedule the initial installation as well
+  // as any later hardware maintenance. You may update this at any time. For
+  // example, if the initial installation is requested during off-hours but
+  // maintenance should be performed during regular business hours, you should
+  // update the access times after initial installation is complete.
   repeated TimePeriod access_times = 26
       [(google.api.field_behavior) = OPTIONAL];
 
@@ -228,6 +253,10 @@ message Site {
   //  - any special process or approval required to move the equipment
   //  - whether a representative will be available during site visits
   string notes = 27 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Customer defined identifier for this Site. This can be used to
+  // identify the site in the customer's own systems.
+  string customer_site_id = 28 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // A group of hardware that is part of the same order, has the same SKU, and is
@@ -327,6 +356,75 @@ message Hardware {
     plural: "hardware"
     singular: "hardware"
   };
+
+  // Message to describe the MAC address of a machine.
+  message MacAddress {
+    // Enum for the different types of MAC address.
+    enum AddressType {
+      // Unspecified address type.
+      ADDRESS_TYPE_UNSPECIFIED = 0;
+
+      // Address of a network interface card.
+      NIC = 1;
+
+      // Address of a baseboard management controller.
+      BMC = 2;
+
+      // Address of a virtual interface.
+      VIRTUAL = 3;
+    }
+
+    // Output only. Address string.
+    string address = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Address type for this MAC address.
+    AddressType type = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Static IP address (if used) that is associated with the MAC
+    // address. Only applicable for VIRTUAL MAC address type.
+    string ipv4_address = 3 [
+      (google.api.field_info).format = IPV4,
+      (google.api.field_behavior) = OUTPUT_ONLY
+    ];
+  }
+
+  // Information about individual disks on a machine.
+  message DiskInfo {
+    // Output only. Disk manufacturer.
+    string manufacturer = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Disk slot number.
+    int32 slot = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Disk serial number.
+    string serial_number = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Disk PSID.
+    string psid = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Disk part number.
+    string part_number = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Disk model number.
+    string model_number = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
+
+  // Information about individual machines vendors will provide during turnup.
+  message MachineInfo {
+    // Output only. Machine service tag.
+    string service_tag = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Each associated MAC address.
+    repeated MacAddress mac_addresses = 2
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Machine name.
+    string name = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Information for each disk installed.
+    repeated DiskInfo disk_infos = 4
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
 
   // Valid states for hardware.
   enum State {
@@ -431,15 +529,19 @@ message Hardware {
     }
   ];
 
-  // Optional. Requested installation date for this hardware. This is
-  // auto-populated when the order is accepted, if the hardware's HardwareGroup
-  // specifies this. It can also be filled in by the customer.
+  // Optional. Requested installation date for this hardware. If not specified,
+  // this is auto-populated from the order's fulfillment_time upon submission or
+  // from the HardwareGroup's requested_installation_date upon order acceptance.
   google.type.Date requested_installation_date = 16
       [(google.api.field_behavior) = OPTIONAL];
 
   // Output only. Actual installation date for this hardware. Filled in by
   // Google.
   google.type.Date actual_installation_date = 17
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Per machine asset information needed for turnup.
+  repeated MachineInfo machine_infos = 20
       [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
@@ -473,6 +575,14 @@ message Comment {
   // Required. Text of this comment. The length of text must be <= 1000
   // characters.
   string text = 5 [(google.api.field_behavior) = REQUIRED];
+
+  // Output only. Timestamp of the first time this comment was viewed by the
+  // customer. If the comment wasn't viewed then this timestamp will be unset.
+  google.protobuf.Timestamp customer_viewed_time = 6
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The entity the author belongs to.
+  Entity author_entity = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // A log entry of a change made to an order.
@@ -601,6 +711,21 @@ message Zone {
     CANCELLED = 4;
   }
 
+  // Valid provisioning states for configurations like MAC addresses.
+  enum ProvisioningState {
+    // Provisioning state is unspecified.
+    PROVISIONING_STATE_UNSPECIFIED = 0;
+
+    // Provisioning is required. Set by Google.
+    PROVISIONING_REQUIRED = 1;
+
+    // Provisioning is in progress. Set by customer.
+    PROVISIONING_IN_PROGRESS = 2;
+
+    // Provisioning is complete. Set by customer.
+    PROVISIONING_COMPLETE = 3;
+  }
+
   // Identifier. Name of this zone.
   // Format: `projects/{project}/locations/{location}/zones/{zone}`
   string name = 1 [(google.api.field_behavior) = IDENTIFIER];
@@ -637,6 +762,14 @@ message Zone {
 
   // Output only. Globally unique identifier generated for this Edge Zone.
   string globally_unique_id = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Subscription configurations for this zone.
+  repeated SubscriptionConfig subscription_configs = 13
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Provisioning state for configurations like MAC addresses.
+  ProvisioningState provisioning_state = 14
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Contact information of the customer organization.
@@ -813,9 +946,9 @@ message HardwareInstallationInfo {
     FOUR_POST = 2;
   }
 
-  // Optional. Location of the rack in the site e.g. Floor 2, Room 201, Row 7,
+  // Required. Location of the rack in the site e.g. Floor 2, Room 201, Row 7,
   // Rack 3.
-  string rack_location = 1 [(google.api.field_behavior) = OPTIONAL];
+  string rack_location = 1 [(google.api.field_behavior) = REQUIRED];
 
   // Required. Distance from the power outlet in meters.
   int32 power_distance_meters = 2 [(google.api.field_behavior) = REQUIRED];
@@ -872,6 +1005,20 @@ message ZoneNetworkConfig {
   // If unspecified, the kubernetes subnet will be the same as the management
   // subnet.
   Subnet kubernetes_ipv4_subnet = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. DNS nameservers.
+  // The GDC Infrastructure will resolve DNS queries via these IPs.
+  // If unspecified, Google DNS is used.
+  repeated string dns_ipv4_addresses = 6 [
+    (google.api.field_info).format = IPV4,
+    (google.api.field_behavior) = OPTIONAL
+  ];
+
+  // Optional. Kubernetes VLAN ID.
+  // By default, the kubernetes node, including the primary kubernetes network,
+  // are in the same VLAN as the machine management network.
+  // For network segmentation purposes, these can optionally be separated.
+  int32 kubernetes_primary_vlan_id = 7 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Represents a subnet.
@@ -941,4 +1088,41 @@ message HardwareLocation {
   // Optional. Spaces occupied by the hardware in the rack.
   // If unset, this location is assumed to be the entire rack.
   repeated RackSpace rack_space = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// A message to store a subscription configuration.
+message SubscriptionConfig {
+  // Enum to represent the state of the subscription.
+  enum SubscriptionState {
+    // State is unspecified.
+    SUBSCRIPTION_STATE_UNSPECIFIED = 0;
+
+    // Active state means that the subscription has been created successfully
+    // and billing is happening.
+    ACTIVE = 1;
+
+    // Inactive means that the subscription has been created successfully, but
+    // billing has not started yet.
+    INACTIVE = 2;
+
+    // The subscription is in an erroneous state.
+    ERROR = 3;
+
+    // The subscription state failed to be retrieved. This may be a transient
+    // issue. The user should retry the request.
+    FAILED_TO_RETRIEVE = 4;
+
+    // The subscription has been completed, because it has reached the end date.
+    COMPLETED = 5;
+  }
+
+  // Output only. The unique identifier of the subscription.
+  string subscription_id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The Google Cloud Billing ID that the subscription is created
+  // under.
+  string billing_id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The current state of the subscription.
+  SubscriptionState state = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 }

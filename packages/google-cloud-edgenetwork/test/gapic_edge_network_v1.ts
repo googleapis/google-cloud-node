@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -355,7 +355,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.InitializeZoneResponse()
       );
@@ -386,7 +386,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.InitializeZoneResponse()
       );
@@ -433,7 +433,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.initializeZone = stubSimpleCall(
         undefined,
@@ -486,7 +486,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.Zone()
       );
@@ -519,7 +519,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.Zone()
       );
@@ -568,7 +568,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getZone = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getZone(request), expectedError);
@@ -620,7 +620,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.Network()
       );
@@ -651,7 +651,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.Network()
       );
@@ -698,7 +698,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNetwork = stubSimpleCall(
         undefined,
@@ -750,7 +750,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.DiagnoseNetworkResponse()
       );
@@ -781,7 +781,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.DiagnoseNetworkResponse()
       );
@@ -828,7 +828,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.diagnoseNetwork = stubSimpleCall(
         undefined,
@@ -880,7 +880,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.Subnet()
       );
@@ -911,7 +911,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.Subnet()
       );
@@ -958,7 +958,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSubnet = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSubnet(request), expectedError);
@@ -1007,7 +1007,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.Interconnect()
       );
@@ -1038,7 +1038,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.Interconnect()
       );
@@ -1085,7 +1085,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getInterconnect = stubSimpleCall(
         undefined,
@@ -1137,7 +1137,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.DiagnoseInterconnectResponse()
       );
@@ -1169,7 +1169,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.DiagnoseInterconnectResponse()
       );
@@ -1216,7 +1216,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.diagnoseInterconnect = stubSimpleCall(
         undefined,
@@ -1268,7 +1268,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.InterconnectAttachment()
       );
@@ -1300,7 +1300,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.InterconnectAttachment()
       );
@@ -1347,7 +1347,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getInterconnectAttachment = stubSimpleCall(
         undefined,
@@ -1405,7 +1405,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.Router()
       );
@@ -1436,7 +1436,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.Router()
       );
@@ -1483,7 +1483,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRouter = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getRouter(request), expectedError);
@@ -1532,7 +1532,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.DiagnoseRouterResponse()
       );
@@ -1563,7 +1563,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.DiagnoseRouterResponse()
       );
@@ -1610,7 +1610,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.diagnoseRouter = stubSimpleCall(
         undefined,
@@ -1662,7 +1662,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1695,7 +1695,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1749,7 +1749,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNetwork = stubLongRunningCall(
         undefined,
@@ -1780,7 +1780,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNetwork = stubLongRunningCall(
         undefined,
@@ -1856,7 +1856,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1889,7 +1889,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1943,7 +1943,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNetwork = stubLongRunningCall(
         undefined,
@@ -1974,7 +1974,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNetwork = stubLongRunningCall(
         undefined,
@@ -2050,7 +2050,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2082,7 +2082,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2136,7 +2136,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSubnet = stubLongRunningCall(
         undefined,
@@ -2167,7 +2167,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSubnet = stubLongRunningCall(
         undefined,
@@ -2241,7 +2241,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['subnet', 'name']
       );
       request.subnet.name = defaultValue1;
-      const expectedHeaderRequestParams = `subnet.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `subnet.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2274,7 +2274,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['subnet', 'name']
       );
       request.subnet.name = defaultValue1;
-      const expectedHeaderRequestParams = `subnet.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `subnet.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2329,7 +2329,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['subnet', 'name']
       );
       request.subnet.name = defaultValue1;
-      const expectedHeaderRequestParams = `subnet.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `subnet.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSubnet = stubLongRunningCall(
         undefined,
@@ -2361,7 +2361,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['subnet', 'name']
       );
       request.subnet.name = defaultValue1;
-      const expectedHeaderRequestParams = `subnet.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `subnet.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSubnet = stubLongRunningCall(
         undefined,
@@ -2434,7 +2434,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2466,7 +2466,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2520,7 +2520,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSubnet = stubLongRunningCall(
         undefined,
@@ -2551,7 +2551,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSubnet = stubLongRunningCall(
         undefined,
@@ -2624,7 +2624,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2657,7 +2657,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2711,7 +2711,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createInterconnectAttachment = stubLongRunningCall(
         undefined,
@@ -2745,7 +2745,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createInterconnectAttachment = stubLongRunningCall(
         undefined,
@@ -2822,7 +2822,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2855,7 +2855,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2909,7 +2909,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteInterconnectAttachment = stubLongRunningCall(
         undefined,
@@ -2943,7 +2943,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteInterconnectAttachment = stubLongRunningCall(
         undefined,
@@ -3020,7 +3020,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3052,7 +3052,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3106,7 +3106,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRouter = stubLongRunningCall(
         undefined,
@@ -3137,7 +3137,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRouter = stubLongRunningCall(
         undefined,
@@ -3211,7 +3211,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['router', 'name']
       );
       request.router.name = defaultValue1;
-      const expectedHeaderRequestParams = `router.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `router.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3244,7 +3244,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['router', 'name']
       );
       request.router.name = defaultValue1;
-      const expectedHeaderRequestParams = `router.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `router.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3299,7 +3299,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['router', 'name']
       );
       request.router.name = defaultValue1;
-      const expectedHeaderRequestParams = `router.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `router.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRouter = stubLongRunningCall(
         undefined,
@@ -3331,7 +3331,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['router', 'name']
       );
       request.router.name = defaultValue1;
-      const expectedHeaderRequestParams = `router.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `router.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRouter = stubLongRunningCall(
         undefined,
@@ -3404,7 +3404,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3436,7 +3436,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3490,7 +3490,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRouter = stubLongRunningCall(
         undefined,
@@ -3521,7 +3521,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRouter = stubLongRunningCall(
         undefined,
@@ -3595,7 +3595,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Zone()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Zone()),
@@ -3630,7 +3630,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Zone()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Zone()),
@@ -3681,7 +3681,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listZones = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listZones(request), expectedError);
@@ -3711,7 +3711,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Zone()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Zone()),
@@ -3767,7 +3767,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listZones.createStream = stubPageStreamingCall(
         undefined,
@@ -3820,7 +3820,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Zone()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Zone()),
@@ -3864,7 +3864,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listZones.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3908,7 +3908,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Network()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Network()),
@@ -3941,7 +3941,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Network()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Network()),
@@ -3990,7 +3990,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNetworks = stubSimpleCall(
         undefined,
@@ -4021,7 +4021,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Network()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Network()),
@@ -4075,7 +4075,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNetworks.createStream = stubPageStreamingCall(
         undefined,
@@ -4126,7 +4126,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Network()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Network()),
@@ -4169,7 +4169,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNetworks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4211,7 +4211,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Subnet()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Subnet()),
@@ -4244,7 +4244,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Subnet()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Subnet()),
@@ -4293,7 +4293,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSubnets = stubSimpleCall(
         undefined,
@@ -4324,7 +4324,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Subnet()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Subnet()),
@@ -4378,7 +4378,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSubnets.createStream = stubPageStreamingCall(
         undefined,
@@ -4429,7 +4429,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Subnet()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Subnet()),
@@ -4472,7 +4472,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSubnets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -4516,7 +4516,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgenetwork.v1.Interconnect()
@@ -4555,7 +4555,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgenetwork.v1.Interconnect()
@@ -4610,7 +4610,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listInterconnects = stubSimpleCall(
         undefined,
@@ -4641,7 +4641,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgenetwork.v1.Interconnect()
@@ -4701,7 +4701,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInterconnects.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4750,7 +4750,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgenetwork.v1.Interconnect()
@@ -4799,7 +4799,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInterconnects.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4842,7 +4842,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgenetwork.v1.InterconnectAttachment()
@@ -4882,7 +4882,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgenetwork.v1.InterconnectAttachment()
@@ -4939,7 +4939,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listInterconnectAttachments = stubSimpleCall(
         undefined,
@@ -4973,7 +4973,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgenetwork.v1.InterconnectAttachment()
@@ -5042,7 +5042,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInterconnectAttachments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5100,7 +5100,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgenetwork.v1.InterconnectAttachment()
@@ -5154,7 +5154,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInterconnectAttachments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5201,7 +5201,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Router()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Router()),
@@ -5234,7 +5234,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Router()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Router()),
@@ -5283,7 +5283,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRouters = stubSimpleCall(
         undefined,
@@ -5314,7 +5314,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Router()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Router()),
@@ -5368,7 +5368,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRouters.createStream = stubPageStreamingCall(
         undefined,
@@ -5419,7 +5419,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Router()),
         generateSampleMessage(new protos.google.cloud.edgenetwork.v1.Router()),
@@ -5462,7 +5462,7 @@ describe('v1.EdgeNetworkClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRouters.asyncIterate = stubAsyncIterationCall(
         undefined,

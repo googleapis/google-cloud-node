@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,26 +29,24 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of parent to list custom modules. Its format is
-   *  `organizations/{organization}/locations/{location}`,
-   *  `folders/{folder}/locations/{location}`,
-   *  or
-   *  `projects/{project}/locations/{location}`
+   *  Required. Name of parent to list custom modules, in one of the following
+   *  formats:
+   *  * `organizations/{organization}/locations/{location}`
+   *  * `folders/{folder}/locations/{location}`
+   *  * `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**
    *  Optional. The maximum number of modules to return. The service may return
-   *  fewer than this value. If unspecified, at most 10 configs will be returned.
+   *  fewer than this value. If unspecified, at most 10 modules will be returned.
    *  The maximum value is 1000; values above 1000 will be coerced to 1000.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A page token, received from a previous
-   *  `ListEventThreatDetectionCustomModules` call. Provide this to retrieve the
-   *  subsequent page.
-   *  When paginating, all other parameters provided to
-   *  `ListEventThreatDetectionCustomModules` must match the call that provided
-   *  the page token.
+   *  Optional. A pagination token returned from a previous request. Provide this
+   *  token to retrieve the next page of results.
+   *  When paginating, the rest of the request must match the request that
+   *  generated the page token.
    */
   // const pageToken = 'abc123'
 

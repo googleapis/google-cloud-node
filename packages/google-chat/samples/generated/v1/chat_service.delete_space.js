@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  When `true`, the method runs using the user's Google Workspace
+   *  Optional. When `true`, the method runs using the user's Google Workspace
    *  administrator privileges.
    *  The calling user must be a Google Workspace administrator with the
    *  manage chat and spaces conversations

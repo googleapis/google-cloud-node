@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -216,7 +216,8 @@ message Revision {
   // [Google Cloud Platform Launch
   // Stages](https://cloud.google.com/terms/launch-stages). Cloud Run supports
   // `ALPHA`, `BETA`, and `GA`.
-  // <p>Note that this value might not be what was used
+  //
+  // Note that this value might not be what was used
   // as input. For example, if ALPHA was provided as input in the parent
   // resource, but only BETA and GA-level features are were, this field will be
   // BETA.
@@ -263,6 +264,9 @@ message Revision {
     type: "cloudkms.googleapis.com/CryptoKey"
   }];
 
+  // Enables service mesh connectivity.
+  ServiceMesh service_mesh = 22;
+
   // The action to take if the encryption key is revoked.
   EncryptionKeyRevocationAction encryption_key_revocation_action = 23;
 
@@ -298,6 +302,9 @@ message Revision {
   // Output only. The current effective scaling settings for the revision.
   RevisionScalingStatus scaling_status = 39
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // The node selector for the revision.
+  NodeSelector node_selector = 40;
 
   // Output only. A system-generated fingerprint for this version of the
   // resource. May be used to detect modification conflict during updates.

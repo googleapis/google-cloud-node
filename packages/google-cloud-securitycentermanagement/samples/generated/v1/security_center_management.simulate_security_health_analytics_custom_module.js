@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,10 +30,9 @@ function main(parent, customConfig, resource) {
    */
   /**
    *  Required. The relative resource name of the organization, project, or
-   *  folder. For more information about relative resource names, see Relative
-   *  Resource
-   *  Name (https://cloud.google.com/apis/design/resource_names#relative_resource_name)
-   *  Example: `organizations/{organization_id}`.
+   *  folder. For more information about relative resource names, see AIP-122:
+   *  Resource names (https://google.aip.dev/122). Example:
+   *  `organizations/{organization_id}`.
    */
   // const parent = 'abc123'
   /**

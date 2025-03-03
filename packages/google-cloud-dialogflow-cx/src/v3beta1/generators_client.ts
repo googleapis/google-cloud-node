@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -493,8 +493,8 @@ export class GeneratorsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the generator.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/generators/<Generator ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generators/<GeneratorID>`.
    * @param {string} request.languageCode
    *   The language to list generators for.
    * @param {object} [options]
@@ -593,7 +593,7 @@ export class GeneratorsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to create a generator for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.Generator} request.generator
    *   Required. The generator to create.
    * @param {string} request.languageCode
@@ -797,8 +797,8 @@ export class GeneratorsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the generator to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/generators/<Generator ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generators/<GeneratorID>`.
    * @param {boolean} request.force
    *   This field has no effect for generators not being used.
    *   For generators that are used by pages/flows/transition route groups:
@@ -905,7 +905,7 @@ export class GeneratorsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all generators for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.languageCode
    *   The language to list generators for.
    * @param {number} request.pageSize
@@ -1001,12 +1001,12 @@ export class GeneratorsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listGenerators`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all generators for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.languageCode
    *   The language to list generators for.
    * @param {number} request.pageSize
@@ -1055,7 +1055,7 @@ export class GeneratorsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all generators for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.languageCode
    *   The language to list generators for.
    * @param {number} request.pageSize

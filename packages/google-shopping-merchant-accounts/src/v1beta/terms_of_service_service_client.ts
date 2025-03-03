@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -206,6 +206,9 @@ export class TermsOfServiceServiceClient {
       ),
       accountTaxPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/accounttax/{tax}'
+      ),
+      autofeedSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/autofeedSettings'
       ),
       businessIdentityPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/businessIdentity'
@@ -515,11 +518,11 @@ export class TermsOfServiceServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.regionCode
-   *   Region code as defined by [CLDR](https://cldr.unicode.org/). This is either
-   *   a country when the ToS applies specifically to that country or 001 when it
-   *   applies globally.
+   *   Required. Region code as defined by [CLDR](https://cldr.unicode.org/). This
+   *   is either a country when the ToS applies specifically to that country or
+   *   001 when it applies globally.
    * @param {google.shopping.merchant.accounts.v1beta.TermsOfServiceKind} request.kind
-   *   The Kind this terms of service version applies to.
+   *   Required. The Kind this terms of service version applies to.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -813,6 +816,31 @@ export class TermsOfServiceServiceClient {
    */
   matchTaxFromAccountTaxName(accountTaxName: string) {
     return this.pathTemplates.accountTaxPathTemplate.match(accountTaxName).tax;
+  }
+
+  /**
+   * Return a fully-qualified autofeedSettings resource name string.
+   *
+   * @param {string} account
+   * @returns {string} Resource name string.
+   */
+  autofeedSettingsPath(account: string) {
+    return this.pathTemplates.autofeedSettingsPathTemplate.render({
+      account: account,
+    });
+  }
+
+  /**
+   * Parse the account from AutofeedSettings resource.
+   *
+   * @param {string} autofeedSettingsName
+   *   A fully-qualified path representing AutofeedSettings resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
+    return this.pathTemplates.autofeedSettingsPathTemplate.match(
+      autofeedSettingsName
+    ).account;
   }
 
   /**

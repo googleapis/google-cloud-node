@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -912,6 +915,25 @@
                         }
                       }
                     },
+                    "UploadedGoModule": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fileHashes": {
+                          "type": "FileHashes",
+                          "id": 2
+                        },
+                        "pushTiming": {
+                          "type": "TimeSpan",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "UploadedNpmPackage": {
                       "fields": {
                         "uri": {
@@ -1086,6 +1108,14 @@
                           "type": "UploadedMavenArtifact",
                           "id": 9
                         },
+                        "goModules": {
+                          "rule": "repeated",
+                          "type": "UploadedGoModule",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "npmPackages": {
                           "rule": "repeated",
                           "type": "UploadedNpmPackage",
@@ -1109,7 +1139,9 @@
                     "Build": {
                       "options": {
                         "(google.api.resource).type": "cloudbuild.googleapis.com/Build",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/builds/{build}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/builds/{build}",
+                        "(google.api.resource).plural": "builds",
+                        "(google.api.resource).singular": "build"
                       },
                       "fields": {
                         "name": {
@@ -1279,11 +1311,26 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "gitConfig": {
+                          "type": "GitConfig",
+                          "id": 48,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "failureInfo": {
                           "type": "FailureInfo",
                           "id": 51,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dependencies": {
+                          "rule": "repeated",
+                          "type": "Dependency",
+                          "id": 56,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -1351,6 +1398,111 @@
                         }
                       }
                     },
+                    "Dependency": {
+                      "oneofs": {
+                        "dep": {
+                          "oneof": [
+                            "empty",
+                            "gitSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "empty": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "gitSource": {
+                          "type": "GitSourceDependency",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "GitSourceDependency": {
+                          "fields": {
+                            "repository": {
+                              "type": "GitSourceRepository",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "revision": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "recurseSubmodules": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "depth": {
+                              "type": "int64",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "destPath": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "GitSourceRepository": {
+                          "oneofs": {
+                            "repotype": {
+                              "oneof": [
+                                "url",
+                                "developerConnect"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "url": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "developerConnect": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "developerconnect.googleapis.com/GitRepositoryLink"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "GitConfig": {
+                      "fields": {
+                        "http": {
+                          "type": "HttpConfig",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "HttpConfig": {
+                          "fields": {
+                            "proxySecretVersionName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "Artifacts": {
                       "fields": {
                         "images": {
@@ -1366,6 +1518,14 @@
                           "rule": "repeated",
                           "type": "MavenArtifact",
                           "id": 3
+                        },
+                        "goModules": {
+                          "rule": "repeated",
+                          "type": "GoModule",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pythonPackages": {
                           "rule": "repeated",
@@ -1420,6 +1580,52 @@
                             "version": {
                               "type": "string",
                               "id": 5
+                            }
+                          }
+                        },
+                        "GoModule": {
+                          "fields": {
+                            "repositoryName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "repositoryLocation": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "repositoryProjectId": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "sourcePath": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "modulePath": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "moduleVersion": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -1520,6 +1726,7 @@
                             "NONE": 0,
                             "SHA256": 1,
                             "MD5": 2,
+                            "GO_MODULE_H1": 3,
                             "SHA512": 4
                           }
                         }
@@ -2456,6 +2663,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "enableStructuredLogging": {
+                          "type": "bool",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2517,7 +2731,8 @@
                         "DefaultLogsBucketBehavior": {
                           "values": {
                             "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED": 0,
-                            "REGIONAL_USER_OWNED_BUCKET": 1
+                            "REGIONAL_USER_OWNED_BUCKET": 1,
+                            "LEGACY_BUCKET": 2
                           }
                         }
                       }
@@ -2742,6 +2957,13 @@
                         "networkConfig": {
                           "type": "NetworkConfig",
                           "id": 2
+                        },
+                        "privateServiceConnect": {
+                          "type": "PrivateServiceConnect",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       },
                       "nested": {
@@ -2785,6 +3007,32 @@
                                 "EGRESS_OPTION_UNSPECIFIED": 0,
                                 "NO_PUBLIC_EGRESS": 1,
                                 "PUBLIC_EGRESS": 2
+                              }
+                            }
+                          }
+                        },
+                        "PrivateServiceConnect": {
+                          "fields": {
+                            "networkAttachment": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "compute.googleapis.com/NetworkAttachment"
+                              }
+                            },
+                            "publicIpAddressDisabled": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "routeAllTraffic": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
                               }
                             }
                           }

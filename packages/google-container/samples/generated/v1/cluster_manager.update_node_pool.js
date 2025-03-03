@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -177,6 +177,11 @@ function main(nodeVersion, imageType) {
    *  Specifies the configuration of queued provisioning.
    */
   // const queuedProvisioning = {}
+  /**
+   *  List of Storage Pools where boot disks are provisioned.
+   *  Existing Storage Pools will be replaced with storage-pools.
+   */
+  // const storagePools = ['abc','def']
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1120,6 +1120,9 @@ export namespace google {
 
                         /** GlossaryConfig ignoreCase */
                         ignoreCase?: (boolean|null);
+
+                        /** GlossaryConfig contextualTranslationEnabled */
+                        contextualTranslationEnabled?: (boolean|null);
                     }
 
                     /** Represents a GlossaryConfig. */
@@ -1136,6 +1139,9 @@ export namespace google {
 
                         /** GlossaryConfig ignoreCase. */
                         public ignoreCase: boolean;
+
+                        /** GlossaryConfig contextualTranslationEnabled. */
+                        public contextualTranslationEnabled: boolean;
 
                         /**
                          * Creates a new GlossaryConfig instance using the specified properties.
@@ -12757,6 +12763,9 @@ export namespace google {
 
                     /** TranslateTextGlossaryConfig ignoreCase */
                     ignoreCase?: (boolean|null);
+
+                    /** TranslateTextGlossaryConfig contextualTranslationEnabled */
+                    contextualTranslationEnabled?: (boolean|null);
                 }
 
                 /** Represents a TranslateTextGlossaryConfig. */
@@ -12773,6 +12782,9 @@ export namespace google {
 
                     /** TranslateTextGlossaryConfig ignoreCase. */
                     public ignoreCase: boolean;
+
+                    /** TranslateTextGlossaryConfig contextualTranslationEnabled. */
+                    public contextualTranslationEnabled: boolean;
 
                     /**
                      * Creates a new TranslateTextGlossaryConfig instance using the specified properties.

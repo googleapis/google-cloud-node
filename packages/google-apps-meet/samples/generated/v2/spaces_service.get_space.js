@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,6 +30,19 @@ function main(name) {
    */
   /**
    *  Required. Resource name of the space.
+   *  Format: `spaces/{space}` or `spaces/{meetingCode}`.
+   *  `{space}` is the resource identifier for the space. It's a unique,
+   *  server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
+   *  `{meetingCode}` is an alias for the space. It's a typeable, unique
+   *  character string and is non-case sensitive. For example, `abc-mnop-xyz`.
+   *  The maximum length is 128 characters.
+   *  A `meetingCode` shouldn't be stored long term as it can become
+   *  dissociated from a meeting space and can be reused for different meeting
+   *  spaces in the future. Generally, a `meetingCode` expires 365 days after
+   *  last use. For more information, see Learn about meeting codes in Google
+   *  Meet (https://support.google.com/meet/answer/10710509).
+   *  For more information, see How Meet identifies a meeting
+   *  space (https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
    */
   // const name = 'abc123'
 

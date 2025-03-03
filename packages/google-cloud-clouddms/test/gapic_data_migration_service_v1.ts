@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -376,7 +376,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.MigrationJob()
       );
@@ -408,7 +408,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.MigrationJob()
       );
@@ -456,7 +456,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMigrationJob = stubSimpleCall(
         undefined,
@@ -510,7 +510,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['migrationJob']
       );
       request.migrationJob = defaultValue1;
-      const expectedHeaderRequestParams = `migration_job=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migration_job=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.SshScript()
       );
@@ -542,7 +542,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['migrationJob']
       );
       request.migrationJob = defaultValue1;
-      const expectedHeaderRequestParams = `migration_job=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migration_job=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.SshScript()
       );
@@ -590,7 +590,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['migrationJob']
       );
       request.migrationJob = defaultValue1;
-      const expectedHeaderRequestParams = `migration_job=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migration_job=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateSshScript = stubSimpleCall(
         undefined,
@@ -644,7 +644,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['migrationJob']
       );
       request.migrationJob = defaultValue1;
-      const expectedHeaderRequestParams = `migration_job=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migration_job=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.TcpProxyScript()
       );
@@ -677,7 +677,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['migrationJob']
       );
       request.migrationJob = defaultValue1;
-      const expectedHeaderRequestParams = `migration_job=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migration_job=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.TcpProxyScript()
       );
@@ -725,7 +725,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['migrationJob']
       );
       request.migrationJob = defaultValue1;
-      const expectedHeaderRequestParams = `migration_job=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migration_job=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateTcpProxyScript = stubSimpleCall(
         undefined,
@@ -785,7 +785,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ConnectionProfile()
       );
@@ -818,7 +818,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ConnectionProfile()
       );
@@ -866,7 +866,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConnectionProfile = stubSimpleCall(
         undefined,
@@ -920,7 +920,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.PrivateConnection()
       );
@@ -953,7 +953,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.PrivateConnection()
       );
@@ -1001,7 +1001,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPrivateConnection = stubSimpleCall(
         undefined,
@@ -1055,7 +1055,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ConversionWorkspace()
       );
@@ -1088,7 +1088,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ConversionWorkspace()
       );
@@ -1136,7 +1136,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConversionWorkspace = stubSimpleCall(
         undefined,
@@ -1196,7 +1196,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.MappingRule()
       );
@@ -1228,7 +1228,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.MappingRule()
       );
@@ -1276,7 +1276,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMappingRule = stubSimpleCall(
         undefined,
@@ -1330,7 +1330,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1362,7 +1362,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1410,7 +1410,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMappingRule = stubSimpleCall(
         undefined,
@@ -1464,7 +1464,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.MappingRule()
       );
@@ -1496,7 +1496,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.MappingRule()
       );
@@ -1544,7 +1544,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMappingRule = stubSimpleCall(
         undefined,
@@ -1598,7 +1598,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace']
       );
       request.conversionWorkspace = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.SearchBackgroundJobsResponse()
       );
@@ -1631,7 +1631,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace']
       );
       request.conversionWorkspace = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.SearchBackgroundJobsResponse()
       );
@@ -1679,7 +1679,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace']
       );
       request.conversionWorkspace = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchBackgroundJobs = stubSimpleCall(
         undefined,
@@ -1733,7 +1733,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace']
       );
       request.conversionWorkspace = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsResponse()
       );
@@ -1767,7 +1767,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace']
       );
       request.conversionWorkspace = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsResponse()
       );
@@ -1815,7 +1815,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace']
       );
       request.conversionWorkspace = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.describeConversionWorkspaceRevisions =
         stubSimpleCall(undefined, expectedError);
@@ -1873,7 +1873,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1907,7 +1907,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1962,7 +1962,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMigrationJob = stubLongRunningCall(
         undefined,
@@ -1994,7 +1994,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMigrationJob = stubLongRunningCall(
         undefined,
@@ -2074,7 +2074,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['migrationJob', 'name']
       );
       request.migrationJob.name = defaultValue1;
-      const expectedHeaderRequestParams = `migration_job.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migration_job.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2109,7 +2109,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['migrationJob', 'name']
       );
       request.migrationJob.name = defaultValue1;
-      const expectedHeaderRequestParams = `migration_job.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migration_job.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2165,7 +2165,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['migrationJob', 'name']
       );
       request.migrationJob.name = defaultValue1;
-      const expectedHeaderRequestParams = `migration_job.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migration_job.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMigrationJob = stubLongRunningCall(
         undefined,
@@ -2198,7 +2198,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['migrationJob', 'name']
       );
       request.migrationJob.name = defaultValue1;
-      const expectedHeaderRequestParams = `migration_job.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migration_job.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMigrationJob = stubLongRunningCall(
         undefined,
@@ -2277,7 +2277,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2311,7 +2311,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2366,7 +2366,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMigrationJob = stubLongRunningCall(
         undefined,
@@ -2398,7 +2398,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMigrationJob = stubLongRunningCall(
         undefined,
@@ -2477,7 +2477,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2511,7 +2511,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2566,7 +2566,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startMigrationJob = stubLongRunningCall(
         undefined,
@@ -2598,7 +2598,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startMigrationJob = stubLongRunningCall(
         undefined,
@@ -2677,7 +2677,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2711,7 +2711,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2766,7 +2766,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopMigrationJob = stubLongRunningCall(
         undefined,
@@ -2798,7 +2798,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopMigrationJob = stubLongRunningCall(
         undefined,
@@ -2877,7 +2877,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2911,7 +2911,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2966,7 +2966,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeMigrationJob = stubLongRunningCall(
         undefined,
@@ -2998,7 +2998,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeMigrationJob = stubLongRunningCall(
         undefined,
@@ -3077,7 +3077,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3111,7 +3111,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3166,7 +3166,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.promoteMigrationJob = stubLongRunningCall(
         undefined,
@@ -3198,7 +3198,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.promoteMigrationJob = stubLongRunningCall(
         undefined,
@@ -3277,7 +3277,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3311,7 +3311,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3366,7 +3366,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.verifyMigrationJob = stubLongRunningCall(
         undefined,
@@ -3398,7 +3398,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.verifyMigrationJob = stubLongRunningCall(
         undefined,
@@ -3477,7 +3477,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3511,7 +3511,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3566,7 +3566,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restartMigrationJob = stubLongRunningCall(
         undefined,
@@ -3598,7 +3598,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restartMigrationJob = stubLongRunningCall(
         undefined,
@@ -3677,7 +3677,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3711,7 +3711,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3766,7 +3766,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnectionProfile = stubLongRunningCall(
         undefined,
@@ -3801,7 +3801,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnectionProfile = stubLongRunningCall(
         undefined,
@@ -3882,7 +3882,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3917,7 +3917,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3973,7 +3973,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnectionProfile = stubLongRunningCall(
         undefined,
@@ -4009,7 +4009,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnectionProfile = stubLongRunningCall(
         undefined,
@@ -4089,7 +4089,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4123,7 +4123,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4178,7 +4178,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnectionProfile = stubLongRunningCall(
         undefined,
@@ -4213,7 +4213,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnectionProfile = stubLongRunningCall(
         undefined,
@@ -4293,7 +4293,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4327,7 +4327,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4382,7 +4382,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPrivateConnection = stubLongRunningCall(
         undefined,
@@ -4417,7 +4417,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPrivateConnection = stubLongRunningCall(
         undefined,
@@ -4497,7 +4497,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4531,7 +4531,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4586,7 +4586,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePrivateConnection = stubLongRunningCall(
         undefined,
@@ -4621,7 +4621,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePrivateConnection = stubLongRunningCall(
         undefined,
@@ -4701,7 +4701,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4735,7 +4735,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4790,7 +4790,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -4825,7 +4825,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -4906,7 +4906,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace', 'name']
       );
       request.conversionWorkspace.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4941,7 +4941,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace', 'name']
       );
       request.conversionWorkspace.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4997,7 +4997,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace', 'name']
       );
       request.conversionWorkspace.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -5033,7 +5033,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace', 'name']
       );
       request.conversionWorkspace.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -5113,7 +5113,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5147,7 +5147,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5202,7 +5202,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -5237,7 +5237,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -5317,7 +5317,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5351,7 +5351,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5406,7 +5406,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.seedConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -5441,7 +5441,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.seedConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -5521,7 +5521,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5555,7 +5555,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5610,7 +5610,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importMappingRules = stubLongRunningCall(
         undefined,
@@ -5642,7 +5642,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importMappingRules = stubLongRunningCall(
         undefined,
@@ -5721,7 +5721,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5755,7 +5755,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5810,7 +5810,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.convertConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -5845,7 +5845,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.convertConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -5925,7 +5925,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5959,7 +5959,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6014,7 +6014,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.commitConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -6049,7 +6049,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.commitConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -6129,7 +6129,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6163,7 +6163,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6218,7 +6218,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rollbackConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -6253,7 +6253,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rollbackConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -6333,7 +6333,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6367,7 +6367,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6422,7 +6422,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.applyConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -6457,7 +6457,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.applyConversionWorkspace = stubLongRunningCall(
         undefined,
@@ -6537,7 +6537,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.MigrationJob()
@@ -6577,7 +6577,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.MigrationJob()
@@ -6633,7 +6633,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMigrationJobs = stubSimpleCall(
         undefined,
@@ -6665,7 +6665,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.MigrationJob()
@@ -6726,7 +6726,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMigrationJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6776,7 +6776,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.MigrationJob()
@@ -6826,7 +6826,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMigrationJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6869,7 +6869,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.ConnectionProfile()
@@ -6910,7 +6910,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.ConnectionProfile()
@@ -6966,7 +6966,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConnectionProfiles = stubSimpleCall(
         undefined,
@@ -7001,7 +7001,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.ConnectionProfile()
@@ -7069,7 +7069,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnectionProfiles.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7126,7 +7126,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.ConnectionProfile()
@@ -7181,7 +7181,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnectionProfiles.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7229,7 +7229,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.PrivateConnection()
@@ -7270,7 +7270,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.PrivateConnection()
@@ -7326,7 +7326,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPrivateConnections = stubSimpleCall(
         undefined,
@@ -7361,7 +7361,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.PrivateConnection()
@@ -7429,7 +7429,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPrivateConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7486,7 +7486,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.PrivateConnection()
@@ -7541,7 +7541,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPrivateConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7589,7 +7589,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.ConversionWorkspace()
@@ -7630,7 +7630,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.ConversionWorkspace()
@@ -7688,7 +7688,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConversionWorkspaces = stubSimpleCall(
         undefined,
@@ -7723,7 +7723,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.ConversionWorkspace()
@@ -7791,7 +7791,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversionWorkspaces.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7848,7 +7848,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.ConversionWorkspace()
@@ -7903,7 +7903,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversionWorkspaces.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7951,7 +7951,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.MappingRule()
@@ -7991,7 +7991,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.MappingRule()
@@ -8047,7 +8047,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMappingRules = stubSimpleCall(
         undefined,
@@ -8079,7 +8079,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.MappingRule()
@@ -8140,7 +8140,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMappingRules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8190,7 +8190,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.MappingRule()
@@ -8240,7 +8240,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMappingRules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8283,7 +8283,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace']
       );
       request.conversionWorkspace = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.DatabaseEntity()
@@ -8324,7 +8324,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace']
       );
       request.conversionWorkspace = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.DatabaseEntity()
@@ -8380,7 +8380,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace']
       );
       request.conversionWorkspace = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.describeDatabaseEntities = stubSimpleCall(
         undefined,
@@ -8415,7 +8415,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace']
       );
       request.conversionWorkspace = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.DatabaseEntity()
@@ -8482,7 +8482,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace']
       );
       request.conversionWorkspace = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.describeDatabaseEntities.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8538,7 +8538,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace']
       );
       request.conversionWorkspace = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.clouddms.v1.DatabaseEntity()
@@ -8592,7 +8592,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['conversionWorkspace']
       );
       request.conversionWorkspace = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.describeDatabaseEntities.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8639,7 +8639,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.innerApiCalls.fetchStaticIps = stubSimpleCall(expectedResponse);
       const [response] = await client.fetchStaticIps(request);
@@ -8669,7 +8669,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.innerApiCalls.fetchStaticIps =
         stubSimpleCallWithCallback(expectedResponse);
@@ -8712,7 +8712,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchStaticIps = stubSimpleCall(
         undefined,
@@ -8744,7 +8744,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.descriptors.page.fetchStaticIps.createStream =
         stubPageStreamingCall(expectedResponse);
@@ -8792,7 +8792,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchStaticIps.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8839,7 +8839,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.descriptors.page.fetchStaticIps.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
@@ -8879,7 +8879,7 @@ describe('v1.DataMigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchStaticIps.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

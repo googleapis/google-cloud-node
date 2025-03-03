@@ -20,6 +20,11 @@
                 "getDeliveryVehicle"
               ]
             },
+            "DeleteDeliveryVehicle": {
+              "methods": [
+                "deleteDeliveryVehicle"
+              ]
+            },
             "UpdateDeliveryVehicle": {
               "methods": [
                 "updateDeliveryVehicle"
@@ -38,6 +43,11 @@
             "GetTask": {
               "methods": [
                 "getTask"
+              ]
+            },
+            "DeleteTask": {
+              "methods": [
+                "deleteTask"
               ]
             },
             "UpdateTask": {
@@ -79,6 +89,11 @@
                 "getDeliveryVehicle"
               ]
             },
+            "DeleteDeliveryVehicle": {
+              "methods": [
+                "deleteDeliveryVehicle"
+              ]
+            },
             "UpdateDeliveryVehicle": {
               "methods": [
                 "updateDeliveryVehicle"
@@ -97,6 +112,11 @@
             "GetTask": {
               "methods": [
                 "getTask"
+              ]
+            },
+            "DeleteTask": {
+              "methods": [
+                "deleteTask"
               ]
             },
             "UpdateTask": {

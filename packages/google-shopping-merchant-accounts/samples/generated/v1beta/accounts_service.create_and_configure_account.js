@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(account) {
+function main(account, service) {
   // [START merchantapi_v1beta_generated_AccountsService_CreateAndConfigureAccount_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -42,9 +42,12 @@ function main(account) {
    */
   // const acceptTermsOfService = {}
   /**
-   *  Optional. If specified, an account service between the account to be
-   *  created and the provider account is initialized as part of the
-   *  creation.
+   *  Required. An account service between the account to be created and the
+   *  provider account is initialized as part of the creation. At least one such
+   *  service needs to be provided. Currently exactly one of these needs to be
+   *  `account_aggregation`, which means you can only create sub accounts, not
+   *  standalone account through this method. Additional `account_management` or
+   *  `product_management` services may be provided.
    */
   // const service = [1,2,3,4]
 
@@ -58,6 +61,7 @@ function main(account) {
     // Construct request
     const request = {
       account,
+      service,
     };
 
     // Run request

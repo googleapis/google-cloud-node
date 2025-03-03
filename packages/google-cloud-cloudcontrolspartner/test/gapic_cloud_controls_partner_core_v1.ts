@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -340,7 +340,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.Workload()
       );
@@ -372,7 +372,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.Workload()
       );
@@ -420,7 +420,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkload = stubSimpleCall(
         undefined,
@@ -474,7 +474,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.Customer()
       );
@@ -506,7 +506,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.Customer()
       );
@@ -554,7 +554,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCustomer = stubSimpleCall(
         undefined,
@@ -608,7 +608,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.EkmConnections()
       );
@@ -640,7 +640,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.EkmConnections()
       );
@@ -688,7 +688,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEkmConnections = stubSimpleCall(
         undefined,
@@ -742,7 +742,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.PartnerPermissions()
       );
@@ -775,7 +775,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.PartnerPermissions()
       );
@@ -823,7 +823,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPartnerPermissions = stubSimpleCall(
         undefined,
@@ -883,7 +883,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.Partner()
       );
@@ -915,7 +915,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.Partner()
       );
@@ -963,7 +963,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPartner = stubSimpleCall(
         undefined,
@@ -1017,7 +1017,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Workload()
@@ -1057,7 +1057,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Workload()
@@ -1115,7 +1115,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkloads = stubSimpleCall(
         undefined,
@@ -1147,7 +1147,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Workload()
@@ -1209,7 +1209,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkloads.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1260,7 +1260,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Workload()
@@ -1311,7 +1311,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkloads.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1355,7 +1355,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Customer()
@@ -1395,7 +1395,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Customer()
@@ -1453,7 +1453,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCustomers = stubSimpleCall(
         undefined,
@@ -1485,7 +1485,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Customer()
@@ -1547,7 +1547,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1598,7 +1598,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Customer()
@@ -1649,7 +1649,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1694,7 +1694,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest()
@@ -1737,7 +1737,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest()
@@ -1797,7 +1797,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAccessApprovalRequests = stubSimpleCall(
         undefined,
@@ -1834,7 +1834,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest()
@@ -1906,7 +1906,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAccessApprovalRequests.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1967,7 +1967,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest()
@@ -2024,7 +2024,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAccessApprovalRequests.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

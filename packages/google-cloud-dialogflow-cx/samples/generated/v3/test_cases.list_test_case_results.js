@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,9 +30,10 @@ function main(parent) {
    */
   /**
    *  Required. The test case to list results for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *  testCases/<TestCase ID>`. Specify a `-` as a wildcard for TestCase ID to
-   *  list results across multiple test cases.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>`.
+   *  Specify a `-` as a wildcard for TestCase ID to
+   *   list results across multiple test cases.
    */
   // const parent = 'abc123'
   /**

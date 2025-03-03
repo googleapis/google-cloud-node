@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/developerconnect-v0.1.0...developerconnect-v0.2.0) (2024-11-21)
+
+
+### Features
+
+* [developerconnect] A new resource_definition `servicedirectory.googleapis.com/Service` is added ([#5820](https://github.com/googleapis/google-cloud-node/issues/5820)) ([b80a7b7](https://github.com/googleapis/google-cloud-node/commit/b80a7b7e6f97d9a07110adb27dcad28f0b5de341))
+
 ## 0.1.0 (2024-06-12)
 
 

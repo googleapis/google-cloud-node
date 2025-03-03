@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -63,6 +63,11 @@ function main(endpoint) {
    *  knowledge and scope of the model.
    */
   // const tools = [1,2,3,4]
+  /**
+   *  Optional. Generation config that the model will use to generate the
+   *  response.
+   */
+  // const generationConfig = {}
 
   // Imports the Aiplatform library
   const {LlmUtilityServiceClient} = require('@google-cloud/aiplatform').v1;

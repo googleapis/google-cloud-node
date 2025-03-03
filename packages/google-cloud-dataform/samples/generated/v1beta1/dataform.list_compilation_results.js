@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,10 +42,21 @@ function main(parent) {
   /**
    *  Optional. Page token received from a previous `ListCompilationResults`
    *  call. Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `ListCompilationResults`
-   *  must match the call that provided the page token.
+   *  When paginating, all other parameters provided to `ListCompilationResults`,
+   *  with the exception of `page_size`, must match the call that provided the
+   *  page token.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. This field only supports ordering by `name` and `create_time`.
+   *  If unspecified, the server will choose the ordering.
+   *  If specified, the default order is ascending for the `name` field.
+   */
+  // const orderBy = 'abc123'
+  /**
+   *  Optional. Filter for the returned list.
+   */
+  // const filter = 'abc123'
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1beta1;

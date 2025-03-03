@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -320,7 +320,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1p1beta1.StandardResourceMetadata()
@@ -360,7 +360,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1p1beta1.StandardResourceMetadata()
@@ -417,7 +417,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchAllResources = stubSimpleCall(
         undefined,
@@ -448,7 +448,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1p1beta1.StandardResourceMetadata()
@@ -511,7 +511,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAllResources.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -563,7 +563,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1p1beta1.StandardResourceMetadata()
@@ -613,7 +613,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAllResources.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -656,7 +656,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1p1beta1.IamPolicySearchResult()
@@ -696,7 +696,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1p1beta1.IamPolicySearchResult()
@@ -753,7 +753,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchAllIamPolicies = stubSimpleCall(
         undefined,
@@ -784,7 +784,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1p1beta1.IamPolicySearchResult()
@@ -847,7 +847,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAllIamPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -899,7 +899,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1p1beta1.IamPolicySearchResult()
@@ -949,7 +949,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAllIamPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -335,6 +335,11 @@
                 "createEndpoint"
               ]
             },
+            "UpdateEndpointLongRunning": {
+              "methods": [
+                "updateEndpointLongRunning"
+              ]
+            },
             "DeleteEndpoint": {
               "methods": [
                 "deleteEndpoint"
@@ -382,6 +387,11 @@
                 "createEndpoint"
               ]
             },
+            "UpdateEndpointLongRunning": {
+              "methods": [
+                "updateEndpointLongRunning"
+              ]
+            },
             "DeleteEndpoint": {
               "methods": [
                 "deleteEndpoint"
@@ -422,6 +432,11 @@
               "methods": [
                 "evaluateInstances"
               ]
+            },
+            "EvaluateDataset": {
+              "methods": [
+                "evaluateDataset"
+              ]
             }
           }
         },
@@ -431,6 +446,11 @@
             "EvaluateInstances": {
               "methods": [
                 "evaluateInstances"
+              ]
+            },
+            "EvaluateDataset": {
+              "methods": [
+                "evaluateDataset"
               ]
             }
           }
@@ -749,6 +769,21 @@
                 "getFeature"
               ]
             },
+            "GetFeatureMonitor": {
+              "methods": [
+                "getFeatureMonitor"
+              ]
+            },
+            "CreateFeatureMonitorJob": {
+              "methods": [
+                "createFeatureMonitorJob"
+              ]
+            },
+            "GetFeatureMonitorJob": {
+              "methods": [
+                "getFeatureMonitorJob"
+              ]
+            },
             "CreateFeatureGroup": {
               "methods": [
                 "createFeatureGroup"
@@ -769,6 +804,11 @@
                 "createFeature"
               ]
             },
+            "BatchCreateFeatures": {
+              "methods": [
+                "batchCreateFeatures"
+              ]
+            },
             "UpdateFeature": {
               "methods": [
                 "updateFeature"
@@ -777,6 +817,21 @@
             "DeleteFeature": {
               "methods": [
                 "deleteFeature"
+              ]
+            },
+            "CreateFeatureMonitor": {
+              "methods": [
+                "createFeatureMonitor"
+              ]
+            },
+            "UpdateFeatureMonitor": {
+              "methods": [
+                "updateFeatureMonitor"
+              ]
+            },
+            "DeleteFeatureMonitor": {
+              "methods": [
+                "deleteFeatureMonitor"
               ]
             },
             "ListFeatureGroups": {
@@ -791,6 +846,20 @@
                 "listFeatures",
                 "listFeaturesStream",
                 "listFeaturesAsync"
+              ]
+            },
+            "ListFeatureMonitors": {
+              "methods": [
+                "listFeatureMonitors",
+                "listFeatureMonitorsStream",
+                "listFeatureMonitorsAsync"
+              ]
+            },
+            "ListFeatureMonitorJobs": {
+              "methods": [
+                "listFeatureMonitorJobs",
+                "listFeatureMonitorJobsStream",
+                "listFeatureMonitorJobsAsync"
               ]
             }
           }
@@ -808,6 +877,21 @@
                 "getFeature"
               ]
             },
+            "GetFeatureMonitor": {
+              "methods": [
+                "getFeatureMonitor"
+              ]
+            },
+            "CreateFeatureMonitorJob": {
+              "methods": [
+                "createFeatureMonitorJob"
+              ]
+            },
+            "GetFeatureMonitorJob": {
+              "methods": [
+                "getFeatureMonitorJob"
+              ]
+            },
             "CreateFeatureGroup": {
               "methods": [
                 "createFeatureGroup"
@@ -828,6 +912,11 @@
                 "createFeature"
               ]
             },
+            "BatchCreateFeatures": {
+              "methods": [
+                "batchCreateFeatures"
+              ]
+            },
             "UpdateFeature": {
               "methods": [
                 "updateFeature"
@@ -836,6 +925,21 @@
             "DeleteFeature": {
               "methods": [
                 "deleteFeature"
+              ]
+            },
+            "CreateFeatureMonitor": {
+              "methods": [
+                "createFeatureMonitor"
+              ]
+            },
+            "UpdateFeatureMonitor": {
+              "methods": [
+                "updateFeatureMonitor"
+              ]
+            },
+            "DeleteFeatureMonitor": {
+              "methods": [
+                "deleteFeatureMonitor"
               ]
             },
             "ListFeatureGroups": {
@@ -850,6 +954,20 @@
                 "listFeatures",
                 "listFeaturesStream",
                 "listFeaturesAsync"
+              ]
+            },
+            "ListFeatureMonitors": {
+              "methods": [
+                "listFeatureMonitors",
+                "listFeatureMonitorsStream",
+                "listFeatureMonitorsAsync"
+              ]
+            },
+            "ListFeatureMonitorJobs": {
+              "methods": [
+                "listFeatureMonitorJobs",
+                "listFeatureMonitorJobsStream",
+                "listFeatureMonitorJobsAsync"
               ]
             }
           }
@@ -1223,6 +1341,11 @@
                 "cancelTuningJob"
               ]
             },
+            "RebaseTunedModel": {
+              "methods": [
+                "rebaseTunedModel"
+              ]
+            },
             "ListTuningJobs": {
               "methods": [
                 "listTuningJobs",
@@ -1248,6 +1371,11 @@
             "CancelTuningJob": {
               "methods": [
                 "cancelTuningJob"
+              ]
+            },
+            "RebaseTunedModel": {
+              "methods": [
+                "rebaseTunedModel"
               ]
             },
             "ListTuningJobs": {
@@ -2303,6 +2431,16 @@
                 "getPublisherModel"
               ]
             },
+            "Deploy": {
+              "methods": [
+                "deploy"
+              ]
+            },
+            "DeployPublisherModel": {
+              "methods": [
+                "deployPublisherModel"
+              ]
+            },
             "ListPublisherModels": {
               "methods": [
                 "listPublisherModels",
@@ -2318,6 +2456,16 @@
             "GetPublisherModel": {
               "methods": [
                 "getPublisherModel"
+              ]
+            },
+            "Deploy": {
+              "methods": [
+                "deploy"
+              ]
+            },
+            "DeployPublisherModel": {
+              "methods": [
+                "deployPublisherModel"
               ]
             },
             "ListPublisherModels": {
@@ -2560,6 +2708,13 @@
                 "listModelVersionsAsync"
               ]
             },
+            "ListModelVersionCheckpoints": {
+              "methods": [
+                "listModelVersionCheckpoints",
+                "listModelVersionCheckpointsStream",
+                "listModelVersionCheckpointsAsync"
+              ]
+            },
             "ListModelEvaluations": {
               "methods": [
                 "listModelEvaluations",
@@ -2663,6 +2818,13 @@
                 "listModelVersionsAsync"
               ]
             },
+            "ListModelVersionCheckpoints": {
+              "methods": [
+                "listModelVersionCheckpoints",
+                "listModelVersionCheckpointsStream",
+                "listModelVersionCheckpointsAsync"
+              ]
+            },
             "ListModelEvaluations": {
               "methods": [
                 "listModelEvaluations",
@@ -2734,6 +2896,11 @@
             "StartNotebookRuntime": {
               "methods": [
                 "startNotebookRuntime"
+              ]
+            },
+            "StopNotebookRuntime": {
+              "methods": [
+                "stopNotebookRuntime"
               ]
             },
             "CreateNotebookExecutionJob": {
@@ -2820,6 +2987,11 @@
             "StartNotebookRuntime": {
               "methods": [
                 "startNotebookRuntime"
+              ]
+            },
+            "StopNotebookRuntime": {
+              "methods": [
+                "stopNotebookRuntime"
               ]
             },
             "CreateNotebookExecutionJob": {
@@ -3209,6 +3381,11 @@
             "QueryReasoningEngine": {
               "methods": [
                 "queryReasoningEngine"
+              ]
+            },
+            "StreamQueryReasoningEngine": {
+              "methods": [
+                "streamQueryReasoningEngine"
               ]
             }
           }
@@ -3909,6 +4086,16 @@
               "methods": [
                 "retrieveContexts"
               ]
+            },
+            "AugmentPrompt": {
+              "methods": [
+                "augmentPrompt"
+              ]
+            },
+            "CorroborateContent": {
+              "methods": [
+                "corroborateContent"
+              ]
             }
           }
         },
@@ -3918,6 +4105,16 @@
             "RetrieveContexts": {
               "methods": [
                 "retrieveContexts"
+              ]
+            },
+            "AugmentPrompt": {
+              "methods": [
+                "augmentPrompt"
+              ]
+            },
+            "CorroborateContent": {
+              "methods": [
+                "corroborateContent"
               ]
             }
           }

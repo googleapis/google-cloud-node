@@ -19,7 +19,6 @@ package google.cloud.dialogflow.cx.v3;
 import "google/api/field_behavior.proto";
 import "google/protobuf/struct.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.Cx.V3";
 option go_package = "cloud.google.com/go/dialogflow/cx/apiv3/cxpb;cxpb";
 option java_multiple_files = true;
@@ -48,7 +47,8 @@ option ruby_package = "Google::Cloud::Dialogflow::CX::V3";
 message ResponseMessage {
   // The text response message.
   message Text {
-    // Required. A collection of text responses.
+    // Required. A collection of text response variants. If multiple variants
+    // are defined, only one text response variant is returned at runtime.
     repeated string text = 1 [(google.api.field_behavior) = REQUIRED];
 
     // Output only. Whether the playback of this message can be interrupted by

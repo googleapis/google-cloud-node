@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -19,6 +22,123 @@
                         "ruby_package": "Google::Cloud::Eventarc::Publishing::V1"
                       },
                       "nested": {
+                        "CloudEvent": {
+                          "oneofs": {
+                            "data": {
+                              "oneof": [
+                                "binaryData",
+                                "textData",
+                                "protoData"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "source": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "specVersion": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "type": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "attributes": {
+                              "keyType": "string",
+                              "type": "CloudEventAttributeValue",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "binaryData": {
+                              "type": "bytes",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "textData": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "protoData": {
+                              "type": "google.protobuf.Any",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "CloudEventAttributeValue": {
+                              "oneofs": {
+                                "attr": {
+                                  "oneof": [
+                                    "ceBoolean",
+                                    "ceInteger",
+                                    "ceString",
+                                    "ceBytes",
+                                    "ceUri",
+                                    "ceUriRef",
+                                    "ceTimestamp"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "ceBoolean": {
+                                  "type": "bool",
+                                  "id": 1
+                                },
+                                "ceInteger": {
+                                  "type": "int32",
+                                  "id": 2
+                                },
+                                "ceString": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "ceBytes": {
+                                  "type": "bytes",
+                                  "id": 4
+                                },
+                                "ceUri": {
+                                  "type": "string",
+                                  "id": 5
+                                },
+                                "ceUriRef": {
+                                  "type": "string",
+                                  "id": 6
+                                },
+                                "ceTimestamp": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 7
+                                }
+                              }
+                            }
+                          }
+                        },
                         "Publisher": {
                           "options": {
                             "(google.api.default_host)": "eventarcpublishing.googleapis.com",
@@ -52,6 +172,22 @@
                                 {
                                   "(google.api.http)": {
                                     "post": "/v1/{channel=projects/*/locations/*/channels/*}:publishEvents",
+                                    "body": "*"
+                                  }
+                                }
+                              ]
+                            },
+                            "Publish": {
+                              "requestType": "PublishRequest",
+                              "responseType": "PublishResponse",
+                              "options": {
+                                "(google.api.http).post": "/v1/{message_bus=projects/*/locations/*/messageBuses/*}:publish",
+                                "(google.api.http).body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{message_bus=projects/*/locations/*/messageBuses/*}:publish",
                                     "body": "*"
                                   }
                                 }
@@ -100,6 +236,41 @@
                         },
                         "PublishEventsResponse": {
                           "fields": {}
+                        },
+                        "PublishRequest": {
+                          "oneofs": {
+                            "format": {
+                              "oneof": [
+                                "protoMessage",
+                                "jsonMessage",
+                                "avroMessage"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "messageBus": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "protoMessage": {
+                              "type": "CloudEvent",
+                              "id": 2
+                            },
+                            "jsonMessage": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "avroMessage": {
+                              "type": "bytes",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "PublishResponse": {
+                          "fields": {}
                         }
                       }
                     }
@@ -111,14 +282,33 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api;api",
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "LaunchStageProto",
+            "java_outer_classname": "FieldInfoProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
           },
           "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
+              }
+            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -499,6 +689,30 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
               }
             }
           }
@@ -1778,7 +1992,19 @@
                 }
               }
             },
-            "Duration": {
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Timestamp": {
               "fields": {
                 "seconds": {
                   "type": "int64",
@@ -1790,14 +2016,14 @@
                 }
               }
             },
-            "Any": {
+            "Duration": {
               "fields": {
-                "type_url": {
-                  "type": "string",
+                "seconds": {
+                  "type": "int64",
                   "id": 1
                 },
-                "value": {
-                  "type": "bytes",
+                "nanos": {
+                  "type": "int32",
                   "id": 2
                 }
               }

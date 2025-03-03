@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -357,7 +357,7 @@ describe('v1.JobControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -393,7 +393,7 @@ describe('v1.JobControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -445,7 +445,7 @@ describe('v1.JobControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.submitJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.submitJob(request), expectedError);
@@ -509,7 +509,7 @@ describe('v1.JobControllerClient', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -550,7 +550,7 @@ describe('v1.JobControllerClient', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -607,7 +607,7 @@ describe('v1.JobControllerClient', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getJob(request), expectedError);
@@ -676,7 +676,7 @@ describe('v1.JobControllerClient', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -717,7 +717,7 @@ describe('v1.JobControllerClient', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -774,7 +774,7 @@ describe('v1.JobControllerClient', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.updateJob(request), expectedError);
@@ -843,7 +843,7 @@ describe('v1.JobControllerClient', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -884,7 +884,7 @@ describe('v1.JobControllerClient', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -941,7 +941,7 @@ describe('v1.JobControllerClient', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.cancelJob(request), expectedError);
@@ -1010,7 +1010,7 @@ describe('v1.JobControllerClient', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1051,7 +1051,7 @@ describe('v1.JobControllerClient', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1108,7 +1108,7 @@ describe('v1.JobControllerClient', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.deleteJob(request), expectedError);
@@ -1172,7 +1172,7 @@ describe('v1.JobControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1210,7 +1210,7 @@ describe('v1.JobControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1269,7 +1269,7 @@ describe('v1.JobControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.submitJobAsOperation = stubLongRunningCall(
         undefined,
@@ -1305,7 +1305,7 @@ describe('v1.JobControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.submitJobAsOperation = stubLongRunningCall(
         undefined,
@@ -1386,7 +1386,7 @@ describe('v1.JobControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
@@ -1424,7 +1424,7 @@ describe('v1.JobControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
@@ -1478,7 +1478,7 @@ describe('v1.JobControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listJobs(request), expectedError);
@@ -1511,7 +1511,7 @@ describe('v1.JobControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
@@ -1567,7 +1567,7 @@ describe('v1.JobControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
         undefined,
@@ -1620,7 +1620,7 @@ describe('v1.JobControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
@@ -1667,7 +1667,7 @@ describe('v1.JobControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
         undefined,

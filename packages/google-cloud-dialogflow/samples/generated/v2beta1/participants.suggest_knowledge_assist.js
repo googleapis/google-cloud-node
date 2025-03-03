@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ function main(parent) {
   // const contextSize = 1234
   /**
    *  Optional. The previously suggested query for the given conversation. This
-   *  helps identify whether the next suggestion we generate is resonably
+   *  helps identify whether the next suggestion we generate is reasonably
    *  different from the previous one. This is useful to avoid similar
    *  suggestions within the conversation.
    */

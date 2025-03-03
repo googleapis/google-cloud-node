@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -281,10 +281,12 @@ export class DeliveryServiceClient {
     const deliveryServiceStubMethods = [
       'createDeliveryVehicle',
       'getDeliveryVehicle',
+      'deleteDeliveryVehicle',
       'updateDeliveryVehicle',
       'batchCreateTasks',
       'createTask',
       'getTask',
+      'deleteTask',
       'updateTask',
       'listTasks',
       'getTaskTrackingInfo',
@@ -646,6 +648,121 @@ export class DeliveryServiceClient {
     return this.innerApiCalls.getDeliveryVehicle(request, options, callback);
   }
   /**
+   * Deletes a DeliveryVehicle from the Fleet Engine.
+   *
+   * Returns FAILED_PRECONDITION if the DeliveryVehicle has OPEN Tasks
+   * assigned to it.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.delivery.v1.DeliveryRequestHeader} [request.header]
+   *   Optional. The standard Delivery API request header.
+   * @param {string} request.name
+   *   Required. Must be in the format
+   *   `providers/{provider}/deliveryVehicles/{delivery_vehicle}`.
+   *   The `provider` must be the Google Cloud Project ID. For example,
+   *   `sample-cloud-project`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/delivery_service.delete_delivery_vehicle.js</caption>
+   * region_tag:fleetengine_v1_generated_DeliveryService_DeleteDeliveryVehicle_async
+   */
+  deleteDeliveryVehicle(
+    request?: protos.maps.fleetengine.delivery.v1.IDeleteDeliveryVehicleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.maps.fleetengine.delivery.v1.IDeleteDeliveryVehicleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteDeliveryVehicle(
+    request: protos.maps.fleetengine.delivery.v1.IDeleteDeliveryVehicleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.maps.fleetengine.delivery.v1.IDeleteDeliveryVehicleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDeliveryVehicle(
+    request: protos.maps.fleetengine.delivery.v1.IDeleteDeliveryVehicleRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.maps.fleetengine.delivery.v1.IDeleteDeliveryVehicleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDeliveryVehicle(
+    request?: protos.maps.fleetengine.delivery.v1.IDeleteDeliveryVehicleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.maps.fleetengine.delivery.v1.IDeleteDeliveryVehicleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.maps.fleetengine.delivery.v1.IDeleteDeliveryVehicleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.maps.fleetengine.delivery.v1.IDeleteDeliveryVehicleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
+          Object.assign(routingParameter, {provider_id: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize();
+    return this.innerApiCalls.deleteDeliveryVehicle(request, options, callback);
+  }
+  /**
    * Writes updated `DeliveryVehicle` data to Fleet Engine, and assigns
    * `Tasks` to the `DeliveryVehicle`. You cannot update the name of the
    * `DeliveryVehicle`. You *can* update `remaining_vehicle_journey_segments`,
@@ -913,6 +1030,12 @@ export class DeliveryServiceClient {
    *   * `planned_location` (optional for `UNAVAILABLE` tasks)
    *   * `task_duration`
    *
+   *   The following fields can be optionally set:
+   *
+   *   * `target_time_window`
+   *   * `task_tracking_view_config`
+   *   * `attributes`
+   *
    *   Note: The Task's `name` field is ignored. All other Task fields must not be
    *   set; otherwise, an error is returned.
    * @param {object} [options]
@@ -1101,6 +1224,108 @@ export class DeliveryServiceClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.getTask(request, options, callback);
+  }
+  /**
+   * Deletes a single Task.
+   *
+   * Returns FAILED_PRECONDITION if the Task is OPEN and assigned to a
+   * DeliveryVehicle.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.delivery.v1.DeliveryRequestHeader} [request.header]
+   *   Optional. The standard Delivery API request header.
+   * @param {string} request.name
+   *   Required. Must be in the format `providers/{provider}/tasks/{task}`. The
+   *   `provider` must be the Google Cloud Project ID. For example,
+   *   `sample-cloud-project`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/delivery_service.delete_task.js</caption>
+   * region_tag:fleetengine_v1_generated_DeliveryService_DeleteTask_async
+   */
+  deleteTask(
+    request?: protos.maps.fleetengine.delivery.v1.IDeleteTaskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.delivery.v1.IDeleteTaskRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteTask(
+    request: protos.maps.fleetengine.delivery.v1.IDeleteTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.delivery.v1.IDeleteTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteTask(
+    request: protos.maps.fleetengine.delivery.v1.IDeleteTaskRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.delivery.v1.IDeleteTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteTask(
+    request?: protos.maps.fleetengine.delivery.v1.IDeleteTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.maps.fleetengine.delivery.v1.IDeleteTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.delivery.v1.IDeleteTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.delivery.v1.IDeleteTaskRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
+          Object.assign(routingParameter, {provider_id: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize();
+    return this.innerApiCalls.deleteTask(request, options, callback);
   }
   /**
    * Updates `Task` data.
@@ -1454,7 +1679,7 @@ export class DeliveryServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTasks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {maps.fleetengine.delivery.v1.DeliveryRequestHeader} [request.header]
@@ -1737,7 +1962,7 @@ export class DeliveryServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDeliveryVehicles`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {maps.fleetengine.delivery.v1.DeliveryRequestHeader} [request.header]

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,12 +30,12 @@ function main(parent, names) {
    */
   /**
    *  Required. The agent to delete test cases from.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. Format of test case names: `projects/<Project ID>/locations/
-   *  <Location ID>/agents/<AgentID>/testCases/<TestCase ID>`.
+   *  Required. Format of test case names:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>`.
    */
   // const names = ['abc','def']
 

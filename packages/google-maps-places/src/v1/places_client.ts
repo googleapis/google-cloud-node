@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -360,7 +360,7 @@ export class PlacesClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -489,6 +489,8 @@ export class PlacesClient {
    *   Required. The region to search.
    * @param {google.maps.places.v1.SearchNearbyRequest.RankPreference} request.rankPreference
    *   How results will be ranked in the response.
+   * @param {google.maps.places.v1.RoutingParameters} [request.routingParameters]
+   *   Optional. Parameters that affect the routing to the search results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -623,6 +625,18 @@ export class PlacesClient {
    *   with location_bias.
    * @param {google.maps.places.v1.SearchTextRequest.EVOptions} [request.evOptions]
    *   Optional. Set the searchable EV options of a place search request.
+   * @param {google.maps.places.v1.RoutingParameters} [request.routingParameters]
+   *   Optional. Additional parameters for routing to results.
+   * @param {google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters} [request.searchAlongRouteParameters]
+   *   Optional. Additional parameters proto for searching along a route.
+   * @param {boolean} [request.includePureServiceAreaBusinesses]
+   *   Optional. Include pure service area businesses if the field is set to true.
+   *   Pure service area business is a business that visits or delivers to
+   *   customers directly but does not serve customers at their business address.
+   *   For example, businesses like cleaning services or plumbers. Those
+   *   businesses do not have a physical address or location on Google Maps.
+   *   Places will not return fields including `location`, `plus_code`, and other
+   *   location related fields for these businesses.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1020,6 +1034,14 @@ export class PlacesClient {
    *   * Be sure to pass a unique session token for each new session. Using the
    *     same token for more than one session will result in each request being
    *     billed individually.
+   * @param {boolean} [request.includePureServiceAreaBusinesses]
+   *   Optional. Include pure service area businesses if the field is set to true.
+   *   Pure service area business is a business that visits or delivers to
+   *   customers directly but does not serve customers at their business address.
+   *   For example, businesses like cleaning services or plumbers. Those
+   *   businesses do not have a physical address or location on Google Maps.
+   *   Places will not return fields including `location`, `plus_code`, and other
+   *   location related fields for these businesses.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

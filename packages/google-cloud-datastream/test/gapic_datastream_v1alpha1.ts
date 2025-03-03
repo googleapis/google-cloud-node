@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -352,7 +352,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ConnectionProfile()
       );
@@ -384,7 +384,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ConnectionProfile()
       );
@@ -431,7 +431,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConnectionProfile = stubSimpleCall(
         undefined,
@@ -483,7 +483,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DiscoverConnectionProfileResponse()
       );
@@ -515,7 +515,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DiscoverConnectionProfileResponse()
       );
@@ -562,7 +562,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.discoverConnectionProfile = stubSimpleCall(
         undefined,
@@ -620,7 +620,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.Stream()
       );
@@ -651,7 +651,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.Stream()
       );
@@ -698,7 +698,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getStream = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getStream(request), expectedError);
@@ -747,7 +747,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.PrivateConnection()
       );
@@ -779,7 +779,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.PrivateConnection()
       );
@@ -826,7 +826,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPrivateConnection = stubSimpleCall(
         undefined,
@@ -878,7 +878,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.Route()
       );
@@ -909,7 +909,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.Route()
       );
@@ -956,7 +956,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRoute = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getRoute(request), expectedError);
@@ -1005,7 +1005,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1038,7 +1038,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1092,7 +1092,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnectionProfile = stubLongRunningCall(
         undefined,
@@ -1126,7 +1126,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnectionProfile = stubLongRunningCall(
         undefined,
@@ -1204,7 +1204,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1238,7 +1238,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1293,7 +1293,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnectionProfile = stubLongRunningCall(
         undefined,
@@ -1328,7 +1328,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnectionProfile = stubLongRunningCall(
         undefined,
@@ -1405,7 +1405,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1438,7 +1438,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1492,7 +1492,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnectionProfile = stubLongRunningCall(
         undefined,
@@ -1526,7 +1526,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnectionProfile = stubLongRunningCall(
         undefined,
@@ -1603,7 +1603,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1635,7 +1635,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1689,7 +1689,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createStream = stubLongRunningCall(
         undefined,
@@ -1720,7 +1720,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createStream = stubLongRunningCall(
         undefined,
@@ -1794,7 +1794,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['stream', 'name']
       );
       request.stream.name = defaultValue1;
-      const expectedHeaderRequestParams = `stream.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `stream.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1827,7 +1827,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['stream', 'name']
       );
       request.stream.name = defaultValue1;
-      const expectedHeaderRequestParams = `stream.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `stream.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1882,7 +1882,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['stream', 'name']
       );
       request.stream.name = defaultValue1;
-      const expectedHeaderRequestParams = `stream.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `stream.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateStream = stubLongRunningCall(
         undefined,
@@ -1914,7 +1914,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['stream', 'name']
       );
       request.stream.name = defaultValue1;
-      const expectedHeaderRequestParams = `stream.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `stream.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateStream = stubLongRunningCall(
         undefined,
@@ -1987,7 +1987,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2019,7 +2019,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2073,7 +2073,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteStream = stubLongRunningCall(
         undefined,
@@ -2104,7 +2104,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteStream = stubLongRunningCall(
         undefined,
@@ -2177,7 +2177,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['stream']
       );
       request.stream = defaultValue1;
-      const expectedHeaderRequestParams = `stream=${defaultValue1}`;
+      const expectedHeaderRequestParams = `stream=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2209,7 +2209,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['stream']
       );
       request.stream = defaultValue1;
-      const expectedHeaderRequestParams = `stream=${defaultValue1}`;
+      const expectedHeaderRequestParams = `stream=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2263,7 +2263,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['stream']
       );
       request.stream = defaultValue1;
-      const expectedHeaderRequestParams = `stream=${defaultValue1}`;
+      const expectedHeaderRequestParams = `stream=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchErrors = stubLongRunningCall(
         undefined,
@@ -2294,7 +2294,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['stream']
       );
       request.stream = defaultValue1;
-      const expectedHeaderRequestParams = `stream=${defaultValue1}`;
+      const expectedHeaderRequestParams = `stream=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchErrors = stubLongRunningCall(
         undefined,
@@ -2367,7 +2367,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2400,7 +2400,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2454,7 +2454,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPrivateConnection = stubLongRunningCall(
         undefined,
@@ -2488,7 +2488,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPrivateConnection = stubLongRunningCall(
         undefined,
@@ -2565,7 +2565,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2598,7 +2598,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2652,7 +2652,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePrivateConnection = stubLongRunningCall(
         undefined,
@@ -2686,7 +2686,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePrivateConnection = stubLongRunningCall(
         undefined,
@@ -2763,7 +2763,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2795,7 +2795,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2849,7 +2849,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRoute = stubLongRunningCall(
         undefined,
@@ -2880,7 +2880,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRoute = stubLongRunningCall(
         undefined,
@@ -2953,7 +2953,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2985,7 +2985,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3039,7 +3039,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRoute = stubLongRunningCall(
         undefined,
@@ -3070,7 +3070,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRoute = stubLongRunningCall(
         undefined,
@@ -3143,7 +3143,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.ConnectionProfile()
@@ -3183,7 +3183,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.ConnectionProfile()
@@ -3240,7 +3240,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConnectionProfiles = stubSimpleCall(
         undefined,
@@ -3274,7 +3274,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.ConnectionProfile()
@@ -3343,7 +3343,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnectionProfiles.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3401,7 +3401,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.ConnectionProfile()
@@ -3455,7 +3455,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnectionProfiles.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3502,7 +3502,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.Stream()
@@ -3541,7 +3541,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.Stream()
@@ -3596,7 +3596,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listStreams = stubSimpleCall(
         undefined,
@@ -3627,7 +3627,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.Stream()
@@ -3687,7 +3687,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listStreams.createStream = stubPageStreamingCall(
         undefined,
@@ -3738,7 +3738,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.Stream()
@@ -3787,7 +3787,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listStreams.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3831,7 +3831,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.innerApiCalls.fetchStaticIps = stubSimpleCall(expectedResponse);
       const [response] = await client.fetchStaticIps(request);
@@ -3860,7 +3860,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.innerApiCalls.fetchStaticIps =
         stubSimpleCallWithCallback(expectedResponse);
@@ -3902,7 +3902,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchStaticIps = stubSimpleCall(
         undefined,
@@ -3933,7 +3933,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.descriptors.page.fetchStaticIps.createStream =
         stubPageStreamingCall(expectedResponse);
@@ -3980,7 +3980,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchStaticIps.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4026,7 +4026,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.descriptors.page.fetchStaticIps.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
@@ -4065,7 +4065,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchStaticIps.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4107,7 +4107,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.PrivateConnection()
@@ -4147,7 +4147,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.PrivateConnection()
@@ -4204,7 +4204,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPrivateConnections = stubSimpleCall(
         undefined,
@@ -4238,7 +4238,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.PrivateConnection()
@@ -4307,7 +4307,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPrivateConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4365,7 +4365,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.PrivateConnection()
@@ -4419,7 +4419,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPrivateConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4466,7 +4466,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.Route()
@@ -4505,7 +4505,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.Route()
@@ -4560,7 +4560,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRoutes = stubSimpleCall(
         undefined,
@@ -4591,7 +4591,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.Route()
@@ -4651,7 +4651,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRoutes.createStream = stubPageStreamingCall(
         undefined,
@@ -4702,7 +4702,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1alpha1.Route()
@@ -4751,7 +4751,7 @@ describe('v1alpha1.DatastreamClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRoutes.asyncIterate = stubAsyncIterationCall(
         undefined,

@@ -6,6 +6,11 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "deadline_exceeded_resource_exhausted_unavailable": [
+          "DEADLINE_EXCEEDED",
+          "RESOURCE_EXHAUSTED",
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -17,18 +22,36 @@
           "rpc_timeout_multiplier": 1,
           "max_rpc_timeout_millis": 60000,
           "total_timeout_millis": 600000
+        },
+        "cf44f94e283152b741c30fbc9df4a6abb71aa468": {
+          "initial_retry_delay_millis": 1000,
+          "retry_delay_multiplier": 9,
+          "max_retry_delay_millis": 90000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        },
+        "c85d7af2fd532496a9c7916f9bf84795125b2bf2": {
+          "initial_retry_delay_millis": 1000,
+          "retry_delay_multiplier": 1.5,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
         }
       },
       "methods": {
         "ProcessDocument": {
           "timeout_millis": 300000,
-          "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_unavailable",
+          "retry_params_name": "cf44f94e283152b741c30fbc9df4a6abb71aa468"
         },
         "BatchProcessDocuments": {
           "timeout_millis": 120000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "retry_params_name": "c85d7af2fd532496a9c7916f9bf84795125b2bf2"
         },
         "FetchProcessorTypes": {
           "retry_codes_name": "non_idempotent",
@@ -97,7 +120,7 @@
         "ReviewDocument": {
           "timeout_millis": 120000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "retry_params_name": "c85d7af2fd532496a9c7916f9bf84795125b2bf2"
         },
         "EvaluateProcessorVersion": {
           "retry_codes_name": "non_idempotent",

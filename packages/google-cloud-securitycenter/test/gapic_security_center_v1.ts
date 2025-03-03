@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -355,7 +355,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
       );
@@ -390,7 +390,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
       );
@@ -439,7 +439,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -497,7 +497,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Source()
       );
@@ -528,7 +528,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Source()
       );
@@ -575,7 +575,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSource = stubSimpleCall(
         undefined,
@@ -627,7 +627,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Finding()
       );
@@ -658,7 +658,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Finding()
       );
@@ -705,7 +705,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFinding = stubSimpleCall(
         undefined,
@@ -757,7 +757,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.MuteConfig()
       );
@@ -788,7 +788,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.MuteConfig()
       );
@@ -835,7 +835,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMuteConfig = stubSimpleCall(
         undefined,
@@ -887,7 +887,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.NotificationConfig()
       );
@@ -919,7 +919,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.NotificationConfig()
       );
@@ -966,7 +966,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNotificationConfig = stubSimpleCall(
         undefined,
@@ -1024,7 +1024,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1055,7 +1055,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1102,7 +1102,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMuteConfig = stubSimpleCall(
         undefined,
@@ -1154,7 +1154,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1186,7 +1186,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1233,7 +1233,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNotificationConfig = stubSimpleCall(
         undefined,
@@ -1291,7 +1291,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1326,7 +1326,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1375,7 +1375,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -1433,7 +1433,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Simulation()
       );
@@ -1464,7 +1464,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Simulation()
       );
@@ -1511,7 +1511,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSimulation = stubSimpleCall(
         undefined,
@@ -1563,7 +1563,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ValuedResource()
       );
@@ -1594,7 +1594,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ValuedResource()
       );
@@ -1641,7 +1641,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getValuedResource = stubSimpleCall(
         undefined,
@@ -1693,7 +1693,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.BigQueryExport()
       );
@@ -1724,7 +1724,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.BigQueryExport()
       );
@@ -1771,7 +1771,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getBigQueryExport = stubSimpleCall(
         undefined,
@@ -1823,7 +1823,7 @@ describe('v1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1854,7 +1854,7 @@ describe('v1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1901,7 +1901,7 @@ describe('v1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -1953,7 +1953,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.MuteConfig()
       );
@@ -1984,7 +1984,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.MuteConfig()
       );
@@ -2031,7 +2031,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMuteConfig = stubSimpleCall(
         undefined,
@@ -2083,7 +2083,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.NotificationConfig()
       );
@@ -2115,7 +2115,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.NotificationConfig()
       );
@@ -2162,7 +2162,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNotificationConfig = stubSimpleCall(
         undefined,
@@ -2220,7 +2220,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.OrganizationSettings()
       );
@@ -2252,7 +2252,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.OrganizationSettings()
       );
@@ -2299,7 +2299,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getOrganizationSettings = stubSimpleCall(
         undefined,
@@ -2357,7 +2357,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
       );
@@ -2392,7 +2392,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
       );
@@ -2441,7 +2441,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEffectiveSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -2499,7 +2499,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
       );
@@ -2532,7 +2532,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
       );
@@ -2579,7 +2579,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -2635,7 +2635,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Source()
       );
@@ -2666,7 +2666,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Source()
       );
@@ -2713,7 +2713,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSource = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSource(request), expectedError);
@@ -2762,7 +2762,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Finding()
       );
@@ -2793,7 +2793,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Finding()
       );
@@ -2840,7 +2840,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setFindingState = stubSimpleCall(
         undefined,
@@ -2892,7 +2892,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Finding()
       );
@@ -2923,7 +2923,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Finding()
       );
@@ -2970,7 +2970,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setMute = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.setMute(request), expectedError);
@@ -3019,7 +3019,7 @@ describe('v1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -3050,7 +3050,7 @@ describe('v1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -3097,7 +3097,7 @@ describe('v1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -3149,7 +3149,7 @@ describe('v1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -3181,7 +3181,7 @@ describe('v1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -3228,7 +3228,7 @@ describe('v1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -3280,7 +3280,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse()
       );
@@ -3315,7 +3315,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse()
       );
@@ -3364,7 +3364,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.simulateSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -3423,7 +3423,7 @@ describe('v1.SecurityCenterClient', () => {
         ['externalSystem', 'name']
       );
       request.externalSystem.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_system.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `external_system.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ExternalSystem()
       );
@@ -3456,7 +3456,7 @@ describe('v1.SecurityCenterClient', () => {
         ['externalSystem', 'name']
       );
       request.externalSystem.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_system.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `external_system.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ExternalSystem()
       );
@@ -3504,7 +3504,7 @@ describe('v1.SecurityCenterClient', () => {
         ['externalSystem', 'name']
       );
       request.externalSystem.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_system.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `external_system.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateExternalSystem = stubSimpleCall(
         undefined,
@@ -3558,7 +3558,7 @@ describe('v1.SecurityCenterClient', () => {
         ['finding', 'name']
       );
       request.finding.name = defaultValue1;
-      const expectedHeaderRequestParams = `finding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `finding.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Finding()
       );
@@ -3590,7 +3590,7 @@ describe('v1.SecurityCenterClient', () => {
         ['finding', 'name']
       );
       request.finding.name = defaultValue1;
-      const expectedHeaderRequestParams = `finding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `finding.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Finding()
       );
@@ -3638,7 +3638,7 @@ describe('v1.SecurityCenterClient', () => {
         ['finding', 'name']
       );
       request.finding.name = defaultValue1;
-      const expectedHeaderRequestParams = `finding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `finding.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFinding = stubSimpleCall(
         undefined,
@@ -3692,7 +3692,7 @@ describe('v1.SecurityCenterClient', () => {
         ['muteConfig', 'name']
       );
       request.muteConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `mute_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `mute_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.MuteConfig()
       );
@@ -3724,7 +3724,7 @@ describe('v1.SecurityCenterClient', () => {
         ['muteConfig', 'name']
       );
       request.muteConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `mute_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `mute_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.MuteConfig()
       );
@@ -3772,7 +3772,7 @@ describe('v1.SecurityCenterClient', () => {
         ['muteConfig', 'name']
       );
       request.muteConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `mute_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `mute_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMuteConfig = stubSimpleCall(
         undefined,
@@ -3826,7 +3826,7 @@ describe('v1.SecurityCenterClient', () => {
         ['notificationConfig', 'name']
       );
       request.notificationConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `notification_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `notification_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.NotificationConfig()
       );
@@ -3859,7 +3859,7 @@ describe('v1.SecurityCenterClient', () => {
         ['notificationConfig', 'name']
       );
       request.notificationConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `notification_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `notification_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.NotificationConfig()
       );
@@ -3907,7 +3907,7 @@ describe('v1.SecurityCenterClient', () => {
         ['notificationConfig', 'name']
       );
       request.notificationConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `notification_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `notification_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNotificationConfig = stubSimpleCall(
         undefined,
@@ -3967,7 +3967,7 @@ describe('v1.SecurityCenterClient', () => {
         ['organizationSettings', 'name']
       );
       request.organizationSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.OrganizationSettings()
       );
@@ -4000,7 +4000,7 @@ describe('v1.SecurityCenterClient', () => {
         ['organizationSettings', 'name']
       );
       request.organizationSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.OrganizationSettings()
       );
@@ -4048,7 +4048,7 @@ describe('v1.SecurityCenterClient', () => {
         ['organizationSettings', 'name']
       );
       request.organizationSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateOrganizationSettings = stubSimpleCall(
         undefined,
@@ -4108,7 +4108,7 @@ describe('v1.SecurityCenterClient', () => {
         ['securityHealthAnalyticsCustomModule', 'name']
       );
       request.securityHealthAnalyticsCustomModule.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
       );
@@ -4144,7 +4144,7 @@ describe('v1.SecurityCenterClient', () => {
         ['securityHealthAnalyticsCustomModule', 'name']
       );
       request.securityHealthAnalyticsCustomModule.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
       );
@@ -4194,7 +4194,7 @@ describe('v1.SecurityCenterClient', () => {
         ['securityHealthAnalyticsCustomModule', 'name']
       );
       request.securityHealthAnalyticsCustomModule.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -4254,7 +4254,7 @@ describe('v1.SecurityCenterClient', () => {
         ['source', 'name']
       );
       request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Source()
       );
@@ -4286,7 +4286,7 @@ describe('v1.SecurityCenterClient', () => {
         ['source', 'name']
       );
       request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.Source()
       );
@@ -4334,7 +4334,7 @@ describe('v1.SecurityCenterClient', () => {
         ['source', 'name']
       );
       request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSource = stubSimpleCall(
         undefined,
@@ -4388,7 +4388,7 @@ describe('v1.SecurityCenterClient', () => {
         ['securityMarks', 'name']
       );
       request.securityMarks.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.SecurityMarks()
       );
@@ -4421,7 +4421,7 @@ describe('v1.SecurityCenterClient', () => {
         ['securityMarks', 'name']
       );
       request.securityMarks.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.SecurityMarks()
       );
@@ -4469,7 +4469,7 @@ describe('v1.SecurityCenterClient', () => {
         ['securityMarks', 'name']
       );
       request.securityMarks.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSecurityMarks = stubSimpleCall(
         undefined,
@@ -4522,7 +4522,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.BigQueryExport()
       );
@@ -4554,7 +4554,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.BigQueryExport()
       );
@@ -4601,7 +4601,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBigQueryExport = stubSimpleCall(
         undefined,
@@ -4653,7 +4653,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4685,7 +4685,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4732,7 +4732,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBigQueryExport = stubSimpleCall(
         undefined,
@@ -4785,7 +4785,7 @@ describe('v1.SecurityCenterClient', () => {
         ['bigQueryExport', 'name']
       );
       request.bigQueryExport.name = defaultValue1;
-      const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.BigQueryExport()
       );
@@ -4818,7 +4818,7 @@ describe('v1.SecurityCenterClient', () => {
         ['bigQueryExport', 'name']
       );
       request.bigQueryExport.name = defaultValue1;
-      const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.BigQueryExport()
       );
@@ -4866,7 +4866,7 @@ describe('v1.SecurityCenterClient', () => {
         ['bigQueryExport', 'name']
       );
       request.bigQueryExport.name = defaultValue1;
-      const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBigQueryExport = stubSimpleCall(
         undefined,
@@ -4919,7 +4919,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule()
       );
@@ -4952,7 +4952,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule()
       );
@@ -4999,7 +4999,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEventThreatDetectionCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -5055,7 +5055,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5088,7 +5088,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5135,7 +5135,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEventThreatDetectionCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -5191,7 +5191,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule()
       );
@@ -5224,7 +5224,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule()
       );
@@ -5271,7 +5271,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEventThreatDetectionCustomModule = stubSimpleCall(
         undefined,
@@ -5330,7 +5330,7 @@ describe('v1.SecurityCenterClient', () => {
         ['eventThreatDetectionCustomModule', 'name']
       );
       request.eventThreatDetectionCustomModule.name = defaultValue1;
-      const expectedHeaderRequestParams = `event_threat_detection_custom_module.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `event_threat_detection_custom_module.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule()
       );
@@ -5364,7 +5364,7 @@ describe('v1.SecurityCenterClient', () => {
         ['eventThreatDetectionCustomModule', 'name']
       );
       request.eventThreatDetectionCustomModule.name = defaultValue1;
-      const expectedHeaderRequestParams = `event_threat_detection_custom_module.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `event_threat_detection_custom_module.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule()
       );
@@ -5412,7 +5412,7 @@ describe('v1.SecurityCenterClient', () => {
         ['eventThreatDetectionCustomModule', 'name']
       );
       request.eventThreatDetectionCustomModule.name = defaultValue1;
-      const expectedHeaderRequestParams = `event_threat_detection_custom_module.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `event_threat_detection_custom_module.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEventThreatDetectionCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -5469,7 +5469,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ValidateEventThreatDetectionCustomModuleResponse()
       );
@@ -5504,7 +5504,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ValidateEventThreatDetectionCustomModuleResponse()
       );
@@ -5553,7 +5553,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.validateEventThreatDetectionCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -5611,7 +5611,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.EffectiveEventThreatDetectionCustomModule()
       );
@@ -5646,7 +5646,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.EffectiveEventThreatDetectionCustomModule()
       );
@@ -5695,7 +5695,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEffectiveEventThreatDetectionCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -5753,7 +5753,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.BatchCreateResourceValueConfigsResponse()
       );
@@ -5785,7 +5785,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.BatchCreateResourceValueConfigsResponse()
       );
@@ -5832,7 +5832,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCreateResourceValueConfigs = stubSimpleCall(
         undefined,
@@ -5890,7 +5890,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5922,7 +5922,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5969,7 +5969,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteResourceValueConfig = stubSimpleCall(
         undefined,
@@ -6027,7 +6027,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ResourceValueConfig()
       );
@@ -6059,7 +6059,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ResourceValueConfig()
       );
@@ -6106,7 +6106,7 @@ describe('v1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getResourceValueConfig = stubSimpleCall(
         undefined,
@@ -6165,7 +6165,7 @@ describe('v1.SecurityCenterClient', () => {
         ['resourceValueConfig', 'name']
       );
       request.resourceValueConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `resource_value_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource_value_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ResourceValueConfig()
       );
@@ -6198,7 +6198,7 @@ describe('v1.SecurityCenterClient', () => {
         ['resourceValueConfig', 'name']
       );
       request.resourceValueConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `resource_value_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource_value_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ResourceValueConfig()
       );
@@ -6246,7 +6246,7 @@ describe('v1.SecurityCenterClient', () => {
         ['resourceValueConfig', 'name']
       );
       request.resourceValueConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `resource_value_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource_value_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateResourceValueConfig = stubSimpleCall(
         undefined,
@@ -6305,7 +6305,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6338,7 +6338,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6392,7 +6392,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkMuteFindings = stubLongRunningCall(
         undefined,
@@ -6423,7 +6423,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkMuteFindings = stubLongRunningCall(
         undefined,
@@ -6500,7 +6500,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6535,7 +6535,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6591,7 +6591,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runAssetDiscovery = stubLongRunningCall(
         undefined,
@@ -6624,7 +6624,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runAssetDiscovery = stubLongRunningCall(
         undefined,
@@ -6706,7 +6706,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.GroupResult()
@@ -6747,7 +6747,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.GroupResult()
@@ -6804,7 +6804,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.groupAssets = stubSimpleCall(
         undefined,
@@ -6837,7 +6837,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.GroupResult()
@@ -6900,7 +6900,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.groupAssets.createStream = stubPageStreamingCall(
         undefined,
@@ -6954,7 +6954,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.GroupResult()
@@ -7006,7 +7006,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.groupAssets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -7052,7 +7052,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.GroupResult()
@@ -7091,7 +7091,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.GroupResult()
@@ -7146,7 +7146,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.groupFindings = stubSimpleCall(
         undefined,
@@ -7177,7 +7177,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.GroupResult()
@@ -7238,7 +7238,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.groupFindings.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7288,7 +7288,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.GroupResult()
@@ -7338,7 +7338,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.groupFindings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7382,7 +7382,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ListAssetsResponse.ListAssetsResult()
@@ -7423,7 +7423,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ListAssetsResponse.ListAssetsResult()
@@ -7482,7 +7482,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAssets = stubSimpleCall(
         undefined,
@@ -7515,7 +7515,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ListAssetsResponse.ListAssetsResult()
@@ -7580,7 +7580,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssets.createStream = stubPageStreamingCall(
         undefined,
@@ -7636,7 +7636,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ListAssetsResponse.ListAssetsResult()
@@ -7688,7 +7688,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -7734,7 +7734,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
@@ -7779,7 +7779,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
@@ -7838,7 +7838,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDescendantSecurityHealthAnalyticsCustomModules =
         stubSimpleCall(undefined, expectedError);
@@ -7872,7 +7872,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
@@ -7950,7 +7950,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8017,7 +8017,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
@@ -8074,7 +8074,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8124,7 +8124,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult()
@@ -8163,7 +8163,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult()
@@ -8220,7 +8220,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFindings = stubSimpleCall(
         undefined,
@@ -8251,7 +8251,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult()
@@ -8314,7 +8314,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFindings.createStream = stubPageStreamingCall(
         undefined,
@@ -8368,7 +8368,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult()
@@ -8418,7 +8418,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFindings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8461,7 +8461,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.MuteConfig()
@@ -8500,7 +8500,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.MuteConfig()
@@ -8555,7 +8555,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMuteConfigs = stubSimpleCall(
         undefined,
@@ -8586,7 +8586,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.MuteConfig()
@@ -8647,7 +8647,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMuteConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8697,7 +8697,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.MuteConfig()
@@ -8746,7 +8746,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMuteConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8789,7 +8789,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.NotificationConfig()
@@ -8829,7 +8829,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.NotificationConfig()
@@ -8886,7 +8886,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNotificationConfigs = stubSimpleCall(
         undefined,
@@ -8920,7 +8920,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.NotificationConfig()
@@ -8989,7 +8989,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNotificationConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9047,7 +9047,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.NotificationConfig()
@@ -9101,7 +9101,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNotificationConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -9148,7 +9148,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
@@ -9191,7 +9191,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
@@ -9250,7 +9250,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEffectiveSecurityHealthAnalyticsCustomModules =
         stubSimpleCall(undefined, expectedError);
@@ -9284,7 +9284,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
@@ -9360,7 +9360,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9425,7 +9425,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
@@ -9482,7 +9482,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -9532,7 +9532,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
@@ -9575,7 +9575,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
@@ -9634,7 +9634,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSecurityHealthAnalyticsCustomModules =
         stubSimpleCall(undefined, expectedError);
@@ -9668,7 +9668,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
@@ -9741,7 +9741,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSecurityHealthAnalyticsCustomModules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9803,7 +9803,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
@@ -9858,7 +9858,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSecurityHealthAnalyticsCustomModules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -9906,7 +9906,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.Source()
@@ -9945,7 +9945,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.Source()
@@ -10000,7 +10000,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSources = stubSimpleCall(
         undefined,
@@ -10031,7 +10031,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.Source()
@@ -10091,7 +10091,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSources.createStream = stubPageStreamingCall(
         undefined,
@@ -10142,7 +10142,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.Source()
@@ -10191,7 +10191,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSources.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -10235,7 +10235,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.BigQueryExport()
@@ -10275,7 +10275,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.BigQueryExport()
@@ -10332,7 +10332,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listBigQueryExports = stubSimpleCall(
         undefined,
@@ -10363,7 +10363,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.BigQueryExport()
@@ -10424,7 +10424,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBigQueryExports.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -10474,7 +10474,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.BigQueryExport()
@@ -10524,7 +10524,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBigQueryExports.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -10567,7 +10567,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule()
@@ -10610,7 +10610,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule()
@@ -10669,7 +10669,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDescendantEventThreatDetectionCustomModules =
         stubSimpleCall(undefined, expectedError);
@@ -10703,7 +10703,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule()
@@ -10779,7 +10779,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDescendantEventThreatDetectionCustomModules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -10844,7 +10844,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule()
@@ -10901,7 +10901,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDescendantEventThreatDetectionCustomModules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -10951,7 +10951,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule()
@@ -10992,7 +10992,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule()
@@ -11049,7 +11049,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEventThreatDetectionCustomModules =
         stubSimpleCall(undefined, expectedError);
@@ -11081,7 +11081,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule()
@@ -11154,7 +11154,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEventThreatDetectionCustomModules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -11216,7 +11216,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule()
@@ -11271,7 +11271,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEventThreatDetectionCustomModules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -11319,7 +11319,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EffectiveEventThreatDetectionCustomModule()
@@ -11362,7 +11362,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EffectiveEventThreatDetectionCustomModule()
@@ -11421,7 +11421,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEffectiveEventThreatDetectionCustomModules =
         stubSimpleCall(undefined, expectedError);
@@ -11455,7 +11455,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EffectiveEventThreatDetectionCustomModule()
@@ -11528,7 +11528,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEffectiveEventThreatDetectionCustomModules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -11590,7 +11590,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.EffectiveEventThreatDetectionCustomModule()
@@ -11645,7 +11645,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEffectiveEventThreatDetectionCustomModules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -11693,7 +11693,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ResourceValueConfig()
@@ -11733,7 +11733,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ResourceValueConfig()
@@ -11790,7 +11790,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listResourceValueConfigs = stubSimpleCall(
         undefined,
@@ -11824,7 +11824,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ResourceValueConfig()
@@ -11893,7 +11893,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listResourceValueConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -11951,7 +11951,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ResourceValueConfig()
@@ -12005,7 +12005,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listResourceValueConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -12052,7 +12052,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ValuedResource()
@@ -12092,7 +12092,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ValuedResource()
@@ -12149,7 +12149,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listValuedResources = stubSimpleCall(
         undefined,
@@ -12180,7 +12180,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ValuedResource()
@@ -12241,7 +12241,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listValuedResources.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -12291,7 +12291,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.ValuedResource()
@@ -12341,7 +12341,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listValuedResources.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -12384,7 +12384,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.AttackPath()
@@ -12423,7 +12423,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.AttackPath()
@@ -12478,7 +12478,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAttackPaths = stubSimpleCall(
         undefined,
@@ -12509,7 +12509,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.AttackPath()
@@ -12570,7 +12570,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAttackPaths.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -12620,7 +12620,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1.AttackPath()
@@ -12669,7 +12669,7 @@ describe('v1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAttackPaths.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

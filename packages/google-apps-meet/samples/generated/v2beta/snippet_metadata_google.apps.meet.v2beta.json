@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-meet",
-        "version": "0.3.0",
+        "version": "0.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -15,7 +15,7 @@
             "regionTag": "meet_v2beta_generated_ConferenceRecordsService_GetConferenceRecord_async",
             "title": "ConferenceRecordsService getConferenceRecord Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Gets a conference record by conference ID.",
+            "description": " Gets a conference record by conference ID.",
             "canonical": true,
             "file": "conference_records_service.get_conference_record.js",
             "language": "JAVASCRIPT",
@@ -55,14 +55,14 @@
             "regionTag": "meet_v2beta_generated_ConferenceRecordsService_ListConferenceRecords_async",
             "title": "ConferenceRecordsService listConferenceRecords Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Lists the conference records by start time and in descending order.",
+            "description": " Lists the conference records. By default, ordered by start time and in descending order.",
             "canonical": true,
             "file": "conference_records_service.list_conference_records.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -103,7 +103,7 @@
             "regionTag": "meet_v2beta_generated_ConferenceRecordsService_GetParticipant_async",
             "title": "ConferenceRecordsService getParticipant Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Gets a participant by participant ID.",
+            "description": " Gets a participant by participant ID.",
             "canonical": true,
             "file": "conference_records_service.get_participant.js",
             "language": "JAVASCRIPT",
@@ -143,14 +143,14 @@
             "regionTag": "meet_v2beta_generated_ConferenceRecordsService_ListParticipants_async",
             "title": "ConferenceRecordsService listParticipants Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Lists the participants in a conference record, by default ordered by join time and in descending order. This API supports `fields` as standard parameters like every other API. However, when the `fields` request parameter is omitted, this API defaults to `'participants/*, next_page_token'`.",
+            "description": " Lists the participants in a conference record. By default, ordered by join time and in descending order. This API supports `fields` as standard parameters like every other API. However, when the `fields` request parameter is omitted, this API defaults to `'participants/*, next_page_token'`.",
             "canonical": true,
             "file": "conference_records_service.list_participants.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 76,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -195,7 +195,7 @@
             "regionTag": "meet_v2beta_generated_ConferenceRecordsService_GetParticipantSession_async",
             "title": "ConferenceRecordsService getParticipantSession Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Gets a participant session by participant session ID.",
+            "description": " Gets a participant session by participant session ID.",
             "canonical": true,
             "file": "conference_records_service.get_participant_session.js",
             "language": "JAVASCRIPT",
@@ -235,14 +235,14 @@
             "regionTag": "meet_v2beta_generated_ConferenceRecordsService_ListParticipantSessions_async",
             "title": "ConferenceRecordsService listParticipantSessions Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Lists the participant sessions of a participant in a conference record, by default ordered by join time and in descending order. This API supports `fields` as standard parameters like every other API. However, when the `fields` request parameter is omitted this API defaults to `'participantsessions/*, next_page_token'`.",
+            "description": " Lists the participant sessions of a participant in a conference record. By default, ordered by join time and in descending order. This API supports `fields` as standard parameters like every other API. However, when the `fields` request parameter is omitted this API defaults to `'participantsessions/*, next_page_token'`.",
             "canonical": true,
             "file": "conference_records_service.list_participant_sessions.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 76,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -287,7 +287,7 @@
             "regionTag": "meet_v2beta_generated_ConferenceRecordsService_GetRecording_async",
             "title": "ConferenceRecordsService getRecording Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Gets a recording by recording ID.",
+            "description": " Gets a recording by recording ID.",
             "canonical": true,
             "file": "conference_records_service.get_recording.js",
             "language": "JAVASCRIPT",
@@ -327,7 +327,7 @@
             "regionTag": "meet_v2beta_generated_ConferenceRecordsService_ListRecordings_async",
             "title": "ConferenceRecordsService listRecordings Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Lists the recording resources from the conference record.",
+            "description": " Lists the recording resources from the conference record. By default, ordered by start time and in ascending order.",
             "canonical": true,
             "file": "conference_records_service.list_recordings.js",
             "language": "JAVASCRIPT",
@@ -375,7 +375,7 @@
             "regionTag": "meet_v2beta_generated_ConferenceRecordsService_GetTranscript_async",
             "title": "ConferenceRecordsService getTranscript Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Gets a transcript by transcript ID.",
+            "description": " Gets a transcript by transcript ID.",
             "canonical": true,
             "file": "conference_records_service.get_transcript.js",
             "language": "JAVASCRIPT",
@@ -415,7 +415,7 @@
             "regionTag": "meet_v2beta_generated_ConferenceRecordsService_ListTranscripts_async",
             "title": "ConferenceRecordsService listTranscripts Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Lists the set of transcripts from the conference record.",
+            "description": " Lists the set of transcripts from the conference record. By default, ordered by start time and in ascending order.",
             "canonical": true,
             "file": "conference_records_service.list_transcripts.js",
             "language": "JAVASCRIPT",
@@ -463,7 +463,7 @@
             "regionTag": "meet_v2beta_generated_ConferenceRecordsService_GetTranscriptEntry_async",
             "title": "ConferenceRecordsService getTranscriptEntry Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Gets a `TranscriptEntry` resource by entry ID. Note: The transcript entries returned by the Google Meet API might not match the transcription found in the Google Docs transcript file. This can occur when the Google Docs transcript file is modified after generation.",
+            "description": " Gets a `TranscriptEntry` resource by entry ID. Note: The transcript entries returned by the Google Meet API might not match the transcription found in the Google Docs transcript file. This can occur when the Google Docs transcript file is modified after generation.",
             "canonical": true,
             "file": "conference_records_service.get_transcript_entry.js",
             "language": "JAVASCRIPT",
@@ -503,7 +503,7 @@
             "regionTag": "meet_v2beta_generated_ConferenceRecordsService_ListTranscriptEntries_async",
             "title": "ConferenceRecordsService listTranscriptEntries Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Lists the structured transcript entries per transcript. By default, ordered by start time and in ascending order. Note: The transcript entries returned by the Google Meet API might not match the transcription found in the Google Docs transcript file. This can occur when the Google Docs transcript file is modified after generation.",
+            "description": " Lists the structured transcript entries per transcript. By default, ordered by start time and in ascending order. Note: The transcript entries returned by the Google Meet API might not match the transcription found in the Google Docs transcript file. This can occur when the Google Docs transcript file is modified after generation.",
             "canonical": true,
             "file": "conference_records_service.list_transcript_entries.js",
             "language": "JAVASCRIPT",
@@ -551,7 +551,7 @@
             "regionTag": "meet_v2beta_generated_SpacesService_CreateSpace_async",
             "title": "ConferenceRecordsService createSpace Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Creates a space.",
+            "description": " Creates a space.",
             "canonical": true,
             "file": "spaces_service.create_space.js",
             "language": "JAVASCRIPT",
@@ -591,14 +591,14 @@
             "regionTag": "meet_v2beta_generated_SpacesService_GetSpace_async",
             "title": "ConferenceRecordsService getSpace Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Gets a space by `space_id` or `meeting_code`.",
+            "description": " Gets details about a meeting space. For an example, see [Get a meeting space](https://developers.google.com/meet/api/guides/meeting-spaces#get-meeting-space).",
             "canonical": true,
             "file": "spaces_service.get_space.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -631,14 +631,14 @@
             "regionTag": "meet_v2beta_generated_SpacesService_UpdateSpace_async",
             "title": "ConferenceRecordsService updateSpace Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Updates a space.",
+            "description": " Updates details about a meeting space. For an example, see [Update a meeting space](https://developers.google.com/meet/api/guides/meeting-spaces#update-meeting-space).",
             "canonical": true,
             "file": "spaces_service.update_space.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 62,
                     "type": "FULL"
                 }
             ],
@@ -672,17 +672,61 @@
             }
         },
         {
+            "regionTag": "meet_v2beta_generated_SpacesService_ConnectActiveConference_async",
+            "title": "ConferenceRecordsService connectActiveConference Sample",
+            "origin": "API_DEFINITION",
+            "description": " [Developer Preview](https://developers.google.com/workspace/preview): Broker a WebRTC connection to the active conference of a space. On success, clients must use the resulting SDP (Session Description Protocol) answer to establish a WebRTC connection. Once connected, additional functionality is available across WebRTC data channels. See [Meet Media API overview](https://developers.google.com/meet/media-api/guides/overview) for more details about this connection.",
+            "canonical": true,
+            "file": "spaces_service.connect_active_conference.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ConnectActiveConference",
+                "fullName": "google.apps.meet.v2beta.SpacesService.ConnectActiveConference",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "offer",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.apps.meet.v2beta.ConnectActiveConferenceResponse",
+                "client": {
+                    "shortName": "SpacesServiceClient",
+                    "fullName": "google.apps.meet.v2beta.SpacesServiceClient"
+                },
+                "method": {
+                    "shortName": "ConnectActiveConference",
+                    "fullName": "google.apps.meet.v2beta.SpacesService.ConnectActiveConference",
+                    "service": {
+                        "shortName": "SpacesService",
+                        "fullName": "google.apps.meet.v2beta.SpacesService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "meet_v2beta_generated_SpacesService_EndActiveConference_async",
             "title": "ConferenceRecordsService endActiveConference Sample",
             "origin": "API_DEFINITION",
-            "description": " [Developer Preview](https://developers.google.com/workspace/preview). Ends an active conference (if there is one).",
+            "description": " Ends an active conference (if there's one). For an example, see [End active conference](https://developers.google.com/meet/api/guides/meeting-spaces#end-active-conference).",
             "canonical": true,
             "file": "spaces_service.end_active_conference.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 58,
                     "type": "FULL"
                 }
             ],
@@ -704,6 +748,178 @@
                 "method": {
                     "shortName": "EndActiveConference",
                     "fullName": "google.apps.meet.v2beta.SpacesService.EndActiveConference",
+                    "service": {
+                        "shortName": "SpacesService",
+                        "fullName": "google.apps.meet.v2beta.SpacesService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "meet_v2beta_generated_SpacesService_CreateMember_async",
+            "title": "ConferenceRecordsService createMember Sample",
+            "origin": "API_DEFINITION",
+            "description": " [Developer Preview](https://developers.google.com/workspace/preview): Create a member. This API supports the `fields` parameter in [SystemParameterContext](https://cloud.google.com/apis/docs/system-parameters). When the `fields` parameter is omitted, this API response will default to \"name,email,role,user\".",
+            "canonical": true,
+            "file": "spaces_service.create_member.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateMember",
+                "fullName": "google.apps.meet.v2beta.SpacesService.CreateMember",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "member",
+                        "type": ".google.apps.meet.v2beta.Member"
+                    }
+                ],
+                "resultType": ".google.apps.meet.v2beta.Member",
+                "client": {
+                    "shortName": "SpacesServiceClient",
+                    "fullName": "google.apps.meet.v2beta.SpacesServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateMember",
+                    "fullName": "google.apps.meet.v2beta.SpacesService.CreateMember",
+                    "service": {
+                        "shortName": "SpacesService",
+                        "fullName": "google.apps.meet.v2beta.SpacesService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "meet_v2beta_generated_SpacesService_GetMember_async",
+            "title": "ConferenceRecordsService getMember Sample",
+            "origin": "API_DEFINITION",
+            "description": " [Developer Preview](https://developers.google.com/workspace/preview): Get a member. This API supports the `fields` parameter in [SystemParameterContext](https://cloud.google.com/apis/docs/system-parameters). When the `fields` parameter is omitted, this API response will default to \"name,email,role,user\".",
+            "canonical": true,
+            "file": "spaces_service.get_member.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetMember",
+                "fullName": "google.apps.meet.v2beta.SpacesService.GetMember",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.apps.meet.v2beta.Member",
+                "client": {
+                    "shortName": "SpacesServiceClient",
+                    "fullName": "google.apps.meet.v2beta.SpacesServiceClient"
+                },
+                "method": {
+                    "shortName": "GetMember",
+                    "fullName": "google.apps.meet.v2beta.SpacesService.GetMember",
+                    "service": {
+                        "shortName": "SpacesService",
+                        "fullName": "google.apps.meet.v2beta.SpacesService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "meet_v2beta_generated_SpacesService_ListMembers_async",
+            "title": "ConferenceRecordsService listMembers Sample",
+            "origin": "API_DEFINITION",
+            "description": " [Developer Preview](https://developers.google.com/workspace/preview): List members. This API supports the `fields` parameter in [SystemParameterContext](https://cloud.google.com/apis/docs/system-parameters). When the `fields` parameter is omitted this API response will default to \"name,email,role,user\".",
+            "canonical": true,
+            "file": "spaces_service.list_members.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListMembers",
+                "fullName": "google.apps.meet.v2beta.SpacesService.ListMembers",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.apps.meet.v2beta.ListMembersResponse",
+                "client": {
+                    "shortName": "SpacesServiceClient",
+                    "fullName": "google.apps.meet.v2beta.SpacesServiceClient"
+                },
+                "method": {
+                    "shortName": "ListMembers",
+                    "fullName": "google.apps.meet.v2beta.SpacesService.ListMembers",
+                    "service": {
+                        "shortName": "SpacesService",
+                        "fullName": "google.apps.meet.v2beta.SpacesService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "meet_v2beta_generated_SpacesService_DeleteMember_async",
+            "title": "ConferenceRecordsService deleteMember Sample",
+            "origin": "API_DEFINITION",
+            "description": " [Developer Preview](https://developers.google.com/workspace/preview): Delete the member who was previously assigned roles in the space.",
+            "canonical": true,
+            "file": "spaces_service.delete_member.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteMember",
+                "fullName": "google.apps.meet.v2beta.SpacesService.DeleteMember",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "SpacesServiceClient",
+                    "fullName": "google.apps.meet.v2beta.SpacesServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteMember",
+                    "fullName": "google.apps.meet.v2beta.SpacesService.DeleteMember",
                     "service": {
                         "shortName": "SpacesService",
                         "fullName": "google.apps.meet.v2beta.SpacesService"

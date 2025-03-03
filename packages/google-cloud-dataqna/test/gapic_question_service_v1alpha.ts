@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -259,7 +259,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
@@ -290,7 +290,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
@@ -337,7 +337,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQuestion = stubSimpleCall(
         undefined,
@@ -389,7 +389,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
@@ -420,7 +420,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
@@ -467,7 +467,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createQuestion = stubSimpleCall(
         undefined,
@@ -519,7 +519,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
@@ -550,7 +550,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
@@ -597,7 +597,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.executeQuestion = stubSimpleCall(
         undefined,
@@ -649,7 +649,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UserFeedback()
       );
@@ -680,7 +680,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UserFeedback()
       );
@@ -727,7 +727,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getUserFeedback = stubSimpleCall(
         undefined,
@@ -780,7 +780,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['userFeedback', 'name']
       );
       request.userFeedback.name = defaultValue1;
-      const expectedHeaderRequestParams = `user_feedback.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `user_feedback.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UserFeedback()
       );
@@ -813,7 +813,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['userFeedback', 'name']
       );
       request.userFeedback.name = defaultValue1;
-      const expectedHeaderRequestParams = `user_feedback.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `user_feedback.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UserFeedback()
       );
@@ -861,7 +861,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         ['userFeedback', 'name']
       );
       request.userFeedback.name = defaultValue1;
-      const expectedHeaderRequestParams = `user_feedback.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `user_feedback.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateUserFeedback = stubSimpleCall(
         undefined,

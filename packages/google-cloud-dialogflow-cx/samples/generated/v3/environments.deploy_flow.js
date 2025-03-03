@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,14 +30,14 @@ function main(environment, flowVersion) {
    */
   /**
    *  Required. The environment to deploy the flow to.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *  environments/<Environment ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    */
   // const environment = 'abc123'
   /**
    *  Required. The flow version to deploy.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *  flows/<Flow ID>/versions/<Version ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    */
   // const flowVersion = 'abc123'
 

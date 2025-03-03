@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2664,6 +2664,7 @@
                              * @interface IGlossaryConfig
                              * @property {string|null} [glossary] GlossaryConfig glossary
                              * @property {boolean|null} [ignoreCase] GlossaryConfig ignoreCase
+                             * @property {boolean|null} [contextualTranslationEnabled] GlossaryConfig contextualTranslationEnabled
                              */
     
                             /**
@@ -2698,6 +2699,14 @@
                             GlossaryConfig.prototype.ignoreCase = false;
     
                             /**
+                             * GlossaryConfig contextualTranslationEnabled.
+                             * @member {boolean} contextualTranslationEnabled
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig
+                             * @instance
+                             */
+                            GlossaryConfig.prototype.contextualTranslationEnabled = false;
+    
+                            /**
                              * Creates a new GlossaryConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig
@@ -2725,6 +2734,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.glossary);
                                 if (message.ignoreCase != null && Object.hasOwnProperty.call(message, "ignoreCase"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).bool(message.ignoreCase);
+                                if (message.contextualTranslationEnabled != null && Object.hasOwnProperty.call(message, "contextualTranslationEnabled"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.contextualTranslationEnabled);
                                 return writer;
                             };
     
@@ -2765,6 +2776,10 @@
                                         }
                                     case 2: {
                                             message.ignoreCase = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.contextualTranslationEnabled = reader.bool();
                                             break;
                                         }
                                     default:
@@ -2808,6 +2823,9 @@
                                 if (message.ignoreCase != null && message.hasOwnProperty("ignoreCase"))
                                     if (typeof message.ignoreCase !== "boolean")
                                         return "ignoreCase: boolean expected";
+                                if (message.contextualTranslationEnabled != null && message.hasOwnProperty("contextualTranslationEnabled"))
+                                    if (typeof message.contextualTranslationEnabled !== "boolean")
+                                        return "contextualTranslationEnabled: boolean expected";
                                 return null;
                             };
     
@@ -2827,6 +2845,8 @@
                                     message.glossary = String(object.glossary);
                                 if (object.ignoreCase != null)
                                     message.ignoreCase = Boolean(object.ignoreCase);
+                                if (object.contextualTranslationEnabled != null)
+                                    message.contextualTranslationEnabled = Boolean(object.contextualTranslationEnabled);
                                 return message;
                             };
     
@@ -2846,11 +2866,14 @@
                                 if (options.defaults) {
                                     object.glossary = "";
                                     object.ignoreCase = false;
+                                    object.contextualTranslationEnabled = false;
                                 }
                                 if (message.glossary != null && message.hasOwnProperty("glossary"))
                                     object.glossary = message.glossary;
                                 if (message.ignoreCase != null && message.hasOwnProperty("ignoreCase"))
                                     object.ignoreCase = message.ignoreCase;
+                                if (message.contextualTranslationEnabled != null && message.hasOwnProperty("contextualTranslationEnabled"))
+                                    object.contextualTranslationEnabled = message.contextualTranslationEnabled;
                                 return object;
                             };
     
@@ -30844,6 +30867,7 @@
                          * @interface ITranslateTextGlossaryConfig
                          * @property {string|null} [glossary] TranslateTextGlossaryConfig glossary
                          * @property {boolean|null} [ignoreCase] TranslateTextGlossaryConfig ignoreCase
+                         * @property {boolean|null} [contextualTranslationEnabled] TranslateTextGlossaryConfig contextualTranslationEnabled
                          */
     
                         /**
@@ -30878,6 +30902,14 @@
                         TranslateTextGlossaryConfig.prototype.ignoreCase = false;
     
                         /**
+                         * TranslateTextGlossaryConfig contextualTranslationEnabled.
+                         * @member {boolean} contextualTranslationEnabled
+                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @instance
+                         */
+                        TranslateTextGlossaryConfig.prototype.contextualTranslationEnabled = false;
+    
+                        /**
                          * Creates a new TranslateTextGlossaryConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
@@ -30905,6 +30937,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.glossary);
                             if (message.ignoreCase != null && Object.hasOwnProperty.call(message, "ignoreCase"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.ignoreCase);
+                            if (message.contextualTranslationEnabled != null && Object.hasOwnProperty.call(message, "contextualTranslationEnabled"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.contextualTranslationEnabled);
                             return writer;
                         };
     
@@ -30945,6 +30979,10 @@
                                     }
                                 case 2: {
                                         message.ignoreCase = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.contextualTranslationEnabled = reader.bool();
                                         break;
                                     }
                                 default:
@@ -30988,6 +31026,9 @@
                             if (message.ignoreCase != null && message.hasOwnProperty("ignoreCase"))
                                 if (typeof message.ignoreCase !== "boolean")
                                     return "ignoreCase: boolean expected";
+                            if (message.contextualTranslationEnabled != null && message.hasOwnProperty("contextualTranslationEnabled"))
+                                if (typeof message.contextualTranslationEnabled !== "boolean")
+                                    return "contextualTranslationEnabled: boolean expected";
                             return null;
                         };
     
@@ -31007,6 +31048,8 @@
                                 message.glossary = String(object.glossary);
                             if (object.ignoreCase != null)
                                 message.ignoreCase = Boolean(object.ignoreCase);
+                            if (object.contextualTranslationEnabled != null)
+                                message.contextualTranslationEnabled = Boolean(object.contextualTranslationEnabled);
                             return message;
                         };
     
@@ -31026,11 +31069,14 @@
                             if (options.defaults) {
                                 object.glossary = "";
                                 object.ignoreCase = false;
+                                object.contextualTranslationEnabled = false;
                             }
                             if (message.glossary != null && message.hasOwnProperty("glossary"))
                                 object.glossary = message.glossary;
                             if (message.ignoreCase != null && message.hasOwnProperty("ignoreCase"))
                                 object.ignoreCase = message.ignoreCase;
+                            if (message.contextualTranslationEnabled != null && message.hasOwnProperty("contextualTranslationEnabled"))
+                                object.contextualTranslationEnabled = message.contextualTranslationEnabled;
                             return object;
                         };
     

@@ -20,7 +20,6 @@ import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/protobuf/duration.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.Cx.V3Beta1";
 option go_package = "cloud.google.com/go/dialogflow/cx/apiv3beta1/cxpb;cxpb";
 option java_multiple_files = true;
@@ -80,6 +79,9 @@ enum AudioEncoding {
   // is replaced with a single byte containing the block length. Only Speex
   // wideband is supported. `sample_rate_hertz` must be 16000.
   AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7;
+
+  // 8-bit samples that compand 13-bit audio samples using G.711 PCMU/a-law.
+  AUDIO_ENCODING_ALAW = 8;
 }
 
 // Variant of the specified [Speech
@@ -162,7 +164,7 @@ message SpeechWordInfo {
 //
 // The client provides this configuration in terms of the durations of those
 // two phases. The durations are measured in terms of the audio length from the
-// the start of the input audio.
+// start of the input audio.
 //
 // No-speech event is a response with END_OF_UTTERANCE without any transcript
 // following up.
@@ -324,6 +326,9 @@ enum OutputAudioEncoding {
 
   // 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
   OUTPUT_AUDIO_ENCODING_MULAW = 5;
+
+  // 8-bit samples that compand 13-bit audio samples using G.711 PCMU/a-law.
+  OUTPUT_AUDIO_ENCODING_ALAW = 6;
 }
 
 // Instructs the speech synthesizer how to generate the output audio content.

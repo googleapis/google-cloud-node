@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,22 +29,22 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Security Command Center service to retrieve.
-   *  Formats:
-   *    * organizations/{organization}/locations/{location}/securityCenterServices/{service}
-   *    * folders/{folder}/locations/{location}/securityCenterServices/{service}
-   *    * projects/{project}/locations/{location}/securityCenterServices/{service}
-   *  The possible values for id {service} are:
-   *    * container-threat-detection
-   *    * event-threat-detection
-   *    * security-health-analytics
-   *    * vm-threat-detection
-   *    * web-security-scanner
+   *  Required. The Security Command Center service to retrieve, in one of the
+   *  following formats:
+   *  * organizations/{organization}/locations/{location}/securityCenterServices/{service}
+   *  * folders/{folder}/locations/{location}/securityCenterServices/{service}
+   *  * projects/{project}/locations/{location}/securityCenterServices/{service}
+   *  The following values are valid for `{service}`:
+   *  * `container-threat-detection`
+   *  * `event-threat-detection`
+   *  * `security-health-analytics`
+   *  * `vm-threat-detection`
+   *  * `web-security-scanner`
    */
   // const name = 'abc123'
   /**
-   *  Flag that, when set, will be used to filter the ModuleSettings that are
-   *  in scope. The default setting is that all modules will be shown.
+   *  Set to `true` to show only modules that are in scope. By default, all
+   *  modules are shown.
    */
   // const showEligibleModulesOnly = true
 

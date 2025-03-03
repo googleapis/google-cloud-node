@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -47,7 +47,12 @@ function main() {
    *  * `space.name`
    *  * `start_time`
    *  * `end_time`
-   *  For example, `space.meeting_code = "abc-mnop-xyz"`.
+   *  For example, consider the following filters:
+   *  * `space.name = "spaces/NAME"`
+   *  * `space.meeting_code = "abc-mnop-xyz"`
+   *  * `start_time>="2024-01-01T00:00:00.000Z" AND
+   *  start_time<="2024-01-02T00:00:00.000Z"`
+   *  * `end_time IS NULL`
    */
   // const filter = 'abc123'
 

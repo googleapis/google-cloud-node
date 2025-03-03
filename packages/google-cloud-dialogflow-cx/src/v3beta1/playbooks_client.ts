@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -502,7 +502,7 @@ export class PlaybooksClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to create a playbook for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.Playbook} request.playbook
    *   Required. The playbook to create.
    * @param {object} [options]
@@ -601,8 +601,8 @@ export class PlaybooksClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the playbook to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/playbooks/<Playbook ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -699,8 +699,8 @@ export class PlaybooksClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the playbook.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/playbooks/<Playbook ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -890,8 +890,8 @@ export class PlaybooksClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The playbook to create a version for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/playbooks/<Playbook ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.PlaybookVersion} request.playbookVersion
    *   Required. The playbook version to create.
    * @param {object} [options]
@@ -990,8 +990,8 @@ export class PlaybooksClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the playbook version.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/playbooks/<Playbook ID>/versions/<Version ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>/versions/<VersionID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1088,8 +1088,8 @@ export class PlaybooksClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the playbook version to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/playbooks/<Playbook ID>/versions/<Version ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>/versions/<VersionID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1187,7 +1187,7 @@ export class PlaybooksClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list playbooks from.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1281,12 +1281,12 @@ export class PlaybooksClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPlaybooks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list playbooks from.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1333,7 +1333,7 @@ export class PlaybooksClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list playbooks from.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1379,8 +1379,8 @@ export class PlaybooksClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The playbook to list versions for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/playbooks/<Playbook ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -1474,13 +1474,13 @@ export class PlaybooksClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPlaybookVersions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The playbook to list versions for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/playbooks/<Playbook ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -1527,8 +1527,8 @@ export class PlaybooksClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The playbook to list versions for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/playbooks/<Playbook ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.

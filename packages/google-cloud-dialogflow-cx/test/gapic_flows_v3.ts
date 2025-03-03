@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -355,7 +355,7 @@ describe('v3.FlowsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Flow()
       );
@@ -386,7 +386,7 @@ describe('v3.FlowsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Flow()
       );
@@ -433,7 +433,7 @@ describe('v3.FlowsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFlow = stubSimpleCall(
         undefined,
@@ -485,7 +485,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -516,7 +516,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -563,7 +563,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFlow = stubSimpleCall(
         undefined,
@@ -615,7 +615,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Flow()
       );
@@ -646,7 +646,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Flow()
       );
@@ -693,7 +693,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFlow = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getFlow(request), expectedError);
@@ -743,7 +743,7 @@ describe('v3.FlowsClient', () => {
         ['flow', 'name']
       );
       request.flow.name = defaultValue1;
-      const expectedHeaderRequestParams = `flow.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `flow.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Flow()
       );
@@ -775,7 +775,7 @@ describe('v3.FlowsClient', () => {
         ['flow', 'name']
       );
       request.flow.name = defaultValue1;
-      const expectedHeaderRequestParams = `flow.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `flow.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Flow()
       );
@@ -823,7 +823,7 @@ describe('v3.FlowsClient', () => {
         ['flow', 'name']
       );
       request.flow.name = defaultValue1;
-      const expectedHeaderRequestParams = `flow.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `flow.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFlow = stubSimpleCall(
         undefined,
@@ -876,7 +876,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.FlowValidationResult()
       );
@@ -907,7 +907,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.FlowValidationResult()
       );
@@ -954,7 +954,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.validateFlow = stubSimpleCall(
         undefined,
@@ -1006,7 +1006,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.FlowValidationResult()
       );
@@ -1038,7 +1038,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.FlowValidationResult()
       );
@@ -1085,7 +1085,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFlowValidationResult = stubSimpleCall(
         undefined,
@@ -1143,7 +1143,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1175,7 +1175,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1229,7 +1229,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.trainFlow = stubLongRunningCall(
         undefined,
@@ -1260,7 +1260,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.trainFlow = stubLongRunningCall(
         undefined,
@@ -1333,7 +1333,7 @@ describe('v3.FlowsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1365,7 +1365,7 @@ describe('v3.FlowsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1419,7 +1419,7 @@ describe('v3.FlowsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importFlow = stubLongRunningCall(
         undefined,
@@ -1450,7 +1450,7 @@ describe('v3.FlowsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importFlow = stubLongRunningCall(
         undefined,
@@ -1523,7 +1523,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1555,7 +1555,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1609,7 +1609,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportFlow = stubLongRunningCall(
         undefined,
@@ -1640,7 +1640,7 @@ describe('v3.FlowsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportFlow = stubLongRunningCall(
         undefined,
@@ -1713,7 +1713,7 @@ describe('v3.FlowsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Flow()),
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Flow()),
@@ -1746,7 +1746,7 @@ describe('v3.FlowsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Flow()),
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Flow()),
@@ -1795,7 +1795,7 @@ describe('v3.FlowsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFlows = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listFlows(request), expectedError);
@@ -1823,7 +1823,7 @@ describe('v3.FlowsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Flow()),
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Flow()),
@@ -1877,7 +1877,7 @@ describe('v3.FlowsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFlows.createStream = stubPageStreamingCall(
         undefined,
@@ -1928,7 +1928,7 @@ describe('v3.FlowsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Flow()),
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Flow()),
@@ -1970,7 +1970,7 @@ describe('v3.FlowsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFlows.asyncIterate = stubAsyncIterationCall(
         undefined,

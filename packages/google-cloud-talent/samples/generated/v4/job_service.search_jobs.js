@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -303,6 +303,13 @@ function main(parent, requestMetadata) {
    *  if no value is specified.
    */
   // const keywordMatchMode = {}
+  /**
+   *  Optional. The relevance threshold of the search results.
+   *  Default to Google defined threshold, leveraging a balance of
+   *  precision and recall to deliver both highly accurate results and
+   *  comprehensive coverage of relevant information.
+   */
+  // const relevanceThreshold = {}
 
   // Imports the Talent library
   const {JobServiceClient} = require('@google-cloud/talent').v4;

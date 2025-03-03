@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [6.4.1](https://github.com/googleapis/google-cloud-node/compare/talent-v6.4.0...talent-v6.4.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6018](https://github.com/googleapis/google-cloud-node/issues/6018)) ([9dc5856](https://github.com/googleapis/google-cloud-node/commit/9dc585661489f51bb7a85b39519fd8b11dfffc5b))
+
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/talent-v6.3.1...talent-v6.4.0) (2025-01-11)
+
+
+### Features
+
+* [talent] A new enum `RelevanceThreshold` is added ([#5910](https://github.com/googleapis/google-cloud-node/issues/5910)) ([cd9f303](https://github.com/googleapis/google-cloud-node/commit/cd9f3032466886d0ed61b7ff3c87a43278a64dac))
+
 ## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/talent-v6.3.0...talent-v6.3.1) (2024-06-21)
 
 

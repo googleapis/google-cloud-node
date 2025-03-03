@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -367,6 +367,7 @@ export class SpacesServiceClient {
     return [
       'https://www.googleapis.com/auth/meetings.space.created',
       'https://www.googleapis.com/auth/meetings.space.readonly',
+      'https://www.googleapis.com/auth/meetings.space.settings',
     ];
   }
 
@@ -469,12 +470,33 @@ export class SpacesServiceClient {
     return this.innerApiCalls.createSpace(request, options, callback);
   }
   /**
-   * Gets a space by `space_id` or `meeting_code`.
+   * Gets details about a meeting space.
+   *
+   * For an example, see [Get a meeting
+   * space](https://developers.google.com/meet/api/guides/meeting-spaces#get-meeting-space).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the space.
+   *
+   *   Format: `spaces/{space}` or `spaces/{meetingCode}`.
+   *
+   *   `{space}` is the resource identifier for the space. It's a unique,
+   *   server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
+   *
+   *   `{meetingCode}` is an alias for the space. It's a typeable, unique
+   *   character string and is non-case sensitive. For example, `abc-mnop-xyz`.
+   *   The maximum length is 128 characters.
+   *
+   *   A `meetingCode` shouldn't be stored long term as it can become
+   *   dissociated from a meeting space and can be reused for different meeting
+   *   spaces in the future. Generally, a `meetingCode` expires 365 days after
+   *   last use. For more information, see [Learn about meeting codes in Google
+   *   Meet](https://support.google.com/meet/answer/10710509).
+   *
+   *   For more information, see [How Meet identifies a meeting
+   *   space](https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -551,7 +573,10 @@ export class SpacesServiceClient {
     return this.innerApiCalls.getSpace(request, options, callback);
   }
   /**
-   * Updates a space.
+   * Updates details about a meeting space.
+   *
+   * For an example, see [Update a meeting
+   * space](https://developers.google.com/meet/api/guides/meeting-spaces#update-meeting-space).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -559,9 +584,11 @@ export class SpacesServiceClient {
    *   Required. Space to be updated.
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. Field mask used to specify the fields to be updated in the space.
-   *   If update_mask isn't provided, it defaults to '*' and updates all
-   *   fields provided in the request, including deleting fields not set in the
+   *   If update_mask isn't provided(not set, set with empty paths, or only has ""
+   *   as paths), it defaults to update all fields provided with values in the
    *   request.
+   *   Using "*" as update_mask will update all fields, including deleting fields
+   *   not set in the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -640,10 +667,21 @@ export class SpacesServiceClient {
   /**
    * Ends an active conference (if there's one).
    *
+   * For an example, see [End active
+   * conference](https://developers.google.com/meet/api/guides/meeting-spaces#end-active-conference).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the space.
+   *
+   *   Format: `spaces/{space}`.
+   *
+   *   `{space}` is the resource identifier for the space. It's a unique,
+   *   server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
+   *
+   *   For more information, see [How Meet identifies a meeting
+   *   space](https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

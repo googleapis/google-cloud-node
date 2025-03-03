@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -1514,6 +1517,24 @@
                             }
                           ]
                         },
+                        "GetPropertyQuotasSnapshot": {
+                          "requestType": "GetPropertyQuotasSnapshotRequest",
+                          "responseType": "PropertyQuotasSnapshot",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/propertyQuotasSnapshot}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/propertyQuotasSnapshot}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "CreateReportTask": {
                           "requestType": "CreateReportTaskRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1784,6 +1805,47 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        }
+                      }
+                    },
+                    "GetPropertyQuotasSnapshotRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/PropertyQuotasSnapshot"
+                          }
+                        }
+                      }
+                    },
+                    "PropertyQuotasSnapshot": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/PropertyQuotasSnapshot",
+                        "(google.api.resource).pattern": "properties/{property}/propertyQuotasSnapshot",
+                        "(google.api.resource).plural": "propertyQuotasSnapshots",
+                        "(google.api.resource).singular": "propertyQuotasSnapshot"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "corePropertyQuota": {
+                          "type": "PropertyQuota",
+                          "id": 1
+                        },
+                        "realtimePropertyQuota": {
+                          "type": "PropertyQuota",
+                          "id": 2
+                        },
+                        "funnelPropertyQuota": {
+                          "type": "PropertyQuota",
+                          "id": 3
                         }
                       }
                     },
@@ -2331,6 +2393,13 @@
                       },
                       "nested": {
                         "ReportDefinition": {
+                          "oneofs": {
+                            "_samplingLevel": {
+                              "oneof": [
+                                "samplingLevel"
+                              ]
+                            }
+                          },
                           "fields": {
                             "dimensions": {
                               "rule": "repeated",
@@ -2419,6 +2488,14 @@
                               "id": 13,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "samplingLevel": {
+                              "type": "SamplingLevel",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           }
@@ -2801,7 +2878,8 @@
                             "stringFilter",
                             "inListFilter",
                             "numericFilter",
-                            "betweenFilter"
+                            "betweenFilter",
+                            "emptyFilter"
                           ]
                         }
                       },
@@ -2825,6 +2903,10 @@
                         "betweenFilter": {
                           "type": "BetweenFilter",
                           "id": 5
+                        },
+                        "emptyFilter": {
+                          "type": "EmptyFilter",
+                          "id": 6
                         }
                       }
                     },
@@ -2961,6 +3043,9 @@
                           "id": 2
                         }
                       }
+                    },
+                    "EmptyFilter": {
+                      "fields": {}
                     },
                     "NumericValue": {
                       "oneofs": {
@@ -3116,6 +3201,11 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "samplingMetadatas": {
+                          "rule": "repeated",
+                          "type": "SamplingMetadata",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -4090,6 +4180,14 @@
                         "RESTRICTED_METRIC_TYPE_UNSPECIFIED": 0,
                         "COST_DATA": 1,
                         "REVENUE_DATA": 2
+                      }
+                    },
+                    "SamplingLevel": {
+                      "values": {
+                        "SAMPLING_LEVEL_UNSPECIFIED": 0,
+                        "LOW": 1,
+                        "MEDIUM": 2,
+                        "UNSAMPLED": 3
                       }
                     }
                   }
@@ -5269,7 +5367,8 @@
                             "stringFilter",
                             "inListFilter",
                             "numericFilter",
-                            "betweenFilter"
+                            "betweenFilter",
+                            "emptyFilter"
                           ]
                         }
                       },
@@ -5293,6 +5392,10 @@
                         "betweenFilter": {
                           "type": "BetweenFilter",
                           "id": 6
+                        },
+                        "emptyFilter": {
+                          "type": "EmptyFilter",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -5373,6 +5476,9 @@
                               "id": 2
                             }
                           }
+                        },
+                        "EmptyFilter": {
+                          "fields": {}
                         }
                       }
                     },

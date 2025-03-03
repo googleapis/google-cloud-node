@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -272,6 +275,30 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RunStream": {
+                          "requestType": "RunStreamRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/streams/*}:run",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Stream",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/streams/*}:run",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Stream",
                                 "metadata_type": "OperationMetadata"
                               }
                             }
@@ -587,7 +614,8 @@
                           "oneof": [
                             "oracleRdbms",
                             "mysqlRdbms",
-                            "postgresqlRdbms"
+                            "postgresqlRdbms",
+                            "sqlServerRdbms"
                           ]
                         }
                       },
@@ -627,6 +655,10 @@
                         "postgresqlRdbms": {
                           "type": "PostgresqlRdbms",
                           "id": 102
+                        },
+                        "sqlServerRdbms": {
+                          "type": "SqlServerRdbms",
+                          "id": 103
                         }
                       }
                     },
@@ -636,7 +668,8 @@
                           "oneof": [
                             "oracleRdbms",
                             "mysqlRdbms",
-                            "postgresqlRdbms"
+                            "postgresqlRdbms",
+                            "sqlServerRdbms"
                           ]
                         }
                       },
@@ -652,6 +685,10 @@
                         "postgresqlRdbms": {
                           "type": "PostgresqlRdbms",
                           "id": 102
+                        },
+                        "sqlServerRdbms": {
+                          "type": "SqlServerRdbms",
+                          "id": 103
                         }
                       }
                     },
@@ -1008,6 +1045,32 @@
                         "requestId": {
                           "type": "string",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RunStreamRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datastream.googleapis.com/Stream"
+                          }
+                        },
+                        "cdcStrategy": {
+                          "type": "CdcStrategy",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1436,7 +1499,7 @@
                           "type": "string",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "databaseService": {
@@ -1450,6 +1513,81 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 6
+                        },
+                        "oracleSslConfig": {
+                          "type": "OracleSslConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "oracleAsmConfig": {
+                          "type": "OracleAsmConfig",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "secretManagerStoredPassword": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "OracleAsmConfig": {
+                      "fields": {
+                        "hostname": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "port": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "username": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "password": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "asmService": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "connectionAttributes": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "oracleSslConfig": {
+                          "type": "OracleSslConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1510,7 +1648,50 @@
                           "type": "string",
                           "id": 4,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "database": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sslConfig": {
+                          "type": "PostgresqlSslConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SqlServerProfile": {
+                      "fields": {
+                        "hostname": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "port": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "username": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "password": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "database": {
@@ -1787,6 +1968,82 @@
                         }
                       }
                     },
+                    "OracleSslConfig": {
+                      "fields": {
+                        "caCertificate": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "caCertificateSet": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "PostgresqlSslConfig": {
+                      "oneofs": {
+                        "encryptionSetting": {
+                          "oneof": [
+                            "serverVerification",
+                            "serverAndClientVerification"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "serverVerification": {
+                          "type": "ServerVerification",
+                          "id": 1
+                        },
+                        "serverAndClientVerification": {
+                          "type": "ServerAndClientVerification",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ServerVerification": {
+                          "fields": {
+                            "caCertificate": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ServerAndClientVerification": {
+                          "fields": {
+                            "clientCertificate": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "clientKey": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "caCertificate": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "ConnectionProfile": {
                       "options": {
                         "(google.api.resource).type": "datastream.googleapis.com/ConnectionProfile",
@@ -1799,7 +2056,8 @@
                             "gcsProfile",
                             "mysqlProfile",
                             "bigqueryProfile",
-                            "postgresqlProfile"
+                            "postgresqlProfile",
+                            "sqlServerProfile"
                           ]
                         },
                         "connectivity": {
@@ -1863,6 +2121,10 @@
                         "postgresqlProfile": {
                           "type": "PostgresqlProfile",
                           "id": 104
+                        },
+                        "sqlServerProfile": {
+                          "type": "SqlServerProfile",
+                          "id": 105
                         },
                         "staticServiceIpConnectivity": {
                           "type": "StaticServiceIpConnectivity",
@@ -1960,6 +2222,12 @@
                             "dropLargeObjects",
                             "streamLargeObjects"
                           ]
+                        },
+                        "cdcMethod": {
+                          "oneof": [
+                            "logMiner",
+                            "binaryLogParser"
+                          ]
                         }
                       },
                       "fields": {
@@ -1986,6 +2254,14 @@
                         "streamLargeObjects": {
                           "type": "StreamLargeObjects",
                           "id": 102
+                        },
+                        "logMiner": {
+                          "type": "LogMiner",
+                          "id": 103
+                        },
+                        "binaryLogParser": {
+                          "type": "BinaryLogParser",
+                          "id": 104
                         }
                       },
                       "nested": {
@@ -1994,6 +2270,52 @@
                         },
                         "StreamLargeObjects": {
                           "fields": {}
+                        },
+                        "LogMiner": {
+                          "fields": {}
+                        },
+                        "BinaryLogParser": {
+                          "oneofs": {
+                            "logFileAccess": {
+                              "oneof": [
+                                "oracleAsmLogFileAccess",
+                                "logFileDirectories"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "oracleAsmLogFileAccess": {
+                              "type": "OracleAsmLogFileAccess",
+                              "id": 1
+                            },
+                            "logFileDirectories": {
+                              "type": "LogFileDirectories",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "OracleAsmLogFileAccess": {
+                              "fields": {}
+                            },
+                            "LogFileDirectories": {
+                              "fields": {
+                                "onlineLogDirectory": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "archivedLogDirectory": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -2098,6 +2420,119 @@
                         }
                       }
                     },
+                    "SqlServerColumn": {
+                      "fields": {
+                        "column": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dataType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "length": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "precision": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "scale": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "primaryKey": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "nullable": {
+                          "type": "bool",
+                          "id": 7
+                        },
+                        "ordinalPosition": {
+                          "type": "int32",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "SqlServerTable": {
+                      "fields": {
+                        "table": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "columns": {
+                          "rule": "repeated",
+                          "type": "SqlServerColumn",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SqlServerSchema": {
+                      "fields": {
+                        "schema": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "tables": {
+                          "rule": "repeated",
+                          "type": "SqlServerTable",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SqlServerRdbms": {
+                      "fields": {
+                        "schemas": {
+                          "rule": "repeated",
+                          "type": "SqlServerSchema",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SqlServerSourceConfig": {
+                      "oneofs": {
+                        "cdcMethod": {
+                          "oneof": [
+                            "transactionLogs",
+                            "changeTables"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "includeObjects": {
+                          "type": "SqlServerRdbms",
+                          "id": 1
+                        },
+                        "excludeObjects": {
+                          "type": "SqlServerRdbms",
+                          "id": 2
+                        },
+                        "maxConcurrentCdcTasks": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "maxConcurrentBackfillTasks": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "transactionLogs": {
+                          "type": "SqlServerTransactionLogs",
+                          "id": 101
+                        },
+                        "changeTables": {
+                          "type": "SqlServerChangeTables",
+                          "id": 102
+                        }
+                      }
+                    },
+                    "SqlServerTransactionLogs": {
+                      "fields": {}
+                    },
+                    "SqlServerChangeTables": {
+                      "fields": {}
+                    },
                     "MysqlColumn": {
                       "fields": {
                         "column": {
@@ -2174,6 +2609,14 @@
                       }
                     },
                     "MysqlSourceConfig": {
+                      "oneofs": {
+                        "cdcMethod": {
+                          "oneof": [
+                            "binaryLogPosition",
+                            "gtid"
+                          ]
+                        }
+                      },
                       "fields": {
                         "includeObjects": {
                           "type": "MysqlRdbms",
@@ -2190,6 +2633,22 @@
                         "maxConcurrentBackfillTasks": {
                           "type": "int32",
                           "id": 4
+                        },
+                        "binaryLogPosition": {
+                          "type": "BinaryLogPosition",
+                          "id": 101
+                        },
+                        "gtid": {
+                          "type": "Gtid",
+                          "id": 102
+                        }
+                      },
+                      "nested": {
+                        "BinaryLogPosition": {
+                          "fields": {}
+                        },
+                        "Gtid": {
+                          "fields": {}
                         }
                       }
                     },
@@ -2199,7 +2658,8 @@
                           "oneof": [
                             "oracleSourceConfig",
                             "mysqlSourceConfig",
-                            "postgresqlSourceConfig"
+                            "postgresqlSourceConfig",
+                            "sqlServerSourceConfig"
                           ]
                         }
                       },
@@ -2223,6 +2683,10 @@
                         "postgresqlSourceConfig": {
                           "type": "PostgresqlSourceConfig",
                           "id": 102
+                        },
+                        "sqlServerSourceConfig": {
+                          "type": "SqlServerSourceConfig",
+                          "id": 103
                         }
                       }
                     },
@@ -2296,6 +2760,12 @@
                             "singleTargetDataset",
                             "sourceHierarchyDatasets"
                           ]
+                        },
+                        "writeMode": {
+                          "oneof": [
+                            "merge",
+                            "appendOnly"
+                          ]
                         }
                       },
                       "fields": {
@@ -2310,6 +2780,14 @@
                         "dataFreshness": {
                           "type": "google.protobuf.Duration",
                           "id": 300
+                        },
+                        "merge": {
+                          "type": "Merge",
+                          "id": 301
+                        },
+                        "appendOnly": {
+                          "type": "AppendOnly",
+                          "id": 302
                         }
                       },
                       "nested": {
@@ -2349,6 +2827,12 @@
                               }
                             }
                           }
+                        },
+                        "AppendOnly": {
+                          "fields": {}
+                        },
+                        "Merge": {
+                          "fields": {}
                         }
                       }
                     },
@@ -2473,6 +2957,13 @@
                             "(google.api.field_behavior)": "IMMUTABLE",
                             "proto3_optional": true
                           }
+                        },
+                        "lastRecoveryTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2495,7 +2986,8 @@
                               "oneof": [
                                 "oracleExcludedObjects",
                                 "mysqlExcludedObjects",
-                                "postgresqlExcludedObjects"
+                                "postgresqlExcludedObjects",
+                                "sqlServerExcludedObjects"
                               ]
                             }
                           },
@@ -2511,6 +3003,10 @@
                             "postgresqlExcludedObjects": {
                               "type": "PostgresqlRdbms",
                               "id": 3
+                            },
+                            "sqlServerExcludedObjects": {
+                              "type": "SqlServerRdbms",
+                              "id": 4
                             }
                           }
                         },
@@ -2577,7 +3073,8 @@
                           "oneof": [
                             "oracleIdentifier",
                             "mysqlIdentifier",
-                            "postgresqlIdentifier"
+                            "postgresqlIdentifier",
+                            "sqlServerIdentifier"
                           ]
                         }
                       },
@@ -2593,6 +3090,10 @@
                         "postgresqlIdentifier": {
                           "type": "PostgresqlObjectIdentifier",
                           "id": 3
+                        },
+                        "sqlServerIdentifier": {
+                          "type": "SqlServerObjectIdentifier",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -2649,6 +3150,24 @@
                               }
                             }
                           }
+                        },
+                        "SqlServerObjectIdentifier": {
+                          "fields": {
+                            "schema": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "table": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -2656,7 +3175,10 @@
                       "fields": {
                         "state": {
                           "type": "State",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "trigger": {
                           "type": "Trigger",
@@ -2749,7 +3271,10 @@
                         },
                         "state": {
                           "type": "State",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "message": {
                           "rule": "repeated",
@@ -2767,7 +3292,8 @@
                             "STATE_UNSPECIFIED": 0,
                             "NOT_EXECUTED": 1,
                             "FAILED": 2,
-                            "PASSED": 3
+                            "PASSED": 3,
+                            "WARNING": 4
                           }
                         }
                       }
@@ -2798,6 +3324,121 @@
                             "LEVEL_UNSPECIFIED": 0,
                             "WARNING": 1,
                             "ERROR": 2
+                          }
+                        }
+                      }
+                    },
+                    "CdcStrategy": {
+                      "oneofs": {
+                        "startPosition": {
+                          "oneof": [
+                            "mostRecentStartPosition",
+                            "nextAvailableStartPosition",
+                            "specificStartPosition"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "mostRecentStartPosition": {
+                          "type": "MostRecentStartPosition",
+                          "id": 101,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "nextAvailableStartPosition": {
+                          "type": "NextAvailableStartPosition",
+                          "id": 102,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "specificStartPosition": {
+                          "type": "SpecificStartPosition",
+                          "id": 103,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MostRecentStartPosition": {
+                          "fields": {}
+                        },
+                        "NextAvailableStartPosition": {
+                          "fields": {}
+                        },
+                        "SpecificStartPosition": {
+                          "oneofs": {
+                            "position": {
+                              "oneof": [
+                                "mysqlLogPosition",
+                                "oracleScnPosition",
+                                "sqlServerLsnPosition"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "mysqlLogPosition": {
+                              "type": "MysqlLogPosition",
+                              "id": 101
+                            },
+                            "oracleScnPosition": {
+                              "type": "OracleScnPosition",
+                              "id": 102
+                            },
+                            "sqlServerLsnPosition": {
+                              "type": "SqlServerLsnPosition",
+                              "id": 103
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SqlServerLsnPosition": {
+                      "fields": {
+                        "lsn": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "OracleScnPosition": {
+                      "fields": {
+                        "scn": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MysqlLogPosition": {
+                      "oneofs": {
+                        "_logPosition": {
+                          "oneof": [
+                            "logPosition"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "logFile": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "logPosition": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }

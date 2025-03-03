@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -224,11 +224,17 @@ export class ArtifactRegistryClient {
       aptArtifactPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}/aptArtifacts/{apt_artifact}'
       ),
+      attachmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}/attachments/{attachment}'
+      ),
       dockerImagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}/dockerImages/{docker_image}'
       ),
       filePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}/files/{file}'
+      ),
+      genericArtifactPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}/genericArtifacts/{generic_artifact}'
       ),
       mavenArtifactPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}/mavenArtifacts/{maven_artifact}'
@@ -247,6 +253,9 @@ export class ArtifactRegistryClient {
       ),
       repositoryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}'
+      ),
+      rulePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}/rules/{rule}'
       ),
       tagPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}/packages/{package}/tags/{tag}'
@@ -310,6 +319,16 @@ export class ArtifactRegistryClient {
         'pageToken',
         'nextPageToken',
         'tags'
+      ),
+      listRules: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'rules'
+      ),
+      listAttachments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'attachments'
       ),
     };
 
@@ -383,6 +402,24 @@ export class ArtifactRegistryClient {
     const batchDeleteVersionsMetadata = protoFilesRoot.lookup(
       '.google.devtools.artifactregistry.v1.BatchDeleteVersionsMetadata'
     ) as gax.protobuf.Type;
+    const deleteFileResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteFileMetadata = protoFilesRoot.lookup(
+      '.google.devtools.artifactregistry.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const createAttachmentResponse = protoFilesRoot.lookup(
+      '.google.devtools.artifactregistry.v1.Attachment'
+    ) as gax.protobuf.Type;
+    const createAttachmentMetadata = protoFilesRoot.lookup(
+      '.google.devtools.artifactregistry.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteAttachmentResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteAttachmentMetadata = protoFilesRoot.lookup(
+      '.google.devtools.artifactregistry.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       importAptArtifacts: new this._gaxModule.LongrunningDescriptor(
@@ -419,6 +456,21 @@ export class ArtifactRegistryClient {
         this.operationsClient,
         batchDeleteVersionsResponse.decode.bind(batchDeleteVersionsResponse),
         batchDeleteVersionsMetadata.decode.bind(batchDeleteVersionsMetadata)
+      ),
+      deleteFile: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteFileResponse.decode.bind(deleteFileResponse),
+        deleteFileMetadata.decode.bind(deleteFileMetadata)
+      ),
+      createAttachment: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createAttachmentResponse.decode.bind(createAttachmentResponse),
+        createAttachmentMetadata.decode.bind(createAttachmentMetadata)
+      ),
+      deleteAttachment: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteAttachmentResponse.decode.bind(deleteAttachmentResponse),
+        deleteAttachmentMetadata.decode.bind(deleteAttachmentMetadata)
       ),
     };
 
@@ -495,13 +547,21 @@ export class ArtifactRegistryClient {
       'getVersion',
       'deleteVersion',
       'batchDeleteVersions',
+      'updateVersion',
       'listFiles',
       'getFile',
+      'deleteFile',
+      'updateFile',
       'listTags',
       'getTag',
       'createTag',
       'updateTag',
       'deleteTag',
+      'createRule',
+      'listRules',
+      'getRule',
+      'updateRule',
+      'deleteRule',
       'setIamPolicy',
       'getIamPolicy',
       'testIamPermissions',
@@ -509,6 +569,11 @@ export class ArtifactRegistryClient {
       'updateProjectSettings',
       'getVpcscConfig',
       'updateVpcscConfig',
+      'updatePackage',
+      'listAttachments',
+      'getAttachment',
+      'createAttachment',
+      'deleteAttachment',
     ];
     for (const methodName of artifactRegistryStubMethods) {
       const callPromise = this.artifactRegistryStub.then(
@@ -1392,6 +1457,106 @@ export class ArtifactRegistryClient {
     return this.innerApiCalls.getVersion(request, options, callback);
   }
   /**
+   * Updates a version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devtools.artifactregistry.v1.Version} request.version
+   *   Required. The Version that replaces the resource on the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The update mask applies to the resource. For the `FieldMask` definition,
+   *   see
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Version|Version}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.update_version.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateVersion_async
+   */
+  updateVersion(
+    request?: protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IVersion,
+      (
+        | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateVersion(
+    request: protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IVersion,
+      | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateVersion(
+    request: protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IVersion,
+      | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateVersion(
+    request?: protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IVersion,
+          | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.artifactregistry.v1.IVersion,
+      | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IVersion,
+      (
+        | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'version.name': request.version!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateVersion(request, options, callback);
+  }
+  /**
    * Gets a file.
    *
    * @param {Object} request
@@ -1480,6 +1645,100 @@ export class ArtifactRegistryClient {
       });
     this.initialize();
     return this.innerApiCalls.getFile(request, options, callback);
+  }
+  /**
+   * Updates a file.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devtools.artifactregistry.v1.File} request.file
+   *   Required. The File that replaces the resource on the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The update mask applies to the resource. For the `FieldMask`
+   *   definition, see
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.File|File}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.update_file.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateFile_async
+   */
+  updateFile(
+    request?: protos.google.devtools.artifactregistry.v1.IUpdateFileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IFile,
+      protos.google.devtools.artifactregistry.v1.IUpdateFileRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateFile(
+    request: protos.google.devtools.artifactregistry.v1.IUpdateFileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IFile,
+      | protos.google.devtools.artifactregistry.v1.IUpdateFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateFile(
+    request: protos.google.devtools.artifactregistry.v1.IUpdateFileRequest,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IFile,
+      | protos.google.devtools.artifactregistry.v1.IUpdateFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateFile(
+    request?: protos.google.devtools.artifactregistry.v1.IUpdateFileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IFile,
+          | protos.google.devtools.artifactregistry.v1.IUpdateFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.artifactregistry.v1.IFile,
+      | protos.google.devtools.artifactregistry.v1.IUpdateFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IFile,
+      protos.google.devtools.artifactregistry.v1.IUpdateFileRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'file.name': request.file!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateFile(request, options, callback);
   }
   /**
    * Gets a tag.
@@ -1848,6 +2107,374 @@ export class ArtifactRegistryClient {
       });
     this.initialize();
     return this.innerApiCalls.deleteTag(request, options, callback);
+  }
+  /**
+   * Creates a rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource where the rule will be created.
+   * @param {string} request.ruleId
+   *   The rule id to use for this repository.
+   * @param {google.devtools.artifactregistry.v1.Rule} request.rule
+   *   The rule to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.create_rule.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateRule_async
+   */
+  createRule(
+    request?: protos.google.devtools.artifactregistry.v1.ICreateRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IRule,
+      protos.google.devtools.artifactregistry.v1.ICreateRuleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createRule(
+    request: protos.google.devtools.artifactregistry.v1.ICreateRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IRule,
+      | protos.google.devtools.artifactregistry.v1.ICreateRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createRule(
+    request: protos.google.devtools.artifactregistry.v1.ICreateRuleRequest,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IRule,
+      | protos.google.devtools.artifactregistry.v1.ICreateRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createRule(
+    request?: protos.google.devtools.artifactregistry.v1.ICreateRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          | protos.google.devtools.artifactregistry.v1.ICreateRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.artifactregistry.v1.IRule,
+      | protos.google.devtools.artifactregistry.v1.ICreateRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IRule,
+      protos.google.devtools.artifactregistry.v1.ICreateRuleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createRule(request, options, callback);
+  }
+  /**
+   * Gets a rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the rule to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.get_rule.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetRule_async
+   */
+  getRule(
+    request?: protos.google.devtools.artifactregistry.v1.IGetRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IRule,
+      protos.google.devtools.artifactregistry.v1.IGetRuleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getRule(
+    request: protos.google.devtools.artifactregistry.v1.IGetRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IRule,
+      | protos.google.devtools.artifactregistry.v1.IGetRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getRule(
+    request: protos.google.devtools.artifactregistry.v1.IGetRuleRequest,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IRule,
+      | protos.google.devtools.artifactregistry.v1.IGetRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getRule(
+    request?: protos.google.devtools.artifactregistry.v1.IGetRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          | protos.google.devtools.artifactregistry.v1.IGetRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.artifactregistry.v1.IRule,
+      | protos.google.devtools.artifactregistry.v1.IGetRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IRule,
+      protos.google.devtools.artifactregistry.v1.IGetRuleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getRule(request, options, callback);
+  }
+  /**
+   * Updates a rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devtools.artifactregistry.v1.Rule} request.rule
+   *   The rule that replaces the resource on the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The update mask applies to the resource. For the `FieldMask` definition,
+   *   see
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.update_rule.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateRule_async
+   */
+  updateRule(
+    request?: protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IRule,
+      protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateRule(
+    request: protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IRule,
+      | protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateRule(
+    request: protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IRule,
+      | protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateRule(
+    request?: protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          | protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.artifactregistry.v1.IRule,
+      | protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IRule,
+      protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'rule.name': request.rule!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateRule(request, options, callback);
+  }
+  /**
+   * Deletes a rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the rule to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.delete_rule.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteRule_async
+   */
+  deleteRule(
+    request?: protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteRule(
+    request: protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteRule(
+    request: protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteRule(
+    request?: protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteRule(request, options, callback);
   }
   /**
    * Updates the IAM policy for a given resource.
@@ -2504,6 +3131,202 @@ export class ArtifactRegistryClient {
       });
     this.initialize();
     return this.innerApiCalls.updateVpcscConfig(request, options, callback);
+  }
+  /**
+   * Updates a package.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devtools.artifactregistry.v1.Package} request.package
+   *   The package that replaces the resource on the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The update mask applies to the resource. For the `FieldMask` definition,
+   *   see
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Package|Package}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.update_package.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdatePackage_async
+   */
+  updatePackage(
+    request?: protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IPackage,
+      (
+        | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updatePackage(
+    request: protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IPackage,
+      | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updatePackage(
+    request: protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IPackage,
+      | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updatePackage(
+    request?: protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IPackage,
+          | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.artifactregistry.v1.IPackage,
+      | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IPackage,
+      (
+        | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'package.name': request.package!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updatePackage(request, options, callback);
+  }
+  /**
+   * Gets an attachment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the attachment to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Attachment|Attachment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.get_attachment.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetAttachment_async
+   */
+  getAttachment(
+    request?: protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IAttachment,
+      (
+        | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getAttachment(
+    request: protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IAttachment,
+      | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAttachment(
+    request: protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IAttachment,
+      | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAttachment(
+    request?: protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IAttachment,
+          | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.artifactregistry.v1.IAttachment,
+      | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IAttachment,
+      (
+        | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getAttachment(request, options, callback);
   }
 
   /**
@@ -3488,6 +4311,424 @@ export class ArtifactRegistryClient {
     >;
   }
   /**
+   * Deletes a file and all of its content. It is only allowed on generic
+   * repositories. The returned operation will complete once the file has been
+   * deleted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the file to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.delete_file.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteFile_async
+   */
+  deleteFile(
+    request?: protos.google.devtools.artifactregistry.v1.IDeleteFileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteFile(
+    request: protos.google.devtools.artifactregistry.v1.IDeleteFileRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteFile(
+    request: protos.google.devtools.artifactregistry.v1.IDeleteFileRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteFile(
+    request?: protos.google.devtools.artifactregistry.v1.IDeleteFileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteFile(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteFile()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.delete_file.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteFile_async
+   */
+  async checkDeleteFileProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.devtools.artifactregistry.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteFile,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.devtools.artifactregistry.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates an attachment. The returned Operation will finish once the
+   * attachment has been created. Its response will be the created attachment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource where the attachment will be
+   *   created.
+   * @param {string} request.attachmentId
+   *   Required. The attachment id to use for this attachment.
+   * @param {google.devtools.artifactregistry.v1.Attachment} request.attachment
+   *   Required. The attachment to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.create_attachment.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateAttachment_async
+   */
+  createAttachment(
+    request?: protos.google.devtools.artifactregistry.v1.ICreateAttachmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devtools.artifactregistry.v1.IAttachment,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createAttachment(
+    request: protos.google.devtools.artifactregistry.v1.ICreateAttachmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.devtools.artifactregistry.v1.IAttachment,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAttachment(
+    request: protos.google.devtools.artifactregistry.v1.ICreateAttachmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.devtools.artifactregistry.v1.IAttachment,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAttachment(
+    request?: protos.google.devtools.artifactregistry.v1.ICreateAttachmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.devtools.artifactregistry.v1.IAttachment,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.devtools.artifactregistry.v1.IAttachment,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devtools.artifactregistry.v1.IAttachment,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createAttachment(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createAttachment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.create_attachment.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateAttachment_async
+   */
+  async checkCreateAttachmentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.devtools.artifactregistry.v1.Attachment,
+      protos.google.devtools.artifactregistry.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createAttachment,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.devtools.artifactregistry.v1.Attachment,
+      protos.google.devtools.artifactregistry.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes an attachment. The returned Operation will
+   * finish once the attachments has been deleted. It will not have any
+   * Operation metadata and will return a `google.protobuf.Empty` response.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the attachment to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.delete_attachment.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteAttachment_async
+   */
+  deleteAttachment(
+    request?: protos.google.devtools.artifactregistry.v1.IDeleteAttachmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteAttachment(
+    request: protos.google.devtools.artifactregistry.v1.IDeleteAttachmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAttachment(
+    request: protos.google.devtools.artifactregistry.v1.IDeleteAttachmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAttachment(
+    request?: protos.google.devtools.artifactregistry.v1.IDeleteAttachmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteAttachment(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteAttachment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.delete_attachment.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteAttachment_async
+   */
+  async checkDeleteAttachmentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.devtools.artifactregistry.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteAttachment,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.devtools.artifactregistry.v1.OperationMetadata
+    >;
+  }
+  /**
    * Lists docker images.
    *
    * @param {Object} request
@@ -3496,7 +4737,7 @@ export class ArtifactRegistryClient {
    *   Required. The name of the parent resource whose docker images will be
    *   listed.
    * @param {number} request.pageSize
-   *   The maximum number of artifacts to return.
+   *   The maximum number of artifacts to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {string} request.orderBy
@@ -3589,14 +4830,14 @@ export class ArtifactRegistryClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDockerImages`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent resource whose docker images will be
    *   listed.
    * @param {number} request.pageSize
-   *   The maximum number of artifacts to return.
+   *   The maximum number of artifacts to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {string} request.orderBy
@@ -3644,7 +4885,7 @@ export class ArtifactRegistryClient {
    *   Required. The name of the parent resource whose docker images will be
    *   listed.
    * @param {number} request.pageSize
-   *   The maximum number of artifacts to return.
+   *   The maximum number of artifacts to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {string} request.orderBy
@@ -3691,7 +4932,7 @@ export class ArtifactRegistryClient {
    *   Required. The name of the parent resource whose maven artifacts will be
    *   listed.
    * @param {number} request.pageSize
-   *   The maximum number of artifacts to return.
+   *   The maximum number of artifacts to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -3782,14 +5023,14 @@ export class ArtifactRegistryClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listMavenArtifacts`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent resource whose maven artifacts will be
    *   listed.
    * @param {number} request.pageSize
-   *   The maximum number of artifacts to return.
+   *   The maximum number of artifacts to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -3835,7 +5076,7 @@ export class ArtifactRegistryClient {
    *   Required. The name of the parent resource whose maven artifacts will be
    *   listed.
    * @param {number} request.pageSize
-   *   The maximum number of artifacts to return.
+   *   The maximum number of artifacts to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -3880,7 +5121,7 @@ export class ArtifactRegistryClient {
    *   Required. The name of the parent resource whose npm packages will be
    *   listed.
    * @param {number} request.pageSize
-   *   The maximum number of artifacts to return.
+   *   The maximum number of artifacts to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -3971,14 +5212,14 @@ export class ArtifactRegistryClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNpmPackages`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent resource whose npm packages will be
    *   listed.
    * @param {number} request.pageSize
-   *   The maximum number of artifacts to return.
+   *   The maximum number of artifacts to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -4024,7 +5265,7 @@ export class ArtifactRegistryClient {
    *   Required. The name of the parent resource whose npm packages will be
    *   listed.
    * @param {number} request.pageSize
-   *   The maximum number of artifacts to return.
+   *   The maximum number of artifacts to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -4069,7 +5310,7 @@ export class ArtifactRegistryClient {
    *   Required. The name of the parent resource whose python packages will be
    *   listed.
    * @param {number} request.pageSize
-   *   The maximum number of artifacts to return.
+   *   The maximum number of artifacts to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -4160,14 +5401,14 @@ export class ArtifactRegistryClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPythonPackages`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent resource whose python packages will be
    *   listed.
    * @param {number} request.pageSize
-   *   The maximum number of artifacts to return.
+   *   The maximum number of artifacts to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -4213,7 +5454,7 @@ export class ArtifactRegistryClient {
    *   Required. The name of the parent resource whose python packages will be
    *   listed.
    * @param {number} request.pageSize
-   *   The maximum number of artifacts to return.
+   *   The maximum number of artifacts to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -4261,6 +5502,28 @@ export class ArtifactRegistryClient {
    *   The maximum number of repositories to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. The fields eligible for filtering are:
+   *
+   *     * `name`
+   *
+   *    Examples of using a filter:
+   *
+   *   To filter the results of your request to repositories with the name
+   *   `my-repo` in project `my-project` in the `us-central` region, append the
+   *   following filter expression to your request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/*repo"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/*repo*"`
+   * @param {string} [request.orderBy]
+   *   Optional. The field to order the results by.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4349,7 +5612,7 @@ export class ArtifactRegistryClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRepositories`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4359,6 +5622,28 @@ export class ArtifactRegistryClient {
    *   The maximum number of repositories to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. The fields eligible for filtering are:
+   *
+   *     * `name`
+   *
+   *    Examples of using a filter:
+   *
+   *   To filter the results of your request to repositories with the name
+   *   `my-repo` in project `my-project` in the `us-central` region, append the
+   *   following filter expression to your request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/*repo"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/*repo*"`
+   * @param {string} [request.orderBy]
+   *   Optional. The field to order the results by.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4405,6 +5690,28 @@ export class ArtifactRegistryClient {
    *   The maximum number of repositories to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. The fields eligible for filtering are:
+   *
+   *     * `name`
+   *
+   *    Examples of using a filter:
+   *
+   *   To filter the results of your request to repositories with the name
+   *   `my-repo` in project `my-project` in the `us-central` region, append the
+   *   following filter expression to your request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/*repo"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/*repo*"`
+   * @param {string} [request.orderBy]
+   *   Optional. The field to order the results by.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4449,6 +5756,54 @@ export class ArtifactRegistryClient {
    *   The maximum number of packages to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. The fields eligible for filtering are:
+   *
+   *     * `name`
+   *     * `annotations`
+   *
+   *   Examples of using a filter:
+   *
+   *    To filter the results of your request to packages with the name
+   *    `my-package` in project `my-project` in the `us-central` region, in
+   *    repository `my-repo`, append the following filter expression to your
+   *    request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*package"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*pack*"`
+   *
+   *    To filter the results of your request to packages with the annotation
+   *    key-value pair [`external_link`: `external_link_value`], append the
+   *    following filter expression to your request":
+   *
+   *     * `"annotations.external_link:external_link_value"`
+   *
+   *    To filter the results just for a specific annotation key `external_link`,
+   *    append the following filter expression to your request:
+   *
+   *     * `"annotations.external_link"`
+   *
+   *    If the annotation key or value contains special characters, you can escape
+   *    them by surrounding the value with backticks. For example, to filter the
+   *    results of your request to packages with the annotation key-value pair
+   *    [`external.link`:`https://example.com/my-package`], append the following
+   *    filter expression to your request:
+   *
+   *     * `` "annotations.`external.link`:`https://example.com/my-package`" ``
+   *
+   *    You can also filter with annotations with a wildcard to
+   *    match any number of characters before or after the value:
+   *
+   *     * `` "annotations.*_link:`*example.com*`" ``
+   * @param {string} [request.orderBy]
+   *   Optional. The field to order the results by.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4537,7 +5892,7 @@ export class ArtifactRegistryClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPackages`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4546,6 +5901,54 @@ export class ArtifactRegistryClient {
    *   The maximum number of packages to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. The fields eligible for filtering are:
+   *
+   *     * `name`
+   *     * `annotations`
+   *
+   *   Examples of using a filter:
+   *
+   *    To filter the results of your request to packages with the name
+   *    `my-package` in project `my-project` in the `us-central` region, in
+   *    repository `my-repo`, append the following filter expression to your
+   *    request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*package"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*pack*"`
+   *
+   *    To filter the results of your request to packages with the annotation
+   *    key-value pair [`external_link`: `external_link_value`], append the
+   *    following filter expression to your request":
+   *
+   *     * `"annotations.external_link:external_link_value"`
+   *
+   *    To filter the results just for a specific annotation key `external_link`,
+   *    append the following filter expression to your request:
+   *
+   *     * `"annotations.external_link"`
+   *
+   *    If the annotation key or value contains special characters, you can escape
+   *    them by surrounding the value with backticks. For example, to filter the
+   *    results of your request to packages with the annotation key-value pair
+   *    [`external.link`:`https://example.com/my-package`], append the following
+   *    filter expression to your request:
+   *
+   *     * `` "annotations.`external.link`:`https://example.com/my-package`" ``
+   *
+   *    You can also filter with annotations with a wildcard to
+   *    match any number of characters before or after the value:
+   *
+   *     * `` "annotations.*_link:`*example.com*`" ``
+   * @param {string} [request.orderBy]
+   *   Optional. The field to order the results by.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4591,6 +5994,54 @@ export class ArtifactRegistryClient {
    *   The maximum number of packages to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. The fields eligible for filtering are:
+   *
+   *     * `name`
+   *     * `annotations`
+   *
+   *   Examples of using a filter:
+   *
+   *    To filter the results of your request to packages with the name
+   *    `my-package` in project `my-project` in the `us-central` region, in
+   *    repository `my-repo`, append the following filter expression to your
+   *    request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*package"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*pack*"`
+   *
+   *    To filter the results of your request to packages with the annotation
+   *    key-value pair [`external_link`: `external_link_value`], append the
+   *    following filter expression to your request":
+   *
+   *     * `"annotations.external_link:external_link_value"`
+   *
+   *    To filter the results just for a specific annotation key `external_link`,
+   *    append the following filter expression to your request:
+   *
+   *     * `"annotations.external_link"`
+   *
+   *    If the annotation key or value contains special characters, you can escape
+   *    them by surrounding the value with backticks. For example, to filter the
+   *    results of your request to packages with the annotation key-value pair
+   *    [`external.link`:`https://example.com/my-package`], append the following
+   *    filter expression to your request:
+   *
+   *     * `` "annotations.`external.link`:`https://example.com/my-package`" ``
+   *
+   *    You can also filter with annotations with a wildcard to
+   *    match any number of characters before or after the value:
+   *
+   *     * `` "annotations.*_link:`*example.com*`" ``
+   * @param {string} [request.orderBy]
+   *   Optional. The field to order the results by.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4639,6 +6090,52 @@ export class ArtifactRegistryClient {
    *   The view that should be returned in the response.
    * @param {string} [request.orderBy]
    *   Optional. The field to order the results by.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. The fields eligible for filtering are:
+   *
+   *     * `name`
+   *     * `annotations`
+   *
+   *    Examples of using a filter:
+   *
+   *    To filter the results of your request to versions with the name
+   *    `my-version` in project `my-project` in the `us-central` region, in
+   *    repository `my-repo`, append the following filter expression to your
+   *    request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my-version"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version*"`
+   *
+   *    To filter the results of your request to versions with the annotation
+   *    key-value pair [`external_link`: `external_link_value`], append the
+   *    following filter expression to your request:
+   *
+   *     * `"annotations.external_link:external_link_value"`
+   *
+   *    To filter just for a specific annotation key `external_link`, append the
+   *    following filter expression to your request:
+   *
+   *     * `"annotations.external_link"`
+   *
+   *    If the annotation key or value contains special characters, you can escape
+   *    them by surrounding the value with backticks. For example, to filter the
+   *    results of your request to versions with the annotation key-value pair
+   *    [`external.link`:`https://example.com/my-version`], append the following
+   *    filter expression to your request:
+   *
+   *     * `` "annotations.`external.link`:`https://example.com/my-version`" ``
+   *
+   *    You can also filter with annotations with a wildcard to
+   *    match any number of characters before or after the value:
+   *
+   *     * `` "annotations.*_link:`*example.com*`" ``
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4727,7 +6224,7 @@ export class ArtifactRegistryClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listVersions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4740,6 +6237,52 @@ export class ArtifactRegistryClient {
    *   The view that should be returned in the response.
    * @param {string} [request.orderBy]
    *   Optional. The field to order the results by.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. The fields eligible for filtering are:
+   *
+   *     * `name`
+   *     * `annotations`
+   *
+   *    Examples of using a filter:
+   *
+   *    To filter the results of your request to versions with the name
+   *    `my-version` in project `my-project` in the `us-central` region, in
+   *    repository `my-repo`, append the following filter expression to your
+   *    request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my-version"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version*"`
+   *
+   *    To filter the results of your request to versions with the annotation
+   *    key-value pair [`external_link`: `external_link_value`], append the
+   *    following filter expression to your request:
+   *
+   *     * `"annotations.external_link:external_link_value"`
+   *
+   *    To filter just for a specific annotation key `external_link`, append the
+   *    following filter expression to your request:
+   *
+   *     * `"annotations.external_link"`
+   *
+   *    If the annotation key or value contains special characters, you can escape
+   *    them by surrounding the value with backticks. For example, to filter the
+   *    results of your request to versions with the annotation key-value pair
+   *    [`external.link`:`https://example.com/my-version`], append the following
+   *    filter expression to your request:
+   *
+   *     * `` "annotations.`external.link`:`https://example.com/my-version`" ``
+   *
+   *    You can also filter with annotations with a wildcard to
+   *    match any number of characters before or after the value:
+   *
+   *     * `` "annotations.*_link:`*example.com*`" ``
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4789,6 +6332,52 @@ export class ArtifactRegistryClient {
    *   The view that should be returned in the response.
    * @param {string} [request.orderBy]
    *   Optional. The field to order the results by.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. The fields eligible for filtering are:
+   *
+   *     * `name`
+   *     * `annotations`
+   *
+   *    Examples of using a filter:
+   *
+   *    To filter the results of your request to versions with the name
+   *    `my-version` in project `my-project` in the `us-central` region, in
+   *    repository `my-repo`, append the following filter expression to your
+   *    request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my-version"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version*"`
+   *
+   *    To filter the results of your request to versions with the annotation
+   *    key-value pair [`external_link`: `external_link_value`], append the
+   *    following filter expression to your request:
+   *
+   *     * `"annotations.external_link:external_link_value"`
+   *
+   *    To filter just for a specific annotation key `external_link`, append the
+   *    following filter expression to your request:
+   *
+   *     * `"annotations.external_link"`
+   *
+   *    If the annotation key or value contains special characters, you can escape
+   *    them by surrounding the value with backticks. For example, to filter the
+   *    results of your request to versions with the annotation key-value pair
+   *    [`external.link`:`https://example.com/my-version`], append the following
+   *    filter expression to your request:
+   *
+   *     * `` "annotations.`external.link`:`https://example.com/my-version`" ``
+   *
+   *    You can also filter with annotations with a wildcard to
+   *    match any number of characters before or after the value:
+   *
+   *     * `` "annotations.*_link:`*example.com*`" ``
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4836,15 +6425,53 @@ export class ArtifactRegistryClient {
    *
    *     * `name`
    *     * `owner`
+   *     * `annotations`
    *
-   *    An example of using a filter:
+   *   Examples of using a filter:
    *
-   *     * `name="projects/p1/locations/us-central1/repositories/repo1/files/a/b/*"` --> Files with an
-   *     ID starting with "a/b/".
-   *     * `owner="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"` -->
-   *     Files owned by the version `1.0` in package `pkg1`.
+   *    To filter the results of your request to files with the name `my_file.txt`
+   *    in project `my-project` in the `us-central` region, in repository
+   *    `my-repo`, append the following filter expression to your request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-file.txt"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file.txt"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file*"`
+   *
+   *    To filter the results of your request to files owned by the version `1.0`
+   *    in package `pkg1`, append the following filter expression to your request:
+   *
+   *     * `owner="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
+   *
+   *    To filter the results of your request to files with the annotation
+   *    key-value pair [`external_link`: `external_link_value`], append the
+   *    following filter expression to your request:
+   *
+   *     * `"annotations.external_link:external_link_value"`
+   *
+   *    To filter just for a specific annotation key `external_link`, append the
+   *    following filter expression to your request:
+   *
+   *     * `"annotations.external_link"`
+   *
+   *    If the annotation key or value contains special characters, you can escape
+   *    them by surrounding the value with backticks. For example, to filter the
+   *    results of your request to files with the annotation key-value pair
+   *    [`external.link`:`https://example.com/my-file`], append the following
+   *    filter expression to your request:
+   *
+   *     * `` "annotations.`external.link`:`https://example.com/my-file`" ``
+   *
+   *    You can also filter with annotations with a wildcard to
+   *    match any number of characters before or after the value:
+   *
+   *     * `` "annotations.*_link:`*example.com*`" ``
    * @param {number} request.pageSize
-   *   The maximum number of files to return.
+   *   The maximum number of files to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {string} request.orderBy
@@ -4937,7 +6564,7 @@ export class ArtifactRegistryClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listFiles`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4949,15 +6576,53 @@ export class ArtifactRegistryClient {
    *
    *     * `name`
    *     * `owner`
+   *     * `annotations`
    *
-   *    An example of using a filter:
+   *   Examples of using a filter:
    *
-   *     * `name="projects/p1/locations/us-central1/repositories/repo1/files/a/b/*"` --> Files with an
-   *     ID starting with "a/b/".
-   *     * `owner="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"` -->
-   *     Files owned by the version `1.0` in package `pkg1`.
+   *    To filter the results of your request to files with the name `my_file.txt`
+   *    in project `my-project` in the `us-central` region, in repository
+   *    `my-repo`, append the following filter expression to your request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-file.txt"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file.txt"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file*"`
+   *
+   *    To filter the results of your request to files owned by the version `1.0`
+   *    in package `pkg1`, append the following filter expression to your request:
+   *
+   *     * `owner="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
+   *
+   *    To filter the results of your request to files with the annotation
+   *    key-value pair [`external_link`: `external_link_value`], append the
+   *    following filter expression to your request:
+   *
+   *     * `"annotations.external_link:external_link_value"`
+   *
+   *    To filter just for a specific annotation key `external_link`, append the
+   *    following filter expression to your request:
+   *
+   *     * `"annotations.external_link"`
+   *
+   *    If the annotation key or value contains special characters, you can escape
+   *    them by surrounding the value with backticks. For example, to filter the
+   *    results of your request to files with the annotation key-value pair
+   *    [`external.link`:`https://example.com/my-file`], append the following
+   *    filter expression to your request:
+   *
+   *     * `` "annotations.`external.link`:`https://example.com/my-file`" ``
+   *
+   *    You can also filter with annotations with a wildcard to
+   *    match any number of characters before or after the value:
+   *
+   *     * `` "annotations.*_link:`*example.com*`" ``
    * @param {number} request.pageSize
-   *   The maximum number of files to return.
+   *   The maximum number of files to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {string} request.orderBy
@@ -5010,15 +6675,53 @@ export class ArtifactRegistryClient {
    *
    *     * `name`
    *     * `owner`
+   *     * `annotations`
    *
-   *    An example of using a filter:
+   *   Examples of using a filter:
    *
-   *     * `name="projects/p1/locations/us-central1/repositories/repo1/files/a/b/*"` --> Files with an
-   *     ID starting with "a/b/".
-   *     * `owner="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"` -->
-   *     Files owned by the version `1.0` in package `pkg1`.
+   *    To filter the results of your request to files with the name `my_file.txt`
+   *    in project `my-project` in the `us-central` region, in repository
+   *    `my-repo`, append the following filter expression to your request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-file.txt"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file.txt"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file*"`
+   *
+   *    To filter the results of your request to files owned by the version `1.0`
+   *    in package `pkg1`, append the following filter expression to your request:
+   *
+   *     * `owner="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
+   *
+   *    To filter the results of your request to files with the annotation
+   *    key-value pair [`external_link`: `external_link_value`], append the
+   *    following filter expression to your request:
+   *
+   *     * `"annotations.external_link:external_link_value"`
+   *
+   *    To filter just for a specific annotation key `external_link`, append the
+   *    following filter expression to your request:
+   *
+   *     * `"annotations.external_link"`
+   *
+   *    If the annotation key or value contains special characters, you can escape
+   *    them by surrounding the value with backticks. For example, to filter the
+   *    results of your request to files with the annotation key-value pair
+   *    [`external.link`:`https://example.com/my-file`], append the following
+   *    filter expression to your request:
+   *
+   *     * `` "annotations.`external.link`:`https://example.com/my-file`" ``
+   *
+   *    You can also filter with annotations with a wildcard to
+   *    match any number of characters before or after the value:
+   *
+   *     * `` "annotations.*_link:`*example.com*`" ``
    * @param {number} request.pageSize
-   *   The maximum number of files to return.
+   *   The maximum number of files to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {string} request.orderBy
@@ -5069,14 +6772,32 @@ export class ArtifactRegistryClient {
    *   An expression for filtering the results of the request. Filter rules are
    *   case insensitive. The fields eligible for filtering are:
    *
+   *     * `name`
    *     * `version`
    *
-   *    An example of using a filter:
+   *    Examples of using a filter:
    *
-   *     * `version="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"`
-   *     --> Tags that are applied to the version `1.0` in package `pkg1`.
+   *    To filter the results of your request to tags with the name `my-tag` in
+   *    package `my-package` in repository `my-repo` in project "`y-project` in
+   *    the us-central region, append the following filter expression to your
+   *    request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my-tag"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag*"`
+   *
+   *    To filter the results of your request to tags applied to the version
+   *    `1.0` in package `my-package`, append the following filter expression to
+   *    your request:
+   *
+   *     * `version="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
    * @param {number} request.pageSize
-   *   The maximum number of tags to return. Maximum page size is 10,000.
+   *   The maximum number of tags to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -5167,7 +6888,7 @@ export class ArtifactRegistryClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTags`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5178,14 +6899,32 @@ export class ArtifactRegistryClient {
    *   An expression for filtering the results of the request. Filter rules are
    *   case insensitive. The fields eligible for filtering are:
    *
+   *     * `name`
    *     * `version`
    *
-   *    An example of using a filter:
+   *    Examples of using a filter:
    *
-   *     * `version="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"`
-   *     --> Tags that are applied to the version `1.0` in package `pkg1`.
+   *    To filter the results of your request to tags with the name `my-tag` in
+   *    package `my-package` in repository `my-repo` in project "`y-project` in
+   *    the us-central region, append the following filter expression to your
+   *    request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my-tag"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag*"`
+   *
+   *    To filter the results of your request to tags applied to the version
+   *    `1.0` in package `my-package`, append the following filter expression to
+   *    your request:
+   *
+   *     * `version="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
    * @param {number} request.pageSize
-   *   The maximum number of tags to return. Maximum page size is 10,000.
+   *   The maximum number of tags to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -5235,14 +6974,32 @@ export class ArtifactRegistryClient {
    *   An expression for filtering the results of the request. Filter rules are
    *   case insensitive. The fields eligible for filtering are:
    *
+   *     * `name`
    *     * `version`
    *
-   *    An example of using a filter:
+   *    Examples of using a filter:
    *
-   *     * `version="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"`
-   *     --> Tags that are applied to the version `1.0` in package `pkg1`.
+   *    To filter the results of your request to tags with the name `my-tag` in
+   *    package `my-package` in repository `my-repo` in project "`y-project` in
+   *    the us-central region, append the following filter expression to your
+   *    request:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my-tag"`
+   *
+   *    You can also use wildcards to match any number of characters before or
+   *    after the value:
+   *
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my*"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag"`
+   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag*"`
+   *
+   *    To filter the results of your request to tags applied to the version
+   *    `1.0` in package `my-package`, append the following filter expression to
+   *    your request:
+   *
+   *     * `version="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
    * @param {number} request.pageSize
-   *   The maximum number of tags to return. Maximum page size is 10,000.
+   *   The maximum number of tags to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -5277,6 +7034,405 @@ export class ArtifactRegistryClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.ITag>;
+  }
+  /**
+   * Lists rules.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent repository whose rules will be listed.
+   *   For example:
+   *   `projects/p1/locations/us-central1/repositories/repo1`.
+   * @param {number} request.pageSize
+   *   The maximum number of rules to return. Maximum page size is 1,000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listRules(
+    request?: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IRule[],
+      protos.google.devtools.artifactregistry.v1.IListRulesRequest | null,
+      protos.google.devtools.artifactregistry.v1.IListRulesResponse,
+    ]
+  >;
+  listRules(
+    request: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+      | protos.google.devtools.artifactregistry.v1.IListRulesResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.IRule
+    >
+  ): void;
+  listRules(
+    request: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+    callback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+      | protos.google.devtools.artifactregistry.v1.IListRulesResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.IRule
+    >
+  ): void;
+  listRules(
+    request?: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+          | protos.google.devtools.artifactregistry.v1.IListRulesResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.IRule
+        >,
+    callback?: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+      | protos.google.devtools.artifactregistry.v1.IListRulesResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.IRule
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IRule[],
+      protos.google.devtools.artifactregistry.v1.IListRulesRequest | null,
+      protos.google.devtools.artifactregistry.v1.IListRulesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listRules(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listRules`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent repository whose rules will be listed.
+   *   For example:
+   *   `projects/p1/locations/us-central1/repositories/repo1`.
+   * @param {number} request.pageSize
+   *   The maximum number of rules to return. Maximum page size is 1,000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.Rule|Rule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listRulesStream(
+    request?: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listRules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listRules.createStream(
+      this.innerApiCalls.listRules as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listRules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent repository whose rules will be listed.
+   *   For example:
+   *   `projects/p1/locations/us-central1/repositories/repo1`.
+   * @param {number} request.pageSize
+   *   The maximum number of rules to return. Maximum page size is 1,000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.list_rules.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListRules_async
+   */
+  listRulesAsync(
+    request?: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.IRule> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listRules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listRules.asyncIterate(
+      this.innerApiCalls['listRules'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IRule>;
+  }
+  /**
+   * Lists attachments.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource whose attachments will be listed.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. The fields eligible for filtering are:
+   *
+   *     * `target`
+   *     * `type`
+   *     * `attachment_namespace`
+   * @param {number} request.pageSize
+   *   The maximum number of attachments to return. Maximum page size is 1,000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.Attachment|Attachment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAttachmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAttachments(
+    request?: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IAttachment[],
+      protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest | null,
+      protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse,
+    ]
+  >;
+  listAttachments(
+    request: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+      | protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.IAttachment
+    >
+  ): void;
+  listAttachments(
+    request: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+    callback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+      | protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.IAttachment
+    >
+  ): void;
+  listAttachments(
+    request?: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+          | protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.IAttachment
+        >,
+    callback?: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+      | protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.IAttachment
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IAttachment[],
+      protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest | null,
+      protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listAttachments(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listAttachments`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource whose attachments will be listed.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. The fields eligible for filtering are:
+   *
+   *     * `target`
+   *     * `type`
+   *     * `attachment_namespace`
+   * @param {number} request.pageSize
+   *   The maximum number of attachments to return. Maximum page size is 1,000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.Attachment|Attachment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAttachmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAttachmentsStream(
+    request?: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAttachments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAttachments.createStream(
+      this.innerApiCalls.listAttachments as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listAttachments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource whose attachments will be listed.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. The fields eligible for filtering are:
+   *
+   *     * `target`
+   *     * `type`
+   *     * `attachment_namespace`
+   * @param {number} request.pageSize
+   *   The maximum number of attachments to return. Maximum page size is 1,000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.devtools.artifactregistry.v1.Attachment|Attachment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.list_attachments.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListAttachments_async
+   */
+  listAttachmentsAsync(
+    request?: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.IAttachment> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAttachments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAttachments.asyncIterate(
+      this.innerApiCalls['listAttachments'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IAttachment>;
   }
   /**
    * Gets information about a location.
@@ -5388,7 +7544,7 @@ export class ArtifactRegistryClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -5401,6 +7557,20 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5437,6 +7607,13 @@ export class ArtifactRegistryClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5472,11 +7649,11 @@ export class ArtifactRegistryClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -5485,6 +7662,20 @@ export class ArtifactRegistryClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5515,7 +7706,7 @@ export class ArtifactRegistryClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -5528,6 +7719,20 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -5604,6 +7809,77 @@ export class ArtifactRegistryClient {
   matchAptArtifactFromAptArtifactName(aptArtifactName: string) {
     return this.pathTemplates.aptArtifactPathTemplate.match(aptArtifactName)
       .apt_artifact;
+  }
+
+  /**
+   * Return a fully-qualified attachment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @param {string} attachment
+   * @returns {string} Resource name string.
+   */
+  attachmentPath(
+    project: string,
+    location: string,
+    repository: string,
+    attachment: string
+  ) {
+    return this.pathTemplates.attachmentPathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+      attachment: attachment,
+    });
+  }
+
+  /**
+   * Parse the project from Attachment resource.
+   *
+   * @param {string} attachmentName
+   *   A fully-qualified path representing Attachment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAttachmentName(attachmentName: string) {
+    return this.pathTemplates.attachmentPathTemplate.match(attachmentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Attachment resource.
+   *
+   * @param {string} attachmentName
+   *   A fully-qualified path representing Attachment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAttachmentName(attachmentName: string) {
+    return this.pathTemplates.attachmentPathTemplate.match(attachmentName)
+      .location;
+  }
+
+  /**
+   * Parse the repository from Attachment resource.
+   *
+   * @param {string} attachmentName
+   *   A fully-qualified path representing Attachment resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromAttachmentName(attachmentName: string) {
+    return this.pathTemplates.attachmentPathTemplate.match(attachmentName)
+      .repository;
+  }
+
+  /**
+   * Parse the attachment from Attachment resource.
+   *
+   * @param {string} attachmentName
+   *   A fully-qualified path representing Attachment resource.
+   * @returns {string} A string representing the attachment.
+   */
+  matchAttachmentFromAttachmentName(attachmentName: string) {
+    return this.pathTemplates.attachmentPathTemplate.match(attachmentName)
+      .attachment;
   }
 
   /**
@@ -5742,6 +8018,81 @@ export class ArtifactRegistryClient {
    */
   matchFileFromFileName(fileName: string) {
     return this.pathTemplates.filePathTemplate.match(fileName).file;
+  }
+
+  /**
+   * Return a fully-qualified genericArtifact resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @param {string} generic_artifact
+   * @returns {string} Resource name string.
+   */
+  genericArtifactPath(
+    project: string,
+    location: string,
+    repository: string,
+    genericArtifact: string
+  ) {
+    return this.pathTemplates.genericArtifactPathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+      generic_artifact: genericArtifact,
+    });
+  }
+
+  /**
+   * Parse the project from GenericArtifact resource.
+   *
+   * @param {string} genericArtifactName
+   *   A fully-qualified path representing GenericArtifact resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGenericArtifactName(genericArtifactName: string) {
+    return this.pathTemplates.genericArtifactPathTemplate.match(
+      genericArtifactName
+    ).project;
+  }
+
+  /**
+   * Parse the location from GenericArtifact resource.
+   *
+   * @param {string} genericArtifactName
+   *   A fully-qualified path representing GenericArtifact resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGenericArtifactName(genericArtifactName: string) {
+    return this.pathTemplates.genericArtifactPathTemplate.match(
+      genericArtifactName
+    ).location;
+  }
+
+  /**
+   * Parse the repository from GenericArtifact resource.
+   *
+   * @param {string} genericArtifactName
+   *   A fully-qualified path representing GenericArtifact resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromGenericArtifactName(genericArtifactName: string) {
+    return this.pathTemplates.genericArtifactPathTemplate.match(
+      genericArtifactName
+    ).repository;
+  }
+
+  /**
+   * Parse the generic_artifact from GenericArtifact resource.
+   *
+   * @param {string} genericArtifactName
+   *   A fully-qualified path representing GenericArtifact resource.
+   * @returns {string} A string representing the generic_artifact.
+   */
+  matchGenericArtifactFromGenericArtifactName(genericArtifactName: string) {
+    return this.pathTemplates.genericArtifactPathTemplate.match(
+      genericArtifactName
+    ).generic_artifact;
   }
 
   /**
@@ -6099,6 +8450,73 @@ export class ArtifactRegistryClient {
   matchRepositoryFromRepositoryName(repositoryName: string) {
     return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
       .repository;
+  }
+
+  /**
+   * Return a fully-qualified rule resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @param {string} rule
+   * @returns {string} Resource name string.
+   */
+  rulePath(
+    project: string,
+    location: string,
+    repository: string,
+    rule: string
+  ) {
+    return this.pathTemplates.rulePathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+      rule: rule,
+    });
+  }
+
+  /**
+   * Parse the project from Rule resource.
+   *
+   * @param {string} ruleName
+   *   A fully-qualified path representing Rule resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRuleName(ruleName: string) {
+    return this.pathTemplates.rulePathTemplate.match(ruleName).project;
+  }
+
+  /**
+   * Parse the location from Rule resource.
+   *
+   * @param {string} ruleName
+   *   A fully-qualified path representing Rule resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRuleName(ruleName: string) {
+    return this.pathTemplates.rulePathTemplate.match(ruleName).location;
+  }
+
+  /**
+   * Parse the repository from Rule resource.
+   *
+   * @param {string} ruleName
+   *   A fully-qualified path representing Rule resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromRuleName(ruleName: string) {
+    return this.pathTemplates.rulePathTemplate.match(ruleName).repository;
+  }
+
+  /**
+   * Parse the rule from Rule resource.
+   *
+   * @param {string} ruleName
+   *   A fully-qualified path representing Rule resource.
+   * @returns {string} A string representing the rule.
+   */
+  matchRuleFromRuleName(ruleName: string) {
+    return this.pathTemplates.rulePathTemplate.match(ruleName).rule;
   }
 
   /**

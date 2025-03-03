@@ -137,6 +137,16 @@
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
+        "ExportIssueModel": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ImportIssueModel": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
         "GetIssue": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
@@ -202,6 +212,41 @@
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
+        "CreateAnalysisRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetAnalysisRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListAnalysisRules": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "UpdateAnalysisRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "DeleteAnalysisRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetEncryptionSpec": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "InitializeEncryptionSpec": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
         "CreateView": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
@@ -223,6 +268,136 @@
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "DeleteView": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "QueryMetrics": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreateQaQuestion": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetQaQuestion": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "UpdateQaQuestion": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "DeleteQaQuestion": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListQaQuestions": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreateQaScorecard": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetQaScorecard": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "UpdateQaScorecard": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "DeleteQaScorecard": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListQaScorecards": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreateQaScorecardRevision": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetQaScorecardRevision": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "TuneQaScorecardRevision": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "DeployQaScorecardRevision": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "UndeployQaScorecardRevision": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "DeleteQaScorecardRevision": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListQaScorecardRevisions": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreateFeedbackLabel": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListFeedbackLabels": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetFeedbackLabel": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "UpdateFeedbackLabel": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "DeleteFeedbackLabel": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListAllFeedbackLabels": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "BulkUploadFeedbackLabels": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "BulkDownloadFeedbackLabels": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"

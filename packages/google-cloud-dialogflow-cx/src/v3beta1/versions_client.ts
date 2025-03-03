@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -575,8 +575,7 @@ export class VersionsClient {
    * @param {string} request.name
    *   Required. The name of the
    *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version}. Format:
-   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -769,8 +768,7 @@ export class VersionsClient {
    * @param {string} request.name
    *   Required. The name of the
    *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version} to delete. Format:
-   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -869,13 +867,13 @@ export class VersionsClient {
    *   Required. Name of the base flow version to compare with the target version.
    *   Use version ID `0` to indicate the draft version of the specified flow.
    *
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/
-   *   <Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    * @param {string} request.targetVersion
    *   Required. Name of the target flow version to compare with the
    *   base version. Use version ID `0` to indicate the draft version of the
-   *   specified flow. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *   specified flow. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    * @param {string} request.languageCode
    *   The language to compare the flow versions for.
    *
@@ -991,8 +989,7 @@ export class VersionsClient {
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow} to create an
    *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version} for. Format:
-   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.Version} request.version
    *   Required. The version to create.
    * @param {object} [options]
@@ -1140,8 +1137,8 @@ export class VersionsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version} to be
-   *   loaded to draft flow. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *   loaded to draft flow. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    * @param {boolean} request.allowOverrideAgentResources
    *   This field is used to prevent accidental overwrite of other agent
    *   resources, which can potentially impact other flow's behavior. If
@@ -1281,8 +1278,8 @@ export class VersionsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow} to list all
-   *   versions for. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/flows/<Flow ID>`.
+   *   versions for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1376,13 +1373,13 @@ export class VersionsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listVersions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow} to list all
-   *   versions for. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/flows/<Flow ID>`.
+   *   versions for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1429,8 +1426,8 @@ export class VersionsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow} to list all
-   *   versions for. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/flows/<Flow ID>`.
+   *   versions for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1579,7 +1576,7 @@ export class VersionsClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1592,6 +1589,20 @@ export class VersionsClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1628,6 +1639,13 @@ export class VersionsClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1663,11 +1681,11 @@ export class VersionsClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1676,6 +1694,20 @@ export class VersionsClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1706,7 +1738,7 @@ export class VersionsClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1719,6 +1751,20 @@ export class VersionsClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

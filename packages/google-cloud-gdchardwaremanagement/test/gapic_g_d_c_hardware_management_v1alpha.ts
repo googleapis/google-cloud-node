@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -377,7 +377,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
       );
@@ -409,7 +409,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
       );
@@ -457,7 +457,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getOrder = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getOrder(request), expectedError);
@@ -508,7 +508,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
       );
@@ -540,7 +540,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
       );
@@ -588,7 +588,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSite = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSite(request), expectedError);
@@ -639,7 +639,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
       );
@@ -671,7 +671,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
       );
@@ -719,7 +719,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getHardwareGroup = stubSimpleCall(
         undefined,
@@ -773,7 +773,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
       );
@@ -805,7 +805,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
       );
@@ -853,7 +853,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getHardware = stubSimpleCall(
         undefined,
@@ -907,7 +907,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
       );
@@ -939,7 +939,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
       );
@@ -987,7 +987,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getComment = stubSimpleCall(
         undefined,
@@ -1025,6 +1025,147 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     });
   });
 
+  describe('recordActionOnComment', () => {
+    it('invokes recordActionOnComment without error', async () => {
+      const client =
+        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
+      );
+      client.innerApiCalls.recordActionOnComment =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.recordActionOnComment(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.recordActionOnComment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.recordActionOnComment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes recordActionOnComment without error using callback', async () => {
+      const client =
+        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
+      );
+      client.innerApiCalls.recordActionOnComment =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.recordActionOnComment(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IComment | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.recordActionOnComment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.recordActionOnComment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes recordActionOnComment with error', async () => {
+      const client =
+        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.recordActionOnComment = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.recordActionOnComment(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.recordActionOnComment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.recordActionOnComment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes recordActionOnComment with closed client', async () => {
+      const client =
+        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.recordActionOnComment(request),
+        expectedError
+      );
+    });
+  });
+
   describe('getChangeLogEntry', () => {
     it('invokes getChangeLogEntry without error', async () => {
       const client =
@@ -1041,7 +1182,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
       );
@@ -1073,7 +1214,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
       );
@@ -1121,7 +1262,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getChangeLogEntry = stubSimpleCall(
         undefined,
@@ -1175,7 +1316,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
       );
@@ -1207,7 +1348,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
       );
@@ -1255,7 +1396,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSku = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSku(request), expectedError);
@@ -1306,7 +1447,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
       );
@@ -1338,7 +1479,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
       );
@@ -1386,7 +1527,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getZone = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getZone(request), expectedError);
@@ -1437,7 +1578,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1470,7 +1611,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1525,7 +1666,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createOrder = stubLongRunningCall(
         undefined,
@@ -1557,7 +1698,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createOrder = stubLongRunningCall(
         undefined,
@@ -1634,7 +1775,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['order', 'name']
       );
       request.order.name = defaultValue1;
-      const expectedHeaderRequestParams = `order.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `order.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1668,7 +1809,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['order', 'name']
       );
       request.order.name = defaultValue1;
-      const expectedHeaderRequestParams = `order.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `order.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1724,7 +1865,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['order', 'name']
       );
       request.order.name = defaultValue1;
-      const expectedHeaderRequestParams = `order.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `order.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateOrder = stubLongRunningCall(
         undefined,
@@ -1757,7 +1898,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['order', 'name']
       );
       request.order.name = defaultValue1;
-      const expectedHeaderRequestParams = `order.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `order.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateOrder = stubLongRunningCall(
         undefined,
@@ -1833,7 +1974,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1866,7 +2007,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1921,7 +2062,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteOrder = stubLongRunningCall(
         undefined,
@@ -1953,7 +2094,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteOrder = stubLongRunningCall(
         undefined,
@@ -2029,7 +2170,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2062,7 +2203,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2117,7 +2258,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.submitOrder = stubLongRunningCall(
         undefined,
@@ -2149,7 +2290,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.submitOrder = stubLongRunningCall(
         undefined,
@@ -2225,7 +2366,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2258,7 +2399,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2313,7 +2454,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSite = stubLongRunningCall(
         undefined,
@@ -2345,7 +2486,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSite = stubLongRunningCall(
         undefined,
@@ -2422,7 +2563,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['site', 'name']
       );
       request.site.name = defaultValue1;
-      const expectedHeaderRequestParams = `site.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2456,7 +2597,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['site', 'name']
       );
       request.site.name = defaultValue1;
-      const expectedHeaderRequestParams = `site.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2512,7 +2653,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['site', 'name']
       );
       request.site.name = defaultValue1;
-      const expectedHeaderRequestParams = `site.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSite = stubLongRunningCall(
         undefined,
@@ -2545,7 +2686,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['site', 'name']
       );
       request.site.name = defaultValue1;
-      const expectedHeaderRequestParams = `site.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSite = stubLongRunningCall(
         undefined,
@@ -2605,6 +2746,202 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     });
   });
 
+  describe('deleteSite', () => {
+    it('invokes deleteSite without error', async () => {
+      const client =
+        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteSite = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteSite(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSite as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSite as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSite without error using callback', async () => {
+      const client =
+        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteSite =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteSite(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSite as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSite as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSite with call error', async () => {
+      const client =
+        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteSite = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteSite(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteSite as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSite as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSite with LRO error', async () => {
+      const client =
+        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteSite = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteSite(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteSite as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSite as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteSiteProgress without error', async () => {
+      const client =
+        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteSiteProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteSiteProgress with error', async () => {
+      const client =
+        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkDeleteSiteProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('createHardwareGroup', () => {
     it('invokes createHardwareGroup without error', async () => {
       const client =
@@ -2621,7 +2958,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2655,7 +2992,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2710,7 +3047,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createHardwareGroup = stubLongRunningCall(
         undefined,
@@ -2742,7 +3079,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createHardwareGroup = stubLongRunningCall(
         undefined,
@@ -2822,7 +3159,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['hardwareGroup', 'name']
       );
       request.hardwareGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2857,7 +3194,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['hardwareGroup', 'name']
       );
       request.hardwareGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2913,7 +3250,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['hardwareGroup', 'name']
       );
       request.hardwareGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateHardwareGroup = stubLongRunningCall(
         undefined,
@@ -2946,7 +3283,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['hardwareGroup', 'name']
       );
       request.hardwareGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateHardwareGroup = stubLongRunningCall(
         undefined,
@@ -3025,7 +3362,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3059,7 +3396,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3114,7 +3451,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteHardwareGroup = stubLongRunningCall(
         undefined,
@@ -3146,7 +3483,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteHardwareGroup = stubLongRunningCall(
         undefined,
@@ -3225,7 +3562,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3259,7 +3596,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3314,7 +3651,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createHardware = stubLongRunningCall(
         undefined,
@@ -3346,7 +3683,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createHardware = stubLongRunningCall(
         undefined,
@@ -3426,7 +3763,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['hardware', 'name']
       );
       request.hardware.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `hardware.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3461,7 +3798,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['hardware', 'name']
       );
       request.hardware.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `hardware.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3517,7 +3854,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['hardware', 'name']
       );
       request.hardware.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `hardware.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateHardware = stubLongRunningCall(
         undefined,
@@ -3550,7 +3887,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['hardware', 'name']
       );
       request.hardware.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `hardware.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateHardware = stubLongRunningCall(
         undefined,
@@ -3629,7 +3966,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3663,7 +4000,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3718,7 +4055,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteHardware = stubLongRunningCall(
         undefined,
@@ -3750,7 +4087,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteHardware = stubLongRunningCall(
         undefined,
@@ -3829,7 +4166,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3863,7 +4200,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3918,7 +4255,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createComment = stubLongRunningCall(
         undefined,
@@ -3950,7 +4287,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createComment = stubLongRunningCall(
         undefined,
@@ -4029,7 +4366,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4062,7 +4399,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4117,7 +4454,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createZone = stubLongRunningCall(
         undefined,
@@ -4149,7 +4486,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createZone = stubLongRunningCall(
         undefined,
@@ -4226,7 +4563,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['zone', 'name']
       );
       request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4260,7 +4597,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['zone', 'name']
       );
       request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4316,7 +4653,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['zone', 'name']
       );
       request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateZone = stubLongRunningCall(
         undefined,
@@ -4349,7 +4686,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['zone', 'name']
       );
       request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateZone = stubLongRunningCall(
         undefined,
@@ -4425,7 +4762,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4458,7 +4795,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4513,7 +4850,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteZone = stubLongRunningCall(
         undefined,
@@ -4545,7 +4882,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteZone = stubLongRunningCall(
         undefined,
@@ -4621,7 +4958,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4655,7 +4992,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4710,7 +5047,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.signalZoneState = stubLongRunningCall(
         undefined,
@@ -4742,7 +5079,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.signalZoneState = stubLongRunningCall(
         undefined,
@@ -4821,7 +5158,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
@@ -4861,7 +5198,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
@@ -4919,7 +5256,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listOrders = stubSimpleCall(
         undefined,
@@ -4951,7 +5288,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
@@ -5015,7 +5352,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOrders.createStream = stubPageStreamingCall(
         undefined,
@@ -5070,7 +5407,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
@@ -5121,7 +5458,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOrders.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -5167,7 +5504,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
@@ -5207,7 +5544,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
@@ -5265,7 +5602,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSites = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listSites(request), expectedError);
@@ -5294,7 +5631,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
@@ -5358,7 +5695,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSites.createStream = stubPageStreamingCall(
         undefined,
@@ -5413,7 +5750,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
@@ -5463,7 +5800,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSites.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -5508,7 +5845,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
@@ -5549,7 +5886,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
@@ -5607,7 +5944,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listHardwareGroups = stubSimpleCall(
         undefined,
@@ -5639,7 +5976,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
@@ -5703,7 +6040,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listHardwareGroups.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5756,7 +6093,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
@@ -5807,7 +6144,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listHardwareGroups.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5851,7 +6188,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
@@ -5891,7 +6228,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
@@ -5949,7 +6286,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listHardware = stubSimpleCall(
         undefined,
@@ -5981,7 +6318,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
@@ -6045,7 +6382,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listHardware.createStream = stubPageStreamingCall(
         undefined,
@@ -6100,7 +6437,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
@@ -6151,7 +6488,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listHardware.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6195,7 +6532,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
@@ -6235,7 +6572,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
@@ -6293,7 +6630,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listComments = stubSimpleCall(
         undefined,
@@ -6325,7 +6662,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
@@ -6389,7 +6726,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listComments.createStream = stubPageStreamingCall(
         undefined,
@@ -6444,7 +6781,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
@@ -6495,7 +6832,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listComments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6539,7 +6876,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
@@ -6580,7 +6917,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
@@ -6638,7 +6975,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listChangeLogEntries = stubSimpleCall(
         undefined,
@@ -6670,7 +7007,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
@@ -6734,7 +7071,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChangeLogEntries.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6787,7 +7124,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
@@ -6838,7 +7175,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChangeLogEntries.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6882,7 +7219,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
@@ -6922,7 +7259,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
@@ -6980,7 +7317,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSkus = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listSkus(request), expectedError);
@@ -7009,7 +7346,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
@@ -7071,7 +7408,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSkus.createStream = stubPageStreamingCall(
         undefined,
@@ -7124,7 +7461,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
@@ -7174,7 +7511,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSkus.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -7219,7 +7556,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
@@ -7259,7 +7596,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
@@ -7317,7 +7654,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listZones = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listZones(request), expectedError);
@@ -7346,7 +7683,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
@@ -7410,7 +7747,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listZones.createStream = stubPageStreamingCall(
         undefined,
@@ -7465,7 +7802,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
@@ -7515,7 +7852,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listZones.asyncIterate = stubAsyncIterationCall(
         undefined,

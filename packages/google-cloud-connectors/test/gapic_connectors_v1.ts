@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -356,7 +356,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.connectors.v1.Connection()
       );
@@ -387,7 +387,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.connectors.v1.Connection()
       );
@@ -434,7 +434,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConnection = stubSimpleCall(
         undefined,
@@ -486,7 +486,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.connectors.v1.Provider()
       );
@@ -517,7 +517,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.connectors.v1.Provider()
       );
@@ -564,7 +564,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProvider = stubSimpleCall(
         undefined,
@@ -616,7 +616,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.connectors.v1.Connector()
       );
@@ -647,7 +647,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.connectors.v1.Connector()
       );
@@ -694,7 +694,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConnector = stubSimpleCall(
         undefined,
@@ -746,7 +746,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.connectors.v1.ConnectorVersion()
       );
@@ -778,7 +778,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.connectors.v1.ConnectorVersion()
       );
@@ -825,7 +825,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConnectorVersion = stubSimpleCall(
         undefined,
@@ -877,7 +877,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.connectors.v1.ConnectionSchemaMetadata()
       );
@@ -909,7 +909,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.connectors.v1.ConnectionSchemaMetadata()
       );
@@ -956,7 +956,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConnectionSchemaMetadata = stubSimpleCall(
         undefined,
@@ -1014,7 +1014,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.connectors.v1.RuntimeConfig()
       );
@@ -1045,7 +1045,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.connectors.v1.RuntimeConfig()
       );
@@ -1092,7 +1092,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRuntimeConfig = stubSimpleCall(
         undefined,
@@ -1144,7 +1144,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.connectors.v1.Settings()
       );
@@ -1175,7 +1175,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.connectors.v1.Settings()
       );
@@ -1222,7 +1222,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGlobalSettings = stubSimpleCall(
         undefined,
@@ -1274,7 +1274,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1307,7 +1307,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1361,7 +1361,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnection = stubLongRunningCall(
         undefined,
@@ -1392,7 +1392,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnection = stubLongRunningCall(
         undefined,
@@ -1469,7 +1469,7 @@ describe('v1.ConnectorsClient', () => {
         ['connection', 'name']
       );
       request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1503,7 +1503,7 @@ describe('v1.ConnectorsClient', () => {
         ['connection', 'name']
       );
       request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1558,7 +1558,7 @@ describe('v1.ConnectorsClient', () => {
         ['connection', 'name']
       );
       request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnection = stubLongRunningCall(
         undefined,
@@ -1590,7 +1590,7 @@ describe('v1.ConnectorsClient', () => {
         ['connection', 'name']
       );
       request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnection = stubLongRunningCall(
         undefined,
@@ -1666,7 +1666,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1699,7 +1699,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1753,7 +1753,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnection = stubLongRunningCall(
         undefined,
@@ -1784,7 +1784,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnection = stubLongRunningCall(
         undefined,
@@ -1860,7 +1860,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1893,7 +1893,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1947,7 +1947,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.refreshConnectionSchemaMetadata =
         stubLongRunningCall(undefined, expectedError);
@@ -1979,7 +1979,7 @@ describe('v1.ConnectorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.refreshConnectionSchemaMetadata =
         stubLongRunningCall(undefined, undefined, expectedError);
@@ -2053,7 +2053,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.Connection()
@@ -2092,7 +2092,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.Connection()
@@ -2147,7 +2147,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConnections = stubSimpleCall(
         undefined,
@@ -2178,7 +2178,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.Connection()
@@ -2238,7 +2238,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2287,7 +2287,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.Connection()
@@ -2336,7 +2336,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2378,7 +2378,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.connectors.v1.Provider()),
         generateSampleMessage(new protos.google.cloud.connectors.v1.Provider()),
@@ -2411,7 +2411,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.connectors.v1.Provider()),
         generateSampleMessage(new protos.google.cloud.connectors.v1.Provider()),
@@ -2460,7 +2460,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProviders = stubSimpleCall(
         undefined,
@@ -2491,7 +2491,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.connectors.v1.Provider()),
         generateSampleMessage(new protos.google.cloud.connectors.v1.Provider()),
@@ -2545,7 +2545,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProviders.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2594,7 +2594,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.connectors.v1.Provider()),
         generateSampleMessage(new protos.google.cloud.connectors.v1.Provider()),
@@ -2637,7 +2637,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProviders.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2679,7 +2679,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.Connector()
@@ -2718,7 +2718,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.Connector()
@@ -2773,7 +2773,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConnectors = stubSimpleCall(
         undefined,
@@ -2804,7 +2804,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.Connector()
@@ -2864,7 +2864,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnectors.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2913,7 +2913,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.Connector()
@@ -2962,7 +2962,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnectors.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3004,7 +3004,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.ConnectorVersion()
@@ -3044,7 +3044,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.ConnectorVersion()
@@ -3101,7 +3101,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConnectorVersions = stubSimpleCall(
         undefined,
@@ -3135,7 +3135,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.ConnectorVersion()
@@ -3202,7 +3202,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnectorVersions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3258,7 +3258,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.ConnectorVersion()
@@ -3312,7 +3312,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnectorVersions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3359,7 +3359,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.RuntimeEntitySchema()
@@ -3399,7 +3399,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.RuntimeEntitySchema()
@@ -3456,7 +3456,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRuntimeEntitySchemas = stubSimpleCall(
         undefined,
@@ -3490,7 +3490,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.RuntimeEntitySchema()
@@ -3557,7 +3557,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRuntimeEntitySchemas.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3613,7 +3613,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.RuntimeEntitySchema()
@@ -3667,7 +3667,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRuntimeEntitySchemas.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3714,7 +3714,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.RuntimeActionSchema()
@@ -3754,7 +3754,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.RuntimeActionSchema()
@@ -3811,7 +3811,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRuntimeActionSchemas = stubSimpleCall(
         undefined,
@@ -3845,7 +3845,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.RuntimeActionSchema()
@@ -3912,7 +3912,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRuntimeActionSchemas.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3968,7 +3968,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.connectors.v1.RuntimeActionSchema()
@@ -4022,7 +4022,7 @@ describe('v1.ConnectorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRuntimeActionSchemas.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

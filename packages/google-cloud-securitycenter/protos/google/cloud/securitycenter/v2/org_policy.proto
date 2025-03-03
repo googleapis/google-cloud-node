@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ syntax = "proto3";
 
 package google.cloud.securitycenter.v2;
 
+import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 
 option csharp_namespace = "Google.Cloud.SecurityCenter.V2";
@@ -35,8 +36,8 @@ message OrgPolicy {
     pattern: "projects/{project}/policies/{constraint_name}"
   };
 
-  // The resource name of the org policy.
+  // Identifier. The resource name of the org policy.
   // Example:
   // "organizations/{organization_id}/policies/{constraint_name}"
-  string name = 1;
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 }

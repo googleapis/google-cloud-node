@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -298,6 +298,9 @@ export namespace google {
 
                     /** BillingAccount parent */
                     parent?: (string|null);
+
+                    /** BillingAccount currencyCode */
+                    currencyCode?: (string|null);
                 }
 
                 /** Represents a BillingAccount. */
@@ -323,6 +326,9 @@ export namespace google {
 
                     /** BillingAccount parent. */
                     public parent: string;
+
+                    /** BillingAccount currencyCode. */
+                    public currencyCode: string;
 
                     /**
                      * Creates a new BillingAccount instance using the specified properties.

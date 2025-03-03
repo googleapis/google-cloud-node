@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -285,7 +285,7 @@ describe('v1small.RegionOperationsClient', () => {
         ['operation']
       );
       request.operation = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&operation=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1small.Operation()
       );
@@ -325,7 +325,7 @@ describe('v1small.RegionOperationsClient', () => {
         ['operation']
       );
       request.operation = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&operation=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1small.Operation()
       );
@@ -380,7 +380,7 @@ describe('v1small.RegionOperationsClient', () => {
         ['operation']
       );
       request.operation = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&operation=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -448,7 +448,7 @@ describe('v1small.RegionOperationsClient', () => {
         ['operation']
       );
       request.operation = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&operation=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1small.Operation()
       );
@@ -488,7 +488,7 @@ describe('v1small.RegionOperationsClient', () => {
         ['operation']
       );
       request.operation = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&operation=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1small.Operation()
       );
@@ -543,7 +543,7 @@ describe('v1small.RegionOperationsClient', () => {
         ['operation']
       );
       request.operation = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&operation=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.wait = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.wait(request), expectedError);

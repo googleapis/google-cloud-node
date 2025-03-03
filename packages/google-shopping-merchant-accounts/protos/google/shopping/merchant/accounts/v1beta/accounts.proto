@@ -22,6 +22,7 @@ import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
+import "google/shopping/merchant/accounts/v1beta/accountservices.proto";
 import "google/shopping/merchant/accounts/v1beta/user.proto";
 import "google/type/datetime.proto";
 
@@ -58,6 +59,9 @@ service AccountsService {
   // Deletes the specified account regardless of its type: standalone, MCA or
   // sub-account. Deleting an MCA leads to the deletion of all of its
   // sub-accounts. Executing this method requires admin access.
+  // The deletion succeeds only if the account does not provide services
+  // to any other account and has no processed offers. You can use the `force`
+  // parameter to override this.
   rpc DeleteAccount(DeleteAccountRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/accounts/v1beta/{name=accounts/*}"
@@ -79,7 +83,8 @@ service AccountsService {
   // constraints of the request such as page size or filters.
   // This is not just listing the sub-accounts of an MCA, but all accounts the
   // calling user has access to including other MCAs, linked accounts,
-  // standalone accounts and so on.
+  // standalone accounts and so on. If no filter is provided, then it returns
+  // accounts the user is directly added to.
   rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {
     option (google.api.http) = {
       get: "/accounts/v1beta/accounts"
@@ -156,7 +161,10 @@ message GetAccountRequest {
 message CreateAndConfigureAccountRequest {
   // Reference to a Terms of Service resource.
   message AcceptTermsOfService {
-    // Required. The resource name of the terms of service version.
+    // Required. The resource name of the terms of service version in the format
+    // `termsOfService/{version}`. To retrieve the latest version, use the
+    // [termsOfService.retrieveLatest](/merchant/api/reference/rest/accounts_v1beta/termsOfService/retrieveLatest)
+    // method.
     string name = 1 [
       (google.api.field_behavior) = REQUIRED,
       (google.api.resource_reference) = {
@@ -173,12 +181,12 @@ message CreateAndConfigureAccountRequest {
   // Additional instructions to add account services during creation of the
   // account.
   message AddAccountService {
-    // Currently only supports
-    // [Multi-client](https://support.google.com/merchants/answer/188487)
-    // parent account type.
+    // The service type to be added.
     oneof service_type {
-      // The provider is an aggregator for the account.
-      google.protobuf.Empty account_aggregation = 2;
+      // The provider is an
+      // [aggregator](https://support.google.com/merchants/answer/188487) for
+      // the account. Payload for service type Account Aggregation.
+      AccountAggregation account_aggregation = 103;
     }
 
     // Optional. The provider of the service.
@@ -202,11 +210,14 @@ message CreateAndConfigureAccountRequest {
   optional AcceptTermsOfService accept_terms_of_service = 3
       [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. If specified, an account service between the account to be
-  // created and the provider account is initialized as part of the
-  // creation.
+  // Required. An account service between the account to be created and the
+  // provider account is initialized as part of the creation. At least one such
+  // service needs to be provided. Currently exactly one of these needs to be
+  // `account_aggregation`, which means you can only create sub accounts, not
+  // standalone account through this method. Additional `account_management` or
+  // `product_management` services may be provided.
   repeated AddAccountService service = 4
-      [(google.api.field_behavior) = OPTIONAL];
+      [(google.api.field_behavior) = REQUIRED];
 }
 
 // Request message for the `DeleteAccount` method.
@@ -219,6 +230,10 @@ message DeleteAccountRequest {
       type: "merchantapi.googleapis.com/Account"
     }
   ];
+
+  // Optional. If set to `true`, the account is deleted even if it provides
+  // services to other accounts or has processed offers.
+  bool force = 2 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Request message for the `UpdateAccount` method.

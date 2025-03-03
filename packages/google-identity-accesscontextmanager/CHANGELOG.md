@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.1](https://github.com/googleapis/google-cloud-node/compare/access-context-manager-v3.3.0...access-context-manager-v3.3.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6019](https://github.com/googleapis/google-cloud-node/issues/6019)) ([734397c](https://github.com/googleapis/google-cloud-node/commit/734397c6b98d0aafe8832544da3f483b1eade1b2))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/access-context-manager-v3.2.0...access-context-manager-v3.3.0) (2024-05-21)
 
 

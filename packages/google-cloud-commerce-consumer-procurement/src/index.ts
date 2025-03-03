@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,8 +21,20 @@ import * as v1alpha1 from './v1alpha1';
 
 const ConsumerProcurementServiceClient = v1.ConsumerProcurementServiceClient;
 type ConsumerProcurementServiceClient = v1.ConsumerProcurementServiceClient;
+const LicenseManagementServiceClient = v1.LicenseManagementServiceClient;
+type LicenseManagementServiceClient = v1.LicenseManagementServiceClient;
 
-export {v1, v1alpha1, ConsumerProcurementServiceClient};
-export default {v1, v1alpha1, ConsumerProcurementServiceClient};
+export {
+  v1,
+  v1alpha1,
+  ConsumerProcurementServiceClient,
+  LicenseManagementServiceClient,
+};
+export default {
+  v1,
+  v1alpha1,
+  ConsumerProcurementServiceClient,
+  LicenseManagementServiceClient,
+};
 import * as protos from '../protos/protos';
 export {protos};

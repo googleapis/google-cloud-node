@@ -44,6 +44,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "BatchCreateFeatures": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetFeature": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

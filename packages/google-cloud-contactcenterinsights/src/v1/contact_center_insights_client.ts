@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,6 +27,8 @@ import type {
   LROperation,
   PaginationCallback,
   GaxCall,
+  IamClient,
+  IamProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -64,6 +66,7 @@ export class ContactCenterInsightsClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  iamClient: IamClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   contactCenterInsightsStub?: Promise<{[name: string]: Function}>;
@@ -180,6 +183,7 @@ export class ContactCenterInsightsClient {
     if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -203,11 +207,11 @@ export class ContactCenterInsightsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      analysisPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}/analyses/{analysis}'
+      analysisRulePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/analysisRules/{analysis_rule}'
       ),
-      conversationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}'
+      encryptionSpecPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/encryptionSpec'
       ),
       issuePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/issueModels/{issue_model}/issues/{issue}'
@@ -220,6 +224,41 @@ export class ContactCenterInsightsClient {
       ),
       phraseMatcherPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/phraseMatchers/{phrase_matcher}'
+      ),
+      projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}'
+        ),
+      projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}/analyses/{analysis}'
+        ),
+      projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}/feedbackLabels/{feedback_label}'
+        ),
+      projectLocationConversationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversations/{conversation}'
+      ),
+      projectLocationConversationAnalysisPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversations/{conversation}/analyses/{analysis}'
+        ),
+      projectLocationConversationFeedbackLabelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversations/{conversation}/feedbackLabels/{feedback_label}'
+        ),
+      qaQuestionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/qaScorecards/{qa_scorecard}/revisions/{revision}/qaQuestions/{qa_question}'
+      ),
+      qaScorecardPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/qaScorecards/{qa_scorecard}'
+      ),
+      qaScorecardResultPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/qaScorecardResults/{qa_scorecard_result}'
+      ),
+      qaScorecardRevisionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/qaScorecards/{qa_scorecard}/revisions/{revision}'
       ),
       settingsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/settings'
@@ -248,10 +287,40 @@ export class ContactCenterInsightsClient {
         'nextPageToken',
         'phraseMatchers'
       ),
+      listAnalysisRules: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'analysisRules'
+      ),
       listViews: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'views'
+      ),
+      listQaQuestions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'qaQuestions'
+      ),
+      listQaScorecards: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'qaScorecards'
+      ),
+      listQaScorecardRevisions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'qaScorecardRevisions'
+      ),
+      listFeedbackLabels: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'feedbackLabels'
+      ),
+      listAllFeedbackLabels: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'feedbackLabels'
       ),
     };
 
@@ -343,6 +412,48 @@ export class ContactCenterInsightsClient {
     const undeployIssueModelMetadata = protoFilesRoot.lookup(
       '.google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata'
     ) as gax.protobuf.Type;
+    const exportIssueModelResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.ExportIssueModelResponse'
+    ) as gax.protobuf.Type;
+    const exportIssueModelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata'
+    ) as gax.protobuf.Type;
+    const importIssueModelResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.ImportIssueModelResponse'
+    ) as gax.protobuf.Type;
+    const importIssueModelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata'
+    ) as gax.protobuf.Type;
+    const initializeEncryptionSpecResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse'
+    ) as gax.protobuf.Type;
+    const initializeEncryptionSpecMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata'
+    ) as gax.protobuf.Type;
+    const queryMetricsResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.QueryMetricsResponse'
+    ) as gax.protobuf.Type;
+    const queryMetricsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.QueryMetricsMetadata'
+    ) as gax.protobuf.Type;
+    const tuneQaScorecardRevisionResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionResponse'
+    ) as gax.protobuf.Type;
+    const tuneQaScorecardRevisionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata'
+    ) as gax.protobuf.Type;
+    const bulkUploadFeedbackLabelsResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsResponse'
+    ) as gax.protobuf.Type;
+    const bulkUploadFeedbackLabelsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata'
+    ) as gax.protobuf.Type;
+    const bulkDownloadFeedbackLabelsResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsResponse'
+    ) as gax.protobuf.Type;
+    const bulkDownloadFeedbackLabelsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       uploadConversation: new this._gaxModule.LongrunningDescriptor(
@@ -402,6 +513,57 @@ export class ContactCenterInsightsClient {
         this.operationsClient,
         undeployIssueModelResponse.decode.bind(undeployIssueModelResponse),
         undeployIssueModelMetadata.decode.bind(undeployIssueModelMetadata)
+      ),
+      exportIssueModel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportIssueModelResponse.decode.bind(exportIssueModelResponse),
+        exportIssueModelMetadata.decode.bind(exportIssueModelMetadata)
+      ),
+      importIssueModel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importIssueModelResponse.decode.bind(importIssueModelResponse),
+        importIssueModelMetadata.decode.bind(importIssueModelMetadata)
+      ),
+      initializeEncryptionSpec: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        initializeEncryptionSpecResponse.decode.bind(
+          initializeEncryptionSpecResponse
+        ),
+        initializeEncryptionSpecMetadata.decode.bind(
+          initializeEncryptionSpecMetadata
+        )
+      ),
+      queryMetrics: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        queryMetricsResponse.decode.bind(queryMetricsResponse),
+        queryMetricsMetadata.decode.bind(queryMetricsMetadata)
+      ),
+      tuneQaScorecardRevision: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        tuneQaScorecardRevisionResponse.decode.bind(
+          tuneQaScorecardRevisionResponse
+        ),
+        tuneQaScorecardRevisionMetadata.decode.bind(
+          tuneQaScorecardRevisionMetadata
+        )
+      ),
+      bulkUploadFeedbackLabels: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        bulkUploadFeedbackLabelsResponse.decode.bind(
+          bulkUploadFeedbackLabelsResponse
+        ),
+        bulkUploadFeedbackLabelsMetadata.decode.bind(
+          bulkUploadFeedbackLabelsMetadata
+        )
+      ),
+      bulkDownloadFeedbackLabels: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        bulkDownloadFeedbackLabelsResponse.decode.bind(
+          bulkDownloadFeedbackLabelsResponse
+        ),
+        bulkDownloadFeedbackLabelsMetadata.decode.bind(
+          bulkDownloadFeedbackLabelsMetadata
+        )
       ),
     };
 
@@ -477,6 +639,8 @@ export class ContactCenterInsightsClient {
       'deleteIssueModel',
       'deployIssueModel',
       'undeployIssueModel',
+      'exportIssueModel',
+      'importIssueModel',
       'getIssue',
       'listIssues',
       'updateIssue',
@@ -490,11 +654,44 @@ export class ContactCenterInsightsClient {
       'calculateStats',
       'getSettings',
       'updateSettings',
+      'createAnalysisRule',
+      'getAnalysisRule',
+      'listAnalysisRules',
+      'updateAnalysisRule',
+      'deleteAnalysisRule',
+      'getEncryptionSpec',
+      'initializeEncryptionSpec',
       'createView',
       'getView',
       'listViews',
       'updateView',
       'deleteView',
+      'queryMetrics',
+      'createQaQuestion',
+      'getQaQuestion',
+      'updateQaQuestion',
+      'deleteQaQuestion',
+      'listQaQuestions',
+      'createQaScorecard',
+      'getQaScorecard',
+      'updateQaScorecard',
+      'deleteQaScorecard',
+      'listQaScorecards',
+      'createQaScorecardRevision',
+      'getQaScorecardRevision',
+      'tuneQaScorecardRevision',
+      'deployQaScorecardRevision',
+      'undeployQaScorecardRevision',
+      'deleteQaScorecardRevision',
+      'listQaScorecardRevisions',
+      'createFeedbackLabel',
+      'listFeedbackLabels',
+      'getFeedbackLabel',
+      'updateFeedbackLabel',
+      'deleteFeedbackLabel',
+      'listAllFeedbackLabels',
+      'bulkUploadFeedbackLabels',
+      'bulkDownloadFeedbackLabels',
     ];
     for (const methodName of contactCenterInsightsStubMethods) {
       const callPromise = this.contactCenterInsightsStub.then(
@@ -614,6 +811,8 @@ export class ContactCenterInsightsClient {
   // -------------------
   /**
    * Creates a conversation.
+   * Note that this method does not support audio transcription or redaction.
+   * Use `conversations.upload` instead.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -725,7 +924,20 @@ export class ContactCenterInsightsClient {
    * @param {google.cloud.contactcenterinsights.v1.Conversation} request.conversation
    *   Required. The new values for the conversation.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated.
+   *   The list of fields to be updated. All possible fields can be updated by
+   *   passing `*`, or a subset of the following updateable fields can be
+   *   provided:
+   *
+   *   * `agent_id`
+   *   * `language_code`
+   *   * `labels`
+   *   * `metadata`
+   *   * `quality_metadata`
+   *   * `call_metadata`
+   *   * `start_time`
+   *   * `expire_time` or `ttl`
+   *   * `data_source.gcs_source.audio_uri` or
+   *   `data_source.dialogflow_source.audio_uri`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2660,6 +2872,495 @@ export class ContactCenterInsightsClient {
     return this.innerApiCalls.updateSettings(request, options, callback);
   }
   /**
+   * Creates a analysis rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the analysis rule. Required. The location
+   *   to create a analysis rule for. Format: `projects/<Project
+   *   ID>/locations/<Location ID>` or `projects/<Project
+   *   Number>/locations/<Location ID>`
+   * @param {google.cloud.contactcenterinsights.v1.AnalysisRule} request.analysisRule
+   *   Required. The analysis rule resource to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.AnalysisRule|AnalysisRule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.create_analysis_rule.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CreateAnalysisRule_async
+   */
+  createAnalysisRule(
+    request?: protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createAnalysisRule(
+    request: protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAnalysisRule(
+    request: protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAnalysisRule(
+    request?: protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+          | protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createAnalysisRule(request, options, callback);
+  }
+  /**
+   * Get a analysis rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the AnalysisRule to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.AnalysisRule|AnalysisRule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.get_analysis_rule.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetAnalysisRule_async
+   */
+  getAnalysisRule(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getAnalysisRule(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      | protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAnalysisRule(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      | protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAnalysisRule(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+          | protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      | protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getAnalysisRule(request, options, callback);
+  }
+  /**
+   * Updates a analysis rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.AnalysisRule} request.analysisRule
+   *   Required. The new analysis rule.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to be updated.
+   *   If the update_mask is not provided, the update will be applied to all
+   *   fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.AnalysisRule|AnalysisRule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.update_analysis_rule.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UpdateAnalysisRule_async
+   */
+  updateAnalysisRule(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateAnalysisRule(
+    request: protos.google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAnalysisRule(
+    request: protos.google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAnalysisRule(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'analysis_rule.name': request.analysisRule!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateAnalysisRule(request, options, callback);
+  }
+  /**
+   * Deletes a analysis rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the analysis rule to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.delete_analysis_rule.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeleteAnalysisRule_async
+   */
+  deleteAnalysisRule(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteAnalysisRule(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAnalysisRule(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAnalysisRule(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteAnalysisRule(request, options, callback);
+  }
+  /**
+   * Gets location-level encryption key specification.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the encryption spec resource to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.EncryptionSpec|EncryptionSpec}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.get_encryption_spec.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetEncryptionSpec_async
+   */
+  getEncryptionSpec(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getEncryptionSpec(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec,
+      | protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEncryptionSpec(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec,
+      | protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEncryptionSpec(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec,
+          | protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec,
+      | protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getEncryptionSpec(request, options, callback);
+  }
+  /**
    * Creates a view.
    *
    * @param {Object} request
@@ -3044,10 +3745,1721 @@ export class ContactCenterInsightsClient {
     this.initialize();
     return this.innerApiCalls.deleteView(request, options, callback);
   }
+  /**
+   * Create a QaQuestion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the QaQuestion.
+   * @param {google.cloud.contactcenterinsights.v1.QaQuestion} request.qaQuestion
+   *   Required. The QaQuestion to create.
+   * @param {string} [request.qaQuestionId]
+   *   Optional. A unique ID for the new question. This ID will become the final
+   *   component of the question's resource name. If no ID is specified, a
+   *   server-generated ID will be used.
+   *
+   *   This value should be 4-64 characters and must match the regular
+   *   expression `^{@link protos.0-9|a-z0-9-]{4,64}$`. Valid characters are `[a-z}-`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.QaQuestion|QaQuestion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.create_qa_question.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CreateQaQuestion_async
+   */
+  createQaQuestion(
+    request?: protos.google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createQaQuestion(
+    request: protos.google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createQaQuestion(
+    request: protos.google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createQaQuestion(
+    request?: protos.google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+          | protos.google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createQaQuestion(request, options, callback);
+  }
+  /**
+   * Gets a QaQuestion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the QaQuestion to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.QaQuestion|QaQuestion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.get_qa_question.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetQaQuestion_async
+   */
+  getQaQuestion(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getQaQuestion(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      | protos.google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getQaQuestion(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      | protos.google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getQaQuestion(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+          | protos.google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      | protos.google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getQaQuestion(request, options, callback);
+  }
+  /**
+   * Updates a QaQuestion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.QaQuestion} request.qaQuestion
+   *   Required. The QaQuestion to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. All possible fields can be
+   *   updated by passing `*`, or a subset of the following updateable fields can
+   *   be provided:
+   *
+   *   * `abbreviation`
+   *   * `answer_choices`
+   *   * `answer_instructions`
+   *   * `order`
+   *   * `question_body`
+   *   * `tags`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.QaQuestion|QaQuestion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.update_qa_question.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UpdateQaQuestion_async
+   */
+  updateQaQuestion(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateQaQuestion(
+    request: protos.google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateQaQuestion(
+    request: protos.google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateQaQuestion(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'qa_question.name': request.qaQuestion!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateQaQuestion(request, options, callback);
+  }
+  /**
+   * Deletes a QaQuestion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the QaQuestion to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.delete_qa_question.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeleteQaQuestion_async
+   */
+  deleteQaQuestion(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteQaQuestion(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteQaQuestion(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteQaQuestion(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteQaQuestion(request, options, callback);
+  }
+  /**
+   * Create a QaScorecard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the QaScorecard.
+   * @param {google.cloud.contactcenterinsights.v1.QaScorecard} request.qaScorecard
+   *   Required. The QaScorecard to create.
+   * @param {string} [request.qaScorecardId]
+   *   Optional. A unique ID for the new QaScorecard. This ID will become the
+   *   final component of the QaScorecard's resource name. If no ID is specified,
+   *   a server-generated ID will be used.
+   *
+   *   This value should be 4-64 characters and must match the regular
+   *   expression `^{@link protos.0-9|a-z0-9-]{4,64}$`. Valid characters are `[a-z}-`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.QaScorecard|QaScorecard}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.create_qa_scorecard.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CreateQaScorecard_async
+   */
+  createQaScorecard(
+    request?: protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createQaScorecard(
+    request: protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createQaScorecard(
+    request: protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createQaScorecard(
+    request?: protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+          | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createQaScorecard(request, options, callback);
+  }
+  /**
+   * Gets a QaScorecard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the QaScorecard to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.QaScorecard|QaScorecard}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.get_qa_scorecard.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetQaScorecard_async
+   */
+  getQaScorecard(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getQaScorecard(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getQaScorecard(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getQaScorecard(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+          | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getQaScorecard(request, options, callback);
+  }
+  /**
+   * Updates a QaScorecard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.QaScorecard} request.qaScorecard
+   *   Required. The QaScorecard to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. All possible fields can be
+   *   updated by passing `*`, or a subset of the following updateable fields can
+   *   be provided:
+   *
+   *   * `description`
+   *   * `display_name`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.QaScorecard|QaScorecard}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.update_qa_scorecard.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UpdateQaScorecard_async
+   */
+  updateQaScorecard(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateQaScorecard(
+    request: protos.google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateQaScorecard(
+    request: protos.google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateQaScorecard(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'qa_scorecard.name': request.qaScorecard!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateQaScorecard(request, options, callback);
+  }
+  /**
+   * Deletes a QaScorecard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the QaScorecard to delete.
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, all of this QaScorecard's child resources will
+   *   also be deleted. Otherwise, the request will only succeed if it has none.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.delete_qa_scorecard.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeleteQaScorecard_async
+   */
+  deleteQaScorecard(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteQaScorecard(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteQaScorecard(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteQaScorecard(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteQaScorecard(request, options, callback);
+  }
+  /**
+   * Creates a QaScorecardRevision.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the QaScorecardRevision.
+   * @param {google.cloud.contactcenterinsights.v1.QaScorecardRevision} request.qaScorecardRevision
+   *   Required. The QaScorecardRevision to create.
+   * @param {string} [request.qaScorecardRevisionId]
+   *   Optional. A unique ID for the new QaScorecardRevision. This ID will become
+   *   the final component of the QaScorecardRevision's resource name. If no ID is
+   *   specified, a server-generated ID will be used.
+   *
+   *   This value should be 4-64 characters and must match the regular
+   *   expression `^{@link protos.0-9|a-z0-9-]{4,64}$`. Valid characters are `[a-z}-`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision|QaScorecardRevision}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.create_qa_scorecard_revision.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CreateQaScorecardRevision_async
+   */
+  createQaScorecardRevision(
+    request?: protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createQaScorecardRevision(
+    request: protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createQaScorecardRevision(
+    request: protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createQaScorecardRevision(
+    request?: protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+          | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createQaScorecardRevision(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Gets a QaScorecardRevision.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the QaScorecardRevision to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision|QaScorecardRevision}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.get_qa_scorecard_revision.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetQaScorecardRevision_async
+   */
+  getQaScorecardRevision(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getQaScorecardRevision(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getQaScorecardRevision(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getQaScorecardRevision(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+          | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getQaScorecardRevision(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deploy a QaScorecardRevision.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the QaScorecardRevision to deploy.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision|QaScorecardRevision}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.deploy_qa_scorecard_revision.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeployQaScorecardRevision_async
+   */
+  deployQaScorecardRevision(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deployQaScorecardRevision(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      | protos.google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deployQaScorecardRevision(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      | protos.google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deployQaScorecardRevision(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+          | protos.google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      | protos.google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deployQaScorecardRevision(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Undeploy a QaScorecardRevision.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the QaScorecardRevision to undeploy.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision|QaScorecardRevision}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.undeploy_qa_scorecard_revision.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UndeployQaScorecardRevision_async
+   */
+  undeployQaScorecardRevision(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  undeployQaScorecardRevision(
+    request: protos.google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      | protos.google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  undeployQaScorecardRevision(
+    request: protos.google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      | protos.google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  undeployQaScorecardRevision(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+          | protos.google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      | protos.google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.undeployQaScorecardRevision(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes a QaScorecardRevision.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the QaScorecardRevision to delete.
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, all of this QaScorecardRevision's child resources
+   *   will also be deleted. Otherwise, the request will only succeed if it has
+   *   none.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.delete_qa_scorecard_revision.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeleteQaScorecardRevision_async
+   */
+  deleteQaScorecardRevision(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteQaScorecardRevision(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteQaScorecardRevision(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteQaScorecardRevision(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteQaScorecardRevision(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Create feedback label.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the feedback label.
+   * @param {string} [request.feedbackLabelId]
+   *   Optional. The ID of the feedback label to create.
+   *   If one is not specified it will be generated by the server.
+   * @param {google.cloud.contactcenterinsights.v1.FeedbackLabel} request.feedbackLabel
+   *   Required. The feedback label to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.FeedbackLabel|FeedbackLabel}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.create_feedback_label.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CreateFeedbackLabel_async
+   */
+  createFeedbackLabel(
+    request?: protos.google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createFeedbackLabel(
+    request: protos.google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createFeedbackLabel(
+    request: protos.google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createFeedbackLabel(
+    request?: protos.google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+          | protos.google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createFeedbackLabel(request, options, callback);
+  }
+  /**
+   * Get feedback label.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the feedback label to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.FeedbackLabel|FeedbackLabel}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.get_feedback_label.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetFeedbackLabel_async
+   */
+  getFeedbackLabel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getFeedbackLabel(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      | protos.google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getFeedbackLabel(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      | protos.google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getFeedbackLabel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+          | protos.google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      | protos.google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getFeedbackLabel(request, options, callback);
+  }
+  /**
+   * Update feedback label.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.FeedbackLabel} request.feedbackLabel
+   *   Required. The feedback label to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.FeedbackLabel|FeedbackLabel}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.update_feedback_label.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UpdateFeedbackLabel_async
+   */
+  updateFeedbackLabel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateFeedbackLabel(
+    request: protos.google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateFeedbackLabel(
+    request: protos.google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateFeedbackLabel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'feedback_label.name': request.feedbackLabel!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateFeedbackLabel(request, options, callback);
+  }
+  /**
+   * Delete feedback label.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the feedback label to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.delete_feedback_label.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeleteFeedbackLabel_async
+   */
+  deleteFeedbackLabel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteFeedbackLabel(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteFeedbackLabel(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteFeedbackLabel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteFeedbackLabel(request, options, callback);
+  }
 
   /**
-   * Create a longrunning conversation upload operation. This method differs
-   * from CreateConversation by allowing audio transcription and optional DLP
+   * Create a long-running conversation upload operation. This method differs
+   * from `CreateConversation` by allowing audio transcription and optional DLP
    * redaction.
    *
    * @param {Object} request
@@ -3656,6 +6068,11 @@ export class ContactCenterInsightsClient {
    * @param {google.cloud.contactcenterinsights.v1.SpeechConfig} [request.speechConfig]
    *   Optional. Default Speech-to-Text configuration. Optional, will default to
    *   the config specified in Settings.
+   * @param {number} [request.sampleSize]
+   *   Optional. If set, this fields indicates the number of objects to ingest
+   *   from the Cloud Storage bucket. If empty, the entire bucket will be
+   *   ingested. Unless they are first deleted, conversations produced through
+   *   sampling won't be ingested by subsequent ingest requests.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4481,6 +6898,1061 @@ export class ContactCenterInsightsClient {
     >;
   }
   /**
+   * Exports an issue model to the provided destination.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination} request.gcsDestination
+   *   Google Cloud Storage URI to export the issue model to.
+   * @param {string} request.name
+   *   Required. The issue model to export.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.export_issue_model.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ExportIssueModel_async
+   */
+  exportIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IExportIssueModelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  exportIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IExportIssueModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IExportIssueModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IExportIssueModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+            protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.exportIssueModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `exportIssueModel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.export_issue_model.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ExportIssueModel_async
+   */
+  async checkExportIssueModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.ExportIssueModelResponse,
+      protos.google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportIssueModel,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.ExportIssueModelResponse,
+      protos.google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+    >;
+  }
+  /**
+   * Imports an issue model from a Cloud Storage bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource} request.gcsSource
+   *   Google Cloud Storage source message.
+   * @param {string} request.parent
+   *   Required. The parent resource of the issue model.
+   * @param {boolean} [request.createNewModel]
+   *   Optional. If set to true, will create an issue model from the imported file
+   *   with randomly generated IDs for the issue model and corresponding issues.
+   *   Otherwise, replaces an existing model with the same ID as the file.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.import_issue_model.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ImportIssueModel_async
+   */
+  importIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IImportIssueModelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  importIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IImportIssueModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IImportIssueModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IImportIssueModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+            protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importIssueModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `importIssueModel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.import_issue_model.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ImportIssueModel_async
+   */
+  async checkImportIssueModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.ImportIssueModelResponse,
+      protos.google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importIssueModel,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.ImportIssueModelResponse,
+      protos.google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+    >;
+  }
+  /**
+   * Initializes a location-level encryption key specification. An error will
+   * result if the location has resources already created before the
+   * initialization. After the encryption specification is initialized at a
+   * location, it is immutable and all newly created resources under the
+   * location will be encrypted with the existing specification.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.EncryptionSpec} request.encryptionSpec
+   *   Required. The encryption spec used for CMEK encryption. It is required that
+   *   the kms key is in the same region as the endpoint. The same key will be
+   *   used for all provisioned resources, if encryption is available. If the
+   *   `kms_key_name` field is left empty, no encryption will be enforced.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.initialize_encryption_spec.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_InitializeEncryptionSpec_async
+   */
+  initializeEncryptionSpec(
+    request?: protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  initializeEncryptionSpec(
+    request: protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  initializeEncryptionSpec(
+    request: protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  initializeEncryptionSpec(
+    request?: protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+            protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'encryption_spec.name': request.encryptionSpec!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.initializeEncryptionSpec(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `initializeEncryptionSpec()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.initialize_encryption_spec.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_InitializeEncryptionSpec_async
+   */
+  async checkInitializeEncryptionSpecProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse,
+      protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.initializeEncryptionSpec,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse,
+      protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+    >;
+  }
+  /**
+   * Query metrics.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.location
+   *   Required. The location of the data.
+   *   "projects/{project}/locations/{location}"
+   * @param {string} request.filter
+   *   Required. Filter to select a subset of conversations to compute the
+   *   metrics. Must specify a window of the conversation create time to compute
+   *   the metrics. The returned metrics will be from the range [DATE(starting
+   *   create time), DATE(ending create time)).
+   *
+   * @param {google.cloud.contactcenterinsights.v1.QueryMetricsRequest.TimeGranularity} request.timeGranularity
+   *   The time granularity of each data point in the time series.
+   *   Defaults to NONE if this field is unspecified.
+   * @param {number[]} request.dimensions
+   *   The dimensions that determine the grouping key for the query. Defaults to
+   *   no dimension if this field is unspecified. If a dimension is specified,
+   *   its key must also be specified. Each dimension's key must be unique.
+   *
+   *   If a time granularity is also specified, metric values in the dimension
+   *   will be bucketed by this granularity.
+   *
+   *   Up to one dimension is supported for now.
+   * @param {google.protobuf.FieldMask} request.measureMask
+   *   Measures to return. Defaults to all measures if this field is unspecified.
+   *   A valid mask should traverse from the `measure` field from the response.
+   *   For example, a path from a measure mask to get the conversation count is
+   *   "conversation_measure.count".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.query_metrics.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_QueryMetrics_async
+   */
+  queryMetrics(
+    request?: protos.google.cloud.contactcenterinsights.v1.IQueryMetricsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IQueryMetricsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IQueryMetricsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  queryMetrics(
+    request: protos.google.cloud.contactcenterinsights.v1.IQueryMetricsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IQueryMetricsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IQueryMetricsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  queryMetrics(
+    request: protos.google.cloud.contactcenterinsights.v1.IQueryMetricsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IQueryMetricsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IQueryMetricsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  queryMetrics(
+    request?: protos.google.cloud.contactcenterinsights.v1.IQueryMetricsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IQueryMetricsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IQueryMetricsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IQueryMetricsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IQueryMetricsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IQueryMetricsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IQueryMetricsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        location: request.location ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.queryMetrics(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `queryMetrics()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.query_metrics.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_QueryMetrics_async
+   */
+  async checkQueryMetricsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.QueryMetricsResponse,
+      protos.google.cloud.contactcenterinsights.v1.QueryMetricsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.queryMetrics,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.QueryMetricsResponse,
+      protos.google.cloud.contactcenterinsights.v1.QueryMetricsMetadata
+    >;
+  }
+  /**
+   * Fine tune one or more QaModels.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource for new fine tuning job instance.
+   * @param {string} request.filter
+   *   Required. Filter for selecting the feedback labels that needs to be
+   *   used for training.
+   *   This filter can be used to limit the feedback labels used for tuning to a
+   *   feedback labels created or updated for a specific time-window etc.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Run in validate only mode, no fine tuning will actually run.
+   *   Data quality validations like training data distributions will run.
+   *   Even when set to false, the data quality validations will still run but
+   *   once the validations complete we will proceed with the fine tune, if
+   *   applicable.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.tune_qa_scorecard_revision.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_TuneQaScorecardRevision_async
+   */
+  tuneQaScorecardRevision(
+    request?: protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionResponse,
+        protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  tuneQaScorecardRevision(
+    request: protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionResponse,
+        protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  tuneQaScorecardRevision(
+    request: protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionResponse,
+        protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  tuneQaScorecardRevision(
+    request?: protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionResponse,
+            protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionResponse,
+        protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionResponse,
+        protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.tuneQaScorecardRevision(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `tuneQaScorecardRevision()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.tune_qa_scorecard_revision.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_TuneQaScorecardRevision_async
+   */
+  async checkTuneQaScorecardRevisionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionResponse,
+      protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.tuneQaScorecardRevision,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionResponse,
+      protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata
+    >;
+  }
+  /**
+   * Upload feedback labels in bulk.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.GcsSource} request.gcsSource
+   *   A cloud storage bucket source.
+   * @param {string} request.parent
+   *   Required. The parent resource for new feedback labels.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, upload will not happen and the labels will be validated.
+   *   If not set, then default behavior will be to upload the labels after
+   *   validation is complete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.bulk_upload_feedback_labels.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_BulkUploadFeedbackLabels_async
+   */
+  bulkUploadFeedbackLabels(
+    request?: protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  bulkUploadFeedbackLabels(
+    request: protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bulkUploadFeedbackLabels(
+    request: protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bulkUploadFeedbackLabels(
+    request?: protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.bulkUploadFeedbackLabels(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `bulkUploadFeedbackLabels()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.bulk_upload_feedback_labels.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_BulkUploadFeedbackLabels_async
+   */
+  async checkBulkUploadFeedbackLabelsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsResponse,
+      protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.bulkUploadFeedbackLabels,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsResponse,
+      protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata
+    >;
+  }
+  /**
+   * Download feedback labels in bulk.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.GcsDestination} request.gcsDestination
+   *   A cloud storage bucket destination.
+   * @param {string} request.parent
+   *   Required. The parent resource for new feedback labels.
+   * @param {string} [request.filter]
+   *   Optional. A filter to reduce results to a specific subset. Supports
+   *   disjunctions (OR) and conjunctions (AND).
+   *
+   *   Supported fields:
+   *
+   *   * `issue_model_id`
+   *   * `qa_question_id`
+   *   * `qa_scorecard_id`
+   *   * `min_create_time`
+   *   * `max_create_time`
+   *   * `min_update_time`
+   *   * `max_update_time`
+   *   * `feedback_label_type`: QUALITY_AI, TOPIC_MODELING
+   * @param {number} [request.maxDownloadCount]
+   *   Optional. Limits the maximum number of feedback labels that will be
+   *   downloaded. The first `N` feedback labels will be downloaded.
+   * @param {google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.FeedbackLabelType} [request.feedbackLabelType]
+   *   Optional. The type of feedback labels that will be downloaded.
+   * @param {string} [request.conversationFilter]
+   *   Optional. Filter parent conversations to download feedback labels for.
+   *   When specified, the feedback labels will be downloaded for the
+   *   conversations that match the filter.
+   *   If `template_qa_scorecard_id` is set, all the conversations that match the
+   *   filter will be paired with the questions under the scorecard for labeling.
+   * @param {string[]} [request.templateQaScorecardId]
+   *   Optional. If set, a template for labeling conversations and scorecard
+   *   questions will be created from the conversation_filter and the questions
+   *   under the scorecard(s). The feedback label `filter` will be ignored.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.bulk_download_feedback_labels.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_BulkDownloadFeedbackLabels_async
+   */
+  bulkDownloadFeedbackLabels(
+    request?: protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  bulkDownloadFeedbackLabels(
+    request: protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bulkDownloadFeedbackLabels(
+    request: protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bulkDownloadFeedbackLabels(
+    request?: protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.bulkDownloadFeedbackLabels(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `bulkDownloadFeedbackLabels()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.bulk_download_feedback_labels.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_BulkDownloadFeedbackLabels_async
+   */
+  async checkBulkDownloadFeedbackLabelsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsResponse,
+      protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.bulkDownloadFeedbackLabels,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsResponse,
+      protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata
+    >;
+  }
+  /**
    * Lists conversations.
    *
    * @param {Object} request
@@ -4489,7 +7961,7 @@ export class ContactCenterInsightsClient {
    *   Required. The parent resource of the conversation.
    * @param {number} request.pageSize
    *   The maximum number of conversations to return in the response. A valid page
-   *   size ranges from 0 to 1,000 inclusive. If the page size is zero or
+   *   size ranges from 0 to 100,000 inclusive. If the page size is zero or
    *   unspecified, a default page size of 100 will be chosen. Note that a call
    *   might return fewer results than the requested page size.
    * @param {string} request.pageToken
@@ -4499,6 +7971,22 @@ export class ContactCenterInsightsClient {
    * @param {string} request.filter
    *   A filter to reduce results to a specific subset. Useful for querying
    *   conversations with specific properties.
+   * @param {string} [request.orderBy]
+   *   Optional. The attribute by which to order conversations in the response.
+   *   If empty, conversations will be ordered by descending creation time.
+   *   Supported values are one of the following:
+   *
+   *   * create_time
+   *   * customer_satisfaction_rating
+   *   * duration
+   *   * latest_analysis
+   *   * start_time
+   *   * turn_count
+   *
+   *   The default sort order is ascending. To specify order, append `asc` or
+   *   `desc` (`create_time desc`).
+   *   For more details, see [Google AIPs
+   *   Ordering](https://google.aip.dev/132#ordering).
    * @param {google.cloud.contactcenterinsights.v1.ConversationView} request.view
    *   The level of details of the conversation. Default is `BASIC`.
    * @param {object} [options]
@@ -4589,14 +8077,14 @@ export class ContactCenterInsightsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConversations`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource of the conversation.
    * @param {number} request.pageSize
    *   The maximum number of conversations to return in the response. A valid page
-   *   size ranges from 0 to 1,000 inclusive. If the page size is zero or
+   *   size ranges from 0 to 100,000 inclusive. If the page size is zero or
    *   unspecified, a default page size of 100 will be chosen. Note that a call
    *   might return fewer results than the requested page size.
    * @param {string} request.pageToken
@@ -4606,6 +8094,22 @@ export class ContactCenterInsightsClient {
    * @param {string} request.filter
    *   A filter to reduce results to a specific subset. Useful for querying
    *   conversations with specific properties.
+   * @param {string} [request.orderBy]
+   *   Optional. The attribute by which to order conversations in the response.
+   *   If empty, conversations will be ordered by descending creation time.
+   *   Supported values are one of the following:
+   *
+   *   * create_time
+   *   * customer_satisfaction_rating
+   *   * duration
+   *   * latest_analysis
+   *   * start_time
+   *   * turn_count
+   *
+   *   The default sort order is ascending. To specify order, append `asc` or
+   *   `desc` (`create_time desc`).
+   *   For more details, see [Google AIPs
+   *   Ordering](https://google.aip.dev/132#ordering).
    * @param {google.cloud.contactcenterinsights.v1.ConversationView} request.view
    *   The level of details of the conversation. Default is `BASIC`.
    * @param {object} [options]
@@ -4651,7 +8155,7 @@ export class ContactCenterInsightsClient {
    *   Required. The parent resource of the conversation.
    * @param {number} request.pageSize
    *   The maximum number of conversations to return in the response. A valid page
-   *   size ranges from 0 to 1,000 inclusive. If the page size is zero or
+   *   size ranges from 0 to 100,000 inclusive. If the page size is zero or
    *   unspecified, a default page size of 100 will be chosen. Note that a call
    *   might return fewer results than the requested page size.
    * @param {string} request.pageToken
@@ -4661,6 +8165,22 @@ export class ContactCenterInsightsClient {
    * @param {string} request.filter
    *   A filter to reduce results to a specific subset. Useful for querying
    *   conversations with specific properties.
+   * @param {string} [request.orderBy]
+   *   Optional. The attribute by which to order conversations in the response.
+   *   If empty, conversations will be ordered by descending creation time.
+   *   Supported values are one of the following:
+   *
+   *   * create_time
+   *   * customer_satisfaction_rating
+   *   * duration
+   *   * latest_analysis
+   *   * start_time
+   *   * turn_count
+   *
+   *   The default sort order is ascending. To specify order, append `asc` or
+   *   `desc` (`create_time desc`).
+   *   For more details, see [Google AIPs
+   *   Ordering](https://google.aip.dev/132#ordering).
    * @param {google.cloud.contactcenterinsights.v1.ConversationView} request.view
    *   The level of details of the conversation. Default is `BASIC`.
    * @param {object} [options]
@@ -4803,7 +8323,7 @@ export class ContactCenterInsightsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAnalyses`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5013,7 +8533,7 @@ export class ContactCenterInsightsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPhraseMatchers`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5115,6 +8635,207 @@ export class ContactCenterInsightsClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IPhraseMatcher>;
+  }
+  /**
+   * Lists analysis rules.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the analysis rules.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of analysis rule to return in the response. If
+   *   this value is zero, the service will select a default size. A call may
+   *   return fewer objects than requested. A non-empty `next_page_token` in the
+   *   response indicates that more data is available.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListAnalysisRulesResponse`;
+   *   indicates that this is a continuation of a prior `ListAnalysisRules` call
+   *   and the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.contactcenterinsights.v1.AnalysisRule|AnalysisRule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAnalysisRulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAnalysisRules(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule[],
+      protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest | null,
+      protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesResponse,
+    ]
+  >;
+  listAnalysisRules(
+    request: protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule
+    >
+  ): void;
+  listAnalysisRules(
+    request: protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule
+    >
+  ): void;
+  listAnalysisRules(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IAnalysisRule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IAnalysisRule[],
+      protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest | null,
+      protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listAnalysisRules(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listAnalysisRules`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the analysis rules.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of analysis rule to return in the response. If
+   *   this value is zero, the service will select a default size. A call may
+   *   return fewer objects than requested. A non-empty `next_page_token` in the
+   *   response indicates that more data is available.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListAnalysisRulesResponse`;
+   *   indicates that this is a continuation of a prior `ListAnalysisRules` call
+   *   and the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.contactcenterinsights.v1.AnalysisRule|AnalysisRule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAnalysisRulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAnalysisRulesStream(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAnalysisRules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAnalysisRules.createStream(
+      this.innerApiCalls.listAnalysisRules as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listAnalysisRules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the analysis rules.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of analysis rule to return in the response. If
+   *   this value is zero, the service will select a default size. A call may
+   *   return fewer objects than requested. A non-empty `next_page_token` in the
+   *   response indicates that more data is available.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListAnalysisRulesResponse`;
+   *   indicates that this is a continuation of a prior `ListAnalysisRules` call
+   *   and the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.contactcenterinsights.v1.AnalysisRule|AnalysisRule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.list_analysis_rules.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ListAnalysisRules_async
+   */
+  listAnalysisRulesAsync(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IAnalysisRule> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAnalysisRules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAnalysisRules.asyncIterate(
+      this.innerApiCalls['listAnalysisRules'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IAnalysisRule>;
   }
   /**
    * Lists views.
@@ -5220,7 +8941,7 @@ export class ContactCenterInsightsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listViews`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5318,6 +9039,1261 @@ export class ContactCenterInsightsClient {
     ) as AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IView>;
   }
   /**
+   * Lists QaQuestions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the questions.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of questions to return in the response. If the
+   *   value is zero, the service will select a default size. A call might return
+   *   fewer objects than requested. A non-empty `next_page_token` in the response
+   *   indicates that more data is available.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListQaQuestionsResponse`. This
+   *   value indicates that this is a continuation of a prior `ListQaQuestions`
+   *   call and that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.contactcenterinsights.v1.QaQuestion|QaQuestion}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listQaQuestionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listQaQuestions(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion[],
+      protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest | null,
+      protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsResponse,
+    ]
+  >;
+  listQaQuestions(
+    request: protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion
+    >
+  ): void;
+  listQaQuestions(
+    request: protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion
+    >
+  ): void;
+  listQaQuestions(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IQaQuestion
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaQuestion[],
+      protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest | null,
+      protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listQaQuestions(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listQaQuestions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the questions.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of questions to return in the response. If the
+   *   value is zero, the service will select a default size. A call might return
+   *   fewer objects than requested. A non-empty `next_page_token` in the response
+   *   indicates that more data is available.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListQaQuestionsResponse`. This
+   *   value indicates that this is a continuation of a prior `ListQaQuestions`
+   *   call and that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.contactcenterinsights.v1.QaQuestion|QaQuestion} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listQaQuestionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listQaQuestionsStream(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listQaQuestions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listQaQuestions.createStream(
+      this.innerApiCalls.listQaQuestions as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listQaQuestions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the questions.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of questions to return in the response. If the
+   *   value is zero, the service will select a default size. A call might return
+   *   fewer objects than requested. A non-empty `next_page_token` in the response
+   *   indicates that more data is available.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListQaQuestionsResponse`. This
+   *   value indicates that this is a continuation of a prior `ListQaQuestions`
+   *   call and that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.contactcenterinsights.v1.QaQuestion|QaQuestion}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.list_qa_questions.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ListQaQuestions_async
+   */
+  listQaQuestionsAsync(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IQaQuestion> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listQaQuestions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listQaQuestions.asyncIterate(
+      this.innerApiCalls['listQaQuestions'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IQaQuestion>;
+  }
+  /**
+   * Lists QaScorecards.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the scorecards.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of scorecards to return in the response. If
+   *   the value is zero, the service will select a default size. A call might
+   *   return fewer objects than requested. A non-empty `next_page_token` in the
+   *   response indicates that more data is available.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListQaScorecardsResponse`. This
+   *   value indicates that this is a continuation of a prior `ListQaScorecards`
+   *   call and that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.contactcenterinsights.v1.QaScorecard|QaScorecard}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listQaScorecardsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listQaScorecards(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard[],
+      protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest | null,
+      protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsResponse,
+    ]
+  >;
+  listQaScorecards(
+    request: protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard
+    >
+  ): void;
+  listQaScorecards(
+    request: protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard
+    >
+  ): void;
+  listQaScorecards(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecard
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecard[],
+      protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest | null,
+      protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listQaScorecards(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listQaScorecards`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the scorecards.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of scorecards to return in the response. If
+   *   the value is zero, the service will select a default size. A call might
+   *   return fewer objects than requested. A non-empty `next_page_token` in the
+   *   response indicates that more data is available.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListQaScorecardsResponse`. This
+   *   value indicates that this is a continuation of a prior `ListQaScorecards`
+   *   call and that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.contactcenterinsights.v1.QaScorecard|QaScorecard} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listQaScorecardsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listQaScorecardsStream(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listQaScorecards'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listQaScorecards.createStream(
+      this.innerApiCalls.listQaScorecards as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listQaScorecards`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the scorecards.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of scorecards to return in the response. If
+   *   the value is zero, the service will select a default size. A call might
+   *   return fewer objects than requested. A non-empty `next_page_token` in the
+   *   response indicates that more data is available.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListQaScorecardsResponse`. This
+   *   value indicates that this is a continuation of a prior `ListQaScorecards`
+   *   call and that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.contactcenterinsights.v1.QaScorecard|QaScorecard}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.list_qa_scorecards.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ListQaScorecards_async
+   */
+  listQaScorecardsAsync(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IQaScorecard> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listQaScorecards'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listQaScorecards.asyncIterate(
+      this.innerApiCalls['listQaScorecards'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IQaScorecard>;
+  }
+  /**
+   * Lists all revisions under the parent QaScorecard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the scorecard revisions. To list all
+   *   revisions of all scorecards, substitute the QaScorecard ID with a '-'
+   *   character.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of scorecard revisions to return in the
+   *   response. If the value is zero, the service will select a default size. A
+   *   call might return fewer objects than requested. A non-empty
+   *   `next_page_token` in the response indicates that more data is available.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListQaScorecardRevisionsResponse`. This value indicates that this is a
+   *   continuation of a prior `ListQaScorecardRevisions` call and that the system
+   *   should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. A filter to reduce results to a specific subset. Useful for
+   *   querying scorecard revisions with specific properties.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision|QaScorecardRevision}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listQaScorecardRevisionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listQaScorecardRevisions(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision[],
+      protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest | null,
+      protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsResponse,
+    ]
+  >;
+  listQaScorecardRevisions(
+    request: protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision
+    >
+  ): void;
+  listQaScorecardRevisions(
+    request: protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision
+    >
+  ): void;
+  listQaScorecardRevisions(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision[],
+      protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest | null,
+      protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listQaScorecardRevisions(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `listQaScorecardRevisions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the scorecard revisions. To list all
+   *   revisions of all scorecards, substitute the QaScorecard ID with a '-'
+   *   character.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of scorecard revisions to return in the
+   *   response. If the value is zero, the service will select a default size. A
+   *   call might return fewer objects than requested. A non-empty
+   *   `next_page_token` in the response indicates that more data is available.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListQaScorecardRevisionsResponse`. This value indicates that this is a
+   *   continuation of a prior `ListQaScorecardRevisions` call and that the system
+   *   should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. A filter to reduce results to a specific subset. Useful for
+   *   querying scorecard revisions with specific properties.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision|QaScorecardRevision} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listQaScorecardRevisionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listQaScorecardRevisionsStream(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listQaScorecardRevisions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listQaScorecardRevisions.createStream(
+      this.innerApiCalls.listQaScorecardRevisions as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listQaScorecardRevisions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the scorecard revisions. To list all
+   *   revisions of all scorecards, substitute the QaScorecard ID with a '-'
+   *   character.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of scorecard revisions to return in the
+   *   response. If the value is zero, the service will select a default size. A
+   *   call might return fewer objects than requested. A non-empty
+   *   `next_page_token` in the response indicates that more data is available.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListQaScorecardRevisionsResponse`. This value indicates that this is a
+   *   continuation of a prior `ListQaScorecardRevisions` call and that the system
+   *   should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. A filter to reduce results to a specific subset. Useful for
+   *   querying scorecard revisions with specific properties.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision|QaScorecardRevision}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.list_qa_scorecard_revisions.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ListQaScorecardRevisions_async
+   */
+  listQaScorecardRevisionsAsync(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listQaScorecardRevisions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listQaScorecardRevisions.asyncIterate(
+      this.innerApiCalls['listQaScorecardRevisions'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision>;
+  }
+  /**
+   * List feedback labels.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the feedback labels.
+   * @param {string} [request.filter]
+   *   Optional. A filter to reduce results to a specific subset. Supports
+   *   disjunctions (OR) and conjunctions (AND). Automatically sorts by
+   *   conversation ID. To sort by all feedback labels in a project see
+   *   ListAllFeedbackLabels.
+   *
+   *   Supported fields:
+   *
+   *   * `issue_model_id`
+   *   * `qa_question_id`
+   *   * `qa_scorecard_id`
+   *   * `min_create_time`
+   *   * `max_create_time`
+   *   * `min_update_time`
+   *   * `max_update_time`
+   *   * `feedback_label_type`: QUALITY_AI, TOPIC_MODELING
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of feedback labels to return in the response.
+   *   A valid page size ranges from 0 to 100,000 inclusive. If the page size is
+   *   zero or unspecified, a default page size of 100 will be chosen. Note that a
+   *   call might return fewer results than the requested page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListFeedbackLabelsResponse`. This
+   *   value indicates that this is a continuation of a prior `ListFeedbackLabels`
+   *   call and that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.contactcenterinsights.v1.FeedbackLabel|FeedbackLabel}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listFeedbackLabelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listFeedbackLabels(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel[],
+      protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest | null,
+      protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsResponse,
+    ]
+  >;
+  listFeedbackLabels(
+    request: protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel
+    >
+  ): void;
+  listFeedbackLabels(
+    request: protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel
+    >
+  ): void;
+  listFeedbackLabels(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel[],
+      protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest | null,
+      protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listFeedbackLabels(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listFeedbackLabels`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the feedback labels.
+   * @param {string} [request.filter]
+   *   Optional. A filter to reduce results to a specific subset. Supports
+   *   disjunctions (OR) and conjunctions (AND). Automatically sorts by
+   *   conversation ID. To sort by all feedback labels in a project see
+   *   ListAllFeedbackLabels.
+   *
+   *   Supported fields:
+   *
+   *   * `issue_model_id`
+   *   * `qa_question_id`
+   *   * `qa_scorecard_id`
+   *   * `min_create_time`
+   *   * `max_create_time`
+   *   * `min_update_time`
+   *   * `max_update_time`
+   *   * `feedback_label_type`: QUALITY_AI, TOPIC_MODELING
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of feedback labels to return in the response.
+   *   A valid page size ranges from 0 to 100,000 inclusive. If the page size is
+   *   zero or unspecified, a default page size of 100 will be chosen. Note that a
+   *   call might return fewer results than the requested page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListFeedbackLabelsResponse`. This
+   *   value indicates that this is a continuation of a prior `ListFeedbackLabels`
+   *   call and that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.contactcenterinsights.v1.FeedbackLabel|FeedbackLabel} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listFeedbackLabelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listFeedbackLabelsStream(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listFeedbackLabels'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listFeedbackLabels.createStream(
+      this.innerApiCalls.listFeedbackLabels as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listFeedbackLabels`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the feedback labels.
+   * @param {string} [request.filter]
+   *   Optional. A filter to reduce results to a specific subset. Supports
+   *   disjunctions (OR) and conjunctions (AND). Automatically sorts by
+   *   conversation ID. To sort by all feedback labels in a project see
+   *   ListAllFeedbackLabels.
+   *
+   *   Supported fields:
+   *
+   *   * `issue_model_id`
+   *   * `qa_question_id`
+   *   * `qa_scorecard_id`
+   *   * `min_create_time`
+   *   * `max_create_time`
+   *   * `min_update_time`
+   *   * `max_update_time`
+   *   * `feedback_label_type`: QUALITY_AI, TOPIC_MODELING
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of feedback labels to return in the response.
+   *   A valid page size ranges from 0 to 100,000 inclusive. If the page size is
+   *   zero or unspecified, a default page size of 100 will be chosen. Note that a
+   *   call might return fewer results than the requested page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListFeedbackLabelsResponse`. This
+   *   value indicates that this is a continuation of a prior `ListFeedbackLabels`
+   *   call and that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.contactcenterinsights.v1.FeedbackLabel|FeedbackLabel}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.list_feedback_labels.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ListFeedbackLabels_async
+   */
+  listFeedbackLabelsAsync(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listFeedbackLabels'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listFeedbackLabels.asyncIterate(
+      this.innerApiCalls['listFeedbackLabels'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel>;
+  }
+  /**
+   * List all feedback labels by project number.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of all feedback labels per project.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of feedback labels to return in the response.
+   *   A valid page size ranges from 0 to 100,000 inclusive. If the page size is
+   *   zero or unspecified, a default page size of 100 will be chosen. Note that a
+   *   call might return fewer results than the requested page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListAllFeedbackLabelsResponse`.
+   *   This value indicates that this is a continuation of a prior
+   *   `ListAllFeedbackLabels` call and that the system should return the next
+   *   page of data.
+   * @param {string} [request.filter]
+   *   Optional. A filter to reduce results to a specific subset in the entire
+   *   project. Supports disjunctions (OR) and conjunctions (AND).
+   *
+   *   Supported fields:
+   *
+   *   * `issue_model_id`
+   *   * `qa_question_id`
+   *   * `min_create_time`
+   *   * `max_create_time`
+   *   * `min_update_time`
+   *   * `max_update_time`
+   *   * `feedback_label_type`: QUALITY_AI, TOPIC_MODELING
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.contactcenterinsights.v1.FeedbackLabel|FeedbackLabel}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAllFeedbackLabelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAllFeedbackLabels(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel[],
+      protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest | null,
+      protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsResponse,
+    ]
+  >;
+  listAllFeedbackLabels(
+    request: protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel
+    >
+  ): void;
+  listAllFeedbackLabels(
+    request: protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel
+    >
+  ): void;
+  listAllFeedbackLabels(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel[],
+      protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest | null,
+      protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listAllFeedbackLabels(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listAllFeedbackLabels`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of all feedback labels per project.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of feedback labels to return in the response.
+   *   A valid page size ranges from 0 to 100,000 inclusive. If the page size is
+   *   zero or unspecified, a default page size of 100 will be chosen. Note that a
+   *   call might return fewer results than the requested page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListAllFeedbackLabelsResponse`.
+   *   This value indicates that this is a continuation of a prior
+   *   `ListAllFeedbackLabels` call and that the system should return the next
+   *   page of data.
+   * @param {string} [request.filter]
+   *   Optional. A filter to reduce results to a specific subset in the entire
+   *   project. Supports disjunctions (OR) and conjunctions (AND).
+   *
+   *   Supported fields:
+   *
+   *   * `issue_model_id`
+   *   * `qa_question_id`
+   *   * `min_create_time`
+   *   * `max_create_time`
+   *   * `min_update_time`
+   *   * `max_update_time`
+   *   * `feedback_label_type`: QUALITY_AI, TOPIC_MODELING
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.contactcenterinsights.v1.FeedbackLabel|FeedbackLabel} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAllFeedbackLabelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAllFeedbackLabelsStream(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAllFeedbackLabels'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAllFeedbackLabels.createStream(
+      this.innerApiCalls.listAllFeedbackLabels as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listAllFeedbackLabels`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of all feedback labels per project.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of feedback labels to return in the response.
+   *   A valid page size ranges from 0 to 100,000 inclusive. If the page size is
+   *   zero or unspecified, a default page size of 100 will be chosen. Note that a
+   *   call might return fewer results than the requested page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListAllFeedbackLabelsResponse`.
+   *   This value indicates that this is a continuation of a prior
+   *   `ListAllFeedbackLabels` call and that the system should return the next
+   *   page of data.
+   * @param {string} [request.filter]
+   *   Optional. A filter to reduce results to a specific subset in the entire
+   *   project. Supports disjunctions (OR) and conjunctions (AND).
+   *
+   *   Supported fields:
+   *
+   *   * `issue_model_id`
+   *   * `qa_question_id`
+   *   * `min_create_time`
+   *   * `max_create_time`
+   *   * `min_update_time`
+   *   * `max_update_time`
+   *   * `feedback_label_type`: QUALITY_AI, TOPIC_MODELING
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.contactcenterinsights.v1.FeedbackLabel|FeedbackLabel}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.list_all_feedback_labels.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ListAllFeedbackLabels_async
+   */
+  listAllFeedbackLabelsAsync(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAllFeedbackLabels'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAllFeedbackLabels.asyncIterate(
+      this.innerApiCalls['listAllFeedbackLabels'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel>;
+  }
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  getIamPolicy(
+    request: IamProtos.google.iam.v1.GetIamPolicyRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.Policy,
+          IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.Policy,
+      IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+    return this.iamClient.getIamPolicy(request, options, callback);
+  }
+
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  setIamPolicy(
+    request: IamProtos.google.iam.v1.SetIamPolicyRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.Policy,
+          IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.Policy,
+      IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+    return this.iamClient.setIamPolicy(request, options, callback);
+  }
+
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
+  testIamPermissions(
+    request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.TestIamPermissionsResponse,
+          IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.TestIamPermissionsResponse,
+      IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    return this.iamClient.testIamPermissions(request, options, callback);
+  }
+
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -5349,7 +10325,7 @@ export class ContactCenterInsightsClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -5362,6 +10338,20 @@ export class ContactCenterInsightsClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5398,6 +10388,13 @@ export class ContactCenterInsightsClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5433,11 +10430,11 @@ export class ContactCenterInsightsClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -5446,6 +10443,20 @@ export class ContactCenterInsightsClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5476,7 +10487,7 @@ export class ContactCenterInsightsClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -5489,6 +10500,20 @@ export class ContactCenterInsightsClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -5497,123 +10522,95 @@ export class ContactCenterInsightsClient {
   // --------------------
 
   /**
-   * Return a fully-qualified analysis resource name string.
+   * Return a fully-qualified analysisRule resource name string.
    *
    * @param {string} project
    * @param {string} location
-   * @param {string} conversation
-   * @param {string} analysis
+   * @param {string} analysis_rule
    * @returns {string} Resource name string.
    */
-  analysisPath(
-    project: string,
-    location: string,
-    conversation: string,
-    analysis: string
-  ) {
-    return this.pathTemplates.analysisPathTemplate.render({
+  analysisRulePath(project: string, location: string, analysisRule: string) {
+    return this.pathTemplates.analysisRulePathTemplate.render({
       project: project,
       location: location,
-      conversation: conversation,
-      analysis: analysis,
+      analysis_rule: analysisRule,
     });
   }
 
   /**
-   * Parse the project from Analysis resource.
+   * Parse the project from AnalysisRule resource.
    *
-   * @param {string} analysisName
-   *   A fully-qualified path representing Analysis resource.
+   * @param {string} analysisRuleName
+   *   A fully-qualified path representing AnalysisRule resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromAnalysisName(analysisName: string) {
-    return this.pathTemplates.analysisPathTemplate.match(analysisName).project;
-  }
-
-  /**
-   * Parse the location from Analysis resource.
-   *
-   * @param {string} analysisName
-   *   A fully-qualified path representing Analysis resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromAnalysisName(analysisName: string) {
-    return this.pathTemplates.analysisPathTemplate.match(analysisName).location;
-  }
-
-  /**
-   * Parse the conversation from Analysis resource.
-   *
-   * @param {string} analysisName
-   *   A fully-qualified path representing Analysis resource.
-   * @returns {string} A string representing the conversation.
-   */
-  matchConversationFromAnalysisName(analysisName: string) {
-    return this.pathTemplates.analysisPathTemplate.match(analysisName)
-      .conversation;
-  }
-
-  /**
-   * Parse the analysis from Analysis resource.
-   *
-   * @param {string} analysisName
-   *   A fully-qualified path representing Analysis resource.
-   * @returns {string} A string representing the analysis.
-   */
-  matchAnalysisFromAnalysisName(analysisName: string) {
-    return this.pathTemplates.analysisPathTemplate.match(analysisName).analysis;
-  }
-
-  /**
-   * Return a fully-qualified conversation resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} conversation
-   * @returns {string} Resource name string.
-   */
-  conversationPath(project: string, location: string, conversation: string) {
-    return this.pathTemplates.conversationPathTemplate.render({
-      project: project,
-      location: location,
-      conversation: conversation,
-    });
-  }
-
-  /**
-   * Parse the project from Conversation resource.
-   *
-   * @param {string} conversationName
-   *   A fully-qualified path representing Conversation resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+  matchProjectFromAnalysisRuleName(analysisRuleName: string) {
+    return this.pathTemplates.analysisRulePathTemplate.match(analysisRuleName)
       .project;
   }
 
   /**
-   * Parse the location from Conversation resource.
+   * Parse the location from AnalysisRule resource.
    *
-   * @param {string} conversationName
-   *   A fully-qualified path representing Conversation resource.
+   * @param {string} analysisRuleName
+   *   A fully-qualified path representing AnalysisRule resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+  matchLocationFromAnalysisRuleName(analysisRuleName: string) {
+    return this.pathTemplates.analysisRulePathTemplate.match(analysisRuleName)
       .location;
   }
 
   /**
-   * Parse the conversation from Conversation resource.
+   * Parse the analysis_rule from AnalysisRule resource.
    *
-   * @param {string} conversationName
-   *   A fully-qualified path representing Conversation resource.
-   * @returns {string} A string representing the conversation.
+   * @param {string} analysisRuleName
+   *   A fully-qualified path representing AnalysisRule resource.
+   * @returns {string} A string representing the analysis_rule.
    */
-  matchConversationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName)
-      .conversation;
+  matchAnalysisRuleFromAnalysisRuleName(analysisRuleName: string) {
+    return this.pathTemplates.analysisRulePathTemplate.match(analysisRuleName)
+      .analysis_rule;
+  }
+
+  /**
+   * Return a fully-qualified encryptionSpec resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  encryptionSpecPath(project: string, location: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from EncryptionSpec resource.
+   *
+   * @param {string} encryptionSpecName
+   *   A fully-qualified path representing EncryptionSpec resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEncryptionSpecName(encryptionSpecName: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.match(
+      encryptionSpecName
+    ).project;
+  }
+
+  /**
+   * Parse the location from EncryptionSpec resource.
+   *
+   * @param {string} encryptionSpecName
+   *   A fully-qualified path representing EncryptionSpec resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEncryptionSpecName(encryptionSpecName: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.match(
+      encryptionSpecName
+    ).location;
   }
 
   /**
@@ -5824,6 +10821,860 @@ export class ContactCenterInsightsClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationAuthorizedViewSetAuthorizedViewConversation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} authorized_view_set
+   * @param {string} authorized_view
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectLocationAuthorizedViewSetAuthorizedViewConversationPath(
+    project: string,
+    location: string,
+    authorizedViewSet: string,
+    authorizedView: string,
+    conversation: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        authorized_view_set: authorizedViewSet,
+        authorized_view: authorizedView,
+        conversation: conversation,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAuthorizedViewSetAuthorizedViewConversation resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAuthorizedViewSetAuthorizedViewConversation resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationName
+    ).location;
+  }
+
+  /**
+   * Parse the authorized_view_set from ProjectLocationAuthorizedViewSetAuthorizedViewConversation resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation resource.
+   * @returns {string} A string representing the authorized_view_set.
+   */
+  matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationName
+    ).authorized_view_set;
+  }
+
+  /**
+   * Parse the authorized_view from ProjectLocationAuthorizedViewSetAuthorizedViewConversation resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation resource.
+   * @returns {string} A string representing the authorized_view.
+   */
+  matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationName
+    ).authorized_view;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationAuthorizedViewSetAuthorizedViewConversation resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationName
+    ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} authorized_view_set
+   * @param {string} authorized_view
+   * @param {string} conversation
+   * @param {string} analysis
+   * @returns {string} Resource name string.
+   */
+  projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPath(
+    project: string,
+    location: string,
+    authorizedViewSet: string,
+    authorizedView: string,
+    conversation: string,
+    analysis: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        authorized_view_set: authorizedViewSet,
+        authorized_view: authorizedView,
+        conversation: conversation,
+        analysis: analysis,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_analysis resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_analysis resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+    ).location;
+  }
+
+  /**
+   * Parse the authorized_view_set from ProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_analysis resource.
+   * @returns {string} A string representing the authorized_view_set.
+   */
+  matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+    ).authorized_view_set;
+  }
+
+  /**
+   * Parse the authorized_view from ProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_analysis resource.
+   * @returns {string} A string representing the authorized_view.
+   */
+  matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+    ).authorized_view;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_analysis resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+    ).conversation;
+  }
+
+  /**
+   * Parse the analysis from ProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_analysis resource.
+   * @returns {string} A string representing the analysis.
+   */
+  matchAnalysisFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+    ).analysis;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} authorized_view_set
+   * @param {string} authorized_view
+   * @param {string} conversation
+   * @param {string} feedback_label
+   * @returns {string} Resource name string.
+   */
+  projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPath(
+    project: string,
+    location: string,
+    authorizedViewSet: string,
+    authorizedView: string,
+    conversation: string,
+    feedbackLabel: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        authorized_view_set: authorizedViewSet,
+        authorized_view: authorizedView,
+        conversation: conversation,
+        feedback_label: feedbackLabel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_feedback_label resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_feedback_label resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+    ).location;
+  }
+
+  /**
+   * Parse the authorized_view_set from ProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_feedback_label resource.
+   * @returns {string} A string representing the authorized_view_set.
+   */
+  matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+    ).authorized_view_set;
+  }
+
+  /**
+   * Parse the authorized_view from ProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_feedback_label resource.
+   * @returns {string} A string representing the authorized_view.
+   */
+  matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+    ).authorized_view;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_feedback_label resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+    ).conversation;
+  }
+
+  /**
+   * Parse the feedback_label from ProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_feedback_label resource.
+   * @returns {string} A string representing the feedback_label.
+   */
+  matchFeedbackLabelFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+    ).feedback_label;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationPath(
+    project: string,
+    location: string,
+    conversation: string
+  ) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.render({
+      project: project,
+      location: location,
+      conversation: conversation,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversation resource.
+   *
+   * @param {string} projectLocationConversationName
+   *   A fully-qualified path representing project_location_conversation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationName(
+    projectLocationConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.match(
+      projectLocationConversationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversation resource.
+   *
+   * @param {string} projectLocationConversationName
+   *   A fully-qualified path representing project_location_conversation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationName(
+    projectLocationConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.match(
+      projectLocationConversationName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationConversation resource.
+   *
+   * @param {string} projectLocationConversationName
+   *   A fully-qualified path representing project_location_conversation resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationConversationName(
+    projectLocationConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.match(
+      projectLocationConversationName
+    ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversationAnalysis resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation
+   * @param {string} analysis
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationAnalysisPath(
+    project: string,
+    location: string,
+    conversation: string,
+    analysis: string
+  ) {
+    return this.pathTemplates.projectLocationConversationAnalysisPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation: conversation,
+        analysis: analysis,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversationAnalysis resource.
+   *
+   * @param {string} projectLocationConversationAnalysisName
+   *   A fully-qualified path representing project_location_conversation_analysis resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationAnalysisName(
+    projectLocationConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationAnalysisPathTemplate.match(
+      projectLocationConversationAnalysisName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversationAnalysis resource.
+   *
+   * @param {string} projectLocationConversationAnalysisName
+   *   A fully-qualified path representing project_location_conversation_analysis resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationAnalysisName(
+    projectLocationConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationAnalysisPathTemplate.match(
+      projectLocationConversationAnalysisName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationConversationAnalysis resource.
+   *
+   * @param {string} projectLocationConversationAnalysisName
+   *   A fully-qualified path representing project_location_conversation_analysis resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationConversationAnalysisName(
+    projectLocationConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationAnalysisPathTemplate.match(
+      projectLocationConversationAnalysisName
+    ).conversation;
+  }
+
+  /**
+   * Parse the analysis from ProjectLocationConversationAnalysis resource.
+   *
+   * @param {string} projectLocationConversationAnalysisName
+   *   A fully-qualified path representing project_location_conversation_analysis resource.
+   * @returns {string} A string representing the analysis.
+   */
+  matchAnalysisFromProjectLocationConversationAnalysisName(
+    projectLocationConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationAnalysisPathTemplate.match(
+      projectLocationConversationAnalysisName
+    ).analysis;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversationFeedbackLabel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation
+   * @param {string} feedback_label
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationFeedbackLabelPath(
+    project: string,
+    location: string,
+    conversation: string,
+    feedbackLabel: string
+  ) {
+    return this.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation: conversation,
+        feedback_label: feedbackLabel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_conversation_feedback_label resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationFeedbackLabelName(
+    projectLocationConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.match(
+      projectLocationConversationFeedbackLabelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_conversation_feedback_label resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationFeedbackLabelName(
+    projectLocationConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.match(
+      projectLocationConversationFeedbackLabelName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_conversation_feedback_label resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationConversationFeedbackLabelName(
+    projectLocationConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.match(
+      projectLocationConversationFeedbackLabelName
+    ).conversation;
+  }
+
+  /**
+   * Parse the feedback_label from ProjectLocationConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_conversation_feedback_label resource.
+   * @returns {string} A string representing the feedback_label.
+   */
+  matchFeedbackLabelFromProjectLocationConversationFeedbackLabelName(
+    projectLocationConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.match(
+      projectLocationConversationFeedbackLabelName
+    ).feedback_label;
+  }
+
+  /**
+   * Return a fully-qualified qaQuestion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} qa_scorecard
+   * @param {string} revision
+   * @param {string} qa_question
+   * @returns {string} Resource name string.
+   */
+  qaQuestionPath(
+    project: string,
+    location: string,
+    qaScorecard: string,
+    revision: string,
+    qaQuestion: string
+  ) {
+    return this.pathTemplates.qaQuestionPathTemplate.render({
+      project: project,
+      location: location,
+      qa_scorecard: qaScorecard,
+      revision: revision,
+      qa_question: qaQuestion,
+    });
+  }
+
+  /**
+   * Parse the project from QaQuestion resource.
+   *
+   * @param {string} qaQuestionName
+   *   A fully-qualified path representing QaQuestion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromQaQuestionName(qaQuestionName: string) {
+    return this.pathTemplates.qaQuestionPathTemplate.match(qaQuestionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from QaQuestion resource.
+   *
+   * @param {string} qaQuestionName
+   *   A fully-qualified path representing QaQuestion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromQaQuestionName(qaQuestionName: string) {
+    return this.pathTemplates.qaQuestionPathTemplate.match(qaQuestionName)
+      .location;
+  }
+
+  /**
+   * Parse the qa_scorecard from QaQuestion resource.
+   *
+   * @param {string} qaQuestionName
+   *   A fully-qualified path representing QaQuestion resource.
+   * @returns {string} A string representing the qa_scorecard.
+   */
+  matchQaScorecardFromQaQuestionName(qaQuestionName: string) {
+    return this.pathTemplates.qaQuestionPathTemplate.match(qaQuestionName)
+      .qa_scorecard;
+  }
+
+  /**
+   * Parse the revision from QaQuestion resource.
+   *
+   * @param {string} qaQuestionName
+   *   A fully-qualified path representing QaQuestion resource.
+   * @returns {string} A string representing the revision.
+   */
+  matchRevisionFromQaQuestionName(qaQuestionName: string) {
+    return this.pathTemplates.qaQuestionPathTemplate.match(qaQuestionName)
+      .revision;
+  }
+
+  /**
+   * Parse the qa_question from QaQuestion resource.
+   *
+   * @param {string} qaQuestionName
+   *   A fully-qualified path representing QaQuestion resource.
+   * @returns {string} A string representing the qa_question.
+   */
+  matchQaQuestionFromQaQuestionName(qaQuestionName: string) {
+    return this.pathTemplates.qaQuestionPathTemplate.match(qaQuestionName)
+      .qa_question;
+  }
+
+  /**
+   * Return a fully-qualified qaScorecard resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} qa_scorecard
+   * @returns {string} Resource name string.
+   */
+  qaScorecardPath(project: string, location: string, qaScorecard: string) {
+    return this.pathTemplates.qaScorecardPathTemplate.render({
+      project: project,
+      location: location,
+      qa_scorecard: qaScorecard,
+    });
+  }
+
+  /**
+   * Parse the project from QaScorecard resource.
+   *
+   * @param {string} qaScorecardName
+   *   A fully-qualified path representing QaScorecard resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromQaScorecardName(qaScorecardName: string) {
+    return this.pathTemplates.qaScorecardPathTemplate.match(qaScorecardName)
+      .project;
+  }
+
+  /**
+   * Parse the location from QaScorecard resource.
+   *
+   * @param {string} qaScorecardName
+   *   A fully-qualified path representing QaScorecard resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromQaScorecardName(qaScorecardName: string) {
+    return this.pathTemplates.qaScorecardPathTemplate.match(qaScorecardName)
+      .location;
+  }
+
+  /**
+   * Parse the qa_scorecard from QaScorecard resource.
+   *
+   * @param {string} qaScorecardName
+   *   A fully-qualified path representing QaScorecard resource.
+   * @returns {string} A string representing the qa_scorecard.
+   */
+  matchQaScorecardFromQaScorecardName(qaScorecardName: string) {
+    return this.pathTemplates.qaScorecardPathTemplate.match(qaScorecardName)
+      .qa_scorecard;
+  }
+
+  /**
+   * Return a fully-qualified qaScorecardResult resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} qa_scorecard_result
+   * @returns {string} Resource name string.
+   */
+  qaScorecardResultPath(
+    project: string,
+    location: string,
+    qaScorecardResult: string
+  ) {
+    return this.pathTemplates.qaScorecardResultPathTemplate.render({
+      project: project,
+      location: location,
+      qa_scorecard_result: qaScorecardResult,
+    });
+  }
+
+  /**
+   * Parse the project from QaScorecardResult resource.
+   *
+   * @param {string} qaScorecardResultName
+   *   A fully-qualified path representing QaScorecardResult resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromQaScorecardResultName(qaScorecardResultName: string) {
+    return this.pathTemplates.qaScorecardResultPathTemplate.match(
+      qaScorecardResultName
+    ).project;
+  }
+
+  /**
+   * Parse the location from QaScorecardResult resource.
+   *
+   * @param {string} qaScorecardResultName
+   *   A fully-qualified path representing QaScorecardResult resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromQaScorecardResultName(qaScorecardResultName: string) {
+    return this.pathTemplates.qaScorecardResultPathTemplate.match(
+      qaScorecardResultName
+    ).location;
+  }
+
+  /**
+   * Parse the qa_scorecard_result from QaScorecardResult resource.
+   *
+   * @param {string} qaScorecardResultName
+   *   A fully-qualified path representing QaScorecardResult resource.
+   * @returns {string} A string representing the qa_scorecard_result.
+   */
+  matchQaScorecardResultFromQaScorecardResultName(
+    qaScorecardResultName: string
+  ) {
+    return this.pathTemplates.qaScorecardResultPathTemplate.match(
+      qaScorecardResultName
+    ).qa_scorecard_result;
+  }
+
+  /**
+   * Return a fully-qualified qaScorecardRevision resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} qa_scorecard
+   * @param {string} revision
+   * @returns {string} Resource name string.
+   */
+  qaScorecardRevisionPath(
+    project: string,
+    location: string,
+    qaScorecard: string,
+    revision: string
+  ) {
+    return this.pathTemplates.qaScorecardRevisionPathTemplate.render({
+      project: project,
+      location: location,
+      qa_scorecard: qaScorecard,
+      revision: revision,
+    });
+  }
+
+  /**
+   * Parse the project from QaScorecardRevision resource.
+   *
+   * @param {string} qaScorecardRevisionName
+   *   A fully-qualified path representing QaScorecardRevision resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromQaScorecardRevisionName(qaScorecardRevisionName: string) {
+    return this.pathTemplates.qaScorecardRevisionPathTemplate.match(
+      qaScorecardRevisionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from QaScorecardRevision resource.
+   *
+   * @param {string} qaScorecardRevisionName
+   *   A fully-qualified path representing QaScorecardRevision resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromQaScorecardRevisionName(qaScorecardRevisionName: string) {
+    return this.pathTemplates.qaScorecardRevisionPathTemplate.match(
+      qaScorecardRevisionName
+    ).location;
+  }
+
+  /**
+   * Parse the qa_scorecard from QaScorecardRevision resource.
+   *
+   * @param {string} qaScorecardRevisionName
+   *   A fully-qualified path representing QaScorecardRevision resource.
+   * @returns {string} A string representing the qa_scorecard.
+   */
+  matchQaScorecardFromQaScorecardRevisionName(qaScorecardRevisionName: string) {
+    return this.pathTemplates.qaScorecardRevisionPathTemplate.match(
+      qaScorecardRevisionName
+    ).qa_scorecard;
+  }
+
+  /**
+   * Parse the revision from QaScorecardRevision resource.
+   *
+   * @param {string} qaScorecardRevisionName
+   *   A fully-qualified path representing QaScorecardRevision resource.
+   * @returns {string} A string representing the revision.
+   */
+  matchRevisionFromQaScorecardRevisionName(qaScorecardRevisionName: string) {
+    return this.pathTemplates.qaScorecardRevisionPathTemplate.match(
+      qaScorecardRevisionName
+    ).revision;
+  }
+
+  /**
    * Return a fully-qualified settings resource name string.
    *
    * @param {string} project
@@ -5919,6 +11770,7 @@ export class ContactCenterInsightsClient {
       return this.contactCenterInsightsStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.iamClient.close();
         this.operationsClient.close();
       });
     }

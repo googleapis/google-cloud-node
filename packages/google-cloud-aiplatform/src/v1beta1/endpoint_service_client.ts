@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -262,6 +262,12 @@ export class EndpointServiceClient {
       featureGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureGroups/{feature_group}'
       ),
+      featureMonitorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}'
+      ),
+      featureMonitorJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}/featureMonitorJobs/{feature_monitor_job}'
+      ),
       featureOnlineStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}'
       ),
@@ -455,6 +461,9 @@ export class EndpointServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
@@ -477,6 +486,9 @@ export class EndpointServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
             },
           ],
         },
@@ -510,6 +522,10 @@ export class EndpointServiceClient {
               body: '*',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
+              body: '*',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
               body: '*',
             },
@@ -535,6 +551,10 @@ export class EndpointServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -563,6 +583,9 @@ export class EndpointServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
             },
             {
@@ -582,6 +605,9 @@ export class EndpointServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
             },
           ],
         },
@@ -1048,6 +1074,10 @@ export class EndpointServiceClient {
             },
             {
               delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
             {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
@@ -1261,6 +1291,10 @@ export class EndpointServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
           ],
@@ -1399,6 +1433,9 @@ export class EndpointServiceClient {
             },
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
             },
             {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
             {
@@ -1558,6 +1595,9 @@ export class EndpointServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
           ],
         },
         {
@@ -1683,6 +1723,9 @@ export class EndpointServiceClient {
             },
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
             {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
             {get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations'},
@@ -1838,6 +1881,9 @@ export class EndpointServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*}/operations',
             },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}/operations',
+            },
           ],
         },
         {
@@ -1987,6 +2033,9 @@ export class EndpointServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
             {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
             {
@@ -2145,6 +2194,9 @@ export class EndpointServiceClient {
             {
               post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
           ],
         },
       ];
@@ -2157,6 +2209,12 @@ export class EndpointServiceClient {
     ) as gax.protobuf.Type;
     const createEndpointMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.CreateEndpointOperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateEndpointLongRunningResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.Endpoint'
+    ) as gax.protobuf.Type;
+    const updateEndpointLongRunningMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.UpdateEndpointOperationMetadata'
     ) as gax.protobuf.Type;
     const deleteEndpointResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
@@ -2188,6 +2246,15 @@ export class EndpointServiceClient {
         this.operationsClient,
         createEndpointResponse.decode.bind(createEndpointResponse),
         createEndpointMetadata.decode.bind(createEndpointMetadata)
+      ),
+      updateEndpointLongRunning: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateEndpointLongRunningResponse.decode.bind(
+          updateEndpointLongRunningResponse
+        ),
+        updateEndpointLongRunningMetadata.decode.bind(
+          updateEndpointLongRunningMetadata
+        )
       ),
       deleteEndpoint: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -2265,6 +2332,7 @@ export class EndpointServiceClient {
       'getEndpoint',
       'listEndpoints',
       'updateEndpoint',
+      'updateEndpointLongRunning',
       'deleteEndpoint',
       'deployModel',
       'undeployModel',
@@ -2724,6 +2792,148 @@ export class EndpointServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.Endpoint,
       protos.google.cloud.aiplatform.v1beta1.CreateEndpointOperationMetadata
+    >;
+  }
+  /**
+   * Updates an Endpoint with a long running operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1beta1.Endpoint} request.endpoint
+   *   Required. The Endpoint which replaces the resource on the server. Currently
+   *   we only support updating the `client_connection_config` field, all the
+   *   other fields' update will be blocked.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/endpoint_service.update_endpoint_long_running.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_EndpointService_UpdateEndpointLongRunning_async
+   */
+  updateEndpointLongRunning(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointLongRunningRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateEndpointLongRunning(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointLongRunningRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEndpointLongRunning(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointLongRunningRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEndpointLongRunning(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointLongRunningRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+            protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'endpoint.name': request.endpoint!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateEndpointLongRunning(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateEndpointLongRunning()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/endpoint_service.update_endpoint_long_running.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_EndpointService_UpdateEndpointLongRunning_async
+   */
+  async checkUpdateEndpointLongRunningProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.Endpoint,
+      protos.google.cloud.aiplatform.v1beta1.UpdateEndpointOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateEndpointLongRunning,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.Endpoint,
+      protos.google.cloud.aiplatform.v1beta1.UpdateEndpointOperationMetadata
     >;
   }
   /**
@@ -3455,7 +3665,7 @@ export class EndpointServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEndpoints`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3846,7 +4056,7 @@ export class EndpointServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -3859,6 +4069,20 @@ export class EndpointServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3895,6 +4119,13 @@ export class EndpointServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3930,11 +4161,11 @@ export class EndpointServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -3943,6 +4174,20 @@ export class EndpointServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -3973,7 +4218,7 @@ export class EndpointServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -3986,6 +4231,20 @@ export class EndpointServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -5015,6 +5274,174 @@ export class EndpointServiceClient {
   matchFeatureGroupFromFeatureGroupName(featureGroupName: string) {
     return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
       .feature_group;
+  }
+
+  /**
+   * Return a fully-qualified featureMonitor resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} feature_group
+   * @param {string} feature_monitor
+   * @returns {string} Resource name string.
+   */
+  featureMonitorPath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    featureMonitor: string
+  ) {
+    return this.pathTemplates.featureMonitorPathTemplate.render({
+      project: project,
+      location: location,
+      feature_group: featureGroup,
+      feature_monitor: featureMonitor,
+    });
+  }
+
+  /**
+   * Parse the project from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).project;
+  }
+
+  /**
+   * Parse the location from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).location;
+  }
+
+  /**
+   * Parse the feature_group from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the feature_group.
+   */
+  matchFeatureGroupFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).feature_group;
+  }
+
+  /**
+   * Parse the feature_monitor from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the feature_monitor.
+   */
+  matchFeatureMonitorFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).feature_monitor;
+  }
+
+  /**
+   * Return a fully-qualified featureMonitorJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} feature_group
+   * @param {string} feature_monitor
+   * @param {string} feature_monitor_job
+   * @returns {string} Resource name string.
+   */
+  featureMonitorJobPath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    featureMonitor: string,
+    featureMonitorJob: string
+  ) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.render({
+      project: project,
+      location: location,
+      feature_group: featureGroup,
+      feature_monitor: featureMonitor,
+      feature_monitor_job: featureMonitorJob,
+    });
+  }
+
+  /**
+   * Parse the project from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).location;
+  }
+
+  /**
+   * Parse the feature_group from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_group.
+   */
+  matchFeatureGroupFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_group;
+  }
+
+  /**
+   * Parse the feature_monitor from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_monitor.
+   */
+  matchFeatureMonitorFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_monitor;
+  }
+
+  /**
+   * Parse the feature_monitor_job from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_monitor_job.
+   */
+  matchFeatureMonitorJobFromFeatureMonitorJobName(
+    featureMonitorJobName: string
+  ) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_monitor_job;
   }
 
   /**

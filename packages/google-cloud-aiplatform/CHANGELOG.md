@@ -1,5 +1,111 @@
 # Changelog
 
+## [3.35.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.34.0...aiplatform-v3.35.0) (2025-02-28)
+
+
+### Features
+
+* A new field `create_time` is added to message `.google.cloud.aiplatform.v1.GenerateContentResponse` ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* A new field `create_time` is added to message `.google.cloud.aiplatform.v1.GenerateContentResponse` ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* A new field `list_all_versions` to `ListPublisherModelsRequest` ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* A new field `response_id` is added to message `.google.cloud.aiplatform.v1.GenerateContentResponse` ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* A new value `NVIDIA_H100_MEGA_80GB` is added to enum `AcceleratorType` ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* A new value `NVIDIA_H100_MEGA_80GB` is added to enum `AcceleratorType` ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add a new thought field in content proto ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add additional Probe options to v1 model.proto ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add Context Cache to v1 ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add GenerationConfig.MediaResolution ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add GenerationConfig.Modality ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add GenerationConfig.SpeechConfig ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add LLM parser proto to API ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add machine_spec, data_persistent_disk_spec, network_spec, euc_config, shielded_vm_config to `.google.cloud.aiplatform.v1beta1.NotebookRuntime` ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add machine_spec, data_persistent_disk_spec, network_spec, euc_config, shielded_vm_config to message `.google.cloud.aiplatform.v1.NotebookRuntime` ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add Model Garden deploy API ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add Model Garden deploy API ([#5836](https://github.com/googleapis/google-cloud-node/issues/5836)) ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add new `RequiredReplicaCount` field to DedicatedResources in MachineResources ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add new `RequiredReplicaCount` field to DedicatedResources in MachineResources ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add new `Status` field to DeployedModel in Endpoint ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add new `Status` field to DeployedModel in Endpoint ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add Notebooks Runtime Software Configuration ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add Notebooks Runtime Software Configuration ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add optimized config in v1 API ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add per-modality token count break downs for GenAI APIs ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add per-modality token count break downs for GenAI APIs ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add rag_files_count to RagCorpus to count number of associated files ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add retrieval_config to ToolConfig v1 ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add retrieval_config to ToolConfig v1beta1 ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add RolloutOptions to DeployedModel in v1beta1 endpoint.proto, add additional Probe options in v1beta1 model.proto ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add speculative decoding spec to DeployedModel proto ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add Tool.GoogleSearch ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add Vertex RAG service proto to v1 ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add workbench_runtime and kernel_name to NotebookExecutionJob ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Add workbench_runtime and kernel_name to NotebookExecutionJob ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Enable FeatureGroup IAM Methods in v1beta1 API version ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Enable FeatureGroup Service Account and IAM methods ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Enable FeatureView Service Account in v1 API version ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Enable UpdateFeatureMonitor in v1beta1 API version ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* EvaluateDataset API v1beta1 initial release ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Expose code execution tool API to v1 ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Introduce HybridSearch and Ranking configuration for RAG ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Introduce VertexAiSearch integration for RAG ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Model Registry Checkpoint API ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Model Registry Checkpoint API ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Paging changes for bigquery ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Reasoning Engine v1 GAPIC release ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Remove autorater config related visibility v1beta1 ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Support streaming and multi class methods in Reasoning Engine v1beta1 API ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+
+
+### Bug Fixes
+
+* Add x-goog-request params to headers for LRO-polling methods ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Finalize fixing typings for headers in generator ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Fix typings for headers in generator ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+* Remove extra protos in ESM & capture ESM in headers ([fdef07b](https://github.com/googleapis/google-cloud-node/commit/fdef07b2005791ed8a3bd600b526784ce24a78d8))
+
+## [3.34.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.33.0...aiplatform-v3.34.0) (2024-11-21)
+
+
+### Features
+
+* Add a v1 UpdateEndpointLongRunning API ([#5812](https://github.com/googleapis/google-cloud-node/issues/5812)) ([39dc74e](https://github.com/googleapis/google-cloud-node/commit/39dc74ec30a573169d282a6e1b172c48e23b00d4))
+
+## [3.33.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.32.0...aiplatform-v3.33.0) (2024-11-14)
+
+
+### Features
+
+* Add fast_tryout_enabled to FasterDeploymentConfig v1 proto ([#5781](https://github.com/googleapis/google-cloud-node/issues/5781)) ([3cc221d](https://github.com/googleapis/google-cloud-node/commit/3cc221d8c6018eab6e7a5ba14c38be2218dcee36))
+
+## [3.32.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.31.0...aiplatform-v3.32.0) (2024-10-30)
+
+
+### Features
+
+* Add code execution tool API ([#5761](https://github.com/googleapis/google-cloud-node/issues/5761)) ([f032b83](https://github.com/googleapis/google-cloud-node/commit/f032b8303a412828252e822edb607be47471013b))
+* Introduce DefaultRuntime to PipelineJob ([#5756](https://github.com/googleapis/google-cloud-node/issues/5756)) ([c4badb0](https://github.com/googleapis/google-cloud-node/commit/c4badb0999c66dc075d5630dc8920a2528417c87))
+
+## [3.31.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.30.1...aiplatform-v3.31.0) (2024-10-10)
+
+
+### Features
+
+* Add partner_model_tuning_spec to TuningJob ([#5721](https://github.com/googleapis/google-cloud-node/issues/5721)) ([cec22ab](https://github.com/googleapis/google-cloud-node/commit/cec22abd4f27d8acf3c7c1d87b2bd6873e505841))
+
+## [3.30.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.30.0...aiplatform-v3.30.1) (2024-10-10)
+
+
+### Bug Fixes
+
+* Annotate PipelineJob and PipelineTaskRerunConfig fields as optional ([#5698](https://github.com/googleapis/google-cloud-node/issues/5698)) ([183c038](https://github.com/googleapis/google-cloud-node/commit/183c038dde5d49727ebc066990c3217629d3fa61))
+
+## [3.30.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.29.0...aiplatform-v3.30.0) (2024-09-24)
+
+
+### Features
+
+* A new field `response_logprbs` is added to message `.google.cloud.aiplatform.v1.GenerationConfig` ([#5664](https://github.com/googleapis/google-cloud-node/issues/5664)) ([100e106](https://github.com/googleapis/google-cloud-node/commit/100e106f93010cf648295a6df58c1a2f82c01340))
+
 ## [3.29.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.28.0...aiplatform-v3.29.0) (2024-09-10)
 
 

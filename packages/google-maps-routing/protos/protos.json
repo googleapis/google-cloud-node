@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -157,30 +160,6 @@
                   "rule": "repeated",
                   "type": "Value",
                   "id": 1
-                }
-              }
-            },
-            "Duration": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
                 }
               }
             },
@@ -1447,6 +1426,30 @@
                   }
                 }
               }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
             }
           }
         },
@@ -1535,7 +1538,6 @@
               "nested": {
                 "v2": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Maps.Routing.V2",
                     "go_package": "cloud.google.com/go/maps/routing/apiv2/routingpb;routingpb",
                     "java_multiple_files": true,
@@ -1543,7 +1545,8 @@
                     "java_package": "com.google.maps.routing.v2",
                     "objc_class_prefix": "GMRV2",
                     "php_namespace": "Google\\Maps\\Routing\\V2",
-                    "ruby_package": "Google::Maps::Routing::V2"
+                    "ruby_package": "Google::Maps::Routing::V2",
+                    "cc_enable_arenas": true
                   },
                   "nested": {
                     "FallbackInfo": {
@@ -1719,6 +1722,89 @@
                         "GEO_JSON_LINESTRING": 2
                       }
                     },
+                    "PolylineDetails": {
+                      "fields": {
+                        "flyoverInfo": {
+                          "rule": "repeated",
+                          "type": "FlyoverInfo",
+                          "id": 12
+                        },
+                        "narrowRoadInfo": {
+                          "rule": "repeated",
+                          "type": "NarrowRoadInfo",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "PolylinePointIndex": {
+                          "oneofs": {
+                            "_startIndex": {
+                              "oneof": [
+                                "startIndex"
+                              ]
+                            },
+                            "_endIndex": {
+                              "oneof": [
+                                "endIndex"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "startIndex": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "endIndex": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "RoadFeatureState": {
+                          "values": {
+                            "ROAD_FEATURE_STATE_UNSPECIFIED": 0,
+                            "EXISTS": 1,
+                            "DOES_NOT_EXIST": 2
+                          }
+                        },
+                        "FlyoverInfo": {
+                          "fields": {
+                            "flyoverPresence": {
+                              "type": "RoadFeatureState",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "polylinePointIndex": {
+                              "type": "PolylinePointIndex",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "NarrowRoadInfo": {
+                          "fields": {
+                            "narrowRoadPresence": {
+                              "type": "RoadFeatureState",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "polylinePointIndex": {
+                              "type": "PolylinePointIndex",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
                     "Route": {
                       "fields": {
                         "routeLabels": {
@@ -1776,6 +1862,10 @@
                         "routeToken": {
                           "type": "string",
                           "id": 12
+                        },
+                        "polylineDetails": {
+                          "type": "PolylineDetails",
+                          "id": 14
                         }
                       },
                       "nested": {
@@ -2089,7 +2179,8 @@
                         "ROUTE_LABEL_UNSPECIFIED": 0,
                         "DEFAULT_ROUTE": 1,
                         "DEFAULT_ROUTE_ALTERNATE": 2,
-                        "FUEL_EFFICIENT": 3
+                        "FUEL_EFFICIENT": 3,
+                        "SHORTER_DISTANCE": 4
                       }
                     },
                     "RouteTravelMode": {
@@ -2607,7 +2698,8 @@
                         "ReferenceRoute": {
                           "values": {
                             "REFERENCE_ROUTE_UNSPECIFIED": 0,
-                            "FUEL_EFFICIENT": 1
+                            "FUEL_EFFICIENT": 1,
+                            "SHORTER_DISTANCE": 2
                           }
                         },
                         "ExtraComputation": {
@@ -2616,7 +2708,9 @@
                             "TOLLS": 1,
                             "FUEL_CONSUMPTION": 2,
                             "TRAFFIC_ON_POLYLINE": 3,
-                            "HTML_FORMATTED_NAVIGATION_INSTRUCTIONS": 4
+                            "HTML_FORMATTED_NAVIGATION_INSTRUCTIONS": 4,
+                            "FLYOVER_INFO_ON_POLYLINE": 7,
+                            "NARROW_ROAD_INFO_ON_POLYLINE": 8
                           }
                         }
                       }
@@ -2986,14 +3080,33 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "go_package": "google.golang.org/genproto/googleapis/api;api",
             "java_multiple_files": true,
-            "java_outer_classname": "FieldBehaviorProto",
+            "java_outer_classname": "LaunchStageProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
           },
           "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
+              }
+            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -3374,25 +3487,6 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
-              }
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7,
-                "IDENTIFIER": 8
               }
             }
           }

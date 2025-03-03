@@ -130,12 +130,27 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "UpdateVersion": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListFiles": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetFile": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteFile": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateFile": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -161,6 +176,31 @@
           "retry_params_name": "default"
         },
         "DeleteTag": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListRules": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteRule": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -196,6 +236,31 @@
           "retry_params_name": "default"
         },
         "UpdateVPCSCConfig": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdatePackage": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListAttachments": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetAttachment": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateAttachment": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteAttachment": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

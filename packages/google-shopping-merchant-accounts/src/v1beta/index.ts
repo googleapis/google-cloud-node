@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@
 export {AccountIssueServiceClient} from './account_issue_service_client';
 export {AccountsServiceClient} from './accounts_service_client';
 export {AccountTaxServiceClient} from './account_tax_service_client';
+export {AutofeedSettingsServiceClient} from './autofeed_settings_service_client';
 export {BusinessIdentityServiceClient} from './business_identity_service_client';
 export {BusinessInfoServiceClient} from './business_info_service_client';
 export {EmailPreferencesServiceClient} from './email_preferences_service_client';

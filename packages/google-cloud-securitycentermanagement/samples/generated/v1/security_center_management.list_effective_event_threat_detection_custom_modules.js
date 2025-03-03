@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,11 +29,11 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of parent to list effective custom modules. Its format is
-   *  `organizations/{organization}/locations/{location}`,
-   *  `folders/{folder}/locations/{location}`,
-   *  or
-   *  `projects/{project}/locations/{location}`
+   *  Required. Name of parent to list effective custom modules, in one of the
+   *  following formats:
+   *  * `organizations/{organization}/locations/{location}`
+   *  * `folders/{folder}/locations/{location}`
+   *  * `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**
@@ -42,7 +42,10 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  Optional. The value returned by the last call indicating a continuation
+   *  Optional. A pagination token returned from a previous request. Provide this
+   *  token to retrieve the next page of results.
+   *  When paginating, the rest of the request must match the request that
+   *  generated the page token.
    */
   // const pageToken = 'abc123'
 

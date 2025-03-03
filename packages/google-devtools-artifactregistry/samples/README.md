@@ -13,12 +13,18 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Artifact_registry.batch_delete_versions](#artifact_registry.batch_delete_versions)
+  * [Artifact_registry.create_attachment](#artifact_registry.create_attachment)
   * [Artifact_registry.create_repository](#artifact_registry.create_repository)
+  * [Artifact_registry.create_rule](#artifact_registry.create_rule)
   * [Artifact_registry.create_tag](#artifact_registry.create_tag)
+  * [Artifact_registry.delete_attachment](#artifact_registry.delete_attachment)
+  * [Artifact_registry.delete_file](#artifact_registry.delete_file)
   * [Artifact_registry.delete_package](#artifact_registry.delete_package)
   * [Artifact_registry.delete_repository](#artifact_registry.delete_repository)
+  * [Artifact_registry.delete_rule](#artifact_registry.delete_rule)
   * [Artifact_registry.delete_tag](#artifact_registry.delete_tag)
   * [Artifact_registry.delete_version](#artifact_registry.delete_version)
+  * [Artifact_registry.get_attachment](#artifact_registry.get_attachment)
   * [Artifact_registry.get_docker_image](#artifact_registry.get_docker_image)
   * [Artifact_registry.get_file](#artifact_registry.get_file)
   * [Artifact_registry.get_iam_policy](#artifact_registry.get_iam_policy)
@@ -28,11 +34,13 @@
   * [Artifact_registry.get_project_settings](#artifact_registry.get_project_settings)
   * [Artifact_registry.get_python_package](#artifact_registry.get_python_package)
   * [Artifact_registry.get_repository](#artifact_registry.get_repository)
+  * [Artifact_registry.get_rule](#artifact_registry.get_rule)
   * [Artifact_registry.get_tag](#artifact_registry.get_tag)
   * [Artifact_registry.get_v_p_c_s_c_config](#artifact_registry.get_v_p_c_s_c_config)
   * [Artifact_registry.get_version](#artifact_registry.get_version)
   * [Artifact_registry.import_apt_artifacts](#artifact_registry.import_apt_artifacts)
   * [Artifact_registry.import_yum_artifacts](#artifact_registry.import_yum_artifacts)
+  * [Artifact_registry.list_attachments](#artifact_registry.list_attachments)
   * [Artifact_registry.list_docker_images](#artifact_registry.list_docker_images)
   * [Artifact_registry.list_files](#artifact_registry.list_files)
   * [Artifact_registry.list_maven_artifacts](#artifact_registry.list_maven_artifacts)
@@ -40,14 +48,19 @@
   * [Artifact_registry.list_packages](#artifact_registry.list_packages)
   * [Artifact_registry.list_python_packages](#artifact_registry.list_python_packages)
   * [Artifact_registry.list_repositories](#artifact_registry.list_repositories)
+  * [Artifact_registry.list_rules](#artifact_registry.list_rules)
   * [Artifact_registry.list_tags](#artifact_registry.list_tags)
   * [Artifact_registry.list_versions](#artifact_registry.list_versions)
   * [Artifact_registry.set_iam_policy](#artifact_registry.set_iam_policy)
   * [Artifact_registry.test_iam_permissions](#artifact_registry.test_iam_permissions)
+  * [Artifact_registry.update_file](#artifact_registry.update_file)
+  * [Artifact_registry.update_package](#artifact_registry.update_package)
   * [Artifact_registry.update_project_settings](#artifact_registry.update_project_settings)
   * [Artifact_registry.update_repository](#artifact_registry.update_repository)
+  * [Artifact_registry.update_rule](#artifact_registry.update_rule)
   * [Artifact_registry.update_tag](#artifact_registry.update_tag)
   * [Artifact_registry.update_v_p_c_s_c_config](#artifact_registry.update_v_p_c_s_c_config)
+  * [Artifact_registry.update_version](#artifact_registry.update_version)
   * [Artifact_registry.create_repository](#artifact_registry.create_repository)
   * [Artifact_registry.create_tag](#artifact_registry.create_tag)
   * [Artifact_registry.delete_package](#artifact_registry.delete_package)
@@ -107,6 +120,23 @@ __Usage:__
 
 
 
+### Artifact_registry.create_attachment
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.create_attachment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.create_attachment.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.create_attachment.js`
+
+
+-----
+
+
+
+
 ### Artifact_registry.create_repository
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.create_repository.js).
@@ -124,6 +154,23 @@ __Usage:__
 
 
 
+### Artifact_registry.create_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.create_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.create_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.create_rule.js`
+
+
+-----
+
+
+
+
 ### Artifact_registry.create_tag
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.create_tag.js).
@@ -134,6 +181,40 @@ __Usage:__
 
 
 `node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.create_tag.js`
+
+
+-----
+
+
+
+
+### Artifact_registry.delete_attachment
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.delete_attachment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.delete_attachment.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.delete_attachment.js`
+
+
+-----
+
+
+
+
+### Artifact_registry.delete_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.delete_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.delete_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.delete_file.js`
 
 
 -----
@@ -175,6 +256,23 @@ __Usage:__
 
 
 
+### Artifact_registry.delete_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.delete_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.delete_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.delete_rule.js`
+
+
+-----
+
+
+
+
 ### Artifact_registry.delete_tag
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.delete_tag.js).
@@ -202,6 +300,23 @@ __Usage:__
 
 
 `node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.delete_version.js`
+
+
+-----
+
+
+
+
+### Artifact_registry.get_attachment
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_attachment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_attachment.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_attachment.js`
 
 
 -----
@@ -362,6 +477,23 @@ __Usage:__
 
 
 
+### Artifact_registry.get_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_rule.js`
+
+
+-----
+
+
+
+
 ### Artifact_registry.get_tag
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_tag.js).
@@ -440,6 +572,23 @@ __Usage:__
 
 
 `node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.import_yum_artifacts.js`
+
+
+-----
+
+
+
+
+### Artifact_registry.list_attachments
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_attachments.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_attachments.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_attachments.js`
 
 
 -----
@@ -566,6 +715,23 @@ __Usage:__
 
 
 
+### Artifact_registry.list_rules
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_rules.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_rules.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_rules.js`
+
+
+-----
+
+
+
+
 ### Artifact_registry.list_tags
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_tags.js).
@@ -634,6 +800,40 @@ __Usage:__
 
 
 
+### Artifact_registry.update_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_file.js`
+
+
+-----
+
+
+
+
+### Artifact_registry.update_package
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_package.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_package.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_package.js`
+
+
+-----
+
+
+
+
 ### Artifact_registry.update_project_settings
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_project_settings.js).
@@ -668,6 +868,23 @@ __Usage:__
 
 
 
+### Artifact_registry.update_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_rule.js`
+
+
+-----
+
+
+
+
 ### Artifact_registry.update_tag
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_tag.js).
@@ -695,6 +912,23 @@ __Usage:__
 
 
 `node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_v_p_c_s_c_config.js`
+
+
+-----
+
+
+
+
+### Artifact_registry.update_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_version.js`
 
 
 -----

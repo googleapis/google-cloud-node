@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,8 +31,8 @@ function main(name) {
   /**
    *  Required. The name of the
    *  SecuritySettings google.cloud.dialogflow.cx.v3.SecuritySettings  to
-   *  delete. Format: `projects/<Project ID>/locations/<Location
-   *  ID>/securitySettings/<Security Settings ID>`.
+   *  delete. Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/securitySettings/<SecuritySettingsID>`.
    */
   // const name = 'abc123'
 

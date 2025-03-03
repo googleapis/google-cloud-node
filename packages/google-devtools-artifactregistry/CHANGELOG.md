@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.5.1](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v3.5.0...artifact-registry-v3.5.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6019](https://github.com/googleapis/google-cloud-node/issues/6019)) ([734397c](https://github.com/googleapis/google-cloud-node/commit/734397c6b98d0aafe8832544da3f483b1eade1b2))
+
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v3.4.0...artifact-registry-v3.5.0) (2024-10-30)
+
+
+### Features
+
+* [artifactregistry] Add Artifact Registry attachment API ([#5769](https://github.com/googleapis/google-cloud-node/issues/5769)) ([c5eb3c3](https://github.com/googleapis/google-cloud-node/commit/c5eb3c3ec44e03edae96207f892d5b2d98aca51a))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v3.3.0...artifact-registry-v3.4.0) (2024-05-21)
 
 

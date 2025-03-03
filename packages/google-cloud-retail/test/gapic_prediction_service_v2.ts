@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -281,7 +281,7 @@ describe('v2.PredictionServiceClient', () => {
         ['placement']
       );
       request.placement = defaultValue1;
-      const expectedHeaderRequestParams = `placement=${defaultValue1}`;
+      const expectedHeaderRequestParams = `placement=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.PredictResponse()
       );
@@ -312,7 +312,7 @@ describe('v2.PredictionServiceClient', () => {
         ['placement']
       );
       request.placement = defaultValue1;
-      const expectedHeaderRequestParams = `placement=${defaultValue1}`;
+      const expectedHeaderRequestParams = `placement=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.PredictResponse()
       );
@@ -359,7 +359,7 @@ describe('v2.PredictionServiceClient', () => {
         ['placement']
       );
       request.placement = defaultValue1;
-      const expectedHeaderRequestParams = `placement=${defaultValue1}`;
+      const expectedHeaderRequestParams = `placement=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.predict = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.predict(request), expectedError);

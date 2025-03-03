@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -347,7 +347,7 @@ message Service {
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. For a deleted resource, the time after which it will be
-  // permamently deleted.
+  // permanently deleted.
   google.protobuf.Timestamp expire_time = 10
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
@@ -375,7 +375,7 @@ message Service {
   // Set the launch stage to a preview stage on input to allow use of preview
   // features in that stage. On read (or output), describes whether the resource
   // uses preview features.
-  // <p>
+  //
   // For example, if ALPHA is provided as input, but only BETA and GA-level
   // features are used, this field will be BETA on output.
   google.api.LaunchStage launch_stage = 16
@@ -396,8 +396,24 @@ message Service {
   // Optional. Specifies service-level scaling settings
   ServiceScaling scaling = 20 [(google.api.field_behavior) = OPTIONAL];
 
+  // Optional. Disables IAM permission check for run.routes.invoke for callers
+  // of this service. This feature is available by invitation only. For more
+  // information, visit
+  // https://cloud.google.com/run/docs/securing/managing-access#invoker_check.
+  bool invoker_iam_disabled = 21 [(google.api.field_behavior) = OPTIONAL];
+
   // Optional. Disables public resolution of the default URI of this service.
   bool default_uri_disabled = 22 [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. All URLs serving traffic for this Service.
+  repeated string urls = 24 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // One or more custom audiences that you want this service to support. Specify
+  // each custom audience as the full URL in a string. The custom audiences are
+  // encoded in the token and used to authenticate requests. For more
+  // information, see
+  // https://cloud.google.com/run/docs/configuring/custom-audiences.
+  repeated string custom_audiences = 37;
 
   // Output only. The generation of this Service currently serving traffic. See
   // comments in `reconciling` for additional information on reconciliation
@@ -444,15 +460,11 @@ message Service {
   // Output only. The main URI in which this Service is serving traffic.
   string uri = 36 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // One or more custom audiences that you want this service to support. Specify
-  // each custom audience as the full URL in a string. The custom audiences are
-  // encoded in the token and used to authenticate requests. For more
-  // information, see
-  // https://cloud.google.com/run/docs/configuring/custom-audiences.
-  repeated string custom_audiences = 37;
-
   // Output only. Reserved for future use.
   bool satisfies_pzs = 38 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. Configuration for building a Cloud Run function.
+  BuildConfig build_config = 41 [(google.api.field_behavior) = OPTIONAL];
 
   // Output only. Returns true if the Service is currently being acted upon by
   // the system to bring it into the desired state.
@@ -461,7 +473,7 @@ message Service {
   // will asynchronously perform all necessary steps to bring the Service to the
   // desired serving state. This process is called reconciliation.
   // While reconciliation is in process, `observed_generation`,
-  // `latest_ready_revison`, `traffic_statuses`, and `uri` will have transient
+  // `latest_ready_revision`, `traffic_statuses`, and `uri` will have transient
   // values that might mismatch the intended state: Once reconciliation is over
   // (and this field is false), there are two possible outcomes: reconciliation
   // succeeded and the serving state matches the Service, or there was an error,

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7939,6 +7939,9 @@ export namespace google {
 
                     /** CheckCloudIdentityAccountsExistRequest domain */
                     domain?: (string|null);
+
+                    /** CheckCloudIdentityAccountsExistRequest primaryAdminEmail */
+                    primaryAdminEmail?: (string|null);
                 }
 
                 /** Represents a CheckCloudIdentityAccountsExistRequest. */
@@ -7955,6 +7958,9 @@ export namespace google {
 
                     /** CheckCloudIdentityAccountsExistRequest domain. */
                     public domain: string;
+
+                    /** CheckCloudIdentityAccountsExistRequest primaryAdminEmail. */
+                    public primaryAdminEmail: string;
 
                     /**
                      * Creates a new CheckCloudIdentityAccountsExistRequest instance using the specified properties.
@@ -8048,6 +8054,12 @@ export namespace google {
 
                     /** CloudIdentityCustomerAccount customerCloudIdentityId */
                     customerCloudIdentityId?: (string|null);
+
+                    /** CloudIdentityCustomerAccount customerType */
+                    customerType?: (google.cloud.channel.v1.CloudIdentityInfo.CustomerType|keyof typeof google.cloud.channel.v1.CloudIdentityInfo.CustomerType|null);
+
+                    /** CloudIdentityCustomerAccount channelPartnerCloudIdentityId */
+                    channelPartnerCloudIdentityId?: (string|null);
                 }
 
                 /** Represents a CloudIdentityCustomerAccount. */
@@ -8070,6 +8082,12 @@ export namespace google {
 
                     /** CloudIdentityCustomerAccount customerCloudIdentityId. */
                     public customerCloudIdentityId: string;
+
+                    /** CloudIdentityCustomerAccount customerType. */
+                    public customerType: (google.cloud.channel.v1.CloudIdentityInfo.CustomerType|keyof typeof google.cloud.channel.v1.CloudIdentityInfo.CustomerType);
+
+                    /** CloudIdentityCustomerAccount channelPartnerCloudIdentityId. */
+                    public channelPartnerCloudIdentityId: string;
 
                     /**
                      * Creates a new CloudIdentityCustomerAccount instance using the specified properties.
@@ -8873,6 +8891,9 @@ export namespace google {
                     /** ImportCustomerRequest cloudIdentityId */
                     cloudIdentityId?: (string|null);
 
+                    /** ImportCustomerRequest primaryAdminEmail */
+                    primaryAdminEmail?: (string|null);
+
                     /** ImportCustomerRequest parent */
                     parent?: (string|null);
 
@@ -8904,6 +8925,9 @@ export namespace google {
                     /** ImportCustomerRequest cloudIdentityId. */
                     public cloudIdentityId?: (string|null);
 
+                    /** ImportCustomerRequest primaryAdminEmail. */
+                    public primaryAdminEmail?: (string|null);
+
                     /** ImportCustomerRequest parent. */
                     public parent: string;
 
@@ -8920,7 +8944,7 @@ export namespace google {
                     public customer: string;
 
                     /** ImportCustomerRequest customerIdentity. */
-                    public customerIdentity?: ("domain"|"cloudIdentityId");
+                    public customerIdentity?: ("domain"|"cloudIdentityId"|"primaryAdminEmail");
 
                     /**
                      * Creates a new ImportCustomerRequest instance using the specified properties.

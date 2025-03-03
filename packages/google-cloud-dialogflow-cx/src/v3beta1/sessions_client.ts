@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -389,7 +389,7 @@ export class SessionsClient {
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough();
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -525,14 +525,15 @@ export class SessionsClient {
    *   The request object that will be sent.
    * @param {string} request.session
    *   Required. The name of the session this query is sent to.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/sessions/<SessionID>`
+   *   or
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/sessions/<SessionID>`.
    *   If `Environment ID` is not specified, we assume default 'draft'
-   *   environment.
-   *   It's up to the API caller to choose an appropriate `Session ID`. It can be
-   *   a random number or some type of session identifiers (preferably hashed).
-   *   The length of the `Session ID` must not exceed 36 characters.
+   *   environment. It's up to the API caller to choose an appropriate `Session
+   *   ID`. It can be a random number or some type of session identifiers
+   *   (preferably hashed). The length of the `Session ID` must not exceed 36
+   *   characters.
    *
    *   For more information, see the [sessions
    *   guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).
@@ -643,17 +644,18 @@ export class SessionsClient {
    *   The request object that will be sent.
    * @param {string} request.session
    *   Required. The name of the session this query is sent to.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/sessions/<SessionID>`
+   *   or
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/sessions/<SessionID>`.
    *   If `Environment ID` is not specified, we assume default 'draft'
-   *   environment.
-   *   It's up to the API caller to choose an appropriate `Session ID`. It can be
-   *   a random number or some type of session identifiers (preferably hashed).
-   *   The length of the `Session ID` must not exceed 36 characters.
+   *    environment.
+   *    It's up to the API caller to choose an appropriate `Session ID`. It can be
+   *    a random number or some type of session identifiers (preferably hashed).
+   *    The length of the `Session ID` must not exceed 36 characters.
    *
-   *   For more information, see the [sessions
-   *   guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).
+   *    For more information, see the [sessions
+   *    guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).
    * @param {google.cloud.dialogflow.cx.v3beta1.QueryParameters} request.queryParams
    *   The parameters of this query.
    * @param {google.cloud.dialogflow.cx.v3beta1.QueryInput} request.queryInput
@@ -968,14 +970,15 @@ export class SessionsClient {
    *   The request object that will be sent.
    * @param {string} request.session
    *   Required. The name of the session this query is sent to.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/sessions/<SessionID>`
+   *   or
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/sessions/<SessionID>`.
    *   If `Environment ID` is not specified, we assume default 'draft'
-   *   environment.
-   *   It's up to the API caller to choose an appropriate `Session ID`. It can be
-   *   a random number or some type of session identifiers (preferably hashed).
-   *   The length of the `Session ID` must not exceed 36 characters.
+   *   environment. It's up to the API caller to choose an appropriate `Session
+   *   ID`. It can be a random number or some type of session identifiers
+   *   (preferably hashed). The length of the `Session ID` must not exceed 36
+   *   characters.
    *
    *   For more information, see the [sessions
    *   guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).

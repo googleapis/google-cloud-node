@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -68,6 +68,7 @@ function main() {
   const networkEndpointGroupsClient = new compute.NetworkEndpointGroupsClient();
   const networkFirewallPoliciesClient =
     new compute.NetworkFirewallPoliciesClient();
+  const networkProfilesClient = new compute.NetworkProfilesClient();
   const networksClient = new compute.NetworksClient();
   const nodeGroupsClient = new compute.NodeGroupsClient();
   const nodeTemplatesClient = new compute.NodeTemplatesClient();

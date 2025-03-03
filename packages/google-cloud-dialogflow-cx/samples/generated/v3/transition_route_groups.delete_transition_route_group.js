@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,10 +31,10 @@ function main(name) {
   /**
    *  Required. The name of the
    *  TransitionRouteGroup google.cloud.dialogflow.cx.v3.TransitionRouteGroup 
-   *  to delete. Format: `projects/<Project ID>/locations/<Location
-   *  ID>/agents/<Agent ID>/flows/<Flow ID>/transitionRouteGroups/<Transition
-   *  Route Group ID>` or `projects/<Project ID>/locations/<Location
-   *  ID>/agents/<Agent ID>/transitionRouteGroups/<Transition Route Group ID>`.
+   *  to delete. Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/transitionRouteGroups/<TransitionRouteGroupID>`
+   *  or
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/transitionRouteGroups/<TransitionRouteGroupID>`.
    */
   // const name = 'abc123'
   /**

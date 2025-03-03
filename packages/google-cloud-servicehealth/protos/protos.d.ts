@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -683,6 +683,9 @@ export namespace google {
 
                     /** Product productName */
                     productName?: (string|null);
+
+                    /** Product id */
+                    id?: (string|null);
                 }
 
                 /** Represents a Product. */
@@ -696,6 +699,9 @@ export namespace google {
 
                     /** Product productName. */
                     public productName: string;
+
+                    /** Product id. */
+                    public id: string;
 
                     /**
                      * Creates a new Product instance using the specified properties.

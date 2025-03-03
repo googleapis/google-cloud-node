@@ -45,6 +45,7 @@
   * [Endpoint_service.mutate_deployed_model](#endpoint_service.mutate_deployed_model)
   * [Endpoint_service.undeploy_model](#endpoint_service.undeploy_model)
   * [Endpoint_service.update_endpoint](#endpoint_service.update_endpoint)
+  * [Endpoint_service.update_endpoint_long_running](#endpoint_service.update_endpoint_long_running)
   * [Evaluation_service.evaluate_instances](#evaluation_service.evaluate_instances)
   * [Feature_online_store_admin_service.create_feature_online_store](#feature_online_store_admin_service.create_feature_online_store)
   * [Feature_online_store_admin_service.create_feature_view](#feature_online_store_admin_service.create_feature_view)
@@ -61,311 +62,7 @@
   * [Feature_online_store_admin_service.update_feature_view](#feature_online_store_admin_service.update_feature_view)
   * [Feature_online_store_service.fetch_feature_values](#feature_online_store_service.fetch_feature_values)
   * [Feature_online_store_service.search_nearest_entities](#feature_online_store_service.search_nearest_entities)
-  * [Feature_registry_service.create_feature](#feature_registry_service.create_feature)
-  * [Feature_registry_service.create_feature_group](#feature_registry_service.create_feature_group)
-  * [Feature_registry_service.delete_feature](#feature_registry_service.delete_feature)
-  * [Feature_registry_service.delete_feature_group](#feature_registry_service.delete_feature_group)
-  * [Feature_registry_service.get_feature](#feature_registry_service.get_feature)
-  * [Feature_registry_service.get_feature_group](#feature_registry_service.get_feature_group)
-  * [Feature_registry_service.list_feature_groups](#feature_registry_service.list_feature_groups)
-  * [Feature_registry_service.list_features](#feature_registry_service.list_features)
-  * [Feature_registry_service.update_feature](#feature_registry_service.update_feature)
-  * [Feature_registry_service.update_feature_group](#feature_registry_service.update_feature_group)
-  * [Featurestore_online_serving_service.read_feature_values](#featurestore_online_serving_service.read_feature_values)
-  * [Featurestore_online_serving_service.streaming_read_feature_values](#featurestore_online_serving_service.streaming_read_feature_values)
-  * [Featurestore_online_serving_service.write_feature_values](#featurestore_online_serving_service.write_feature_values)
-  * [Featurestore_service.batch_create_features](#featurestore_service.batch_create_features)
-  * [Featurestore_service.batch_read_feature_values](#featurestore_service.batch_read_feature_values)
-  * [Featurestore_service.create_entity_type](#featurestore_service.create_entity_type)
-  * [Featurestore_service.create_feature](#featurestore_service.create_feature)
-  * [Featurestore_service.create_featurestore](#featurestore_service.create_featurestore)
-  * [Featurestore_service.delete_entity_type](#featurestore_service.delete_entity_type)
-  * [Featurestore_service.delete_feature](#featurestore_service.delete_feature)
-  * [Featurestore_service.delete_feature_values](#featurestore_service.delete_feature_values)
-  * [Featurestore_service.delete_featurestore](#featurestore_service.delete_featurestore)
-  * [Featurestore_service.export_feature_values](#featurestore_service.export_feature_values)
-  * [Featurestore_service.get_entity_type](#featurestore_service.get_entity_type)
-  * [Featurestore_service.get_feature](#featurestore_service.get_feature)
-  * [Featurestore_service.get_featurestore](#featurestore_service.get_featurestore)
-  * [Featurestore_service.import_feature_values](#featurestore_service.import_feature_values)
-  * [Featurestore_service.list_entity_types](#featurestore_service.list_entity_types)
-  * [Featurestore_service.list_features](#featurestore_service.list_features)
-  * [Featurestore_service.list_featurestores](#featurestore_service.list_featurestores)
-  * [Featurestore_service.search_features](#featurestore_service.search_features)
-  * [Featurestore_service.update_entity_type](#featurestore_service.update_entity_type)
-  * [Featurestore_service.update_feature](#featurestore_service.update_feature)
-  * [Featurestore_service.update_featurestore](#featurestore_service.update_featurestore)
-  * [Gen_ai_tuning_service.cancel_tuning_job](#gen_ai_tuning_service.cancel_tuning_job)
-  * [Gen_ai_tuning_service.create_tuning_job](#gen_ai_tuning_service.create_tuning_job)
-  * [Gen_ai_tuning_service.get_tuning_job](#gen_ai_tuning_service.get_tuning_job)
-  * [Gen_ai_tuning_service.list_tuning_jobs](#gen_ai_tuning_service.list_tuning_jobs)
-  * [Index_endpoint_service.create_index_endpoint](#index_endpoint_service.create_index_endpoint)
-  * [Index_endpoint_service.delete_index_endpoint](#index_endpoint_service.delete_index_endpoint)
-  * [Index_endpoint_service.deploy_index](#index_endpoint_service.deploy_index)
-  * [Index_endpoint_service.get_index_endpoint](#index_endpoint_service.get_index_endpoint)
-  * [Index_endpoint_service.list_index_endpoints](#index_endpoint_service.list_index_endpoints)
-  * [Index_endpoint_service.mutate_deployed_index](#index_endpoint_service.mutate_deployed_index)
-  * [Index_endpoint_service.undeploy_index](#index_endpoint_service.undeploy_index)
-  * [Index_endpoint_service.update_index_endpoint](#index_endpoint_service.update_index_endpoint)
-  * [Index_service.create_index](#index_service.create_index)
-  * [Index_service.delete_index](#index_service.delete_index)
-  * [Index_service.get_index](#index_service.get_index)
-  * [Index_service.list_indexes](#index_service.list_indexes)
-  * [Index_service.remove_datapoints](#index_service.remove_datapoints)
-  * [Index_service.update_index](#index_service.update_index)
-  * [Index_service.upsert_datapoints](#index_service.upsert_datapoints)
-  * [Job_service.cancel_batch_prediction_job](#job_service.cancel_batch_prediction_job)
-  * [Job_service.cancel_custom_job](#job_service.cancel_custom_job)
-  * [Job_service.cancel_data_labeling_job](#job_service.cancel_data_labeling_job)
-  * [Job_service.cancel_hyperparameter_tuning_job](#job_service.cancel_hyperparameter_tuning_job)
-  * [Job_service.cancel_nas_job](#job_service.cancel_nas_job)
-  * [Job_service.create_batch_prediction_job](#job_service.create_batch_prediction_job)
-  * [Job_service.create_custom_job](#job_service.create_custom_job)
-  * [Job_service.create_data_labeling_job](#job_service.create_data_labeling_job)
-  * [Job_service.create_hyperparameter_tuning_job](#job_service.create_hyperparameter_tuning_job)
-  * [Job_service.create_model_deployment_monitoring_job](#job_service.create_model_deployment_monitoring_job)
-  * [Job_service.create_nas_job](#job_service.create_nas_job)
-  * [Job_service.delete_batch_prediction_job](#job_service.delete_batch_prediction_job)
-  * [Job_service.delete_custom_job](#job_service.delete_custom_job)
-  * [Job_service.delete_data_labeling_job](#job_service.delete_data_labeling_job)
-  * [Job_service.delete_hyperparameter_tuning_job](#job_service.delete_hyperparameter_tuning_job)
-  * [Job_service.delete_model_deployment_monitoring_job](#job_service.delete_model_deployment_monitoring_job)
-  * [Job_service.delete_nas_job](#job_service.delete_nas_job)
-  * [Job_service.get_batch_prediction_job](#job_service.get_batch_prediction_job)
-  * [Job_service.get_custom_job](#job_service.get_custom_job)
-  * [Job_service.get_data_labeling_job](#job_service.get_data_labeling_job)
-  * [Job_service.get_hyperparameter_tuning_job](#job_service.get_hyperparameter_tuning_job)
-  * [Job_service.get_model_deployment_monitoring_job](#job_service.get_model_deployment_monitoring_job)
-  * [Job_service.get_nas_job](#job_service.get_nas_job)
-  * [Job_service.get_nas_trial_detail](#job_service.get_nas_trial_detail)
-  * [Job_service.list_batch_prediction_jobs](#job_service.list_batch_prediction_jobs)
-  * [Job_service.list_custom_jobs](#job_service.list_custom_jobs)
-  * [Job_service.list_data_labeling_jobs](#job_service.list_data_labeling_jobs)
-  * [Job_service.list_hyperparameter_tuning_jobs](#job_service.list_hyperparameter_tuning_jobs)
-  * [Job_service.list_model_deployment_monitoring_jobs](#job_service.list_model_deployment_monitoring_jobs)
-  * [Job_service.list_nas_jobs](#job_service.list_nas_jobs)
-  * [Job_service.list_nas_trial_details](#job_service.list_nas_trial_details)
-  * [Job_service.pause_model_deployment_monitoring_job](#job_service.pause_model_deployment_monitoring_job)
-  * [Job_service.resume_model_deployment_monitoring_job](#job_service.resume_model_deployment_monitoring_job)
-  * [Job_service.search_model_deployment_monitoring_stats_anomalies](#job_service.search_model_deployment_monitoring_stats_anomalies)
-  * [Job_service.update_model_deployment_monitoring_job](#job_service.update_model_deployment_monitoring_job)
-  * [Llm_utility_service.compute_tokens](#llm_utility_service.compute_tokens)
-  * [Llm_utility_service.count_tokens](#llm_utility_service.count_tokens)
-  * [Match_service.find_neighbors](#match_service.find_neighbors)
-  * [Match_service.read_index_datapoints](#match_service.read_index_datapoints)
-  * [Metadata_service.add_context_artifacts_and_executions](#metadata_service.add_context_artifacts_and_executions)
-  * [Metadata_service.add_context_children](#metadata_service.add_context_children)
-  * [Metadata_service.add_execution_events](#metadata_service.add_execution_events)
-  * [Metadata_service.create_artifact](#metadata_service.create_artifact)
-  * [Metadata_service.create_context](#metadata_service.create_context)
-  * [Metadata_service.create_execution](#metadata_service.create_execution)
-  * [Metadata_service.create_metadata_schema](#metadata_service.create_metadata_schema)
-  * [Metadata_service.create_metadata_store](#metadata_service.create_metadata_store)
-  * [Metadata_service.delete_artifact](#metadata_service.delete_artifact)
-  * [Metadata_service.delete_context](#metadata_service.delete_context)
-  * [Metadata_service.delete_execution](#metadata_service.delete_execution)
-  * [Metadata_service.delete_metadata_store](#metadata_service.delete_metadata_store)
-  * [Metadata_service.get_artifact](#metadata_service.get_artifact)
-  * [Metadata_service.get_context](#metadata_service.get_context)
-  * [Metadata_service.get_execution](#metadata_service.get_execution)
-  * [Metadata_service.get_metadata_schema](#metadata_service.get_metadata_schema)
-  * [Metadata_service.get_metadata_store](#metadata_service.get_metadata_store)
-  * [Metadata_service.list_artifacts](#metadata_service.list_artifacts)
-  * [Metadata_service.list_contexts](#metadata_service.list_contexts)
-  * [Metadata_service.list_executions](#metadata_service.list_executions)
-  * [Metadata_service.list_metadata_schemas](#metadata_service.list_metadata_schemas)
-  * [Metadata_service.list_metadata_stores](#metadata_service.list_metadata_stores)
-  * [Metadata_service.purge_artifacts](#metadata_service.purge_artifacts)
-  * [Metadata_service.purge_contexts](#metadata_service.purge_contexts)
-  * [Metadata_service.purge_executions](#metadata_service.purge_executions)
-  * [Metadata_service.query_artifact_lineage_subgraph](#metadata_service.query_artifact_lineage_subgraph)
-  * [Metadata_service.query_context_lineage_subgraph](#metadata_service.query_context_lineage_subgraph)
-  * [Metadata_service.query_execution_inputs_and_outputs](#metadata_service.query_execution_inputs_and_outputs)
-  * [Metadata_service.remove_context_children](#metadata_service.remove_context_children)
-  * [Metadata_service.update_artifact](#metadata_service.update_artifact)
-  * [Metadata_service.update_context](#metadata_service.update_context)
-  * [Metadata_service.update_execution](#metadata_service.update_execution)
-  * [Migration_service.batch_migrate_resources](#migration_service.batch_migrate_resources)
-  * [Migration_service.search_migratable_resources](#migration_service.search_migratable_resources)
-  * [Model_garden_service.get_publisher_model](#model_garden_service.get_publisher_model)
-  * [Model_service.batch_import_evaluated_annotations](#model_service.batch_import_evaluated_annotations)
-  * [Model_service.batch_import_model_evaluation_slices](#model_service.batch_import_model_evaluation_slices)
-  * [Model_service.copy_model](#model_service.copy_model)
-  * [Model_service.delete_model](#model_service.delete_model)
-  * [Model_service.delete_model_version](#model_service.delete_model_version)
-  * [Model_service.export_model](#model_service.export_model)
-  * [Model_service.get_model](#model_service.get_model)
-  * [Model_service.get_model_evaluation](#model_service.get_model_evaluation)
-  * [Model_service.get_model_evaluation_slice](#model_service.get_model_evaluation_slice)
-  * [Model_service.import_model_evaluation](#model_service.import_model_evaluation)
-  * [Model_service.list_model_evaluation_slices](#model_service.list_model_evaluation_slices)
-  * [Model_service.list_model_evaluations](#model_service.list_model_evaluations)
-  * [Model_service.list_model_versions](#model_service.list_model_versions)
-  * [Model_service.list_models](#model_service.list_models)
-  * [Model_service.merge_version_aliases](#model_service.merge_version_aliases)
-  * [Model_service.update_explanation_dataset](#model_service.update_explanation_dataset)
-  * [Model_service.update_model](#model_service.update_model)
-  * [Model_service.upload_model](#model_service.upload_model)
-  * [Notebook_service.assign_notebook_runtime](#notebook_service.assign_notebook_runtime)
-  * [Notebook_service.create_notebook_execution_job](#notebook_service.create_notebook_execution_job)
-  * [Notebook_service.create_notebook_runtime_template](#notebook_service.create_notebook_runtime_template)
-  * [Notebook_service.delete_notebook_execution_job](#notebook_service.delete_notebook_execution_job)
-  * [Notebook_service.delete_notebook_runtime](#notebook_service.delete_notebook_runtime)
-  * [Notebook_service.delete_notebook_runtime_template](#notebook_service.delete_notebook_runtime_template)
-  * [Notebook_service.get_notebook_execution_job](#notebook_service.get_notebook_execution_job)
-  * [Notebook_service.get_notebook_runtime](#notebook_service.get_notebook_runtime)
-  * [Notebook_service.get_notebook_runtime_template](#notebook_service.get_notebook_runtime_template)
-  * [Notebook_service.list_notebook_execution_jobs](#notebook_service.list_notebook_execution_jobs)
-  * [Notebook_service.list_notebook_runtime_templates](#notebook_service.list_notebook_runtime_templates)
-  * [Notebook_service.list_notebook_runtimes](#notebook_service.list_notebook_runtimes)
-  * [Notebook_service.start_notebook_runtime](#notebook_service.start_notebook_runtime)
-  * [Notebook_service.update_notebook_runtime_template](#notebook_service.update_notebook_runtime_template)
-  * [Notebook_service.upgrade_notebook_runtime](#notebook_service.upgrade_notebook_runtime)
-  * [Persistent_resource_service.create_persistent_resource](#persistent_resource_service.create_persistent_resource)
-  * [Persistent_resource_service.delete_persistent_resource](#persistent_resource_service.delete_persistent_resource)
-  * [Persistent_resource_service.get_persistent_resource](#persistent_resource_service.get_persistent_resource)
-  * [Persistent_resource_service.list_persistent_resources](#persistent_resource_service.list_persistent_resources)
-  * [Persistent_resource_service.reboot_persistent_resource](#persistent_resource_service.reboot_persistent_resource)
-  * [Persistent_resource_service.update_persistent_resource](#persistent_resource_service.update_persistent_resource)
-  * [Pipeline_service.batch_cancel_pipeline_jobs](#pipeline_service.batch_cancel_pipeline_jobs)
-  * [Pipeline_service.batch_delete_pipeline_jobs](#pipeline_service.batch_delete_pipeline_jobs)
-  * [Pipeline_service.cancel_pipeline_job](#pipeline_service.cancel_pipeline_job)
-  * [Pipeline_service.cancel_training_pipeline](#pipeline_service.cancel_training_pipeline)
-  * [Pipeline_service.create_pipeline_job](#pipeline_service.create_pipeline_job)
-  * [Pipeline_service.create_training_pipeline](#pipeline_service.create_training_pipeline)
-  * [Pipeline_service.delete_pipeline_job](#pipeline_service.delete_pipeline_job)
-  * [Pipeline_service.delete_training_pipeline](#pipeline_service.delete_training_pipeline)
-  * [Pipeline_service.get_pipeline_job](#pipeline_service.get_pipeline_job)
-  * [Pipeline_service.get_training_pipeline](#pipeline_service.get_training_pipeline)
-  * [Pipeline_service.list_pipeline_jobs](#pipeline_service.list_pipeline_jobs)
-  * [Pipeline_service.list_training_pipelines](#pipeline_service.list_training_pipelines)
-  * [Prediction_service.direct_predict](#prediction_service.direct_predict)
-  * [Prediction_service.direct_raw_predict](#prediction_service.direct_raw_predict)
-  * [Prediction_service.explain](#prediction_service.explain)
-  * [Prediction_service.generate_content](#prediction_service.generate_content)
-  * [Prediction_service.predict](#prediction_service.predict)
-  * [Prediction_service.raw_predict](#prediction_service.raw_predict)
-  * [Prediction_service.server_streaming_predict](#prediction_service.server_streaming_predict)
-  * [Prediction_service.stream_direct_predict](#prediction_service.stream_direct_predict)
-  * [Prediction_service.stream_direct_raw_predict](#prediction_service.stream_direct_raw_predict)
-  * [Prediction_service.stream_generate_content](#prediction_service.stream_generate_content)
-  * [Prediction_service.stream_raw_predict](#prediction_service.stream_raw_predict)
-  * [Prediction_service.streaming_predict](#prediction_service.streaming_predict)
-  * [Prediction_service.streaming_raw_predict](#prediction_service.streaming_raw_predict)
-  * [Schedule_service.create_schedule](#schedule_service.create_schedule)
-  * [Schedule_service.delete_schedule](#schedule_service.delete_schedule)
-  * [Schedule_service.get_schedule](#schedule_service.get_schedule)
-  * [Schedule_service.list_schedules](#schedule_service.list_schedules)
-  * [Schedule_service.pause_schedule](#schedule_service.pause_schedule)
-  * [Schedule_service.resume_schedule](#schedule_service.resume_schedule)
-  * [Schedule_service.update_schedule](#schedule_service.update_schedule)
-  * [Specialist_pool_service.create_specialist_pool](#specialist_pool_service.create_specialist_pool)
-  * [Specialist_pool_service.delete_specialist_pool](#specialist_pool_service.delete_specialist_pool)
-  * [Specialist_pool_service.get_specialist_pool](#specialist_pool_service.get_specialist_pool)
-  * [Specialist_pool_service.list_specialist_pools](#specialist_pool_service.list_specialist_pools)
-  * [Specialist_pool_service.update_specialist_pool](#specialist_pool_service.update_specialist_pool)
-  * [Tensorboard_service.batch_create_tensorboard_runs](#tensorboard_service.batch_create_tensorboard_runs)
-  * [Tensorboard_service.batch_create_tensorboard_time_series](#tensorboard_service.batch_create_tensorboard_time_series)
-  * [Tensorboard_service.batch_read_tensorboard_time_series_data](#tensorboard_service.batch_read_tensorboard_time_series_data)
-  * [Tensorboard_service.create_tensorboard](#tensorboard_service.create_tensorboard)
-  * [Tensorboard_service.create_tensorboard_experiment](#tensorboard_service.create_tensorboard_experiment)
-  * [Tensorboard_service.create_tensorboard_run](#tensorboard_service.create_tensorboard_run)
-  * [Tensorboard_service.create_tensorboard_time_series](#tensorboard_service.create_tensorboard_time_series)
-  * [Tensorboard_service.delete_tensorboard](#tensorboard_service.delete_tensorboard)
-  * [Tensorboard_service.delete_tensorboard_experiment](#tensorboard_service.delete_tensorboard_experiment)
-  * [Tensorboard_service.delete_tensorboard_run](#tensorboard_service.delete_tensorboard_run)
-  * [Tensorboard_service.delete_tensorboard_time_series](#tensorboard_service.delete_tensorboard_time_series)
-  * [Tensorboard_service.export_tensorboard_time_series_data](#tensorboard_service.export_tensorboard_time_series_data)
-  * [Tensorboard_service.get_tensorboard](#tensorboard_service.get_tensorboard)
-  * [Tensorboard_service.get_tensorboard_experiment](#tensorboard_service.get_tensorboard_experiment)
-  * [Tensorboard_service.get_tensorboard_run](#tensorboard_service.get_tensorboard_run)
-  * [Tensorboard_service.get_tensorboard_time_series](#tensorboard_service.get_tensorboard_time_series)
-  * [Tensorboard_service.list_tensorboard_experiments](#tensorboard_service.list_tensorboard_experiments)
-  * [Tensorboard_service.list_tensorboard_runs](#tensorboard_service.list_tensorboard_runs)
-  * [Tensorboard_service.list_tensorboard_time_series](#tensorboard_service.list_tensorboard_time_series)
-  * [Tensorboard_service.list_tensorboards](#tensorboard_service.list_tensorboards)
-  * [Tensorboard_service.read_tensorboard_blob_data](#tensorboard_service.read_tensorboard_blob_data)
-  * [Tensorboard_service.read_tensorboard_size](#tensorboard_service.read_tensorboard_size)
-  * [Tensorboard_service.read_tensorboard_time_series_data](#tensorboard_service.read_tensorboard_time_series_data)
-  * [Tensorboard_service.read_tensorboard_usage](#tensorboard_service.read_tensorboard_usage)
-  * [Tensorboard_service.update_tensorboard](#tensorboard_service.update_tensorboard)
-  * [Tensorboard_service.update_tensorboard_experiment](#tensorboard_service.update_tensorboard_experiment)
-  * [Tensorboard_service.update_tensorboard_run](#tensorboard_service.update_tensorboard_run)
-  * [Tensorboard_service.update_tensorboard_time_series](#tensorboard_service.update_tensorboard_time_series)
-  * [Tensorboard_service.write_tensorboard_experiment_data](#tensorboard_service.write_tensorboard_experiment_data)
-  * [Tensorboard_service.write_tensorboard_run_data](#tensorboard_service.write_tensorboard_run_data)
-  * [Vizier_service.add_trial_measurement](#vizier_service.add_trial_measurement)
-  * [Vizier_service.check_trial_early_stopping_state](#vizier_service.check_trial_early_stopping_state)
-  * [Vizier_service.complete_trial](#vizier_service.complete_trial)
-  * [Vizier_service.create_study](#vizier_service.create_study)
-  * [Vizier_service.create_trial](#vizier_service.create_trial)
-  * [Vizier_service.delete_study](#vizier_service.delete_study)
-  * [Vizier_service.delete_trial](#vizier_service.delete_trial)
-  * [Vizier_service.get_study](#vizier_service.get_study)
-  * [Vizier_service.get_trial](#vizier_service.get_trial)
-  * [Vizier_service.list_optimal_trials](#vizier_service.list_optimal_trials)
-  * [Vizier_service.list_studies](#vizier_service.list_studies)
-  * [Vizier_service.list_trials](#vizier_service.list_trials)
-  * [Vizier_service.lookup_study](#vizier_service.lookup_study)
-  * [Vizier_service.stop_trial](#vizier_service.stop_trial)
-  * [Vizier_service.suggest_trials](#vizier_service.suggest_trials)
-  * [Dataset_service.create_dataset](#dataset_service.create_dataset)
-  * [Dataset_service.create_dataset_version](#dataset_service.create_dataset_version)
-  * [Dataset_service.delete_dataset](#dataset_service.delete_dataset)
-  * [Dataset_service.delete_dataset_version](#dataset_service.delete_dataset_version)
-  * [Dataset_service.delete_saved_query](#dataset_service.delete_saved_query)
-  * [Dataset_service.export_data](#dataset_service.export_data)
-  * [Dataset_service.get_annotation_spec](#dataset_service.get_annotation_spec)
-  * [Dataset_service.get_dataset](#dataset_service.get_dataset)
-  * [Dataset_service.get_dataset_version](#dataset_service.get_dataset_version)
-  * [Dataset_service.import_data](#dataset_service.import_data)
-  * [Dataset_service.list_annotations](#dataset_service.list_annotations)
-  * [Dataset_service.list_data_items](#dataset_service.list_data_items)
-  * [Dataset_service.list_dataset_versions](#dataset_service.list_dataset_versions)
-  * [Dataset_service.list_datasets](#dataset_service.list_datasets)
-  * [Dataset_service.list_saved_queries](#dataset_service.list_saved_queries)
-  * [Dataset_service.restore_dataset_version](#dataset_service.restore_dataset_version)
-  * [Dataset_service.search_data_items](#dataset_service.search_data_items)
-  * [Dataset_service.update_dataset](#dataset_service.update_dataset)
-  * [Dataset_service.update_dataset_version](#dataset_service.update_dataset_version)
-  * [Deployment_resource_pool_service.create_deployment_resource_pool](#deployment_resource_pool_service.create_deployment_resource_pool)
-  * [Deployment_resource_pool_service.delete_deployment_resource_pool](#deployment_resource_pool_service.delete_deployment_resource_pool)
-  * [Deployment_resource_pool_service.get_deployment_resource_pool](#deployment_resource_pool_service.get_deployment_resource_pool)
-  * [Deployment_resource_pool_service.list_deployment_resource_pools](#deployment_resource_pool_service.list_deployment_resource_pools)
-  * [Deployment_resource_pool_service.query_deployed_models](#deployment_resource_pool_service.query_deployed_models)
-  * [Deployment_resource_pool_service.update_deployment_resource_pool](#deployment_resource_pool_service.update_deployment_resource_pool)
-  * [Endpoint_service.create_endpoint](#endpoint_service.create_endpoint)
-  * [Endpoint_service.delete_endpoint](#endpoint_service.delete_endpoint)
-  * [Endpoint_service.deploy_model](#endpoint_service.deploy_model)
-  * [Endpoint_service.get_endpoint](#endpoint_service.get_endpoint)
-  * [Endpoint_service.list_endpoints](#endpoint_service.list_endpoints)
-  * [Endpoint_service.mutate_deployed_model](#endpoint_service.mutate_deployed_model)
-  * [Endpoint_service.undeploy_model](#endpoint_service.undeploy_model)
-  * [Endpoint_service.update_endpoint](#endpoint_service.update_endpoint)
-  * [Evaluation_service.evaluate_instances](#evaluation_service.evaluate_instances)
-  * [Extension_execution_service.execute_extension](#extension_execution_service.execute_extension)
-  * [Extension_execution_service.query_extension](#extension_execution_service.query_extension)
-  * [Extension_registry_service.delete_extension](#extension_registry_service.delete_extension)
-  * [Extension_registry_service.get_extension](#extension_registry_service.get_extension)
-  * [Extension_registry_service.import_extension](#extension_registry_service.import_extension)
-  * [Extension_registry_service.list_extensions](#extension_registry_service.list_extensions)
-  * [Extension_registry_service.update_extension](#extension_registry_service.update_extension)
-  * [Feature_online_store_admin_service.create_feature_online_store](#feature_online_store_admin_service.create_feature_online_store)
-  * [Feature_online_store_admin_service.create_feature_view](#feature_online_store_admin_service.create_feature_view)
-  * [Feature_online_store_admin_service.delete_feature_online_store](#feature_online_store_admin_service.delete_feature_online_store)
-  * [Feature_online_store_admin_service.delete_feature_view](#feature_online_store_admin_service.delete_feature_view)
-  * [Feature_online_store_admin_service.get_feature_online_store](#feature_online_store_admin_service.get_feature_online_store)
-  * [Feature_online_store_admin_service.get_feature_view](#feature_online_store_admin_service.get_feature_view)
-  * [Feature_online_store_admin_service.get_feature_view_sync](#feature_online_store_admin_service.get_feature_view_sync)
-  * [Feature_online_store_admin_service.list_feature_online_stores](#feature_online_store_admin_service.list_feature_online_stores)
-  * [Feature_online_store_admin_service.list_feature_view_syncs](#feature_online_store_admin_service.list_feature_view_syncs)
-  * [Feature_online_store_admin_service.list_feature_views](#feature_online_store_admin_service.list_feature_views)
-  * [Feature_online_store_admin_service.sync_feature_view](#feature_online_store_admin_service.sync_feature_view)
-  * [Feature_online_store_admin_service.update_feature_online_store](#feature_online_store_admin_service.update_feature_online_store)
-  * [Feature_online_store_admin_service.update_feature_view](#feature_online_store_admin_service.update_feature_view)
-  * [Feature_online_store_service.fetch_feature_values](#feature_online_store_service.fetch_feature_values)
-  * [Feature_online_store_service.search_nearest_entities](#feature_online_store_service.search_nearest_entities)
-  * [Feature_online_store_service.streaming_fetch_feature_values](#feature_online_store_service.streaming_fetch_feature_values)
+  * [Feature_registry_service.batch_create_features](#feature_registry_service.batch_create_features)
   * [Feature_registry_service.create_feature](#feature_registry_service.create_feature)
   * [Feature_registry_service.create_feature_group](#feature_registry_service.create_feature_group)
   * [Feature_registry_service.delete_feature](#feature_registry_service.delete_feature)
@@ -409,6 +106,7 @@
   * [Gen_ai_tuning_service.create_tuning_job](#gen_ai_tuning_service.create_tuning_job)
   * [Gen_ai_tuning_service.get_tuning_job](#gen_ai_tuning_service.get_tuning_job)
   * [Gen_ai_tuning_service.list_tuning_jobs](#gen_ai_tuning_service.list_tuning_jobs)
+  * [Gen_ai_tuning_service.rebase_tuned_model](#gen_ai_tuning_service.rebase_tuned_model)
   * [Index_endpoint_service.create_index_endpoint](#index_endpoint_service.create_index_endpoint)
   * [Index_endpoint_service.delete_index_endpoint](#index_endpoint_service.delete_index_endpoint)
   * [Index_endpoint_service.deploy_index](#index_endpoint_service.deploy_index)
@@ -498,18 +196,6 @@
   * [Migration_service.batch_migrate_resources](#migration_service.batch_migrate_resources)
   * [Migration_service.search_migratable_resources](#migration_service.search_migratable_resources)
   * [Model_garden_service.get_publisher_model](#model_garden_service.get_publisher_model)
-  * [Model_garden_service.list_publisher_models](#model_garden_service.list_publisher_models)
-  * [Model_monitoring_service.create_model_monitor](#model_monitoring_service.create_model_monitor)
-  * [Model_monitoring_service.create_model_monitoring_job](#model_monitoring_service.create_model_monitoring_job)
-  * [Model_monitoring_service.delete_model_monitor](#model_monitoring_service.delete_model_monitor)
-  * [Model_monitoring_service.delete_model_monitoring_job](#model_monitoring_service.delete_model_monitoring_job)
-  * [Model_monitoring_service.get_model_monitor](#model_monitoring_service.get_model_monitor)
-  * [Model_monitoring_service.get_model_monitoring_job](#model_monitoring_service.get_model_monitoring_job)
-  * [Model_monitoring_service.list_model_monitoring_jobs](#model_monitoring_service.list_model_monitoring_jobs)
-  * [Model_monitoring_service.list_model_monitors](#model_monitoring_service.list_model_monitors)
-  * [Model_monitoring_service.search_model_monitoring_alerts](#model_monitoring_service.search_model_monitoring_alerts)
-  * [Model_monitoring_service.search_model_monitoring_stats](#model_monitoring_service.search_model_monitoring_stats)
-  * [Model_monitoring_service.update_model_monitor](#model_monitoring_service.update_model_monitor)
   * [Model_service.batch_import_evaluated_annotations](#model_service.batch_import_evaluated_annotations)
   * [Model_service.batch_import_model_evaluation_slices](#model_service.batch_import_model_evaluation_slices)
   * [Model_service.copy_model](#model_service.copy_model)
@@ -522,6 +208,7 @@
   * [Model_service.import_model_evaluation](#model_service.import_model_evaluation)
   * [Model_service.list_model_evaluation_slices](#model_service.list_model_evaluation_slices)
   * [Model_service.list_model_evaluations](#model_service.list_model_evaluations)
+  * [Model_service.list_model_version_checkpoints](#model_service.list_model_version_checkpoints)
   * [Model_service.list_model_versions](#model_service.list_model_versions)
   * [Model_service.list_models](#model_service.list_models)
   * [Model_service.merge_version_aliases](#model_service.merge_version_aliases)
@@ -541,6 +228,7 @@
   * [Notebook_service.list_notebook_runtime_templates](#notebook_service.list_notebook_runtime_templates)
   * [Notebook_service.list_notebook_runtimes](#notebook_service.list_notebook_runtimes)
   * [Notebook_service.start_notebook_runtime](#notebook_service.start_notebook_runtime)
+  * [Notebook_service.stop_notebook_runtime](#notebook_service.stop_notebook_runtime)
   * [Notebook_service.update_notebook_runtime_template](#notebook_service.update_notebook_runtime_template)
   * [Notebook_service.upgrade_notebook_runtime](#notebook_service.upgrade_notebook_runtime)
   * [Persistent_resource_service.create_persistent_resource](#persistent_resource_service.create_persistent_resource)
@@ -561,8 +249,6 @@
   * [Pipeline_service.get_training_pipeline](#pipeline_service.get_training_pipeline)
   * [Pipeline_service.list_pipeline_jobs](#pipeline_service.list_pipeline_jobs)
   * [Pipeline_service.list_training_pipelines](#pipeline_service.list_training_pipelines)
-  * [Prediction_service.chat_completions](#prediction_service.chat_completions)
-  * [Prediction_service.count_tokens](#prediction_service.count_tokens)
   * [Prediction_service.direct_predict](#prediction_service.direct_predict)
   * [Prediction_service.direct_raw_predict](#prediction_service.direct_raw_predict)
   * [Prediction_service.explain](#prediction_service.explain)
@@ -577,6 +263,7 @@
   * [Prediction_service.streaming_predict](#prediction_service.streaming_predict)
   * [Prediction_service.streaming_raw_predict](#prediction_service.streaming_raw_predict)
   * [Reasoning_engine_execution_service.query_reasoning_engine](#reasoning_engine_execution_service.query_reasoning_engine)
+  * [Reasoning_engine_execution_service.stream_query_reasoning_engine](#reasoning_engine_execution_service.stream_query_reasoning_engine)
   * [Reasoning_engine_service.create_reasoning_engine](#reasoning_engine_service.create_reasoning_engine)
   * [Reasoning_engine_service.delete_reasoning_engine](#reasoning_engine_service.delete_reasoning_engine)
   * [Reasoning_engine_service.get_reasoning_engine](#reasoning_engine_service.get_reasoning_engine)
@@ -634,6 +321,368 @@
   * [Vertex_rag_data_service.list_rag_files](#vertex_rag_data_service.list_rag_files)
   * [Vertex_rag_data_service.update_rag_corpus](#vertex_rag_data_service.update_rag_corpus)
   * [Vertex_rag_data_service.upload_rag_file](#vertex_rag_data_service.upload_rag_file)
+  * [Vertex_rag_service.augment_prompt](#vertex_rag_service.augment_prompt)
+  * [Vertex_rag_service.corroborate_content](#vertex_rag_service.corroborate_content)
+  * [Vertex_rag_service.retrieve_contexts](#vertex_rag_service.retrieve_contexts)
+  * [Vizier_service.add_trial_measurement](#vizier_service.add_trial_measurement)
+  * [Vizier_service.check_trial_early_stopping_state](#vizier_service.check_trial_early_stopping_state)
+  * [Vizier_service.complete_trial](#vizier_service.complete_trial)
+  * [Vizier_service.create_study](#vizier_service.create_study)
+  * [Vizier_service.create_trial](#vizier_service.create_trial)
+  * [Vizier_service.delete_study](#vizier_service.delete_study)
+  * [Vizier_service.delete_trial](#vizier_service.delete_trial)
+  * [Vizier_service.get_study](#vizier_service.get_study)
+  * [Vizier_service.get_trial](#vizier_service.get_trial)
+  * [Vizier_service.list_optimal_trials](#vizier_service.list_optimal_trials)
+  * [Vizier_service.list_studies](#vizier_service.list_studies)
+  * [Vizier_service.list_trials](#vizier_service.list_trials)
+  * [Vizier_service.lookup_study](#vizier_service.lookup_study)
+  * [Vizier_service.stop_trial](#vizier_service.stop_trial)
+  * [Vizier_service.suggest_trials](#vizier_service.suggest_trials)
+  * [Dataset_service.create_dataset](#dataset_service.create_dataset)
+  * [Dataset_service.create_dataset_version](#dataset_service.create_dataset_version)
+  * [Dataset_service.delete_dataset](#dataset_service.delete_dataset)
+  * [Dataset_service.delete_dataset_version](#dataset_service.delete_dataset_version)
+  * [Dataset_service.delete_saved_query](#dataset_service.delete_saved_query)
+  * [Dataset_service.export_data](#dataset_service.export_data)
+  * [Dataset_service.get_annotation_spec](#dataset_service.get_annotation_spec)
+  * [Dataset_service.get_dataset](#dataset_service.get_dataset)
+  * [Dataset_service.get_dataset_version](#dataset_service.get_dataset_version)
+  * [Dataset_service.import_data](#dataset_service.import_data)
+  * [Dataset_service.list_annotations](#dataset_service.list_annotations)
+  * [Dataset_service.list_data_items](#dataset_service.list_data_items)
+  * [Dataset_service.list_dataset_versions](#dataset_service.list_dataset_versions)
+  * [Dataset_service.list_datasets](#dataset_service.list_datasets)
+  * [Dataset_service.list_saved_queries](#dataset_service.list_saved_queries)
+  * [Dataset_service.restore_dataset_version](#dataset_service.restore_dataset_version)
+  * [Dataset_service.search_data_items](#dataset_service.search_data_items)
+  * [Dataset_service.update_dataset](#dataset_service.update_dataset)
+  * [Dataset_service.update_dataset_version](#dataset_service.update_dataset_version)
+  * [Deployment_resource_pool_service.create_deployment_resource_pool](#deployment_resource_pool_service.create_deployment_resource_pool)
+  * [Deployment_resource_pool_service.delete_deployment_resource_pool](#deployment_resource_pool_service.delete_deployment_resource_pool)
+  * [Deployment_resource_pool_service.get_deployment_resource_pool](#deployment_resource_pool_service.get_deployment_resource_pool)
+  * [Deployment_resource_pool_service.list_deployment_resource_pools](#deployment_resource_pool_service.list_deployment_resource_pools)
+  * [Deployment_resource_pool_service.query_deployed_models](#deployment_resource_pool_service.query_deployed_models)
+  * [Deployment_resource_pool_service.update_deployment_resource_pool](#deployment_resource_pool_service.update_deployment_resource_pool)
+  * [Endpoint_service.create_endpoint](#endpoint_service.create_endpoint)
+  * [Endpoint_service.delete_endpoint](#endpoint_service.delete_endpoint)
+  * [Endpoint_service.deploy_model](#endpoint_service.deploy_model)
+  * [Endpoint_service.get_endpoint](#endpoint_service.get_endpoint)
+  * [Endpoint_service.list_endpoints](#endpoint_service.list_endpoints)
+  * [Endpoint_service.mutate_deployed_model](#endpoint_service.mutate_deployed_model)
+  * [Endpoint_service.undeploy_model](#endpoint_service.undeploy_model)
+  * [Endpoint_service.update_endpoint](#endpoint_service.update_endpoint)
+  * [Endpoint_service.update_endpoint_long_running](#endpoint_service.update_endpoint_long_running)
+  * [Evaluation_service.evaluate_dataset](#evaluation_service.evaluate_dataset)
+  * [Evaluation_service.evaluate_instances](#evaluation_service.evaluate_instances)
+  * [Extension_execution_service.execute_extension](#extension_execution_service.execute_extension)
+  * [Extension_execution_service.query_extension](#extension_execution_service.query_extension)
+  * [Extension_registry_service.delete_extension](#extension_registry_service.delete_extension)
+  * [Extension_registry_service.get_extension](#extension_registry_service.get_extension)
+  * [Extension_registry_service.import_extension](#extension_registry_service.import_extension)
+  * [Extension_registry_service.list_extensions](#extension_registry_service.list_extensions)
+  * [Extension_registry_service.update_extension](#extension_registry_service.update_extension)
+  * [Feature_online_store_admin_service.create_feature_online_store](#feature_online_store_admin_service.create_feature_online_store)
+  * [Feature_online_store_admin_service.create_feature_view](#feature_online_store_admin_service.create_feature_view)
+  * [Feature_online_store_admin_service.delete_feature_online_store](#feature_online_store_admin_service.delete_feature_online_store)
+  * [Feature_online_store_admin_service.delete_feature_view](#feature_online_store_admin_service.delete_feature_view)
+  * [Feature_online_store_admin_service.get_feature_online_store](#feature_online_store_admin_service.get_feature_online_store)
+  * [Feature_online_store_admin_service.get_feature_view](#feature_online_store_admin_service.get_feature_view)
+  * [Feature_online_store_admin_service.get_feature_view_sync](#feature_online_store_admin_service.get_feature_view_sync)
+  * [Feature_online_store_admin_service.list_feature_online_stores](#feature_online_store_admin_service.list_feature_online_stores)
+  * [Feature_online_store_admin_service.list_feature_view_syncs](#feature_online_store_admin_service.list_feature_view_syncs)
+  * [Feature_online_store_admin_service.list_feature_views](#feature_online_store_admin_service.list_feature_views)
+  * [Feature_online_store_admin_service.sync_feature_view](#feature_online_store_admin_service.sync_feature_view)
+  * [Feature_online_store_admin_service.update_feature_online_store](#feature_online_store_admin_service.update_feature_online_store)
+  * [Feature_online_store_admin_service.update_feature_view](#feature_online_store_admin_service.update_feature_view)
+  * [Feature_online_store_service.fetch_feature_values](#feature_online_store_service.fetch_feature_values)
+  * [Feature_online_store_service.search_nearest_entities](#feature_online_store_service.search_nearest_entities)
+  * [Feature_online_store_service.streaming_fetch_feature_values](#feature_online_store_service.streaming_fetch_feature_values)
+  * [Feature_registry_service.batch_create_features](#feature_registry_service.batch_create_features)
+  * [Feature_registry_service.create_feature](#feature_registry_service.create_feature)
+  * [Feature_registry_service.create_feature_group](#feature_registry_service.create_feature_group)
+  * [Feature_registry_service.create_feature_monitor](#feature_registry_service.create_feature_monitor)
+  * [Feature_registry_service.create_feature_monitor_job](#feature_registry_service.create_feature_monitor_job)
+  * [Feature_registry_service.delete_feature](#feature_registry_service.delete_feature)
+  * [Feature_registry_service.delete_feature_group](#feature_registry_service.delete_feature_group)
+  * [Feature_registry_service.delete_feature_monitor](#feature_registry_service.delete_feature_monitor)
+  * [Feature_registry_service.get_feature](#feature_registry_service.get_feature)
+  * [Feature_registry_service.get_feature_group](#feature_registry_service.get_feature_group)
+  * [Feature_registry_service.get_feature_monitor](#feature_registry_service.get_feature_monitor)
+  * [Feature_registry_service.get_feature_monitor_job](#feature_registry_service.get_feature_monitor_job)
+  * [Feature_registry_service.list_feature_groups](#feature_registry_service.list_feature_groups)
+  * [Feature_registry_service.list_feature_monitor_jobs](#feature_registry_service.list_feature_monitor_jobs)
+  * [Feature_registry_service.list_feature_monitors](#feature_registry_service.list_feature_monitors)
+  * [Feature_registry_service.list_features](#feature_registry_service.list_features)
+  * [Feature_registry_service.update_feature](#feature_registry_service.update_feature)
+  * [Feature_registry_service.update_feature_group](#feature_registry_service.update_feature_group)
+  * [Feature_registry_service.update_feature_monitor](#feature_registry_service.update_feature_monitor)
+  * [Featurestore_online_serving_service.read_feature_values](#featurestore_online_serving_service.read_feature_values)
+  * [Featurestore_online_serving_service.streaming_read_feature_values](#featurestore_online_serving_service.streaming_read_feature_values)
+  * [Featurestore_online_serving_service.write_feature_values](#featurestore_online_serving_service.write_feature_values)
+  * [Featurestore_service.batch_create_features](#featurestore_service.batch_create_features)
+  * [Featurestore_service.batch_read_feature_values](#featurestore_service.batch_read_feature_values)
+  * [Featurestore_service.create_entity_type](#featurestore_service.create_entity_type)
+  * [Featurestore_service.create_feature](#featurestore_service.create_feature)
+  * [Featurestore_service.create_featurestore](#featurestore_service.create_featurestore)
+  * [Featurestore_service.delete_entity_type](#featurestore_service.delete_entity_type)
+  * [Featurestore_service.delete_feature](#featurestore_service.delete_feature)
+  * [Featurestore_service.delete_feature_values](#featurestore_service.delete_feature_values)
+  * [Featurestore_service.delete_featurestore](#featurestore_service.delete_featurestore)
+  * [Featurestore_service.export_feature_values](#featurestore_service.export_feature_values)
+  * [Featurestore_service.get_entity_type](#featurestore_service.get_entity_type)
+  * [Featurestore_service.get_feature](#featurestore_service.get_feature)
+  * [Featurestore_service.get_featurestore](#featurestore_service.get_featurestore)
+  * [Featurestore_service.import_feature_values](#featurestore_service.import_feature_values)
+  * [Featurestore_service.list_entity_types](#featurestore_service.list_entity_types)
+  * [Featurestore_service.list_features](#featurestore_service.list_features)
+  * [Featurestore_service.list_featurestores](#featurestore_service.list_featurestores)
+  * [Featurestore_service.search_features](#featurestore_service.search_features)
+  * [Featurestore_service.update_entity_type](#featurestore_service.update_entity_type)
+  * [Featurestore_service.update_feature](#featurestore_service.update_feature)
+  * [Featurestore_service.update_featurestore](#featurestore_service.update_featurestore)
+  * [Gen_ai_cache_service.create_cached_content](#gen_ai_cache_service.create_cached_content)
+  * [Gen_ai_cache_service.delete_cached_content](#gen_ai_cache_service.delete_cached_content)
+  * [Gen_ai_cache_service.get_cached_content](#gen_ai_cache_service.get_cached_content)
+  * [Gen_ai_cache_service.list_cached_contents](#gen_ai_cache_service.list_cached_contents)
+  * [Gen_ai_cache_service.update_cached_content](#gen_ai_cache_service.update_cached_content)
+  * [Gen_ai_tuning_service.cancel_tuning_job](#gen_ai_tuning_service.cancel_tuning_job)
+  * [Gen_ai_tuning_service.create_tuning_job](#gen_ai_tuning_service.create_tuning_job)
+  * [Gen_ai_tuning_service.get_tuning_job](#gen_ai_tuning_service.get_tuning_job)
+  * [Gen_ai_tuning_service.list_tuning_jobs](#gen_ai_tuning_service.list_tuning_jobs)
+  * [Gen_ai_tuning_service.rebase_tuned_model](#gen_ai_tuning_service.rebase_tuned_model)
+  * [Index_endpoint_service.create_index_endpoint](#index_endpoint_service.create_index_endpoint)
+  * [Index_endpoint_service.delete_index_endpoint](#index_endpoint_service.delete_index_endpoint)
+  * [Index_endpoint_service.deploy_index](#index_endpoint_service.deploy_index)
+  * [Index_endpoint_service.get_index_endpoint](#index_endpoint_service.get_index_endpoint)
+  * [Index_endpoint_service.list_index_endpoints](#index_endpoint_service.list_index_endpoints)
+  * [Index_endpoint_service.mutate_deployed_index](#index_endpoint_service.mutate_deployed_index)
+  * [Index_endpoint_service.undeploy_index](#index_endpoint_service.undeploy_index)
+  * [Index_endpoint_service.update_index_endpoint](#index_endpoint_service.update_index_endpoint)
+  * [Index_service.create_index](#index_service.create_index)
+  * [Index_service.delete_index](#index_service.delete_index)
+  * [Index_service.get_index](#index_service.get_index)
+  * [Index_service.list_indexes](#index_service.list_indexes)
+  * [Index_service.remove_datapoints](#index_service.remove_datapoints)
+  * [Index_service.update_index](#index_service.update_index)
+  * [Index_service.upsert_datapoints](#index_service.upsert_datapoints)
+  * [Job_service.cancel_batch_prediction_job](#job_service.cancel_batch_prediction_job)
+  * [Job_service.cancel_custom_job](#job_service.cancel_custom_job)
+  * [Job_service.cancel_data_labeling_job](#job_service.cancel_data_labeling_job)
+  * [Job_service.cancel_hyperparameter_tuning_job](#job_service.cancel_hyperparameter_tuning_job)
+  * [Job_service.cancel_nas_job](#job_service.cancel_nas_job)
+  * [Job_service.create_batch_prediction_job](#job_service.create_batch_prediction_job)
+  * [Job_service.create_custom_job](#job_service.create_custom_job)
+  * [Job_service.create_data_labeling_job](#job_service.create_data_labeling_job)
+  * [Job_service.create_hyperparameter_tuning_job](#job_service.create_hyperparameter_tuning_job)
+  * [Job_service.create_model_deployment_monitoring_job](#job_service.create_model_deployment_monitoring_job)
+  * [Job_service.create_nas_job](#job_service.create_nas_job)
+  * [Job_service.delete_batch_prediction_job](#job_service.delete_batch_prediction_job)
+  * [Job_service.delete_custom_job](#job_service.delete_custom_job)
+  * [Job_service.delete_data_labeling_job](#job_service.delete_data_labeling_job)
+  * [Job_service.delete_hyperparameter_tuning_job](#job_service.delete_hyperparameter_tuning_job)
+  * [Job_service.delete_model_deployment_monitoring_job](#job_service.delete_model_deployment_monitoring_job)
+  * [Job_service.delete_nas_job](#job_service.delete_nas_job)
+  * [Job_service.get_batch_prediction_job](#job_service.get_batch_prediction_job)
+  * [Job_service.get_custom_job](#job_service.get_custom_job)
+  * [Job_service.get_data_labeling_job](#job_service.get_data_labeling_job)
+  * [Job_service.get_hyperparameter_tuning_job](#job_service.get_hyperparameter_tuning_job)
+  * [Job_service.get_model_deployment_monitoring_job](#job_service.get_model_deployment_monitoring_job)
+  * [Job_service.get_nas_job](#job_service.get_nas_job)
+  * [Job_service.get_nas_trial_detail](#job_service.get_nas_trial_detail)
+  * [Job_service.list_batch_prediction_jobs](#job_service.list_batch_prediction_jobs)
+  * [Job_service.list_custom_jobs](#job_service.list_custom_jobs)
+  * [Job_service.list_data_labeling_jobs](#job_service.list_data_labeling_jobs)
+  * [Job_service.list_hyperparameter_tuning_jobs](#job_service.list_hyperparameter_tuning_jobs)
+  * [Job_service.list_model_deployment_monitoring_jobs](#job_service.list_model_deployment_monitoring_jobs)
+  * [Job_service.list_nas_jobs](#job_service.list_nas_jobs)
+  * [Job_service.list_nas_trial_details](#job_service.list_nas_trial_details)
+  * [Job_service.pause_model_deployment_monitoring_job](#job_service.pause_model_deployment_monitoring_job)
+  * [Job_service.resume_model_deployment_monitoring_job](#job_service.resume_model_deployment_monitoring_job)
+  * [Job_service.search_model_deployment_monitoring_stats_anomalies](#job_service.search_model_deployment_monitoring_stats_anomalies)
+  * [Job_service.update_model_deployment_monitoring_job](#job_service.update_model_deployment_monitoring_job)
+  * [Llm_utility_service.compute_tokens](#llm_utility_service.compute_tokens)
+  * [Llm_utility_service.count_tokens](#llm_utility_service.count_tokens)
+  * [Match_service.find_neighbors](#match_service.find_neighbors)
+  * [Match_service.read_index_datapoints](#match_service.read_index_datapoints)
+  * [Metadata_service.add_context_artifacts_and_executions](#metadata_service.add_context_artifacts_and_executions)
+  * [Metadata_service.add_context_children](#metadata_service.add_context_children)
+  * [Metadata_service.add_execution_events](#metadata_service.add_execution_events)
+  * [Metadata_service.create_artifact](#metadata_service.create_artifact)
+  * [Metadata_service.create_context](#metadata_service.create_context)
+  * [Metadata_service.create_execution](#metadata_service.create_execution)
+  * [Metadata_service.create_metadata_schema](#metadata_service.create_metadata_schema)
+  * [Metadata_service.create_metadata_store](#metadata_service.create_metadata_store)
+  * [Metadata_service.delete_artifact](#metadata_service.delete_artifact)
+  * [Metadata_service.delete_context](#metadata_service.delete_context)
+  * [Metadata_service.delete_execution](#metadata_service.delete_execution)
+  * [Metadata_service.delete_metadata_store](#metadata_service.delete_metadata_store)
+  * [Metadata_service.get_artifact](#metadata_service.get_artifact)
+  * [Metadata_service.get_context](#metadata_service.get_context)
+  * [Metadata_service.get_execution](#metadata_service.get_execution)
+  * [Metadata_service.get_metadata_schema](#metadata_service.get_metadata_schema)
+  * [Metadata_service.get_metadata_store](#metadata_service.get_metadata_store)
+  * [Metadata_service.list_artifacts](#metadata_service.list_artifacts)
+  * [Metadata_service.list_contexts](#metadata_service.list_contexts)
+  * [Metadata_service.list_executions](#metadata_service.list_executions)
+  * [Metadata_service.list_metadata_schemas](#metadata_service.list_metadata_schemas)
+  * [Metadata_service.list_metadata_stores](#metadata_service.list_metadata_stores)
+  * [Metadata_service.purge_artifacts](#metadata_service.purge_artifacts)
+  * [Metadata_service.purge_contexts](#metadata_service.purge_contexts)
+  * [Metadata_service.purge_executions](#metadata_service.purge_executions)
+  * [Metadata_service.query_artifact_lineage_subgraph](#metadata_service.query_artifact_lineage_subgraph)
+  * [Metadata_service.query_context_lineage_subgraph](#metadata_service.query_context_lineage_subgraph)
+  * [Metadata_service.query_execution_inputs_and_outputs](#metadata_service.query_execution_inputs_and_outputs)
+  * [Metadata_service.remove_context_children](#metadata_service.remove_context_children)
+  * [Metadata_service.update_artifact](#metadata_service.update_artifact)
+  * [Metadata_service.update_context](#metadata_service.update_context)
+  * [Metadata_service.update_execution](#metadata_service.update_execution)
+  * [Migration_service.batch_migrate_resources](#migration_service.batch_migrate_resources)
+  * [Migration_service.search_migratable_resources](#migration_service.search_migratable_resources)
+  * [Model_garden_service.deploy](#model_garden_service.deploy)
+  * [Model_garden_service.deploy_publisher_model](#model_garden_service.deploy_publisher_model)
+  * [Model_garden_service.get_publisher_model](#model_garden_service.get_publisher_model)
+  * [Model_garden_service.list_publisher_models](#model_garden_service.list_publisher_models)
+  * [Model_monitoring_service.create_model_monitor](#model_monitoring_service.create_model_monitor)
+  * [Model_monitoring_service.create_model_monitoring_job](#model_monitoring_service.create_model_monitoring_job)
+  * [Model_monitoring_service.delete_model_monitor](#model_monitoring_service.delete_model_monitor)
+  * [Model_monitoring_service.delete_model_monitoring_job](#model_monitoring_service.delete_model_monitoring_job)
+  * [Model_monitoring_service.get_model_monitor](#model_monitoring_service.get_model_monitor)
+  * [Model_monitoring_service.get_model_monitoring_job](#model_monitoring_service.get_model_monitoring_job)
+  * [Model_monitoring_service.list_model_monitoring_jobs](#model_monitoring_service.list_model_monitoring_jobs)
+  * [Model_monitoring_service.list_model_monitors](#model_monitoring_service.list_model_monitors)
+  * [Model_monitoring_service.search_model_monitoring_alerts](#model_monitoring_service.search_model_monitoring_alerts)
+  * [Model_monitoring_service.search_model_monitoring_stats](#model_monitoring_service.search_model_monitoring_stats)
+  * [Model_monitoring_service.update_model_monitor](#model_monitoring_service.update_model_monitor)
+  * [Model_service.batch_import_evaluated_annotations](#model_service.batch_import_evaluated_annotations)
+  * [Model_service.batch_import_model_evaluation_slices](#model_service.batch_import_model_evaluation_slices)
+  * [Model_service.copy_model](#model_service.copy_model)
+  * [Model_service.delete_model](#model_service.delete_model)
+  * [Model_service.delete_model_version](#model_service.delete_model_version)
+  * [Model_service.export_model](#model_service.export_model)
+  * [Model_service.get_model](#model_service.get_model)
+  * [Model_service.get_model_evaluation](#model_service.get_model_evaluation)
+  * [Model_service.get_model_evaluation_slice](#model_service.get_model_evaluation_slice)
+  * [Model_service.import_model_evaluation](#model_service.import_model_evaluation)
+  * [Model_service.list_model_evaluation_slices](#model_service.list_model_evaluation_slices)
+  * [Model_service.list_model_evaluations](#model_service.list_model_evaluations)
+  * [Model_service.list_model_version_checkpoints](#model_service.list_model_version_checkpoints)
+  * [Model_service.list_model_versions](#model_service.list_model_versions)
+  * [Model_service.list_models](#model_service.list_models)
+  * [Model_service.merge_version_aliases](#model_service.merge_version_aliases)
+  * [Model_service.update_explanation_dataset](#model_service.update_explanation_dataset)
+  * [Model_service.update_model](#model_service.update_model)
+  * [Model_service.upload_model](#model_service.upload_model)
+  * [Notebook_service.assign_notebook_runtime](#notebook_service.assign_notebook_runtime)
+  * [Notebook_service.create_notebook_execution_job](#notebook_service.create_notebook_execution_job)
+  * [Notebook_service.create_notebook_runtime_template](#notebook_service.create_notebook_runtime_template)
+  * [Notebook_service.delete_notebook_execution_job](#notebook_service.delete_notebook_execution_job)
+  * [Notebook_service.delete_notebook_runtime](#notebook_service.delete_notebook_runtime)
+  * [Notebook_service.delete_notebook_runtime_template](#notebook_service.delete_notebook_runtime_template)
+  * [Notebook_service.get_notebook_execution_job](#notebook_service.get_notebook_execution_job)
+  * [Notebook_service.get_notebook_runtime](#notebook_service.get_notebook_runtime)
+  * [Notebook_service.get_notebook_runtime_template](#notebook_service.get_notebook_runtime_template)
+  * [Notebook_service.list_notebook_execution_jobs](#notebook_service.list_notebook_execution_jobs)
+  * [Notebook_service.list_notebook_runtime_templates](#notebook_service.list_notebook_runtime_templates)
+  * [Notebook_service.list_notebook_runtimes](#notebook_service.list_notebook_runtimes)
+  * [Notebook_service.start_notebook_runtime](#notebook_service.start_notebook_runtime)
+  * [Notebook_service.stop_notebook_runtime](#notebook_service.stop_notebook_runtime)
+  * [Notebook_service.update_notebook_runtime_template](#notebook_service.update_notebook_runtime_template)
+  * [Notebook_service.upgrade_notebook_runtime](#notebook_service.upgrade_notebook_runtime)
+  * [Persistent_resource_service.create_persistent_resource](#persistent_resource_service.create_persistent_resource)
+  * [Persistent_resource_service.delete_persistent_resource](#persistent_resource_service.delete_persistent_resource)
+  * [Persistent_resource_service.get_persistent_resource](#persistent_resource_service.get_persistent_resource)
+  * [Persistent_resource_service.list_persistent_resources](#persistent_resource_service.list_persistent_resources)
+  * [Persistent_resource_service.reboot_persistent_resource](#persistent_resource_service.reboot_persistent_resource)
+  * [Persistent_resource_service.update_persistent_resource](#persistent_resource_service.update_persistent_resource)
+  * [Pipeline_service.batch_cancel_pipeline_jobs](#pipeline_service.batch_cancel_pipeline_jobs)
+  * [Pipeline_service.batch_delete_pipeline_jobs](#pipeline_service.batch_delete_pipeline_jobs)
+  * [Pipeline_service.cancel_pipeline_job](#pipeline_service.cancel_pipeline_job)
+  * [Pipeline_service.cancel_training_pipeline](#pipeline_service.cancel_training_pipeline)
+  * [Pipeline_service.create_pipeline_job](#pipeline_service.create_pipeline_job)
+  * [Pipeline_service.create_training_pipeline](#pipeline_service.create_training_pipeline)
+  * [Pipeline_service.delete_pipeline_job](#pipeline_service.delete_pipeline_job)
+  * [Pipeline_service.delete_training_pipeline](#pipeline_service.delete_training_pipeline)
+  * [Pipeline_service.get_pipeline_job](#pipeline_service.get_pipeline_job)
+  * [Pipeline_service.get_training_pipeline](#pipeline_service.get_training_pipeline)
+  * [Pipeline_service.list_pipeline_jobs](#pipeline_service.list_pipeline_jobs)
+  * [Pipeline_service.list_training_pipelines](#pipeline_service.list_training_pipelines)
+  * [Prediction_service.chat_completions](#prediction_service.chat_completions)
+  * [Prediction_service.count_tokens](#prediction_service.count_tokens)
+  * [Prediction_service.direct_predict](#prediction_service.direct_predict)
+  * [Prediction_service.direct_raw_predict](#prediction_service.direct_raw_predict)
+  * [Prediction_service.explain](#prediction_service.explain)
+  * [Prediction_service.generate_content](#prediction_service.generate_content)
+  * [Prediction_service.predict](#prediction_service.predict)
+  * [Prediction_service.raw_predict](#prediction_service.raw_predict)
+  * [Prediction_service.server_streaming_predict](#prediction_service.server_streaming_predict)
+  * [Prediction_service.stream_direct_predict](#prediction_service.stream_direct_predict)
+  * [Prediction_service.stream_direct_raw_predict](#prediction_service.stream_direct_raw_predict)
+  * [Prediction_service.stream_generate_content](#prediction_service.stream_generate_content)
+  * [Prediction_service.stream_raw_predict](#prediction_service.stream_raw_predict)
+  * [Prediction_service.streaming_predict](#prediction_service.streaming_predict)
+  * [Prediction_service.streaming_raw_predict](#prediction_service.streaming_raw_predict)
+  * [Reasoning_engine_execution_service.query_reasoning_engine](#reasoning_engine_execution_service.query_reasoning_engine)
+  * [Reasoning_engine_execution_service.stream_query_reasoning_engine](#reasoning_engine_execution_service.stream_query_reasoning_engine)
+  * [Reasoning_engine_service.create_reasoning_engine](#reasoning_engine_service.create_reasoning_engine)
+  * [Reasoning_engine_service.delete_reasoning_engine](#reasoning_engine_service.delete_reasoning_engine)
+  * [Reasoning_engine_service.get_reasoning_engine](#reasoning_engine_service.get_reasoning_engine)
+  * [Reasoning_engine_service.list_reasoning_engines](#reasoning_engine_service.list_reasoning_engines)
+  * [Reasoning_engine_service.update_reasoning_engine](#reasoning_engine_service.update_reasoning_engine)
+  * [Schedule_service.create_schedule](#schedule_service.create_schedule)
+  * [Schedule_service.delete_schedule](#schedule_service.delete_schedule)
+  * [Schedule_service.get_schedule](#schedule_service.get_schedule)
+  * [Schedule_service.list_schedules](#schedule_service.list_schedules)
+  * [Schedule_service.pause_schedule](#schedule_service.pause_schedule)
+  * [Schedule_service.resume_schedule](#schedule_service.resume_schedule)
+  * [Schedule_service.update_schedule](#schedule_service.update_schedule)
+  * [Specialist_pool_service.create_specialist_pool](#specialist_pool_service.create_specialist_pool)
+  * [Specialist_pool_service.delete_specialist_pool](#specialist_pool_service.delete_specialist_pool)
+  * [Specialist_pool_service.get_specialist_pool](#specialist_pool_service.get_specialist_pool)
+  * [Specialist_pool_service.list_specialist_pools](#specialist_pool_service.list_specialist_pools)
+  * [Specialist_pool_service.update_specialist_pool](#specialist_pool_service.update_specialist_pool)
+  * [Tensorboard_service.batch_create_tensorboard_runs](#tensorboard_service.batch_create_tensorboard_runs)
+  * [Tensorboard_service.batch_create_tensorboard_time_series](#tensorboard_service.batch_create_tensorboard_time_series)
+  * [Tensorboard_service.batch_read_tensorboard_time_series_data](#tensorboard_service.batch_read_tensorboard_time_series_data)
+  * [Tensorboard_service.create_tensorboard](#tensorboard_service.create_tensorboard)
+  * [Tensorboard_service.create_tensorboard_experiment](#tensorboard_service.create_tensorboard_experiment)
+  * [Tensorboard_service.create_tensorboard_run](#tensorboard_service.create_tensorboard_run)
+  * [Tensorboard_service.create_tensorboard_time_series](#tensorboard_service.create_tensorboard_time_series)
+  * [Tensorboard_service.delete_tensorboard](#tensorboard_service.delete_tensorboard)
+  * [Tensorboard_service.delete_tensorboard_experiment](#tensorboard_service.delete_tensorboard_experiment)
+  * [Tensorboard_service.delete_tensorboard_run](#tensorboard_service.delete_tensorboard_run)
+  * [Tensorboard_service.delete_tensorboard_time_series](#tensorboard_service.delete_tensorboard_time_series)
+  * [Tensorboard_service.export_tensorboard_time_series_data](#tensorboard_service.export_tensorboard_time_series_data)
+  * [Tensorboard_service.get_tensorboard](#tensorboard_service.get_tensorboard)
+  * [Tensorboard_service.get_tensorboard_experiment](#tensorboard_service.get_tensorboard_experiment)
+  * [Tensorboard_service.get_tensorboard_run](#tensorboard_service.get_tensorboard_run)
+  * [Tensorboard_service.get_tensorboard_time_series](#tensorboard_service.get_tensorboard_time_series)
+  * [Tensorboard_service.list_tensorboard_experiments](#tensorboard_service.list_tensorboard_experiments)
+  * [Tensorboard_service.list_tensorboard_runs](#tensorboard_service.list_tensorboard_runs)
+  * [Tensorboard_service.list_tensorboard_time_series](#tensorboard_service.list_tensorboard_time_series)
+  * [Tensorboard_service.list_tensorboards](#tensorboard_service.list_tensorboards)
+  * [Tensorboard_service.read_tensorboard_blob_data](#tensorboard_service.read_tensorboard_blob_data)
+  * [Tensorboard_service.read_tensorboard_size](#tensorboard_service.read_tensorboard_size)
+  * [Tensorboard_service.read_tensorboard_time_series_data](#tensorboard_service.read_tensorboard_time_series_data)
+  * [Tensorboard_service.read_tensorboard_usage](#tensorboard_service.read_tensorboard_usage)
+  * [Tensorboard_service.update_tensorboard](#tensorboard_service.update_tensorboard)
+  * [Tensorboard_service.update_tensorboard_experiment](#tensorboard_service.update_tensorboard_experiment)
+  * [Tensorboard_service.update_tensorboard_run](#tensorboard_service.update_tensorboard_run)
+  * [Tensorboard_service.update_tensorboard_time_series](#tensorboard_service.update_tensorboard_time_series)
+  * [Tensorboard_service.write_tensorboard_experiment_data](#tensorboard_service.write_tensorboard_experiment_data)
+  * [Tensorboard_service.write_tensorboard_run_data](#tensorboard_service.write_tensorboard_run_data)
+  * [Vertex_rag_data_service.create_rag_corpus](#vertex_rag_data_service.create_rag_corpus)
+  * [Vertex_rag_data_service.delete_rag_corpus](#vertex_rag_data_service.delete_rag_corpus)
+  * [Vertex_rag_data_service.delete_rag_file](#vertex_rag_data_service.delete_rag_file)
+  * [Vertex_rag_data_service.get_rag_corpus](#vertex_rag_data_service.get_rag_corpus)
+  * [Vertex_rag_data_service.get_rag_file](#vertex_rag_data_service.get_rag_file)
+  * [Vertex_rag_data_service.import_rag_files](#vertex_rag_data_service.import_rag_files)
+  * [Vertex_rag_data_service.list_rag_corpora](#vertex_rag_data_service.list_rag_corpora)
+  * [Vertex_rag_data_service.list_rag_files](#vertex_rag_data_service.list_rag_files)
+  * [Vertex_rag_data_service.update_rag_corpus](#vertex_rag_data_service.update_rag_corpus)
+  * [Vertex_rag_data_service.upload_rag_file](#vertex_rag_data_service.upload_rag_file)
+  * [Vertex_rag_service.augment_prompt](#vertex_rag_service.augment_prompt)
+  * [Vertex_rag_service.corroborate_content](#vertex_rag_service.corroborate_content)
   * [Vertex_rag_service.retrieve_contexts](#vertex_rag_service.retrieve_contexts)
   * [Vizier_service.add_trial_measurement](#vizier_service.add_trial_measurement)
   * [Vizier_service.check_trial_early_stopping_state](#vizier_service.check_trial_early_stopping_state)
@@ -1228,6 +1277,23 @@ __Usage:__
 
 
 
+### Endpoint_service.update_endpoint_long_running
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.update_endpoint_long_running.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.update_endpoint_long_running.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.update_endpoint_long_running.js`
+
+
+-----
+
+
+
+
 ### Evaluation_service.evaluate_instances
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/evaluation_service.evaluate_instances.js).
@@ -1493,6 +1559,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.search_nearest_entities.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.batch_create_features
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.batch_create_features.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.batch_create_features.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.batch_create_features.js`
 
 
 -----
@@ -2078,6 +2161,91 @@ __Usage:__
 
 
 
+### Gen_ai_cache_service.create_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.create_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.create_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.create_cached_content.js`
+
+
+-----
+
+
+
+
+### Gen_ai_cache_service.delete_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.delete_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.delete_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.delete_cached_content.js`
+
+
+-----
+
+
+
+
+### Gen_ai_cache_service.get_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.get_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.get_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.get_cached_content.js`
+
+
+-----
+
+
+
+
+### Gen_ai_cache_service.list_cached_contents
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.list_cached_contents.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.list_cached_contents.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.list_cached_contents.js`
+
+
+-----
+
+
+
+
+### Gen_ai_cache_service.update_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.update_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.update_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.update_cached_content.js`
+
+
+-----
+
+
+
+
 ### Gen_ai_tuning_service.cancel_tuning_job
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.cancel_tuning_job.js).
@@ -2139,6 +2307,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.list_tuning_jobs.js`
+
+
+-----
+
+
+
+
+### Gen_ai_tuning_service.rebase_tuned_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.rebase_tuned_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.rebase_tuned_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.rebase_tuned_model.js`
 
 
 -----
@@ -3863,6 +4048,23 @@ __Usage:__
 
 
 
+### Model_service.list_model_version_checkpoints
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_version_checkpoints.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_version_checkpoints.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_version_checkpoints.js`
+
+
+-----
+
+
+
+
 ### Model_service.list_model_versions
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_versions.js).
@@ -4179,6 +4381,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.start_notebook_runtime.js`
+
+
+-----
+
+
+
+
+### Notebook_service.stop_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.stop_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.stop_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.stop_notebook_runtime.js`
 
 
 -----
@@ -4740,6 +4959,125 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.streaming_raw_predict.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_execution_service.query_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.query_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.query_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.query_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_execution_service.stream_query_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.stream_query_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.stream_query_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.stream_query_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.create_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.create_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.create_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.create_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.delete_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.delete_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.delete_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.delete_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.get_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.get_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.get_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.get_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.list_reasoning_engines
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.list_reasoning_engines.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.list_reasoning_engines.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.list_reasoning_engines.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.update_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.update_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.update_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.update_reasoning_engine.js`
 
 
 -----
@@ -5454,6 +5792,227 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.write_tensorboard_run_data.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.create_rag_corpus
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.create_rag_corpus.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.create_rag_corpus.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.create_rag_corpus.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.delete_rag_corpus
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.delete_rag_corpus.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.delete_rag_corpus.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.delete_rag_corpus.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.delete_rag_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.delete_rag_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.delete_rag_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.delete_rag_file.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.get_rag_corpus
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_corpus.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_corpus.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_corpus.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.get_rag_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_file.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.import_rag_files
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.import_rag_files.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.import_rag_files.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.import_rag_files.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.list_rag_corpora
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.list_rag_corpora.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.list_rag_corpora.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.list_rag_corpora.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.list_rag_files
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.list_rag_files.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.list_rag_files.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.list_rag_files.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.update_rag_corpus
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.update_rag_corpus.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.update_rag_corpus.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.update_rag_corpus.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.upload_rag_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.upload_rag_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.upload_rag_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.upload_rag_file.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_service.augment_prompt
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.augment_prompt.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.augment_prompt.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.augment_prompt.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_service.corroborate_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.corroborate_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.corroborate_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.corroborate_content.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_service.retrieve_contexts
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.retrieve_contexts.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.retrieve_contexts.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.retrieve_contexts.js`
 
 
 -----
@@ -6277,6 +6836,40 @@ __Usage:__
 
 
 
+### Endpoint_service.update_endpoint_long_running
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint_long_running.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint_long_running.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint_long_running.js`
+
+
+-----
+
+
+
+
+### Evaluation_service.evaluate_dataset
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_dataset.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_dataset.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_dataset.js`
+
+
+-----
+
+
+
+
 ### Evaluation_service.evaluate_instances
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_instances.js).
@@ -6685,6 +7278,23 @@ __Usage:__
 
 
 
+### Feature_registry_service.batch_create_features
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.batch_create_features.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.batch_create_features.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.batch_create_features.js`
+
+
+-----
+
+
+
+
 ### Feature_registry_service.create_feature
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature.js).
@@ -6712,6 +7322,40 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_group.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.create_feature_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.create_feature_monitor_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor_job.js`
 
 
 -----
@@ -6753,6 +7397,23 @@ __Usage:__
 
 
 
+### Feature_registry_service.delete_feature_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_monitor.js`
+
+
+-----
+
+
+
+
 ### Feature_registry_service.get_feature
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature.js).
@@ -6787,6 +7448,40 @@ __Usage:__
 
 
 
+### Feature_registry_service.get_feature_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.get_feature_monitor_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor_job.js`
+
+
+-----
+
+
+
+
 ### Feature_registry_service.list_feature_groups
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_groups.js).
@@ -6797,6 +7492,40 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_groups.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.list_feature_monitor_jobs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitor_jobs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitor_jobs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitor_jobs.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.list_feature_monitors
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitors.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitors.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitors.js`
 
 
 -----
@@ -6848,6 +7577,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature_group.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.update_feature_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature_monitor.js`
 
 
 -----
@@ -7409,6 +8155,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.list_tuning_jobs.js`
+
+
+-----
+
+
+
+
+### Gen_ai_tuning_service.rebase_tuned_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.rebase_tuned_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.rebase_tuned_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.rebase_tuned_model.js`
 
 
 -----
@@ -8912,6 +9675,40 @@ __Usage:__
 
 
 
+### Model_garden_service.deploy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy.js`
+
+
+-----
+
+
+
+
+### Model_garden_service.deploy_publisher_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy_publisher_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy_publisher_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy_publisher_model.js`
+
+
+-----
+
+
+
+
 ### Model_garden_service.get_publisher_model
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.get_publisher_model.js).
@@ -9337,6 +10134,23 @@ __Usage:__
 
 
 
+### Model_service.list_model_version_checkpoints
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_version_checkpoints.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_version_checkpoints.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_version_checkpoints.js`
+
+
+-----
+
+
+
+
 ### Model_service.list_model_versions
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_versions.js).
@@ -9653,6 +10467,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.start_notebook_runtime.js`
+
+
+-----
+
+
+
+
+### Notebook_service.stop_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js`
 
 
 -----
@@ -10265,6 +11096,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.query_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_execution_service.stream_query_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.stream_query_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.stream_query_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.stream_query_reasoning_engine.js`
 
 
 -----
@@ -11234,6 +12082,40 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.upload_rag_file.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_service.augment_prompt
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.augment_prompt.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.augment_prompt.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.augment_prompt.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_service.corroborate_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.corroborate_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.corroborate_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.corroborate_content.js`
 
 
 -----

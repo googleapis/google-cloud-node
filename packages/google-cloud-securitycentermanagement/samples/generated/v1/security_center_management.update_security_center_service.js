@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,19 +33,23 @@ function main(securityCenterService, updateMask) {
    */
   // const securityCenterService = {}
   /**
-   *  Required. The list of fields to be updated. Possible values:
-   *    * "intended_enablement_state"
-   *    * "modules"
+   *  Required. The fields to update. Accepts the following values:
+   *  * `intended_enablement_state`
+   *  * `modules`
+   *  If omitted, then all eligible fields are updated.
    */
   // const updateMask = {}
   /**
-   *  Optional. When set to true, only validations (including IAM checks) will be
-   *  done for the request (service will not be updated). An OK response
-   *  indicates that the request is valid, while an error response indicates that
-   *  the request is invalid. Note that a subsequent request to actually update
-   *  the service could still fail for one of the following reasons:
-   *  - The state could have changed (e.g. IAM permission lost).
-   *  - A failure occurred while trying to delete the module.
+   *  Optional. When set to `true`, the request will be validated (including IAM
+   *  checks), but no service will be updated. An `OK` response indicates that
+   *  the request is valid, while an error response indicates that the request is
+   *  invalid.
+   *  If the request is valid, a subsequent request to update the service could
+   *  still fail for one of the following reasons:
+   *  *  The state of your cloud resources changed; for example, you lost a
+   *     required IAM permission
+   *  *  An error occurred during update of the service
+   *  Defaults to `false`.
    */
   // const validateOnly = true
 

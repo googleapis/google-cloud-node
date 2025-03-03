@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ function main(name) {
   /**
    *  Required. The resource name of the terms of service version.
    *  Format: `accounts/{account}/termsOfServiceAgreementState/{identifier}`
+   *  The identifier format is: `{TermsOfServiceKind}-{country}`
    */
   // const name = 'abc123'
 

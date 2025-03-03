@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,15 +31,13 @@ function main(parent) {
   /**
    *  Required. The project and location for which to retrieve instance
    *  information, in the format `projects/{project_id}/locations/{location}`.
-   *  For Parallelstore locations map to Google Cloud zones, for example
-   *  **us-central1-a**.
-   *  To retrieve instance information for all locations, use "-" for the
-   *  `{location}` value.
+   *  To retrieve instance information for all locations, use "-" as the value of
+   *  `{location}`.
    */
   // const parent = 'abc123'
   /**
    *  Optional. Requested page size. Server may return fewer items than
-   *  requested. If unspecified, server will pick an appropriate default.
+   *  requested. If unspecified, the server will pick an appropriate default.
    */
   // const pageSize = 1234
   /**
@@ -47,11 +45,11 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Filtering results
+   *  Optional. Filtering results.
    */
   // const filter = 'abc123'
   /**
-   *  Optional. Hint for how to order the results
+   *  Optional. Hint for how to order the results.
    */
   // const orderBy = 'abc123'
 

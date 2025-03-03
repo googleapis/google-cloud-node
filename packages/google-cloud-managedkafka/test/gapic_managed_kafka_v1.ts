@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -360,7 +360,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.Cluster()
       );
@@ -391,7 +391,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.Cluster()
       );
@@ -438,7 +438,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCluster = stubSimpleCall(
         undefined,
@@ -490,7 +490,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.Topic()
       );
@@ -521,7 +521,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.Topic()
       );
@@ -568,7 +568,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTopic = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getTopic(request), expectedError);
@@ -617,7 +617,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.Topic()
       );
@@ -648,7 +648,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.Topic()
       );
@@ -695,7 +695,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTopic = stubSimpleCall(
         undefined,
@@ -748,7 +748,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['topic', 'name']
       );
       request.topic.name = defaultValue1;
-      const expectedHeaderRequestParams = `topic.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `topic.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.Topic()
       );
@@ -780,7 +780,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['topic', 'name']
       );
       request.topic.name = defaultValue1;
-      const expectedHeaderRequestParams = `topic.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `topic.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.Topic()
       );
@@ -828,7 +828,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['topic', 'name']
       );
       request.topic.name = defaultValue1;
-      const expectedHeaderRequestParams = `topic.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `topic.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTopic = stubSimpleCall(
         undefined,
@@ -881,7 +881,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -912,7 +912,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -959,7 +959,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTopic = stubSimpleCall(
         undefined,
@@ -1011,7 +1011,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ConsumerGroup()
       );
@@ -1042,7 +1042,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ConsumerGroup()
       );
@@ -1089,7 +1089,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConsumerGroup = stubSimpleCall(
         undefined,
@@ -1142,7 +1142,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['consumerGroup', 'name']
       );
       request.consumerGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `consumer_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `consumer_group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ConsumerGroup()
       );
@@ -1175,7 +1175,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['consumerGroup', 'name']
       );
       request.consumerGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `consumer_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `consumer_group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ConsumerGroup()
       );
@@ -1223,7 +1223,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['consumerGroup', 'name']
       );
       request.consumerGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `consumer_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `consumer_group.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConsumerGroup = stubSimpleCall(
         undefined,
@@ -1276,7 +1276,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1308,7 +1308,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1355,7 +1355,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConsumerGroup = stubSimpleCall(
         undefined,
@@ -1407,7 +1407,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1440,7 +1440,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1494,7 +1494,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubLongRunningCall(
         undefined,
@@ -1525,7 +1525,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubLongRunningCall(
         undefined,
@@ -1602,7 +1602,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1636,7 +1636,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1691,7 +1691,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubLongRunningCall(
         undefined,
@@ -1723,7 +1723,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubLongRunningCall(
         undefined,
@@ -1799,7 +1799,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1832,7 +1832,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1886,7 +1886,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubLongRunningCall(
         undefined,
@@ -1917,7 +1917,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubLongRunningCall(
         undefined,
@@ -1993,7 +1993,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedkafka.v1.Cluster()
@@ -2032,7 +2032,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedkafka.v1.Cluster()
@@ -2087,7 +2087,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listClusters = stubSimpleCall(
         undefined,
@@ -2118,7 +2118,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedkafka.v1.Cluster()
@@ -2178,7 +2178,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.createStream = stubPageStreamingCall(
         undefined,
@@ -2229,7 +2229,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedkafka.v1.Cluster()
@@ -2278,7 +2278,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2320,7 +2320,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
         generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
@@ -2353,7 +2353,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
         generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
@@ -2402,7 +2402,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTopics = stubSimpleCall(
         undefined,
@@ -2433,7 +2433,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
         generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
@@ -2487,7 +2487,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTopics.createStream = stubPageStreamingCall(
         undefined,
@@ -2538,7 +2538,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
         generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
@@ -2581,7 +2581,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTopics.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2625,7 +2625,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedkafka.v1.ConsumerGroup()
@@ -2665,7 +2665,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedkafka.v1.ConsumerGroup()
@@ -2720,7 +2720,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConsumerGroups = stubSimpleCall(
         undefined,
@@ -2751,7 +2751,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedkafka.v1.ConsumerGroup()
@@ -2812,7 +2812,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConsumerGroups.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2862,7 +2862,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedkafka.v1.ConsumerGroup()
@@ -2912,7 +2912,7 @@ describe('v1.ManagedKafkaClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConsumerGroups.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -202,14 +202,13 @@ export class CloudTasksClient {
       opts
     );
 
-    // Determine the client header string.
-
     // Add ESM headers
     const isEsm = true;
     const isEsmString = isEsm ? '-esm' : '-cjs';
+    // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
-      clientHeader.push(`gl-node/${process.versions.node}${isEsmString}`);
+      clientHeader.push(`gl-node/{process.versions.node}${isEsmString}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
@@ -1957,7 +1956,7 @@ export class CloudTasksClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listQueues`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2226,7 +2225,7 @@ export class CloudTasksClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTasks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent

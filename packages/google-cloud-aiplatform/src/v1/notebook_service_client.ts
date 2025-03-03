@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -226,6 +226,9 @@ export class NotebookServiceClient {
       batchPredictionJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}'
       ),
+      cachedContentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cachedContents/{cached_content}'
+      ),
       contextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/contexts/{context}'
       ),
@@ -337,6 +340,15 @@ export class NotebookServiceClient {
         ),
       publisherModelPathTemplate: new this._gaxModule.PathTemplate(
         'publishers/{publisher}/models/{model}'
+      ),
+      ragCorpusPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}'
+      ),
+      ragFilePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}'
+      ),
+      reasoningEnginePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}'
       ),
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
@@ -458,6 +470,9 @@ export class NotebookServiceClient {
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -513,6 +528,10 @@ export class NotebookServiceClient {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -554,6 +573,9 @@ export class NotebookServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
             },
           ],
         },
@@ -779,6 +801,15 @@ export class NotebookServiceClient {
               post: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
             },
             {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:cancel',
+            },
+            {
               post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
             },
             {
@@ -991,6 +1022,10 @@ export class NotebookServiceClient {
             },
             {
               delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
             {delete: '/v1/{name=projects/*/locations/*/operations/*}'},
@@ -1094,6 +1129,18 @@ export class NotebookServiceClient {
             {
               delete:
                 '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
             },
             {
               delete:
@@ -1292,6 +1339,9 @@ export class NotebookServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
             {get: '/v1/{name=projects/*/locations/*/operations/*}'},
             {get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
@@ -1365,6 +1415,15 @@ export class NotebookServiceClient {
             },
             {
               get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
             },
             {get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
@@ -1533,6 +1592,9 @@ export class NotebookServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
             {get: '/v1/{name=projects/*/locations/*}/operations'},
             {get: '/v1/{name=projects/*/locations/*/datasets/*}/operations'},
             {
@@ -1603,6 +1665,9 @@ export class NotebookServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
             },
+            {
+              get: '/v1/{name=projects/*/locations/*/reasoningEngines/*}/operations',
+            },
             {get: '/v1/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
@@ -1615,6 +1680,10 @@ export class NotebookServiceClient {
             },
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',
             },
             {get: '/v1/{name=projects/*/locations/*/schedules/*}/operations'},
             {
@@ -1794,6 +1863,9 @@ export class NotebookServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
             {post: '/v1/{name=projects/*/locations/*/operations/*}:wait'},
             {
               post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
@@ -1872,6 +1944,15 @@ export class NotebookServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',
             },
             {
               post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
@@ -1961,6 +2042,12 @@ export class NotebookServiceClient {
     const startNotebookRuntimeMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.StartNotebookRuntimeOperationMetadata'
     ) as gax.protobuf.Type;
+    const stopNotebookRuntimeResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.StopNotebookRuntimeResponse'
+    ) as gax.protobuf.Type;
+    const stopNotebookRuntimeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.StopNotebookRuntimeOperationMetadata'
+    ) as gax.protobuf.Type;
     const createNotebookExecutionJobResponse = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.NotebookExecutionJob'
     ) as gax.protobuf.Type;
@@ -2020,6 +2107,11 @@ export class NotebookServiceClient {
         this.operationsClient,
         startNotebookRuntimeResponse.decode.bind(startNotebookRuntimeResponse),
         startNotebookRuntimeMetadata.decode.bind(startNotebookRuntimeMetadata)
+      ),
+      stopNotebookRuntime: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        stopNotebookRuntimeResponse.decode.bind(stopNotebookRuntimeResponse),
+        stopNotebookRuntimeMetadata.decode.bind(stopNotebookRuntimeMetadata)
       ),
       createNotebookExecutionJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -2102,6 +2194,7 @@ export class NotebookServiceClient {
       'deleteNotebookRuntime',
       'upgradeNotebookRuntime',
       'startNotebookRuntime',
+      'stopNotebookRuntime',
       'createNotebookExecutionJob',
       'getNotebookExecutionJob',
       'listNotebookExecutionJobs',
@@ -3484,6 +3577,145 @@ export class NotebookServiceClient {
     >;
   }
   /**
+   * Stops a NotebookRuntime.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NotebookRuntime resource to be stopped.
+   *   Instead of checking whether the name is in valid NotebookRuntime resource
+   *   name format, directly throw NotFound exception if there is no such
+   *   NotebookRuntime in spanner.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/notebook_service.stop_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_StopNotebookRuntime_async
+   */
+  stopNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  stopNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeResponse,
+            protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.stopNotebookRuntime(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `stopNotebookRuntime()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/notebook_service.stop_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_StopNotebookRuntime_async
+   */
+  async checkStopNotebookRuntimeProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.StopNotebookRuntimeResponse,
+      protos.google.cloud.aiplatform.v1.StopNotebookRuntimeOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.stopNotebookRuntime,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.StopNotebookRuntimeResponse,
+      protos.google.cloud.aiplatform.v1.StopNotebookRuntimeOperationMetadata
+    >;
+  }
+  /**
    * Creates a NotebookExecutionJob.
    *
    * @param {Object} request
@@ -3792,6 +4024,8 @@ export class NotebookServiceClient {
    *       * A key including a space must be quoted. `labels."a key"`.
    *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
    *     [USER_DEFINED, ONE_CLICK].
+   *     * `machineType` supports = and !=.
+   *     * `acceleratorType` supports = and !=.
    *
    *   Some examples:
    *
@@ -3799,6 +4033,8 @@ export class NotebookServiceClient {
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
    *     * `notebookRuntimeType=USER_DEFINED`
+   *     * `machineType=e2-standard-4`
+   *     * `acceleratorType=NVIDIA_TESLA_T4`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
@@ -3911,7 +4147,7 @@ export class NotebookServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNotebookRuntimeTemplates`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3933,6 +4169,8 @@ export class NotebookServiceClient {
    *       * A key including a space must be quoted. `labels."a key"`.
    *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
    *     [USER_DEFINED, ONE_CLICK].
+   *     * `machineType` supports = and !=.
+   *     * `acceleratorType` supports = and !=.
    *
    *   Some examples:
    *
@@ -3940,6 +4178,8 @@ export class NotebookServiceClient {
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
    *     * `notebookRuntimeType=USER_DEFINED`
+   *     * `machineType=e2-standard-4`
+   *     * `acceleratorType=NVIDIA_TESLA_T4`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
@@ -4018,6 +4258,8 @@ export class NotebookServiceClient {
    *       * A key including a space must be quoted. `labels."a key"`.
    *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
    *     [USER_DEFINED, ONE_CLICK].
+   *     * `machineType` supports = and !=.
+   *     * `acceleratorType` supports = and !=.
    *
    *   Some examples:
    *
@@ -4025,6 +4267,8 @@ export class NotebookServiceClient {
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
    *     * `notebookRuntimeType=USER_DEFINED`
+   *     * `machineType=e2-standard-4`
+   *     * `acceleratorType=NVIDIA_TESLA_T4`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
@@ -4112,6 +4356,8 @@ export class NotebookServiceClient {
    *     UI_RESOURCE_STATE_CREATION_FAILED].
    *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
    *     [USER_DEFINED, ONE_CLICK].
+   *     * `machineType` supports = and !=.
+   *     * `acceleratorType` supports = and !=.
    *
    *   Some examples:
    *
@@ -4123,6 +4369,8 @@ export class NotebookServiceClient {
    *     * `runtimeUser="test@google.com"`
    *     * `uiState=UI_RESOURCE_STATE_BEING_DELETED`
    *     * `notebookRuntimeType=USER_DEFINED`
+   *     * `machineType=e2-standard-4`
+   *     * `acceleratorType=NVIDIA_TESLA_T4`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
@@ -4231,7 +4479,7 @@ export class NotebookServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNotebookRuntimes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4263,6 +4511,8 @@ export class NotebookServiceClient {
    *     UI_RESOURCE_STATE_CREATION_FAILED].
    *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
    *     [USER_DEFINED, ONE_CLICK].
+   *     * `machineType` supports = and !=.
+   *     * `acceleratorType` supports = and !=.
    *
    *   Some examples:
    *
@@ -4274,6 +4524,8 @@ export class NotebookServiceClient {
    *     * `runtimeUser="test@google.com"`
    *     * `uiState=UI_RESOURCE_STATE_BEING_DELETED`
    *     * `notebookRuntimeType=USER_DEFINED`
+   *     * `machineType=e2-standard-4`
+   *     * `acceleratorType=NVIDIA_TESLA_T4`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
@@ -4362,6 +4614,8 @@ export class NotebookServiceClient {
    *     UI_RESOURCE_STATE_CREATION_FAILED].
    *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
    *     [USER_DEFINED, ONE_CLICK].
+   *     * `machineType` supports = and !=.
+   *     * `acceleratorType` supports = and !=.
    *
    *   Some examples:
    *
@@ -4373,6 +4627,8 @@ export class NotebookServiceClient {
    *     * `runtimeUser="test@google.com"`
    *     * `uiState=UI_RESOURCE_STATE_BEING_DELETED`
    *     * `notebookRuntimeType=USER_DEFINED`
+   *     * `machineType=e2-standard-4`
+   *     * `acceleratorType=NVIDIA_TESLA_T4`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
@@ -4453,7 +4709,8 @@ export class NotebookServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.|ListNotebookExecutionJobs.next_page_token} of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.ListNotebookExecutionJobsResponse.next_page_token|ListNotebookExecutionJobsResponse.next_page_token}
+   *   of the previous
    *   {@link protos.google.cloud.aiplatform.v1.NotebookService.ListNotebookExecutionJobs|NotebookService.ListNotebookExecutionJobs}
    *   call.
    * @param {string} [request.orderBy]
@@ -4559,7 +4816,7 @@ export class NotebookServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNotebookExecutionJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4584,7 +4841,8 @@ export class NotebookServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.|ListNotebookExecutionJobs.next_page_token} of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.ListNotebookExecutionJobsResponse.next_page_token|ListNotebookExecutionJobsResponse.next_page_token}
+   *   of the previous
    *   {@link protos.google.cloud.aiplatform.v1.NotebookService.ListNotebookExecutionJobs|NotebookService.ListNotebookExecutionJobs}
    *   call.
    * @param {string} [request.orderBy]
@@ -4659,7 +4917,8 @@ export class NotebookServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.|ListNotebookExecutionJobs.next_page_token} of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.ListNotebookExecutionJobsResponse.next_page_token|ListNotebookExecutionJobsResponse.next_page_token}
+   *   of the previous
    *   {@link protos.google.cloud.aiplatform.v1.NotebookService.ListNotebookExecutionJobs|NotebookService.ListNotebookExecutionJobs}
    *   call.
    * @param {string} [request.orderBy]
@@ -4954,7 +5213,7 @@ export class NotebookServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -4967,6 +5226,20 @@ export class NotebookServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5003,6 +5276,13 @@ export class NotebookServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5038,11 +5318,11 @@ export class NotebookServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -5051,6 +5331,20 @@ export class NotebookServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5081,7 +5375,7 @@ export class NotebookServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -5094,6 +5388,20 @@ export class NotebookServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -5389,6 +5697,58 @@ export class NotebookServiceClient {
     return this.pathTemplates.batchPredictionJobPathTemplate.match(
       batchPredictionJobName
     ).batch_prediction_job;
+  }
+
+  /**
+   * Return a fully-qualified cachedContent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cached_content
+   * @returns {string} Resource name string.
+   */
+  cachedContentPath(project: string, location: string, cachedContent: string) {
+    return this.pathTemplates.cachedContentPathTemplate.render({
+      project: project,
+      location: location,
+      cached_content: cachedContent,
+    });
+  }
+
+  /**
+   * Parse the project from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .location;
+  }
+
+  /**
+   * Parse the cached_content from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the cached_content.
+   */
+  matchCachedContentFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .cached_content;
   }
 
   /**
@@ -7687,6 +8047,184 @@ export class NotebookServiceClient {
     return this.pathTemplates.publisherModelPathTemplate.match(
       publisherModelName
     ).model;
+  }
+
+  /**
+   * Return a fully-qualified ragCorpus resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @returns {string} Resource name string.
+   */
+  ragCorpusPath(project: string, location: string, ragCorpus: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+    });
+  }
+
+  /**
+   * Parse the project from RagCorpus resource.
+   *
+   * @param {string} ragCorpusName
+   *   A fully-qualified path representing RagCorpus resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagCorpusName(ragCorpusName: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .project;
+  }
+
+  /**
+   * Parse the location from RagCorpus resource.
+   *
+   * @param {string} ragCorpusName
+   *   A fully-qualified path representing RagCorpus resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagCorpusName(ragCorpusName: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagCorpus resource.
+   *
+   * @param {string} ragCorpusName
+   *   A fully-qualified path representing RagCorpus resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagCorpusName(ragCorpusName: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .rag_corpus;
+  }
+
+  /**
+   * Return a fully-qualified ragFile resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @param {string} rag_file
+   * @returns {string} Resource name string.
+   */
+  ragFilePath(
+    project: string,
+    location: string,
+    ragCorpus: string,
+    ragFile: string
+  ) {
+    return this.pathTemplates.ragFilePathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+      rag_file: ragFile,
+    });
+  }
+
+  /**
+   * Parse the project from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).project;
+  }
+
+  /**
+   * Parse the location from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).rag_corpus;
+  }
+
+  /**
+   * Parse the rag_file from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the rag_file.
+   */
+  matchRagFileFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).rag_file;
+  }
+
+  /**
+   * Return a fully-qualified reasoningEngine resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @returns {string} Resource name string.
+   */
+  reasoningEnginePath(
+    project: string,
+    location: string,
+    reasoningEngine: string
+  ) {
+    return this.pathTemplates.reasoningEnginePathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+    });
+  }
+
+  /**
+   * Parse the project from ReasoningEngine resource.
+   *
+   * @param {string} reasoningEngineName
+   *   A fully-qualified path representing ReasoningEngine resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromReasoningEngineName(reasoningEngineName: string) {
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ReasoningEngine resource.
+   *
+   * @param {string} reasoningEngineName
+   *   A fully-qualified path representing ReasoningEngine resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromReasoningEngineName(reasoningEngineName: string) {
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from ReasoningEngine resource.
+   *
+   * @param {string} reasoningEngineName
+   *   A fully-qualified path representing ReasoningEngine resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromReasoningEngineName(reasoningEngineName: string) {
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).reasoning_engine;
   }
 
   /**

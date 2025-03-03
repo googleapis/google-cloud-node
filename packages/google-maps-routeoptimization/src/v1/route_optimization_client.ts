@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -587,7 +587,7 @@ export class RouteOptimizationClient {
    * @param {boolean} request.populatePolylines
    *   If true, polylines will be populated in response `ShipmentRoute`s.
    * @param {boolean} request.populateTransitionPolylines
-   *   If true, polylines will be populated in response
+   *   If true, polylines and route tokens will be populated in response
    *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.transitions|ShipmentRoute.transitions}.
    * @param {boolean} request.allowLargeDeadlineDespiteInterruptionRisk
    *   If this is set, then the request can have a deadline
@@ -704,23 +704,23 @@ export class RouteOptimizationClient {
    *
    * This method is a Long Running Operation (LRO). The inputs for optimization
    * (`OptimizeToursRequest` messages) and outputs (`OptimizeToursResponse`
-   * messages) are read/written from/to Cloud Storage in user-specified
+   * messages) are read from and written to Cloud Storage in user-specified
    * format. Like the `OptimizeTours` method, each `OptimizeToursRequest`
    * contains a `ShipmentModel` and returns an `OptimizeToursResponse`
-   * containing `ShipmentRoute`s, which are a set of routes to be performed by
-   * vehicles minimizing the overall cost.
+   * containing `ShipmentRoute` fields, which are a set of routes to be
+   * performed by vehicles minimizing the overall cost.
    *
    * The user can poll `operations.get` to check the status of the LRO:
    *
-   * If the LRO's `done` field is false, then at least one request is still
+   * If the LRO `done` field is false, then at least one request is still
    * being processed. Other requests may have completed successfully and their
-   * results are available in GCS.
+   * results are available in Cloud Storage.
    *
    * If the LRO's `done` field is true, then all requests have been processed.
    * Any successfully processed requests will have their results available in
-   * GCS. Any requests that failed will not have their results available in
-   * GCS. If the LRO's `error` field is set, then it contains the error from
-   * one of the failed requests.
+   * Cloud Storage. Any requests that failed will not have their results
+   * available in Cloud Storage. If the LRO's `error` field is set, then it
+   * contains the error from one of the failed requests.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -896,7 +896,7 @@ export class RouteOptimizationClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -909,6 +909,20 @@ export class RouteOptimizationClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -945,6 +959,13 @@ export class RouteOptimizationClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -980,11 +1001,11 @@ export class RouteOptimizationClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -993,6 +1014,20 @@ export class RouteOptimizationClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1023,7 +1058,7 @@ export class RouteOptimizationClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1036,6 +1071,20 @@ export class RouteOptimizationClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

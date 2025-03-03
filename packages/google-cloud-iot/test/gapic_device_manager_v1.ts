@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -320,7 +320,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
@@ -352,7 +352,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
@@ -399,7 +399,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDeviceRegistry = stubSimpleCall(
         undefined,
@@ -451,7 +451,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
@@ -482,7 +482,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
@@ -529,7 +529,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDeviceRegistry = stubSimpleCall(
         undefined,
@@ -582,7 +582,7 @@ describe('v1.DeviceManagerClient', () => {
         ['deviceRegistry', 'name']
       );
       request.deviceRegistry.name = defaultValue1;
-      const expectedHeaderRequestParams = `device_registry.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `device_registry.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
@@ -615,7 +615,7 @@ describe('v1.DeviceManagerClient', () => {
         ['deviceRegistry', 'name']
       );
       request.deviceRegistry.name = defaultValue1;
-      const expectedHeaderRequestParams = `device_registry.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `device_registry.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
@@ -663,7 +663,7 @@ describe('v1.DeviceManagerClient', () => {
         ['deviceRegistry', 'name']
       );
       request.deviceRegistry.name = defaultValue1;
-      const expectedHeaderRequestParams = `device_registry.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `device_registry.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDeviceRegistry = stubSimpleCall(
         undefined,
@@ -716,7 +716,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -748,7 +748,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -795,7 +795,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDeviceRegistry = stubSimpleCall(
         undefined,
@@ -847,7 +847,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
@@ -878,7 +878,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
@@ -925,7 +925,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDevice = stubSimpleCall(
         undefined,
@@ -977,7 +977,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
@@ -1008,7 +1008,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
@@ -1055,7 +1055,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDevice = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getDevice(request), expectedError);
@@ -1105,7 +1105,7 @@ describe('v1.DeviceManagerClient', () => {
         ['device', 'name']
       );
       request.device.name = defaultValue1;
-      const expectedHeaderRequestParams = `device.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `device.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
@@ -1137,7 +1137,7 @@ describe('v1.DeviceManagerClient', () => {
         ['device', 'name']
       );
       request.device.name = defaultValue1;
-      const expectedHeaderRequestParams = `device.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `device.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
@@ -1185,7 +1185,7 @@ describe('v1.DeviceManagerClient', () => {
         ['device', 'name']
       );
       request.device.name = defaultValue1;
-      const expectedHeaderRequestParams = `device.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `device.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDevice = stubSimpleCall(
         undefined,
@@ -1238,7 +1238,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1269,7 +1269,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1316,7 +1316,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDevice = stubSimpleCall(
         undefined,
@@ -1368,7 +1368,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceConfig()
       );
@@ -1400,7 +1400,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceConfig()
       );
@@ -1447,7 +1447,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.modifyCloudToDeviceConfig = stubSimpleCall(
         undefined,
@@ -1505,7 +1505,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsResponse()
       );
@@ -1537,7 +1537,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsResponse()
       );
@@ -1584,7 +1584,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDeviceConfigVersions = stubSimpleCall(
         undefined,
@@ -1642,7 +1642,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesResponse()
       );
@@ -1673,7 +1673,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesResponse()
       );
@@ -1720,7 +1720,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDeviceStates = stubSimpleCall(
         undefined,
@@ -1772,7 +1772,7 @@ describe('v1.DeviceManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1803,7 +1803,7 @@ describe('v1.DeviceManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1850,7 +1850,7 @@ describe('v1.DeviceManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -1902,7 +1902,7 @@ describe('v1.DeviceManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1933,7 +1933,7 @@ describe('v1.DeviceManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1980,7 +1980,7 @@ describe('v1.DeviceManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -2032,7 +2032,7 @@ describe('v1.DeviceManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -2064,7 +2064,7 @@ describe('v1.DeviceManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -2111,7 +2111,7 @@ describe('v1.DeviceManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -2163,7 +2163,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceResponse()
       );
@@ -2195,7 +2195,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceResponse()
       );
@@ -2242,7 +2242,7 @@ describe('v1.DeviceManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.sendCommandToDevice = stubSimpleCall(
         undefined,
@@ -2294,7 +2294,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayResponse()
       );
@@ -2326,7 +2326,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayResponse()
       );
@@ -2373,7 +2373,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bindDeviceToGateway = stubSimpleCall(
         undefined,
@@ -2425,7 +2425,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayResponse()
       );
@@ -2457,7 +2457,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayResponse()
       );
@@ -2504,7 +2504,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.unbindDeviceFromGateway = stubSimpleCall(
         undefined,
@@ -2562,7 +2562,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
@@ -2596,7 +2596,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
@@ -2645,7 +2645,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDeviceRegistries = stubSimpleCall(
         undefined,
@@ -2676,7 +2676,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
@@ -2730,7 +2730,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeviceRegistries.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2779,7 +2779,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
@@ -2822,7 +2822,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeviceRegistries.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2864,7 +2864,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
@@ -2897,7 +2897,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
@@ -2946,7 +2946,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDevices = stubSimpleCall(
         undefined,
@@ -2977,7 +2977,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
@@ -3028,7 +3028,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDevices.createStream = stubPageStreamingCall(
         undefined,
@@ -3076,7 +3076,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
@@ -3119,7 +3119,7 @@ describe('v1.DeviceManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDevices.asyncIterate = stubAsyncIterationCall(
         undefined,

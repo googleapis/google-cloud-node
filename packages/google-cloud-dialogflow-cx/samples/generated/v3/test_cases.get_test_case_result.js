@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the testcase.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/testCases/<TestCase ID>/results/<TestCaseResult ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>/results/<TestCaseResultID>`.
    */
   // const name = 'abc123'
 

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -58,14 +58,15 @@ function main(parent) {
    *  response. The expression takes the following forms: <br>
    *  *   field=value for `category` and `state`<br>
    *  *   field &lt;, >, &lt;=, or >= value for `update_time` <br>
-   *  Examples: `category=INCIDENT`, `update_time>=2000-01-01T11:30:00-04:00`
+   *  Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`,
+   *  `event_impacts.product.product_name:"Eventarc"`
    *  <br>
    *  Multiple filter queries are separated by spaces. Example:
    *  `category=INCIDENT state=ACTIVE`.
    *  By default, each expression is an AND expression. However, you can include
    *  AND and OR expressions explicitly.
    *  Filter is supported for the following fields: `category`, `state`,
-   *  `update_time`
+   *  `update_time`, `event_impacts.product.product_name`
    */
   // const filter = 'abc123'
   /**

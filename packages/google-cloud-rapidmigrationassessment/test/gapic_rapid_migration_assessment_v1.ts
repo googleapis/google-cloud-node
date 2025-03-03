@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -389,7 +389,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.rapidmigrationassessment.v1.Annotation()
       );
@@ -421,7 +421,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.rapidmigrationassessment.v1.Annotation()
       );
@@ -469,7 +469,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAnnotation = stubSimpleCall(
         undefined,
@@ -523,7 +523,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.rapidmigrationassessment.v1.Collector()
       );
@@ -555,7 +555,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.rapidmigrationassessment.v1.Collector()
       );
@@ -603,7 +603,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCollector = stubSimpleCall(
         undefined,
@@ -657,7 +657,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -691,7 +691,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -746,7 +746,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCollector = stubLongRunningCall(
         undefined,
@@ -778,7 +778,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCollector = stubLongRunningCall(
         undefined,
@@ -857,7 +857,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -891,7 +891,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -946,7 +946,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAnnotation = stubLongRunningCall(
         undefined,
@@ -978,7 +978,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAnnotation = stubLongRunningCall(
         undefined,
@@ -1058,7 +1058,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['collector', 'name']
       );
       request.collector.name = defaultValue1;
-      const expectedHeaderRequestParams = `collector.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `collector.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1093,7 +1093,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['collector', 'name']
       );
       request.collector.name = defaultValue1;
-      const expectedHeaderRequestParams = `collector.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `collector.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1149,7 +1149,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['collector', 'name']
       );
       request.collector.name = defaultValue1;
-      const expectedHeaderRequestParams = `collector.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `collector.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCollector = stubLongRunningCall(
         undefined,
@@ -1182,7 +1182,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['collector', 'name']
       );
       request.collector.name = defaultValue1;
-      const expectedHeaderRequestParams = `collector.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `collector.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCollector = stubLongRunningCall(
         undefined,
@@ -1261,7 +1261,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1295,7 +1295,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1350,7 +1350,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCollector = stubLongRunningCall(
         undefined,
@@ -1382,7 +1382,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCollector = stubLongRunningCall(
         undefined,
@@ -1461,7 +1461,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1495,7 +1495,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1550,7 +1550,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeCollector = stubLongRunningCall(
         undefined,
@@ -1582,7 +1582,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeCollector = stubLongRunningCall(
         undefined,
@@ -1661,7 +1661,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1695,7 +1695,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1750,7 +1750,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.registerCollector = stubLongRunningCall(
         undefined,
@@ -1782,7 +1782,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.registerCollector = stubLongRunningCall(
         undefined,
@@ -1861,7 +1861,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1895,7 +1895,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1950,7 +1950,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseCollector = stubLongRunningCall(
         undefined,
@@ -1982,7 +1982,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseCollector = stubLongRunningCall(
         undefined,
@@ -2061,7 +2061,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.rapidmigrationassessment.v1.Collector()
@@ -2101,7 +2101,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.rapidmigrationassessment.v1.Collector()
@@ -2159,7 +2159,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCollectors = stubSimpleCall(
         undefined,
@@ -2191,7 +2191,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.rapidmigrationassessment.v1.Collector()
@@ -2255,7 +2255,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCollectors.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2308,7 +2308,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.rapidmigrationassessment.v1.Collector()
@@ -2359,7 +2359,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCollectors.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

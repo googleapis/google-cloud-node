@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -424,7 +424,7 @@ export class SessionsClient {
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough();
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -560,9 +560,10 @@ export class SessionsClient {
    *   The request object that will be sent.
    * @param {string} request.session
    *   Required. The name of the session this query is sent to.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/sessions/<Session
+   *   ID>` or
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/sessions/<SessionID>`.
    *   If `Environment ID` is not specified, we assume default 'draft'
    *   environment.
    *   It's up to the API caller to choose an appropriate `Session ID`. It can be
@@ -672,9 +673,10 @@ export class SessionsClient {
    *   The request object that will be sent.
    * @param {string} request.session
    *   Required. The name of the session this query is sent to.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/sessions/<SessionID>`
+   *   or
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/sessions/<SessionID>`.
    *   If `Environment ID` is not specified, we assume default 'draft'
    *   environment.
    *   It's up to the API caller to choose an appropriate `Session ID`. It can be
@@ -991,9 +993,10 @@ export class SessionsClient {
    *   The request object that will be sent.
    * @param {string} request.session
    *   Required. The name of the session this query is sent to.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/sessions/<Session
+   *   ID>` or
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/sessions/<SessionID>`.
    *   If `Environment ID` is not specified, we assume default 'draft'
    *   environment.
    *   It's up to the API caller to choose an appropriate `Session ID`. It can be
@@ -1172,7 +1175,7 @@ export class SessionsClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1185,6 +1188,20 @@ export class SessionsClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1221,6 +1238,13 @@ export class SessionsClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1256,11 +1280,11 @@ export class SessionsClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1269,6 +1293,20 @@ export class SessionsClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1299,7 +1337,7 @@ export class SessionsClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1312,6 +1350,20 @@ export class SessionsClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

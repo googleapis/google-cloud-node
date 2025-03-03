@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-cx",
-        "version": "4.8.0",
+        "version": "4.10.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -622,7 +622,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -670,7 +670,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 55,
                     "type": "FULL"
                 }
             ],
@@ -946,7 +946,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 97,
+                    "end": 96,
                     "type": "FULL"
                 }
             ],
@@ -1110,7 +1110,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 55,
                     "type": "FULL"
                 }
             ],
@@ -1238,7 +1238,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 55,
                     "type": "FULL"
                 }
             ],
@@ -1458,7 +1458,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -1506,7 +1506,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 55,
                     "type": "FULL"
                 }
             ],
@@ -1546,7 +1546,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],
@@ -1634,7 +1634,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 55,
                     "type": "FULL"
                 }
             ],
@@ -2746,7 +2746,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 84,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -3254,7 +3254,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 70,
                     "type": "FULL"
                 }
             ],
@@ -3342,7 +3342,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -3470,7 +3470,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -3522,7 +3522,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 81,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -3574,7 +3574,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 94,
+                    "end": 95,
                     "type": "FULL"
                 }
             ],
@@ -3634,7 +3634,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 76,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -4054,7 +4054,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -4246,7 +4246,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 89,
+                    "end": 90,
                     "type": "FULL"
                 }
             ],
@@ -4662,7 +4662,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 62,
+                    "end": 61,
                     "type": "FULL"
                 }
             ],

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -467,6 +467,110 @@ describe('v1.DeliveryServiceClient', () => {
         });
     });
 
+    describe('deleteDeliveryVehicle', () => {
+        it('invokes deleteDeliveryVehicle without error', async () => {
+            const client = new deliveryserviceModule.v1.DeliveryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.delivery.v1.DeleteDeliveryVehicleRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedHeaderRequestParams = 'provider_id=providers%2Fvalue';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteDeliveryVehicle = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteDeliveryVehicle(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDeliveryVehicle as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDeliveryVehicle as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDeliveryVehicle without error using callback', async () => {
+            const client = new deliveryserviceModule.v1.DeliveryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.delivery.v1.DeleteDeliveryVehicleRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedHeaderRequestParams = 'provider_id=providers%2Fvalue';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteDeliveryVehicle = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteDeliveryVehicle(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDeliveryVehicle as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDeliveryVehicle as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDeliveryVehicle with error', async () => {
+            const client = new deliveryserviceModule.v1.DeliveryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.delivery.v1.DeleteDeliveryVehicleRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedHeaderRequestParams = 'provider_id=providers%2Fvalue';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDeliveryVehicle = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteDeliveryVehicle(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDeliveryVehicle as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDeliveryVehicle as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDeliveryVehicle with closed client', async () => {
+            const client = new deliveryserviceModule.v1.DeliveryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.delivery.v1.DeleteDeliveryVehicleRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close();
+            await assert.rejects(client.deleteDeliveryVehicle(request), expectedError);
+        });
+    });
+
     describe('updateDeliveryVehicle', () => {
         it('invokes updateDeliveryVehicle without error', async () => {
             const client = new deliveryserviceModule.v1.DeliveryServiceClient({
@@ -884,6 +988,110 @@ describe('v1.DeliveryServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close();
             await assert.rejects(client.getTask(request), expectedError);
+        });
+    });
+
+    describe('deleteTask', () => {
+        it('invokes deleteTask without error', async () => {
+            const client = new deliveryserviceModule.v1.DeliveryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.delivery.v1.DeleteTaskRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedHeaderRequestParams = 'provider_id=providers%2Fvalue';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteTask = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteTask(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTask without error using callback', async () => {
+            const client = new deliveryserviceModule.v1.DeliveryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.delivery.v1.DeleteTaskRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedHeaderRequestParams = 'provider_id=providers%2Fvalue';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteTask = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteTask(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTask with error', async () => {
+            const client = new deliveryserviceModule.v1.DeliveryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.delivery.v1.DeleteTaskRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedHeaderRequestParams = 'provider_id=providers%2Fvalue';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteTask = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteTask(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTask with closed client', async () => {
+            const client = new deliveryserviceModule.v1.DeliveryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.delivery.v1.DeleteTaskRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close();
+            await assert.rejects(client.deleteTask(request), expectedError);
         });
     });
 

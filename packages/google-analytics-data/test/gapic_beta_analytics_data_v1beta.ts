@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -374,7 +374,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunReportResponse()
       );
@@ -407,7 +407,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunReportResponse()
       );
@@ -456,7 +456,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runReport = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.runReport(request), expectedError);
@@ -509,7 +509,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunPivotReportResponse()
       );
@@ -542,7 +542,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunPivotReportResponse()
       );
@@ -591,7 +591,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runPivotReport = stubSimpleCall(
         undefined,
@@ -647,7 +647,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.BatchRunReportsResponse()
       );
@@ -680,7 +680,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.BatchRunReportsResponse()
       );
@@ -729,7 +729,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchRunReports = stubSimpleCall(
         undefined,
@@ -785,7 +785,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.BatchRunPivotReportsResponse()
       );
@@ -819,7 +819,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.BatchRunPivotReportsResponse()
       );
@@ -868,7 +868,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchRunPivotReports = stubSimpleCall(
         undefined,
@@ -924,7 +924,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.Metadata()
       );
@@ -957,7 +957,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.Metadata()
       );
@@ -1006,7 +1006,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMetadata = stubSimpleCall(
         undefined,
@@ -1062,7 +1062,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunRealtimeReportResponse()
       );
@@ -1095,7 +1095,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunRealtimeReportResponse()
       );
@@ -1144,7 +1144,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runRealtimeReport = stubSimpleCall(
         undefined,
@@ -1200,7 +1200,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.CheckCompatibilityResponse()
       );
@@ -1234,7 +1234,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.CheckCompatibilityResponse()
       );
@@ -1283,7 +1283,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.checkCompatibility = stubSimpleCall(
         undefined,
@@ -1339,7 +1339,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.QueryAudienceExportResponse()
       );
@@ -1373,7 +1373,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.QueryAudienceExportResponse()
       );
@@ -1422,7 +1422,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryAudienceExport = stubSimpleCall(
         undefined,
@@ -1478,7 +1478,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.AudienceExport()
       );
@@ -1511,7 +1511,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1beta.AudienceExport()
       );
@@ -1560,7 +1560,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAudienceExport = stubSimpleCall(
         undefined,
@@ -1616,7 +1616,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1651,7 +1651,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1707,7 +1707,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAudienceExport = stubLongRunningCall(
         undefined,
@@ -1740,7 +1740,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAudienceExport = stubLongRunningCall(
         undefined,
@@ -1822,7 +1822,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1beta.AudienceExport()
@@ -1864,7 +1864,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1beta.AudienceExport()
@@ -1923,7 +1923,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAudienceExports = stubSimpleCall(
         undefined,
@@ -1956,7 +1956,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1beta.AudienceExport()
@@ -2019,7 +2019,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAudienceExports.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2071,7 +2071,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1beta.AudienceExport()
@@ -2123,7 +2123,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAudienceExports.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

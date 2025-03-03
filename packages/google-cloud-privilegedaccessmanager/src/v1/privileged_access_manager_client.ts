@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -572,7 +572,7 @@ export class PrivilegedAccessManagerClient {
   // -- Service calls --
   // -------------------
   /**
-   * CheckOnboardingStatus reports the onboarding status for a
+   * `CheckOnboardingStatus` reports the onboarding status for a
    * project/folder/organization. Any findings reported by this API need to be
    * fixed before PAM can be used on the resource.
    *
@@ -867,7 +867,8 @@ export class PrivilegedAccessManagerClient {
     return this.innerApiCalls.getGrant(request, options, callback);
   }
   /**
-   * Creates a new grant in a given project and location.
+   * Creates a new grant in a given project/folder/organization and
+   * location.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -886,7 +887,7 @@ export class PrivilegedAccessManagerClient {
    *   request times out. If you make the request again with the same request
    *   ID, the server can check if original operation with the same request ID
    *   was received, and if so, ignores the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
+   *   clients from accidentally creating duplicate grants.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
@@ -1219,7 +1220,7 @@ export class PrivilegedAccessManagerClient {
    *   ID, the server can check if original operation with the same request ID
    *   was received, and if so, ignores the second request and returns the
    *   previous operation's response. This prevents clients from accidentally
-   *   creating duplicate commitments.
+   *   creating duplicate entitlements.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
@@ -1354,7 +1355,7 @@ export class PrivilegedAccessManagerClient {
   }
   /**
    * Deletes a single entitlement. This method can only be called when there
-   * are no in-progress (ACTIVE/ACTIVATING/REVOKING) grants under the
+   * are no in-progress (`ACTIVE`/`ACTIVATING`/`REVOKING`) grants under the
    * entitlement.
    *
    * @param {Object} request
@@ -1370,8 +1371,7 @@ export class PrivilegedAccessManagerClient {
    *   For example, consider a situation where you make an initial request and the
    *   request times out. If you make the request again with the same request
    *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, ignores the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
+   *   was received, and if so, ignores the second request.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
@@ -1916,7 +1916,7 @@ export class PrivilegedAccessManagerClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEntitlements`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2120,7 +2120,7 @@ export class PrivilegedAccessManagerClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchEntitlements`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2325,7 +2325,7 @@ export class PrivilegedAccessManagerClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listGrants`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2528,7 +2528,7 @@ export class PrivilegedAccessManagerClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchGrants`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2737,7 +2737,7 @@ export class PrivilegedAccessManagerClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -2750,6 +2750,20 @@ export class PrivilegedAccessManagerClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2786,6 +2800,13 @@ export class PrivilegedAccessManagerClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2821,11 +2842,11 @@ export class PrivilegedAccessManagerClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -2834,6 +2855,20 @@ export class PrivilegedAccessManagerClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2864,7 +2899,7 @@ export class PrivilegedAccessManagerClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -2877,6 +2912,20 @@ export class PrivilegedAccessManagerClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -340,7 +340,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Namespace()
       );
@@ -372,7 +372,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Namespace()
       );
@@ -420,7 +420,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNamespace = stubSimpleCall(
         undefined,
@@ -474,7 +474,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Namespace()
       );
@@ -506,7 +506,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Namespace()
       );
@@ -554,7 +554,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNamespace = stubSimpleCall(
         undefined,
@@ -609,7 +609,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['namespace', 'name']
       );
       request.namespace.name = defaultValue1;
-      const expectedHeaderRequestParams = `namespace.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `namespace.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Namespace()
       );
@@ -642,7 +642,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['namespace', 'name']
       );
       request.namespace.name = defaultValue1;
-      const expectedHeaderRequestParams = `namespace.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `namespace.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Namespace()
       );
@@ -691,7 +691,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['namespace', 'name']
       );
       request.namespace.name = defaultValue1;
-      const expectedHeaderRequestParams = `namespace.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `namespace.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNamespace = stubSimpleCall(
         undefined,
@@ -746,7 +746,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -778,7 +778,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -826,7 +826,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNamespace = stubSimpleCall(
         undefined,
@@ -880,7 +880,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Service()
       );
@@ -912,7 +912,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Service()
       );
@@ -960,7 +960,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createService = stubSimpleCall(
         undefined,
@@ -1014,7 +1014,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Service()
       );
@@ -1046,7 +1046,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Service()
       );
@@ -1094,7 +1094,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getService = stubSimpleCall(
         undefined,
@@ -1149,7 +1149,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['service', 'name']
       );
       request.service.name = defaultValue1;
-      const expectedHeaderRequestParams = `service.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Service()
       );
@@ -1182,7 +1182,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['service', 'name']
       );
       request.service.name = defaultValue1;
-      const expectedHeaderRequestParams = `service.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Service()
       );
@@ -1231,7 +1231,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['service', 'name']
       );
       request.service.name = defaultValue1;
-      const expectedHeaderRequestParams = `service.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateService = stubSimpleCall(
         undefined,
@@ -1286,7 +1286,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1318,7 +1318,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1366,7 +1366,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteService = stubSimpleCall(
         undefined,
@@ -1420,7 +1420,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Endpoint()
       );
@@ -1452,7 +1452,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Endpoint()
       );
@@ -1500,7 +1500,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEndpoint = stubSimpleCall(
         undefined,
@@ -1554,7 +1554,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Endpoint()
       );
@@ -1586,7 +1586,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Endpoint()
       );
@@ -1634,7 +1634,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEndpoint = stubSimpleCall(
         undefined,
@@ -1689,7 +1689,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['endpoint', 'name']
       );
       request.endpoint.name = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Endpoint()
       );
@@ -1722,7 +1722,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['endpoint', 'name']
       );
       request.endpoint.name = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.Endpoint()
       );
@@ -1771,7 +1771,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['endpoint', 'name']
       );
       request.endpoint.name = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEndpoint = stubSimpleCall(
         undefined,
@@ -1826,7 +1826,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1858,7 +1858,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1906,7 +1906,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEndpoint = stubSimpleCall(
         undefined,
@@ -1960,7 +1960,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1992,7 +1992,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -2040,7 +2040,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -2094,7 +2094,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -2126,7 +2126,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -2174,7 +2174,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -2228,7 +2228,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -2261,7 +2261,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -2309,7 +2309,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -2363,7 +2363,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicedirectory.v1beta1.Namespace()
@@ -2403,7 +2403,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicedirectory.v1beta1.Namespace()
@@ -2461,7 +2461,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNamespaces = stubSimpleCall(
         undefined,
@@ -2493,7 +2493,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicedirectory.v1beta1.Namespace()
@@ -2557,7 +2557,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNamespaces.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2610,7 +2610,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicedirectory.v1beta1.Namespace()
@@ -2661,7 +2661,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNamespaces.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2705,7 +2705,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicedirectory.v1beta1.Service()
@@ -2745,7 +2745,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicedirectory.v1beta1.Service()
@@ -2803,7 +2803,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listServices = stubSimpleCall(
         undefined,
@@ -2835,7 +2835,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicedirectory.v1beta1.Service()
@@ -2897,7 +2897,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServices.createStream = stubPageStreamingCall(
         undefined,
@@ -2950,7 +2950,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicedirectory.v1beta1.Service()
@@ -3001,7 +3001,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServices.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3045,7 +3045,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicedirectory.v1beta1.Endpoint()
@@ -3085,7 +3085,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicedirectory.v1beta1.Endpoint()
@@ -3143,7 +3143,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEndpoints = stubSimpleCall(
         undefined,
@@ -3175,7 +3175,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicedirectory.v1beta1.Endpoint()
@@ -3237,7 +3237,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEndpoints.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3288,7 +3288,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicedirectory.v1beta1.Endpoint()
@@ -3339,7 +3339,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEndpoints.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

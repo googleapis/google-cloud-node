@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -280,7 +280,7 @@ describe('v1beta1.MatchServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.FindNeighborsResponse()
       );
@@ -311,7 +311,7 @@ describe('v1beta1.MatchServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.FindNeighborsResponse()
       );
@@ -358,7 +358,7 @@ describe('v1beta1.MatchServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.findNeighbors = stubSimpleCall(
         undefined,
@@ -410,7 +410,7 @@ describe('v1beta1.MatchServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadIndexDatapointsResponse()
       );
@@ -442,7 +442,7 @@ describe('v1beta1.MatchServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadIndexDatapointsResponse()
       );
@@ -489,7 +489,7 @@ describe('v1beta1.MatchServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.readIndexDatapoints = stubSimpleCall(
         undefined,
@@ -2208,6 +2208,192 @@ describe('v1beta1.MatchServiceClient', () => {
         assert.strictEqual(result, 'featureGroupValue');
         assert(
           (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureMonitor', () => {
+      const fakePath = '/rendered/path/featureMonitor';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+        feature_monitor: 'featureMonitorValue',
+      };
+      const client = new matchserviceModule.v1beta1.MatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.featureMonitorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureMonitorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureMonitorPath', () => {
+        const result = client.featureMonitorPath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue',
+          'featureMonitorValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureMonitorName', () => {
+        const result = client.matchProjectFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureMonitorName', () => {
+        const result = client.matchLocationFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromFeatureMonitorName', () => {
+        const result = client.matchFeatureGroupFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorFromFeatureMonitorName', () => {
+        const result =
+          client.matchFeatureMonitorFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'featureMonitorValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureMonitorJob', () => {
+      const fakePath = '/rendered/path/featureMonitorJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+        feature_monitor: 'featureMonitorValue',
+        feature_monitor_job: 'featureMonitorJobValue',
+      };
+      const client = new matchserviceModule.v1beta1.MatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.featureMonitorJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureMonitorJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureMonitorJobPath', () => {
+        const result = client.featureMonitorJobPath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue',
+          'featureMonitorValue',
+          'featureMonitorJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureMonitorJobName', () => {
+        const result = client.matchProjectFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureMonitorJobName', () => {
+        const result = client.matchLocationFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromFeatureMonitorJobName', () => {
+        const result =
+          client.matchFeatureGroupFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorFromFeatureMonitorJobName', () => {
+        const result =
+          client.matchFeatureMonitorFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'featureMonitorValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorJobFromFeatureMonitorJobName', () => {
+        const result =
+          client.matchFeatureMonitorJobFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'featureMonitorJobValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

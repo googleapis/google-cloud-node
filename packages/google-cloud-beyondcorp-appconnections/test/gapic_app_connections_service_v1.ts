@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -375,7 +375,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
       );
@@ -407,7 +407,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
       );
@@ -455,7 +455,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAppConnection = stubSimpleCall(
         undefined,
@@ -509,7 +509,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -543,7 +543,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -598,7 +598,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAppConnection = stubLongRunningCall(
         undefined,
@@ -630,7 +630,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAppConnection = stubLongRunningCall(
         undefined,
@@ -710,7 +710,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['appConnection', 'name']
       );
       request.appConnection.name = defaultValue1;
-      const expectedHeaderRequestParams = `app_connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `app_connection.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -745,7 +745,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['appConnection', 'name']
       );
       request.appConnection.name = defaultValue1;
-      const expectedHeaderRequestParams = `app_connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `app_connection.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -801,7 +801,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['appConnection', 'name']
       );
       request.appConnection.name = defaultValue1;
-      const expectedHeaderRequestParams = `app_connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `app_connection.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAppConnection = stubLongRunningCall(
         undefined,
@@ -834,7 +834,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['appConnection', 'name']
       );
       request.appConnection.name = defaultValue1;
-      const expectedHeaderRequestParams = `app_connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `app_connection.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAppConnection = stubLongRunningCall(
         undefined,
@@ -913,7 +913,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -947,7 +947,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1002,7 +1002,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAppConnection = stubLongRunningCall(
         undefined,
@@ -1034,7 +1034,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAppConnection = stubLongRunningCall(
         undefined,
@@ -1113,7 +1113,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
@@ -1154,7 +1154,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
@@ -1212,7 +1212,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAppConnections = stubSimpleCall(
         undefined,
@@ -1244,7 +1244,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
@@ -1308,7 +1308,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAppConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1361,7 +1361,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
@@ -1412,7 +1412,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAppConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1456,7 +1456,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
@@ -1497,7 +1497,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
@@ -1555,7 +1555,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resolveAppConnections = stubSimpleCall(
         undefined,
@@ -1590,7 +1590,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
@@ -1660,7 +1660,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.resolveAppConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1719,7 +1719,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
@@ -1774,7 +1774,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.resolveAppConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

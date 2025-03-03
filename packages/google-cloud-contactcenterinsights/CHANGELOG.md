@@ -1,5 +1,33 @@
 # Changelog
 
+## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.8.0...contact-center-insights-v3.9.0) (2025-01-23)
+
+
+### Features
+
+* [Many APIs] Reasoning Engine v1 GAPIC release ([#5965](https://github.com/googleapis/google-cloud-node/issues/5965)) ([050db4d](https://github.com/googleapis/google-cloud-node/commit/050db4d28f9a203ce2d41db21eb74b3ecb6b4a16))
+
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.7.0...contact-center-insights-v3.8.0) (2024-12-18)
+
+
+### Features
+
+* [contactcenterinsights] A new resource pattern value `projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}` added to the resource definition `contactcenter... ([#5890](https://github.com/googleapis/google-cloud-node/issues/5890)) ([5564d05](https://github.com/googleapis/google-cloud-node/commit/5564d0548d8681e7647c46e4e33df4af4da4d6aa))
+
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.6.0...contact-center-insights-v3.7.0) (2024-11-21)
+
+
+### Features
+
+* [contactcenterinsights] Add FeedbackLabel resource and APIs ([#5817](https://github.com/googleapis/google-cloud-node/issues/5817)) ([d5acb00](https://github.com/googleapis/google-cloud-node/commit/d5acb00e881256ec5866d14556b9a013157288a6))
+
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.5.0...contact-center-insights-v3.6.0) (2024-10-10)
+
+
+### Features
+
+* [contactcenterinsights] Add import / export IssueModel ([#5738](https://github.com/googleapis/google-cloud-node/issues/5738)) ([f3060f2](https://github.com/googleapis/google-cloud-node/commit/f3060f2fad34867307825e591ae49ad38c221371))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.4.0...contact-center-insights-v3.5.0) (2024-05-21)
 
 

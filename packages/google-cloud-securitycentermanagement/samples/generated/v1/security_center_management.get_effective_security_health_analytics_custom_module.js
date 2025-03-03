@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,9 +31,9 @@ function main(name) {
   /**
    *  Required. The full resource name of the custom module, specified in one of
    *  the following formats:
-   *  * `organizations/organization/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
-   *  * `folders/folder/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
-   *  * `projects/project/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
+   *  * `organizations/organization/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
+   *  * `folders/folder/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
+   *  * `projects/project/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
    */
   // const name = 'abc123'
 

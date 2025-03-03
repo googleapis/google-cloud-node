@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-tpu",
-        "version": "3.5.0",
+        "version": "3.8.1",
         "language": "TYPESCRIPT",
         "apis": [
             {

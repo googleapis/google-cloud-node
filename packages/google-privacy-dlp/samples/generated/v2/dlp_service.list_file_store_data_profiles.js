@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -73,6 +73,7 @@ function main(parent) {
    *  * A restriction has the form of `{field} {operator} {value}`.
    *  * Supported fields/values:
    *      - `project_id` - The Google Cloud project ID.
+   *      - `account_id` - The AWS account ID.
    *      - `file_store_path` - The path like "gs://bucket".
    *      - `data_source_type` - The profile's data source type, like
    *      "google/storage/bucket".

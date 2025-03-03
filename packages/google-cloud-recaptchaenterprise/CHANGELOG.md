@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.12.0...recaptcha-enterprise-v5.13.0) (2024-11-14)
+
+
+### Features
+
+* [recaptchaenterprise] A new enum `Challenge` is added ([#5807](https://github.com/googleapis/google-cloud-node/issues/5807)) ([9cfcf1f](https://github.com/googleapis/google-cloud-node/commit/9cfcf1fead76fdaa16f22737f33859c52945481e))
+
+## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.11.0...recaptcha-enterprise-v5.12.0) (2024-10-30)
+
+
+### Features
+
+* [recaptchaenterprise] support for ListIpOverrides and RemoveIpOverride ([#5777](https://github.com/googleapis/google-cloud-node/issues/5777)) ([ae63b6a](https://github.com/googleapis/google-cloud-node/commit/ae63b6a3f18b20f27b43a9f21f26f69af95b2461))
+
 ## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.10.0...recaptcha-enterprise-v5.11.0) (2024-08-29)
 
 

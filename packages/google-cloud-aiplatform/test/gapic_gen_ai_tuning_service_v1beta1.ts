@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,7 +25,13 @@ import * as genaituningserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, IamProtos, LocationProtos} from 'google-gax';
+import {
+  protobuf,
+  LROperation,
+  operationsProtos,
+  IamProtos,
+  LocationProtos,
+} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -64,6 +70,38 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
+}
+
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 function stubPageStreamingCall<ResponseType>(
@@ -335,7 +373,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TuningJob()
       );
@@ -367,7 +405,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TuningJob()
       );
@@ -415,7 +453,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTuningJob = stubSimpleCall(
         undefined,
@@ -469,7 +507,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TuningJob()
       );
@@ -501,7 +539,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TuningJob()
       );
@@ -549,7 +587,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTuningJob = stubSimpleCall(
         undefined,
@@ -603,7 +641,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -635,7 +673,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -683,7 +721,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelTuningJob = stubSimpleCall(
         undefined,
@@ -721,6 +759,206 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
     });
   });
 
+  describe('rebaseTunedModel', () => {
+    it('invokes rebaseTunedModel without error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.RebaseTunedModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.RebaseTunedModelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.rebaseTunedModel =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.rebaseTunedModel(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.rebaseTunedModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rebaseTunedModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rebaseTunedModel without error using callback', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.RebaseTunedModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.RebaseTunedModelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.rebaseTunedModel =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.rebaseTunedModel(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.ITuningJob,
+              protos.google.cloud.aiplatform.v1beta1.IRebaseTunedModelOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.ITuningJob,
+        protos.google.cloud.aiplatform.v1beta1.IRebaseTunedModelOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.rebaseTunedModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rebaseTunedModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rebaseTunedModel with call error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.RebaseTunedModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.RebaseTunedModelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.rebaseTunedModel = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.rebaseTunedModel(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.rebaseTunedModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rebaseTunedModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rebaseTunedModel with LRO error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.RebaseTunedModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.RebaseTunedModelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.rebaseTunedModel = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.rebaseTunedModel(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.rebaseTunedModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rebaseTunedModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkRebaseTunedModelProgress without error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkRebaseTunedModelProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkRebaseTunedModelProgress with error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkRebaseTunedModelProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listTuningJobs', () => {
     it('invokes listTuningJobs without error', async () => {
       const client =
@@ -737,7 +975,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.TuningJob()
@@ -777,7 +1015,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.TuningJob()
@@ -833,7 +1071,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTuningJobs = stubSimpleCall(
         undefined,
@@ -865,7 +1103,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.TuningJob()
@@ -927,7 +1165,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTuningJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -978,7 +1216,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.TuningJob()
@@ -1028,7 +1266,7 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTuningJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1588,6 +1826,322 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
           )
+      );
+    });
+  });
+  describe('getOperation', () => {
+    it('invokes getOperation without error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const response = await client.getOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes getOperation without error using callback', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.getOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: operationsProtos.google.longrunning.Operation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+    it('invokes getOperation with error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.getOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('cancelOperation', () => {
+    it('invokes cancelOperation without error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.cancelOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes cancelOperation without error using callback', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.cancelOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+    });
+    it('invokes cancelOperation with error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.cancelOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.cancelOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('deleteOperation', () => {
+    it('invokes deleteOperation without error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.deleteOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes deleteOperation without error using callback', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.deleteOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
+    });
+    it('invokes deleteOperation with error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.deleteOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.deleteOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('listOperationsAsync', () => {
+    it('uses async iteration with listOperations without error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+      ];
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+        [];
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+    it('uses async iteration with listOperations with error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
       );
     });
   });
@@ -2768,6 +3322,194 @@ describe('v1beta1.GenAiTuningServiceClient', () => {
         assert.strictEqual(result, 'featureGroupValue');
         assert(
           (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureMonitor', () => {
+      const fakePath = '/rendered/path/featureMonitor';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+        feature_monitor: 'featureMonitorValue',
+      };
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.featureMonitorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureMonitorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureMonitorPath', () => {
+        const result = client.featureMonitorPath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue',
+          'featureMonitorValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureMonitorName', () => {
+        const result = client.matchProjectFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureMonitorName', () => {
+        const result = client.matchLocationFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromFeatureMonitorName', () => {
+        const result = client.matchFeatureGroupFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorFromFeatureMonitorName', () => {
+        const result =
+          client.matchFeatureMonitorFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'featureMonitorValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureMonitorJob', () => {
+      const fakePath = '/rendered/path/featureMonitorJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+        feature_monitor: 'featureMonitorValue',
+        feature_monitor_job: 'featureMonitorJobValue',
+      };
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.featureMonitorJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureMonitorJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureMonitorJobPath', () => {
+        const result = client.featureMonitorJobPath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue',
+          'featureMonitorValue',
+          'featureMonitorJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureMonitorJobName', () => {
+        const result = client.matchProjectFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureMonitorJobName', () => {
+        const result = client.matchLocationFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromFeatureMonitorJobName', () => {
+        const result =
+          client.matchFeatureGroupFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorFromFeatureMonitorJobName', () => {
+        const result =
+          client.matchFeatureMonitorFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'featureMonitorValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorJobFromFeatureMonitorJobName', () => {
+        const result =
+          client.matchFeatureMonitorJobFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'featureMonitorJobValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

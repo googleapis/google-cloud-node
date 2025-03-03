@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -337,7 +337,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SessionTemplate()
       );
@@ -370,7 +370,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SessionTemplate()
       );
@@ -418,7 +418,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSessionTemplate = stubSimpleCall(
         undefined,
@@ -479,7 +479,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['sessionTemplate', 'name']
       );
       request.sessionTemplate.name = defaultValue1;
-      const expectedHeaderRequestParams = `session_template.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session_template.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SessionTemplate()
       );
@@ -513,7 +513,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['sessionTemplate', 'name']
       );
       request.sessionTemplate.name = defaultValue1;
-      const expectedHeaderRequestParams = `session_template.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session_template.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SessionTemplate()
       );
@@ -562,7 +562,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['sessionTemplate', 'name']
       );
       request.sessionTemplate.name = defaultValue1;
-      const expectedHeaderRequestParams = `session_template.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session_template.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSessionTemplate = stubSimpleCall(
         undefined,
@@ -623,7 +623,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SessionTemplate()
       );
@@ -656,7 +656,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SessionTemplate()
       );
@@ -704,7 +704,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSessionTemplate = stubSimpleCall(
         undefined,
@@ -758,7 +758,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -791,7 +791,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -839,7 +839,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSessionTemplate = stubSimpleCall(
         undefined,
@@ -899,7 +899,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1.SessionTemplate()
@@ -940,7 +940,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1.SessionTemplate()
@@ -996,7 +996,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSessionTemplates = stubSimpleCall(
         undefined,
@@ -1028,7 +1028,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1.SessionTemplate()
@@ -1089,7 +1089,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSessionTemplates.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1139,7 +1139,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1.SessionTemplate()
@@ -1189,7 +1189,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSessionTemplates.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

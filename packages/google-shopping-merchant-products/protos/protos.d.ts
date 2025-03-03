@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -526,7 +526,7 @@ export namespace google {
                         googleProductCategory?: (string|null);
 
                         /** Attributes gtin */
-                        gtin?: (string|null);
+                        gtin?: (string[]|null);
 
                         /** Attributes itemGroupId */
                         itemGroupId?: (string|null);
@@ -812,7 +812,7 @@ export namespace google {
                         public googleProductCategory?: (string|null);
 
                         /** Attributes gtin. */
-                        public gtin?: (string|null);
+                        public gtin: string[];
 
                         /** Attributes itemGroupId. */
                         public itemGroupId?: (string|null);
@@ -1074,9 +1074,6 @@ export namespace google {
 
                         /** Attributes _googleProductCategory. */
                         public _googleProductCategory?: "googleProductCategory";
-
-                        /** Attributes _gtin. */
-                        public _gtin?: "gtin";
 
                         /** Attributes _itemGroupId. */
                         public _itemGroupId?: "itemGroupId";
@@ -2159,6 +2156,12 @@ export namespace google {
 
                         /** LoyaltyProgram loyaltyPoints */
                         loyaltyPoints?: (number|Long|string|null);
+
+                        /** LoyaltyProgram memberPriceEffectiveDate */
+                        memberPriceEffectiveDate?: (google.type.IInterval|null);
+
+                        /** LoyaltyProgram shippingLabel */
+                        shippingLabel?: (string|null);
                     }
 
                     /** Represents a LoyaltyProgram. */
@@ -2185,6 +2188,12 @@ export namespace google {
                         /** LoyaltyProgram loyaltyPoints. */
                         public loyaltyPoints?: (number|Long|string|null);
 
+                        /** LoyaltyProgram memberPriceEffectiveDate. */
+                        public memberPriceEffectiveDate?: (google.type.IInterval|null);
+
+                        /** LoyaltyProgram shippingLabel. */
+                        public shippingLabel?: (string|null);
+
                         /** LoyaltyProgram _programLabel. */
                         public _programLabel?: "programLabel";
 
@@ -2199,6 +2208,12 @@ export namespace google {
 
                         /** LoyaltyProgram _loyaltyPoints. */
                         public _loyaltyPoints?: "loyaltyPoints";
+
+                        /** LoyaltyProgram _memberPriceEffectiveDate. */
+                        public _memberPriceEffectiveDate?: "memberPriceEffectiveDate";
+
+                        /** LoyaltyProgram _shippingLabel. */
+                        public _shippingLabel?: "shippingLabel";
 
                         /**
                          * Creates a new LoyaltyProgram instance using the specified properties.

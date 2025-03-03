@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29001,6 +29001,12 @@ export namespace google {
 
                     /** DatasetSchema documentSchema */
                     documentSchema?: (google.cloud.documentai.v1beta3.IDocumentSchema|null);
+
+                    /** DatasetSchema satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
+                    /** DatasetSchema satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
                 }
 
                 /** Represents a DatasetSchema. */
@@ -29017,6 +29023,12 @@ export namespace google {
 
                     /** DatasetSchema documentSchema. */
                     public documentSchema?: (google.cloud.documentai.v1beta3.IDocumentSchema|null);
+
+                    /** DatasetSchema satisfiesPzs. */
+                    public satisfiesPzs: boolean;
+
+                    /** DatasetSchema satisfiesPzi. */
+                    public satisfiesPzi: boolean;
 
                     /**
                      * Creates a new DatasetSchema instance using the specified properties.

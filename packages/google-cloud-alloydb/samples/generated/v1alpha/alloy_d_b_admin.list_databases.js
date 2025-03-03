@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,9 +34,9 @@ function main(parent) {
   // const parent = 'abc123'
   /**
    *  Optional. The maximum number of databases to return. The service may return
-   *  fewer than this value. If unspecified, an appropriate number of databases
-   *  will be returned. The max value will be 2000, values above max will be
-   *  coerced to max.
+   *  fewer than this value. If unspecified, 2000 is the default page_size. The
+   *  max value of page_size will be 4000, values above max will be coerced to
+   *  max.
    */
   // const pageSize = 1234
   /**

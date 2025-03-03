@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-parallelstore",
-        "version": "0.6.0",
+        "version": "0.7.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -15,14 +15,14 @@
             "regionTag": "parallelstore_v1beta_generated_Parallelstore_ListInstances_async",
             "title": "Parallelstore listInstances Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists Instances in a given project and location.",
+            "description": " Lists all instances in a given project and location.",
             "canonical": true,
             "file": "parallelstore.list_instances.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 77,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -71,7 +71,7 @@
             "regionTag": "parallelstore_v1beta_generated_Parallelstore_GetInstance_async",
             "title": "Parallelstore getInstance Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets details of a single Instance.",
+            "description": " Gets details of a single instance.",
             "canonical": true,
             "file": "parallelstore.get_instance.js",
             "language": "JAVASCRIPT",
@@ -118,7 +118,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 86,
+                    "end": 85,
                     "type": "FULL"
                 }
             ],
@@ -163,7 +163,7 @@
             "regionTag": "parallelstore_v1beta_generated_Parallelstore_UpdateInstance_async",
             "title": "Parallelstore updateInstance Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a single Instance.",
+            "description": " Updates the parameters of a single instance.",
             "canonical": true,
             "file": "parallelstore.update_instance.js",
             "language": "JAVASCRIPT",
@@ -211,7 +211,7 @@
             "regionTag": "parallelstore_v1beta_generated_Parallelstore_DeleteInstance_async",
             "title": "Parallelstore deleteInstance Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes a single Instance.",
+            "description": " Deletes a single instance.",
             "canonical": true,
             "file": "parallelstore.delete_instance.js",
             "language": "JAVASCRIPT",
@@ -255,14 +255,14 @@
             "regionTag": "parallelstore_v1beta_generated_Parallelstore_ImportData_async",
             "title": "Parallelstore importData Sample",
             "origin": "API_DEFINITION",
-            "description": " ImportData copies data from Cloud Storage to Parallelstore.",
+            "description": " Copies data from Cloud Storage to Parallelstore.",
             "canonical": true,
             "file": "parallelstore.import_data.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 84,
+                    "end": 87,
                     "type": "FULL"
                 }
             ],
@@ -311,14 +311,14 @@
             "regionTag": "parallelstore_v1beta_generated_Parallelstore_ExportData_async",
             "title": "Parallelstore exportData Sample",
             "origin": "API_DEFINITION",
-            "description": " ExportData copies data from Parallelstore to Cloud Storage",
+            "description": " Copies data from Parallelstore to Cloud Storage.",
             "canonical": true,
             "file": "parallelstore.export_data.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 84,
+                    "end": 87,
                     "type": "FULL"
                 }
             ],

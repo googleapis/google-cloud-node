@@ -124,6 +124,12 @@ message Backup {
   // Output only. Total size of all backups in a chain in bytes = baseline
   // backup size + sum(incremental backup size)
   int64 chain_storage_bytes = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Reserved for future use
+  bool satisfies_pzs = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Reserved for future use
+  bool satisfies_pzi = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // ListBackupsRequest lists backups.
@@ -199,8 +205,8 @@ message CreateBackupRequest {
 
   // Required. The ID to use for the backup.
   // The ID must be unique within the specified backupVault.
-  // Must contain only letters, numbers, underscore and hyphen, with the first
-  // character a letter or underscore, the last a letter or underscore or a
+  // Must contain only letters, numbers and hyphen, with the first
+  // character a letter, the last a letter or a
   // number, and a 63 character maximum.
   string backup_id = 2 [(google.api.field_behavior) = REQUIRED];
 

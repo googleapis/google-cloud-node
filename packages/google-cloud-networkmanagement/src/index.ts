@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,8 +21,15 @@ import * as v1beta1 from './v1beta1';
 
 const ReachabilityServiceClient = v1.ReachabilityServiceClient;
 type ReachabilityServiceClient = v1.ReachabilityServiceClient;
+const VpcFlowLogsServiceClient = v1.VpcFlowLogsServiceClient;
+type VpcFlowLogsServiceClient = v1.VpcFlowLogsServiceClient;
 
-export {v1, v1beta1, ReachabilityServiceClient};
-export default {v1, v1beta1, ReachabilityServiceClient};
+export {v1, v1beta1, ReachabilityServiceClient, VpcFlowLogsServiceClient};
+export default {
+  v1,
+  v1beta1,
+  ReachabilityServiceClient,
+  VpcFlowLogsServiceClient,
+};
 import * as protos from '../protos/protos';
 export {protos};

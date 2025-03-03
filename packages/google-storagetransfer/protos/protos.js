@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -9144,6 +9144,335 @@
                     return TransferSpec;
                 })();
     
+                v1.ReplicationSpec = (function() {
+    
+                    /**
+                     * Properties of a ReplicationSpec.
+                     * @memberof google.storagetransfer.v1
+                     * @interface IReplicationSpec
+                     * @property {google.storagetransfer.v1.IGcsData|null} [gcsDataSource] ReplicationSpec gcsDataSource
+                     * @property {google.storagetransfer.v1.IGcsData|null} [gcsDataSink] ReplicationSpec gcsDataSink
+                     * @property {google.storagetransfer.v1.IObjectConditions|null} [objectConditions] ReplicationSpec objectConditions
+                     * @property {google.storagetransfer.v1.ITransferOptions|null} [transferOptions] ReplicationSpec transferOptions
+                     */
+    
+                    /**
+                     * Constructs a new ReplicationSpec.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents a ReplicationSpec.
+                     * @implements IReplicationSpec
+                     * @constructor
+                     * @param {google.storagetransfer.v1.IReplicationSpec=} [properties] Properties to set
+                     */
+                    function ReplicationSpec(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ReplicationSpec gcsDataSource.
+                     * @member {google.storagetransfer.v1.IGcsData|null|undefined} gcsDataSource
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @instance
+                     */
+                    ReplicationSpec.prototype.gcsDataSource = null;
+    
+                    /**
+                     * ReplicationSpec gcsDataSink.
+                     * @member {google.storagetransfer.v1.IGcsData|null|undefined} gcsDataSink
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @instance
+                     */
+                    ReplicationSpec.prototype.gcsDataSink = null;
+    
+                    /**
+                     * ReplicationSpec objectConditions.
+                     * @member {google.storagetransfer.v1.IObjectConditions|null|undefined} objectConditions
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @instance
+                     */
+                    ReplicationSpec.prototype.objectConditions = null;
+    
+                    /**
+                     * ReplicationSpec transferOptions.
+                     * @member {google.storagetransfer.v1.ITransferOptions|null|undefined} transferOptions
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @instance
+                     */
+                    ReplicationSpec.prototype.transferOptions = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * ReplicationSpec dataSource.
+                     * @member {"gcsDataSource"|undefined} dataSource
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @instance
+                     */
+                    Object.defineProperty(ReplicationSpec.prototype, "dataSource", {
+                        get: $util.oneOfGetter($oneOfFields = ["gcsDataSource"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * ReplicationSpec dataSink.
+                     * @member {"gcsDataSink"|undefined} dataSink
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @instance
+                     */
+                    Object.defineProperty(ReplicationSpec.prototype, "dataSink", {
+                        get: $util.oneOfGetter($oneOfFields = ["gcsDataSink"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new ReplicationSpec instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @static
+                     * @param {google.storagetransfer.v1.IReplicationSpec=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.ReplicationSpec} ReplicationSpec instance
+                     */
+                    ReplicationSpec.create = function create(properties) {
+                        return new ReplicationSpec(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ReplicationSpec message. Does not implicitly {@link google.storagetransfer.v1.ReplicationSpec.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @static
+                     * @param {google.storagetransfer.v1.IReplicationSpec} message ReplicationSpec message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReplicationSpec.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.gcsDataSource != null && Object.hasOwnProperty.call(message, "gcsDataSource"))
+                            $root.google.storagetransfer.v1.GcsData.encode(message.gcsDataSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.gcsDataSink != null && Object.hasOwnProperty.call(message, "gcsDataSink"))
+                            $root.google.storagetransfer.v1.GcsData.encode(message.gcsDataSink, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.objectConditions != null && Object.hasOwnProperty.call(message, "objectConditions"))
+                            $root.google.storagetransfer.v1.ObjectConditions.encode(message.objectConditions, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.transferOptions != null && Object.hasOwnProperty.call(message, "transferOptions"))
+                            $root.google.storagetransfer.v1.TransferOptions.encode(message.transferOptions, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ReplicationSpec message, length delimited. Does not implicitly {@link google.storagetransfer.v1.ReplicationSpec.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @static
+                     * @param {google.storagetransfer.v1.IReplicationSpec} message ReplicationSpec message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReplicationSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ReplicationSpec message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.ReplicationSpec} ReplicationSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReplicationSpec.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.ReplicationSpec();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.gcsDataSource = $root.google.storagetransfer.v1.GcsData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.gcsDataSink = $root.google.storagetransfer.v1.GcsData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.objectConditions = $root.google.storagetransfer.v1.ObjectConditions.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.transferOptions = $root.google.storagetransfer.v1.TransferOptions.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ReplicationSpec message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.ReplicationSpec} ReplicationSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReplicationSpec.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ReplicationSpec message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ReplicationSpec.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.gcsDataSource != null && message.hasOwnProperty("gcsDataSource")) {
+                            properties.dataSource = 1;
+                            {
+                                var error = $root.google.storagetransfer.v1.GcsData.verify(message.gcsDataSource);
+                                if (error)
+                                    return "gcsDataSource." + error;
+                            }
+                        }
+                        if (message.gcsDataSink != null && message.hasOwnProperty("gcsDataSink")) {
+                            properties.dataSink = 1;
+                            {
+                                var error = $root.google.storagetransfer.v1.GcsData.verify(message.gcsDataSink);
+                                if (error)
+                                    return "gcsDataSink." + error;
+                            }
+                        }
+                        if (message.objectConditions != null && message.hasOwnProperty("objectConditions")) {
+                            var error = $root.google.storagetransfer.v1.ObjectConditions.verify(message.objectConditions);
+                            if (error)
+                                return "objectConditions." + error;
+                        }
+                        if (message.transferOptions != null && message.hasOwnProperty("transferOptions")) {
+                            var error = $root.google.storagetransfer.v1.TransferOptions.verify(message.transferOptions);
+                            if (error)
+                                return "transferOptions." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ReplicationSpec message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.ReplicationSpec} ReplicationSpec
+                     */
+                    ReplicationSpec.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.ReplicationSpec)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.ReplicationSpec();
+                        if (object.gcsDataSource != null) {
+                            if (typeof object.gcsDataSource !== "object")
+                                throw TypeError(".google.storagetransfer.v1.ReplicationSpec.gcsDataSource: object expected");
+                            message.gcsDataSource = $root.google.storagetransfer.v1.GcsData.fromObject(object.gcsDataSource);
+                        }
+                        if (object.gcsDataSink != null) {
+                            if (typeof object.gcsDataSink !== "object")
+                                throw TypeError(".google.storagetransfer.v1.ReplicationSpec.gcsDataSink: object expected");
+                            message.gcsDataSink = $root.google.storagetransfer.v1.GcsData.fromObject(object.gcsDataSink);
+                        }
+                        if (object.objectConditions != null) {
+                            if (typeof object.objectConditions !== "object")
+                                throw TypeError(".google.storagetransfer.v1.ReplicationSpec.objectConditions: object expected");
+                            message.objectConditions = $root.google.storagetransfer.v1.ObjectConditions.fromObject(object.objectConditions);
+                        }
+                        if (object.transferOptions != null) {
+                            if (typeof object.transferOptions !== "object")
+                                throw TypeError(".google.storagetransfer.v1.ReplicationSpec.transferOptions: object expected");
+                            message.transferOptions = $root.google.storagetransfer.v1.TransferOptions.fromObject(object.transferOptions);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ReplicationSpec message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @static
+                     * @param {google.storagetransfer.v1.ReplicationSpec} message ReplicationSpec
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ReplicationSpec.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.objectConditions = null;
+                            object.transferOptions = null;
+                        }
+                        if (message.gcsDataSource != null && message.hasOwnProperty("gcsDataSource")) {
+                            object.gcsDataSource = $root.google.storagetransfer.v1.GcsData.toObject(message.gcsDataSource, options);
+                            if (options.oneofs)
+                                object.dataSource = "gcsDataSource";
+                        }
+                        if (message.gcsDataSink != null && message.hasOwnProperty("gcsDataSink")) {
+                            object.gcsDataSink = $root.google.storagetransfer.v1.GcsData.toObject(message.gcsDataSink, options);
+                            if (options.oneofs)
+                                object.dataSink = "gcsDataSink";
+                        }
+                        if (message.objectConditions != null && message.hasOwnProperty("objectConditions"))
+                            object.objectConditions = $root.google.storagetransfer.v1.ObjectConditions.toObject(message.objectConditions, options);
+                        if (message.transferOptions != null && message.hasOwnProperty("transferOptions"))
+                            object.transferOptions = $root.google.storagetransfer.v1.TransferOptions.toObject(message.transferOptions, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ReplicationSpec to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ReplicationSpec.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ReplicationSpec
+                     * @function getTypeUrl
+                     * @memberof google.storagetransfer.v1.ReplicationSpec
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ReplicationSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.storagetransfer.v1.ReplicationSpec";
+                    };
+    
+                    return ReplicationSpec;
+                })();
+    
                 v1.MetadataOptions = (function() {
     
                     /**
@@ -10714,6 +11043,7 @@
                      * @property {string|null} [description] TransferJob description
                      * @property {string|null} [projectId] TransferJob projectId
                      * @property {google.storagetransfer.v1.ITransferSpec|null} [transferSpec] TransferJob transferSpec
+                     * @property {google.storagetransfer.v1.IReplicationSpec|null} [replicationSpec] TransferJob replicationSpec
                      * @property {google.storagetransfer.v1.INotificationConfig|null} [notificationConfig] TransferJob notificationConfig
                      * @property {google.storagetransfer.v1.ILoggingConfig|null} [loggingConfig] TransferJob loggingConfig
                      * @property {google.storagetransfer.v1.ISchedule|null} [schedule] TransferJob schedule
@@ -10771,6 +11101,14 @@
                      * @instance
                      */
                     TransferJob.prototype.transferSpec = null;
+    
+                    /**
+                     * TransferJob replicationSpec.
+                     * @member {google.storagetransfer.v1.IReplicationSpec|null|undefined} replicationSpec
+                     * @memberof google.storagetransfer.v1.TransferJob
+                     * @instance
+                     */
+                    TransferJob.prototype.replicationSpec = null;
     
                     /**
                      * TransferJob notificationConfig.
@@ -10894,6 +11232,8 @@
                             $root.google.storagetransfer.v1.LoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                         if (message.eventStream != null && Object.hasOwnProperty.call(message, "eventStream"))
                             $root.google.storagetransfer.v1.EventStream.encode(message.eventStream, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                        if (message.replicationSpec != null && Object.hasOwnProperty.call(message, "replicationSpec"))
+                            $root.google.storagetransfer.v1.ReplicationSpec.encode(message.replicationSpec, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                         return writer;
                     };
     
@@ -10942,6 +11282,10 @@
                                 }
                             case 4: {
                                     message.transferSpec = $root.google.storagetransfer.v1.TransferSpec.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 17: {
+                                    message.replicationSpec = $root.google.storagetransfer.v1.ReplicationSpec.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 11: {
@@ -11029,6 +11373,11 @@
                             if (error)
                                 return "transferSpec." + error;
                         }
+                        if (message.replicationSpec != null && message.hasOwnProperty("replicationSpec")) {
+                            var error = $root.google.storagetransfer.v1.ReplicationSpec.verify(message.replicationSpec);
+                            if (error)
+                                return "replicationSpec." + error;
+                        }
                         if (message.notificationConfig != null && message.hasOwnProperty("notificationConfig")) {
                             var error = $root.google.storagetransfer.v1.NotificationConfig.verify(message.notificationConfig);
                             if (error)
@@ -11102,6 +11451,11 @@
                             if (typeof object.transferSpec !== "object")
                                 throw TypeError(".google.storagetransfer.v1.TransferJob.transferSpec: object expected");
                             message.transferSpec = $root.google.storagetransfer.v1.TransferSpec.fromObject(object.transferSpec);
+                        }
+                        if (object.replicationSpec != null) {
+                            if (typeof object.replicationSpec !== "object")
+                                throw TypeError(".google.storagetransfer.v1.TransferJob.replicationSpec: object expected");
+                            message.replicationSpec = $root.google.storagetransfer.v1.ReplicationSpec.fromObject(object.replicationSpec);
                         }
                         if (object.notificationConfig != null) {
                             if (typeof object.notificationConfig !== "object")
@@ -11194,6 +11548,7 @@
                             object.latestOperationName = "";
                             object.loggingConfig = null;
                             object.eventStream = null;
+                            object.replicationSpec = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -11221,6 +11576,8 @@
                             object.loggingConfig = $root.google.storagetransfer.v1.LoggingConfig.toObject(message.loggingConfig, options);
                         if (message.eventStream != null && message.hasOwnProperty("eventStream"))
                             object.eventStream = $root.google.storagetransfer.v1.EventStream.toObject(message.eventStream, options);
+                        if (message.replicationSpec != null && message.hasOwnProperty("replicationSpec"))
+                            object.replicationSpec = $root.google.storagetransfer.v1.ReplicationSpec.toObject(message.replicationSpec, options);
                         return object;
                     };
     

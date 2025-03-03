@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -10,7 +13,6 @@
                   "nested": {
                     "v3": {
                       "options": {
-                        "cc_enable_arenas": true,
                         "csharp_namespace": "Google.Cloud.Dialogflow.Cx.V3",
                         "go_package": "cloud.google.com/go/dialogflow/cx/apiv3/cxpb;cxpb",
                         "java_multiple_files": true,
@@ -356,6 +358,16 @@
                               "oneof": [
                                 "genAppBuilderSettings"
                               ]
+                            },
+                            "_satisfiesPzs": {
+                              "oneof": [
+                                "satisfiesPzs"
+                              ]
+                            },
+                            "_satisfiesPzi": {
+                              "oneof": [
+                                "satisfiesPzi"
+                              ]
                             }
                           },
                           "fields": {
@@ -470,6 +482,29 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "clientCertificateSettings": {
+                              "type": "ClientCertificateSettings",
+                              "id": 43,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "satisfiesPzs": {
+                              "type": "bool",
+                              "id": 45,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "satisfiesPzi": {
+                              "type": "bool",
+                              "id": 46,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
                             }
                           },
                           "nested": {
@@ -544,6 +579,33 @@
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "ClientCertificateSettings": {
+                              "fields": {
+                                "sslCertificate": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "privateKey": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                                  }
+                                },
+                                "passphrase": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
                                   }
                                 }
                               }
@@ -884,7 +946,8 @@
                             "AUDIO_ENCODING_AMR": 4,
                             "AUDIO_ENCODING_AMR_WB": 5,
                             "AUDIO_ENCODING_OGG_OPUS": 6,
-                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
+                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7,
+                            "AUDIO_ENCODING_ALAW": 8
                           }
                         },
                         "SpeechModelVariant": {
@@ -1023,7 +1086,8 @@
                             "OUTPUT_AUDIO_ENCODING_MP3": 2,
                             "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS": 4,
                             "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3,
-                            "OUTPUT_AUDIO_ENCODING_MULAW": 5
+                            "OUTPUT_AUDIO_ENCODING_MULAW": 5,
+                            "OUTPUT_AUDIO_ENCODING_ALAW": 6
                           }
                         },
                         "OutputAudioConfig": {
@@ -2186,6 +2250,10 @@
                             "dataStore": {
                               "type": "string",
                               "id": 2
+                            },
+                            "documentProcessingMode": {
+                              "type": "DocumentProcessingMode",
+                              "id": 4
                             }
                           }
                         },
@@ -2404,6 +2472,13 @@
                                 }
                               }
                             }
+                          }
+                        },
+                        "DocumentProcessingMode": {
+                          "values": {
+                            "DOCUMENT_PROCESSING_MODE_UNSPECIFIED": 0,
+                            "DOCUMENTS": 1,
+                            "CHUNKS": 2
                           }
                         },
                         "Fulfillment": {
@@ -5564,7 +5639,10 @@
                               "fields": {
                                 "id": {
                                   "type": "string",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
                                 },
                                 "parts": {
                                   "rule": "repeated",
@@ -6444,6 +6522,7 @@
                               "type": "bool",
                               "id": 25,
                               "options": {
+                                "deprecated": true,
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
@@ -6495,6 +6574,81 @@
                                   "id": 2,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "boostControlSpec": {
+                                  "type": "BoostControlSpec",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "BoostControlSpec": {
+                                  "fields": {
+                                    "fieldName": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "attributeType": {
+                                      "type": "AttributeType",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "interpolationType": {
+                                      "type": "InterpolationType",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "controlPoints": {
+                                      "rule": "repeated",
+                                      "type": "ControlPoint",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  },
+                                  "nested": {
+                                    "AttributeType": {
+                                      "values": {
+                                        "ATTRIBUTE_TYPE_UNSPECIFIED": 0,
+                                        "NUMERICAL": 1,
+                                        "FRESHNESS": 2
+                                      }
+                                    },
+                                    "InterpolationType": {
+                                      "values": {
+                                        "INTERPOLATION_TYPE_UNSPECIFIED": 0,
+                                        "LINEAR": 1
+                                      }
+                                    },
+                                    "ControlPoint": {
+                                      "fields": {
+                                        "attributeValue": {
+                                          "type": "string",
+                                          "id": 1,
+                                          "options": {
+                                            "(google.api.field_behavior)": "OPTIONAL"
+                                          }
+                                        },
+                                        "boostAmount": {
+                                          "type": "float",
+                                          "id": 2,
+                                          "options": {
+                                            "(google.api.field_behavior)": "OPTIONAL"
+                                          }
+                                        }
+                                      }
+                                    }
                                   }
                                 }
                               }
@@ -8852,6 +9006,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "modelParameter": {
+                              "type": "ModelParameter",
+                              "id": 8
                             }
                           },
                           "nested": {
@@ -8864,6 +9022,60 @@
                                 "name": {
                                   "type": "string",
                                   "id": 2
+                                }
+                              }
+                            },
+                            "ModelParameter": {
+                              "oneofs": {
+                                "_temperature": {
+                                  "oneof": [
+                                    "temperature"
+                                  ]
+                                },
+                                "_maxDecodeSteps": {
+                                  "oneof": [
+                                    "maxDecodeSteps"
+                                  ]
+                                },
+                                "_topP": {
+                                  "oneof": [
+                                    "topP"
+                                  ]
+                                },
+                                "_topK": {
+                                  "oneof": [
+                                    "topK"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "temperature": {
+                                  "type": "float",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "maxDecodeSteps": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "topP": {
+                                  "type": "float",
+                                  "id": 3,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "topK": {
+                                  "type": "int32",
+                                  "id": 4,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
                                 }
                               }
                             }
@@ -9702,7 +9914,6 @@
                     },
                     "v3beta1": {
                       "options": {
-                        "cc_enable_arenas": true,
                         "csharp_namespace": "Google.Cloud.Dialogflow.Cx.V3Beta1",
                         "go_package": "cloud.google.com/go/dialogflow/cx/apiv3beta1/cxpb;cxpb",
                         "java_multiple_files": true,
@@ -9711,7 +9922,8 @@
                         "objc_class_prefix": "DF",
                         "ruby_package": "Google::Cloud::Dialogflow::CX::V3beta1",
                         "(google.api.resource_definition).type": "dlp.googleapis.com/DeidentifyTemplate",
-                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}"
+                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}",
+                        "cc_enable_arenas": true
                       },
                       "nested": {
                         "AdvancedSettings": {
@@ -9788,6 +10000,10 @@
                                 "enableInteractionLogging": {
                                   "type": "bool",
                                   "id": 3
+                                },
+                                "enableConsentBasedRedaction": {
+                                  "type": "bool",
+                                  "id": 4
                                 }
                               }
                             }
@@ -10050,6 +10266,16 @@
                               "oneof": [
                                 "genAppBuilderSettings"
                               ]
+                            },
+                            "_satisfiesPzs": {
+                              "oneof": [
+                                "satisfiesPzs"
+                              ]
+                            },
+                            "_satisfiesPzi": {
+                              "oneof": [
+                                "satisfiesPzi"
+                              ]
                             }
                           },
                           "fields": {
@@ -10146,6 +10372,13 @@
                               "type": "GitIntegrationSettings",
                               "id": 30
                             },
+                            "bigqueryExportSettings": {
+                              "type": "BigQueryExportSettings",
+                              "id": 29,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "textToSpeechSettings": {
                               "type": "TextToSpeechSettings",
                               "id": 31
@@ -10169,6 +10402,29 @@
                               "id": 42,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "clientCertificateSettings": {
+                              "type": "ClientCertificateSettings",
+                              "id": 43,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "satisfiesPzs": {
+                              "type": "bool",
+                              "id": 45,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "satisfiesPzi": {
+                              "type": "bool",
+                              "id": 46,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
                               }
                             }
                           },
@@ -10244,6 +10500,33 @@
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "ClientCertificateSettings": {
+                              "fields": {
+                                "sslCertificate": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "privateKey": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                                  }
+                                },
+                                "passphrase": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
                                   }
                                 }
                               }
@@ -10584,7 +10867,8 @@
                             "AUDIO_ENCODING_AMR": 4,
                             "AUDIO_ENCODING_AMR_WB": 5,
                             "AUDIO_ENCODING_OGG_OPUS": 6,
-                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
+                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7,
+                            "AUDIO_ENCODING_ALAW": 8
                           }
                         },
                         "SpeechModelVariant": {
@@ -10723,7 +11007,8 @@
                             "OUTPUT_AUDIO_ENCODING_MP3": 2,
                             "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS": 4,
                             "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3,
-                            "OUTPUT_AUDIO_ENCODING_MULAW": 5
+                            "OUTPUT_AUDIO_ENCODING_MULAW": 5,
+                            "OUTPUT_AUDIO_ENCODING_ALAW": 6
                           }
                         },
                         "OutputAudioConfig": {
@@ -10751,6 +11036,18 @@
                               "keyType": "string",
                               "type": "SynthesizeSpeechConfig",
                               "id": 1
+                            }
+                          }
+                        },
+                        "BigQueryExportSettings": {
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "bigqueryTable": {
+                              "type": "string",
+                              "id": 2
                             }
                           }
                         },
@@ -11058,6 +11355,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "locked": {
+                              "type": "bool",
+                              "id": 30
                             }
                           },
                           "nested": {
@@ -11626,7 +11927,8 @@
                             "target": {
                               "oneof": [
                                 "targetPage",
-                                "targetFlow"
+                                "targetFlow",
+                                "targetPlaybook"
                               ]
                             }
                           },
@@ -11661,6 +11963,13 @@
                               "id": 3,
                               "options": {
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "targetPlaybook": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
                               }
                             }
                           }
@@ -11882,6 +12191,10 @@
                             "dataStore": {
                               "type": "string",
                               "id": 2
+                            },
+                            "documentProcessingMode": {
+                              "type": "DocumentProcessingMode",
+                              "id": 4
                             }
                           }
                         },
@@ -11972,6 +12285,10 @@
                                 "modelOutput": {
                                   "type": "string",
                                   "id": 2
+                                },
+                                "model": {
+                                  "type": "string",
+                                  "id": 3
                                 }
                               }
                             },
@@ -12000,6 +12317,10 @@
                                 "modelOutput": {
                                   "type": "string",
                                   "id": 2
+                                },
+                                "model": {
+                                  "type": "string",
+                                  "id": 3
                                 }
                               }
                             },
@@ -12092,6 +12413,13 @@
                                 }
                               }
                             }
+                          }
+                        },
+                        "DocumentProcessingMode": {
+                          "values": {
+                            "DOCUMENT_PROCESSING_MODE_UNSPECIFIED": 0,
+                            "DOCUMENTS": 1,
+                            "CHUNKS": 2
                           }
                         },
                         "Fulfillment": {
@@ -12663,6 +12991,13 @@
                         },
                         "SafetySettings": {
                           "fields": {
+                            "defaultBannedPhraseMatchStrategy": {
+                              "type": "PhraseMatchStrategy",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "bannedPhrases": {
                               "rule": "repeated",
                               "type": "Phrase",
@@ -12686,6 +13021,13 @@
                                     "(google.api.field_behavior)": "REQUIRED"
                                   }
                                 }
+                              }
+                            },
+                            "PhraseMatchStrategy": {
+                              "values": {
+                                "PHRASE_MATCH_STRATEGY_UNSPECIFIED": 0,
+                                "PARTIAL_MATCH": 1,
+                                "WORD_MATCH": 2
                               }
                             }
                           }
@@ -13154,9 +13496,18 @@
                                   "type": "google.protobuf.Timestamp",
                                   "id": 6
                                 },
+                                "answerFeedback": {
+                                  "type": "AnswerFeedback",
+                                  "id": 7
+                                },
                                 "missingTransition": {
                                   "type": "MissingTransition",
                                   "id": 8
+                                },
+                                "stepMetrics": {
+                                  "rule": "repeated",
+                                  "type": "StepMetrics",
+                                  "id": 9
                                 }
                               },
                               "nested": {
@@ -13168,6 +13519,18 @@
                                     },
                                     "score": {
                                       "type": "float",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "StepMetrics": {
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "latency": {
+                                      "type": "google.protobuf.Duration",
                                       "id": 2
                                     }
                                   }
@@ -14983,7 +15346,10 @@
                               "fields": {
                                 "id": {
                                   "type": "string",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
                                 },
                                 "parts": {
                                   "rule": "repeated",
@@ -15897,6 +16263,7 @@
                               "type": "bool",
                               "id": 25,
                               "options": {
+                                "deprecated": true,
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
@@ -15948,6 +16315,81 @@
                                   "id": 2,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "boostControlSpec": {
+                                  "type": "BoostControlSpec",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "BoostControlSpec": {
+                                  "fields": {
+                                    "fieldName": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "attributeType": {
+                                      "type": "AttributeType",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "interpolationType": {
+                                      "type": "InterpolationType",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "controlPoints": {
+                                      "rule": "repeated",
+                                      "type": "ControlPoint",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  },
+                                  "nested": {
+                                    "AttributeType": {
+                                      "values": {
+                                        "ATTRIBUTE_TYPE_UNSPECIFIED": 0,
+                                        "NUMERICAL": 1,
+                                        "FRESHNESS": 2
+                                      }
+                                    },
+                                    "InterpolationType": {
+                                      "values": {
+                                        "INTERPOLATION_TYPE_UNSPECIFIED": 0,
+                                        "LINEAR": 1
+                                      }
+                                    },
+                                    "ControlPoint": {
+                                      "fields": {
+                                        "attributeValue": {
+                                          "type": "string",
+                                          "id": 1,
+                                          "options": {
+                                            "(google.api.field_behavior)": "OPTIONAL"
+                                          }
+                                        },
+                                        "boostAmount": {
+                                          "type": "float",
+                                          "id": 2,
+                                          "options": {
+                                            "(google.api.field_behavior)": "OPTIONAL"
+                                          }
+                                        }
+                                      }
+                                    }
                                   }
                                 }
                               }
@@ -16284,6 +16726,7 @@
                                 "NO_MATCH": 4,
                                 "NO_INPUT": 5,
                                 "EVENT": 6,
+                                "KNOWLEDGE_CONNECTOR": 8,
                                 "PLAYBOOK": 9
                               }
                             }
@@ -16818,6 +17261,13 @@
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Tool"
                               }
                             },
+                            "displayName": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
                             "action": {
                               "type": "string",
                               "id": 2,
@@ -16851,6 +17301,13 @@
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
                               }
                             },
+                            "displayName": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
                             "playbookInput": {
                               "type": "PlaybookInput",
                               "id": 2,
@@ -16882,6 +17339,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             },
                             "inputActionParameters": {
@@ -19527,6 +19991,10 @@
                             "llmModelSettings": {
                               "type": "LlmModelSettings",
                               "id": 9
+                            },
+                            "modelParameter": {
+                              "type": "ModelParameter",
+                              "id": 8
                             }
                           },
                           "nested": {
@@ -19539,6 +20007,60 @@
                                 "name": {
                                   "type": "string",
                                   "id": 2
+                                }
+                              }
+                            },
+                            "ModelParameter": {
+                              "oneofs": {
+                                "_temperature": {
+                                  "oneof": [
+                                    "temperature"
+                                  ]
+                                },
+                                "_maxDecodeSteps": {
+                                  "oneof": [
+                                    "maxDecodeSteps"
+                                  ]
+                                },
+                                "_topP": {
+                                  "oneof": [
+                                    "topP"
+                                  ]
+                                },
+                                "_topK": {
+                                  "oneof": [
+                                    "topK"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "temperature": {
+                                  "type": "float",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "maxDecodeSteps": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "topP": {
+                                  "type": "float",
+                                  "id": 3,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "topK": {
+                                  "type": "int32",
+                                  "id": 4,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
                                 }
                               }
                             }
@@ -20066,6 +20588,21 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "speechSettings": {
+                              "type": "AdvancedSettings.SpeechSettings",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "handlers": {
+                              "rule": "repeated",
+                              "type": "Handler",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -20091,6 +20628,10 @@
                             },
                             "Instruction": {
                               "fields": {
+                                "guidelines": {
+                                  "type": "string",
+                                  "id": 1
+                                },
                                 "steps": {
                                   "rule": "repeated",
                                   "type": "Step",
@@ -20221,6 +20762,78 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/PlaybookVersion"
+                              }
+                            }
+                          }
+                        },
+                        "Handler": {
+                          "oneofs": {
+                            "handler": {
+                              "oneof": [
+                                "eventHandler",
+                                "lifecycleHandler"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "eventHandler": {
+                              "type": "EventHandler",
+                              "id": 1
+                            },
+                            "lifecycleHandler": {
+                              "type": "LifecycleHandler",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "EventHandler": {
+                              "fields": {
+                                "event": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "condition": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "fulfillment": {
+                                  "type": "Fulfillment",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "LifecycleHandler": {
+                              "fields": {
+                                "lifecycleStage": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "condition": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "fulfillment": {
+                                  "type": "Fulfillment",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
                               }
                             }
                           }
@@ -20947,6 +21560,13 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "serviceDirectoryConfig": {
+                                  "type": "ServiceDirectoryConfig",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             },
@@ -21009,7 +21629,8 @@
                                   "oneof": [
                                     "apiKeyConfig",
                                     "oauthConfig",
-                                    "serviceAgentAuthConfig"
+                                    "serviceAgentAuthConfig",
+                                    "bearerTokenConfig"
                                   ]
                                 }
                               },
@@ -21025,6 +21646,10 @@
                                 "serviceAgentAuthConfig": {
                                   "type": "ServiceAgentAuthConfig",
                                   "id": 3
+                                },
+                                "bearerTokenConfig": {
+                                  "type": "BearerTokenConfig",
+                                  "id": 4
                                 }
                               },
                               "nested": {
@@ -21089,6 +21714,14 @@
                                       "options": {
                                         "(google.api.field_behavior)": "REQUIRED"
                                       }
+                                    },
+                                    "scopes": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 5,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
                                     }
                                   },
                                   "nested": {
@@ -21101,7 +21734,35 @@
                                   }
                                 },
                                 "ServiceAgentAuthConfig": {
-                                  "fields": {}
+                                  "fields": {
+                                    "serviceAgentAuth": {
+                                      "type": "ServiceAgentAuth",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  },
+                                  "nested": {
+                                    "ServiceAgentAuth": {
+                                      "values": {
+                                        "SERVICE_AGENT_AUTH_UNSPECIFIED": 0,
+                                        "ID_TOKEN": 1,
+                                        "ACCESS_TOKEN": 2
+                                      }
+                                    }
+                                  }
+                                },
+                                "BearerTokenConfig": {
+                                  "fields": {
+                                    "token": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    }
+                                  }
                                 }
                               }
                             },
@@ -21133,6 +21794,18 @@
                                         "(google.api.field_behavior)": "REQUIRED"
                                       }
                                     }
+                                  }
+                                }
+                              }
+                            },
+                            "ServiceDirectoryConfig": {
+                              "fields": {
+                                "service": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "servicedirectory.googleapis.com/Service"
                                   }
                                 }
                               }

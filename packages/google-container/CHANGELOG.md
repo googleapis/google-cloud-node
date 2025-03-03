@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.19.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.18.0...container-v5.19.0) (2024-11-14)
+
+
+### Features
+
+* [container] add LocalSsdEncryptionMode in NodeConfig ([#5796](https://github.com/googleapis/google-cloud-node/issues/5796)) ([35f689a](https://github.com/googleapis/google-cloud-node/commit/35f689a7c3e74135e3f5c1bae77e3e4fa07c17fc))
+
+## [5.18.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.17.0...container-v5.18.0) (2024-10-10)
+
+
+### Features
+
+* [container] add an effective_cgroup_mode field in node config ([#5741](https://github.com/googleapis/google-cloud-node/issues/5741)) ([88083e4](https://github.com/googleapis/google-cloud-node/commit/88083e4a879ef6963eca9183c037ef84b861efed))
+
 ## [5.17.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.16.0...container-v5.17.0) (2024-08-29)
 
 

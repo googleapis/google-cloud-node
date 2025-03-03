@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -163,8 +163,10 @@ message AlertConfig {
       DECLINED = 2;
     }
 
-    // The feature that provides alerting capability. Supported value is
-    // only `search-data-quality` for now.
+    // The feature that provides alerting capability.
+    // Supported value:
+    // - `search-data-quality` for retail search customers.
+    // - `conv-data-quality` for retail conversation customers.
     string alert_group = 1;
 
     // The enrollment status of a customer.

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(name, validateOnly) {
+function main(name) {
   // [START eventarc_v1_generated_Eventarc_DeleteChannel_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -33,7 +33,7 @@ function main(name, validateOnly) {
    */
   // const name = 'abc123'
   /**
-   *  Required. If set, validate the request and preview the review, but do not
+   *  Optional. If set, validate the request and preview the review, but do not
    *  post it.
    */
   // const validateOnly = true
@@ -48,7 +48,6 @@ function main(name, validateOnly) {
     // Construct request
     const request = {
       name,
-      validateOnly,
     };
 
     // Run request

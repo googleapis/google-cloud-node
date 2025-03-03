@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -276,7 +276,6 @@ export class ParallelstoreClient {
         {
           selector: 'google.longrunning.Operations.CancelOperation',
           post: '/v1beta/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
@@ -529,7 +528,7 @@ export class ParallelstoreClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets details of a single Instance.
+   * Gets details of a single instance.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -628,10 +627,9 @@ export class ParallelstoreClient {
    * @param {string} request.parent
    *   Required. The instance's project and location, in the format
    *   `projects/{project}/locations/{location}`.
-   *   Locations map to Google Cloud zones, for example **us-west1-b**.
+   *   Locations map to Google Cloud zones; for example, `us-west1-b`.
    * @param {string} request.instanceId
-   *   Required. The logical name of the Parallelstore instance in the user
-   *   project with the following restrictions:
+   *   Required. The name of the Parallelstore instance.
    *
    *   * Must contain only lowercase letters, numbers, and hyphens.
    *   * Must start with a letter.
@@ -784,17 +782,17 @@ export class ParallelstoreClient {
     >;
   }
   /**
-   * Updates the parameters of a single Instance.
+   * Updates the parameters of a single instance.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update .Field mask is used to specify the
+   *   Required. Mask of fields to update. Field mask is used to specify the
    *   fields to be overwritten in the Instance resource by the update. At least
    *   one path must be supplied in this field. The fields specified in the
    *   update_mask are relative to the resource, not the full request.
    * @param {google.cloud.parallelstore.v1beta.Instance} request.instance
-   *   Required. The instance to update
+   *   Required. The instance to update.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
    *   request ID so that if you must retry your request, the server will know to
@@ -939,7 +937,7 @@ export class ParallelstoreClient {
     >;
   }
   /**
-   * Deletes a single Instance.
+   * Deletes a single instance.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1089,12 +1087,12 @@ export class ParallelstoreClient {
     >;
   }
   /**
-   * ImportData copies data from Cloud Storage to Parallelstore.
+   * Copies data from Cloud Storage to Parallelstore.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.parallelstore.v1beta.SourceGcsBucket} request.sourceGcsBucket
-   *   Cloud Storage source.
+   *   The Cloud Storage source bucket and, optionally, path inside the bucket.
    * @param {google.cloud.parallelstore.v1beta.DestinationParallelstore} request.destinationParallelstore
    *   Parallelstore destination.
    * @param {string} request.name
@@ -1114,11 +1112,17 @@ export class ParallelstoreClient {
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {string} [request.serviceAccount]
-   *   Optional. User-specified Service Account (SA) credentials to be used when
+   *   Optional. User-specified service account credentials to be used when
    *   performing the transfer.
-   *   Format: `projects/{project_id}/serviceAccounts/{service_account}`
+   *
+   *   Use one of the following formats:
+   *
+   *   * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *   * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *   * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *
    *   If unspecified, the Parallelstore service agent is used:
-   *   service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
+   *   `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1249,7 +1253,7 @@ export class ParallelstoreClient {
     >;
   }
   /**
-   * ExportData copies data from Parallelstore to Cloud Storage
+   * Copies data from Parallelstore to Cloud Storage.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1276,9 +1280,14 @@ export class ParallelstoreClient {
    * @param {string} [request.serviceAccount]
    *   Optional. User-specified Service Account (SA) credentials to be used when
    *   performing the transfer.
-   *   Format: `projects/{project_id}/serviceAccounts/{service_account}`
+   *   Use one of the following formats:
+   *
+   *   * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *   * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *   * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *
    *   If unspecified, the Parallelstore service agent is used:
-   *   service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
+   *   `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1409,26 +1418,25 @@ export class ParallelstoreClient {
     >;
   }
   /**
-   * Lists Instances in a given project and location.
+   * Lists all instances in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location for which to retrieve instance
    *   information, in the format `projects/{project_id}/locations/{location}`.
-   *   For Parallelstore locations map to Google Cloud zones, for example
-   *   **us-central1-a**.
-   *   To retrieve instance information for all locations, use "-" for the
-   *   `{location}` value.
+   *
+   *   To retrieve instance information for all locations, use "-" as the value of
+   *   `{location}`.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
+   *   requested. If unspecified, the server will pick an appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
-   *   Optional. Filtering results
+   *   Optional. Filtering results.
    * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
+   *   Optional. Hint for how to order the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1517,25 +1525,24 @@ export class ParallelstoreClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listInstances`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location for which to retrieve instance
    *   information, in the format `projects/{project_id}/locations/{location}`.
-   *   For Parallelstore locations map to Google Cloud zones, for example
-   *   **us-central1-a**.
-   *   To retrieve instance information for all locations, use "-" for the
-   *   `{location}` value.
+   *
+   *   To retrieve instance information for all locations, use "-" as the value of
+   *   `{location}`.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
+   *   requested. If unspecified, the server will pick an appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
-   *   Optional. Filtering results
+   *   Optional. Filtering results.
    * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
+   *   Optional. Hint for how to order the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1578,19 +1585,18 @@ export class ParallelstoreClient {
    * @param {string} request.parent
    *   Required. The project and location for which to retrieve instance
    *   information, in the format `projects/{project_id}/locations/{location}`.
-   *   For Parallelstore locations map to Google Cloud zones, for example
-   *   **us-central1-a**.
-   *   To retrieve instance information for all locations, use "-" for the
-   *   `{location}` value.
+   *
+   *   To retrieve instance information for all locations, use "-" as the value of
+   *   `{location}`.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
+   *   requested. If unspecified, the server will pick an appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
-   *   Optional. Filtering results
+   *   Optional. Filtering results.
    * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
+   *   Optional. Hint for how to order the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1734,7 +1740,7 @@ export class ParallelstoreClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1747,6 +1753,20 @@ export class ParallelstoreClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1783,6 +1803,13 @@ export class ParallelstoreClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1818,11 +1845,11 @@ export class ParallelstoreClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1831,6 +1858,20 @@ export class ParallelstoreClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1861,7 +1902,7 @@ export class ParallelstoreClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1874,6 +1915,20 @@ export class ParallelstoreClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

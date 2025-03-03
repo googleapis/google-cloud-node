@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -512,7 +512,9 @@ export namespace google {
                         METHOD_TYPE_UNSPECIFIED = 0,
                         CREATE = 1,
                         UPDATE = 2,
-                        DELETE = 3
+                        DELETE = 3,
+                        REMOVE_GRANT = 4,
+                        GOVERN_TAGS = 5
                     }
 
                     /** ActionType enum. */

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -353,7 +353,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AwsCluster()
       );
@@ -384,7 +384,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AwsCluster()
       );
@@ -431,7 +431,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAwsCluster = stubSimpleCall(
         undefined,
@@ -483,7 +483,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster']
       );
       request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenResponse()
       );
@@ -515,7 +515,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster']
       );
       request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenResponse()
       );
@@ -562,7 +562,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster']
       );
       request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateAwsClusterAgentToken = stubSimpleCall(
         undefined,
@@ -620,7 +620,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster']
       );
       request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenResponse()
       );
@@ -652,7 +652,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster']
       );
       request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenResponse()
       );
@@ -699,7 +699,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster']
       );
       request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateAwsAccessToken = stubSimpleCall(
         undefined,
@@ -757,7 +757,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
       );
@@ -788,7 +788,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
       );
@@ -835,7 +835,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAwsNodePool = stubSimpleCall(
         undefined,
@@ -887,7 +887,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster']
       );
       request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AwsOpenIdConfig()
       );
@@ -919,7 +919,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster']
       );
       request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AwsOpenIdConfig()
       );
@@ -966,7 +966,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster']
       );
       request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAwsOpenIdConfig = stubSimpleCall(
         undefined,
@@ -1018,7 +1018,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster']
       );
       request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AwsJsonWebKeys()
       );
@@ -1049,7 +1049,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster']
       );
       request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AwsJsonWebKeys()
       );
@@ -1096,7 +1096,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster']
       );
       request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAwsJsonWebKeys = stubSimpleCall(
         undefined,
@@ -1148,7 +1148,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AwsServerConfig()
       );
@@ -1180,7 +1180,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AwsServerConfig()
       );
@@ -1227,7 +1227,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAwsServerConfig = stubSimpleCall(
         undefined,
@@ -1279,7 +1279,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1312,7 +1312,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1366,7 +1366,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAwsCluster = stubLongRunningCall(
         undefined,
@@ -1397,7 +1397,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAwsCluster = stubLongRunningCall(
         undefined,
@@ -1474,7 +1474,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster', 'name']
       );
       request.awsCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1508,7 +1508,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster', 'name']
       );
       request.awsCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1563,7 +1563,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster', 'name']
       );
       request.awsCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAwsCluster = stubLongRunningCall(
         undefined,
@@ -1595,7 +1595,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsCluster', 'name']
       );
       request.awsCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAwsCluster = stubLongRunningCall(
         undefined,
@@ -1671,7 +1671,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1704,7 +1704,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1758,7 +1758,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAwsCluster = stubLongRunningCall(
         undefined,
@@ -1789,7 +1789,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAwsCluster = stubLongRunningCall(
         undefined,
@@ -1865,7 +1865,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1898,7 +1898,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1952,7 +1952,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAwsNodePool = stubLongRunningCall(
         undefined,
@@ -1983,7 +1983,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAwsNodePool = stubLongRunningCall(
         undefined,
@@ -2060,7 +2060,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsNodePool', 'name']
       );
       request.awsNodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2094,7 +2094,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsNodePool', 'name']
       );
       request.awsNodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2149,7 +2149,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsNodePool', 'name']
       );
       request.awsNodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAwsNodePool = stubLongRunningCall(
         undefined,
@@ -2181,7 +2181,7 @@ describe('v1.AwsClustersClient', () => {
         ['awsNodePool', 'name']
       );
       request.awsNodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAwsNodePool = stubLongRunningCall(
         undefined,
@@ -2257,7 +2257,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2290,7 +2290,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2344,7 +2344,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rollbackAwsNodePoolUpdate = stubLongRunningCall(
         undefined,
@@ -2378,7 +2378,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rollbackAwsNodePoolUpdate = stubLongRunningCall(
         undefined,
@@ -2455,7 +2455,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2488,7 +2488,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2542,7 +2542,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAwsNodePool = stubLongRunningCall(
         undefined,
@@ -2573,7 +2573,7 @@ describe('v1.AwsClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAwsNodePool = stubLongRunningCall(
         undefined,
@@ -2649,7 +2649,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AwsCluster()
@@ -2688,7 +2688,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AwsCluster()
@@ -2743,7 +2743,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAwsClusters = stubSimpleCall(
         undefined,
@@ -2774,7 +2774,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AwsCluster()
@@ -2834,7 +2834,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAwsClusters.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2883,7 +2883,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AwsCluster()
@@ -2932,7 +2932,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAwsClusters.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2975,7 +2975,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
@@ -3014,7 +3014,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
@@ -3069,7 +3069,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAwsNodePools = stubSimpleCall(
         undefined,
@@ -3100,7 +3100,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
@@ -3161,7 +3161,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAwsNodePools.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3211,7 +3211,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
@@ -3260,7 +3260,7 @@ describe('v1.AwsClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAwsNodePools.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

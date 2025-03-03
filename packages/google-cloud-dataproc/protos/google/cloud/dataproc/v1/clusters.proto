@@ -379,8 +379,11 @@ message AutoscalingConfig {
 
 // Encryption settings for the cluster.
 message EncryptionConfig {
-  // Optional. The Cloud KMS key name to use for PD disk encryption for all
-  // instances in the cluster.
+  // Optional. The Cloud KMS key resource name to use for persistent disk
+  // encryption for all instances in the cluster. See [Use CMEK with cluster
+  // data]
+  // (https://cloud.google.com//dataproc/docs/concepts/configuring-clusters/customer-managed-encryption#use_cmek_with_cluster_data)
+  // for more information.
   string gce_pd_kms_key_name = 1 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The Cloud KMS key resource name to use for cluster persistent
@@ -409,7 +412,12 @@ message EncryptionConfig {
   //   scriptVariables and queryList.queries
   // * [PrestoJob](https://cloud.google.com/dataproc/docs/reference/rest/v1/PrestoJob)
   //   scriptVariables and queryList.queries
-  string kms_key = 2 [(google.api.field_behavior) = OPTIONAL];
+  string kms_key = 2 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "cloudkms.googleapis.com/CryptoKey"
+    }
+  ];
 }
 
 // Common config settings for resources of Compute Engine cluster
@@ -475,12 +483,22 @@ message GceClusterConfig {
   // * `sub0`
   string subnetwork_uri = 6 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. If true, all instances in the cluster will only have internal IP
-  // addresses. By default, clusters are not restricted to internal IP
-  // addresses, and will have ephemeral external IP addresses assigned to each
-  // instance. This `internal_ip_only` restriction can only be enabled for
-  // subnetwork enabled networks, and all off-cluster dependencies must be
-  // configured to be accessible without external IP addresses.
+  // Optional. This setting applies to subnetwork-enabled networks. It is set to
+  // `true` by default in clusters created with image versions 2.2.x.
+  //
+  // When set to `true`:
+  //
+  // * All cluster VMs have internal IP addresses.
+  // * [Google Private Access]
+  // (https://cloud.google.com/vpc/docs/private-google-access)
+  // must be enabled to access Dataproc and other Google Cloud APIs.
+  // * Off-cluster dependencies must be configured to be accessible
+  // without external IP addresses.
+  //
+  // When set to `false`:
+  //
+  // * Cluster VMs are not restricted to internal IP addresses.
+  // * Ephemeral external IP addresses are assigned to each cluster VM.
   optional bool internal_ip_only = 7 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The type of IPv6 access for a cluster.
@@ -517,8 +535,8 @@ message GceClusterConfig {
   repeated string service_account_scopes = 3
       [(google.api.field_behavior) = OPTIONAL];
 
-  // The Compute Engine tags to add to all instances (see [Tagging
-  // instances](https://cloud.google.com/compute/docs/label-or-tag-resources#tags)).
+  // The Compute Engine network tags to add to all instances (see [Tagging
+  // instances](https://cloud.google.com/vpc/docs/add-remove-network-tags)).
   repeated string tags = 4;
 
   // Optional. The Compute Engine metadata entries to add to all instances (see
@@ -776,6 +794,30 @@ message ManagedGroupConfig {
 // Instance flexibility Policy allowing a mixture of VM shapes and provisioning
 // models.
 message InstanceFlexibilityPolicy {
+  // Defines how Dataproc should create VMs with a mixture of provisioning
+  // models.
+  message ProvisioningModelMix {
+    // Optional. The base capacity that will always use Standard VMs to avoid
+    // risk of more preemption than the minimum capacity you need. Dataproc will
+    // create only standard VMs until it reaches standard_capacity_base, then it
+    // will start using standard_capacity_percent_above_base to mix Spot with
+    // Standard VMs. eg. If 15 instances are requested and
+    // standard_capacity_base is 5, Dataproc will create 5 standard VMs and then
+    // start mixing spot and standard VMs for remaining 10 instances.
+    optional int32 standard_capacity_base = 1
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The percentage of target capacity that should use Standard VM.
+    // The remaining percentage will use Spot VMs. The percentage applies only
+    // to the capacity above standard_capacity_base. eg. If 15 instances are
+    // requested and standard_capacity_base is 5 and
+    // standard_capacity_percent_above_base is 30, Dataproc will create 5
+    // standard VMs and then start mixing spot and standard VMs for remaining 10
+    // instances. The mix will be 30% standard and 70% spot.
+    optional int32 standard_capacity_percent_above_base = 2
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+
   // Defines machines types and a rank to which the machines types belong.
   message InstanceSelection {
     // Optional. Full machine-type names, e.g. "n1-standard-16".
@@ -800,6 +842,11 @@ message InstanceFlexibilityPolicy {
     optional int32 vm_count = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
+  // Optional. Defines how the Group selects the provisioning model to ensure
+  // required reliability.
+  ProvisioningModelMix provisioning_model_mix = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
   // Optional. List of instance selection options that the group will use when
   // creating new VMs.
   repeated InstanceSelection instance_selection_list = 2
@@ -821,15 +868,15 @@ message AcceleratorConfig {
   //
   // Examples:
   //
-  // * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]/acceleratorTypes/nvidia-tesla-k80`
-  // * `projects/[project_id]/zones/[zone]/acceleratorTypes/nvidia-tesla-k80`
-  // * `nvidia-tesla-k80`
+  // * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]/acceleratorTypes/nvidia-tesla-t4`
+  // * `projects/[project_id]/zones/[zone]/acceleratorTypes/nvidia-tesla-t4`
+  // * `nvidia-tesla-t4`
   //
   // **Auto Zone Exception**: If you are using the Dataproc
   // [Auto Zone
   // Placement](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement)
   // feature, you must use the short name of the accelerator type
-  // resource, for example, `nvidia-tesla-k80`.
+  // resource, for example, `nvidia-tesla-t4`.
   string accelerator_type_uri = 1;
 
   // The number of the accelerator cards of this type exposed to this instance.
@@ -865,6 +912,19 @@ message DiskConfig {
   // See [local SSD
   // performance](https://cloud.google.com/compute/docs/disks/local-ssd#performance).
   string local_ssd_interface = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Indicates how many IOPS to provision for the disk. This sets the
+  // number of I/O operations per second that the disk can handle. Note: This
+  // field is only supported if boot_disk_type is hyperdisk-balanced.
+  optional int64 boot_disk_provisioned_iops = 5
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Indicates how much throughput to provision for the disk. This
+  // sets the number of throughput mb per second that the disk can handle.
+  // Values must be greater than or equal to 1. Note: This field is only
+  // supported if boot_disk_type is hyperdisk-balanced.
+  optional int64 boot_disk_provisioned_throughput = 6
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Node group identification and configuration information.
@@ -1039,7 +1099,7 @@ message KerberosConfig {
   string root_principal_password_uri = 2
       [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. The uri of the KMS key used to encrypt various sensitive
+  // Optional. The URI of the KMS key used to encrypt sensitive
   // files.
   string kms_key_uri = 3 [(google.api.field_behavior) = OPTIONAL];
 
@@ -1113,7 +1173,7 @@ message IdentityConfig {
 message SoftwareConfig {
   // Optional. The version of software inside the cluster. It must be one of the
   // supported [Dataproc
-  // Versions](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#supported_dataproc_versions),
+  // Versions](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#supported-dataproc-image-versions),
   // such as "1.2" (including a subminor version, such as "1.2.29"), or the
   // ["preview"
   // version](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#other_versions).
@@ -1539,12 +1599,12 @@ message ListClustersRequest {
   // where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
   // and `[KEY]` is a label key. **value** can be `*` to match all values.
   // `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
-  // `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
-  // contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
-  // contains the `DELETING` and `ERROR` states.
-  // `clusterName` is the name of the cluster provided at creation time.
-  // Only the logical `AND` operator is supported; space-separated items are
-  // treated as having an implicit `AND` operator.
+  // `CREATING`, `RUNNING`, `ERROR`, `DELETING`, `UPDATING`, `STOPPING`, or
+  // `STOPPED`. `ACTIVE` contains the `CREATING`, `UPDATING`, and `RUNNING`
+  // states. `INACTIVE` contains the `DELETING`, `ERROR`, `STOPPING`, and
+  // `STOPPED` states. `clusterName` is the name of the cluster provided at
+  // creation time. Only the logical `AND` operator is supported;
+  // space-separated items are treated as having an implicit `AND` operator.
   //
   // Example filter:
   //
@@ -1596,7 +1656,7 @@ message DiagnoseClusterRequest {
   // Required. The cluster name.
   string cluster_name = 2 [(google.api.field_behavior) = REQUIRED];
 
-  // Optional. The output Cloud Storage directory for the diagnostic
+  // Optional. (Optional) The output Cloud Storage directory for the diagnostic
   // tarball. If not specified, a task-specific directory in the cluster's
   // staging bucket will be used.
   string tarball_gcs_dir = 4 [(google.api.field_behavior) = OPTIONAL];

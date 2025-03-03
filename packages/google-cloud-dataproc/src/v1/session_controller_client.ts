@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1153,12 +1153,13 @@ export class SessionControllerClient {
    *   A filter is a logical expression constraining the values of various fields
    *   in each session resource. Filters are case sensitive, and may contain
    *   multiple clauses combined with logical operators (AND, OR).
-   *   Supported fields are `session_id`, `session_uuid`, `state`, and
-   *   `create_time`.
+   *   Supported fields are `session_id`, `session_uuid`, `state`, `create_time`,
+   *   and `labels`.
    *
    *   Example: `state = ACTIVE and create_time < "2023-01-01T00:00:00Z"`
    *   is a filter for sessions in an ACTIVE state that were created before
-   *   2023-01-01.
+   *   2023-01-01. `state = ACTIVE and labels.environment=production` is a filter
+   *   for sessions in an ACTIVE state that have a production environment label.
    *
    *   See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
    *   description of the filter syntax and a list of supported comparators.
@@ -1244,7 +1245,7 @@ export class SessionControllerClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSessions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1261,12 +1262,13 @@ export class SessionControllerClient {
    *   A filter is a logical expression constraining the values of various fields
    *   in each session resource. Filters are case sensitive, and may contain
    *   multiple clauses combined with logical operators (AND, OR).
-   *   Supported fields are `session_id`, `session_uuid`, `state`, and
-   *   `create_time`.
+   *   Supported fields are `session_id`, `session_uuid`, `state`, `create_time`,
+   *   and `labels`.
    *
    *   Example: `state = ACTIVE and create_time < "2023-01-01T00:00:00Z"`
    *   is a filter for sessions in an ACTIVE state that were created before
-   *   2023-01-01.
+   *   2023-01-01. `state = ACTIVE and labels.environment=production` is a filter
+   *   for sessions in an ACTIVE state that have a production environment label.
    *
    *   See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
    *   description of the filter syntax and a list of supported comparators.
@@ -1323,12 +1325,13 @@ export class SessionControllerClient {
    *   A filter is a logical expression constraining the values of various fields
    *   in each session resource. Filters are case sensitive, and may contain
    *   multiple clauses combined with logical operators (AND, OR).
-   *   Supported fields are `session_id`, `session_uuid`, `state`, and
-   *   `create_time`.
+   *   Supported fields are `session_id`, `session_uuid`, `state`, `create_time`,
+   *   and `labels`.
    *
    *   Example: `state = ACTIVE and create_time < "2023-01-01T00:00:00Z"`
    *   is a filter for sessions in an ACTIVE state that were created before
-   *   2023-01-01.
+   *   2023-01-01. `state = ACTIVE and labels.environment=production` is a filter
+   *   for sessions in an ACTIVE state that have a production environment label.
    *
    *   See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
    *   description of the filter syntax and a list of supported comparators.
@@ -1535,7 +1538,7 @@ export class SessionControllerClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1548,6 +1551,20 @@ export class SessionControllerClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1584,6 +1601,13 @@ export class SessionControllerClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1619,11 +1643,11 @@ export class SessionControllerClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1632,6 +1656,20 @@ export class SessionControllerClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1662,7 +1700,7 @@ export class SessionControllerClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1675,6 +1713,20 @@ export class SessionControllerClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

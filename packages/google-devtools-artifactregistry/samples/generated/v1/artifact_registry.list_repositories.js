@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,6 +41,26 @@ function main(parent) {
    *  The next_page_token value returned from a previous list request, if any.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. An expression for filtering the results of the request. Filter
+   *  rules are case insensitive. The fields eligible for filtering are:
+   *    * `name`
+   *   Examples of using a filter:
+   *  To filter the results of your request to repositories with the name
+   *  `my-repo` in project `my-project` in the `us-central` region, append the
+   *  following filter expression to your request:
+   *    * `name="projects/my-project/locations/us-central1/repositories/my-repo"`
+   *   You can also use wildcards to match any number of characters before or
+   *   after the value:
+   *    * `name="projects/my-project/locations/us-central1/repositories/my-*"`
+   *    * `name="projects/my-project/locations/us-central1/repositories/*repo"`
+   *    * `name="projects/my-project/locations/us-central1/repositories/*repo*"`
+   */
+  // const filter = 'abc123'
+  /**
+   *  Optional. The field to order the results by.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;

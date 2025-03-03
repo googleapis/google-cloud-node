@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.8.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.7.0...confidentialcomputing-v1.8.0) (2025-02-28)
+
+
+### Features
+
+* [confidentialcomputing] A new field `attester` is added to message `.google.cloud.confidentialcomputing.v1.VerifyAttestationRequest` ([#6044](https://github.com/googleapis/google-cloud-node/issues/6044)) ([b962c5a](https://github.com/googleapis/google-cloud-node/commit/b962c5ae4c742b25592a0941a901022bca038f0e))
+
+## [1.7.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.6.0...confidentialcomputing-v1.7.0) (2024-12-18)
+
+
+### Features
+
+* [confidentialcomputing] Add a token_type options proto to allow for customization of specific token types. Added the first token type option to hold principal tag token options ([#5839](https://github.com/googleapis/google-cloud-node/issues/5839)) ([338106a](https://github.com/googleapis/google-cloud-node/commit/338106af19815df0fdc95be0c38e689ded15f95d))
+
 ## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.5.0...confidentialcomputing-v1.6.0) (2024-07-22)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -318,7 +318,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Example()
       );
@@ -349,7 +349,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Example()
       );
@@ -396,7 +396,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createExample = stubSimpleCall(
         undefined,
@@ -448,7 +448,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -479,7 +479,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -526,7 +526,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteExample = stubSimpleCall(
         undefined,
@@ -578,7 +578,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Example()
       );
@@ -609,7 +609,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Example()
       );
@@ -656,7 +656,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getExample = stubSimpleCall(
         undefined,
@@ -709,7 +709,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['example', 'name']
       );
       request.example.name = defaultValue1;
-      const expectedHeaderRequestParams = `example.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `example.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Example()
       );
@@ -741,7 +741,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['example', 'name']
       );
       request.example.name = defaultValue1;
-      const expectedHeaderRequestParams = `example.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `example.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Example()
       );
@@ -789,7 +789,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['example', 'name']
       );
       request.example.name = defaultValue1;
-      const expectedHeaderRequestParams = `example.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `example.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateExample = stubSimpleCall(
         undefined,
@@ -842,7 +842,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Example()
@@ -881,7 +881,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Example()
@@ -936,7 +936,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listExamples = stubSimpleCall(
         undefined,
@@ -967,7 +967,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Example()
@@ -1028,7 +1028,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExamples.createStream = stubPageStreamingCall(
         undefined,
@@ -1080,7 +1080,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Example()
@@ -1130,7 +1130,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExamples.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

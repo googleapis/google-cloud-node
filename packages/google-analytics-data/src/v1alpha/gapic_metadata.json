@@ -40,6 +40,11 @@
                 "getRecurringAudienceList"
               ]
             },
+            "GetPropertyQuotasSnapshot": {
+              "methods": [
+                "getPropertyQuotasSnapshot"
+              ]
+            },
             "QueryReportTask": {
               "methods": [
                 "queryReportTask"
@@ -114,6 +119,11 @@
             "GetRecurringAudienceList": {
               "methods": [
                 "getRecurringAudienceList"
+              ]
+            },
+            "GetPropertyQuotasSnapshot": {
+              "methods": [
+                "getPropertyQuotasSnapshot"
               ]
             },
             "QueryReportTask": {

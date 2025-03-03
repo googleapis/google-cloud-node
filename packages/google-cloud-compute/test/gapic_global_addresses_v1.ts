@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -338,7 +338,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['address']
       );
       request.address = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&address=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&address=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -374,7 +374,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['address']
       );
       request.address = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&address=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&address=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -426,7 +426,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['address']
       );
       request.address = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&address=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&address=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
@@ -485,7 +485,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['address']
       );
       request.address = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&address=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&address=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Address()
       );
@@ -520,7 +520,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['address']
       );
       request.address = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&address=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&address=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Address()
       );
@@ -570,7 +570,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['address']
       );
       request.address = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&address=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&address=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -623,7 +623,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -654,7 +654,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -701,7 +701,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -755,7 +755,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['address']
       );
       request.address = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&address=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&address=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -790,7 +790,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['address']
       );
       request.address = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&address=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&address=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -840,7 +840,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['address']
       );
       request.address = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&address=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&address=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.move = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.move(request), expectedError);
@@ -898,7 +898,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -934,7 +934,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -986,7 +986,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setLabels = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.setLabels(request), expectedError);
@@ -1040,7 +1040,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Address()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Address()),
@@ -1072,7 +1072,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Address()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Address()),
@@ -1119,7 +1119,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -1146,7 +1146,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Address()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Address()),
@@ -1200,7 +1200,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1251,7 +1251,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Address()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Address()),
@@ -1293,7 +1293,7 @@ describe('v1.GlobalAddressesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

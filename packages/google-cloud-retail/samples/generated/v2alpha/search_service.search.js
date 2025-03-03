@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -299,6 +299,15 @@ function main(placement, visitorId) {
    *  search results boosted by entity.
    */
   // const entity = 'abc123'
+  /**
+   *  Optional. This field specifies all conversational related parameters
+   *  addition to traditional retail search.
+   */
+  // const conversationalSearchSpec = {}
+  /**
+   *  Optional. This field specifies tile navigation related parameters.
+   */
+  // const tileNavigationSpec = {}
 
   // Imports the Retail library
   const {SearchServiceClient} = require('@google-cloud/retail').v2alpha;

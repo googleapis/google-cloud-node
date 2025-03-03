@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,24 +35,34 @@ function main(name, query) {
   // const name = 'abc123'
   /**
    *  Required. The query against which entries in scope should be matched.
+   *  The query syntax is defined in Search syntax for Dataplex
+   *  Catalog (https://cloud.google.com/dataplex/docs/search-syntax).
    */
   // const query = 'abc123'
   /**
-   *  Optional. Pagination.
+   *  Optional. Number of results in the search page. If <=0, then defaults
+   *  to 10. Max limit for page_size is 1000. Throws an invalid argument for
+   *  page_size > 1000.
    */
   // const pageSize = 1234
   /**
+   *  Optional. Page token received from a previous `SearchEntries` call. Provide
+   *  this to retrieve the subsequent page.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Ordering of the results. Supported options to be added later.
+   *  Optional. Specifies the ordering of results.
+   *  Supported values are:
+   *  * `relevance` (default)
+   *  * `last_modified_timestamp`
+   *  * `last_modified_timestamp asc`
    */
   // const orderBy = 'abc123'
   /**
-   *  Optional. The scope under which the search should be operating. Should
-   *  either be organizations/<org_id> or projects/<project_ref>. If left
-   *  unspecified, it will default to the organization where the project provided
-   *  in `name` is located.
+   *  Optional. The scope under which the search should be operating. It must
+   *  either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
+   *  unspecified, it defaults to the organization where the project provided in
+   *  `name` is located.
    */
   // const scope = 'abc123'
 

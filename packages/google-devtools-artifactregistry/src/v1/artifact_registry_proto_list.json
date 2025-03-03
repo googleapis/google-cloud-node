@@ -1,9 +1,12 @@
 [
   "../../protos/google/devtools/artifactregistry/v1/apt_artifact.proto",
   "../../protos/google/devtools/artifactregistry/v1/artifact.proto",
+  "../../protos/google/devtools/artifactregistry/v1/attachment.proto",
   "../../protos/google/devtools/artifactregistry/v1/file.proto",
+  "../../protos/google/devtools/artifactregistry/v1/generic.proto",
   "../../protos/google/devtools/artifactregistry/v1/package.proto",
   "../../protos/google/devtools/artifactregistry/v1/repository.proto",
+  "../../protos/google/devtools/artifactregistry/v1/rule.proto",
   "../../protos/google/devtools/artifactregistry/v1/service.proto",
   "../../protos/google/devtools/artifactregistry/v1/settings.proto",
   "../../protos/google/devtools/artifactregistry/v1/tag.proto",

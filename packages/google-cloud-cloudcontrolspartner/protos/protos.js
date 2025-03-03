@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12092,6 +12092,105 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore|createCustomer}.
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore
+                         * @typedef CreateCustomerCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.Customer} [response] Customer
+                         */
+    
+                        /**
+                         * Calls CreateCustomer.
+                         * @function createCustomer
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest} request CreateCustomerRequest message or plain object
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.CreateCustomerCallback} callback Node-style callback called with the error, if any, and Customer
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudControlsPartnerCore.prototype.createCustomer = function createCustomer(request, callback) {
+                            return this.rpcCall(createCustomer, $root.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest, $root.google.cloud.cloudcontrolspartner.v1beta.Customer, request, callback);
+                        }, "name", { value: "CreateCustomer" });
+    
+                        /**
+                         * Calls CreateCustomer.
+                         * @function createCustomer
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest} request CreateCustomerRequest message or plain object
+                         * @returns {Promise<google.cloud.cloudcontrolspartner.v1beta.Customer>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore|updateCustomer}.
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore
+                         * @typedef UpdateCustomerCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.Customer} [response] Customer
+                         */
+    
+                        /**
+                         * Calls UpdateCustomer.
+                         * @function updateCustomer
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest} request UpdateCustomerRequest message or plain object
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.UpdateCustomerCallback} callback Node-style callback called with the error, if any, and Customer
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudControlsPartnerCore.prototype.updateCustomer = function updateCustomer(request, callback) {
+                            return this.rpcCall(updateCustomer, $root.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest, $root.google.cloud.cloudcontrolspartner.v1beta.Customer, request, callback);
+                        }, "name", { value: "UpdateCustomer" });
+    
+                        /**
+                         * Calls UpdateCustomer.
+                         * @function updateCustomer
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest} request UpdateCustomerRequest message or plain object
+                         * @returns {Promise<google.cloud.cloudcontrolspartner.v1beta.Customer>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore|deleteCustomer}.
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore
+                         * @typedef DeleteCustomerCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteCustomer.
+                         * @function deleteCustomer
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest} request DeleteCustomerRequest message or plain object
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.DeleteCustomerCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudControlsPartnerCore.prototype.deleteCustomer = function deleteCustomer(request, callback) {
+                            return this.rpcCall(deleteCustomer, $root.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteCustomer" });
+    
+                        /**
+                         * Calls DeleteCustomer.
+                         * @function deleteCustomer
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest} request DeleteCustomerRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
                         return CloudControlsPartnerCore;
                     })();
     
@@ -14305,6 +14404,7 @@
                          * @property {string|null} [displayName] Customer displayName
                          * @property {google.cloud.cloudcontrolspartner.v1beta.ICustomerOnboardingState|null} [customerOnboardingState] Customer customerOnboardingState
                          * @property {boolean|null} [isOnboarded] Customer isOnboarded
+                         * @property {string|null} [organizationDomain] Customer organizationDomain
                          */
     
                         /**
@@ -14355,6 +14455,14 @@
                         Customer.prototype.isOnboarded = false;
     
                         /**
+                         * Customer organizationDomain.
+                         * @member {string} organizationDomain
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.Customer
+                         * @instance
+                         */
+                        Customer.prototype.organizationDomain = "";
+    
+                        /**
                          * Creates a new Customer instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.cloudcontrolspartner.v1beta.Customer
@@ -14386,6 +14494,8 @@
                                 $root.google.cloud.cloudcontrolspartner.v1beta.CustomerOnboardingState.encode(message.customerOnboardingState, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.isOnboarded != null && Object.hasOwnProperty.call(message, "isOnboarded"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.isOnboarded);
+                            if (message.organizationDomain != null && Object.hasOwnProperty.call(message, "organizationDomain"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.organizationDomain);
                             return writer;
                         };
     
@@ -14434,6 +14544,10 @@
                                     }
                                 case 4: {
                                         message.isOnboarded = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.organizationDomain = reader.string();
                                         break;
                                     }
                                 default:
@@ -14485,6 +14599,9 @@
                             if (message.isOnboarded != null && message.hasOwnProperty("isOnboarded"))
                                 if (typeof message.isOnboarded !== "boolean")
                                     return "isOnboarded: boolean expected";
+                            if (message.organizationDomain != null && message.hasOwnProperty("organizationDomain"))
+                                if (!$util.isString(message.organizationDomain))
+                                    return "organizationDomain: string expected";
                             return null;
                         };
     
@@ -14511,6 +14628,8 @@
                             }
                             if (object.isOnboarded != null)
                                 message.isOnboarded = Boolean(object.isOnboarded);
+                            if (object.organizationDomain != null)
+                                message.organizationDomain = String(object.organizationDomain);
                             return message;
                         };
     
@@ -14532,6 +14651,7 @@
                                 object.displayName = "";
                                 object.customerOnboardingState = null;
                                 object.isOnboarded = false;
+                                object.organizationDomain = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -14541,6 +14661,8 @@
                                 object.customerOnboardingState = $root.google.cloud.cloudcontrolspartner.v1beta.CustomerOnboardingState.toObject(message.customerOnboardingState, options);
                             if (message.isOnboarded != null && message.hasOwnProperty("isOnboarded"))
                                 object.isOnboarded = message.isOnboarded;
+                            if (message.organizationDomain != null && message.hasOwnProperty("organizationDomain"))
+                                object.organizationDomain = message.organizationDomain;
                             return object;
                         };
     
@@ -15155,6 +15277,261 @@
                         };
     
                         return ListCustomersResponse;
+                    })();
+    
+                    v1beta.CreateCustomerRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateCustomerRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta
+                         * @interface ICreateCustomerRequest
+                         * @property {string|null} [parent] CreateCustomerRequest parent
+                         * @property {google.cloud.cloudcontrolspartner.v1beta.ICustomer|null} [customer] CreateCustomerRequest customer
+                         * @property {string|null} [customerId] CreateCustomerRequest customerId
+                         */
+    
+                        /**
+                         * Constructs a new CreateCustomerRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta
+                         * @classdesc Represents a CreateCustomerRequest.
+                         * @implements ICreateCustomerRequest
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest=} [properties] Properties to set
+                         */
+                        function CreateCustomerRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateCustomerRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest
+                         * @instance
+                         */
+                        CreateCustomerRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateCustomerRequest customer.
+                         * @member {google.cloud.cloudcontrolspartner.v1beta.ICustomer|null|undefined} customer
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest
+                         * @instance
+                         */
+                        CreateCustomerRequest.prototype.customer = null;
+    
+                        /**
+                         * CreateCustomerRequest customerId.
+                         * @member {string} customerId
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest
+                         * @instance
+                         */
+                        CreateCustomerRequest.prototype.customerId = "";
+    
+                        /**
+                         * Creates a new CreateCustomerRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest} CreateCustomerRequest instance
+                         */
+                        CreateCustomerRequest.create = function create(properties) {
+                            return new CreateCustomerRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomerRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest} message CreateCustomerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomerRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.customer != null && Object.hasOwnProperty.call(message, "customer"))
+                                $root.google.cloud.cloudcontrolspartner.v1beta.Customer.encode(message.customer, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.customerId != null && Object.hasOwnProperty.call(message, "customerId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.customerId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomerRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest} message CreateCustomerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomerRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomerRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest} CreateCustomerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomerRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.customer = $root.google.cloud.cloudcontrolspartner.v1beta.Customer.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.customerId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomerRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest} CreateCustomerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomerRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateCustomerRequest message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateCustomerRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.customer != null && message.hasOwnProperty("customer")) {
+                                var error = $root.google.cloud.cloudcontrolspartner.v1beta.Customer.verify(message.customer);
+                                if (error)
+                                    return "customer." + error;
+                            }
+                            if (message.customerId != null && message.hasOwnProperty("customerId"))
+                                if (!$util.isString(message.customerId))
+                                    return "customerId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateCustomerRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest} CreateCustomerRequest
+                         */
+                        CreateCustomerRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.customer != null) {
+                                if (typeof object.customer !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest.customer: object expected");
+                                message.customer = $root.google.cloud.cloudcontrolspartner.v1beta.Customer.fromObject(object.customer);
+                            }
+                            if (object.customerId != null)
+                                message.customerId = String(object.customerId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateCustomerRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest} message CreateCustomerRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateCustomerRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.customer = null;
+                                object.customerId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.customer != null && message.hasOwnProperty("customer"))
+                                object.customer = $root.google.cloud.cloudcontrolspartner.v1beta.Customer.toObject(message.customer, options);
+                            if (message.customerId != null && message.hasOwnProperty("customerId"))
+                                object.customerId = message.customerId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateCustomerRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateCustomerRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateCustomerRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateCustomerRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest";
+                        };
+    
+                        return CreateCustomerRequest;
                     })();
     
                     v1beta.GetCustomerRequest = (function() {
@@ -15939,6 +16316,446 @@
                         })();
     
                         return CustomerOnboardingStep;
+                    })();
+    
+                    v1beta.UpdateCustomerRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateCustomerRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta
+                         * @interface IUpdateCustomerRequest
+                         * @property {google.cloud.cloudcontrolspartner.v1beta.ICustomer|null} [customer] UpdateCustomerRequest customer
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateCustomerRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateCustomerRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta
+                         * @classdesc Represents an UpdateCustomerRequest.
+                         * @implements IUpdateCustomerRequest
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest=} [properties] Properties to set
+                         */
+                        function UpdateCustomerRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateCustomerRequest customer.
+                         * @member {google.cloud.cloudcontrolspartner.v1beta.ICustomer|null|undefined} customer
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest
+                         * @instance
+                         */
+                        UpdateCustomerRequest.prototype.customer = null;
+    
+                        /**
+                         * UpdateCustomerRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest
+                         * @instance
+                         */
+                        UpdateCustomerRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateCustomerRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest} UpdateCustomerRequest instance
+                         */
+                        UpdateCustomerRequest.create = function create(properties) {
+                            return new UpdateCustomerRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomerRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest} message UpdateCustomerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomerRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customer != null && Object.hasOwnProperty.call(message, "customer"))
+                                $root.google.cloud.cloudcontrolspartner.v1beta.Customer.encode(message.customer, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomerRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest} message UpdateCustomerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomerRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomerRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest} UpdateCustomerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomerRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.customer = $root.google.cloud.cloudcontrolspartner.v1beta.Customer.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomerRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest} UpdateCustomerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomerRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateCustomerRequest message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateCustomerRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customer != null && message.hasOwnProperty("customer")) {
+                                var error = $root.google.cloud.cloudcontrolspartner.v1beta.Customer.verify(message.customer);
+                                if (error)
+                                    return "customer." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateCustomerRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest} UpdateCustomerRequest
+                         */
+                        UpdateCustomerRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest();
+                            if (object.customer != null) {
+                                if (typeof object.customer !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest.customer: object expected");
+                                message.customer = $root.google.cloud.cloudcontrolspartner.v1beta.Customer.fromObject(object.customer);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateCustomerRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest} message UpdateCustomerRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateCustomerRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.customer = null;
+                                object.updateMask = null;
+                            }
+                            if (message.customer != null && message.hasOwnProperty("customer"))
+                                object.customer = $root.google.cloud.cloudcontrolspartner.v1beta.Customer.toObject(message.customer, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateCustomerRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateCustomerRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateCustomerRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateCustomerRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest";
+                        };
+    
+                        return UpdateCustomerRequest;
+                    })();
+    
+                    v1beta.DeleteCustomerRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteCustomerRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta
+                         * @interface IDeleteCustomerRequest
+                         * @property {string|null} [name] DeleteCustomerRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteCustomerRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta
+                         * @classdesc Represents a DeleteCustomerRequest.
+                         * @implements IDeleteCustomerRequest
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest=} [properties] Properties to set
+                         */
+                        function DeleteCustomerRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteCustomerRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest
+                         * @instance
+                         */
+                        DeleteCustomerRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteCustomerRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest} DeleteCustomerRequest instance
+                         */
+                        DeleteCustomerRequest.create = function create(properties) {
+                            return new DeleteCustomerRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCustomerRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest} message DeleteCustomerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCustomerRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCustomerRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest} message DeleteCustomerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCustomerRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteCustomerRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest} DeleteCustomerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCustomerRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteCustomerRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest} DeleteCustomerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCustomerRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteCustomerRequest message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteCustomerRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteCustomerRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest} DeleteCustomerRequest
+                         */
+                        DeleteCustomerRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteCustomerRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest} message DeleteCustomerRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteCustomerRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteCustomerRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteCustomerRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteCustomerRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteCustomerRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest";
+                        };
+    
+                        return DeleteCustomerRequest;
                     })();
     
                     v1beta.EkmConnections = (function() {
@@ -39242,6 +40059,400 @@
                 };
     
                 return Duration;
+            })();
+    
+            protobuf.FieldMask = (function() {
+    
+                /**
+                 * Properties of a FieldMask.
+                 * @memberof google.protobuf
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
+                 */
+    
+                /**
+                 * Constructs a new FieldMask.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
+                 * @constructor
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 */
+                function FieldMask(properties) {
+                    this.paths = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 */
+                FieldMask.prototype.paths = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldMask instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
+                 */
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldMask message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldMask.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 */
+                FieldMask.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
+                        return object;
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.FieldMask} message FieldMask
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldMask.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldMask to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldMask.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldMask
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
+                };
+    
+                return FieldMask;
+            })();
+    
+            protobuf.Empty = (function() {
+    
+                /**
+                 * Properties of an Empty.
+                 * @memberof google.protobuf
+                 * @interface IEmpty
+                 */
+    
+                /**
+                 * Constructs a new Empty.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Empty.
+                 * @implements IEmpty
+                 * @constructor
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 */
+                function Empty(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Creates a new Empty instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 * @returns {google.protobuf.Empty} Empty instance
+                 */
+                Empty.create = function create(properties) {
+                    return new Empty(properties);
+                };
+    
+                /**
+                 * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Empty message.
+                 * @function verify
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Empty.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Empty} Empty
+                 */
+                Empty.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Empty)
+                        return object;
+                    return new $root.google.protobuf.Empty();
+                };
+    
+                /**
+                 * Creates a plain object from an Empty message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.Empty} message Empty
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Empty.toObject = function toObject() {
+                    return {};
+                };
+    
+                /**
+                 * Converts this Empty to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Empty
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Empty.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Empty
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Empty.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Empty";
+                };
+    
+                return Empty;
             })();
     
             return protobuf;

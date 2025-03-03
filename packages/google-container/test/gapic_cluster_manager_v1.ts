@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6844,6 +6844,164 @@ describe('v1.ClusterManagerClient', () => {
             expectedHeaderRequestParams
           )
       );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('caPool', () => {
+      const fakePath = '/rendered/path/caPool';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        ca_pool: 'caPoolValue',
+      };
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.caPoolPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.caPoolPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('caPoolPath', () => {
+        const result = client.caPoolPath(
+          'projectValue',
+          'locationValue',
+          'caPoolValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.caPoolPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCaPoolName', () => {
+        const result = client.matchProjectFromCaPoolName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCaPoolName', () => {
+        const result = client.matchLocationFromCaPoolName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCaPoolFromCaPoolName', () => {
+        const result = client.matchCaPoolFromCaPoolName(fakePath);
+        assert.strictEqual(result, 'caPoolValue');
+        assert(
+          (client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('cryptoKeyVersion', () => {
+      const fakePath = '/rendered/path/cryptoKeyVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        key_ring: 'keyRingValue',
+        crypto_key: 'cryptoKeyValue',
+        crypto_key_version: 'cryptoKeyVersionValue',
+      };
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.cryptoKeyVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cryptoKeyVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cryptoKeyVersionPath', () => {
+        const result = client.cryptoKeyVersionPath(
+          'projectValue',
+          'locationValue',
+          'keyRingValue',
+          'cryptoKeyValue',
+          'cryptoKeyVersionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.cryptoKeyVersionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCryptoKeyVersionName', () => {
+        const result = client.matchProjectFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCryptoKeyVersionName', () => {
+        const result = client.matchLocationFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKeyRingFromCryptoKeyVersionName', () => {
+        const result = client.matchKeyRingFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'keyRingValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCryptoKeyFromCryptoKeyVersionName', () => {
+        const result = client.matchCryptoKeyFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCryptoKeyVersionFromCryptoKeyVersionName', () => {
+        const result =
+          client.matchCryptoKeyVersionFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyVersionValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
     });
   });
 });

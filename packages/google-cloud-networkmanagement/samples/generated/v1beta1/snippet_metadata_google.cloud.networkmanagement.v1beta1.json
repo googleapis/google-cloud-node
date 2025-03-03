@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-networkmanagement",
-        "version": "3.7.0",
+        "version": "3.11.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -159,7 +159,7 @@
             "regionTag": "networkmanagement_v1beta1_generated_ReachabilityService_UpdateConnectivityTest_async",
             "title": "ReachabilityService updateConnectivityTest Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates the configuration of an existing `ConnectivityTest`. After you update a test, the reachability analysis is performed as part of the long running operation, which completes when the analysis completes. The Reachability state in the test resource is updated with the new result. If the endpoint specifications in `ConnectivityTest` are invalid (for example, they contain non-existent resources in the network, or the user does not have read permissions to the network configurations of listed projects), then the reachability result returns a value of <code>UNKNOWN</code>. If the endpoint specifications in `ConnectivityTest` are incomplete, the reachability result returns a value of `AMBIGUOUS`. See the documentation in `ConnectivityTest` for for more details.",
+            "description": " Updates the configuration of an existing `ConnectivityTest`. After you update a test, the reachability analysis is performed as part of the long running operation, which completes when the analysis completes. The Reachability state in the test resource is updated with the new result. If the endpoint specifications in `ConnectivityTest` are invalid (for example, they contain non-existent resources in the network, or the user does not have read permissions to the network configurations of listed projects), then the reachability result returns a value of <code>UNKNOWN</code>. If the endpoint specifications in `ConnectivityTest` are incomplete, the reachability result returns a value of `AMBIGUOUS`. See the documentation in `ConnectivityTest` for more details.",
             "canonical": true,
             "file": "reachability_service.update_connectivity_test.js",
             "language": "JAVASCRIPT",

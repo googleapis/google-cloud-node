@@ -93,7 +93,6 @@
     "packages/google-cloud-networksecurity": {},
     "packages/google-cloud-networkservices": {},
     "packages/google-cloud-notebooks": {},
-    "packages/google-cloud-optimization": {},
     "packages/google-cloud-orchestration-airflow-service": {},
     "packages/google-cloud-orgpolicy": {},
     "packages/google-cloud-osconfig": {},
@@ -190,7 +189,14 @@
     "packages/google-shopping-merchant-products": {},
     "packages/google-shopping-merchant-accounts": {},
     "packages/google-cloud-gdchardwaremanagement": {},
-    "packages/google-cloud-apihub": {}
+    "packages/google-cloud-apihub": {},
+    "packages/google-marketingplatform-admin": {},
+    "packages/google-cloud-oracledatabase": {},
+    "packages/google-ads-admanager": {},
+    "packages/google-shopping-merchant-reviews": {},
+    "packages/google-cloud-memorystore": {},
+    "packages/google-cloud-parametermanager": {},
+    "packages/google-maps-areainsights": {}
   },
   "plugins": [
     {

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main() {
+function main(regionCode, kind) {
   // [START merchantapi_v1beta_generated_TermsOfServiceService_RetrieveLatestTermsOfService_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,13 +29,13 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Region code as defined by CLDR (https://cldr.unicode.org/). This is either
-   *  a country when the ToS applies specifically to that country or 001 when it
-   *  applies globally.
+   *  Required. Region code as defined by CLDR (https://cldr.unicode.org/). This
+   *  is either a country when the ToS applies specifically to that country or
+   *  001 when it applies globally.
    */
   // const regionCode = 'abc123'
   /**
-   *  The Kind this terms of service version applies to.
+   *  Required. The Kind this terms of service version applies to.
    */
   // const kind = {}
 
@@ -48,6 +48,8 @@ function main() {
   async function callRetrieveLatestTermsOfService() {
     // Construct request
     const request = {
+      regionCode,
+      kind,
     };
 
     // Run request

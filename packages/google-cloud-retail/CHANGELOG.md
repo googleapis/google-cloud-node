@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.6.1](https://github.com/googleapis/google-cloud-node/compare/retail-v3.6.0...retail-v3.6.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6018](https://github.com/googleapis/google-cloud-node/issues/6018)) ([9dc5856](https://github.com/googleapis/google-cloud-node/commit/9dc585661489f51bb7a85b39519fd8b11dfffc5b))
+
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.5.0...retail-v3.6.0) (2024-10-10)
+
+
+### Features
+
+* [retail] add conversational search ([#5740](https://github.com/googleapis/google-cloud-node/issues/5740)) ([1a182cc](https://github.com/googleapis/google-cloud-node/commit/1a182cc261b9df04154dfeb123196a539fd25129))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.4.0...retail-v3.5.0) (2024-06-21)
 
 

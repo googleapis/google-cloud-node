@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,25 +30,27 @@ function main(parent, securityHealthAnalyticsCustomModule) {
    */
   /**
    *  Required. Name of the parent organization, folder, or project of the
-   *  module, specified in one of the following formats:
+   *  module, in one of the following formats:
    *  * `organizations/{organization}/locations/{location}`
    *  * `folders/{folder}/locations/{location}`
    *  * `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**
-   *  Required. The resource being created
+   *  Required. The resource being created.
    */
   // const securityHealthAnalyticsCustomModule = {}
   /**
-   *  Optional. When set to true, only validations (including IAM checks) will
-   *  done for the request (no module will be created). An OK response indicates
-   *  the request is valid while an error response indicates the request is
-   *  invalid. Note that a subsequent request to actually create the module could
-   *  still fail because:
-   *   1. the state could have changed (e.g. IAM permission lost) or
-   *   2. A failure occurred during creation of the module.
-   *  Defaults to false.
+   *  Optional. When set to `true`, the request will be validated (including IAM
+   *  checks), but no module will be created. An `OK` response indicates that the
+   *  request is valid, while an error response indicates that the request is
+   *  invalid.
+   *  If the request is valid, a subsequent request to create the module could
+   *  still fail for one of the following reasons:
+   *  *  The state of your cloud resources changed; for example, you lost a
+   *     required IAM permission
+   *  *  An error occurred during creation of the module
+   *  Defaults to `false`.
    */
   // const validateOnly = true
 

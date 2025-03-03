@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -335,7 +335,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Dependency()
       );
@@ -366,7 +366,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Dependency()
       );
@@ -413,7 +413,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDependency = stubSimpleCall(
         undefined,
@@ -465,7 +465,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Dependency()
       );
@@ -496,7 +496,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Dependency()
       );
@@ -543,7 +543,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDependency = stubSimpleCall(
         undefined,
@@ -596,7 +596,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['dependency', 'name']
       );
       request.dependency.name = defaultValue1;
-      const expectedHeaderRequestParams = `dependency.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dependency.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Dependency()
       );
@@ -628,7 +628,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['dependency', 'name']
       );
       request.dependency.name = defaultValue1;
-      const expectedHeaderRequestParams = `dependency.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dependency.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Dependency()
       );
@@ -676,7 +676,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['dependency', 'name']
       );
       request.dependency.name = defaultValue1;
-      const expectedHeaderRequestParams = `dependency.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dependency.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDependency = stubSimpleCall(
         undefined,
@@ -729,7 +729,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -760,7 +760,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -807,7 +807,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDependency = stubSimpleCall(
         undefined,
@@ -859,7 +859,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Dependency()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Dependency()),
@@ -892,7 +892,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Dependency()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Dependency()),
@@ -941,7 +941,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDependencies = stubSimpleCall(
         undefined,
@@ -972,7 +972,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Dependency()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Dependency()),
@@ -1026,7 +1026,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDependencies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1075,7 +1075,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Dependency()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Dependency()),
@@ -1118,7 +1118,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDependencies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

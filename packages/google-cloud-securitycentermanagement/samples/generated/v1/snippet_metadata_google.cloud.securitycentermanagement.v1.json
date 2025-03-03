@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-securitycentermanagement",
-        "version": "0.4.0",
+        "version": "0.5.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -15,14 +15,14 @@
             "regionTag": "securitycentermanagement_v1_generated_SecurityCenterManagement_ListEffectiveSecurityHealthAnalyticsCustomModules_async",
             "title": "SecurityCenterManagement listEffectiveSecurityHealthAnalyticsCustomModules Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns a list of all EffectiveSecurityHealthAnalyticsCustomModules for the given parent. This includes resident modules defined at the scope of the parent, and inherited modules, inherited from CRM ancestors (no descendants).",
+            "description": " Returns a list of all [EffectiveSecurityHealthAnalyticsCustomModule][google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule] resources for the given parent. This includes resident modules defined at the scope of the parent, and inherited modules, inherited from ancestor organizations, folders, and projects (no descendants).",
             "canonical": true,
             "file": "security_center_management.list_effective_security_health_analytics_custom_modules.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -63,7 +63,7 @@
             "regionTag": "securitycentermanagement_v1_generated_SecurityCenterManagement_GetEffectiveSecurityHealthAnalyticsCustomModule_async",
             "title": "SecurityCenterManagement getEffectiveSecurityHealthAnalyticsCustomModule Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets details of a single EffectiveSecurityHealthAnalyticsCustomModule.",
+            "description": " Gets details of a single [EffectiveSecurityHealthAnalyticsCustomModule][google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule].",
             "canonical": true,
             "file": "security_center_management.get_effective_security_health_analytics_custom_module.js",
             "language": "JAVASCRIPT",
@@ -103,14 +103,14 @@
             "regionTag": "securitycentermanagement_v1_generated_SecurityCenterManagement_ListSecurityHealthAnalyticsCustomModules_async",
             "title": "SecurityCenterManagement listSecurityHealthAnalyticsCustomModules Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns a list of all SecurityHealthAnalyticsCustomModules for the given parent. This includes resident modules defined at the scope of the parent, and inherited modules, inherited from CRM ancestors (no descendants).",
+            "description": " Returns a list of all [SecurityHealthAnalyticsCustomModule][google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule] resources for the given parent. This includes resident modules defined at the scope of the parent, and inherited modules, inherited from ancestor organizations, folders, and projects (no descendants).",
             "canonical": true,
             "file": "security_center_management.list_security_health_analytics_custom_modules.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -151,14 +151,14 @@
             "regionTag": "securitycentermanagement_v1_generated_SecurityCenterManagement_ListDescendantSecurityHealthAnalyticsCustomModules_async",
             "title": "SecurityCenterManagement listDescendantSecurityHealthAnalyticsCustomModules Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns a list of all resident SecurityHealthAnalyticsCustomModules under the given CRM parent and all of the parent's CRM descendants.",
+            "description": " Returns a list of all resident [SecurityHealthAnalyticsCustomModule][google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule] resources under the given organization, folder, or project and all of its descendants.",
             "canonical": true,
             "file": "security_center_management.list_descendant_security_health_analytics_custom_modules.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -199,14 +199,14 @@
             "regionTag": "securitycentermanagement_v1_generated_SecurityCenterManagement_GetSecurityHealthAnalyticsCustomModule_async",
             "title": "SecurityCenterManagement getSecurityHealthAnalyticsCustomModule Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves a SecurityHealthAnalyticsCustomModule.",
+            "description": " Retrieves a [SecurityHealthAnalyticsCustomModule][google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule].",
             "canonical": true,
             "file": "security_center_management.get_security_health_analytics_custom_module.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -239,14 +239,14 @@
             "regionTag": "securitycentermanagement_v1_generated_SecurityCenterManagement_CreateSecurityHealthAnalyticsCustomModule_async",
             "title": "SecurityCenterManagement createSecurityHealthAnalyticsCustomModule Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a resident SecurityHealthAnalyticsCustomModule at the scope of the given CRM parent, and also creates inherited SecurityHealthAnalyticsCustomModules for all CRM descendants of the given parent. These modules are enabled by default.",
+            "description": " Creates a resident [SecurityHealthAnalyticsCustomModule][google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule] at the scope of the given organization, folder, or project, and also creates inherited `SecurityHealthAnalyticsCustomModule` resources for all folders and projects that are descendants of the given parent. These modules are enabled by default.",
             "canonical": true,
             "file": "security_center_management.create_security_health_analytics_custom_module.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -287,14 +287,14 @@
             "regionTag": "securitycentermanagement_v1_generated_SecurityCenterManagement_UpdateSecurityHealthAnalyticsCustomModule_async",
             "title": "SecurityCenterManagement updateSecurityHealthAnalyticsCustomModule Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates the SecurityHealthAnalyticsCustomModule under the given name based on the given update mask. Updating the enablement state is supported on both resident and inherited modules (though resident modules cannot have an enablement state of \"inherited\"). Updating the display name and custom config of a module is supported on resident modules only.",
+            "description": " Updates the [SecurityHealthAnalyticsCustomModule][google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule] under the given name based on the given update mask. Updating the enablement state is supported on both resident and inherited modules (though resident modules cannot have an enablement state of \"inherited\"). Updating the display name and custom configuration of a module is supported on resident modules only.",
             "canonical": true,
             "file": "security_center_management.update_security_health_analytics_custom_module.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -335,14 +335,14 @@
             "regionTag": "securitycentermanagement_v1_generated_SecurityCenterManagement_DeleteSecurityHealthAnalyticsCustomModule_async",
             "title": "SecurityCenterManagement deleteSecurityHealthAnalyticsCustomModule Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes the specified SecurityHealthAnalyticsCustomModule and all of its descendants in the CRM hierarchy. This method is only supported for resident custom modules.",
+            "description": " Deletes the specified [SecurityHealthAnalyticsCustomModule][google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule] and all of its descendants in the resource hierarchy. This method is only supported for resident custom modules.",
             "canonical": true,
             "file": "security_center_management.delete_security_health_analytics_custom_module.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 70,
                     "type": "FULL"
                 }
             ],
@@ -379,14 +379,14 @@
             "regionTag": "securitycentermanagement_v1_generated_SecurityCenterManagement_SimulateSecurityHealthAnalyticsCustomModule_async",
             "title": "SecurityCenterManagement simulateSecurityHealthAnalyticsCustomModule Sample",
             "origin": "API_DEFINITION",
-            "description": " Simulates a given SecurityHealthAnalyticsCustomModule and Resource.",
+            "description": " Simulates the result of using a [SecurityHealthAnalyticsCustomModule][google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule] to check a resource.",
             "canonical": true,
             "file": "security_center_management.simulate_security_health_analytics_custom_module.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -434,7 +434,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -475,7 +475,7 @@
             "regionTag": "securitycentermanagement_v1_generated_SecurityCenterManagement_GetEffectiveEventThreatDetectionCustomModule_async",
             "title": "SecurityCenterManagement getEffectiveEventThreatDetectionCustomModule Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets an effective ETD custom module. Retrieves the effective module at the given level. The difference between an EffectiveCustomModule and a CustomModule is that the fields for an EffectiveCustomModule are computed from ancestors if needed. For example, the enablement_state for a CustomModule can be either ENABLED, DISABLED, or INHERITED. Where as the enablement_state for an EffectiveCustomModule is always computed to ENABLED or DISABLED (the effective enablement_state).",
+            "description": " Gets the effective Event Threat Detection custom module at the given level. The difference between an [EffectiveEventThreatDetectionCustomModule][google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule] and an [EventThreatDetectionCustomModule][google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule] is that the fields for an `EffectiveEventThreatDetectionCustomModule` are computed from ancestors if needed. For example, the enablement state for an `EventThreatDetectionCustomModule` can be `ENABLED`, `DISABLED`, or `INHERITED`. In contrast, the enablement state for an `EffectiveEventThreatDetectionCustomModule` is always computed as `ENABLED` or `DISABLED`.",
             "canonical": true,
             "file": "security_center_management.get_effective_event_threat_detection_custom_module.js",
             "language": "JAVASCRIPT",
@@ -515,14 +515,14 @@
             "regionTag": "securitycentermanagement_v1_generated_SecurityCenterManagement_ListEventThreatDetectionCustomModules_async",
             "title": "SecurityCenterManagement listEventThreatDetectionCustomModules Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists all Event Threat Detection custom modules for the given Resource Manager parent. This includes resident modules defined at the scope of the parent along with modules inherited from ancestors.",
+            "description": " Lists all Event Threat Detection custom modules for the given organization, folder, or project. This includes resident modules defined at the scope of the parent along with modules inherited from ancestors.",
             "canonical": true,
             "file": "security_center_management.list_event_threat_detection_custom_modules.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -563,14 +563,14 @@
             "regionTag": "securitycentermanagement_v1_generated_SecurityCenterManagement_ListDescendantEventThreatDetectionCustomModules_async",
             "title": "SecurityCenterManagement listDescendantEventThreatDetectionCustomModules Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists all resident Event Threat Detection custom modules under the given Resource Manager parent and its descendants.",
+            "description": " Lists all resident Event Threat Detection custom modules for the given organization, folder, or project and its descendants.",
             "canonical": true,
             "file": "security_center_management.list_descendant_event_threat_detection_custom_modules.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -651,14 +651,14 @@
             "regionTag": "securitycentermanagement_v1_generated_SecurityCenterManagement_CreateEventThreatDetectionCustomModule_async",
             "title": "SecurityCenterManagement createEventThreatDetectionCustomModule Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a resident Event Threat Detection custom module at the scope of the given Resource Manager parent, and also creates inherited custom modules for all descendants of the given parent. These modules are enabled by default.",
+            "description": " Creates a resident Event Threat Detection custom module at the scope of the given organization, folder, or project, and creates inherited custom modules for all descendants of the given parent. These modules are enabled by default.",
             "canonical": true,
             "file": "security_center_management.create_event_threat_detection_custom_module.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -706,7 +706,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -747,14 +747,14 @@
             "regionTag": "securitycentermanagement_v1_generated_SecurityCenterManagement_DeleteEventThreatDetectionCustomModule_async",
             "title": "SecurityCenterManagement deleteEventThreatDetectionCustomModule Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes the specified Event Threat Detection custom module and all of its descendants in the Resource Manager hierarchy. This method is only supported for resident custom modules.",
+            "description": " Deletes the specified Event Threat Detection custom module and all of its descendants in the resource hierarchy. This method is only supported for resident custom modules.",
             "canonical": true,
             "file": "security_center_management.delete_event_threat_detection_custom_module.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 70,
                     "type": "FULL"
                 }
             ],
@@ -890,7 +890,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -942,7 +942,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 74,
                     "type": "FULL"
                 }
             ],

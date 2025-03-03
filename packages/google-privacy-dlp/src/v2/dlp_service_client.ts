@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,13 +41,9 @@ import * as gapicConfig from './dlp_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  The Cloud Data Loss Prevention (DLP) API is a service that allows clients
- *  to detect the presence of Personally Identifiable Information (PII) and other
- *  privacy-sensitive data in user-supplied, unstructured data streams, like text
- *  blocks or images.
- *  The service also includes methods for sensitive data redaction and
- *  scheduling of data scans on Google Cloud Platform based data sets.
- *
+ *  Sensitive Data Protection provides access to a powerful sensitive data
+ *  inspection, classification, and de-identification platform that works
+ *  on text, images, and Google Cloud storage repositories.
  *  To learn more about concepts and find how-to guides see
  *  https://cloud.google.com/sensitive-data-protection/docs/.
  * @class
@@ -1126,7 +1122,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.reidentifyContent(request, options, callback);
   }
   /**
-   * Returns a list of the sensitive information types that DLP API
+   * Returns a list of the sensitive information types that the DLP API
    * supports. See
    * https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference
    * to learn more.
@@ -5039,7 +5035,7 @@ export class DlpServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listInspectTemplates`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5343,7 +5339,7 @@ export class DlpServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDeidentifyTemplates`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5662,7 +5658,7 @@ export class DlpServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listJobTriggers`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5996,7 +5992,7 @@ export class DlpServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDiscoveryConfigs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6289,7 +6285,7 @@ export class DlpServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDlpJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6636,7 +6632,7 @@ export class DlpServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listStoredInfoTypes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6934,7 +6930,7 @@ export class DlpServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listProjectDataProfiles`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -7253,7 +7249,7 @@ export class DlpServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTableDataProfiles`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -7604,7 +7600,7 @@ export class DlpServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listColumnDataProfiles`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -7849,6 +7845,7 @@ export class DlpServiceClient {
    *   * A restriction has the form of `{field} {operator} {value}`.
    *   * Supported fields/values:
    *       - `project_id` - The Google Cloud project ID.
+   *       - `account_id` - The AWS account ID.
    *       - `file_store_path` - The path like "gs://bucket".
    *       - `data_source_type` - The profile's data source type, like
    *       "google/storage/bucket".
@@ -7961,7 +7958,7 @@ export class DlpServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listFileStoreDataProfiles`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -8007,6 +8004,7 @@ export class DlpServiceClient {
    *   * A restriction has the form of `{field} {operator} {value}`.
    *   * Supported fields/values:
    *       - `project_id` - The Google Cloud project ID.
+   *       - `account_id` - The AWS account ID.
    *       - `file_store_path` - The path like "gs://bucket".
    *       - `data_source_type` - The profile's data source type, like
    *       "google/storage/bucket".
@@ -8109,6 +8107,7 @@ export class DlpServiceClient {
    *   * A restriction has the form of `{field} {operator} {value}`.
    *   * Supported fields/values:
    *       - `project_id` - The Google Cloud project ID.
+   *       - `account_id` - The AWS account ID.
    *       - `file_store_path` - The path like "gs://bucket".
    *       - `data_source_type` - The profile's data source type, like
    *       "google/storage/bucket".
@@ -8261,7 +8260,7 @@ export class DlpServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConnections`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -8462,7 +8461,7 @@ export class DlpServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchConnections`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent

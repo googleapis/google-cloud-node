@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -118,6 +118,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public updateReservation(request: google.cloud.bigquery.reservation.v1.IUpdateReservationRequest): Promise<google.cloud.bigquery.reservation.v1.Reservation>;
+
+                        /**
+                         * Calls FailoverReservation.
+                         * @param request FailoverReservationRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Reservation
+                         */
+                        public failoverReservation(request: google.cloud.bigquery.reservation.v1.IFailoverReservationRequest, callback: google.cloud.bigquery.reservation.v1.ReservationService.FailoverReservationCallback): void;
+
+                        /**
+                         * Calls FailoverReservation.
+                         * @param request FailoverReservationRequest message or plain object
+                         * @returns Promise
+                         */
+                        public failoverReservation(request: google.cloud.bigquery.reservation.v1.IFailoverReservationRequest): Promise<google.cloud.bigquery.reservation.v1.Reservation>;
 
                         /**
                          * Calls CreateCapacityCommitment.
@@ -382,6 +396,13 @@ export namespace google {
                         type UpdateReservationCallback = (error: (Error|null), response?: google.cloud.bigquery.reservation.v1.Reservation) => void;
 
                         /**
+                         * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|failoverReservation}.
+                         * @param error Error, if any
+                         * @param [response] Reservation
+                         */
+                        type FailoverReservationCallback = (error: (Error|null), response?: google.cloud.bigquery.reservation.v1.Reservation) => void;
+
+                        /**
                          * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|createCapacityCommitment}.
                          * @param error Error, if any
                          * @param [response] CapacityCommitment
@@ -523,6 +544,18 @@ export namespace google {
 
                         /** Reservation edition */
                         edition?: (google.cloud.bigquery.reservation.v1.Edition|keyof typeof google.cloud.bigquery.reservation.v1.Edition|null);
+
+                        /** Reservation primaryLocation */
+                        primaryLocation?: (string|null);
+
+                        /** Reservation secondaryLocation */
+                        secondaryLocation?: (string|null);
+
+                        /** Reservation originalPrimaryLocation */
+                        originalPrimaryLocation?: (string|null);
+
+                        /** Reservation replicationStatus */
+                        replicationStatus?: (google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus|null);
                     }
 
                     /** Represents a Reservation. */
@@ -560,6 +593,18 @@ export namespace google {
 
                         /** Reservation edition. */
                         public edition: (google.cloud.bigquery.reservation.v1.Edition|keyof typeof google.cloud.bigquery.reservation.v1.Edition);
+
+                        /** Reservation primaryLocation. */
+                        public primaryLocation: string;
+
+                        /** Reservation secondaryLocation. */
+                        public secondaryLocation: string;
+
+                        /** Reservation originalPrimaryLocation. */
+                        public originalPrimaryLocation: string;
+
+                        /** Reservation replicationStatus. */
+                        public replicationStatus?: (google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus|null);
 
                         /**
                          * Creates a new Reservation instance using the specified properties.
@@ -743,6 +788,115 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+
+                        /** Properties of a ReplicationStatus. */
+                        interface IReplicationStatus {
+
+                            /** ReplicationStatus error */
+                            error?: (google.rpc.IStatus|null);
+
+                            /** ReplicationStatus lastErrorTime */
+                            lastErrorTime?: (google.protobuf.ITimestamp|null);
+
+                            /** ReplicationStatus lastReplicationTime */
+                            lastReplicationTime?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents a ReplicationStatus. */
+                        class ReplicationStatus implements IReplicationStatus {
+
+                            /**
+                             * Constructs a new ReplicationStatus.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus);
+
+                            /** ReplicationStatus error. */
+                            public error?: (google.rpc.IStatus|null);
+
+                            /** ReplicationStatus lastErrorTime. */
+                            public lastErrorTime?: (google.protobuf.ITimestamp|null);
+
+                            /** ReplicationStatus lastReplicationTime. */
+                            public lastReplicationTime?: (google.protobuf.ITimestamp|null);
+
+                            /**
+                             * Creates a new ReplicationStatus instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ReplicationStatus instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus): google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus;
+
+                            /**
+                             * Encodes the specified ReplicationStatus message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.verify|verify} messages.
+                             * @param message ReplicationStatus message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ReplicationStatus message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.verify|verify} messages.
+                             * @param message ReplicationStatus message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ReplicationStatus message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ReplicationStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus;
+
+                            /**
+                             * Decodes a ReplicationStatus message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ReplicationStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus;
+
+                            /**
+                             * Verifies a ReplicationStatus message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ReplicationStatus message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ReplicationStatus
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus;
+
+                            /**
+                             * Creates a plain object from a ReplicationStatus message. Also converts values to other types if specified.
+                             * @param message ReplicationStatus
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ReplicationStatus to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ReplicationStatus
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a CapacityCommitment. */
@@ -777,6 +931,9 @@ export namespace google {
 
                         /** CapacityCommitment edition */
                         edition?: (google.cloud.bigquery.reservation.v1.Edition|keyof typeof google.cloud.bigquery.reservation.v1.Edition|null);
+
+                        /** CapacityCommitment isFlatRate */
+                        isFlatRate?: (boolean|null);
                     }
 
                     /** Represents a CapacityCommitment. */
@@ -817,6 +974,9 @@ export namespace google {
 
                         /** CapacityCommitment edition. */
                         public edition: (google.cloud.bigquery.reservation.v1.Edition|keyof typeof google.cloud.bigquery.reservation.v1.Edition);
+
+                        /** CapacityCommitment isFlatRate. */
+                        public isFlatRate: boolean;
 
                         /**
                          * Creates a new CapacityCommitment instance using the specified properties.
@@ -1533,6 +1693,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for UpdateReservationRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FailoverReservationRequest. */
+                    interface IFailoverReservationRequest {
+
+                        /** FailoverReservationRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a FailoverReservationRequest. */
+                    class FailoverReservationRequest implements IFailoverReservationRequest {
+
+                        /**
+                         * Constructs a new FailoverReservationRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.reservation.v1.IFailoverReservationRequest);
+
+                        /** FailoverReservationRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new FailoverReservationRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FailoverReservationRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.reservation.v1.IFailoverReservationRequest): google.cloud.bigquery.reservation.v1.FailoverReservationRequest;
+
+                        /**
+                         * Encodes the specified FailoverReservationRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.FailoverReservationRequest.verify|verify} messages.
+                         * @param message FailoverReservationRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.reservation.v1.IFailoverReservationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FailoverReservationRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.FailoverReservationRequest.verify|verify} messages.
+                         * @param message FailoverReservationRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.IFailoverReservationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FailoverReservationRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FailoverReservationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.FailoverReservationRequest;
+
+                        /**
+                         * Decodes a FailoverReservationRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FailoverReservationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.FailoverReservationRequest;
+
+                        /**
+                         * Verifies a FailoverReservationRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FailoverReservationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FailoverReservationRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.FailoverReservationRequest;
+
+                        /**
+                         * Creates a plain object from a FailoverReservationRequest message. Also converts values to other types if specified.
+                         * @param message FailoverReservationRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.reservation.v1.FailoverReservationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FailoverReservationRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FailoverReservationRequest
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -2492,6 +2749,9 @@ export namespace google {
 
                         /** Assignment state */
                         state?: (google.cloud.bigquery.reservation.v1.Assignment.State|keyof typeof google.cloud.bigquery.reservation.v1.Assignment.State|null);
+
+                        /** Assignment enableGeminiInBigquery */
+                        enableGeminiInBigquery?: (boolean|null);
                     }
 
                     /** Represents an Assignment. */
@@ -2514,6 +2774,9 @@ export namespace google {
 
                         /** Assignment state. */
                         public state: (google.cloud.bigquery.reservation.v1.Assignment.State|keyof typeof google.cloud.bigquery.reservation.v1.Assignment.State);
+
+                        /** Assignment enableGeminiInBigquery. */
+                        public enableGeminiInBigquery: boolean;
 
                         /**
                          * Creates a new Assignment instance using the specified properties.
@@ -2601,7 +2864,8 @@ export namespace google {
                             PIPELINE = 1,
                             QUERY = 2,
                             ML_EXTERNAL = 3,
-                            BACKGROUND = 4
+                            BACKGROUND = 4,
+                            CONTINUOUS = 6
                         }
 
                         /** State enum. */

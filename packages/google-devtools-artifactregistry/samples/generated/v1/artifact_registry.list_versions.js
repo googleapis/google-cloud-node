@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -48,6 +48,40 @@ function main() {
    *  Optional. The field to order the results by.
    */
   // const orderBy = 'abc123'
+  /**
+   *  Optional. An expression for filtering the results of the request. Filter
+   *  rules are case insensitive. The fields eligible for filtering are:
+   *    * `name`
+   *    * `annotations`
+   *   Examples of using a filter:
+   *   To filter the results of your request to versions with the name
+   *   `my-version` in project `my-project` in the `us-central` region, in
+   *   repository `my-repo`, append the following filter expression to your
+   *   request:
+   *    * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my-version"`
+   *   You can also use wildcards to match any number of characters before or
+   *   after the value:
+   *    * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version"`
+   *    * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my*"`
+   *    * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version*"`
+   *   To filter the results of your request to versions with the annotation
+   *   key-value pair `external_link`: `external_link_value`, append the
+   *   following filter expression to your request:
+   *    * `"annotations.external_link:external_link_value"`
+   *   To filter just for a specific annotation key `external_link`, append the
+   *   following filter expression to your request:
+   *    * `"annotations.external_link"`
+   *   If the annotation key or value contains special characters, you can escape
+   *   them by surrounding the value with backticks. For example, to filter the
+   *   results of your request to versions with the annotation key-value pair
+   *   `external.link`:`https://example.com/my-version`, append the following
+   *   filter expression to your request:
+   *    * `` "annotations.`external.link`:`https://example.com/my-version`" ``
+   *   You can also filter with annotations with a wildcard to
+   *   match any number of characters before or after the value:
+   *    * `` "annotations.*_link:`*example.com*`" ``
+   */
+  // const filter = 'abc123'
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;

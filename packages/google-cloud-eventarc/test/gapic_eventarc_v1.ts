@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -356,7 +356,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Trigger()
       );
@@ -387,7 +387,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Trigger()
       );
@@ -434,7 +434,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTrigger = stubSimpleCall(
         undefined,
@@ -486,7 +486,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Channel()
       );
@@ -517,7 +517,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Channel()
       );
@@ -564,7 +564,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getChannel = stubSimpleCall(
         undefined,
@@ -616,7 +616,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Provider()
       );
@@ -647,7 +647,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Provider()
       );
@@ -694,7 +694,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProvider = stubSimpleCall(
         undefined,
@@ -746,7 +746,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ChannelConnection()
       );
@@ -778,7 +778,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ChannelConnection()
       );
@@ -825,7 +825,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getChannelConnection = stubSimpleCall(
         undefined,
@@ -877,7 +877,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GoogleChannelConfig()
       );
@@ -909,7 +909,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GoogleChannelConfig()
       );
@@ -956,7 +956,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGoogleChannelConfig = stubSimpleCall(
         undefined,
@@ -1015,7 +1015,7 @@ describe('v1.EventarcClient', () => {
         ['googleChannelConfig', 'name']
       );
       request.googleChannelConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `google_channel_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `google_channel_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GoogleChannelConfig()
       );
@@ -1048,7 +1048,7 @@ describe('v1.EventarcClient', () => {
         ['googleChannelConfig', 'name']
       );
       request.googleChannelConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `google_channel_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `google_channel_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GoogleChannelConfig()
       );
@@ -1096,7 +1096,7 @@ describe('v1.EventarcClient', () => {
         ['googleChannelConfig', 'name']
       );
       request.googleChannelConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `google_channel_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `google_channel_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGoogleChannelConfig = stubSimpleCall(
         undefined,
@@ -1140,6 +1140,527 @@ describe('v1.EventarcClient', () => {
     });
   });
 
+  describe('getMessageBus', () => {
+    it('invokes getMessageBus without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetMessageBusRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetMessageBusRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.MessageBus()
+      );
+      client.innerApiCalls.getMessageBus = stubSimpleCall(expectedResponse);
+      const [response] = await client.getMessageBus(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMessageBus without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetMessageBusRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetMessageBusRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.MessageBus()
+      );
+      client.innerApiCalls.getMessageBus =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getMessageBus(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.v1.IMessageBus | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMessageBus with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetMessageBusRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetMessageBusRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getMessageBus = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getMessageBus(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMessageBus with closed client', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetMessageBusRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetMessageBusRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getMessageBus(request), expectedError);
+    });
+  });
+
+  describe('getEnrollment', () => {
+    it('invokes getEnrollment without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetEnrollmentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetEnrollmentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.Enrollment()
+      );
+      client.innerApiCalls.getEnrollment = stubSimpleCall(expectedResponse);
+      const [response] = await client.getEnrollment(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEnrollment without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetEnrollmentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetEnrollmentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.Enrollment()
+      );
+      client.innerApiCalls.getEnrollment =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getEnrollment(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.v1.IEnrollment | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEnrollment with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetEnrollmentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetEnrollmentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getEnrollment = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getEnrollment(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEnrollment with closed client', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetEnrollmentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetEnrollmentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEnrollment(request), expectedError);
+    });
+  });
+
+  describe('getPipeline', () => {
+    it('invokes getPipeline without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetPipelineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.Pipeline()
+      );
+      client.innerApiCalls.getPipeline = stubSimpleCall(expectedResponse);
+      const [response] = await client.getPipeline(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPipeline without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetPipelineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.Pipeline()
+      );
+      client.innerApiCalls.getPipeline =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getPipeline(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.v1.IPipeline | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPipeline with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetPipelineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getPipeline = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getPipeline(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPipeline with closed client', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetPipelineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPipeline(request), expectedError);
+    });
+  });
+
+  describe('getGoogleApiSource', () => {
+    it('invokes getGoogleApiSource without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetGoogleApiSourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetGoogleApiSourceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GoogleApiSource()
+      );
+      client.innerApiCalls.getGoogleApiSource =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getGoogleApiSource(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGoogleApiSource without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetGoogleApiSourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetGoogleApiSourceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GoogleApiSource()
+      );
+      client.innerApiCalls.getGoogleApiSource =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getGoogleApiSource(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.v1.IGoogleApiSource | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGoogleApiSource with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetGoogleApiSourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetGoogleApiSourceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getGoogleApiSource = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getGoogleApiSource(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGoogleApiSource with closed client', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetGoogleApiSourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetGoogleApiSourceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getGoogleApiSource(request), expectedError);
+    });
+  });
+
   describe('createTrigger', () => {
     it('invokes createTrigger without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
@@ -1155,7 +1676,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1188,7 +1709,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1242,7 +1763,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTrigger = stubLongRunningCall(
         undefined,
@@ -1273,7 +1794,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTrigger = stubLongRunningCall(
         undefined,
@@ -1350,7 +1871,7 @@ describe('v1.EventarcClient', () => {
         ['trigger', 'name']
       );
       request.trigger.name = defaultValue1;
-      const expectedHeaderRequestParams = `trigger.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `trigger.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1384,7 +1905,7 @@ describe('v1.EventarcClient', () => {
         ['trigger', 'name']
       );
       request.trigger.name = defaultValue1;
-      const expectedHeaderRequestParams = `trigger.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `trigger.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1439,7 +1960,7 @@ describe('v1.EventarcClient', () => {
         ['trigger', 'name']
       );
       request.trigger.name = defaultValue1;
-      const expectedHeaderRequestParams = `trigger.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `trigger.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTrigger = stubLongRunningCall(
         undefined,
@@ -1471,7 +1992,7 @@ describe('v1.EventarcClient', () => {
         ['trigger', 'name']
       );
       request.trigger.name = defaultValue1;
-      const expectedHeaderRequestParams = `trigger.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `trigger.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTrigger = stubLongRunningCall(
         undefined,
@@ -1547,7 +2068,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1580,7 +2101,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1634,7 +2155,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTrigger = stubLongRunningCall(
         undefined,
@@ -1665,7 +2186,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTrigger = stubLongRunningCall(
         undefined,
@@ -1741,7 +2262,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1774,7 +2295,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1828,7 +2349,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createChannel = stubLongRunningCall(
         undefined,
@@ -1859,7 +2380,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createChannel = stubLongRunningCall(
         undefined,
@@ -1936,7 +2457,7 @@ describe('v1.EventarcClient', () => {
         ['channel', 'name']
       );
       request.channel.name = defaultValue1;
-      const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `channel.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1970,7 +2491,7 @@ describe('v1.EventarcClient', () => {
         ['channel', 'name']
       );
       request.channel.name = defaultValue1;
-      const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `channel.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2025,7 +2546,7 @@ describe('v1.EventarcClient', () => {
         ['channel', 'name']
       );
       request.channel.name = defaultValue1;
-      const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `channel.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateChannel = stubLongRunningCall(
         undefined,
@@ -2057,7 +2578,7 @@ describe('v1.EventarcClient', () => {
         ['channel', 'name']
       );
       request.channel.name = defaultValue1;
-      const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `channel.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateChannel = stubLongRunningCall(
         undefined,
@@ -2133,7 +2654,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2166,7 +2687,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2220,7 +2741,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteChannel = stubLongRunningCall(
         undefined,
@@ -2251,7 +2772,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteChannel = stubLongRunningCall(
         undefined,
@@ -2327,7 +2848,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2360,7 +2881,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2414,7 +2935,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createChannelConnection = stubLongRunningCall(
         undefined,
@@ -2448,7 +2969,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createChannelConnection = stubLongRunningCall(
         undefined,
@@ -2525,7 +3046,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2558,7 +3079,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2612,7 +3133,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteChannelConnection = stubLongRunningCall(
         undefined,
@@ -2646,7 +3167,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteChannelConnection = stubLongRunningCall(
         undefined,
@@ -2708,6 +3229,2359 @@ describe('v1.EventarcClient', () => {
     });
   });
 
+  describe('createMessageBus', () => {
+    it('invokes createMessageBus without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateMessageBusRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateMessageBusRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createMessageBus =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createMessageBus(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createMessageBus without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateMessageBusRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateMessageBusRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createMessageBus =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createMessageBus(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IMessageBus,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createMessageBus with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateMessageBusRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateMessageBusRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createMessageBus = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createMessageBus(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createMessageBus with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateMessageBusRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateMessageBusRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createMessageBus = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createMessageBus(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateMessageBusProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateMessageBusProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateMessageBusProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateMessageBusProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateMessageBus', () => {
+    it('invokes updateMessageBus without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateMessageBusRequest()
+      );
+      request.messageBus ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateMessageBusRequest',
+        ['messageBus', 'name']
+      );
+      request.messageBus.name = defaultValue1;
+      const expectedHeaderRequestParams = `message_bus.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateMessageBus =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateMessageBus(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMessageBus without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateMessageBusRequest()
+      );
+      request.messageBus ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateMessageBusRequest',
+        ['messageBus', 'name']
+      );
+      request.messageBus.name = defaultValue1;
+      const expectedHeaderRequestParams = `message_bus.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateMessageBus =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateMessageBus(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IMessageBus,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMessageBus with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateMessageBusRequest()
+      );
+      request.messageBus ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateMessageBusRequest',
+        ['messageBus', 'name']
+      );
+      request.messageBus.name = defaultValue1;
+      const expectedHeaderRequestParams = `message_bus.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateMessageBus = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateMessageBus(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMessageBus with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateMessageBusRequest()
+      );
+      request.messageBus ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateMessageBusRequest',
+        ['messageBus', 'name']
+      );
+      request.messageBus.name = defaultValue1;
+      const expectedHeaderRequestParams = `message_bus.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateMessageBus = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateMessageBus(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateMessageBusProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateMessageBusProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateMessageBusProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateMessageBusProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteMessageBus', () => {
+    it('invokes deleteMessageBus without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteMessageBusRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteMessageBusRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteMessageBus =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteMessageBus(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteMessageBus without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteMessageBusRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteMessageBusRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteMessageBus =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteMessageBus(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IMessageBus,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteMessageBus with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteMessageBusRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteMessageBusRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteMessageBus = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteMessageBus(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteMessageBus with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteMessageBusRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteMessageBusRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteMessageBus = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteMessageBus(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteMessageBus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMessageBus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteMessageBusProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteMessageBusProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteMessageBusProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteMessageBusProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createEnrollment', () => {
+    it('invokes createEnrollment without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateEnrollmentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateEnrollmentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createEnrollment =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createEnrollment(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createEnrollment without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateEnrollmentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateEnrollmentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createEnrollment =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createEnrollment(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IEnrollment,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createEnrollment with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateEnrollmentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateEnrollmentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createEnrollment = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createEnrollment(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createEnrollment with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateEnrollmentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateEnrollmentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createEnrollment = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createEnrollment(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateEnrollmentProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateEnrollmentProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateEnrollmentProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateEnrollmentProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateEnrollment', () => {
+    it('invokes updateEnrollment without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateEnrollmentRequest()
+      );
+      request.enrollment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateEnrollmentRequest',
+        ['enrollment', 'name']
+      );
+      request.enrollment.name = defaultValue1;
+      const expectedHeaderRequestParams = `enrollment.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateEnrollment =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateEnrollment(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEnrollment without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateEnrollmentRequest()
+      );
+      request.enrollment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateEnrollmentRequest',
+        ['enrollment', 'name']
+      );
+      request.enrollment.name = defaultValue1;
+      const expectedHeaderRequestParams = `enrollment.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateEnrollment =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateEnrollment(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IEnrollment,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEnrollment with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateEnrollmentRequest()
+      );
+      request.enrollment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateEnrollmentRequest',
+        ['enrollment', 'name']
+      );
+      request.enrollment.name = defaultValue1;
+      const expectedHeaderRequestParams = `enrollment.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateEnrollment = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateEnrollment(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEnrollment with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateEnrollmentRequest()
+      );
+      request.enrollment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateEnrollmentRequest',
+        ['enrollment', 'name']
+      );
+      request.enrollment.name = defaultValue1;
+      const expectedHeaderRequestParams = `enrollment.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateEnrollment = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateEnrollment(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateEnrollmentProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateEnrollmentProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateEnrollmentProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateEnrollmentProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteEnrollment', () => {
+    it('invokes deleteEnrollment without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteEnrollmentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteEnrollmentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteEnrollment =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteEnrollment(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteEnrollment without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteEnrollmentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteEnrollmentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteEnrollment =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteEnrollment(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IEnrollment,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteEnrollment with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteEnrollmentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteEnrollmentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteEnrollment = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteEnrollment(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteEnrollment with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteEnrollmentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteEnrollmentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteEnrollment = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteEnrollment(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteEnrollment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteEnrollment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteEnrollmentProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteEnrollmentProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteEnrollmentProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteEnrollmentProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createPipeline', () => {
+    it('invokes createPipeline without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreatePipelineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreatePipelineRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createPipeline =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createPipeline(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createPipeline without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreatePipelineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreatePipelineRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createPipeline =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createPipeline(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IPipeline,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createPipeline with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreatePipelineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreatePipelineRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createPipeline = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createPipeline(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createPipeline with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreatePipelineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreatePipelineRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createPipeline = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createPipeline(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreatePipelineProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreatePipelineProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreatePipelineProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreatePipelineProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updatePipeline', () => {
+    it('invokes updatePipeline without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdatePipelineRequest()
+      );
+      request.pipeline ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdatePipelineRequest',
+        ['pipeline', 'name']
+      );
+      request.pipeline.name = defaultValue1;
+      const expectedHeaderRequestParams = `pipeline.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updatePipeline =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updatePipeline(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updatePipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePipeline without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdatePipelineRequest()
+      );
+      request.pipeline ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdatePipelineRequest',
+        ['pipeline', 'name']
+      );
+      request.pipeline.name = defaultValue1;
+      const expectedHeaderRequestParams = `pipeline.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updatePipeline =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updatePipeline(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IPipeline,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updatePipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePipeline with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdatePipelineRequest()
+      );
+      request.pipeline ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdatePipelineRequest',
+        ['pipeline', 'name']
+      );
+      request.pipeline.name = defaultValue1;
+      const expectedHeaderRequestParams = `pipeline.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updatePipeline = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updatePipeline(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updatePipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePipeline with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdatePipelineRequest()
+      );
+      request.pipeline ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdatePipelineRequest',
+        ['pipeline', 'name']
+      );
+      request.pipeline.name = defaultValue1;
+      const expectedHeaderRequestParams = `pipeline.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updatePipeline = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updatePipeline(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updatePipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdatePipelineProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdatePipelineProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdatePipelineProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdatePipelineProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deletePipeline', () => {
+    it('invokes deletePipeline without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeletePipelineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeletePipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deletePipeline =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deletePipeline(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deletePipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deletePipeline without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeletePipelineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeletePipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deletePipeline =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deletePipeline(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IPipeline,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deletePipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deletePipeline with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeletePipelineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeletePipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deletePipeline = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deletePipeline(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deletePipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deletePipeline with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeletePipelineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeletePipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deletePipeline = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deletePipeline(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deletePipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeletePipelineProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeletePipelineProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeletePipelineProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeletePipelineProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createGoogleApiSource', () => {
+    it('invokes createGoogleApiSource without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createGoogleApiSource =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createGoogleApiSource(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createGoogleApiSource without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createGoogleApiSource =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createGoogleApiSource(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IGoogleApiSource,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createGoogleApiSource with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createGoogleApiSource = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createGoogleApiSource(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createGoogleApiSource with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createGoogleApiSource = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createGoogleApiSource(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateGoogleApiSourceProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateGoogleApiSourceProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateGoogleApiSourceProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateGoogleApiSourceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateGoogleApiSource', () => {
+    it('invokes updateGoogleApiSource without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest()
+      );
+      request.googleApiSource ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest',
+        ['googleApiSource', 'name']
+      );
+      request.googleApiSource.name = defaultValue1;
+      const expectedHeaderRequestParams = `google_api_source.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateGoogleApiSource =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateGoogleApiSource(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateGoogleApiSource without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest()
+      );
+      request.googleApiSource ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest',
+        ['googleApiSource', 'name']
+      );
+      request.googleApiSource.name = defaultValue1;
+      const expectedHeaderRequestParams = `google_api_source.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateGoogleApiSource =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateGoogleApiSource(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IGoogleApiSource,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateGoogleApiSource with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest()
+      );
+      request.googleApiSource ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest',
+        ['googleApiSource', 'name']
+      );
+      request.googleApiSource.name = defaultValue1;
+      const expectedHeaderRequestParams = `google_api_source.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateGoogleApiSource = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateGoogleApiSource(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateGoogleApiSource with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest()
+      );
+      request.googleApiSource ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest',
+        ['googleApiSource', 'name']
+      );
+      request.googleApiSource.name = defaultValue1;
+      const expectedHeaderRequestParams = `google_api_source.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateGoogleApiSource = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateGoogleApiSource(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateGoogleApiSourceProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateGoogleApiSourceProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateGoogleApiSourceProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateGoogleApiSourceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteGoogleApiSource', () => {
+    it('invokes deleteGoogleApiSource without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteGoogleApiSource =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteGoogleApiSource(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteGoogleApiSource without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteGoogleApiSource =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteGoogleApiSource(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IGoogleApiSource,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteGoogleApiSource with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteGoogleApiSource = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteGoogleApiSource(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteGoogleApiSource with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteGoogleApiSource = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteGoogleApiSource(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteGoogleApiSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoogleApiSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteGoogleApiSourceProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteGoogleApiSourceProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteGoogleApiSourceProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteGoogleApiSourceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listTriggers', () => {
     it('invokes listTriggers without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
@@ -2723,7 +5597,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
@@ -2756,7 +5630,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
@@ -2805,7 +5679,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTriggers = stubSimpleCall(
         undefined,
@@ -2836,7 +5710,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
@@ -2890,7 +5764,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTriggers.createStream = stubPageStreamingCall(
         undefined,
@@ -2941,7 +5815,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
@@ -2984,7 +5858,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTriggers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3026,7 +5900,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
@@ -3059,7 +5933,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
@@ -3108,7 +5982,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listChannels = stubSimpleCall(
         undefined,
@@ -3139,7 +6013,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
@@ -3193,7 +6067,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChannels.createStream = stubPageStreamingCall(
         undefined,
@@ -3244,7 +6118,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
@@ -3287,7 +6161,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChannels.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3329,7 +6203,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
@@ -3362,7 +6236,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
@@ -3411,7 +6285,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProviders = stubSimpleCall(
         undefined,
@@ -3442,7 +6316,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
@@ -3496,7 +6370,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProviders.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3545,7 +6419,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
@@ -3588,7 +6462,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProviders.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3630,7 +6504,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.eventarc.v1.ChannelConnection()
@@ -3670,7 +6544,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.eventarc.v1.ChannelConnection()
@@ -3725,7 +6599,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listChannelConnections = stubSimpleCall(
         undefined,
@@ -3759,7 +6633,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.eventarc.v1.ChannelConnection()
@@ -3826,7 +6700,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChannelConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3882,7 +6756,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.eventarc.v1.ChannelConnection()
@@ -3936,7 +6810,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChannelConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3964,6 +6838,1536 @@ describe('v1.EventarcClient', () => {
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
           )
+      );
+    });
+  });
+
+  describe('listMessageBuses', () => {
+    it('invokes listMessageBuses without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListMessageBusesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListMessageBusesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
+      ];
+      client.innerApiCalls.listMessageBuses = stubSimpleCall(expectedResponse);
+      const [response] = await client.listMessageBuses(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listMessageBuses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMessageBuses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMessageBuses without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListMessageBusesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListMessageBusesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
+      ];
+      client.innerApiCalls.listMessageBuses =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listMessageBuses(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.v1.IMessageBus[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listMessageBuses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMessageBuses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMessageBuses with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListMessageBusesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListMessageBusesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listMessageBuses = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listMessageBuses(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listMessageBuses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMessageBuses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMessageBusesStream without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListMessageBusesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListMessageBusesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
+      ];
+      client.descriptors.page.listMessageBuses.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listMessageBusesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.eventarc.v1.MessageBus[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.eventarc.v1.MessageBus) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listMessageBuses.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMessageBuses, request)
+      );
+      assert(
+        (client.descriptors.page.listMessageBuses.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listMessageBusesStream with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListMessageBusesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListMessageBusesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMessageBuses.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listMessageBusesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.eventarc.v1.MessageBus[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.eventarc.v1.MessageBus) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listMessageBuses.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMessageBuses, request)
+      );
+      assert(
+        (client.descriptors.page.listMessageBuses.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listMessageBuses without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListMessageBusesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListMessageBusesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
+      ];
+      client.descriptors.page.listMessageBuses.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.eventarc.v1.IMessageBus[] = [];
+      const iterable = client.listMessageBusesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMessageBuses.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listMessageBuses.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listMessageBuses with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListMessageBusesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListMessageBusesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMessageBuses.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listMessageBusesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.eventarc.v1.IMessageBus[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMessageBuses.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listMessageBuses.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listMessageBusEnrollments', () => {
+    it('invokes listMessageBusEnrollments without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [new String(), new String(), new String()];
+      client.innerApiCalls.listMessageBusEnrollments =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listMessageBusEnrollments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listMessageBusEnrollments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMessageBusEnrollments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMessageBusEnrollments without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [new String(), new String(), new String()];
+      client.innerApiCalls.listMessageBusEnrollments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listMessageBusEnrollments(
+          request,
+          (err?: Error | null, result?: string[] | null) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listMessageBusEnrollments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMessageBusEnrollments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMessageBusEnrollments with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listMessageBusEnrollments = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listMessageBusEnrollments(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listMessageBusEnrollments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMessageBusEnrollments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMessageBusEnrollmentsStream without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [new String(), new String(), new String()];
+      client.descriptors.page.listMessageBusEnrollments.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listMessageBusEnrollmentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: string[] = [];
+        stream.on('data', (response: string) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listMessageBusEnrollments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMessageBusEnrollments, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listMessageBusEnrollments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listMessageBusEnrollmentsStream with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMessageBusEnrollments.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listMessageBusEnrollmentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: string[] = [];
+        stream.on('data', (response: string) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listMessageBusEnrollments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMessageBusEnrollments, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listMessageBusEnrollments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listMessageBusEnrollments without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [new String(), new String(), new String()];
+      client.descriptors.page.listMessageBusEnrollments.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: string[] = [];
+      const iterable = client.listMessageBusEnrollmentsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMessageBusEnrollments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listMessageBusEnrollments
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listMessageBusEnrollments with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMessageBusEnrollments.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listMessageBusEnrollmentsAsync(request);
+      await assert.rejects(async () => {
+        const responses: string[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMessageBusEnrollments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listMessageBusEnrollments
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listEnrollments', () => {
+    it('invokes listEnrollments without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListEnrollmentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListEnrollmentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
+      ];
+      client.innerApiCalls.listEnrollments = stubSimpleCall(expectedResponse);
+      const [response] = await client.listEnrollments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listEnrollments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEnrollments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEnrollments without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListEnrollmentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListEnrollmentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
+      ];
+      client.innerApiCalls.listEnrollments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listEnrollments(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.v1.IEnrollment[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listEnrollments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEnrollments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEnrollments with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListEnrollmentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListEnrollmentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listEnrollments = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listEnrollments(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listEnrollments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEnrollments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEnrollmentsStream without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListEnrollmentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListEnrollmentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
+      ];
+      client.descriptors.page.listEnrollments.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listEnrollmentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.eventarc.v1.Enrollment[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.eventarc.v1.Enrollment) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listEnrollments.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listEnrollments, request)
+      );
+      assert(
+        (client.descriptors.page.listEnrollments.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listEnrollmentsStream with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListEnrollmentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListEnrollmentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEnrollments.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listEnrollmentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.eventarc.v1.Enrollment[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.eventarc.v1.Enrollment) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listEnrollments.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listEnrollments, request)
+      );
+      assert(
+        (client.descriptors.page.listEnrollments.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listEnrollments without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListEnrollmentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListEnrollmentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
+      ];
+      client.descriptors.page.listEnrollments.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.eventarc.v1.IEnrollment[] = [];
+      const iterable = client.listEnrollmentsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listEnrollments.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listEnrollments.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listEnrollments with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListEnrollmentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListEnrollmentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEnrollments.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listEnrollmentsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.eventarc.v1.IEnrollment[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listEnrollments.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listEnrollments.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listPipelines', () => {
+    it('invokes listPipelines without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListPipelinesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
+      ];
+      client.innerApiCalls.listPipelines = stubSimpleCall(expectedResponse);
+      const [response] = await client.listPipelines(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPipelines as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPipelines as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPipelines without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListPipelinesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
+      ];
+      client.innerApiCalls.listPipelines =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listPipelines(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.v1.IPipeline[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPipelines as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPipelines as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPipelines with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListPipelinesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listPipelines = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listPipelines(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listPipelines as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPipelines as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPipelinesStream without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListPipelinesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
+      ];
+      client.descriptors.page.listPipelines.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listPipelinesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.eventarc.v1.Pipeline[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.eventarc.v1.Pipeline) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listPipelines.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPipelines, request)
+      );
+      assert(
+        (client.descriptors.page.listPipelines.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listPipelinesStream with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListPipelinesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPipelines.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listPipelinesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.eventarc.v1.Pipeline[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.eventarc.v1.Pipeline) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listPipelines.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPipelines, request)
+      );
+      assert(
+        (client.descriptors.page.listPipelines.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listPipelines without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListPipelinesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
+      ];
+      client.descriptors.page.listPipelines.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.eventarc.v1.IPipeline[] = [];
+      const iterable = client.listPipelinesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPipelines.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listPipelines.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listPipelines with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListPipelinesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPipelines.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listPipelinesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.eventarc.v1.IPipeline[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPipelines.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listPipelines.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listGoogleApiSources', () => {
+    it('invokes listGoogleApiSources without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.GoogleApiSource()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.GoogleApiSource()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.GoogleApiSource()
+        ),
+      ];
+      client.innerApiCalls.listGoogleApiSources =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listGoogleApiSources(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoogleApiSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoogleApiSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoogleApiSources without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.GoogleApiSource()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.GoogleApiSource()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.GoogleApiSource()
+        ),
+      ];
+      client.innerApiCalls.listGoogleApiSources =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listGoogleApiSources(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.v1.IGoogleApiSource[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoogleApiSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoogleApiSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoogleApiSources with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listGoogleApiSources = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listGoogleApiSources(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listGoogleApiSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoogleApiSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoogleApiSourcesStream without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.GoogleApiSource()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.GoogleApiSource()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.GoogleApiSource()
+        ),
+      ];
+      client.descriptors.page.listGoogleApiSources.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listGoogleApiSourcesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.eventarc.v1.GoogleApiSource[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.eventarc.v1.GoogleApiSource) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listGoogleApiSources.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listGoogleApiSources, request)
+      );
+      assert(
+        (client.descriptors.page.listGoogleApiSources.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listGoogleApiSourcesStream with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoogleApiSources.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listGoogleApiSourcesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.eventarc.v1.GoogleApiSource[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.eventarc.v1.GoogleApiSource) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listGoogleApiSources.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listGoogleApiSources, request)
+      );
+      assert(
+        (client.descriptors.page.listGoogleApiSources.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listGoogleApiSources without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.GoogleApiSource()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.GoogleApiSource()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.GoogleApiSource()
+        ),
+      ];
+      client.descriptors.page.listGoogleApiSources.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.eventarc.v1.IGoogleApiSource[] = [];
+      const iterable = client.listGoogleApiSourcesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoogleApiSources.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listGoogleApiSources.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listGoogleApiSources with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoogleApiSources.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listGoogleApiSourcesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.eventarc.v1.IGoogleApiSource[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoogleApiSources.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listGoogleApiSources.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4937,6 +9341,135 @@ describe('v1.EventarcClient', () => {
       });
     });
 
+    describe('enrollment', () => {
+      const fakePath = '/rendered/path/enrollment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        enrollment: 'enrollmentValue',
+      };
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.enrollmentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.enrollmentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('enrollmentPath', () => {
+        const result = client.enrollmentPath(
+          'projectValue',
+          'locationValue',
+          'enrollmentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.enrollmentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromEnrollmentName', () => {
+        const result = client.matchProjectFromEnrollmentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.enrollmentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromEnrollmentName', () => {
+        const result = client.matchLocationFromEnrollmentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.enrollmentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnrollmentFromEnrollmentName', () => {
+        const result = client.matchEnrollmentFromEnrollmentName(fakePath);
+        assert.strictEqual(result, 'enrollmentValue');
+        assert(
+          (client.pathTemplates.enrollmentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('googleApiSource', () => {
+      const fakePath = '/rendered/path/googleApiSource';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        google_api_source: 'googleApiSourceValue',
+      };
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.googleApiSourcePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.googleApiSourcePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('googleApiSourcePath', () => {
+        const result = client.googleApiSourcePath(
+          'projectValue',
+          'locationValue',
+          'googleApiSourceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.googleApiSourcePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromGoogleApiSourceName', () => {
+        const result = client.matchProjectFromGoogleApiSourceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.googleApiSourcePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromGoogleApiSourceName', () => {
+        const result = client.matchLocationFromGoogleApiSourceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.googleApiSourcePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchGoogleApiSourceFromGoogleApiSourceName', () => {
+        const result =
+          client.matchGoogleApiSourceFromGoogleApiSourceName(fakePath);
+        assert.strictEqual(result, 'googleApiSourceValue');
+        assert(
+          (client.pathTemplates.googleApiSourcePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('googleChannelConfig', () => {
       const fakePath = '/rendered/path/googleChannelConfig';
       const expectedParameters = {
@@ -5042,6 +9575,134 @@ describe('v1.EventarcClient', () => {
         assert.strictEqual(result, 'locationValue');
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('messageBus', () => {
+      const fakePath = '/rendered/path/messageBus';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        message_bus: 'messageBusValue',
+      };
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.messageBusPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.messageBusPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('messageBusPath', () => {
+        const result = client.messageBusPath(
+          'projectValue',
+          'locationValue',
+          'messageBusValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.messageBusPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromMessageBusName', () => {
+        const result = client.matchProjectFromMessageBusName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.messageBusPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromMessageBusName', () => {
+        const result = client.matchLocationFromMessageBusName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.messageBusPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMessageBusFromMessageBusName', () => {
+        const result = client.matchMessageBusFromMessageBusName(fakePath);
+        assert.strictEqual(result, 'messageBusValue');
+        assert(
+          (client.pathTemplates.messageBusPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('pipeline', () => {
+      const fakePath = '/rendered/path/pipeline';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        pipeline: 'pipelineValue',
+      };
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.pipelinePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.pipelinePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('pipelinePath', () => {
+        const result = client.pipelinePath(
+          'projectValue',
+          'locationValue',
+          'pipelineValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.pipelinePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPipelineName', () => {
+        const result = client.matchProjectFromPipelineName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.pipelinePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPipelineName', () => {
+        const result = client.matchLocationFromPipelineName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.pipelinePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPipelineFromPipelineName', () => {
+        const result = client.matchPipelineFromPipelineName(fakePath);
+        assert.strictEqual(result, 'pipelineValue');
+        assert(
+          (client.pathTemplates.pipelinePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

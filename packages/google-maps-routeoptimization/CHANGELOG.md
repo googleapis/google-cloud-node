@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/routeoptimization-v0.3.0...routeoptimization-v0.3.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6019](https://github.com/googleapis/google-cloud-node/issues/6019)) ([734397c](https://github.com/googleapis/google-cloud-node/commit/734397c6b98d0aafe8832544da3f483b1eade1b2))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/routeoptimization-v0.2.0...routeoptimization-v0.3.0) (2024-10-10)
+
+
+### Features
+
+* [routeoptimization] Add support for generating route tokens ([#5706](https://github.com/googleapis/google-cloud-node/issues/5706)) ([ade97ed](https://github.com/googleapis/google-cloud-node/commit/ade97eddd23ffa8e89526221b564c0eacd3b078e))
+* A new field `route_token` is added to message `.google.maps.routeoptimization.v1.ShipmentRoute.Transition` ([ade97ed](https://github.com/googleapis/google-cloud-node/commit/ade97eddd23ffa8e89526221b564c0eacd3b078e))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/routeoptimization-v0.1.0...routeoptimization-v0.2.0) (2024-09-24)
+
+
+### Features
+
+* [routeoptimization] minor fields and documentation update ([#5677](https://github.com/googleapis/google-cloud-node/issues/5677)) ([90a7e94](https://github.com/googleapis/google-cloud-node/commit/90a7e94a18e2472fd3e942c1006c0d53b5ab33fb))
+
 ## 0.1.0 (2024-05-23)
 
 

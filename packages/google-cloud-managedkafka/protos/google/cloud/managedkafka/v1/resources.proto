@@ -31,6 +31,10 @@ option (google.api.resource_definition) = {
   type: "cloudkms.googleapis.com/CryptoKey"
   pattern: "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
 };
+option (google.api.resource_definition) = {
+  type: "secretmanager.googleapis.com/SecretVersion"
+  pattern: "projects/{project}/secrets/{secret}/versions/{secret_version}"
+};
 
 // An Apache Kafka cluster deployed in a location.
 message Cluster {
@@ -86,6 +90,12 @@ message Cluster {
 
   // Output only. The current state of the cluster.
   State state = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Reserved for future use.
+  optional bool satisfies_pzi = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Reserved for future use.
+  optional bool satisfies_pzs = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // A capacity configuration of a Kafka cluster.

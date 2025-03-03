@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -350,6 +350,12 @@ export class DatastreamClient {
     const deleteStreamMetadata = protoFilesRoot.lookup(
       '.google.cloud.datastream.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const runStreamResponse = protoFilesRoot.lookup(
+      '.google.cloud.datastream.v1.Stream'
+    ) as gax.protobuf.Type;
+    const runStreamMetadata = protoFilesRoot.lookup(
+      '.google.cloud.datastream.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const createPrivateConnectionResponse = protoFilesRoot.lookup(
       '.google.cloud.datastream.v1.PrivateConnection'
     ) as gax.protobuf.Type;
@@ -417,6 +423,11 @@ export class DatastreamClient {
         this.operationsClient,
         deleteStreamResponse.decode.bind(deleteStreamResponse),
         deleteStreamMetadata.decode.bind(deleteStreamMetadata)
+      ),
+      runStream: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        runStreamResponse.decode.bind(runStreamResponse),
+        runStreamMetadata.decode.bind(runStreamMetadata)
       ),
       createPrivateConnection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -509,6 +520,7 @@ export class DatastreamClient {
       'createStream',
       'updateStream',
       'deleteStream',
+      'runStream',
       'getStreamObject',
       'lookupStreamObject',
       'listStreamObjects',
@@ -762,6 +774,8 @@ export class DatastreamClient {
    *   MySQL RDBMS to enrich with child data objects and metadata.
    * @param {google.cloud.datastream.v1.PostgresqlRdbms} request.postgresqlRdbms
    *   PostgreSQL RDBMS to enrich with child data objects and metadata.
+   * @param {google.cloud.datastream.v1.SqlServerRdbms} request.sqlServerRdbms
+   *   SQLServer RDBMS to enrich with child data objects and metadata.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2435,6 +2449,149 @@ export class DatastreamClient {
     >;
   }
   /**
+   * Use this method to start, resume or recover a stream with a non default CDC
+   * strategy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the stream resource to start, in the format:
+   *   projects/{project_id}/locations/{location}/streams/{stream_name}
+   * @param {google.cloud.datastream.v1.CdcStrategy} [request.cdcStrategy]
+   *   Optional. The CDC strategy of the stream. If not set, the system's default
+   *   value will be used.
+   * @param {boolean} [request.force]
+   *   Optional. Update the stream without validating it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/datastream.run_stream.js</caption>
+   * region_tag:datastream_v1_generated_Datastream_RunStream_async
+   */
+  runStream(
+    request?: protos.google.cloud.datastream.v1.IRunStreamRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datastream.v1.IStream,
+        protos.google.cloud.datastream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  runStream(
+    request: protos.google.cloud.datastream.v1.IRunStreamRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datastream.v1.IStream,
+        protos.google.cloud.datastream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runStream(
+    request: protos.google.cloud.datastream.v1.IRunStreamRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datastream.v1.IStream,
+        protos.google.cloud.datastream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runStream(
+    request?: protos.google.cloud.datastream.v1.IRunStreamRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.datastream.v1.IStream,
+            protos.google.cloud.datastream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.datastream.v1.IStream,
+        protos.google.cloud.datastream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datastream.v1.IStream,
+        protos.google.cloud.datastream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.runStream(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `runStream()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/datastream.run_stream.js</caption>
+   * region_tag:datastream_v1_generated_Datastream_RunStream_async
+   */
+  async checkRunStreamProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.datastream.v1.Stream,
+      protos.google.cloud.datastream.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.runStream,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.datastream.v1.Stream,
+      protos.google.cloud.datastream.v1.OperationMetadata
+    >;
+  }
+  /**
    * Use this method to create a private connectivity configuration.
    *
    * @param {Object} request
@@ -3170,7 +3327,7 @@ export class DatastreamClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConnectionProfiles`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3380,7 +3537,7 @@ export class DatastreamClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listStreams`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3592,7 +3749,7 @@ export class DatastreamClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listStreamObjects`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3793,7 +3950,7 @@ export class DatastreamClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `fetchStaticIps`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -4001,7 +4158,7 @@ export class DatastreamClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPrivateConnections`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4220,7 +4377,7 @@ export class DatastreamClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRoutes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4579,7 +4736,7 @@ export class DatastreamClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -4592,6 +4749,20 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -4628,6 +4799,13 @@ export class DatastreamClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -4663,11 +4841,11 @@ export class DatastreamClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -4676,6 +4854,20 @@ export class DatastreamClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -4706,7 +4898,7 @@ export class DatastreamClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -4719,6 +4911,20 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1301,7 +1301,7 @@ export namespace google {
                         languageCode?: (string|null);
 
                         /** ListAccountIssuesRequest timeZone */
-                        timeZone?: (google.type.ITimeZone|null);
+                        timeZone?: (string|null);
                     }
 
                     /** Represents a ListAccountIssuesRequest. */
@@ -1326,7 +1326,7 @@ export namespace google {
                         public languageCode: string;
 
                         /** ListAccountIssuesRequest timeZone. */
-                        public timeZone?: (google.type.ITimeZone|null);
+                        public timeZone: string;
 
                         /**
                          * Creates a new ListAccountIssuesRequest instance using the specified properties.
@@ -2116,7 +2116,7 @@ export namespace google {
                         interface IAddAccountService {
 
                             /** AddAccountService accountAggregation */
-                            accountAggregation?: (google.protobuf.IEmpty|null);
+                            accountAggregation?: (google.shopping.merchant.accounts.v1beta.IAccountAggregation|null);
 
                             /** AddAccountService provider */
                             provider?: (string|null);
@@ -2132,7 +2132,7 @@ export namespace google {
                             constructor(properties?: google.shopping.merchant.accounts.v1beta.CreateAndConfigureAccountRequest.IAddAccountService);
 
                             /** AddAccountService accountAggregation. */
-                            public accountAggregation?: (google.protobuf.IEmpty|null);
+                            public accountAggregation?: (google.shopping.merchant.accounts.v1beta.IAccountAggregation|null);
 
                             /** AddAccountService provider. */
                             public provider?: (string|null);
@@ -2227,6 +2227,9 @@ export namespace google {
 
                         /** DeleteAccountRequest name */
                         name?: (string|null);
+
+                        /** DeleteAccountRequest force */
+                        force?: (boolean|null);
                     }
 
                     /** Represents a DeleteAccountRequest. */
@@ -2240,6 +2243,9 @@ export namespace google {
 
                         /** DeleteAccountRequest name. */
                         public name: string;
+
+                        /** DeleteAccountRequest force. */
+                        public force: boolean;
 
                         /**
                          * Creates a new DeleteAccountRequest instance using the specified properties.
@@ -2840,6 +2846,97 @@ export namespace google {
 
                         /**
                          * Gets the default type url for ListSubAccountsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AccountAggregation. */
+                    interface IAccountAggregation {
+                    }
+
+                    /** Represents an AccountAggregation. */
+                    class AccountAggregation implements IAccountAggregation {
+
+                        /**
+                         * Constructs a new AccountAggregation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IAccountAggregation);
+
+                        /**
+                         * Creates a new AccountAggregation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AccountAggregation instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IAccountAggregation): google.shopping.merchant.accounts.v1beta.AccountAggregation;
+
+                        /**
+                         * Encodes the specified AccountAggregation message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AccountAggregation.verify|verify} messages.
+                         * @param message AccountAggregation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IAccountAggregation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AccountAggregation message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AccountAggregation.verify|verify} messages.
+                         * @param message AccountAggregation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IAccountAggregation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AccountAggregation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AccountAggregation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.AccountAggregation;
+
+                        /**
+                         * Decodes an AccountAggregation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AccountAggregation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.AccountAggregation;
+
+                        /**
+                         * Verifies an AccountAggregation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AccountAggregation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AccountAggregation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.AccountAggregation;
+
+                        /**
+                         * Creates a plain object from an AccountAggregation message. Also converts values to other types if specified.
+                         * @param message AccountAggregation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.AccountAggregation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AccountAggregation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AccountAggregation
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -3712,6 +3809,381 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Represents an AutofeedSettingsService */
+                    class AutofeedSettingsService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new AutofeedSettingsService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new AutofeedSettingsService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AutofeedSettingsService;
+
+                        /**
+                         * Calls GetAutofeedSettings.
+                         * @param request GetAutofeedSettingsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and AutofeedSettings
+                         */
+                        public getAutofeedSettings(request: google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest, callback: google.shopping.merchant.accounts.v1beta.AutofeedSettingsService.GetAutofeedSettingsCallback): void;
+
+                        /**
+                         * Calls GetAutofeedSettings.
+                         * @param request GetAutofeedSettingsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getAutofeedSettings(request: google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest): Promise<google.shopping.merchant.accounts.v1beta.AutofeedSettings>;
+
+                        /**
+                         * Calls UpdateAutofeedSettings.
+                         * @param request UpdateAutofeedSettingsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and AutofeedSettings
+                         */
+                        public updateAutofeedSettings(request: google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest, callback: google.shopping.merchant.accounts.v1beta.AutofeedSettingsService.UpdateAutofeedSettingsCallback): void;
+
+                        /**
+                         * Calls UpdateAutofeedSettings.
+                         * @param request UpdateAutofeedSettingsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateAutofeedSettings(request: google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest): Promise<google.shopping.merchant.accounts.v1beta.AutofeedSettings>;
+                    }
+
+                    namespace AutofeedSettingsService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.AutofeedSettingsService|getAutofeedSettings}.
+                         * @param error Error, if any
+                         * @param [response] AutofeedSettings
+                         */
+                        type GetAutofeedSettingsCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.AutofeedSettings) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.AutofeedSettingsService|updateAutofeedSettings}.
+                         * @param error Error, if any
+                         * @param [response] AutofeedSettings
+                         */
+                        type UpdateAutofeedSettingsCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.AutofeedSettings) => void;
+                    }
+
+                    /** Properties of an AutofeedSettings. */
+                    interface IAutofeedSettings {
+
+                        /** AutofeedSettings name */
+                        name?: (string|null);
+
+                        /** AutofeedSettings enableProducts */
+                        enableProducts?: (boolean|null);
+
+                        /** AutofeedSettings eligible */
+                        eligible?: (boolean|null);
+                    }
+
+                    /** Represents an AutofeedSettings. */
+                    class AutofeedSettings implements IAutofeedSettings {
+
+                        /**
+                         * Constructs a new AutofeedSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IAutofeedSettings);
+
+                        /** AutofeedSettings name. */
+                        public name: string;
+
+                        /** AutofeedSettings enableProducts. */
+                        public enableProducts: boolean;
+
+                        /** AutofeedSettings eligible. */
+                        public eligible: boolean;
+
+                        /**
+                         * Creates a new AutofeedSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AutofeedSettings instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IAutofeedSettings): google.shopping.merchant.accounts.v1beta.AutofeedSettings;
+
+                        /**
+                         * Encodes the specified AutofeedSettings message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutofeedSettings.verify|verify} messages.
+                         * @param message AutofeedSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IAutofeedSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AutofeedSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutofeedSettings.verify|verify} messages.
+                         * @param message AutofeedSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IAutofeedSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AutofeedSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AutofeedSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.AutofeedSettings;
+
+                        /**
+                         * Decodes an AutofeedSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AutofeedSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.AutofeedSettings;
+
+                        /**
+                         * Verifies an AutofeedSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AutofeedSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AutofeedSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.AutofeedSettings;
+
+                        /**
+                         * Creates a plain object from an AutofeedSettings message. Also converts values to other types if specified.
+                         * @param message AutofeedSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.AutofeedSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AutofeedSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AutofeedSettings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetAutofeedSettingsRequest. */
+                    interface IGetAutofeedSettingsRequest {
+
+                        /** GetAutofeedSettingsRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetAutofeedSettingsRequest. */
+                    class GetAutofeedSettingsRequest implements IGetAutofeedSettingsRequest {
+
+                        /**
+                         * Constructs a new GetAutofeedSettingsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest);
+
+                        /** GetAutofeedSettingsRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetAutofeedSettingsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetAutofeedSettingsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest): google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest;
+
+                        /**
+                         * Encodes the specified GetAutofeedSettingsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest.verify|verify} messages.
+                         * @param message GetAutofeedSettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetAutofeedSettingsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest.verify|verify} messages.
+                         * @param message GetAutofeedSettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetAutofeedSettingsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetAutofeedSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest;
+
+                        /**
+                         * Decodes a GetAutofeedSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetAutofeedSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest;
+
+                        /**
+                         * Verifies a GetAutofeedSettingsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetAutofeedSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetAutofeedSettingsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest;
+
+                        /**
+                         * Creates a plain object from a GetAutofeedSettingsRequest message. Also converts values to other types if specified.
+                         * @param message GetAutofeedSettingsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetAutofeedSettingsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetAutofeedSettingsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateAutofeedSettingsRequest. */
+                    interface IUpdateAutofeedSettingsRequest {
+
+                        /** UpdateAutofeedSettingsRequest autofeedSettings */
+                        autofeedSettings?: (google.shopping.merchant.accounts.v1beta.IAutofeedSettings|null);
+
+                        /** UpdateAutofeedSettingsRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateAutofeedSettingsRequest. */
+                    class UpdateAutofeedSettingsRequest implements IUpdateAutofeedSettingsRequest {
+
+                        /**
+                         * Constructs a new UpdateAutofeedSettingsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest);
+
+                        /** UpdateAutofeedSettingsRequest autofeedSettings. */
+                        public autofeedSettings?: (google.shopping.merchant.accounts.v1beta.IAutofeedSettings|null);
+
+                        /** UpdateAutofeedSettingsRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateAutofeedSettingsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateAutofeedSettingsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest): google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest;
+
+                        /**
+                         * Encodes the specified UpdateAutofeedSettingsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest.verify|verify} messages.
+                         * @param message UpdateAutofeedSettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateAutofeedSettingsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest.verify|verify} messages.
+                         * @param message UpdateAutofeedSettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateAutofeedSettingsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateAutofeedSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest;
+
+                        /**
+                         * Decodes an UpdateAutofeedSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateAutofeedSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest;
+
+                        /**
+                         * Verifies an UpdateAutofeedSettingsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateAutofeedSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateAutofeedSettingsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateAutofeedSettingsRequest message. Also converts values to other types if specified.
+                         * @param message UpdateAutofeedSettingsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateAutofeedSettingsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateAutofeedSettingsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Represents a BusinessIdentityService */
                     class BusinessIdentityService extends $protobuf.rpc.Service {
 
@@ -4311,6 +4783,9 @@ export namespace google {
 
                         /** BusinessInfo customerService */
                         customerService?: (google.shopping.merchant.accounts.v1beta.ICustomerService|null);
+
+                        /** BusinessInfo koreanBusinessRegistrationNumber */
+                        koreanBusinessRegistrationNumber?: (string|null);
                     }
 
                     /** Represents a BusinessInfo. */
@@ -4337,6 +4812,9 @@ export namespace google {
                         /** BusinessInfo customerService. */
                         public customerService?: (google.shopping.merchant.accounts.v1beta.ICustomerService|null);
 
+                        /** BusinessInfo koreanBusinessRegistrationNumber. */
+                        public koreanBusinessRegistrationNumber?: (string|null);
+
                         /** BusinessInfo _address. */
                         public _address?: "address";
 
@@ -4348,6 +4826,9 @@ export namespace google {
 
                         /** BusinessInfo _customerService. */
                         public _customerService?: "customerService";
+
+                        /** BusinessInfo _koreanBusinessRegistrationNumber. */
+                        public _koreanBusinessRegistrationNumber?: "koreanBusinessRegistrationNumber";
 
                         /**
                          * Creates a new BusinessInfo instance using the specified properties.

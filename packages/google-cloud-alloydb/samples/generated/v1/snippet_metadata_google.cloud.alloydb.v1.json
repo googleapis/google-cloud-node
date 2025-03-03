@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-alloydb",
-        "version": "1.9.0",
+        "version": "1.10.2",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -234,7 +234,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 84,
+                    "end": 85,
                     "type": "FULL"
                 }
             ],
@@ -290,7 +290,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 81,
                     "type": "FULL"
                 }
             ],
@@ -324,6 +324,54 @@
                 "method": {
                     "shortName": "PromoteCluster",
                     "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.PromoteCluster",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "alloydb_v1_generated_AlloyDBAdmin_SwitchoverCluster_async",
+            "title": "AlloyDBAdmin switchoverCluster Sample",
+            "origin": "API_DEFINITION",
+            "description": " Switches the roles of PRIMARY and SECONDARY clusters without any data loss. This promotes the SECONDARY cluster to PRIMARY and sets up the original PRIMARY cluster to replicate from this newly promoted cluster.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.switchover_cluster.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SwitchoverCluster",
+                "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.SwitchoverCluster",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "SwitchoverCluster",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.SwitchoverCluster",
                     "service": {
                         "shortName": "AlloyDBAdmin",
                         "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
@@ -778,7 +826,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 81,
                     "type": "FULL"
                 }
             ],
@@ -830,7 +878,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -930,7 +978,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -950,6 +998,10 @@
                     {
                         "name": "validate_only",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "node_ids",
+                        "type": "TYPE_STRING[]"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -960,6 +1012,62 @@
                 "method": {
                     "shortName": "RestartInstance",
                     "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.RestartInstance",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "alloydb_v1_generated_AlloyDBAdmin_ExecuteSql_async",
+            "title": "AlloyDBAdmin executeSql Sample",
+            "origin": "API_DEFINITION",
+            "description": " Executes a SQL statement in a database inside an AlloyDB instance.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.execute_sql.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 78,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExecuteSql",
+                "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.ExecuteSql",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "password",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "instance",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "database",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "user",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "sql_statement",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.alloydb.v1.ExecuteSqlResponse",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "ExecuteSql",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.ExecuteSql",
                     "service": {
                         "shortName": "AlloyDBAdmin",
                         "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
@@ -1624,6 +1732,58 @@
                 "method": {
                     "shortName": "DeleteUser",
                     "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.DeleteUser",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "alloydb_v1_generated_AlloyDBAdmin_ListDatabases_async",
+            "title": "AlloyDBAdmin listDatabases Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists Databases in a given project and location.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.list_databases.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 73,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListDatabases",
+                "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.ListDatabases",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.alloydb.v1.ListDatabasesResponse",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "ListDatabases",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.ListDatabases",
                     "service": {
                         "shortName": "AlloyDBAdmin",
                         "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"

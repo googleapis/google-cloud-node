@@ -24,12 +24,12 @@ body:
             e.js"
           required: true
         - label: "Check our Troubleshooting guide:
-            https://googlecloudplatform.github.io/google-cloud-node/#/docs/guid\
-            es/troubleshooting"
+            https://github.com/googleapis/google-cloud-node/blob/main/docs/trou\
+            bleshooting.md"
           required: true
         - label: "Check our FAQ:
-            https://googlecloudplatform.github.io/google-cloud-node/#/docs/guid\
-            es/faq"
+            https://github.com/googleapis/google-cloud-node/blob/main/docs/faq.\
+            md"
           required: true
         - label: "Check our libraries HOW-TO:
             https://github.com/googleapis/gax-nodejs/blob/main/client-libraries\

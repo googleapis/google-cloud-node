@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,7 +35,15 @@ function main() {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Filters to restrict results to specific answer records.
+   *  Optional. Filters to restrict results to specific answer records. The
+   *  expression has the following syntax:
+   *    <field> <operator> <value> AND <field> <operator> <value>  ...
+   *  The following fields and operators are supported:
+   *  * conversation_id with equals(=) operator
+   *  Examples:
+   *  * "conversation_id=bar" matches answer records in the
+   *    projects/foo/locations/global/conversations/bar conversation
+   *    (assuming the parent is projects/foo/locations/global).
    *  For more information about filtering, see
    *  API Filtering (https://aip.dev/160).
    */

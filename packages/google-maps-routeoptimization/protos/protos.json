@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -1283,6 +1286,13 @@
                             "routePolyline": {
                               "type": "EncodedPolyline",
                               "id": 9
+                            },
+                            "routeToken": {
+                              "type": "string",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "vehicleLoads": {
                               "keyType": "string",

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v1alpha from './v1alpha';
 import * as v1beta from './v1beta';
 import * as v1beta2 from './v1beta2';
 import * as v1beta3 from './v1beta3';
@@ -33,6 +34,8 @@ const ModelServiceClient = v1beta.ModelServiceClient;
 type ModelServiceClient = v1beta.ModelServiceClient;
 const PermissionServiceClient = v1beta.PermissionServiceClient;
 type PermissionServiceClient = v1beta.PermissionServiceClient;
+const PredictionServiceClient = v1beta.PredictionServiceClient;
+type PredictionServiceClient = v1beta.PredictionServiceClient;
 const RetrieverServiceClient = v1beta.RetrieverServiceClient;
 type RetrieverServiceClient = v1beta.RetrieverServiceClient;
 const TextServiceClient = v1beta.TextServiceClient;
@@ -40,6 +43,7 @@ type TextServiceClient = v1beta.TextServiceClient;
 
 export {
   v1,
+  v1alpha,
   v1beta,
   v1beta2,
   v1beta3,
@@ -49,11 +53,13 @@ export {
   GenerativeServiceClient,
   ModelServiceClient,
   PermissionServiceClient,
+  PredictionServiceClient,
   RetrieverServiceClient,
   TextServiceClient,
 };
 export default {
   v1,
+  v1alpha,
   v1beta,
   v1beta2,
   v1beta3,
@@ -63,6 +69,7 @@ export default {
   GenerativeServiceClient,
   ModelServiceClient,
   PermissionServiceClient,
+  PredictionServiceClient,
   RetrieverServiceClient,
   TextServiceClient,
 };

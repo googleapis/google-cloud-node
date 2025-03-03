@@ -20,6 +20,16 @@
                 "getClusterCertificateAuthority"
               ]
             },
+            "GetBackupCollection": {
+              "methods": [
+                "getBackupCollection"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
             "UpdateCluster": {
               "methods": [
                 "updateCluster"
@@ -35,11 +45,45 @@
                 "createCluster"
               ]
             },
+            "RescheduleClusterMaintenance": {
+              "methods": [
+                "rescheduleClusterMaintenance"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "ExportBackup": {
+              "methods": [
+                "exportBackup"
+              ]
+            },
+            "BackupCluster": {
+              "methods": [
+                "backupCluster"
+              ]
+            },
             "ListClusters": {
               "methods": [
                 "listClusters",
                 "listClustersStream",
                 "listClustersAsync"
+              ]
+            },
+            "ListBackupCollections": {
+              "methods": [
+                "listBackupCollections",
+                "listBackupCollectionsStream",
+                "listBackupCollectionsAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
               ]
             }
           }
@@ -57,6 +101,16 @@
                 "getClusterCertificateAuthority"
               ]
             },
+            "GetBackupCollection": {
+              "methods": [
+                "getBackupCollection"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
             "UpdateCluster": {
               "methods": [
                 "updateCluster"
@@ -72,11 +126,45 @@
                 "createCluster"
               ]
             },
+            "RescheduleClusterMaintenance": {
+              "methods": [
+                "rescheduleClusterMaintenance"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "ExportBackup": {
+              "methods": [
+                "exportBackup"
+              ]
+            },
+            "BackupCluster": {
+              "methods": [
+                "backupCluster"
+              ]
+            },
             "ListClusters": {
               "methods": [
                 "listClusters",
                 "listClustersStream",
                 "listClustersAsync"
+              ]
+            },
+            "ListBackupCollections": {
+              "methods": [
+                "listBackupCollections",
+                "listBackupCollectionsStream",
+                "listBackupCollectionsAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
               ]
             }
           }

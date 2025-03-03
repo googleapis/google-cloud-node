@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-privilegedaccessmanager",
-        "version": "0.1.0",
+        "version": "0.2.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -15,7 +15,7 @@
             "regionTag": "privilegedaccessmanager_v1_generated_PrivilegedAccessManager_CheckOnboardingStatus_async",
             "title": "PrivilegedAccessManager checkOnboardingStatus Sample",
             "origin": "API_DEFINITION",
-            "description": " CheckOnboardingStatus reports the onboarding status for a project/folder/organization. Any findings reported by this API need to be fixed before PAM can be used on the resource.",
+            "description": " `CheckOnboardingStatus` reports the onboarding status for a project/folder/organization. Any findings reported by this API need to be fixed before PAM can be used on the resource.",
             "canonical": true,
             "file": "privileged_access_manager.check_onboarding_status.js",
             "language": "JAVASCRIPT",
@@ -259,14 +259,14 @@
             "regionTag": "privilegedaccessmanager_v1_generated_PrivilegedAccessManager_DeleteEntitlement_async",
             "title": "PrivilegedAccessManager deleteEntitlement Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes a single entitlement. This method can only be called when there are no in-progress (ACTIVE/ACTIVATING/REVOKING) grants under the entitlement.",
+            "description": " Deletes a single entitlement. This method can only be called when there are no in-progress (`ACTIVE`/`ACTIVATING`/`REVOKING`) grants under the entitlement.",
             "canonical": true,
             "file": "privileged_access_manager.delete_entitlement.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],
@@ -503,7 +503,7 @@
             "regionTag": "privilegedaccessmanager_v1_generated_PrivilegedAccessManager_CreateGrant_async",
             "title": "PrivilegedAccessManager createGrant Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a new grant in a given project and location.",
+            "description": " Creates a new grant in a given project/folder/organization and location.",
             "canonical": true,
             "file": "privileged_access_manager.create_grant.js",
             "language": "JAVASCRIPT",

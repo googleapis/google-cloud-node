@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -365,6 +365,12 @@ export class GDCHardwareManagementClient {
     const updateSiteMetadata = protoFilesRoot.lookup(
       '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
     ) as gax.protobuf.Type;
+    const deleteSiteResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteSiteMetadata = protoFilesRoot.lookup(
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
+    ) as gax.protobuf.Type;
     const createHardwareGroupResponse = protoFilesRoot.lookup(
       '.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup'
     ) as gax.protobuf.Type;
@@ -462,6 +468,11 @@ export class GDCHardwareManagementClient {
         this.operationsClient,
         updateSiteResponse.decode.bind(updateSiteResponse),
         updateSiteMetadata.decode.bind(updateSiteMetadata)
+      ),
+      deleteSite: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteSiteResponse.decode.bind(deleteSiteResponse),
+        deleteSiteMetadata.decode.bind(deleteSiteMetadata)
       ),
       createHardwareGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -581,6 +592,7 @@ export class GDCHardwareManagementClient {
       'getSite',
       'createSite',
       'updateSite',
+      'deleteSite',
       'listHardwareGroups',
       'getHardwareGroup',
       'createHardwareGroup',
@@ -594,6 +606,7 @@ export class GDCHardwareManagementClient {
       'listComments',
       'getComment',
       'createComment',
+      'recordActionOnComment',
       'listChangeLogEntries',
       'getChangeLogEntry',
       'listSkus',
@@ -1206,6 +1219,109 @@ export class GDCHardwareManagementClient {
       });
     this.initialize();
     return this.innerApiCalls.getComment(request, options, callback);
+  }
+  /**
+   * Record Action on a Comment. If the Action specified in the request is READ,
+   * the viewed time in the comment is set to the time the request was received.
+   * If the comment is already marked as read, subsequent calls will be ignored.
+   * If the Action is UNREAD, the viewed time is cleared from the comment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the comment.
+   *   Format:
+   *   `projects/{project}/locations/{location}/orders/{order}/comments/{comment}`
+   * @param {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType} request.actionType
+   *   Required. The action type of the recorded action.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Comment|Comment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.record_action_on_comment.js</caption>
+   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RecordActionOnComment_async
+   */
+  recordActionOnComment(
+    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+      (
+        | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  recordActionOnComment(
+    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+      | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  recordActionOnComment(
+    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
+    callback: Callback<
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+      | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  recordActionOnComment(
+    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+      | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+      (
+        | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.recordActionOnComment(request, options, callback);
   }
   /**
    * Gets details of a change to an order.
@@ -1951,6 +2067,9 @@ export class GDCHardwareManagementClient {
    * @param {string} [request.requestId]
    *   Optional. An optional unique identifier for this request. See
    *   [AIP-155](https://google.aip.dev/155).
+   * @param {google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type} [request.type]
+   *   Optional. Type of this request. If unset, the request type is assumed to be
+   *   `INFO_PENDING`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2372,6 +2491,146 @@ export class GDCHardwareManagementClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gdchardwaremanagement.v1alpha.Site,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a site.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the site.
+   *   Format: `projects/{project}/locations/{location}/sites/{site}`
+   * @param {string} [request.requestId]
+   *   Optional. An optional unique identifier for this request. See
+   *   [AIP-155](https://google.aip.dev/155).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_site.js</caption>
+   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_async
+   */
+  deleteSite(
+    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteSite(
+    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSite(
+    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSite(
+    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteSite(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteSite()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_site.js</caption>
+   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_async
+   */
+  async checkDeleteSiteProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteSite,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >;
   }
@@ -3841,8 +4100,12 @@ export class GDCHardwareManagementClient {
    * @param {string} [request.requestId]
    *   Optional. An optional unique identifier for this request. See
    *   [AIP-155](https://google.aip.dev/155).
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal} request.stateSignal
-   *   Required. The state signal to send for this zone.
+   * @param {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal} [request.stateSignal]
+   *   Optional. The state signal to send for this zone. Either state_signal or
+   *   provisioning_state_signal must be set, but not both.
+   * @param {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal} [request.provisioningStateSignal]
+   *   Optional. The provisioning state signal to send for this zone. Either
+   *   state_signal or provisioning_state_signal must be set, but not both.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3980,6 +4243,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list orders in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list orders across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4077,12 +4344,16 @@ export class GDCHardwareManagementClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listOrders`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location to list orders in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list orders across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4134,6 +4405,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list orders in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list orders across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4184,6 +4459,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list sites in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list sites across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4281,12 +4560,16 @@ export class GDCHardwareManagementClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSites`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location to list sites in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list sites across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4338,6 +4621,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list sites in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list sites across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4485,7 +4772,7 @@ export class GDCHardwareManagementClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listHardwareGroups`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4592,6 +4879,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list hardware in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list hardware across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4689,12 +4980,16 @@ export class GDCHardwareManagementClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listHardware`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location to list hardware in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list hardware across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4746,6 +5041,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list hardware in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list hardware across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4893,7 +5192,7 @@ export class GDCHardwareManagementClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listComments`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5097,7 +5396,7 @@ export class GDCHardwareManagementClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listChangeLogEntries`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5204,6 +5503,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list SKUs in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list SKUs across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -5301,12 +5604,16 @@ export class GDCHardwareManagementClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSkus`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location to list SKUs in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list SKUs across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -5358,6 +5665,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list SKUs in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list SKUs across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -5408,6 +5719,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list zones in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list zones across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -5505,12 +5820,16 @@ export class GDCHardwareManagementClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listZones`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location to list zones in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list zones across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -5562,6 +5881,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list zones in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list zones across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -5714,7 +6037,7 @@ export class GDCHardwareManagementClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -5727,6 +6050,20 @@ export class GDCHardwareManagementClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5763,6 +6100,13 @@ export class GDCHardwareManagementClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5798,11 +6142,11 @@ export class GDCHardwareManagementClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -5811,6 +6155,20 @@ export class GDCHardwareManagementClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5841,7 +6199,7 @@ export class GDCHardwareManagementClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -5854,6 +6212,20 @@ export class GDCHardwareManagementClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

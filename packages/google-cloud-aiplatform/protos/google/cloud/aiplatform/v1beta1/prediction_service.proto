@@ -26,6 +26,7 @@ import "google/cloud/aiplatform/v1beta1/explanation.proto";
 import "google/cloud/aiplatform/v1beta1/tool.proto";
 import "google/cloud/aiplatform/v1beta1/types.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Google.Cloud.AIPlatform.V1Beta1";
 option go_package = "cloud.google.com/go/aiplatform/apiv1beta1/aiplatformpb;aiplatformpb";
@@ -714,6 +715,11 @@ message CountTokensRequest {
   // external systems to perform an action, or set of actions, outside of
   // knowledge and scope of the model.
   repeated Tool tools = 6 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Generation config that the model will use to generate the
+  // response.
+  optional GenerationConfig generation_config = 7
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response message for
@@ -725,13 +731,22 @@ message CountTokensResponse {
   // The total number of billable characters counted across all instances from
   // the request.
   int32 total_billable_characters = 2;
+
+  // Output only. List of modalities that were processed in the request input.
+  repeated ModalityTokenCount prompt_tokens_details = 3
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Request message for [PredictionService.GenerateContent].
 message GenerateContentRequest {
-  // Required. The name of the publisher model requested to serve the
-  // prediction. Format:
+  // Required. The fully qualified name of the publisher model or tuned model
+  // endpoint to use.
+  //
+  // Publisher model format:
   // `projects/{project}/locations/{location}/publishers/*/models/*`
+  //
+  // Tuned model endpoint format:
+  // `projects/{project}/locations/{location}/endpoints/{endpoint}`
   string model = 5 [(google.api.field_behavior) = REQUIRED];
 
   // Required. The content of the current conversation with the model.
@@ -770,6 +785,15 @@ message GenerateContentRequest {
   // Optional. Tool config. This config is shared for all tools provided in the
   // request.
   ToolConfig tool_config = 7 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The labels with user-defined metadata for the request. It is used
+  // for billing and reporting only.
+  //
+  // Label keys and values can be no longer than 63 characters
+  // (Unicode codepoints) and can only contain lowercase letters, numeric
+  // characters, underscores, and dashes. International characters are allowed.
+  // Label values are optional. Label keys must start with a letter.
+  map<string, string> labels = 10 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Per request settings for blocking unsafe content.
   // Enforced on GenerateContentResponse.candidates.
@@ -825,16 +849,41 @@ message GenerateContentResponse {
     // Number of tokens in the response(s).
     int32 candidates_token_count = 2;
 
+    // Total token count for prompt and response candidates.
     int32 total_token_count = 3;
 
     // Output only. Number of tokens in the cached part in the input (the cached
     // content).
     int32 cached_content_token_count = 5
         [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. List of modalities that were processed in the request input.
+    repeated ModalityTokenCount prompt_tokens_details = 9
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. List of modalities of the cached content in the request
+    // input.
+    repeated ModalityTokenCount cache_tokens_details = 10
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. List of modalities that were returned in the response.
+    repeated ModalityTokenCount candidates_tokens_details = 11
+        [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
   // Output only. Generated candidates.
   repeated Candidate candidates = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The model version used to generate the response.
+  string model_version = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Timestamp when the request is made to the server.
+  google.protobuf.Timestamp create_time = 12
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. response_id is used to identify each response. It is the
+  // encoding of the event_id.
+  string response_id = 13 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Content filter results for a prompt sent in the request.
   // Note: Sent only in the first stream chunk.
@@ -848,9 +897,9 @@ message GenerateContentResponse {
 
 // Request message for [PredictionService.ChatCompletions]
 message ChatCompletionsRequest {
-  // Required. The name of the Endpoint requested to serve the prediction.
+  // Required. The name of the endpoint requested to serve the prediction.
   // Format:
-  // `projects/{project}/locations/{location}/endpoints/openapi`
+  // `projects/{project}/locations/{location}/endpoints/{endpoint}`
   string endpoint = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {

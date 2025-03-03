@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,6 +35,12 @@ function main(name) {
    *  `location_id` refers to a GCP region.
    */
   // const name = 'abc123'
+  /**
+   *  Optional. If set to true, any child resources of this data scan will also
+   *  be deleted. (Otherwise, the request will only work if the data scan has no
+   *  child resources.)
+   */
+  // const force = true
 
   // Imports the Dataplex library
   const {DataScanServiceClient} = require('@google-cloud/dataplex').v1;

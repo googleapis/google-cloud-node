@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,25 +29,24 @@ function main(updateMask, eventThreatDetectionCustomModule) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Field mask is used to specify the fields to be overwritten in the
-   *  EventThreatDetectionCustomModule resource by the update.
-   *  The fields specified in the update_mask are relative to the resource, not
-   *  the full request. A field will be overwritten if it is in the mask. If the
-   *  user does not provide a mask then all fields will be overwritten.
+   *  Required. The fields to update. If omitted, then all fields are updated.
    */
   // const updateMask = {}
   /**
-   *  Required. The module being updated
+   *  Required. The module being updated.
    */
   // const eventThreatDetectionCustomModule = {}
   /**
-   *  Optional. When set to true, only validations (including IAM checks) will
-   *  done for the request (module will not be updated). An OK response indicates
-   *  the request is valid while an error response indicates the request is
-   *  invalid. Note that a subsequent request to actually update the module could
-   *  still fail because 1. the state could have changed (e.g. IAM permission
-   *  lost) or
-   *  2. A failure occurred while trying to update the module.
+   *  Optional. When set to `true`, the request will be validated (including IAM
+   *  checks), but no module will be updated. An `OK` response indicates that the
+   *  request is valid, while an error response indicates that the request is
+   *  invalid.
+   *  If the request is valid, a subsequent request to update the module could
+   *  still fail for one of the following reasons:
+   *  *  The state of your cloud resources changed; for example, you lost a
+   *     required IAM permission
+   *  *  An error occurred during creation of the module
+   *  Defaults to `false`.
    */
   // const validateOnly = true
 

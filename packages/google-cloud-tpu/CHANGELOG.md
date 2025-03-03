@@ -1,5 +1,33 @@
 # Changelog
 
+## [3.8.1](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.8.0...tpu-v3.8.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6018](https://github.com/googleapis/google-cloud-node/issues/6018)) ([9dc5856](https://github.com/googleapis/google-cloud-node/commit/9dc585661489f51bb7a85b39519fd8b11dfffc5b))
+
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.7.0...tpu-v3.8.0) (2025-01-23)
+
+
+### Features
+
+* [tpu] Introduce PerformMaintenance API ([#5956](https://github.com/googleapis/google-cloud-node/issues/5956)) ([03232b3](https://github.com/googleapis/google-cloud-node/commit/03232b371a770205d488791bfcb3631f2291d9fb))
+
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.6.0...tpu-v3.7.0) (2025-01-16)
+
+
+### Features
+
+* [tpu] Promote network_configs field to v2 API ([#5945](https://github.com/googleapis/google-cloud-node/issues/5945)) ([df0d206](https://github.com/googleapis/google-cloud-node/commit/df0d2064ff860da7c2029de9dd3f9a1aab41b5c8))
+
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.5.0...tpu-v3.6.0) (2025-01-11)
+
+
+### Features
+
+* [tpu] Add UNKNOWN to TPU node state, This state will be used to prevent a node from being marked as READY during diagnose after it has failed repair ([#5941](https://github.com/googleapis/google-cloud-node/issues/5941)) ([e575e15](https://github.com/googleapis/google-cloud-node/commit/e575e15101e34887731c4bab60e81bac504d7683))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.4.0...tpu-v3.5.0) (2024-05-21)
 
 

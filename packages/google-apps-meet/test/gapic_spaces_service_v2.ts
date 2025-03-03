@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -340,7 +340,7 @@ describe('v2.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2.Space()
       );
@@ -371,7 +371,7 @@ describe('v2.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2.Space()
       );
@@ -418,7 +418,7 @@ describe('v2.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSpace = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSpace(request), expectedError);
@@ -468,7 +468,7 @@ describe('v2.SpacesServiceClient', () => {
         ['space', 'name']
       );
       request.space.name = defaultValue1;
-      const expectedHeaderRequestParams = `space.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `space.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2.Space()
       );
@@ -500,7 +500,7 @@ describe('v2.SpacesServiceClient', () => {
         ['space', 'name']
       );
       request.space.name = defaultValue1;
-      const expectedHeaderRequestParams = `space.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `space.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2.Space()
       );
@@ -548,7 +548,7 @@ describe('v2.SpacesServiceClient', () => {
         ['space', 'name']
       );
       request.space.name = defaultValue1;
-      const expectedHeaderRequestParams = `space.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `space.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSpace = stubSimpleCall(
         undefined,
@@ -601,7 +601,7 @@ describe('v2.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -633,7 +633,7 @@ describe('v2.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -680,7 +680,7 @@ describe('v2.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.endActiveConference = stubSimpleCall(
         undefined,

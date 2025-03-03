@@ -20,6 +20,8 @@ import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/cloud/aiplatform/v1beta1/encryption_spec.proto";
 import "google/cloud/aiplatform/v1beta1/job_state.proto";
+import "google/cloud/aiplatform/v1beta1/machine_resources.proto";
+import "google/cloud/aiplatform/v1beta1/network_spec.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
@@ -70,6 +72,21 @@ message NotebookExecutionJob {
     bytes content = 1;
   }
 
+  // Compute configuration to use for an execution job.
+  message CustomEnvironmentSpec {
+    // The specification of a single machine for the execution job.
+    MachineSpec machine_spec = 1;
+
+    // The specification of a persistent disk to attach for the execution job.
+    PersistentDiskSpec persistent_disk_spec = 2;
+
+    // The network configuration to use for the execution job.
+    NetworkSpec network_spec = 3;
+  }
+
+  // Configuration for a Workbench Instances-based environment.
+  message WorkbenchRuntime {}
+
   // The input notebook.
   oneof notebook_source {
     // The Dataform Repository pointing to a single file notebook repository.
@@ -90,6 +107,9 @@ message NotebookExecutionJob {
         [(google.api.resource_reference) = {
           type: "aiplatform.googleapis.com/NotebookRuntimeTemplate"
         }];
+
+    // The custom compute configuration for an execution job.
+    CustomEnvironmentSpec custom_environment_spec = 16;
   }
 
   // The location to store the notebook execution result.
@@ -106,6 +126,13 @@ message NotebookExecutionJob {
 
     // The service account to run the execution as.
     string service_account = 18;
+  }
+
+  // Runtime environment for the notebook execution job. If unspecified, the
+  // default runtime of Colab is used.
+  oneof runtime_environment {
+    // The Workbench runtime configuration to use for the notebook execution.
+    WorkbenchRuntime workbench_runtime = 23;
   }
 
   // Output only. The resource name of this NotebookExecutionJob. Format:
@@ -157,8 +184,13 @@ message NotebookExecutionJob {
   // and are immutable.
   map<string, string> labels = 19;
 
+  // The name of the kernel to use during notebook execution. If unset, the
+  // default kernel is used.
+  string kernel_name = 20;
+
   // Customer-managed encryption key spec for the notebook execution job.
   // This field is auto-populated if the
-  // [NotebookService.NotebookRuntimeTemplate][] has an encryption spec.
+  // [NotebookRuntimeTemplate][google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate]
+  // has an encryption spec.
   EncryptionSpec encryption_spec = 22;
 }

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -968,7 +968,13 @@ export class ConferenceRecordsServiceClient {
    *   * `start_time`
    *   * `end_time`
    *
-   *   For example, `space.meeting_code = "abc-mnop-xyz"`.
+   *   For example, consider the following filters:
+   *
+   *   * `space.name = "spaces/NAME"`
+   *   * `space.meeting_code = "abc-mnop-xyz"`
+   *   * `start_time>="2024-01-01T00:00:00.000Z" AND
+   *   start_time<="2024-01-02T00:00:00.000Z"`
+   *   * `end_time IS NULL`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1053,7 +1059,7 @@ export class ConferenceRecordsServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConferenceRecords`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} [request.pageSize]
@@ -1073,7 +1079,13 @@ export class ConferenceRecordsServiceClient {
    *   * `start_time`
    *   * `end_time`
    *
-   *   For example, `space.meeting_code = "abc-mnop-xyz"`.
+   *   For example, consider the following filters:
+   *
+   *   * `space.name = "spaces/NAME"`
+   *   * `space.meeting_code = "abc-mnop-xyz"`
+   *   * `start_time>="2024-01-01T00:00:00.000Z" AND
+   *   start_time<="2024-01-02T00:00:00.000Z"`
+   *   * `end_time IS NULL`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1126,7 +1138,13 @@ export class ConferenceRecordsServiceClient {
    *   * `start_time`
    *   * `end_time`
    *
-   *   For example, `space.meeting_code = "abc-mnop-xyz"`.
+   *   For example, consider the following filters:
+   *
+   *   * `space.name = "spaces/NAME"`
+   *   * `space.meeting_code = "abc-mnop-xyz"`
+   *   * `start_time>="2024-01-01T00:00:00.000Z" AND
+   *   start_time<="2024-01-02T00:00:00.000Z"`
+   *   * `end_time IS NULL`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1267,7 +1285,7 @@ export class ConferenceRecordsServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listParticipants`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1503,7 +1521,7 @@ export class ConferenceRecordsServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listParticipantSessions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1714,7 +1732,7 @@ export class ConferenceRecordsServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRecordings`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1907,7 +1925,7 @@ export class ConferenceRecordsServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTranscripts`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2111,7 +2129,7 @@ export class ConferenceRecordsServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTranscriptEntries`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,6 +28,287 @@ export namespace google {
 
                 /** Namespace v1. */
                 namespace v1 {
+
+                    /** Properties of a CloudEvent. */
+                    interface ICloudEvent {
+
+                        /** CloudEvent id */
+                        id?: (string|null);
+
+                        /** CloudEvent source */
+                        source?: (string|null);
+
+                        /** CloudEvent specVersion */
+                        specVersion?: (string|null);
+
+                        /** CloudEvent type */
+                        type?: (string|null);
+
+                        /** CloudEvent attributes */
+                        attributes?: ({ [k: string]: google.cloud.eventarc.publishing.v1.CloudEvent.ICloudEventAttributeValue }|null);
+
+                        /** CloudEvent binaryData */
+                        binaryData?: (Uint8Array|string|null);
+
+                        /** CloudEvent textData */
+                        textData?: (string|null);
+
+                        /** CloudEvent protoData */
+                        protoData?: (google.protobuf.IAny|null);
+                    }
+
+                    /** Represents a CloudEvent. */
+                    class CloudEvent implements ICloudEvent {
+
+                        /**
+                         * Constructs a new CloudEvent.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.eventarc.publishing.v1.ICloudEvent);
+
+                        /** CloudEvent id. */
+                        public id: string;
+
+                        /** CloudEvent source. */
+                        public source: string;
+
+                        /** CloudEvent specVersion. */
+                        public specVersion: string;
+
+                        /** CloudEvent type. */
+                        public type: string;
+
+                        /** CloudEvent attributes. */
+                        public attributes: { [k: string]: google.cloud.eventarc.publishing.v1.CloudEvent.ICloudEventAttributeValue };
+
+                        /** CloudEvent binaryData. */
+                        public binaryData?: (Uint8Array|string|null);
+
+                        /** CloudEvent textData. */
+                        public textData?: (string|null);
+
+                        /** CloudEvent protoData. */
+                        public protoData?: (google.protobuf.IAny|null);
+
+                        /** CloudEvent data. */
+                        public data?: ("binaryData"|"textData"|"protoData");
+
+                        /**
+                         * Creates a new CloudEvent instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudEvent instance
+                         */
+                        public static create(properties?: google.cloud.eventarc.publishing.v1.ICloudEvent): google.cloud.eventarc.publishing.v1.CloudEvent;
+
+                        /**
+                         * Encodes the specified CloudEvent message. Does not implicitly {@link google.cloud.eventarc.publishing.v1.CloudEvent.verify|verify} messages.
+                         * @param message CloudEvent message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.eventarc.publishing.v1.ICloudEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudEvent message, length delimited. Does not implicitly {@link google.cloud.eventarc.publishing.v1.CloudEvent.verify|verify} messages.
+                         * @param message CloudEvent message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.eventarc.publishing.v1.ICloudEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudEvent message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.publishing.v1.CloudEvent;
+
+                        /**
+                         * Decodes a CloudEvent message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.publishing.v1.CloudEvent;
+
+                        /**
+                         * Verifies a CloudEvent message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudEvent message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudEvent
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.publishing.v1.CloudEvent;
+
+                        /**
+                         * Creates a plain object from a CloudEvent message. Also converts values to other types if specified.
+                         * @param message CloudEvent
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.eventarc.publishing.v1.CloudEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudEvent to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CloudEvent
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CloudEvent {
+
+                        /** Properties of a CloudEventAttributeValue. */
+                        interface ICloudEventAttributeValue {
+
+                            /** CloudEventAttributeValue ceBoolean */
+                            ceBoolean?: (boolean|null);
+
+                            /** CloudEventAttributeValue ceInteger */
+                            ceInteger?: (number|null);
+
+                            /** CloudEventAttributeValue ceString */
+                            ceString?: (string|null);
+
+                            /** CloudEventAttributeValue ceBytes */
+                            ceBytes?: (Uint8Array|string|null);
+
+                            /** CloudEventAttributeValue ceUri */
+                            ceUri?: (string|null);
+
+                            /** CloudEventAttributeValue ceUriRef */
+                            ceUriRef?: (string|null);
+
+                            /** CloudEventAttributeValue ceTimestamp */
+                            ceTimestamp?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents a CloudEventAttributeValue. */
+                        class CloudEventAttributeValue implements ICloudEventAttributeValue {
+
+                            /**
+                             * Constructs a new CloudEventAttributeValue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.eventarc.publishing.v1.CloudEvent.ICloudEventAttributeValue);
+
+                            /** CloudEventAttributeValue ceBoolean. */
+                            public ceBoolean?: (boolean|null);
+
+                            /** CloudEventAttributeValue ceInteger. */
+                            public ceInteger?: (number|null);
+
+                            /** CloudEventAttributeValue ceString. */
+                            public ceString?: (string|null);
+
+                            /** CloudEventAttributeValue ceBytes. */
+                            public ceBytes?: (Uint8Array|string|null);
+
+                            /** CloudEventAttributeValue ceUri. */
+                            public ceUri?: (string|null);
+
+                            /** CloudEventAttributeValue ceUriRef. */
+                            public ceUriRef?: (string|null);
+
+                            /** CloudEventAttributeValue ceTimestamp. */
+                            public ceTimestamp?: (google.protobuf.ITimestamp|null);
+
+                            /** CloudEventAttributeValue attr. */
+                            public attr?: ("ceBoolean"|"ceInteger"|"ceString"|"ceBytes"|"ceUri"|"ceUriRef"|"ceTimestamp");
+
+                            /**
+                             * Creates a new CloudEventAttributeValue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CloudEventAttributeValue instance
+                             */
+                            public static create(properties?: google.cloud.eventarc.publishing.v1.CloudEvent.ICloudEventAttributeValue): google.cloud.eventarc.publishing.v1.CloudEvent.CloudEventAttributeValue;
+
+                            /**
+                             * Encodes the specified CloudEventAttributeValue message. Does not implicitly {@link google.cloud.eventarc.publishing.v1.CloudEvent.CloudEventAttributeValue.verify|verify} messages.
+                             * @param message CloudEventAttributeValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.eventarc.publishing.v1.CloudEvent.ICloudEventAttributeValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CloudEventAttributeValue message, length delimited. Does not implicitly {@link google.cloud.eventarc.publishing.v1.CloudEvent.CloudEventAttributeValue.verify|verify} messages.
+                             * @param message CloudEventAttributeValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.eventarc.publishing.v1.CloudEvent.ICloudEventAttributeValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CloudEventAttributeValue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CloudEventAttributeValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.publishing.v1.CloudEvent.CloudEventAttributeValue;
+
+                            /**
+                             * Decodes a CloudEventAttributeValue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CloudEventAttributeValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.publishing.v1.CloudEvent.CloudEventAttributeValue;
+
+                            /**
+                             * Verifies a CloudEventAttributeValue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CloudEventAttributeValue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CloudEventAttributeValue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.publishing.v1.CloudEvent.CloudEventAttributeValue;
+
+                            /**
+                             * Creates a plain object from a CloudEventAttributeValue message. Also converts values to other types if specified.
+                             * @param message CloudEventAttributeValue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.eventarc.publishing.v1.CloudEvent.CloudEventAttributeValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CloudEventAttributeValue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CloudEventAttributeValue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
 
                     /** Represents a Publisher */
                     class Publisher extends $protobuf.rpc.Service {
@@ -76,6 +357,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public publishEvents(request: google.cloud.eventarc.publishing.v1.IPublishEventsRequest): Promise<google.cloud.eventarc.publishing.v1.PublishEventsResponse>;
+
+                        /**
+                         * Calls Publish.
+                         * @param request PublishRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and PublishResponse
+                         */
+                        public publish(request: google.cloud.eventarc.publishing.v1.IPublishRequest, callback: google.cloud.eventarc.publishing.v1.Publisher.PublishCallback): void;
+
+                        /**
+                         * Calls Publish.
+                         * @param request PublishRequest message or plain object
+                         * @returns Promise
+                         */
+                        public publish(request: google.cloud.eventarc.publishing.v1.IPublishRequest): Promise<google.cloud.eventarc.publishing.v1.PublishResponse>;
                     }
 
                     namespace Publisher {
@@ -93,6 +388,13 @@ export namespace google {
                          * @param [response] PublishEventsResponse
                          */
                         type PublishEventsCallback = (error: (Error|null), response?: google.cloud.eventarc.publishing.v1.PublishEventsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.publishing.v1.Publisher|publish}.
+                         * @param error Error, if any
+                         * @param [response] PublishResponse
+                         */
+                        type PublishCallback = (error: (Error|null), response?: google.cloud.eventarc.publishing.v1.PublishResponse) => void;
                     }
 
                     /** Properties of a PublishChannelConnectionEventsRequest. */
@@ -494,6 +796,215 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a PublishRequest. */
+                    interface IPublishRequest {
+
+                        /** PublishRequest messageBus */
+                        messageBus?: (string|null);
+
+                        /** PublishRequest protoMessage */
+                        protoMessage?: (google.cloud.eventarc.publishing.v1.ICloudEvent|null);
+
+                        /** PublishRequest jsonMessage */
+                        jsonMessage?: (string|null);
+
+                        /** PublishRequest avroMessage */
+                        avroMessage?: (Uint8Array|string|null);
+                    }
+
+                    /** Represents a PublishRequest. */
+                    class PublishRequest implements IPublishRequest {
+
+                        /**
+                         * Constructs a new PublishRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.eventarc.publishing.v1.IPublishRequest);
+
+                        /** PublishRequest messageBus. */
+                        public messageBus: string;
+
+                        /** PublishRequest protoMessage. */
+                        public protoMessage?: (google.cloud.eventarc.publishing.v1.ICloudEvent|null);
+
+                        /** PublishRequest jsonMessage. */
+                        public jsonMessage?: (string|null);
+
+                        /** PublishRequest avroMessage. */
+                        public avroMessage?: (Uint8Array|string|null);
+
+                        /** PublishRequest format. */
+                        public format?: ("protoMessage"|"jsonMessage"|"avroMessage");
+
+                        /**
+                         * Creates a new PublishRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PublishRequest instance
+                         */
+                        public static create(properties?: google.cloud.eventarc.publishing.v1.IPublishRequest): google.cloud.eventarc.publishing.v1.PublishRequest;
+
+                        /**
+                         * Encodes the specified PublishRequest message. Does not implicitly {@link google.cloud.eventarc.publishing.v1.PublishRequest.verify|verify} messages.
+                         * @param message PublishRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.eventarc.publishing.v1.IPublishRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PublishRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.publishing.v1.PublishRequest.verify|verify} messages.
+                         * @param message PublishRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.eventarc.publishing.v1.IPublishRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PublishRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PublishRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.publishing.v1.PublishRequest;
+
+                        /**
+                         * Decodes a PublishRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PublishRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.publishing.v1.PublishRequest;
+
+                        /**
+                         * Verifies a PublishRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PublishRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PublishRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.publishing.v1.PublishRequest;
+
+                        /**
+                         * Creates a plain object from a PublishRequest message. Also converts values to other types if specified.
+                         * @param message PublishRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.eventarc.publishing.v1.PublishRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PublishRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PublishRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PublishResponse. */
+                    interface IPublishResponse {
+                    }
+
+                    /** Represents a PublishResponse. */
+                    class PublishResponse implements IPublishResponse {
+
+                        /**
+                         * Constructs a new PublishResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.eventarc.publishing.v1.IPublishResponse);
+
+                        /**
+                         * Creates a new PublishResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PublishResponse instance
+                         */
+                        public static create(properties?: google.cloud.eventarc.publishing.v1.IPublishResponse): google.cloud.eventarc.publishing.v1.PublishResponse;
+
+                        /**
+                         * Encodes the specified PublishResponse message. Does not implicitly {@link google.cloud.eventarc.publishing.v1.PublishResponse.verify|verify} messages.
+                         * @param message PublishResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.eventarc.publishing.v1.IPublishResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PublishResponse message, length delimited. Does not implicitly {@link google.cloud.eventarc.publishing.v1.PublishResponse.verify|verify} messages.
+                         * @param message PublishResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.eventarc.publishing.v1.IPublishResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PublishResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PublishResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.publishing.v1.PublishResponse;
+
+                        /**
+                         * Decodes a PublishResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PublishResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.publishing.v1.PublishResponse;
+
+                        /**
+                         * Verifies a PublishResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PublishResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PublishResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.publishing.v1.PublishResponse;
+
+                        /**
+                         * Creates a plain object from a PublishResponse message. Also converts values to other types if specified.
+                         * @param message PublishResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.eventarc.publishing.v1.PublishResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PublishResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PublishResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
             }
         }
@@ -501,6 +1012,19 @@ export namespace google {
 
     /** Namespace api. */
     namespace api {
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
+        }
 
         /** Properties of a Http. */
         interface IHttp {
@@ -2347,6 +2871,115 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
+        }
+
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
         }
     }
 
@@ -4510,6 +5143,12 @@ export namespace google {
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FieldOptions .google.api.fieldBehavior */
+            ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
         }
 
         /** Represents a FieldOptions. */
@@ -6443,109 +7082,6 @@ export namespace google {
             }
         }
 
-        /** Properties of a Duration. */
-        interface IDuration {
-
-            /** Duration seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Duration nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Duration. */
-        class Duration implements IDuration {
-
-            /**
-             * Constructs a new Duration.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IDuration);
-
-            /** Duration seconds. */
-            public seconds: (number|Long|string);
-
-            /** Duration nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Duration instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Duration instance
-             */
-            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
-
-            /**
-             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
-
-            /**
-             * Verifies a Duration message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Duration
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
-
-            /**
-             * Creates a plain object from a Duration message. Also converts values to other types if specified.
-             * @param message Duration
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Duration to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Duration
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of an Any. */
         interface IAny {
 
@@ -6643,6 +7179,212 @@ export namespace google {
 
             /**
              * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Duration
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

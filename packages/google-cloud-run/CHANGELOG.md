@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.5.1](https://github.com/googleapis/google-cloud-node/compare/run-v1.5.0...run-v1.5.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [run] finalize fixing typings for headers in generator ([#6016](https://github.com/googleapis/google-cloud-node/issues/6016)) ([34bda26](https://github.com/googleapis/google-cloud-node/commit/34bda26d89163c60fdb602b6e81bd8c263148709))
+
+## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/run-v1.4.0...run-v1.5.0) (2024-11-21)
+
+
+### Features
+
+* [run]support manual instance count in Cloud Run for manual scaling feature ([#5821](https://github.com/googleapis/google-cloud-node/issues/5821)) ([a1ab492](https://github.com/googleapis/google-cloud-node/commit/a1ab492a1116d08b008f9fc88751972703725b02))
+
 ## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/run-v1.3.0...run-v1.4.0) (2024-07-22)
 
 

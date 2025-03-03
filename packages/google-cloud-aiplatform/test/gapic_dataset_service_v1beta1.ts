@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -359,7 +359,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Dataset()
       );
@@ -390,7 +390,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Dataset()
       );
@@ -437,7 +437,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataset = stubSimpleCall(
         undefined,
@@ -490,7 +490,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Dataset()
       );
@@ -522,7 +522,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Dataset()
       );
@@ -570,7 +570,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataset = stubSimpleCall(
         undefined,
@@ -624,7 +624,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['datasetVersion', 'name']
       );
       request.datasetVersion.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
       );
@@ -657,7 +657,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['datasetVersion', 'name']
       );
       request.datasetVersion.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
       );
@@ -705,7 +705,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['datasetVersion', 'name']
       );
       request.datasetVersion.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDatasetVersion = stubSimpleCall(
         undefined,
@@ -758,7 +758,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
       );
@@ -789,7 +789,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
       );
@@ -836,7 +836,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDatasetVersion = stubSimpleCall(
         undefined,
@@ -888,7 +888,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.AnnotationSpec()
       );
@@ -919,7 +919,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.AnnotationSpec()
       );
@@ -966,7 +966,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAnnotationSpec = stubSimpleCall(
         undefined,
@@ -1018,7 +1018,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1051,7 +1051,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1105,7 +1105,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataset = stubLongRunningCall(
         undefined,
@@ -1136,7 +1136,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataset = stubLongRunningCall(
         undefined,
@@ -1212,7 +1212,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1245,7 +1245,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1299,7 +1299,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataset = stubLongRunningCall(
         undefined,
@@ -1330,7 +1330,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataset = stubLongRunningCall(
         undefined,
@@ -1406,7 +1406,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1438,7 +1438,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1492,7 +1492,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importData = stubLongRunningCall(
         undefined,
@@ -1523,7 +1523,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importData = stubLongRunningCall(
         undefined,
@@ -1596,7 +1596,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1628,7 +1628,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1682,7 +1682,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportData = stubLongRunningCall(
         undefined,
@@ -1713,7 +1713,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportData = stubLongRunningCall(
         undefined,
@@ -1786,7 +1786,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1819,7 +1819,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1873,7 +1873,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDatasetVersion = stubLongRunningCall(
         undefined,
@@ -1904,7 +1904,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDatasetVersion = stubLongRunningCall(
         undefined,
@@ -1980,7 +1980,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2013,7 +2013,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2067,7 +2067,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDatasetVersion = stubLongRunningCall(
         undefined,
@@ -2098,7 +2098,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDatasetVersion = stubLongRunningCall(
         undefined,
@@ -2174,7 +2174,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2207,7 +2207,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2261,7 +2261,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restoreDatasetVersion = stubLongRunningCall(
         undefined,
@@ -2295,7 +2295,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restoreDatasetVersion = stubLongRunningCall(
         undefined,
@@ -2371,7 +2371,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2404,7 +2404,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2458,7 +2458,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSavedQuery = stubLongRunningCall(
         undefined,
@@ -2489,7 +2489,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSavedQuery = stubLongRunningCall(
         undefined,
@@ -2565,7 +2565,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Dataset()
@@ -2604,7 +2604,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Dataset()
@@ -2659,7 +2659,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDatasets = stubSimpleCall(
         undefined,
@@ -2690,7 +2690,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Dataset()
@@ -2750,7 +2750,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(
         undefined,
@@ -2801,7 +2801,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Dataset()
@@ -2850,7 +2850,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2892,7 +2892,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
@@ -2932,7 +2932,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
@@ -2989,7 +2989,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDatasetVersions = stubSimpleCall(
         undefined,
@@ -3020,7 +3020,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
@@ -3081,7 +3081,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasetVersions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3131,7 +3131,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
@@ -3181,7 +3181,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasetVersions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3224,7 +3224,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.DataItem()
@@ -3263,7 +3263,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.DataItem()
@@ -3318,7 +3318,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataItems = stubSimpleCall(
         undefined,
@@ -3349,7 +3349,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.DataItem()
@@ -3409,7 +3409,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataItems.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3458,7 +3458,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.DataItem()
@@ -3507,7 +3507,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataItems.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3550,7 +3550,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.DataItemView()
@@ -3589,7 +3589,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.DataItemView()
@@ -3646,7 +3646,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchDataItems = stubSimpleCall(
         undefined,
@@ -3677,7 +3677,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.DataItemView()
@@ -3738,7 +3738,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchDataItems.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3788,7 +3788,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.DataItemView()
@@ -3838,7 +3838,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchDataItems.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3881,7 +3881,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
@@ -3920,7 +3920,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
@@ -3975,7 +3975,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSavedQueries = stubSimpleCall(
         undefined,
@@ -4006,7 +4006,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
@@ -4067,7 +4067,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSavedQueries.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4117,7 +4117,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
@@ -4167,7 +4167,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSavedQueries.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4210,7 +4210,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Annotation()
@@ -4249,7 +4249,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Annotation()
@@ -4304,7 +4304,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAnnotations = stubSimpleCall(
         undefined,
@@ -4335,7 +4335,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Annotation()
@@ -4396,7 +4396,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnnotations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4446,7 +4446,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Annotation()
@@ -4496,7 +4496,7 @@ describe('v1beta1.DatasetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnnotations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6511,6 +6511,192 @@ describe('v1beta1.DatasetServiceClient', () => {
         assert.strictEqual(result, 'featureGroupValue');
         assert(
           (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureMonitor', () => {
+      const fakePath = '/rendered/path/featureMonitor';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+        feature_monitor: 'featureMonitorValue',
+      };
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.featureMonitorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureMonitorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureMonitorPath', () => {
+        const result = client.featureMonitorPath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue',
+          'featureMonitorValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureMonitorName', () => {
+        const result = client.matchProjectFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureMonitorName', () => {
+        const result = client.matchLocationFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromFeatureMonitorName', () => {
+        const result = client.matchFeatureGroupFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorFromFeatureMonitorName', () => {
+        const result =
+          client.matchFeatureMonitorFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'featureMonitorValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureMonitorJob', () => {
+      const fakePath = '/rendered/path/featureMonitorJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+        feature_monitor: 'featureMonitorValue',
+        feature_monitor_job: 'featureMonitorJobValue',
+      };
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.featureMonitorJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureMonitorJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureMonitorJobPath', () => {
+        const result = client.featureMonitorJobPath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue',
+          'featureMonitorValue',
+          'featureMonitorJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureMonitorJobName', () => {
+        const result = client.matchProjectFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureMonitorJobName', () => {
+        const result = client.matchLocationFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromFeatureMonitorJobName', () => {
+        const result =
+          client.matchFeatureGroupFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorFromFeatureMonitorJobName', () => {
+        const result =
+          client.matchFeatureMonitorFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'featureMonitorValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorJobFromFeatureMonitorJobName', () => {
+        const result =
+          client.matchFeatureMonitorJobFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'featureMonitorJobValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

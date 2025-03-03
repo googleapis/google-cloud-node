@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -58,7 +58,7 @@ function main(parent) {
    *  localize times in human-readable fields. For example 'America/Los_Angeles'.
    *  If not set, 'America/Los_Angeles' will be used.
    */
-  // const timeZone = {}
+  // const timeZone = 'abc123'
 
   // Imports the Accounts library
   const {AccountIssueServiceClient} = require('@google-shopping/accounts').v1beta;

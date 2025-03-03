@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(domain, cloudIdentityId, parent, overwriteIfExists) {
+function main(domain, cloudIdentityId, primaryAdminEmail, parent, overwriteIfExists) {
   // [START cloudchannel_v1_generated_CloudChannelService_ImportCustomer_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -36,6 +36,10 @@ function main(domain, cloudIdentityId, parent, overwriteIfExists) {
    *  Required. Customer's Cloud Identity ID
    */
   // const cloudIdentityId = 'abc123'
+  /**
+   *  Required. Customer's primary admin email.
+   */
+  // const primaryAdminEmail = 'abc123'
   /**
    *  Required. The resource name of the reseller's account.
    *  Parent takes the format: accounts/{account_id} or
@@ -80,6 +84,7 @@ function main(domain, cloudIdentityId, parent, overwriteIfExists) {
     const request = {
       domain,
       cloudIdentityId,
+      primaryAdminEmail,
       parent,
       overwriteIfExists,
     };

@@ -1,5 +1,33 @@
 # Changelog
 
+## [4.8.1](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.8.0...cloudbuild-v4.8.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6019](https://github.com/googleapis/google-cloud-node/issues/6019)) ([734397c](https://github.com/googleapis/google-cloud-node/commit/734397c6b98d0aafe8832544da3f483b1eade1b2))
+
+## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.7.0...cloudbuild-v4.8.0) (2025-01-11)
+
+
+### Features
+
+* [cloudbuild] Add option to enable structured logging ([#5934](https://github.com/googleapis/google-cloud-node/issues/5934)) ([36be8cd](https://github.com/googleapis/google-cloud-node/commit/36be8cdce58807b3ca02b31d9b4cf950ba386063))
+
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.6.0...cloudbuild-v4.7.0) (2024-10-30)
+
+
+### Features
+
+* [cloudbuild] Add PrivateServiceConnect option to WorkerPool ([#5770](https://github.com/googleapis/google-cloud-node/issues/5770)) ([3aade58](https://github.com/googleapis/google-cloud-node/commit/3aade58c11e739c4652f5b1ab8e7f3cf12992ce9))
+
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.5.0...cloudbuild-v4.6.0) (2024-10-10)
+
+
+### Features
+
+* [cloudbuild] Add LEGACY_BUCKET option to DefaultLogsBucketBehavior ([#5700](https://github.com/googleapis/google-cloud-node/issues/5700)) ([7cbf6b2](https://github.com/googleapis/google-cloud-node/commit/7cbf6b20d0e4944779ba71aaa3388abbf3840ed5))
+
 ## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.4.0...cloudbuild-v4.5.0) (2024-05-21)
 
 

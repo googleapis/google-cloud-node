@@ -1,5 +1,33 @@
 # Changelog
 
+## [2.9.1](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.9.0...generativelanguage-v2.9.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6011](https://github.com/googleapis/google-cloud-node/issues/6011)) ([ee865ff](https://github.com/googleapis/google-cloud-node/commit/ee865ff34a696fbd657e4cfb6cc4be2f6651f77a))
+
+## [2.9.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.8.0...generativelanguage-v2.9.0) (2025-01-11)
+
+
+### Features
+
+* [generativelanguage] Add GoogleSearch tool type ([#5929](https://github.com/googleapis/google-cloud-node/issues/5929)) ([e5a665a](https://github.com/googleapis/google-cloud-node/commit/e5a665a909fb52d2ec4d05f147ac2c7ebd8ceb01))
+
+## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.7.0...generativelanguage-v2.8.0) (2024-11-21)
+
+
+### Features
+
+* [generativelanguage] Adds search grounding ([#5828](https://github.com/googleapis/google-cloud-node/issues/5828)) ([0b27dc2](https://github.com/googleapis/google-cloud-node/commit/0b27dc2c46300e144e82f6bd90a0fbf7072b22db))
+
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.6.0...generativelanguage-v2.7.0) (2024-10-10)
+
+
+### Features
+
+* [generativelanguage] Add GoogleSearchRetrieval tool and candidate.grounding_metadata ([#5699](https://github.com/googleapis/google-cloud-node/issues/5699)) ([3eb6375](https://github.com/googleapis/google-cloud-node/commit/3eb6375a4e4f28565de5e921c33e8547654a0fa2))
+
 ## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.5.0...generativelanguage-v2.6.0) (2024-06-26)
 
 

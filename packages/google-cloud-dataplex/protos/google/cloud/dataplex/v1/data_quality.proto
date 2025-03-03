@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -203,11 +203,11 @@ message DataQualityRuleResult {
   // evaluation, or
   // * exclude `null` rows from the `evaluated_count`, by setting
   // `ignore_nulls = true`.
+  //
+  // This field is not set for rule SqlAssertion.
   int64 evaluated_count = 9;
 
-  // The number of rows which passed a rule evaluation.
-  //
-  // This field is only valid for row-level type rules.
+  // This field is not set for rule SqlAssertion.
   int64 passed_count = 8;
 
   // The number of rows with null values in the specified column.
@@ -253,7 +253,7 @@ message DataQualityDimensionResult {
 message DataQualityDimension {
   // The dimension name a rule belongs to. Supported dimensions are
   // ["COMPLETENESS", "ACCURACY", "CONSISTENCY", "VALIDITY", "UNIQUENESS",
-  // "INTEGRITY"]
+  // "FRESHNESS", "VOLUME"]
   string name = 1;
 }
 
@@ -442,7 +442,8 @@ message DataQualityRule {
 
   // Required. The dimension a rule belongs to. Results are also aggregated at
   // the dimension level. Supported dimensions are **["COMPLETENESS",
-  // "ACCURACY", "CONSISTENCY", "VALIDITY", "UNIQUENESS", "INTEGRITY"]**
+  // "ACCURACY", "CONSISTENCY", "VALIDITY", "UNIQUENESS", "FRESHNESS",
+  // "VOLUME"]**
   string dimension = 502 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. The minimum ratio of **passing_rows / total_rows** required to
@@ -466,6 +467,10 @@ message DataQualityRule {
   //
   // * The maximum length is 1,024 characters.
   string description = 505 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Whether the Rule is active or suspended.
+  // Default is false.
+  bool suspended = 506 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // DataQualityColumnResult provides a more detailed, per-column view of

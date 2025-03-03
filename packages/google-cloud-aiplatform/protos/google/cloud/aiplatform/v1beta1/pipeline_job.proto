@@ -24,6 +24,8 @@ import "google/cloud/aiplatform/v1beta1/encryption_spec.proto";
 import "google/cloud/aiplatform/v1beta1/execution.proto";
 import "google/cloud/aiplatform/v1beta1/pipeline_failure_policy.proto";
 import "google/cloud/aiplatform/v1beta1/pipeline_state.proto";
+import "google/cloud/aiplatform/v1beta1/service_networking.proto";
+import "google/cloud/aiplatform/v1beta1/ui_pipeline_spec.proto";
 import "google/cloud/aiplatform/v1beta1/value.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
@@ -59,6 +61,44 @@ message PipelineJob {
         // The artifact must stay within the same project, location and default
         // metadatastore as the pipeline.
         string artifact_id = 1;
+      }
+    }
+
+    // Persistent resource based runtime detail. For more information, refer to
+    // https://cloud.google.com/vertex-ai/docs/training/persistent-resource-overview
+    message PersistentResourceRuntimeDetail {
+      // An enum that specifies the behavior to take if the timeout is reached.
+      enum TaskResourceUnavailableTimeoutBehavior {
+        // Unspecified. Behavior is same as `FAIL`.
+        TASK_RESOURCE_UNAVAILABLE_TIMEOUT_BEHAVIOR_UNSPECIFIED = 0;
+
+        // Fail the task if the timeout is reached.
+        FAIL = 1;
+
+        // Fall back to on-demand execution if the timeout is reached.
+        FALL_BACK_TO_ON_DEMAND = 2;
+      }
+
+      // Persistent resource name.
+      // Format:
+      // `projects/{project}/locations/{location}/persistentResources/{persistent_resource}`
+      string persistent_resource_name = 1;
+
+      // The max time a pipeline task waits for the required CPU, memory, or
+      // accelerator resource to become available from the specified persistent
+      // resource. Default wait time is 0.
+      int64 task_resource_unavailable_wait_time_ms = 2;
+
+      // Specifies the behavior to take if the timeout is reached.
+      TaskResourceUnavailableTimeoutBehavior
+          task_resource_unavailable_timeout_behavior = 3;
+    }
+
+    // The default runtime for the PipelineJob.
+    message DefaultRuntime {
+      oneof runtime_detail {
+        // Persistent resource based runtime detail.
+        PersistentResourceRuntimeDetail persistent_resource_runtime_detail = 1;
       }
     }
 
@@ -101,6 +141,12 @@ message PipelineJob {
     // The runtime artifacts of the PipelineJob. The key will be the input
     // artifact name and the value would be one of the InputArtifact.
     map<string, InputArtifact> input_artifacts = 5;
+
+    // Optional. The default runtime for the PipelineJob. If not provided,
+    // Vertex Custom Job(on demand) is used as the runtime. For Vertex Custom
+    // Job, please refer to
+    // https://cloud.google.com/vertex-ai/docs/training/overview.
+    DefaultRuntime default_runtime = 6 [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Output only. The resource name of the PipelineJob.
@@ -197,6 +243,10 @@ message PipelineJob {
   // Example: ['vertex-ai-ip-range'].
   repeated string reserved_ip_ranges = 25;
 
+  // Optional. Configuration for PSC-I for PipelineJob.
+  PscInterfaceConfig psc_interface_config = 31
+      [(google.api.field_behavior) = OPTIONAL];
+
   // A template uri from where the
   // [PipelineJob.pipeline_spec][google.cloud.aiplatform.v1beta1.PipelineJob.pipeline_spec],
   // if empty, will be downloaded. Currently, only uri from Vertex Template
@@ -222,6 +272,21 @@ message PipelineJob {
 
   // Output only. Reserved for future use.
   bool satisfies_pzi = 28 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. The original pipeline job id if this pipeline job is a rerun of a
+  // previous pipeline job.
+  int64 original_pipeline_job_id = 29 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The rerun configs for each task in the pipeline job.
+  // By default, the rerun will:
+  // 1. Use the same input artifacts as the original run.
+  // 2. Use the same input parameters as the original run.
+  // 3. Skip all the tasks that are already succeeded in the original run.
+  // 4. Rerun all the tasks that are not succeeded in the original run.
+  // By providing this field, users can override the default behavior and
+  // specify the rerun config for each task.
+  repeated PipelineTaskRerunConfig pipeline_task_rerun_configs = 30
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Pipeline template metadata if
@@ -434,4 +499,42 @@ message PipelineTaskExecutorDetail {
     CustomJobDetail custom_job_detail = 2
         [(google.api.field_behavior) = OUTPUT_ONLY];
   }
+}
+
+// User provided rerun config to submit a rerun pipelinejob. This includes
+// 1. Which task to rerun
+// 2. User override input parameters and artifacts.
+message PipelineTaskRerunConfig {
+  // A list of artifact metadata.
+  message ArtifactList {
+    // Optional. A list of artifact metadata.
+    repeated RuntimeArtifact artifacts = 1
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // Runtime inputs data of the task.
+  message Inputs {
+    // Optional. Input artifacts.
+    map<string, ArtifactList> artifacts = 1
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Input parameters.
+    map<string, google.protobuf.Value> parameter_values = 2
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // Optional. The system generated ID of the task. Retrieved from original run.
+  int64 task_id = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The name of the task.
+  string task_name = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The runtime input of the task overridden by the user.
+  Inputs inputs = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Whether to skip this task. Default value is False.
+  bool skip_task = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Whether to skip downstream tasks. Default value is False.
+  bool skip_downstream_tasks = 5 [(google.api.field_behavior) = OPTIONAL];
 }

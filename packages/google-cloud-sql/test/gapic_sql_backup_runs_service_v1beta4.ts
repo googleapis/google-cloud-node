@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -307,7 +307,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
         ['id']
       );
       request.id = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation()
       );
@@ -349,7 +349,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
         ['id']
       );
       request.id = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation()
       );
@@ -407,7 +407,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
         ['id']
       );
       request.id = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&id=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
@@ -478,7 +478,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
         ['id']
       );
       request.id = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.BackupRun()
       );
@@ -519,7 +519,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
         ['id']
       );
       request.id = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.BackupRun()
       );
@@ -575,7 +575,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
         ['id']
       );
       request.id = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&id=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -640,7 +640,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation()
       );
@@ -677,7 +677,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation()
       );
@@ -730,7 +730,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -791,7 +791,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.BackupRunsListResponse()
       );
@@ -827,7 +827,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.BackupRunsListResponse()
       );
@@ -878,7 +878,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -492,8 +492,8 @@ export class ExamplesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The playbook to create an example for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/playbooks/<Playbook ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.Example} request.example
    *   Required. The example to create.
    * @param {object} [options]
@@ -592,8 +592,8 @@ export class ExamplesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the example to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/playbooks/<Playbook ID>/examples/<Example ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>/examples/<ExampleID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -690,8 +690,8 @@ export class ExamplesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the example.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/playbooks/<Playbook ID>/examples/<Example ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>/examples/<ExampleID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -882,8 +882,8 @@ export class ExamplesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The playbook to list the examples from.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/playbooks/<Playbook ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -892,7 +892,7 @@ export class ExamplesClient {
    *   returned from a previous list request.
    * @param {string} [request.languageCode]
    *   Optional. The language to list examples for.
-   *   If not specified, the agent's default language is used.
+   *   If not specified, list all examples under the playbook.
    *   Note: languages must be enabled in the agent before they can be used.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -982,13 +982,13 @@ export class ExamplesClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listExamples`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The playbook to list the examples from.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/playbooks/<Playbook ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -997,7 +997,7 @@ export class ExamplesClient {
    *   returned from a previous list request.
    * @param {string} [request.languageCode]
    *   Optional. The language to list examples for.
-   *   If not specified, the agent's default language is used.
+   *   If not specified, list all examples under the playbook.
    *   Note: languages must be enabled in the agent before they can be used.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1040,8 +1040,8 @@ export class ExamplesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The playbook to list the examples from.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/playbooks/<Playbook ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -1050,7 +1050,7 @@ export class ExamplesClient {
    *   returned from a previous list request.
    * @param {string} [request.languageCode]
    *   Optional. The language to list examples for.
-   *   If not specified, the agent's default language is used.
+   *   If not specified, list all examples under the playbook.
    *   Note: languages must be enabled in the agent before they can be used.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.

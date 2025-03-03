@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35497,14 +35497,20 @@ export namespace google {
                 /** Properties of an Attack. */
                 interface IAttack {
 
+                    /** Attack volumePpsLong */
+                    volumePpsLong?: (number|Long|string|null);
+
+                    /** Attack volumeBpsLong */
+                    volumeBpsLong?: (number|Long|string|null);
+
+                    /** Attack classification */
+                    classification?: (string|null);
+
                     /** Attack volumePps */
                     volumePps?: (number|null);
 
                     /** Attack volumeBps */
                     volumeBps?: (number|null);
-
-                    /** Attack classification */
-                    classification?: (string|null);
                 }
 
                 /** Represents an Attack. */
@@ -35516,14 +35522,20 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.securitycenter.v2.IAttack);
 
+                    /** Attack volumePpsLong. */
+                    public volumePpsLong: (number|Long|string);
+
+                    /** Attack volumeBpsLong. */
+                    public volumeBpsLong: (number|Long|string);
+
+                    /** Attack classification. */
+                    public classification: string;
+
                     /** Attack volumePps. */
                     public volumePps: number;
 
                     /** Attack volumeBps. */
                     public volumeBps: number;
-
-                    /** Attack classification. */
-                    public classification: string;
 
                     /**
                      * Creates a new Attack instance using the specified properties.
@@ -36492,6 +36504,388 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a DataAccessEvent. */
+                interface IDataAccessEvent {
+
+                    /** DataAccessEvent eventId */
+                    eventId?: (string|null);
+
+                    /** DataAccessEvent principalEmail */
+                    principalEmail?: (string|null);
+
+                    /** DataAccessEvent operation */
+                    operation?: (google.cloud.securitycenter.v2.DataAccessEvent.Operation|keyof typeof google.cloud.securitycenter.v2.DataAccessEvent.Operation|null);
+
+                    /** DataAccessEvent eventTime */
+                    eventTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DataAccessEvent. */
+                class DataAccessEvent implements IDataAccessEvent {
+
+                    /**
+                     * Constructs a new DataAccessEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v2.IDataAccessEvent);
+
+                    /** DataAccessEvent eventId. */
+                    public eventId: string;
+
+                    /** DataAccessEvent principalEmail. */
+                    public principalEmail: string;
+
+                    /** DataAccessEvent operation. */
+                    public operation: (google.cloud.securitycenter.v2.DataAccessEvent.Operation|keyof typeof google.cloud.securitycenter.v2.DataAccessEvent.Operation);
+
+                    /** DataAccessEvent eventTime. */
+                    public eventTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new DataAccessEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataAccessEvent instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v2.IDataAccessEvent): google.cloud.securitycenter.v2.DataAccessEvent;
+
+                    /**
+                     * Encodes the specified DataAccessEvent message. Does not implicitly {@link google.cloud.securitycenter.v2.DataAccessEvent.verify|verify} messages.
+                     * @param message DataAccessEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v2.IDataAccessEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataAccessEvent message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.DataAccessEvent.verify|verify} messages.
+                     * @param message DataAccessEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v2.IDataAccessEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataAccessEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataAccessEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v2.DataAccessEvent;
+
+                    /**
+                     * Decodes a DataAccessEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataAccessEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v2.DataAccessEvent;
+
+                    /**
+                     * Verifies a DataAccessEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataAccessEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataAccessEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v2.DataAccessEvent;
+
+                    /**
+                     * Creates a plain object from a DataAccessEvent message. Also converts values to other types if specified.
+                     * @param message DataAccessEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v2.DataAccessEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataAccessEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataAccessEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DataAccessEvent {
+
+                    /** Operation enum. */
+                    enum Operation {
+                        OPERATION_UNSPECIFIED = 0,
+                        READ = 1,
+                        MOVE = 2,
+                        COPY = 3
+                    }
+                }
+
+                /** Properties of a DataFlowEvent. */
+                interface IDataFlowEvent {
+
+                    /** DataFlowEvent eventId */
+                    eventId?: (string|null);
+
+                    /** DataFlowEvent principalEmail */
+                    principalEmail?: (string|null);
+
+                    /** DataFlowEvent operation */
+                    operation?: (google.cloud.securitycenter.v2.DataFlowEvent.Operation|keyof typeof google.cloud.securitycenter.v2.DataFlowEvent.Operation|null);
+
+                    /** DataFlowEvent violatedLocation */
+                    violatedLocation?: (string|null);
+
+                    /** DataFlowEvent eventTime */
+                    eventTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DataFlowEvent. */
+                class DataFlowEvent implements IDataFlowEvent {
+
+                    /**
+                     * Constructs a new DataFlowEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v2.IDataFlowEvent);
+
+                    /** DataFlowEvent eventId. */
+                    public eventId: string;
+
+                    /** DataFlowEvent principalEmail. */
+                    public principalEmail: string;
+
+                    /** DataFlowEvent operation. */
+                    public operation: (google.cloud.securitycenter.v2.DataFlowEvent.Operation|keyof typeof google.cloud.securitycenter.v2.DataFlowEvent.Operation);
+
+                    /** DataFlowEvent violatedLocation. */
+                    public violatedLocation: string;
+
+                    /** DataFlowEvent eventTime. */
+                    public eventTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new DataFlowEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataFlowEvent instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v2.IDataFlowEvent): google.cloud.securitycenter.v2.DataFlowEvent;
+
+                    /**
+                     * Encodes the specified DataFlowEvent message. Does not implicitly {@link google.cloud.securitycenter.v2.DataFlowEvent.verify|verify} messages.
+                     * @param message DataFlowEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v2.IDataFlowEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataFlowEvent message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.DataFlowEvent.verify|verify} messages.
+                     * @param message DataFlowEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v2.IDataFlowEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataFlowEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataFlowEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v2.DataFlowEvent;
+
+                    /**
+                     * Decodes a DataFlowEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataFlowEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v2.DataFlowEvent;
+
+                    /**
+                     * Verifies a DataFlowEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataFlowEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataFlowEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v2.DataFlowEvent;
+
+                    /**
+                     * Creates a plain object from a DataFlowEvent message. Also converts values to other types if specified.
+                     * @param message DataFlowEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v2.DataFlowEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataFlowEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataFlowEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DataFlowEvent {
+
+                    /** Operation enum. */
+                    enum Operation {
+                        OPERATION_UNSPECIFIED = 0,
+                        READ = 1,
+                        MOVE = 2,
+                        COPY = 3
+                    }
+                }
+
+                /** Properties of a DataRetentionDeletionEvent. */
+                interface IDataRetentionDeletionEvent {
+
+                    /** DataRetentionDeletionEvent eventDetectionTime */
+                    eventDetectionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataRetentionDeletionEvent dataObjectCount */
+                    dataObjectCount?: (number|Long|string|null);
+
+                    /** DataRetentionDeletionEvent maxRetentionAllowed */
+                    maxRetentionAllowed?: (google.protobuf.IDuration|null);
+
+                    /** DataRetentionDeletionEvent eventType */
+                    eventType?: (google.cloud.securitycenter.v2.DataRetentionDeletionEvent.EventType|keyof typeof google.cloud.securitycenter.v2.DataRetentionDeletionEvent.EventType|null);
+                }
+
+                /** Represents a DataRetentionDeletionEvent. */
+                class DataRetentionDeletionEvent implements IDataRetentionDeletionEvent {
+
+                    /**
+                     * Constructs a new DataRetentionDeletionEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v2.IDataRetentionDeletionEvent);
+
+                    /** DataRetentionDeletionEvent eventDetectionTime. */
+                    public eventDetectionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataRetentionDeletionEvent dataObjectCount. */
+                    public dataObjectCount: (number|Long|string);
+
+                    /** DataRetentionDeletionEvent maxRetentionAllowed. */
+                    public maxRetentionAllowed?: (google.protobuf.IDuration|null);
+
+                    /** DataRetentionDeletionEvent eventType. */
+                    public eventType: (google.cloud.securitycenter.v2.DataRetentionDeletionEvent.EventType|keyof typeof google.cloud.securitycenter.v2.DataRetentionDeletionEvent.EventType);
+
+                    /**
+                     * Creates a new DataRetentionDeletionEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataRetentionDeletionEvent instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v2.IDataRetentionDeletionEvent): google.cloud.securitycenter.v2.DataRetentionDeletionEvent;
+
+                    /**
+                     * Encodes the specified DataRetentionDeletionEvent message. Does not implicitly {@link google.cloud.securitycenter.v2.DataRetentionDeletionEvent.verify|verify} messages.
+                     * @param message DataRetentionDeletionEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v2.IDataRetentionDeletionEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataRetentionDeletionEvent message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.DataRetentionDeletionEvent.verify|verify} messages.
+                     * @param message DataRetentionDeletionEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v2.IDataRetentionDeletionEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataRetentionDeletionEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataRetentionDeletionEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v2.DataRetentionDeletionEvent;
+
+                    /**
+                     * Decodes a DataRetentionDeletionEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataRetentionDeletionEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v2.DataRetentionDeletionEvent;
+
+                    /**
+                     * Verifies a DataRetentionDeletionEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataRetentionDeletionEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataRetentionDeletionEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v2.DataRetentionDeletionEvent;
+
+                    /**
+                     * Creates a plain object from a DataRetentionDeletionEvent message. Also converts values to other types if specified.
+                     * @param message DataRetentionDeletionEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v2.DataRetentionDeletionEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataRetentionDeletionEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataRetentionDeletionEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DataRetentionDeletionEvent {
+
+                    /** EventType enum. */
+                    enum EventType {
+                        EVENT_TYPE_UNSPECIFIED = 0,
+                        EVENT_TYPE_MAX_TTL_EXCEEDED = 1
+                    }
+                }
+
                 /** Properties of a Database. */
                 interface IDatabase {
 
@@ -36613,6 +37007,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Database
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Disk. */
+                interface IDisk {
+
+                    /** Disk name */
+                    name?: (string|null);
+                }
+
+                /** Represents a Disk. */
+                class Disk implements IDisk {
+
+                    /**
+                     * Constructs a new Disk.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v2.IDisk);
+
+                    /** Disk name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new Disk instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Disk instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v2.IDisk): google.cloud.securitycenter.v2.Disk;
+
+                    /**
+                     * Encodes the specified Disk message. Does not implicitly {@link google.cloud.securitycenter.v2.Disk.verify|verify} messages.
+                     * @param message Disk message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v2.IDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Disk message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.Disk.verify|verify} messages.
+                     * @param message Disk message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v2.IDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Disk message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Disk
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v2.Disk;
+
+                    /**
+                     * Decodes a Disk message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Disk
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v2.Disk;
+
+                    /**
+                     * Verifies a Disk message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Disk message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Disk
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v2.Disk;
+
+                    /**
+                     * Creates a plain object from a Disk message. Also converts values to other types if specified.
+                     * @param message Disk
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v2.Disk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Disk to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Disk
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -37509,6 +38000,18 @@ export namespace google {
 
                     /** Finding groupMemberships */
                     groupMemberships?: (google.cloud.securitycenter.v2.IGroupMembership[]|null);
+
+                    /** Finding disk */
+                    disk?: (google.cloud.securitycenter.v2.IDisk|null);
+
+                    /** Finding dataAccessEvents */
+                    dataAccessEvents?: (google.cloud.securitycenter.v2.IDataAccessEvent[]|null);
+
+                    /** Finding dataFlowEvents */
+                    dataFlowEvents?: (google.cloud.securitycenter.v2.IDataFlowEvent[]|null);
+
+                    /** Finding dataRetentionDeletionEvents */
+                    dataRetentionDeletionEvents?: (google.cloud.securitycenter.v2.IDataRetentionDeletionEvent[]|null);
                 }
 
                 /** Represents a Finding. */
@@ -37669,6 +38172,18 @@ export namespace google {
 
                     /** Finding groupMemberships. */
                     public groupMemberships: google.cloud.securitycenter.v2.IGroupMembership[];
+
+                    /** Finding disk. */
+                    public disk?: (google.cloud.securitycenter.v2.IDisk|null);
+
+                    /** Finding dataAccessEvents. */
+                    public dataAccessEvents: google.cloud.securitycenter.v2.IDataAccessEvent[];
+
+                    /** Finding dataFlowEvents. */
+                    public dataFlowEvents: google.cloud.securitycenter.v2.IDataFlowEvent[];
+
+                    /** Finding dataRetentionDeletionEvents. */
+                    public dataRetentionDeletionEvents: google.cloud.securitycenter.v2.IDataRetentionDeletionEvent[];
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -38095,7 +38610,8 @@ export namespace google {
                         OBSERVATION = 4,
                         SCC_ERROR = 5,
                         POSTURE_VIOLATION = 6,
-                        TOXIC_COMBINATION = 7
+                        TOXIC_COMBINATION = 7,
+                        SENSITIVE_DATA_RISK = 8
                     }
                 }
 
@@ -40582,6 +41098,7 @@ export namespace google {
                         ACCOUNT_ACCESS_REMOVAL = 51,
                         STEAL_WEB_SESSION_COOKIE = 25,
                         CREATE_OR_MODIFY_SYSTEM_PROCESS = 24,
+                        EVENT_TRIGGERED_EXECUTION = 65,
                         ABUSE_ELEVATION_CONTROL_MECHANISM = 34,
                         UNSECURED_CREDENTIALS = 13,
                         MODIFY_AUTHENTICATION_PROCESS = 28,
@@ -40598,6 +41115,7 @@ export namespace google {
                         ACTIVE_SCANNING = 1,
                         SCANNING_IP_BLOCKS = 2,
                         CONTAINER_ADMINISTRATION_COMMAND = 60,
+                        DEPLOY_CONTAINER = 66,
                         ESCAPE_TO_HOST = 61,
                         CONTAINER_AND_RESOURCE_DISCOVERY = 57,
                         STEAL_OR_FORGE_AUTHENTICATION_CERTIFICATES = 62
@@ -41677,6 +42195,9 @@ export namespace google {
 
                     /** Cve exploitReleaseDate */
                     exploitReleaseDate?: (google.protobuf.ITimestamp|null);
+
+                    /** Cve firstExploitationDate */
+                    firstExploitationDate?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a Cve. */
@@ -41714,6 +42235,9 @@ export namespace google {
 
                     /** Cve exploitReleaseDate. */
                     public exploitReleaseDate?: (google.protobuf.ITimestamp|null);
+
+                    /** Cve firstExploitationDate. */
+                    public firstExploitationDate?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new Cve instance using the specified properties.
@@ -43645,6 +44169,9 @@ export namespace google {
 
                     /** AzureMetadata resourceGroup */
                     resourceGroup?: (google.cloud.securitycenter.v2.AzureMetadata.IAzureResourceGroup|null);
+
+                    /** AzureMetadata tenant */
+                    tenant?: (google.cloud.securitycenter.v2.AzureMetadata.IAzureTenant|null);
                 }
 
                 /** Represents an AzureMetadata. */
@@ -43664,6 +44191,9 @@ export namespace google {
 
                     /** AzureMetadata resourceGroup. */
                     public resourceGroup?: (google.cloud.securitycenter.v2.AzureMetadata.IAzureResourceGroup|null);
+
+                    /** AzureMetadata tenant. */
+                    public tenant?: (google.cloud.securitycenter.v2.AzureMetadata.IAzureTenant|null);
 
                     /**
                      * Creates a new AzureMetadata instance using the specified properties.
@@ -43954,6 +44484,9 @@ export namespace google {
                     /** Properties of an AzureResourceGroup. */
                     interface IAzureResourceGroup {
 
+                        /** AzureResourceGroup id */
+                        id?: (string|null);
+
                         /** AzureResourceGroup name */
                         name?: (string|null);
                     }
@@ -43966,6 +44499,9 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.securitycenter.v2.AzureMetadata.IAzureResourceGroup);
+
+                        /** AzureResourceGroup id. */
+                        public id: string;
 
                         /** AzureResourceGroup name. */
                         public name: string;
@@ -44042,6 +44578,109 @@ export namespace google {
 
                         /**
                          * Gets the default type url for AzureResourceGroup
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AzureTenant. */
+                    interface IAzureTenant {
+
+                        /** AzureTenant id */
+                        id?: (string|null);
+
+                        /** AzureTenant displayName */
+                        displayName?: (string|null);
+                    }
+
+                    /** Represents an AzureTenant. */
+                    class AzureTenant implements IAzureTenant {
+
+                        /**
+                         * Constructs a new AzureTenant.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v2.AzureMetadata.IAzureTenant);
+
+                        /** AzureTenant id. */
+                        public id: string;
+
+                        /** AzureTenant displayName. */
+                        public displayName: string;
+
+                        /**
+                         * Creates a new AzureTenant instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AzureTenant instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v2.AzureMetadata.IAzureTenant): google.cloud.securitycenter.v2.AzureMetadata.AzureTenant;
+
+                        /**
+                         * Encodes the specified AzureTenant message. Does not implicitly {@link google.cloud.securitycenter.v2.AzureMetadata.AzureTenant.verify|verify} messages.
+                         * @param message AzureTenant message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v2.AzureMetadata.IAzureTenant, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AzureTenant message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.AzureMetadata.AzureTenant.verify|verify} messages.
+                         * @param message AzureTenant message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v2.AzureMetadata.IAzureTenant, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AzureTenant message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AzureTenant
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v2.AzureMetadata.AzureTenant;
+
+                        /**
+                         * Decodes an AzureTenant message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AzureTenant
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v2.AzureMetadata.AzureTenant;
+
+                        /**
+                         * Verifies an AzureTenant message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AzureTenant message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AzureTenant
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v2.AzureMetadata.AzureTenant;
+
+                        /**
+                         * Creates a plain object from an AzureTenant message. Also converts values to other types if specified.
+                         * @param message AzureTenant
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v2.AzureMetadata.AzureTenant, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AzureTenant to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AzureTenant
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

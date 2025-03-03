@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -491,8 +491,8 @@ export class ConversationHistoryClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the conversation.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/conversations/<Conversation ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/conversations/<ConversationID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -589,8 +589,8 @@ export class ConversationHistoryClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the conversation.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/conversations/<Conversation ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/conversations/<ConversationID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -688,7 +688,7 @@ export class ConversationHistoryClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all conversations for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} [request.filter]
    *   Optional. The filter string. Supports filter by create_time,
    *   metrics.has_end_interaction, metrics.has_live_agent_handoff,
@@ -795,12 +795,12 @@ export class ConversationHistoryClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConversations`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all conversations for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} [request.filter]
    *   Optional. The filter string. Supports filter by create_time,
    *   metrics.has_end_interaction, metrics.has_live_agent_handoff,
@@ -860,7 +860,7 @@ export class ConversationHistoryClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all conversations for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} [request.filter]
    *   Optional. The filter string. Supports filter by create_time,
    *   metrics.has_end_interaction, metrics.has_live_agent_handoff,

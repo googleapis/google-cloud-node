@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -257,6 +257,12 @@ export class PredictionServiceClient {
       featureGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureGroups/{feature_group}'
       ),
+      featureMonitorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}'
+      ),
+      featureMonitorJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}/featureMonitorJobs/{feature_monitor_job}'
+      ),
       featureOnlineStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}'
       ),
@@ -504,7 +510,7 @@ export class PredictionServiceClient {
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough();
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -1216,6 +1222,9 @@ export class PredictionServiceClient {
    *   A `Tool` is a piece of code that enables the system to interact with
    *   external systems to perform an action, or set of actions, outside of
    *   knowledge and scope of the model.
+   * @param {google.cloud.aiplatform.v1beta1.GenerationConfig} [request.generationConfig]
+   *   Optional. Generation config that the model will use to generate the
+   *   response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1305,9 +1314,14 @@ export class PredictionServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.model
-   *   Required. The name of the publisher model requested to serve the
-   *   prediction. Format:
+   *   Required. The fully qualified name of the publisher model or tuned model
+   *   endpoint to use.
+   *
+   *   Publisher model format:
    *   `projects/{project}/locations/{location}/publishers/* /models/*`
+   *
+   *   Tuned model endpoint format:
+   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
    * @param {number[]} request.contents
    *   Required. The content of the current conversation with the model.
    *
@@ -1334,6 +1348,14 @@ export class PredictionServiceClient {
    * @param {google.cloud.aiplatform.v1beta1.ToolConfig} [request.toolConfig]
    *   Optional. Tool config. This config is shared for all tools provided in the
    *   request.
+   * @param {number[]} [request.labels]
+   *   Optional. The labels with user-defined metadata for the request. It is used
+   *   for billing and reporting only.
+   *
+   *   Label keys and values can be no longer than 63 characters
+   *   (Unicode codepoints) and can only contain lowercase letters, numeric
+   *   characters, underscores, and dashes. International characters are allowed.
+   *   Label values are optional. Label keys must start with a letter.
    * @param {number[]} [request.safetySettings]
    *   Optional. Per request settings for blocking unsafe content.
    *   Enforced on GenerateContentResponse.candidates.
@@ -1589,9 +1611,14 @@ export class PredictionServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.model
-   *   Required. The name of the publisher model requested to serve the
-   *   prediction. Format:
+   *   Required. The fully qualified name of the publisher model or tuned model
+   *   endpoint to use.
+   *
+   *   Publisher model format:
    *   `projects/{project}/locations/{location}/publishers/* /models/*`
+   *
+   *   Tuned model endpoint format:
+   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
    * @param {number[]} request.contents
    *   Required. The content of the current conversation with the model.
    *
@@ -1618,6 +1645,14 @@ export class PredictionServiceClient {
    * @param {google.cloud.aiplatform.v1beta1.ToolConfig} [request.toolConfig]
    *   Optional. Tool config. This config is shared for all tools provided in the
    *   request.
+   * @param {number[]} [request.labels]
+   *   Optional. The labels with user-defined metadata for the request. It is used
+   *   for billing and reporting only.
+   *
+   *   Label keys and values can be no longer than 63 characters
+   *   (Unicode codepoints) and can only contain lowercase letters, numeric
+   *   characters, underscores, and dashes. International characters are allowed.
+   *   Label values are optional. Label keys must start with a letter.
    * @param {number[]} [request.safetySettings]
    *   Optional. Per request settings for blocking unsafe content.
    *   Enforced on GenerateContentResponse.candidates.
@@ -1654,9 +1689,9 @@ export class PredictionServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.endpoint
-   *   Required. The name of the Endpoint requested to serve the prediction.
+   *   Required. The name of the endpoint requested to serve the prediction.
    *   Format:
-   *   `projects/{project}/locations/{location}/endpoints/openapi`
+   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
    * @param {google.api.HttpBody} [request.httpBody]
    *   Optional. The prediction input. Supports HTTP headers and arbitrary data
    *   payload.
@@ -2927,6 +2962,174 @@ export class PredictionServiceClient {
   matchFeatureGroupFromFeatureGroupName(featureGroupName: string) {
     return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
       .feature_group;
+  }
+
+  /**
+   * Return a fully-qualified featureMonitor resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} feature_group
+   * @param {string} feature_monitor
+   * @returns {string} Resource name string.
+   */
+  featureMonitorPath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    featureMonitor: string
+  ) {
+    return this.pathTemplates.featureMonitorPathTemplate.render({
+      project: project,
+      location: location,
+      feature_group: featureGroup,
+      feature_monitor: featureMonitor,
+    });
+  }
+
+  /**
+   * Parse the project from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).project;
+  }
+
+  /**
+   * Parse the location from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).location;
+  }
+
+  /**
+   * Parse the feature_group from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the feature_group.
+   */
+  matchFeatureGroupFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).feature_group;
+  }
+
+  /**
+   * Parse the feature_monitor from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the feature_monitor.
+   */
+  matchFeatureMonitorFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).feature_monitor;
+  }
+
+  /**
+   * Return a fully-qualified featureMonitorJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} feature_group
+   * @param {string} feature_monitor
+   * @param {string} feature_monitor_job
+   * @returns {string} Resource name string.
+   */
+  featureMonitorJobPath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    featureMonitor: string,
+    featureMonitorJob: string
+  ) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.render({
+      project: project,
+      location: location,
+      feature_group: featureGroup,
+      feature_monitor: featureMonitor,
+      feature_monitor_job: featureMonitorJob,
+    });
+  }
+
+  /**
+   * Parse the project from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).location;
+  }
+
+  /**
+   * Parse the feature_group from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_group.
+   */
+  matchFeatureGroupFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_group;
+  }
+
+  /**
+   * Parse the feature_monitor from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_monitor.
+   */
+  matchFeatureMonitorFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_monitor;
+  }
+
+  /**
+   * Parse the feature_monitor_job from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_monitor_job.
+   */
+  matchFeatureMonitorJobFromFeatureMonitorJobName(
+    featureMonitorJobName: string
+  ) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_monitor_job;
   }
 
   /**

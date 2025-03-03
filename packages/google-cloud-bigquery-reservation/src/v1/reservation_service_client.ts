@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -320,6 +320,7 @@ export class ReservationServiceClient {
       'getReservation',
       'deleteReservation',
       'updateReservation',
+      'failoverReservation',
       'createCapacityCommitment',
       'listCapacityCommitments',
       'getCapacityCommitment',
@@ -849,6 +850,107 @@ export class ReservationServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateReservation(request, options, callback);
+  }
+  /**
+   * Fail over a reservation to the secondary location. The operation should be
+   * done in the current secondary location, which will be promoted to the
+   * new primary location for the reservation.
+   * Attempting to failover a reservation in the current primary location will
+   * fail with the error code `google.rpc.Code.FAILED_PRECONDITION`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the reservation to failover. E.g.,
+   *      `projects/myproject/locations/US/reservations/team1-prod`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/reservation_service.failover_reservation.js</caption>
+   * region_tag:bigqueryreservation_v1_generated_ReservationService_FailoverReservation_async
+   */
+  failoverReservation(
+    request?: protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.reservation.v1.IReservation,
+      (
+        | protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  failoverReservation(
+    request: protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.bigquery.reservation.v1.IReservation,
+      | protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  failoverReservation(
+    request: protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest,
+    callback: Callback<
+      protos.google.cloud.bigquery.reservation.v1.IReservation,
+      | protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  failoverReservation(
+    request?: protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservation,
+          | protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.bigquery.reservation.v1.IReservation,
+      | protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.reservation.v1.IReservation,
+      (
+        | protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.failoverReservation(request, options, callback);
   }
   /**
    * Creates a new capacity commitment resource.
@@ -2260,7 +2362,7 @@ export class ReservationServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listReservations`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2453,7 +2555,7 @@ export class ReservationServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCapacityCommitments`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2667,7 +2769,7 @@ export class ReservationServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAssignments`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2903,7 +3005,7 @@ export class ReservationServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchAssignments`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3150,7 +3252,7 @@ export class ReservationServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchAllAssignments`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent

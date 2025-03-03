@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2023,7 +2023,7 @@ export class BackendServicesClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `list`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.filter
@@ -2123,7 +2123,7 @@ export class BackendServicesClient {
     ) as AsyncIterable<protos.google.cloud.compute.v1.IBackendService>;
   }
   /**
-   * Retrieves an aggregated list of all usable backend services in the specified project.
+   * Retrieves a list of all usable backend services in the specified project.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2227,7 +2227,7 @@ export class BackendServicesClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listUsable`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.filter

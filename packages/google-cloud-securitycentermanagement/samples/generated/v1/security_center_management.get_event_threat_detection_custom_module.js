@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,11 +29,11 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the ETD custom module.
-   *  Its format is:
-   *    * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
-   *    * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
-   *    * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+   *  Required. The resource name of the Event Threat Detection custom module, in
+   *  one of the following formats:
+   *  * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+   *  * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+   *  * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
    */
   // const name = 'abc123'
 

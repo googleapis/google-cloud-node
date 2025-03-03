@@ -82,6 +82,11 @@
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
+        "DeleteSite": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
         "ListHardwareGroups": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
@@ -144,6 +149,10 @@
         },
         "CreateComment": {
           "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RecordActionOnComment": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3891,6 +3891,127 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of a ReplicationSpec. */
+            interface IReplicationSpec {
+
+                /** ReplicationSpec gcsDataSource */
+                gcsDataSource?: (google.storagetransfer.v1.IGcsData|null);
+
+                /** ReplicationSpec gcsDataSink */
+                gcsDataSink?: (google.storagetransfer.v1.IGcsData|null);
+
+                /** ReplicationSpec objectConditions */
+                objectConditions?: (google.storagetransfer.v1.IObjectConditions|null);
+
+                /** ReplicationSpec transferOptions */
+                transferOptions?: (google.storagetransfer.v1.ITransferOptions|null);
+            }
+
+            /** Represents a ReplicationSpec. */
+            class ReplicationSpec implements IReplicationSpec {
+
+                /**
+                 * Constructs a new ReplicationSpec.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.IReplicationSpec);
+
+                /** ReplicationSpec gcsDataSource. */
+                public gcsDataSource?: (google.storagetransfer.v1.IGcsData|null);
+
+                /** ReplicationSpec gcsDataSink. */
+                public gcsDataSink?: (google.storagetransfer.v1.IGcsData|null);
+
+                /** ReplicationSpec objectConditions. */
+                public objectConditions?: (google.storagetransfer.v1.IObjectConditions|null);
+
+                /** ReplicationSpec transferOptions. */
+                public transferOptions?: (google.storagetransfer.v1.ITransferOptions|null);
+
+                /** ReplicationSpec dataSource. */
+                public dataSource?: "gcsDataSource";
+
+                /** ReplicationSpec dataSink. */
+                public dataSink?: "gcsDataSink";
+
+                /**
+                 * Creates a new ReplicationSpec instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ReplicationSpec instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.IReplicationSpec): google.storagetransfer.v1.ReplicationSpec;
+
+                /**
+                 * Encodes the specified ReplicationSpec message. Does not implicitly {@link google.storagetransfer.v1.ReplicationSpec.verify|verify} messages.
+                 * @param message ReplicationSpec message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.IReplicationSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ReplicationSpec message, length delimited. Does not implicitly {@link google.storagetransfer.v1.ReplicationSpec.verify|verify} messages.
+                 * @param message ReplicationSpec message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.IReplicationSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ReplicationSpec message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ReplicationSpec
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.ReplicationSpec;
+
+                /**
+                 * Decodes a ReplicationSpec message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ReplicationSpec
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.ReplicationSpec;
+
+                /**
+                 * Verifies a ReplicationSpec message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ReplicationSpec message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ReplicationSpec
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.ReplicationSpec;
+
+                /**
+                 * Creates a plain object from a ReplicationSpec message. Also converts values to other types if specified.
+                 * @param message ReplicationSpec
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.ReplicationSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ReplicationSpec to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReplicationSpec
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of a MetadataOptions. */
             interface IMetadataOptions {
 
@@ -4448,6 +4569,9 @@ export namespace google {
                 /** TransferJob transferSpec */
                 transferSpec?: (google.storagetransfer.v1.ITransferSpec|null);
 
+                /** TransferJob replicationSpec */
+                replicationSpec?: (google.storagetransfer.v1.IReplicationSpec|null);
+
                 /** TransferJob notificationConfig */
                 notificationConfig?: (google.storagetransfer.v1.INotificationConfig|null);
 
@@ -4496,6 +4620,9 @@ export namespace google {
 
                 /** TransferJob transferSpec. */
                 public transferSpec?: (google.storagetransfer.v1.ITransferSpec|null);
+
+                /** TransferJob replicationSpec. */
+                public replicationSpec?: (google.storagetransfer.v1.IReplicationSpec|null);
 
                 /** TransferJob notificationConfig. */
                 public notificationConfig?: (google.storagetransfer.v1.INotificationConfig|null);

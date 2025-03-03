@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -361,7 +361,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
       );
@@ -393,7 +393,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
       );
@@ -440,7 +440,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAuthorizationPolicy = stubSimpleCall(
         undefined,
@@ -498,7 +498,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
       );
@@ -530,7 +530,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
       );
@@ -577,7 +577,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getServerTlsPolicy = stubSimpleCall(
         undefined,
@@ -629,7 +629,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
       );
@@ -661,7 +661,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
       );
@@ -708,7 +708,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getClientTlsPolicy = stubSimpleCall(
         undefined,
@@ -760,7 +760,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -793,7 +793,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -847,7 +847,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAuthorizationPolicy = stubLongRunningCall(
         undefined,
@@ -881,7 +881,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAuthorizationPolicy = stubLongRunningCall(
         undefined,
@@ -959,7 +959,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['authorizationPolicy', 'name']
       );
       request.authorizationPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -993,7 +993,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['authorizationPolicy', 'name']
       );
       request.authorizationPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1048,7 +1048,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['authorizationPolicy', 'name']
       );
       request.authorizationPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAuthorizationPolicy = stubLongRunningCall(
         undefined,
@@ -1083,7 +1083,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['authorizationPolicy', 'name']
       );
       request.authorizationPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAuthorizationPolicy = stubLongRunningCall(
         undefined,
@@ -1160,7 +1160,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1193,7 +1193,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1247,7 +1247,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAuthorizationPolicy = stubLongRunningCall(
         undefined,
@@ -1281,7 +1281,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAuthorizationPolicy = stubLongRunningCall(
         undefined,
@@ -1358,7 +1358,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1391,7 +1391,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1445,7 +1445,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServerTlsPolicy = stubLongRunningCall(
         undefined,
@@ -1479,7 +1479,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServerTlsPolicy = stubLongRunningCall(
         undefined,
@@ -1556,7 +1556,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['serverTlsPolicy', 'name']
       );
       request.serverTlsPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1590,7 +1590,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['serverTlsPolicy', 'name']
       );
       request.serverTlsPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1645,7 +1645,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['serverTlsPolicy', 'name']
       );
       request.serverTlsPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateServerTlsPolicy = stubLongRunningCall(
         undefined,
@@ -1680,7 +1680,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['serverTlsPolicy', 'name']
       );
       request.serverTlsPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateServerTlsPolicy = stubLongRunningCall(
         undefined,
@@ -1756,7 +1756,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1789,7 +1789,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1843,7 +1843,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteServerTlsPolicy = stubLongRunningCall(
         undefined,
@@ -1877,7 +1877,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteServerTlsPolicy = stubLongRunningCall(
         undefined,
@@ -1953,7 +1953,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1986,7 +1986,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2040,7 +2040,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createClientTlsPolicy = stubLongRunningCall(
         undefined,
@@ -2074,7 +2074,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createClientTlsPolicy = stubLongRunningCall(
         undefined,
@@ -2151,7 +2151,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['clientTlsPolicy', 'name']
       );
       request.clientTlsPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `client_tls_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `client_tls_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2185,7 +2185,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['clientTlsPolicy', 'name']
       );
       request.clientTlsPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `client_tls_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `client_tls_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2240,7 +2240,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['clientTlsPolicy', 'name']
       );
       request.clientTlsPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `client_tls_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `client_tls_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateClientTlsPolicy = stubLongRunningCall(
         undefined,
@@ -2275,7 +2275,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['clientTlsPolicy', 'name']
       );
       request.clientTlsPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `client_tls_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `client_tls_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateClientTlsPolicy = stubLongRunningCall(
         undefined,
@@ -2351,7 +2351,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2384,7 +2384,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2438,7 +2438,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteClientTlsPolicy = stubLongRunningCall(
         undefined,
@@ -2472,7 +2472,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteClientTlsPolicy = stubLongRunningCall(
         undefined,
@@ -2548,7 +2548,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
@@ -2588,7 +2588,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
@@ -2645,7 +2645,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAuthorizationPolicies = stubSimpleCall(
         undefined,
@@ -2679,7 +2679,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
@@ -2748,7 +2748,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAuthorizationPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2806,7 +2806,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
@@ -2860,7 +2860,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAuthorizationPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2907,7 +2907,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
@@ -2947,7 +2947,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
@@ -3004,7 +3004,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listServerTlsPolicies = stubSimpleCall(
         undefined,
@@ -3038,7 +3038,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
@@ -3107,7 +3107,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServerTlsPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3165,7 +3165,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
@@ -3219,7 +3219,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServerTlsPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3266,7 +3266,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
@@ -3306,7 +3306,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
@@ -3363,7 +3363,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listClientTlsPolicies = stubSimpleCall(
         undefined,
@@ -3397,7 +3397,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
@@ -3466,7 +3466,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClientTlsPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3524,7 +3524,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
@@ -3578,7 +3578,7 @@ describe('v1.NetworkSecurityClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClientTlsPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

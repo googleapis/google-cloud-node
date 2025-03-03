@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -585,9 +585,9 @@ export class ConversationsClient {
    *   Google. Only set it if you cannot wait for the response to return a
    *   auto-generated one to you.
    *
-   *   The conversation ID must be compliant with the regression fomula
+   *   The conversation ID must be compliant with the regression formula
    *   `{@link protos.a-zA-Z0-9_-|a-zA-Z}*` with the characters length in range of [3,64].
-   *   If the field is provided, the caller is resposible for
+   *   If the field is provided, the caller is responsible for
    *   1. the uniqueness of the ID, otherwise the request will be rejected.
    *   2. the consistency for whether to use custom ID or not under a project to
    *   better ensure uniqueness.
@@ -1244,6 +1244,30 @@ export class ConversationsClient {
    *   triggered.
    *   Format: `projects/<Project ID>/locations/<Location
    *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+   * @param {google.cloud.dialogflow.v2.SearchKnowledgeRequest.QuerySource} [request.querySource]
+   *   Optional. The source of the query in the request.
+   * @param {google.protobuf.Struct} [request.endUserMetadata]
+   *   Optional. Information about the end-user to improve the relevance and
+   *   accuracy of generative answers.
+   *
+   *   This will be interpreted and used by a language model, so, for good
+   *   results, the data should be self-descriptive, and in a simple structure.
+   *
+   *   Example:
+   *
+   *   ```json
+   *   {
+   *     "subscription plan": "Business Premium Plus",
+   *     "devices owned": [
+   *       {"model": "Google Pixel 7"},
+   *       {"model": "Google Pixel Tablet"}
+   *     ]
+   *   }
+   *   ```
+   * @param {google.cloud.dialogflow.v2.SearchKnowledgeRequest.SearchConfig} [request.searchConfig]
+   *   Optional. Configuration specific to search queries with data stores.
+   * @param {boolean} [request.exactSearch]
+   *   Optional. Whether to search the query exactly without query rewrite.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1439,7 +1463,7 @@ export class ConversationsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConversations`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1663,7 +1687,7 @@ export class ConversationsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listMessages`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent

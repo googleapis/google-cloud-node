@@ -4,6 +4,34 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.12.0...dataproc-v5.13.0) (2025-02-28)
+
+
+### Features
+
+* [dataproc] Added support for the AuthenticationConfig field to Dataproc serverless workload configurations, allowing specification of the user workload identity as either the end user or a service account ([#6045](https://github.com/googleapis/google-cloud-node/issues/6045)) ([8a66270](https://github.com/googleapis/google-cloud-node/commit/8a662709b9e9b749f63e44acd92087381e95b7f9))
+
+## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.11.0...dataproc-v5.12.0) (2024-10-30)
+
+
+### Features
+
+* [dataproc] Add `ProvisioningModelMix` to support mixing of spot and standard instances for secondary workers ([#5753](https://github.com/googleapis/google-cloud-node/issues/5753)) ([9639bc9](https://github.com/googleapis/google-cloud-node/commit/9639bc9a253ccf94a4318210d638b29a42a5ee72))
+
+## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.10.0...dataproc-v5.11.0) (2024-10-10)
+
+
+### Features
+
+* [dataproc] add support for Spark Connect sessions in Dataproc Serverless for Spark ([#5709](https://github.com/googleapis/google-cloud-node/issues/5709)) ([fe95238](https://github.com/googleapis/google-cloud-node/commit/fe95238882e9c30570e025d11dc3a8ef5d4614a8))
+
+## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.9.0...dataproc-v5.10.0) (2024-09-24)
+
+
+### Features
+
+* [dataproc] add resource reference for KMS keys and fix comments ([#5680](https://github.com/googleapis/google-cloud-node/issues/5680)) ([8c7b907](https://github.com/googleapis/google-cloud-node/commit/8c7b907e67852a7fbb91961bce625b3387411525))
+
 ## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.8.0...dataproc-v5.9.0) (2024-09-13)
 
 

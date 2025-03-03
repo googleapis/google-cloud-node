@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -262,6 +262,12 @@ export class MetadataServiceClient {
       featureGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureGroups/{feature_group}'
       ),
+      featureMonitorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}'
+      ),
+      featureMonitorJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}/featureMonitorJobs/{feature_monitor_job}'
+      ),
       featureOnlineStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}'
       ),
@@ -478,6 +484,9 @@ export class MetadataServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
@@ -500,6 +509,9 @@ export class MetadataServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
             },
           ],
         },
@@ -533,6 +545,10 @@ export class MetadataServiceClient {
               body: '*',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
+              body: '*',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
               body: '*',
             },
@@ -558,6 +574,10 @@ export class MetadataServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -586,6 +606,9 @@ export class MetadataServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
             },
             {
@@ -605,6 +628,9 @@ export class MetadataServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
             },
           ],
         },
@@ -1071,6 +1097,10 @@ export class MetadataServiceClient {
             },
             {
               delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
             {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
@@ -1284,6 +1314,10 @@ export class MetadataServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
           ],
@@ -1422,6 +1456,9 @@ export class MetadataServiceClient {
             },
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
             },
             {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
             {
@@ -1581,6 +1618,9 @@ export class MetadataServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
           ],
         },
         {
@@ -1706,6 +1746,9 @@ export class MetadataServiceClient {
             },
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
             {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
             {get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations'},
@@ -1861,6 +1904,9 @@ export class MetadataServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*}/operations',
             },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}/operations',
+            },
           ],
         },
         {
@@ -2010,6 +2056,9 @@ export class MetadataServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
             {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
             {
@@ -2167,6 +2216,9 @@ export class MetadataServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
           ],
         },
@@ -5709,7 +5761,7 @@ export class MetadataServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listMetadataStores`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5963,7 +6015,7 @@ export class MetadataServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listArtifacts`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6297,7 +6349,7 @@ export class MetadataServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listContexts`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6635,7 +6687,7 @@ export class MetadataServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listExecutions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6929,7 +6981,7 @@ export class MetadataServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listMetadataSchemas`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -7288,7 +7340,7 @@ export class MetadataServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -7301,6 +7353,20 @@ export class MetadataServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -7337,6 +7403,13 @@ export class MetadataServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -7372,11 +7445,11 @@ export class MetadataServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -7385,6 +7458,20 @@ export class MetadataServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -7415,7 +7502,7 @@ export class MetadataServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -7428,6 +7515,20 @@ export class MetadataServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -8457,6 +8558,174 @@ export class MetadataServiceClient {
   matchFeatureGroupFromFeatureGroupName(featureGroupName: string) {
     return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
       .feature_group;
+  }
+
+  /**
+   * Return a fully-qualified featureMonitor resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} feature_group
+   * @param {string} feature_monitor
+   * @returns {string} Resource name string.
+   */
+  featureMonitorPath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    featureMonitor: string
+  ) {
+    return this.pathTemplates.featureMonitorPathTemplate.render({
+      project: project,
+      location: location,
+      feature_group: featureGroup,
+      feature_monitor: featureMonitor,
+    });
+  }
+
+  /**
+   * Parse the project from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).project;
+  }
+
+  /**
+   * Parse the location from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).location;
+  }
+
+  /**
+   * Parse the feature_group from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the feature_group.
+   */
+  matchFeatureGroupFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).feature_group;
+  }
+
+  /**
+   * Parse the feature_monitor from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the feature_monitor.
+   */
+  matchFeatureMonitorFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).feature_monitor;
+  }
+
+  /**
+   * Return a fully-qualified featureMonitorJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} feature_group
+   * @param {string} feature_monitor
+   * @param {string} feature_monitor_job
+   * @returns {string} Resource name string.
+   */
+  featureMonitorJobPath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    featureMonitor: string,
+    featureMonitorJob: string
+  ) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.render({
+      project: project,
+      location: location,
+      feature_group: featureGroup,
+      feature_monitor: featureMonitor,
+      feature_monitor_job: featureMonitorJob,
+    });
+  }
+
+  /**
+   * Parse the project from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).location;
+  }
+
+  /**
+   * Parse the feature_group from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_group.
+   */
+  matchFeatureGroupFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_group;
+  }
+
+  /**
+   * Parse the feature_monitor from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_monitor.
+   */
+  matchFeatureMonitorFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_monitor;
+  }
+
+  /**
+   * Parse the feature_monitor_job from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_monitor_job.
+   */
+  matchFeatureMonitorJobFromFeatureMonitorJobName(
+    featureMonitorJobName: string
+  ) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_monitor_job;
   }
 
   /**

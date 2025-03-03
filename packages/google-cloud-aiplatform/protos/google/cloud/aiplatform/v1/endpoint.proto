@@ -23,6 +23,7 @@ import "google/cloud/aiplatform/v1/explanation.proto";
 import "google/cloud/aiplatform/v1/io.proto";
 import "google/cloud/aiplatform/v1/machine_resources.proto";
 import "google/cloud/aiplatform/v1/service_networking.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Google.Cloud.AIPlatform.V1";
@@ -167,6 +168,9 @@ message Endpoint {
   string dedicated_endpoint_dns = 25
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
+  // Configurations that are applied to the endpoint for online prediction.
+  ClientConnectionConfig client_connection_config = 23;
+
   // Output only. Reserved for future use.
   bool satisfies_pzs = 27 [(google.api.field_behavior) = OUTPUT_ONLY];
 
@@ -176,6 +180,20 @@ message Endpoint {
 
 // A deployment of a Model. Endpoints contain one or more DeployedModels.
 message DeployedModel {
+  // Runtime status of the deployed model.
+  message Status {
+    // Output only. The latest deployed model's status message (if any).
+    string message = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. The time at which the status was last updated.
+    google.protobuf.Timestamp last_update_time = 2
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. The number of available replicas of the deployed model.
+    int32 available_replica_count = 3
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
+
   // The prediction (for example, the machine) resources that the DeployedModel
   // uses. The user is billed for the resources (at least their minimal amount)
   // even if the DeployedModel receives no traffic.
@@ -293,6 +311,20 @@ message DeployedModel {
   // [network][google.cloud.aiplatform.v1.Endpoint.network] is configured.
   PrivateEndpoints private_endpoints = 14
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Configuration for faster model deployment.
+  FasterDeploymentConfig faster_deployment_config = 23;
+
+  // Output only. Runtime status of the deployed model.
+  Status status = 26 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // System labels to apply to Model Garden deployments.
+  // System labels are managed by Google for internal use only.
+  map<string, string> system_labels = 28;
+
+  // Optional. Spec for configuring speculative decoding.
+  SpeculativeDecodingSpec speculative_decoding_spec = 30
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // PrivateEndpoints proto is used to provide paths for users to send
@@ -331,4 +363,54 @@ message PredictRequestResponseLoggingConfig {
   // most special characters will become underscores). If no table name is
   // given, a new table will be created with name `request_response_logging`
   BigQueryDestination bigquery_destination = 3;
+}
+
+// Configurations (e.g. inference timeout) that are applied on your endpoints.
+message ClientConnectionConfig {
+  // Customizable online prediction request timeout.
+  google.protobuf.Duration inference_timeout = 1;
+}
+
+// Configuration for faster model deployment.
+message FasterDeploymentConfig {
+  // If true, enable fast tryout feature for this deployed model.
+  bool fast_tryout_enabled = 2;
+}
+
+// Configuration for Speculative Decoding.
+message SpeculativeDecodingSpec {
+  // Draft model speculation works by using the smaller model to generate
+  // candidate tokens for speculative decoding.
+  message DraftModelSpeculation {
+    // Required. The resource name of the draft model.
+    string draft_model = 1 [
+      (google.api.field_behavior) = REQUIRED,
+      (google.api.resource_reference) = {
+        type: "aiplatform.googleapis.com/Model"
+      }
+    ];
+  }
+
+  // N-Gram speculation works by trying to find matching tokens in the
+  // previous prompt sequence and use those as speculation for generating
+  // new tokens.
+  message NgramSpeculation {
+    // The number of last N input tokens used as ngram to search/match
+    // against the previous prompt sequence.
+    // This is equal to the N in N-Gram.
+    // The default value is 3 if not specified.
+    int32 ngram_size = 1;
+  }
+
+  // The type of speculation method to use.
+  oneof speculation {
+    // draft model speculation.
+    DraftModelSpeculation draft_model_speculation = 2;
+
+    // N-Gram speculation.
+    NgramSpeculation ngram_speculation = 3;
+  }
+
+  // The number of speculative tokens to generate at each step.
+  int32 speculative_token_count = 1;
 }

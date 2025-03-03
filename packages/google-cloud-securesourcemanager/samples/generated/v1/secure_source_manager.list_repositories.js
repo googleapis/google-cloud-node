@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -45,6 +45,16 @@ function main(parent) {
    *  Optional. Filter results.
    */
   // const filter = 'abc123'
+  /**
+   *  Optional. The name of the instance in which the repository is hosted,
+   *  formatted as
+   *  `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+   *  When listing repositories via
+   *  securesourcemanager.googleapis.com (Control Plane API), this field is
+   *  required. When listing repositories via *.sourcemanager.dev (Data Plane
+   *  API), this field is ignored.
+   */
+  // const instance = 'abc123'
 
   // Imports the Securesourcemanager library
   const {SecureSourceManagerClient} = require('@google-cloud/securesourcemanager').v1;

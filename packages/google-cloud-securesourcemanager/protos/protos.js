@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -458,6 +458,171 @@
                          * @instance
                          * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
                          * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|createBranchRule}.
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @typedef CreateBranchRuleCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateBranchRule.
+                         * @function createBranchRule
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @instance
+                         * @param {google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest} request CreateBranchRuleRequest message or plain object
+                         * @param {google.cloud.securesourcemanager.v1.SecureSourceManager.CreateBranchRuleCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecureSourceManager.prototype.createBranchRule = function createBranchRule(request, callback) {
+                            return this.rpcCall(createBranchRule, $root.google.cloud.securesourcemanager.v1.CreateBranchRuleRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateBranchRule" });
+    
+                        /**
+                         * Calls CreateBranchRule.
+                         * @function createBranchRule
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @instance
+                         * @param {google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest} request CreateBranchRuleRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|listBranchRules}.
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @typedef ListBranchRulesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securesourcemanager.v1.ListBranchRulesResponse} [response] ListBranchRulesResponse
+                         */
+    
+                        /**
+                         * Calls ListBranchRules.
+                         * @function listBranchRules
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @instance
+                         * @param {google.cloud.securesourcemanager.v1.IListBranchRulesRequest} request ListBranchRulesRequest message or plain object
+                         * @param {google.cloud.securesourcemanager.v1.SecureSourceManager.ListBranchRulesCallback} callback Node-style callback called with the error, if any, and ListBranchRulesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecureSourceManager.prototype.listBranchRules = function listBranchRules(request, callback) {
+                            return this.rpcCall(listBranchRules, $root.google.cloud.securesourcemanager.v1.ListBranchRulesRequest, $root.google.cloud.securesourcemanager.v1.ListBranchRulesResponse, request, callback);
+                        }, "name", { value: "ListBranchRules" });
+    
+                        /**
+                         * Calls ListBranchRules.
+                         * @function listBranchRules
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @instance
+                         * @param {google.cloud.securesourcemanager.v1.IListBranchRulesRequest} request ListBranchRulesRequest message or plain object
+                         * @returns {Promise<google.cloud.securesourcemanager.v1.ListBranchRulesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|getBranchRule}.
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @typedef GetBranchRuleCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securesourcemanager.v1.BranchRule} [response] BranchRule
+                         */
+    
+                        /**
+                         * Calls GetBranchRule.
+                         * @function getBranchRule
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @instance
+                         * @param {google.cloud.securesourcemanager.v1.IGetBranchRuleRequest} request GetBranchRuleRequest message or plain object
+                         * @param {google.cloud.securesourcemanager.v1.SecureSourceManager.GetBranchRuleCallback} callback Node-style callback called with the error, if any, and BranchRule
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecureSourceManager.prototype.getBranchRule = function getBranchRule(request, callback) {
+                            return this.rpcCall(getBranchRule, $root.google.cloud.securesourcemanager.v1.GetBranchRuleRequest, $root.google.cloud.securesourcemanager.v1.BranchRule, request, callback);
+                        }, "name", { value: "GetBranchRule" });
+    
+                        /**
+                         * Calls GetBranchRule.
+                         * @function getBranchRule
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @instance
+                         * @param {google.cloud.securesourcemanager.v1.IGetBranchRuleRequest} request GetBranchRuleRequest message or plain object
+                         * @returns {Promise<google.cloud.securesourcemanager.v1.BranchRule>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|updateBranchRule}.
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @typedef UpdateBranchRuleCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateBranchRule.
+                         * @function updateBranchRule
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @instance
+                         * @param {google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest} request UpdateBranchRuleRequest message or plain object
+                         * @param {google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateBranchRuleCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecureSourceManager.prototype.updateBranchRule = function updateBranchRule(request, callback) {
+                            return this.rpcCall(updateBranchRule, $root.google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateBranchRule" });
+    
+                        /**
+                         * Calls UpdateBranchRule.
+                         * @function updateBranchRule
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @instance
+                         * @param {google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest} request UpdateBranchRuleRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|deleteBranchRule}.
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @typedef DeleteBranchRuleCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteBranchRule.
+                         * @function deleteBranchRule
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @instance
+                         * @param {google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest} request DeleteBranchRuleRequest message or plain object
+                         * @param {google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteBranchRuleCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecureSourceManager.prototype.deleteBranchRule = function deleteBranchRule(request, callback) {
+                            return this.rpcCall(deleteBranchRule, $root.google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteBranchRule" });
+    
+                        /**
+                         * Calls DeleteBranchRule.
+                         * @function deleteBranchRule
+                         * @memberof google.cloud.securesourcemanager.v1.SecureSourceManager
+                         * @instance
+                         * @param {google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest} request DeleteBranchRuleRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
     
@@ -1289,6 +1454,7 @@
                              * @property {string|null} [caPool] PrivateConfig caPool
                              * @property {string|null} [httpServiceAttachment] PrivateConfig httpServiceAttachment
                              * @property {string|null} [sshServiceAttachment] PrivateConfig sshServiceAttachment
+                             * @property {Array.<string>|null} [pscAllowedProjects] PrivateConfig pscAllowedProjects
                              */
     
                             /**
@@ -1300,6 +1466,7 @@
                              * @param {google.cloud.securesourcemanager.v1.Instance.IPrivateConfig=} [properties] Properties to set
                              */
                             function PrivateConfig(properties) {
+                                this.pscAllowedProjects = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -1339,6 +1506,14 @@
                             PrivateConfig.prototype.sshServiceAttachment = "";
     
                             /**
+                             * PrivateConfig pscAllowedProjects.
+                             * @member {Array.<string>} pscAllowedProjects
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @instance
+                             */
+                            PrivateConfig.prototype.pscAllowedProjects = $util.emptyArray;
+    
+                            /**
                              * Creates a new PrivateConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
@@ -1370,6 +1545,9 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.httpServiceAttachment);
                                 if (message.sshServiceAttachment != null && Object.hasOwnProperty.call(message, "sshServiceAttachment"))
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.sshServiceAttachment);
+                                if (message.pscAllowedProjects != null && message.pscAllowedProjects.length)
+                                    for (var i = 0; i < message.pscAllowedProjects.length; ++i)
+                                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.pscAllowedProjects[i]);
                                 return writer;
                             };
     
@@ -1420,6 +1598,12 @@
                                             message.sshServiceAttachment = reader.string();
                                             break;
                                         }
+                                    case 6: {
+                                            if (!(message.pscAllowedProjects && message.pscAllowedProjects.length))
+                                                message.pscAllowedProjects = [];
+                                            message.pscAllowedProjects.push(reader.string());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -1467,6 +1651,13 @@
                                 if (message.sshServiceAttachment != null && message.hasOwnProperty("sshServiceAttachment"))
                                     if (!$util.isString(message.sshServiceAttachment))
                                         return "sshServiceAttachment: string expected";
+                                if (message.pscAllowedProjects != null && message.hasOwnProperty("pscAllowedProjects")) {
+                                    if (!Array.isArray(message.pscAllowedProjects))
+                                        return "pscAllowedProjects: array expected";
+                                    for (var i = 0; i < message.pscAllowedProjects.length; ++i)
+                                        if (!$util.isString(message.pscAllowedProjects[i]))
+                                            return "pscAllowedProjects: string[] expected";
+                                }
                                 return null;
                             };
     
@@ -1490,6 +1681,13 @@
                                     message.httpServiceAttachment = String(object.httpServiceAttachment);
                                 if (object.sshServiceAttachment != null)
                                     message.sshServiceAttachment = String(object.sshServiceAttachment);
+                                if (object.pscAllowedProjects) {
+                                    if (!Array.isArray(object.pscAllowedProjects))
+                                        throw TypeError(".google.cloud.securesourcemanager.v1.Instance.PrivateConfig.pscAllowedProjects: array expected");
+                                    message.pscAllowedProjects = [];
+                                    for (var i = 0; i < object.pscAllowedProjects.length; ++i)
+                                        message.pscAllowedProjects[i] = String(object.pscAllowedProjects[i]);
+                                }
                                 return message;
                             };
     
@@ -1506,6 +1704,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.pscAllowedProjects = [];
                                 if (options.defaults) {
                                     object.isPrivate = false;
                                     object.caPool = "";
@@ -1520,6 +1720,11 @@
                                     object.httpServiceAttachment = message.httpServiceAttachment;
                                 if (message.sshServiceAttachment != null && message.hasOwnProperty("sshServiceAttachment"))
                                     object.sshServiceAttachment = message.sshServiceAttachment;
+                                if (message.pscAllowedProjects && message.pscAllowedProjects.length) {
+                                    object.pscAllowedProjects = [];
+                                    for (var j = 0; j < message.pscAllowedProjects.length; ++j)
+                                        object.pscAllowedProjects[j] = message.pscAllowedProjects[j];
+                                }
                                 return object;
                             };
     
@@ -2501,6 +2706,803 @@
                         })();
     
                         return Repository;
+                    })();
+    
+                    v1.BranchRule = (function() {
+    
+                        /**
+                         * Properties of a BranchRule.
+                         * @memberof google.cloud.securesourcemanager.v1
+                         * @interface IBranchRule
+                         * @property {string|null} [name] BranchRule name
+                         * @property {string|null} [uid] BranchRule uid
+                         * @property {google.protobuf.ITimestamp|null} [createTime] BranchRule createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] BranchRule updateTime
+                         * @property {Object.<string,string>|null} [annotations] BranchRule annotations
+                         * @property {string|null} [etag] BranchRule etag
+                         * @property {string|null} [includePattern] BranchRule includePattern
+                         * @property {boolean|null} [disabled] BranchRule disabled
+                         * @property {boolean|null} [requirePullRequest] BranchRule requirePullRequest
+                         * @property {number|null} [minimumReviewsCount] BranchRule minimumReviewsCount
+                         * @property {number|null} [minimumApprovalsCount] BranchRule minimumApprovalsCount
+                         * @property {boolean|null} [requireCommentsResolved] BranchRule requireCommentsResolved
+                         * @property {boolean|null} [allowStaleReviews] BranchRule allowStaleReviews
+                         * @property {boolean|null} [requireLinearHistory] BranchRule requireLinearHistory
+                         * @property {Array.<google.cloud.securesourcemanager.v1.BranchRule.ICheck>|null} [requiredStatusChecks] BranchRule requiredStatusChecks
+                         */
+    
+                        /**
+                         * Constructs a new BranchRule.
+                         * @memberof google.cloud.securesourcemanager.v1
+                         * @classdesc Represents a BranchRule.
+                         * @implements IBranchRule
+                         * @constructor
+                         * @param {google.cloud.securesourcemanager.v1.IBranchRule=} [properties] Properties to set
+                         */
+                        function BranchRule(properties) {
+                            this.annotations = {};
+                            this.requiredStatusChecks = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BranchRule name.
+                         * @member {string} name
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.name = "";
+    
+                        /**
+                         * BranchRule uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.uid = "";
+    
+                        /**
+                         * BranchRule createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.createTime = null;
+    
+                        /**
+                         * BranchRule updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.updateTime = null;
+    
+                        /**
+                         * BranchRule annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * BranchRule etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.etag = "";
+    
+                        /**
+                         * BranchRule includePattern.
+                         * @member {string} includePattern
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.includePattern = "";
+    
+                        /**
+                         * BranchRule disabled.
+                         * @member {boolean} disabled
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.disabled = false;
+    
+                        /**
+                         * BranchRule requirePullRequest.
+                         * @member {boolean} requirePullRequest
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.requirePullRequest = false;
+    
+                        /**
+                         * BranchRule minimumReviewsCount.
+                         * @member {number} minimumReviewsCount
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.minimumReviewsCount = 0;
+    
+                        /**
+                         * BranchRule minimumApprovalsCount.
+                         * @member {number} minimumApprovalsCount
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.minimumApprovalsCount = 0;
+    
+                        /**
+                         * BranchRule requireCommentsResolved.
+                         * @member {boolean} requireCommentsResolved
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.requireCommentsResolved = false;
+    
+                        /**
+                         * BranchRule allowStaleReviews.
+                         * @member {boolean} allowStaleReviews
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.allowStaleReviews = false;
+    
+                        /**
+                         * BranchRule requireLinearHistory.
+                         * @member {boolean} requireLinearHistory
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.requireLinearHistory = false;
+    
+                        /**
+                         * BranchRule requiredStatusChecks.
+                         * @member {Array.<google.cloud.securesourcemanager.v1.BranchRule.ICheck>} requiredStatusChecks
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.requiredStatusChecks = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BranchRule instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IBranchRule=} [properties] Properties to set
+                         * @returns {google.cloud.securesourcemanager.v1.BranchRule} BranchRule instance
+                         */
+                        BranchRule.create = function create(properties) {
+                            return new BranchRule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BranchRule message. Does not implicitly {@link google.cloud.securesourcemanager.v1.BranchRule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IBranchRule} message BranchRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BranchRule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uid);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.etag);
+                            if (message.includePattern != null && Object.hasOwnProperty.call(message, "includePattern"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.includePattern);
+                            if (message.disabled != null && Object.hasOwnProperty.call(message, "disabled"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.disabled);
+                            if (message.requirePullRequest != null && Object.hasOwnProperty.call(message, "requirePullRequest"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.requirePullRequest);
+                            if (message.minimumReviewsCount != null && Object.hasOwnProperty.call(message, "minimumReviewsCount"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.minimumReviewsCount);
+                            if (message.minimumApprovalsCount != null && Object.hasOwnProperty.call(message, "minimumApprovalsCount"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.minimumApprovalsCount);
+                            if (message.requireCommentsResolved != null && Object.hasOwnProperty.call(message, "requireCommentsResolved"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.requireCommentsResolved);
+                            if (message.requireLinearHistory != null && Object.hasOwnProperty.call(message, "requireLinearHistory"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).bool(message.requireLinearHistory);
+                            if (message.requiredStatusChecks != null && message.requiredStatusChecks.length)
+                                for (var i = 0; i < message.requiredStatusChecks.length; ++i)
+                                    $root.google.cloud.securesourcemanager.v1.BranchRule.Check.encode(message.requiredStatusChecks[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.allowStaleReviews != null && Object.hasOwnProperty.call(message, "allowStaleReviews"))
+                                writer.uint32(/* id 15, wireType 0 =*/120).bool(message.allowStaleReviews);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BranchRule message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.BranchRule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IBranchRule} message BranchRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BranchRule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BranchRule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securesourcemanager.v1.BranchRule} BranchRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BranchRule.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securesourcemanager.v1.BranchRule(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 6: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.includePattern = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.disabled = reader.bool();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.requirePullRequest = reader.bool();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.minimumReviewsCount = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.minimumApprovalsCount = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.requireCommentsResolved = reader.bool();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.allowStaleReviews = reader.bool();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.requireLinearHistory = reader.bool();
+                                        break;
+                                    }
+                                case 14: {
+                                        if (!(message.requiredStatusChecks && message.requiredStatusChecks.length))
+                                            message.requiredStatusChecks = [];
+                                        message.requiredStatusChecks.push($root.google.cloud.securesourcemanager.v1.BranchRule.Check.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BranchRule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securesourcemanager.v1.BranchRule} BranchRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BranchRule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BranchRule message.
+                         * @function verify
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BranchRule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.includePattern != null && message.hasOwnProperty("includePattern"))
+                                if (!$util.isString(message.includePattern))
+                                    return "includePattern: string expected";
+                            if (message.disabled != null && message.hasOwnProperty("disabled"))
+                                if (typeof message.disabled !== "boolean")
+                                    return "disabled: boolean expected";
+                            if (message.requirePullRequest != null && message.hasOwnProperty("requirePullRequest"))
+                                if (typeof message.requirePullRequest !== "boolean")
+                                    return "requirePullRequest: boolean expected";
+                            if (message.minimumReviewsCount != null && message.hasOwnProperty("minimumReviewsCount"))
+                                if (!$util.isInteger(message.minimumReviewsCount))
+                                    return "minimumReviewsCount: integer expected";
+                            if (message.minimumApprovalsCount != null && message.hasOwnProperty("minimumApprovalsCount"))
+                                if (!$util.isInteger(message.minimumApprovalsCount))
+                                    return "minimumApprovalsCount: integer expected";
+                            if (message.requireCommentsResolved != null && message.hasOwnProperty("requireCommentsResolved"))
+                                if (typeof message.requireCommentsResolved !== "boolean")
+                                    return "requireCommentsResolved: boolean expected";
+                            if (message.allowStaleReviews != null && message.hasOwnProperty("allowStaleReviews"))
+                                if (typeof message.allowStaleReviews !== "boolean")
+                                    return "allowStaleReviews: boolean expected";
+                            if (message.requireLinearHistory != null && message.hasOwnProperty("requireLinearHistory"))
+                                if (typeof message.requireLinearHistory !== "boolean")
+                                    return "requireLinearHistory: boolean expected";
+                            if (message.requiredStatusChecks != null && message.hasOwnProperty("requiredStatusChecks")) {
+                                if (!Array.isArray(message.requiredStatusChecks))
+                                    return "requiredStatusChecks: array expected";
+                                for (var i = 0; i < message.requiredStatusChecks.length; ++i) {
+                                    var error = $root.google.cloud.securesourcemanager.v1.BranchRule.Check.verify(message.requiredStatusChecks[i]);
+                                    if (error)
+                                        return "requiredStatusChecks." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BranchRule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securesourcemanager.v1.BranchRule} BranchRule
+                         */
+                        BranchRule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securesourcemanager.v1.BranchRule)
+                                return object;
+                            var message = new $root.google.cloud.securesourcemanager.v1.BranchRule();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.securesourcemanager.v1.BranchRule.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.securesourcemanager.v1.BranchRule.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.securesourcemanager.v1.BranchRule.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.includePattern != null)
+                                message.includePattern = String(object.includePattern);
+                            if (object.disabled != null)
+                                message.disabled = Boolean(object.disabled);
+                            if (object.requirePullRequest != null)
+                                message.requirePullRequest = Boolean(object.requirePullRequest);
+                            if (object.minimumReviewsCount != null)
+                                message.minimumReviewsCount = object.minimumReviewsCount | 0;
+                            if (object.minimumApprovalsCount != null)
+                                message.minimumApprovalsCount = object.minimumApprovalsCount | 0;
+                            if (object.requireCommentsResolved != null)
+                                message.requireCommentsResolved = Boolean(object.requireCommentsResolved);
+                            if (object.allowStaleReviews != null)
+                                message.allowStaleReviews = Boolean(object.allowStaleReviews);
+                            if (object.requireLinearHistory != null)
+                                message.requireLinearHistory = Boolean(object.requireLinearHistory);
+                            if (object.requiredStatusChecks) {
+                                if (!Array.isArray(object.requiredStatusChecks))
+                                    throw TypeError(".google.cloud.securesourcemanager.v1.BranchRule.requiredStatusChecks: array expected");
+                                message.requiredStatusChecks = [];
+                                for (var i = 0; i < object.requiredStatusChecks.length; ++i) {
+                                    if (typeof object.requiredStatusChecks[i] !== "object")
+                                        throw TypeError(".google.cloud.securesourcemanager.v1.BranchRule.requiredStatusChecks: object expected");
+                                    message.requiredStatusChecks[i] = $root.google.cloud.securesourcemanager.v1.BranchRule.Check.fromObject(object.requiredStatusChecks[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BranchRule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.BranchRule} message BranchRule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BranchRule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.requiredStatusChecks = [];
+                            if (options.objects || options.defaults)
+                                object.annotations = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.uid = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.etag = "";
+                                object.includePattern = "";
+                                object.disabled = false;
+                                object.requirePullRequest = false;
+                                object.minimumReviewsCount = 0;
+                                object.minimumApprovalsCount = 0;
+                                object.requireCommentsResolved = false;
+                                object.requireLinearHistory = false;
+                                object.allowStaleReviews = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.includePattern != null && message.hasOwnProperty("includePattern"))
+                                object.includePattern = message.includePattern;
+                            if (message.disabled != null && message.hasOwnProperty("disabled"))
+                                object.disabled = message.disabled;
+                            if (message.requirePullRequest != null && message.hasOwnProperty("requirePullRequest"))
+                                object.requirePullRequest = message.requirePullRequest;
+                            if (message.minimumReviewsCount != null && message.hasOwnProperty("minimumReviewsCount"))
+                                object.minimumReviewsCount = message.minimumReviewsCount;
+                            if (message.minimumApprovalsCount != null && message.hasOwnProperty("minimumApprovalsCount"))
+                                object.minimumApprovalsCount = message.minimumApprovalsCount;
+                            if (message.requireCommentsResolved != null && message.hasOwnProperty("requireCommentsResolved"))
+                                object.requireCommentsResolved = message.requireCommentsResolved;
+                            if (message.requireLinearHistory != null && message.hasOwnProperty("requireLinearHistory"))
+                                object.requireLinearHistory = message.requireLinearHistory;
+                            if (message.requiredStatusChecks && message.requiredStatusChecks.length) {
+                                object.requiredStatusChecks = [];
+                                for (var j = 0; j < message.requiredStatusChecks.length; ++j)
+                                    object.requiredStatusChecks[j] = $root.google.cloud.securesourcemanager.v1.BranchRule.Check.toObject(message.requiredStatusChecks[j], options);
+                            }
+                            if (message.allowStaleReviews != null && message.hasOwnProperty("allowStaleReviews"))
+                                object.allowStaleReviews = message.allowStaleReviews;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BranchRule to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BranchRule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BranchRule
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BranchRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securesourcemanager.v1.BranchRule";
+                        };
+    
+                        BranchRule.Check = (function() {
+    
+                            /**
+                             * Properties of a Check.
+                             * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                             * @interface ICheck
+                             * @property {string|null} [context] Check context
+                             */
+    
+                            /**
+                             * Constructs a new Check.
+                             * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                             * @classdesc Represents a Check.
+                             * @implements ICheck
+                             * @constructor
+                             * @param {google.cloud.securesourcemanager.v1.BranchRule.ICheck=} [properties] Properties to set
+                             */
+                            function Check(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Check context.
+                             * @member {string} context
+                             * @memberof google.cloud.securesourcemanager.v1.BranchRule.Check
+                             * @instance
+                             */
+                            Check.prototype.context = "";
+    
+                            /**
+                             * Creates a new Check instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securesourcemanager.v1.BranchRule.Check
+                             * @static
+                             * @param {google.cloud.securesourcemanager.v1.BranchRule.ICheck=} [properties] Properties to set
+                             * @returns {google.cloud.securesourcemanager.v1.BranchRule.Check} Check instance
+                             */
+                            Check.create = function create(properties) {
+                                return new Check(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Check message. Does not implicitly {@link google.cloud.securesourcemanager.v1.BranchRule.Check.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securesourcemanager.v1.BranchRule.Check
+                             * @static
+                             * @param {google.cloud.securesourcemanager.v1.BranchRule.ICheck} message Check message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Check.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.context != null && Object.hasOwnProperty.call(message, "context"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.context);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Check message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.BranchRule.Check.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securesourcemanager.v1.BranchRule.Check
+                             * @static
+                             * @param {google.cloud.securesourcemanager.v1.BranchRule.ICheck} message Check message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Check.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Check message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securesourcemanager.v1.BranchRule.Check
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securesourcemanager.v1.BranchRule.Check} Check
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Check.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securesourcemanager.v1.BranchRule.Check();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.context = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Check message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securesourcemanager.v1.BranchRule.Check
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securesourcemanager.v1.BranchRule.Check} Check
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Check.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Check message.
+                             * @function verify
+                             * @memberof google.cloud.securesourcemanager.v1.BranchRule.Check
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Check.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.context != null && message.hasOwnProperty("context"))
+                                    if (!$util.isString(message.context))
+                                        return "context: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Check message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securesourcemanager.v1.BranchRule.Check
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securesourcemanager.v1.BranchRule.Check} Check
+                             */
+                            Check.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securesourcemanager.v1.BranchRule.Check)
+                                    return object;
+                                var message = new $root.google.cloud.securesourcemanager.v1.BranchRule.Check();
+                                if (object.context != null)
+                                    message.context = String(object.context);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Check message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securesourcemanager.v1.BranchRule.Check
+                             * @static
+                             * @param {google.cloud.securesourcemanager.v1.BranchRule.Check} message Check
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Check.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.context = "";
+                                if (message.context != null && message.hasOwnProperty("context"))
+                                    object.context = message.context;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Check to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securesourcemanager.v1.BranchRule.Check
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Check.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Check
+                             * @function getTypeUrl
+                             * @memberof google.cloud.securesourcemanager.v1.BranchRule.Check
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Check.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.securesourcemanager.v1.BranchRule.Check";
+                            };
+    
+                            return Check;
+                        })();
+    
+                        return BranchRule;
                     })();
     
                     v1.ListInstancesRequest = (function() {
@@ -4157,6 +5159,7 @@
                          * @property {number|null} [pageSize] ListRepositoriesRequest pageSize
                          * @property {string|null} [pageToken] ListRepositoriesRequest pageToken
                          * @property {string|null} [filter] ListRepositoriesRequest filter
+                         * @property {string|null} [instance] ListRepositoriesRequest instance
                          */
     
                         /**
@@ -4207,6 +5210,14 @@
                         ListRepositoriesRequest.prototype.filter = "";
     
                         /**
+                         * ListRepositoriesRequest instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.securesourcemanager.v1.ListRepositoriesRequest
+                         * @instance
+                         */
+                        ListRepositoriesRequest.prototype.instance = "";
+    
+                        /**
                          * Creates a new ListRepositoriesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securesourcemanager.v1.ListRepositoriesRequest
@@ -4238,6 +5249,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
                             if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.instance);
                             return writer;
                         };
     
@@ -4288,6 +5301,10 @@
                                         message.filter = reader.string();
                                         break;
                                     }
+                                case 5: {
+                                        message.instance = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4335,6 +5352,9 @@
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
                             return null;
                         };
     
@@ -4358,6 +5378,8 @@
                                 message.pageToken = String(object.pageToken);
                             if (object.filter != null)
                                 message.filter = String(object.filter);
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
                             return message;
                         };
     
@@ -4379,6 +5401,7 @@
                                 object.pageSize = 0;
                                 object.pageToken = "";
                                 object.filter = "";
+                                object.instance = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -4388,6 +5411,8 @@
                                 object.pageToken = message.pageToken;
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 object.filter = message.filter;
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
                             return object;
                         };
     
@@ -5351,6 +6376,1449 @@
                         };
     
                         return DeleteRepositoryRequest;
+                    })();
+    
+                    v1.GetBranchRuleRequest = (function() {
+    
+                        /**
+                         * Properties of a GetBranchRuleRequest.
+                         * @memberof google.cloud.securesourcemanager.v1
+                         * @interface IGetBranchRuleRequest
+                         * @property {string|null} [name] GetBranchRuleRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetBranchRuleRequest.
+                         * @memberof google.cloud.securesourcemanager.v1
+                         * @classdesc Represents a GetBranchRuleRequest.
+                         * @implements IGetBranchRuleRequest
+                         * @constructor
+                         * @param {google.cloud.securesourcemanager.v1.IGetBranchRuleRequest=} [properties] Properties to set
+                         */
+                        function GetBranchRuleRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetBranchRuleRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.securesourcemanager.v1.GetBranchRuleRequest
+                         * @instance
+                         */
+                        GetBranchRuleRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetBranchRuleRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securesourcemanager.v1.GetBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IGetBranchRuleRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securesourcemanager.v1.GetBranchRuleRequest} GetBranchRuleRequest instance
+                         */
+                        GetBranchRuleRequest.create = function create(properties) {
+                            return new GetBranchRuleRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetBranchRuleRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.GetBranchRuleRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securesourcemanager.v1.GetBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IGetBranchRuleRequest} message GetBranchRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBranchRuleRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetBranchRuleRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.GetBranchRuleRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securesourcemanager.v1.GetBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IGetBranchRuleRequest} message GetBranchRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBranchRuleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetBranchRuleRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securesourcemanager.v1.GetBranchRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securesourcemanager.v1.GetBranchRuleRequest} GetBranchRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBranchRuleRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securesourcemanager.v1.GetBranchRuleRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetBranchRuleRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securesourcemanager.v1.GetBranchRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securesourcemanager.v1.GetBranchRuleRequest} GetBranchRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBranchRuleRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetBranchRuleRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securesourcemanager.v1.GetBranchRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetBranchRuleRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetBranchRuleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securesourcemanager.v1.GetBranchRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securesourcemanager.v1.GetBranchRuleRequest} GetBranchRuleRequest
+                         */
+                        GetBranchRuleRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securesourcemanager.v1.GetBranchRuleRequest)
+                                return object;
+                            var message = new $root.google.cloud.securesourcemanager.v1.GetBranchRuleRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetBranchRuleRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securesourcemanager.v1.GetBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.GetBranchRuleRequest} message GetBranchRuleRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetBranchRuleRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetBranchRuleRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securesourcemanager.v1.GetBranchRuleRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetBranchRuleRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetBranchRuleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securesourcemanager.v1.GetBranchRuleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetBranchRuleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securesourcemanager.v1.GetBranchRuleRequest";
+                        };
+    
+                        return GetBranchRuleRequest;
+                    })();
+    
+                    v1.CreateBranchRuleRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateBranchRuleRequest.
+                         * @memberof google.cloud.securesourcemanager.v1
+                         * @interface ICreateBranchRuleRequest
+                         * @property {string|null} [parent] CreateBranchRuleRequest parent
+                         * @property {google.cloud.securesourcemanager.v1.IBranchRule|null} [branchRule] CreateBranchRuleRequest branchRule
+                         * @property {string|null} [branchRuleId] CreateBranchRuleRequest branchRuleId
+                         */
+    
+                        /**
+                         * Constructs a new CreateBranchRuleRequest.
+                         * @memberof google.cloud.securesourcemanager.v1
+                         * @classdesc Represents a CreateBranchRuleRequest.
+                         * @implements ICreateBranchRuleRequest
+                         * @constructor
+                         * @param {google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest=} [properties] Properties to set
+                         */
+                        function CreateBranchRuleRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateBranchRuleRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.securesourcemanager.v1.CreateBranchRuleRequest
+                         * @instance
+                         */
+                        CreateBranchRuleRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateBranchRuleRequest branchRule.
+                         * @member {google.cloud.securesourcemanager.v1.IBranchRule|null|undefined} branchRule
+                         * @memberof google.cloud.securesourcemanager.v1.CreateBranchRuleRequest
+                         * @instance
+                         */
+                        CreateBranchRuleRequest.prototype.branchRule = null;
+    
+                        /**
+                         * CreateBranchRuleRequest branchRuleId.
+                         * @member {string} branchRuleId
+                         * @memberof google.cloud.securesourcemanager.v1.CreateBranchRuleRequest
+                         * @instance
+                         */
+                        CreateBranchRuleRequest.prototype.branchRuleId = "";
+    
+                        /**
+                         * Creates a new CreateBranchRuleRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securesourcemanager.v1.CreateBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securesourcemanager.v1.CreateBranchRuleRequest} CreateBranchRuleRequest instance
+                         */
+                        CreateBranchRuleRequest.create = function create(properties) {
+                            return new CreateBranchRuleRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateBranchRuleRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.CreateBranchRuleRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securesourcemanager.v1.CreateBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest} message CreateBranchRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateBranchRuleRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.branchRule != null && Object.hasOwnProperty.call(message, "branchRule"))
+                                $root.google.cloud.securesourcemanager.v1.BranchRule.encode(message.branchRule, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.branchRuleId != null && Object.hasOwnProperty.call(message, "branchRuleId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.branchRuleId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateBranchRuleRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.CreateBranchRuleRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securesourcemanager.v1.CreateBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest} message CreateBranchRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateBranchRuleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateBranchRuleRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securesourcemanager.v1.CreateBranchRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securesourcemanager.v1.CreateBranchRuleRequest} CreateBranchRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateBranchRuleRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securesourcemanager.v1.CreateBranchRuleRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.branchRule = $root.google.cloud.securesourcemanager.v1.BranchRule.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.branchRuleId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateBranchRuleRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securesourcemanager.v1.CreateBranchRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securesourcemanager.v1.CreateBranchRuleRequest} CreateBranchRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateBranchRuleRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateBranchRuleRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securesourcemanager.v1.CreateBranchRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateBranchRuleRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.branchRule != null && message.hasOwnProperty("branchRule")) {
+                                var error = $root.google.cloud.securesourcemanager.v1.BranchRule.verify(message.branchRule);
+                                if (error)
+                                    return "branchRule." + error;
+                            }
+                            if (message.branchRuleId != null && message.hasOwnProperty("branchRuleId"))
+                                if (!$util.isString(message.branchRuleId))
+                                    return "branchRuleId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateBranchRuleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securesourcemanager.v1.CreateBranchRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securesourcemanager.v1.CreateBranchRuleRequest} CreateBranchRuleRequest
+                         */
+                        CreateBranchRuleRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securesourcemanager.v1.CreateBranchRuleRequest)
+                                return object;
+                            var message = new $root.google.cloud.securesourcemanager.v1.CreateBranchRuleRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.branchRule != null) {
+                                if (typeof object.branchRule !== "object")
+                                    throw TypeError(".google.cloud.securesourcemanager.v1.CreateBranchRuleRequest.branchRule: object expected");
+                                message.branchRule = $root.google.cloud.securesourcemanager.v1.BranchRule.fromObject(object.branchRule);
+                            }
+                            if (object.branchRuleId != null)
+                                message.branchRuleId = String(object.branchRuleId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateBranchRuleRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securesourcemanager.v1.CreateBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.CreateBranchRuleRequest} message CreateBranchRuleRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateBranchRuleRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.branchRule = null;
+                                object.branchRuleId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.branchRule != null && message.hasOwnProperty("branchRule"))
+                                object.branchRule = $root.google.cloud.securesourcemanager.v1.BranchRule.toObject(message.branchRule, options);
+                            if (message.branchRuleId != null && message.hasOwnProperty("branchRuleId"))
+                                object.branchRuleId = message.branchRuleId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateBranchRuleRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securesourcemanager.v1.CreateBranchRuleRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateBranchRuleRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateBranchRuleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securesourcemanager.v1.CreateBranchRuleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateBranchRuleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securesourcemanager.v1.CreateBranchRuleRequest";
+                        };
+    
+                        return CreateBranchRuleRequest;
+                    })();
+    
+                    v1.ListBranchRulesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListBranchRulesRequest.
+                         * @memberof google.cloud.securesourcemanager.v1
+                         * @interface IListBranchRulesRequest
+                         * @property {string|null} [parent] ListBranchRulesRequest parent
+                         * @property {number|null} [pageSize] ListBranchRulesRequest pageSize
+                         * @property {string|null} [pageToken] ListBranchRulesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListBranchRulesRequest.
+                         * @memberof google.cloud.securesourcemanager.v1
+                         * @classdesc Represents a ListBranchRulesRequest.
+                         * @implements IListBranchRulesRequest
+                         * @constructor
+                         * @param {google.cloud.securesourcemanager.v1.IListBranchRulesRequest=} [properties] Properties to set
+                         */
+                        function ListBranchRulesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBranchRulesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesRequest
+                         * @instance
+                         */
+                        ListBranchRulesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListBranchRulesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesRequest
+                         * @instance
+                         */
+                        ListBranchRulesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListBranchRulesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesRequest
+                         * @instance
+                         */
+                        ListBranchRulesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListBranchRulesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IListBranchRulesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securesourcemanager.v1.ListBranchRulesRequest} ListBranchRulesRequest instance
+                         */
+                        ListBranchRulesRequest.create = function create(properties) {
+                            return new ListBranchRulesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBranchRulesRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListBranchRulesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IListBranchRulesRequest} message ListBranchRulesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBranchRulesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBranchRulesRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListBranchRulesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IListBranchRulesRequest} message ListBranchRulesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBranchRulesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBranchRulesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securesourcemanager.v1.ListBranchRulesRequest} ListBranchRulesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBranchRulesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securesourcemanager.v1.ListBranchRulesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBranchRulesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securesourcemanager.v1.ListBranchRulesRequest} ListBranchRulesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBranchRulesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBranchRulesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBranchRulesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBranchRulesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securesourcemanager.v1.ListBranchRulesRequest} ListBranchRulesRequest
+                         */
+                        ListBranchRulesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securesourcemanager.v1.ListBranchRulesRequest)
+                                return object;
+                            var message = new $root.google.cloud.securesourcemanager.v1.ListBranchRulesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBranchRulesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.ListBranchRulesRequest} message ListBranchRulesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBranchRulesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBranchRulesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBranchRulesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBranchRulesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBranchRulesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securesourcemanager.v1.ListBranchRulesRequest";
+                        };
+    
+                        return ListBranchRulesRequest;
+                    })();
+    
+                    v1.DeleteBranchRuleRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteBranchRuleRequest.
+                         * @memberof google.cloud.securesourcemanager.v1
+                         * @interface IDeleteBranchRuleRequest
+                         * @property {string|null} [name] DeleteBranchRuleRequest name
+                         * @property {boolean|null} [allowMissing] DeleteBranchRuleRequest allowMissing
+                         */
+    
+                        /**
+                         * Constructs a new DeleteBranchRuleRequest.
+                         * @memberof google.cloud.securesourcemanager.v1
+                         * @classdesc Represents a DeleteBranchRuleRequest.
+                         * @implements IDeleteBranchRuleRequest
+                         * @constructor
+                         * @param {google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest=} [properties] Properties to set
+                         */
+                        function DeleteBranchRuleRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteBranchRuleRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest
+                         * @instance
+                         */
+                        DeleteBranchRuleRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteBranchRuleRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest
+                         * @instance
+                         */
+                        DeleteBranchRuleRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * Creates a new DeleteBranchRuleRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest} DeleteBranchRuleRequest instance
+                         */
+                        DeleteBranchRuleRequest.create = function create(properties) {
+                            return new DeleteBranchRuleRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteBranchRuleRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest} message DeleteBranchRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteBranchRuleRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allowMissing);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteBranchRuleRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest} message DeleteBranchRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteBranchRuleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteBranchRuleRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest} DeleteBranchRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteBranchRuleRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteBranchRuleRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest} DeleteBranchRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteBranchRuleRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteBranchRuleRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteBranchRuleRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteBranchRuleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest} DeleteBranchRuleRequest
+                         */
+                        DeleteBranchRuleRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest)
+                                return object;
+                            var message = new $root.google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteBranchRuleRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest} message DeleteBranchRuleRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteBranchRuleRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.allowMissing = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteBranchRuleRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteBranchRuleRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteBranchRuleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteBranchRuleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest";
+                        };
+    
+                        return DeleteBranchRuleRequest;
+                    })();
+    
+                    v1.UpdateBranchRuleRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateBranchRuleRequest.
+                         * @memberof google.cloud.securesourcemanager.v1
+                         * @interface IUpdateBranchRuleRequest
+                         * @property {google.cloud.securesourcemanager.v1.IBranchRule|null} [branchRule] UpdateBranchRuleRequest branchRule
+                         * @property {boolean|null} [validateOnly] UpdateBranchRuleRequest validateOnly
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateBranchRuleRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateBranchRuleRequest.
+                         * @memberof google.cloud.securesourcemanager.v1
+                         * @classdesc Represents an UpdateBranchRuleRequest.
+                         * @implements IUpdateBranchRuleRequest
+                         * @constructor
+                         * @param {google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest=} [properties] Properties to set
+                         */
+                        function UpdateBranchRuleRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateBranchRuleRequest branchRule.
+                         * @member {google.cloud.securesourcemanager.v1.IBranchRule|null|undefined} branchRule
+                         * @memberof google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest
+                         * @instance
+                         */
+                        UpdateBranchRuleRequest.prototype.branchRule = null;
+    
+                        /**
+                         * UpdateBranchRuleRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest
+                         * @instance
+                         */
+                        UpdateBranchRuleRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * UpdateBranchRuleRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest
+                         * @instance
+                         */
+                        UpdateBranchRuleRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateBranchRuleRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest} UpdateBranchRuleRequest instance
+                         */
+                        UpdateBranchRuleRequest.create = function create(properties) {
+                            return new UpdateBranchRuleRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBranchRuleRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest} message UpdateBranchRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBranchRuleRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.branchRule != null && Object.hasOwnProperty.call(message, "branchRule"))
+                                $root.google.cloud.securesourcemanager.v1.BranchRule.encode(message.branchRule, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.validateOnly);
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBranchRuleRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest} message UpdateBranchRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBranchRuleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateBranchRuleRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest} UpdateBranchRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBranchRuleRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.branchRule = $root.google.cloud.securesourcemanager.v1.BranchRule.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateBranchRuleRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest} UpdateBranchRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBranchRuleRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateBranchRuleRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateBranchRuleRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.branchRule != null && message.hasOwnProperty("branchRule")) {
+                                var error = $root.google.cloud.securesourcemanager.v1.BranchRule.verify(message.branchRule);
+                                if (error)
+                                    return "branchRule." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateBranchRuleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest} UpdateBranchRuleRequest
+                         */
+                        UpdateBranchRuleRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest)
+                                return object;
+                            var message = new $root.google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest();
+                            if (object.branchRule != null) {
+                                if (typeof object.branchRule !== "object")
+                                    throw TypeError(".google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest.branchRule: object expected");
+                                message.branchRule = $root.google.cloud.securesourcemanager.v1.BranchRule.fromObject(object.branchRule);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateBranchRuleRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest} message UpdateBranchRuleRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateBranchRuleRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.branchRule = null;
+                                object.validateOnly = false;
+                                object.updateMask = null;
+                            }
+                            if (message.branchRule != null && message.hasOwnProperty("branchRule"))
+                                object.branchRule = $root.google.cloud.securesourcemanager.v1.BranchRule.toObject(message.branchRule, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateBranchRuleRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateBranchRuleRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateBranchRuleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateBranchRuleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest";
+                        };
+    
+                        return UpdateBranchRuleRequest;
+                    })();
+    
+                    v1.ListBranchRulesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListBranchRulesResponse.
+                         * @memberof google.cloud.securesourcemanager.v1
+                         * @interface IListBranchRulesResponse
+                         * @property {Array.<google.cloud.securesourcemanager.v1.IBranchRule>|null} [branchRules] ListBranchRulesResponse branchRules
+                         * @property {string|null} [nextPageToken] ListBranchRulesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListBranchRulesResponse.
+                         * @memberof google.cloud.securesourcemanager.v1
+                         * @classdesc Represents a ListBranchRulesResponse.
+                         * @implements IListBranchRulesResponse
+                         * @constructor
+                         * @param {google.cloud.securesourcemanager.v1.IListBranchRulesResponse=} [properties] Properties to set
+                         */
+                        function ListBranchRulesResponse(properties) {
+                            this.branchRules = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBranchRulesResponse branchRules.
+                         * @member {Array.<google.cloud.securesourcemanager.v1.IBranchRule>} branchRules
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesResponse
+                         * @instance
+                         */
+                        ListBranchRulesResponse.prototype.branchRules = $util.emptyArray;
+    
+                        /**
+                         * ListBranchRulesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesResponse
+                         * @instance
+                         */
+                        ListBranchRulesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListBranchRulesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesResponse
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IListBranchRulesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.securesourcemanager.v1.ListBranchRulesResponse} ListBranchRulesResponse instance
+                         */
+                        ListBranchRulesResponse.create = function create(properties) {
+                            return new ListBranchRulesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBranchRulesResponse message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListBranchRulesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesResponse
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IListBranchRulesResponse} message ListBranchRulesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBranchRulesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.branchRules != null && message.branchRules.length)
+                                for (var i = 0; i < message.branchRules.length; ++i)
+                                    $root.google.cloud.securesourcemanager.v1.BranchRule.encode(message.branchRules[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBranchRulesResponse message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListBranchRulesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesResponse
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.IListBranchRulesResponse} message ListBranchRulesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBranchRulesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBranchRulesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securesourcemanager.v1.ListBranchRulesResponse} ListBranchRulesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBranchRulesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securesourcemanager.v1.ListBranchRulesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.branchRules && message.branchRules.length))
+                                            message.branchRules = [];
+                                        message.branchRules.push($root.google.cloud.securesourcemanager.v1.BranchRule.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBranchRulesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securesourcemanager.v1.ListBranchRulesResponse} ListBranchRulesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBranchRulesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBranchRulesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBranchRulesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.branchRules != null && message.hasOwnProperty("branchRules")) {
+                                if (!Array.isArray(message.branchRules))
+                                    return "branchRules: array expected";
+                                for (var i = 0; i < message.branchRules.length; ++i) {
+                                    var error = $root.google.cloud.securesourcemanager.v1.BranchRule.verify(message.branchRules[i]);
+                                    if (error)
+                                        return "branchRules." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBranchRulesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securesourcemanager.v1.ListBranchRulesResponse} ListBranchRulesResponse
+                         */
+                        ListBranchRulesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securesourcemanager.v1.ListBranchRulesResponse)
+                                return object;
+                            var message = new $root.google.cloud.securesourcemanager.v1.ListBranchRulesResponse();
+                            if (object.branchRules) {
+                                if (!Array.isArray(object.branchRules))
+                                    throw TypeError(".google.cloud.securesourcemanager.v1.ListBranchRulesResponse.branchRules: array expected");
+                                message.branchRules = [];
+                                for (var i = 0; i < object.branchRules.length; ++i) {
+                                    if (typeof object.branchRules[i] !== "object")
+                                        throw TypeError(".google.cloud.securesourcemanager.v1.ListBranchRulesResponse.branchRules: object expected");
+                                    message.branchRules[i] = $root.google.cloud.securesourcemanager.v1.BranchRule.fromObject(object.branchRules[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBranchRulesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesResponse
+                         * @static
+                         * @param {google.cloud.securesourcemanager.v1.ListBranchRulesResponse} message ListBranchRulesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBranchRulesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.branchRules = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.branchRules && message.branchRules.length) {
+                                object.branchRules = [];
+                                for (var j = 0; j < message.branchRules.length; ++j)
+                                    object.branchRules[j] = $root.google.cloud.securesourcemanager.v1.BranchRule.toObject(message.branchRules[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBranchRulesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBranchRulesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBranchRulesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securesourcemanager.v1.ListBranchRulesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBranchRulesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securesourcemanager.v1.ListBranchRulesResponse";
+                        };
+    
+                        return ListBranchRulesResponse;
                     })();
     
                     return v1;

@@ -201,6 +201,9 @@ message Filter {
 
     // A filter for between two values.
     BetweenFilter between_filter = 5;
+
+    // A filter for empty values such as "(not set)" and "" values.
+    EmptyFilter empty_filter = 6;
   }
 }
 
@@ -340,6 +343,9 @@ message BetweenFilter {
   // Ends with this number.
   NumericValue to_value = 2;
 }
+
+// Filter for empty values.
+message EmptyFilter {}
 
 // To represent a number.
 message NumericValue {
@@ -554,6 +560,16 @@ message ResponseMetaData {
   // Demographics and
   // Interests](https://support.google.com/analytics/answer/2799357).
   optional bool subject_to_thresholding = 8;
+
+  // If this report's results are
+  // [sampled](https://support.google.com/analytics/answer/13331292), this
+  // describes the percentage of events used in this report. One
+  // `samplingMetadatas` is populated for each date range. Each
+  // `samplingMetadatas` corresponds to a date range in the order that date
+  // ranges were specified in the request.
+  //
+  // However if the results are not sampled, this field will not be defined.
+  repeated SamplingMetadata sampling_metadatas = 9;
 }
 
 // Describes a dimension column in the report. Dimensions requested in a report
@@ -1107,7 +1123,7 @@ enum EventExclusionDuration {
 // Another segment might be users who purchase a particular line of products or
 // who visit a specific part of your site or trigger certain events in your app.
 //
-// To learn more, see [GA4 Segment
+// To learn more, see [Segment
 // Builder](https://support.google.com/analytics/answer/9304353).
 message Segment {
   // The name for this segment. If unspecified, segments are named "Segment".
@@ -1472,8 +1488,8 @@ message FunnelResponseMetadata {
   // [sampled](https://support.google.com/analytics/answer/13331292), this
   // describes what percentage of events were used in this funnel report. One
   // `samplingMetadatas` is populated for each date range. Each
-  // `samplingMetadatas` corresponds to a date range in order that date ranges
-  // were specified in the request.
+  // `samplingMetadatas` corresponds to a date range in the order that date
+  // ranges were specified in the request.
   //
   // However if the results are not sampled, this field will not be defined.
   repeated SamplingMetadata sampling_metadatas = 1;
@@ -1561,8 +1577,8 @@ enum MetricType {
   TYPE_KILOMETERS = 13;
 }
 
-// Categories of data that you may be restricted from viewing on certain GA4
-// properties.
+// Categories of data that you may be restricted from viewing on certain
+// Google Analytics properties.
 enum RestrictedMetricType {
   // Unspecified type.
   RESTRICTED_METRIC_TYPE_UNSPECIFIED = 0;
@@ -1572,4 +1588,24 @@ enum RestrictedMetricType {
 
   // Revenue metrics such as `purchaseRevenue`.
   REVENUE_DATA = 2;
+}
+
+// Categories of sampling levels for the requests.
+enum SamplingLevel {
+  // Unspecified type.
+  SAMPLING_LEVEL_UNSPECIFIED = 0;
+
+  // Applies a sampling level of 10 million to standard properties and
+  // 100 million to Google Analytics 360 properties.
+  LOW = 1;
+
+  // Exclusive to Google Analytics 360 properties with a sampling level of 1
+  // billion.
+  MEDIUM = 2;
+
+  // Exclusive to Google Analytics 360 properties. Unsampled explorations are
+  // more accurate and can reveal insights that aren't visible in standard
+  // explorations. To learn more, see
+  // https://support.google.com/analytics/answer/10896953.
+  UNSAMPLED = 3;
 }

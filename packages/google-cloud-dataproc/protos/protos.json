@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -1072,6 +1075,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "authenticationConfig": {
+                          "type": "AuthenticationConfig",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1439,6 +1449,26 @@
                               "type": "int32",
                               "id": 3
                             }
+                          }
+                        }
+                      }
+                    },
+                    "AuthenticationConfig": {
+                      "fields": {
+                        "userWorkloadAuthenticationType": {
+                          "type": "AuthenticationType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AuthenticationType": {
+                          "values": {
+                            "AUTHENTICATION_TYPE_UNSPECIFIED": 0,
+                            "SERVICE_ACCOUNT": 1,
+                            "END_USER_CREDENTIALS": 2
                           }
                         }
                       }
@@ -1998,7 +2028,8 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                           }
                         }
                       }
@@ -2364,6 +2395,13 @@
                     },
                     "InstanceFlexibilityPolicy": {
                       "fields": {
+                        "provisioningModelMix": {
+                          "type": "ProvisioningModelMix",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "instanceSelectionList": {
                           "rule": "repeated",
                           "type": "InstanceSelection",
@@ -2382,6 +2420,38 @@
                         }
                       },
                       "nested": {
+                        "ProvisioningModelMix": {
+                          "oneofs": {
+                            "_standardCapacityBase": {
+                              "oneof": [
+                                "standardCapacityBase"
+                              ]
+                            },
+                            "_standardCapacityPercentAboveBase": {
+                              "oneof": [
+                                "standardCapacityPercentAboveBase"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "standardCapacityBase": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "standardCapacityPercentAboveBase": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
                         "InstanceSelection": {
                           "fields": {
                             "machineTypes": {
@@ -2448,6 +2518,18 @@
                       }
                     },
                     "DiskConfig": {
+                      "oneofs": {
+                        "_bootDiskProvisionedIops": {
+                          "oneof": [
+                            "bootDiskProvisionedIops"
+                          ]
+                        },
+                        "_bootDiskProvisionedThroughput": {
+                          "oneof": [
+                            "bootDiskProvisionedThroughput"
+                          ]
+                        }
+                      },
                       "fields": {
                         "bootDiskType": {
                           "type": "string",
@@ -2475,6 +2557,22 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "bootDiskProvisionedIops": {
+                          "type": "int64",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "bootDiskProvisionedThroughput": {
+                          "type": "int64",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -5346,7 +5444,8 @@
                       "oneofs": {
                         "sessionConfig": {
                           "oneof": [
-                            "jupyterSession"
+                            "jupyterSession",
+                            "sparkConnectSession"
                           ]
                         }
                       },
@@ -5375,6 +5474,13 @@
                         "jupyterSession": {
                           "type": "JupyterConfig",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sparkConnectSession": {
+                          "type": "SparkConnectConfig",
+                          "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5690,7 +5796,8 @@
                       "oneofs": {
                         "sessionConfig": {
                           "oneof": [
-                            "jupyterSession"
+                            "jupyterSession",
+                            "sparkConnectSession"
                           ]
                         }
                       },
@@ -5719,6 +5826,13 @@
                         "jupyterSession": {
                           "type": "JupyterConfig",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sparkConnectSession": {
+                          "type": "SparkConnectConfig",
+                          "id": 17,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5868,6 +5982,9 @@
                           }
                         }
                       }
+                    },
+                    "SparkConnectConfig": {
+                      "fields": {}
                     },
                     "WorkflowTemplateService": {
                       "options": {
@@ -6161,7 +6278,8 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                               }
                             }
                           }

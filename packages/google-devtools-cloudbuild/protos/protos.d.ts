@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1582,6 +1582,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UploadedGoModule. */
+                interface IUploadedGoModule {
+
+                    /** UploadedGoModule uri */
+                    uri?: (string|null);
+
+                    /** UploadedGoModule fileHashes */
+                    fileHashes?: (google.devtools.cloudbuild.v1.IFileHashes|null);
+
+                    /** UploadedGoModule pushTiming */
+                    pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+                }
+
+                /** Represents an UploadedGoModule. */
+                class UploadedGoModule implements IUploadedGoModule {
+
+                    /**
+                     * Constructs a new UploadedGoModule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IUploadedGoModule);
+
+                    /** UploadedGoModule uri. */
+                    public uri: string;
+
+                    /** UploadedGoModule fileHashes. */
+                    public fileHashes?: (google.devtools.cloudbuild.v1.IFileHashes|null);
+
+                    /** UploadedGoModule pushTiming. */
+                    public pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /**
+                     * Creates a new UploadedGoModule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UploadedGoModule instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IUploadedGoModule): google.devtools.cloudbuild.v1.UploadedGoModule;
+
+                    /**
+                     * Encodes the specified UploadedGoModule message. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedGoModule.verify|verify} messages.
+                     * @param message UploadedGoModule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IUploadedGoModule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UploadedGoModule message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedGoModule.verify|verify} messages.
+                     * @param message UploadedGoModule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IUploadedGoModule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UploadedGoModule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UploadedGoModule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.UploadedGoModule;
+
+                    /**
+                     * Decodes an UploadedGoModule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UploadedGoModule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.UploadedGoModule;
+
+                    /**
+                     * Verifies an UploadedGoModule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UploadedGoModule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UploadedGoModule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.UploadedGoModule;
+
+                    /**
+                     * Creates a plain object from an UploadedGoModule message. Also converts values to other types if specified.
+                     * @param message UploadedGoModule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.UploadedGoModule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UploadedGoModule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UploadedGoModule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an UploadedNpmPackage. */
                 interface IUploadedNpmPackage {
 
@@ -2023,6 +2132,9 @@ export namespace google {
                     /** Results mavenArtifacts */
                     mavenArtifacts?: (google.devtools.cloudbuild.v1.IUploadedMavenArtifact[]|null);
 
+                    /** Results goModules */
+                    goModules?: (google.devtools.cloudbuild.v1.IUploadedGoModule[]|null);
+
                     /** Results npmPackages */
                     npmPackages?: (google.devtools.cloudbuild.v1.IUploadedNpmPackage[]|null);
                 }
@@ -2059,6 +2171,9 @@ export namespace google {
 
                     /** Results mavenArtifacts. */
                     public mavenArtifacts: google.devtools.cloudbuild.v1.IUploadedMavenArtifact[];
+
+                    /** Results goModules. */
+                    public goModules: google.devtools.cloudbuild.v1.IUploadedGoModule[];
 
                     /** Results npmPackages. */
                     public npmPackages: google.devtools.cloudbuild.v1.IUploadedNpmPackage[];
@@ -2331,8 +2446,14 @@ export namespace google {
                     /** Build warnings */
                     warnings?: (google.devtools.cloudbuild.v1.Build.IWarning[]|null);
 
+                    /** Build gitConfig */
+                    gitConfig?: (google.devtools.cloudbuild.v1.IGitConfig|null);
+
                     /** Build failureInfo */
                     failureInfo?: (google.devtools.cloudbuild.v1.Build.IFailureInfo|null);
+
+                    /** Build dependencies */
+                    dependencies?: (google.devtools.cloudbuild.v1.IDependency[]|null);
                 }
 
                 /** Represents a Build. */
@@ -2428,8 +2549,14 @@ export namespace google {
                     /** Build warnings. */
                     public warnings: google.devtools.cloudbuild.v1.Build.IWarning[];
 
+                    /** Build gitConfig. */
+                    public gitConfig?: (google.devtools.cloudbuild.v1.IGitConfig|null);
+
                     /** Build failureInfo. */
                     public failureInfo?: (google.devtools.cloudbuild.v1.Build.IFailureInfo|null);
+
+                    /** Build dependencies. */
+                    public dependencies: google.devtools.cloudbuild.v1.IDependency[];
 
                     /**
                      * Creates a new Build instance using the specified properties.
@@ -2757,6 +2884,539 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a Dependency. */
+                interface IDependency {
+
+                    /** Dependency empty */
+                    empty?: (boolean|null);
+
+                    /** Dependency gitSource */
+                    gitSource?: (google.devtools.cloudbuild.v1.Dependency.IGitSourceDependency|null);
+                }
+
+                /** Represents a Dependency. */
+                class Dependency implements IDependency {
+
+                    /**
+                     * Constructs a new Dependency.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IDependency);
+
+                    /** Dependency empty. */
+                    public empty?: (boolean|null);
+
+                    /** Dependency gitSource. */
+                    public gitSource?: (google.devtools.cloudbuild.v1.Dependency.IGitSourceDependency|null);
+
+                    /** Dependency dep. */
+                    public dep?: ("empty"|"gitSource");
+
+                    /**
+                     * Creates a new Dependency instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Dependency instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IDependency): google.devtools.cloudbuild.v1.Dependency;
+
+                    /**
+                     * Encodes the specified Dependency message. Does not implicitly {@link google.devtools.cloudbuild.v1.Dependency.verify|verify} messages.
+                     * @param message Dependency message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IDependency, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Dependency message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Dependency.verify|verify} messages.
+                     * @param message Dependency message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IDependency, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Dependency message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Dependency
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.Dependency;
+
+                    /**
+                     * Decodes a Dependency message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Dependency
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.Dependency;
+
+                    /**
+                     * Verifies a Dependency message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Dependency message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Dependency
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.Dependency;
+
+                    /**
+                     * Creates a plain object from a Dependency message. Also converts values to other types if specified.
+                     * @param message Dependency
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.Dependency, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Dependency to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Dependency
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Dependency {
+
+                    /** Properties of a GitSourceDependency. */
+                    interface IGitSourceDependency {
+
+                        /** GitSourceDependency repository */
+                        repository?: (google.devtools.cloudbuild.v1.Dependency.IGitSourceRepository|null);
+
+                        /** GitSourceDependency revision */
+                        revision?: (string|null);
+
+                        /** GitSourceDependency recurseSubmodules */
+                        recurseSubmodules?: (boolean|null);
+
+                        /** GitSourceDependency depth */
+                        depth?: (number|Long|string|null);
+
+                        /** GitSourceDependency destPath */
+                        destPath?: (string|null);
+                    }
+
+                    /** Represents a GitSourceDependency. */
+                    class GitSourceDependency implements IGitSourceDependency {
+
+                        /**
+                         * Constructs a new GitSourceDependency.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.cloudbuild.v1.Dependency.IGitSourceDependency);
+
+                        /** GitSourceDependency repository. */
+                        public repository?: (google.devtools.cloudbuild.v1.Dependency.IGitSourceRepository|null);
+
+                        /** GitSourceDependency revision. */
+                        public revision: string;
+
+                        /** GitSourceDependency recurseSubmodules. */
+                        public recurseSubmodules: boolean;
+
+                        /** GitSourceDependency depth. */
+                        public depth: (number|Long|string);
+
+                        /** GitSourceDependency destPath. */
+                        public destPath: string;
+
+                        /**
+                         * Creates a new GitSourceDependency instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GitSourceDependency instance
+                         */
+                        public static create(properties?: google.devtools.cloudbuild.v1.Dependency.IGitSourceDependency): google.devtools.cloudbuild.v1.Dependency.GitSourceDependency;
+
+                        /**
+                         * Encodes the specified GitSourceDependency message. Does not implicitly {@link google.devtools.cloudbuild.v1.Dependency.GitSourceDependency.verify|verify} messages.
+                         * @param message GitSourceDependency message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.cloudbuild.v1.Dependency.IGitSourceDependency, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GitSourceDependency message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Dependency.GitSourceDependency.verify|verify} messages.
+                         * @param message GitSourceDependency message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.cloudbuild.v1.Dependency.IGitSourceDependency, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GitSourceDependency message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GitSourceDependency
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.Dependency.GitSourceDependency;
+
+                        /**
+                         * Decodes a GitSourceDependency message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GitSourceDependency
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.Dependency.GitSourceDependency;
+
+                        /**
+                         * Verifies a GitSourceDependency message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GitSourceDependency message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GitSourceDependency
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.Dependency.GitSourceDependency;
+
+                        /**
+                         * Creates a plain object from a GitSourceDependency message. Also converts values to other types if specified.
+                         * @param message GitSourceDependency
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.cloudbuild.v1.Dependency.GitSourceDependency, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GitSourceDependency to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GitSourceDependency
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GitSourceRepository. */
+                    interface IGitSourceRepository {
+
+                        /** GitSourceRepository url */
+                        url?: (string|null);
+
+                        /** GitSourceRepository developerConnect */
+                        developerConnect?: (string|null);
+                    }
+
+                    /** Represents a GitSourceRepository. */
+                    class GitSourceRepository implements IGitSourceRepository {
+
+                        /**
+                         * Constructs a new GitSourceRepository.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.cloudbuild.v1.Dependency.IGitSourceRepository);
+
+                        /** GitSourceRepository url. */
+                        public url?: (string|null);
+
+                        /** GitSourceRepository developerConnect. */
+                        public developerConnect?: (string|null);
+
+                        /** GitSourceRepository repotype. */
+                        public repotype?: ("url"|"developerConnect");
+
+                        /**
+                         * Creates a new GitSourceRepository instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GitSourceRepository instance
+                         */
+                        public static create(properties?: google.devtools.cloudbuild.v1.Dependency.IGitSourceRepository): google.devtools.cloudbuild.v1.Dependency.GitSourceRepository;
+
+                        /**
+                         * Encodes the specified GitSourceRepository message. Does not implicitly {@link google.devtools.cloudbuild.v1.Dependency.GitSourceRepository.verify|verify} messages.
+                         * @param message GitSourceRepository message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.cloudbuild.v1.Dependency.IGitSourceRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GitSourceRepository message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Dependency.GitSourceRepository.verify|verify} messages.
+                         * @param message GitSourceRepository message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.cloudbuild.v1.Dependency.IGitSourceRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GitSourceRepository message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GitSourceRepository
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.Dependency.GitSourceRepository;
+
+                        /**
+                         * Decodes a GitSourceRepository message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GitSourceRepository
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.Dependency.GitSourceRepository;
+
+                        /**
+                         * Verifies a GitSourceRepository message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GitSourceRepository message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GitSourceRepository
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.Dependency.GitSourceRepository;
+
+                        /**
+                         * Creates a plain object from a GitSourceRepository message. Also converts values to other types if specified.
+                         * @param message GitSourceRepository
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.cloudbuild.v1.Dependency.GitSourceRepository, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GitSourceRepository to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GitSourceRepository
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a GitConfig. */
+                interface IGitConfig {
+
+                    /** GitConfig http */
+                    http?: (google.devtools.cloudbuild.v1.GitConfig.IHttpConfig|null);
+                }
+
+                /** Represents a GitConfig. */
+                class GitConfig implements IGitConfig {
+
+                    /**
+                     * Constructs a new GitConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IGitConfig);
+
+                    /** GitConfig http. */
+                    public http?: (google.devtools.cloudbuild.v1.GitConfig.IHttpConfig|null);
+
+                    /**
+                     * Creates a new GitConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GitConfig instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IGitConfig): google.devtools.cloudbuild.v1.GitConfig;
+
+                    /**
+                     * Encodes the specified GitConfig message. Does not implicitly {@link google.devtools.cloudbuild.v1.GitConfig.verify|verify} messages.
+                     * @param message GitConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IGitConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GitConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GitConfig.verify|verify} messages.
+                     * @param message GitConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IGitConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GitConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GitConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.GitConfig;
+
+                    /**
+                     * Decodes a GitConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GitConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.GitConfig;
+
+                    /**
+                     * Verifies a GitConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GitConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GitConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.GitConfig;
+
+                    /**
+                     * Creates a plain object from a GitConfig message. Also converts values to other types if specified.
+                     * @param message GitConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.GitConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GitConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GitConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GitConfig {
+
+                    /** Properties of a HttpConfig. */
+                    interface IHttpConfig {
+
+                        /** HttpConfig proxySecretVersionName */
+                        proxySecretVersionName?: (string|null);
+                    }
+
+                    /** Represents a HttpConfig. */
+                    class HttpConfig implements IHttpConfig {
+
+                        /**
+                         * Constructs a new HttpConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.cloudbuild.v1.GitConfig.IHttpConfig);
+
+                        /** HttpConfig proxySecretVersionName. */
+                        public proxySecretVersionName: string;
+
+                        /**
+                         * Creates a new HttpConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns HttpConfig instance
+                         */
+                        public static create(properties?: google.devtools.cloudbuild.v1.GitConfig.IHttpConfig): google.devtools.cloudbuild.v1.GitConfig.HttpConfig;
+
+                        /**
+                         * Encodes the specified HttpConfig message. Does not implicitly {@link google.devtools.cloudbuild.v1.GitConfig.HttpConfig.verify|verify} messages.
+                         * @param message HttpConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.cloudbuild.v1.GitConfig.IHttpConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified HttpConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GitConfig.HttpConfig.verify|verify} messages.
+                         * @param message HttpConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.cloudbuild.v1.GitConfig.IHttpConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a HttpConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns HttpConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.GitConfig.HttpConfig;
+
+                        /**
+                         * Decodes a HttpConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns HttpConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.GitConfig.HttpConfig;
+
+                        /**
+                         * Verifies a HttpConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a HttpConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns HttpConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.GitConfig.HttpConfig;
+
+                        /**
+                         * Creates a plain object from a HttpConfig message. Also converts values to other types if specified.
+                         * @param message HttpConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.cloudbuild.v1.GitConfig.HttpConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this HttpConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for HttpConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of an Artifacts. */
                 interface IArtifacts {
 
@@ -2768,6 +3428,9 @@ export namespace google {
 
                     /** Artifacts mavenArtifacts */
                     mavenArtifacts?: (google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact[]|null);
+
+                    /** Artifacts goModules */
+                    goModules?: (google.devtools.cloudbuild.v1.Artifacts.IGoModule[]|null);
 
                     /** Artifacts pythonPackages */
                     pythonPackages?: (google.devtools.cloudbuild.v1.Artifacts.IPythonPackage[]|null);
@@ -2793,6 +3456,9 @@ export namespace google {
 
                     /** Artifacts mavenArtifacts. */
                     public mavenArtifacts: google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact[];
+
+                    /** Artifacts goModules. */
+                    public goModules: google.devtools.cloudbuild.v1.Artifacts.IGoModule[];
 
                     /** Artifacts pythonPackages. */
                     public pythonPackages: google.devtools.cloudbuild.v1.Artifacts.IPythonPackage[];
@@ -3104,6 +3770,133 @@ export namespace google {
 
                         /**
                          * Gets the default type url for MavenArtifact
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GoModule. */
+                    interface IGoModule {
+
+                        /** GoModule repositoryName */
+                        repositoryName?: (string|null);
+
+                        /** GoModule repositoryLocation */
+                        repositoryLocation?: (string|null);
+
+                        /** GoModule repositoryProjectId */
+                        repositoryProjectId?: (string|null);
+
+                        /** GoModule sourcePath */
+                        sourcePath?: (string|null);
+
+                        /** GoModule modulePath */
+                        modulePath?: (string|null);
+
+                        /** GoModule moduleVersion */
+                        moduleVersion?: (string|null);
+                    }
+
+                    /** Represents a GoModule. */
+                    class GoModule implements IGoModule {
+
+                        /**
+                         * Constructs a new GoModule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.cloudbuild.v1.Artifacts.IGoModule);
+
+                        /** GoModule repositoryName. */
+                        public repositoryName: string;
+
+                        /** GoModule repositoryLocation. */
+                        public repositoryLocation: string;
+
+                        /** GoModule repositoryProjectId. */
+                        public repositoryProjectId: string;
+
+                        /** GoModule sourcePath. */
+                        public sourcePath: string;
+
+                        /** GoModule modulePath. */
+                        public modulePath: string;
+
+                        /** GoModule moduleVersion. */
+                        public moduleVersion: string;
+
+                        /**
+                         * Creates a new GoModule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GoModule instance
+                         */
+                        public static create(properties?: google.devtools.cloudbuild.v1.Artifacts.IGoModule): google.devtools.cloudbuild.v1.Artifacts.GoModule;
+
+                        /**
+                         * Encodes the specified GoModule message. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.GoModule.verify|verify} messages.
+                         * @param message GoModule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.cloudbuild.v1.Artifacts.IGoModule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GoModule message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.GoModule.verify|verify} messages.
+                         * @param message GoModule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.cloudbuild.v1.Artifacts.IGoModule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GoModule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GoModule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.Artifacts.GoModule;
+
+                        /**
+                         * Decodes a GoModule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GoModule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.Artifacts.GoModule;
+
+                        /**
+                         * Verifies a GoModule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GoModule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GoModule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.Artifacts.GoModule;
+
+                        /**
+                         * Creates a plain object from a GoModule message. Also converts values to other types if specified.
+                         * @param message GoModule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.cloudbuild.v1.Artifacts.GoModule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GoModule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GoModule
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -3839,6 +4632,7 @@ export namespace google {
                         NONE = 0,
                         SHA256 = 1,
                         MD5 = 2,
+                        GO_MODULE_H1 = 3,
                         SHA512 = 4
                     }
                 }
@@ -7193,6 +7987,9 @@ export namespace google {
 
                     /** BuildOptions defaultLogsBucketBehavior */
                     defaultLogsBucketBehavior?: (google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|keyof typeof google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|null);
+
+                    /** BuildOptions enableStructuredLogging */
+                    enableStructuredLogging?: (boolean|null);
                 }
 
                 /** Represents a BuildOptions. */
@@ -7248,6 +8045,9 @@ export namespace google {
 
                     /** BuildOptions defaultLogsBucketBehavior. */
                     public defaultLogsBucketBehavior: (google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|keyof typeof google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior);
+
+                    /** BuildOptions enableStructuredLogging. */
+                    public enableStructuredLogging: boolean;
 
                     /**
                      * Creates a new BuildOptions instance using the specified properties.
@@ -7468,7 +8268,8 @@ export namespace google {
                     /** DefaultLogsBucketBehavior enum. */
                     enum DefaultLogsBucketBehavior {
                         DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED = 0,
-                        REGIONAL_USER_OWNED_BUCKET = 1
+                        REGIONAL_USER_OWNED_BUCKET = 1,
+                        LEGACY_BUCKET = 2
                     }
                 }
 
@@ -8119,6 +8920,9 @@ export namespace google {
 
                     /** PrivatePoolV1Config networkConfig */
                     networkConfig?: (google.devtools.cloudbuild.v1.PrivatePoolV1Config.INetworkConfig|null);
+
+                    /** PrivatePoolV1Config privateServiceConnect */
+                    privateServiceConnect?: (google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect|null);
                 }
 
                 /** Represents a PrivatePoolV1Config. */
@@ -8135,6 +8939,9 @@ export namespace google {
 
                     /** PrivatePoolV1Config networkConfig. */
                     public networkConfig?: (google.devtools.cloudbuild.v1.PrivatePoolV1Config.INetworkConfig|null);
+
+                    /** PrivatePoolV1Config privateServiceConnect. */
+                    public privateServiceConnect?: (google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect|null);
 
                     /**
                      * Creates a new PrivatePoolV1Config instance using the specified properties.
@@ -8436,6 +9243,115 @@ export namespace google {
                             NO_PUBLIC_EGRESS = 1,
                             PUBLIC_EGRESS = 2
                         }
+                    }
+
+                    /** Properties of a PrivateServiceConnect. */
+                    interface IPrivateServiceConnect {
+
+                        /** PrivateServiceConnect networkAttachment */
+                        networkAttachment?: (string|null);
+
+                        /** PrivateServiceConnect publicIpAddressDisabled */
+                        publicIpAddressDisabled?: (boolean|null);
+
+                        /** PrivateServiceConnect routeAllTraffic */
+                        routeAllTraffic?: (boolean|null);
+                    }
+
+                    /** Represents a PrivateServiceConnect. */
+                    class PrivateServiceConnect implements IPrivateServiceConnect {
+
+                        /**
+                         * Constructs a new PrivateServiceConnect.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect);
+
+                        /** PrivateServiceConnect networkAttachment. */
+                        public networkAttachment: string;
+
+                        /** PrivateServiceConnect publicIpAddressDisabled. */
+                        public publicIpAddressDisabled: boolean;
+
+                        /** PrivateServiceConnect routeAllTraffic. */
+                        public routeAllTraffic: boolean;
+
+                        /**
+                         * Creates a new PrivateServiceConnect instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PrivateServiceConnect instance
+                         */
+                        public static create(properties?: google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect): google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect;
+
+                        /**
+                         * Encodes the specified PrivateServiceConnect message. Does not implicitly {@link google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect.verify|verify} messages.
+                         * @param message PrivateServiceConnect message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PrivateServiceConnect message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect.verify|verify} messages.
+                         * @param message PrivateServiceConnect message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PrivateServiceConnect message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PrivateServiceConnect
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect;
+
+                        /**
+                         * Decodes a PrivateServiceConnect message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PrivateServiceConnect
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect;
+
+                        /**
+                         * Verifies a PrivateServiceConnect message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PrivateServiceConnect message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PrivateServiceConnect
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect;
+
+                        /**
+                         * Creates a plain object from a PrivateServiceConnect message. Also converts values to other types if specified.
+                         * @param message PrivateServiceConnect
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PrivateServiceConnect to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PrivateServiceConnect
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 

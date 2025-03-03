@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -360,7 +360,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.OrchestrationCluster()
       );
@@ -392,7 +392,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.OrchestrationCluster()
       );
@@ -439,7 +439,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getOrchestrationCluster = stubSimpleCall(
         undefined,
@@ -497,7 +497,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.EdgeSlm()
       );
@@ -528,7 +528,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.EdgeSlm()
       );
@@ -575,7 +575,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEdgeSlm = stubSimpleCall(
         undefined,
@@ -627,7 +627,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Blueprint()
       );
@@ -658,7 +658,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Blueprint()
       );
@@ -705,7 +705,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBlueprint = stubSimpleCall(
         undefined,
@@ -758,7 +758,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['blueprint', 'name']
       );
       request.blueprint.name = defaultValue1;
-      const expectedHeaderRequestParams = `blueprint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `blueprint.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Blueprint()
       );
@@ -790,7 +790,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['blueprint', 'name']
       );
       request.blueprint.name = defaultValue1;
-      const expectedHeaderRequestParams = `blueprint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `blueprint.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Blueprint()
       );
@@ -838,7 +838,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['blueprint', 'name']
       );
       request.blueprint.name = defaultValue1;
-      const expectedHeaderRequestParams = `blueprint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `blueprint.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBlueprint = stubSimpleCall(
         undefined,
@@ -891,7 +891,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Blueprint()
       );
@@ -922,7 +922,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Blueprint()
       );
@@ -969,7 +969,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getBlueprint = stubSimpleCall(
         undefined,
@@ -1021,7 +1021,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1052,7 +1052,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1099,7 +1099,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBlueprint = stubSimpleCall(
         undefined,
@@ -1151,7 +1151,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Blueprint()
       );
@@ -1182,7 +1182,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Blueprint()
       );
@@ -1229,7 +1229,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.approveBlueprint = stubSimpleCall(
         undefined,
@@ -1281,7 +1281,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Blueprint()
       );
@@ -1312,7 +1312,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Blueprint()
       );
@@ -1359,7 +1359,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.proposeBlueprint = stubSimpleCall(
         undefined,
@@ -1411,7 +1411,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Blueprint()
       );
@@ -1442,7 +1442,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Blueprint()
       );
@@ -1489,7 +1489,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rejectBlueprint = stubSimpleCall(
         undefined,
@@ -1541,7 +1541,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.DiscardBlueprintChangesResponse()
       );
@@ -1573,7 +1573,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.DiscardBlueprintChangesResponse()
       );
@@ -1620,7 +1620,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.discardBlueprintChanges = stubSimpleCall(
         undefined,
@@ -1678,7 +1678,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.PublicBlueprint()
       );
@@ -1710,7 +1710,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.PublicBlueprint()
       );
@@ -1757,7 +1757,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPublicBlueprint = stubSimpleCall(
         undefined,
@@ -1809,7 +1809,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Deployment()
       );
@@ -1840,7 +1840,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Deployment()
       );
@@ -1887,7 +1887,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDeployment = stubSimpleCall(
         undefined,
@@ -1940,7 +1940,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['deployment', 'name']
       );
       request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Deployment()
       );
@@ -1972,7 +1972,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['deployment', 'name']
       );
       request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Deployment()
       );
@@ -2020,7 +2020,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['deployment', 'name']
       );
       request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDeployment = stubSimpleCall(
         undefined,
@@ -2073,7 +2073,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Deployment()
       );
@@ -2104,7 +2104,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Deployment()
       );
@@ -2151,7 +2151,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDeployment = stubSimpleCall(
         undefined,
@@ -2203,7 +2203,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2234,7 +2234,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2281,7 +2281,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeDeployment = stubSimpleCall(
         undefined,
@@ -2333,7 +2333,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.DiscardDeploymentChangesResponse()
       );
@@ -2365,7 +2365,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.DiscardDeploymentChangesResponse()
       );
@@ -2412,7 +2412,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.discardDeploymentChanges = stubSimpleCall(
         undefined,
@@ -2470,7 +2470,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Deployment()
       );
@@ -2501,7 +2501,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Deployment()
       );
@@ -2548,7 +2548,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.applyDeployment = stubSimpleCall(
         undefined,
@@ -2600,7 +2600,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.ComputeDeploymentStatusResponse()
       );
@@ -2632,7 +2632,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.ComputeDeploymentStatusResponse()
       );
@@ -2679,7 +2679,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.computeDeploymentStatus = stubSimpleCall(
         undefined,
@@ -2737,7 +2737,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Deployment()
       );
@@ -2769,7 +2769,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.Deployment()
       );
@@ -2816,7 +2816,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rollbackDeployment = stubSimpleCall(
         undefined,
@@ -2868,7 +2868,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.HydratedDeployment()
       );
@@ -2900,7 +2900,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.HydratedDeployment()
       );
@@ -2947,7 +2947,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getHydratedDeployment = stubSimpleCall(
         undefined,
@@ -3006,7 +3006,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['hydratedDeployment', 'name']
       );
       request.hydratedDeployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `hydrated_deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `hydrated_deployment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.HydratedDeployment()
       );
@@ -3039,7 +3039,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['hydratedDeployment', 'name']
       );
       request.hydratedDeployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `hydrated_deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `hydrated_deployment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.HydratedDeployment()
       );
@@ -3087,7 +3087,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['hydratedDeployment', 'name']
       );
       request.hydratedDeployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `hydrated_deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `hydrated_deployment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateHydratedDeployment = stubSimpleCall(
         undefined,
@@ -3146,7 +3146,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.HydratedDeployment()
       );
@@ -3178,7 +3178,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1.HydratedDeployment()
       );
@@ -3225,7 +3225,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.applyHydratedDeployment = stubSimpleCall(
         undefined,
@@ -3283,7 +3283,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3316,7 +3316,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3370,7 +3370,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createOrchestrationCluster = stubLongRunningCall(
         undefined,
@@ -3404,7 +3404,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createOrchestrationCluster = stubLongRunningCall(
         undefined,
@@ -3481,7 +3481,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3514,7 +3514,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3568,7 +3568,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteOrchestrationCluster = stubLongRunningCall(
         undefined,
@@ -3602,7 +3602,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteOrchestrationCluster = stubLongRunningCall(
         undefined,
@@ -3679,7 +3679,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3712,7 +3712,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3766,7 +3766,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEdgeSlm = stubLongRunningCall(
         undefined,
@@ -3797,7 +3797,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEdgeSlm = stubLongRunningCall(
         undefined,
@@ -3873,7 +3873,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3906,7 +3906,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3960,7 +3960,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEdgeSlm = stubLongRunningCall(
         undefined,
@@ -3991,7 +3991,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEdgeSlm = stubLongRunningCall(
         undefined,
@@ -4067,7 +4067,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.OrchestrationCluster()
@@ -4107,7 +4107,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.OrchestrationCluster()
@@ -4164,7 +4164,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listOrchestrationClusters = stubSimpleCall(
         undefined,
@@ -4198,7 +4198,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.OrchestrationCluster()
@@ -4267,7 +4267,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOrchestrationClusters.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4325,7 +4325,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.OrchestrationCluster()
@@ -4379,7 +4379,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOrchestrationClusters.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4426,7 +4426,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.EdgeSlm()
@@ -4465,7 +4465,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.EdgeSlm()
@@ -4520,7 +4520,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEdgeSlms = stubSimpleCall(
         undefined,
@@ -4551,7 +4551,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.EdgeSlm()
@@ -4611,7 +4611,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEdgeSlms.createStream = stubPageStreamingCall(
         undefined,
@@ -4662,7 +4662,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.EdgeSlm()
@@ -4711,7 +4711,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEdgeSlms.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4753,7 +4753,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Blueprint()
@@ -4792,7 +4792,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Blueprint()
@@ -4847,7 +4847,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listBlueprints = stubSimpleCall(
         undefined,
@@ -4878,7 +4878,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Blueprint()
@@ -4939,7 +4939,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBlueprints.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4989,7 +4989,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Blueprint()
@@ -5038,7 +5038,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBlueprints.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5081,7 +5081,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Blueprint()
@@ -5121,7 +5121,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Blueprint()
@@ -5176,7 +5176,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listBlueprintRevisions = stubSimpleCall(
         undefined,
@@ -5210,7 +5210,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Blueprint()
@@ -5277,7 +5277,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBlueprintRevisions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5333,7 +5333,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Blueprint()
@@ -5386,7 +5386,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBlueprintRevisions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5433,7 +5433,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Blueprint()
@@ -5473,7 +5473,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Blueprint()
@@ -5528,7 +5528,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchBlueprintRevisions = stubSimpleCall(
         undefined,
@@ -5562,7 +5562,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Blueprint()
@@ -5629,7 +5629,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchBlueprintRevisions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5685,7 +5685,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Blueprint()
@@ -5738,7 +5738,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchBlueprintRevisions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5785,7 +5785,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Deployment()
@@ -5825,7 +5825,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Deployment()
@@ -5880,7 +5880,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchDeploymentRevisions = stubSimpleCall(
         undefined,
@@ -5914,7 +5914,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Deployment()
@@ -5981,7 +5981,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchDeploymentRevisions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6037,7 +6037,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Deployment()
@@ -6091,7 +6091,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchDeploymentRevisions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6138,7 +6138,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.PublicBlueprint()
@@ -6178,7 +6178,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.PublicBlueprint()
@@ -6235,7 +6235,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPublicBlueprints = stubSimpleCall(
         undefined,
@@ -6266,7 +6266,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.PublicBlueprint()
@@ -6329,7 +6329,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPublicBlueprints.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6381,7 +6381,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.PublicBlueprint()
@@ -6431,7 +6431,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPublicBlueprints.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6474,7 +6474,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Deployment()
@@ -6513,7 +6513,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Deployment()
@@ -6568,7 +6568,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDeployments = stubSimpleCall(
         undefined,
@@ -6599,7 +6599,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Deployment()
@@ -6660,7 +6660,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeployments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6710,7 +6710,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Deployment()
@@ -6760,7 +6760,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeployments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6803,7 +6803,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Deployment()
@@ -6843,7 +6843,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Deployment()
@@ -6898,7 +6898,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDeploymentRevisions = stubSimpleCall(
         undefined,
@@ -6932,7 +6932,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Deployment()
@@ -6999,7 +6999,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeploymentRevisions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7055,7 +7055,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.Deployment()
@@ -7109,7 +7109,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeploymentRevisions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7156,7 +7156,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.HydratedDeployment()
@@ -7196,7 +7196,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.HydratedDeployment()
@@ -7253,7 +7253,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listHydratedDeployments = stubSimpleCall(
         undefined,
@@ -7287,7 +7287,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.HydratedDeployment()
@@ -7356,7 +7356,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listHydratedDeployments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7414,7 +7414,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.telcoautomation.v1.HydratedDeployment()
@@ -7468,7 +7468,7 @@ describe('v1.TelcoAutomationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listHydratedDeployments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -322,7 +322,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['catalog', 'name']
       );
       request.catalog.name = defaultValue1;
-      const expectedHeaderRequestParams = `catalog.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Catalog()
       );
@@ -354,7 +354,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['catalog', 'name']
       );
       request.catalog.name = defaultValue1;
-      const expectedHeaderRequestParams = `catalog.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Catalog()
       );
@@ -402,7 +402,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['catalog', 'name']
       );
       request.catalog.name = defaultValue1;
-      const expectedHeaderRequestParams = `catalog.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCatalog = stubSimpleCall(
         undefined,
@@ -455,7 +455,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -486,7 +486,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -533,7 +533,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setDefaultBranch = stubSimpleCall(
         undefined,
@@ -585,7 +585,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetDefaultBranchResponse()
       );
@@ -616,7 +616,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetDefaultBranchResponse()
       );
@@ -663,7 +663,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDefaultBranch = stubSimpleCall(
         undefined,
@@ -715,7 +715,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CompletionConfig()
       );
@@ -747,7 +747,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CompletionConfig()
       );
@@ -794,7 +794,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCompletionConfig = stubSimpleCall(
         undefined,
@@ -847,7 +847,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['completionConfig', 'name']
       );
       request.completionConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `completion_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `completion_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CompletionConfig()
       );
@@ -880,7 +880,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['completionConfig', 'name']
       );
       request.completionConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `completion_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `completion_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CompletionConfig()
       );
@@ -928,7 +928,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['completionConfig', 'name']
       );
       request.completionConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `completion_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `completion_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCompletionConfig = stubSimpleCall(
         undefined,
@@ -987,7 +987,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AttributesConfig()
       );
@@ -1019,7 +1019,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AttributesConfig()
       );
@@ -1066,7 +1066,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAttributesConfig = stubSimpleCall(
         undefined,
@@ -1119,7 +1119,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig', 'name']
       );
       request.attributesConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AttributesConfig()
       );
@@ -1152,7 +1152,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig', 'name']
       );
       request.attributesConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AttributesConfig()
       );
@@ -1200,7 +1200,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig', 'name']
       );
       request.attributesConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAttributesConfig = stubSimpleCall(
         undefined,
@@ -1259,7 +1259,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AttributesConfig()
       );
@@ -1291,7 +1291,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AttributesConfig()
       );
@@ -1338,7 +1338,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addCatalogAttribute = stubSimpleCall(
         undefined,
@@ -1390,7 +1390,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AttributesConfig()
       );
@@ -1422,7 +1422,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AttributesConfig()
       );
@@ -1469,7 +1469,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeCatalogAttribute = stubSimpleCall(
         undefined,
@@ -1527,7 +1527,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesResponse()
       );
@@ -1559,7 +1559,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesResponse()
       );
@@ -1606,7 +1606,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchRemoveCatalogAttributes = stubSimpleCall(
         undefined,
@@ -1664,7 +1664,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AttributesConfig()
       );
@@ -1696,7 +1696,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AttributesConfig()
       );
@@ -1743,7 +1743,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.replaceCatalogAttribute = stubSimpleCall(
         undefined,
@@ -1801,7 +1801,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Catalog()),
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Catalog()),
@@ -1834,7 +1834,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Catalog()),
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Catalog()),
@@ -1883,7 +1883,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCatalogs = stubSimpleCall(
         undefined,
@@ -1914,7 +1914,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Catalog()),
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Catalog()),
@@ -1968,7 +1968,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCatalogs.createStream = stubPageStreamingCall(
         undefined,
@@ -2019,7 +2019,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Catalog()),
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Catalog()),
@@ -2062,7 +2062,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCatalogs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -17,6 +17,7 @@
   * [Net_app.create_backup_policy](#net_app.create_backup_policy)
   * [Net_app.create_backup_vault](#net_app.create_backup_vault)
   * [Net_app.create_kms_config](#net_app.create_kms_config)
+  * [Net_app.create_quota_rule](#net_app.create_quota_rule)
   * [Net_app.create_replication](#net_app.create_replication)
   * [Net_app.create_snapshot](#net_app.create_snapshot)
   * [Net_app.create_storage_pool](#net_app.create_storage_pool)
@@ -26,16 +27,19 @@
   * [Net_app.delete_backup_policy](#net_app.delete_backup_policy)
   * [Net_app.delete_backup_vault](#net_app.delete_backup_vault)
   * [Net_app.delete_kms_config](#net_app.delete_kms_config)
+  * [Net_app.delete_quota_rule](#net_app.delete_quota_rule)
   * [Net_app.delete_replication](#net_app.delete_replication)
   * [Net_app.delete_snapshot](#net_app.delete_snapshot)
   * [Net_app.delete_storage_pool](#net_app.delete_storage_pool)
   * [Net_app.delete_volume](#net_app.delete_volume)
   * [Net_app.encrypt_volumes](#net_app.encrypt_volumes)
+  * [Net_app.establish_peering](#net_app.establish_peering)
   * [Net_app.get_active_directory](#net_app.get_active_directory)
   * [Net_app.get_backup](#net_app.get_backup)
   * [Net_app.get_backup_policy](#net_app.get_backup_policy)
   * [Net_app.get_backup_vault](#net_app.get_backup_vault)
   * [Net_app.get_kms_config](#net_app.get_kms_config)
+  * [Net_app.get_quota_rule](#net_app.get_quota_rule)
   * [Net_app.get_replication](#net_app.get_replication)
   * [Net_app.get_snapshot](#net_app.get_snapshot)
   * [Net_app.get_storage_pool](#net_app.get_storage_pool)
@@ -45,6 +49,7 @@
   * [Net_app.list_backup_vaults](#net_app.list_backup_vaults)
   * [Net_app.list_backups](#net_app.list_backups)
   * [Net_app.list_kms_configs](#net_app.list_kms_configs)
+  * [Net_app.list_quota_rules](#net_app.list_quota_rules)
   * [Net_app.list_replications](#net_app.list_replications)
   * [Net_app.list_snapshots](#net_app.list_snapshots)
   * [Net_app.list_storage_pools](#net_app.list_storage_pools)
@@ -53,15 +58,19 @@
   * [Net_app.reverse_replication_direction](#net_app.reverse_replication_direction)
   * [Net_app.revert_volume](#net_app.revert_volume)
   * [Net_app.stop_replication](#net_app.stop_replication)
+  * [Net_app.switch_active_replica_zone](#net_app.switch_active_replica_zone)
+  * [Net_app.sync_replication](#net_app.sync_replication)
   * [Net_app.update_active_directory](#net_app.update_active_directory)
   * [Net_app.update_backup](#net_app.update_backup)
   * [Net_app.update_backup_policy](#net_app.update_backup_policy)
   * [Net_app.update_backup_vault](#net_app.update_backup_vault)
   * [Net_app.update_kms_config](#net_app.update_kms_config)
+  * [Net_app.update_quota_rule](#net_app.update_quota_rule)
   * [Net_app.update_replication](#net_app.update_replication)
   * [Net_app.update_snapshot](#net_app.update_snapshot)
   * [Net_app.update_storage_pool](#net_app.update_storage_pool)
   * [Net_app.update_volume](#net_app.update_volume)
+  * [Net_app.validate_directory_service](#net_app.validate_directory_service)
   * [Net_app.verify_kms_config](#net_app.verify_kms_config)
   * [Quickstart](#quickstart)
 
@@ -158,6 +167,23 @@ __Usage:__
 
 
 `node packages/google-cloud-netapp/samples/generated/v1/net_app.create_kms_config.js`
+
+
+-----
+
+
+
+
+### Net_app.create_quota_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.create_quota_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.create_quota_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.create_quota_rule.js`
 
 
 -----
@@ -318,6 +344,23 @@ __Usage:__
 
 
 
+### Net_app.delete_quota_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_quota_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.delete_quota_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.delete_quota_rule.js`
+
+
+-----
+
+
+
+
 ### Net_app.delete_replication
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_replication.js).
@@ -403,6 +446,23 @@ __Usage:__
 
 
 
+### Net_app.establish_peering
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.establish_peering.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.establish_peering.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.establish_peering.js`
+
+
+-----
+
+
+
+
 ### Net_app.get_active_directory
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_active_directory.js).
@@ -481,6 +541,23 @@ __Usage:__
 
 
 `node packages/google-cloud-netapp/samples/generated/v1/net_app.get_kms_config.js`
+
+
+-----
+
+
+
+
+### Net_app.get_quota_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_quota_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.get_quota_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.get_quota_rule.js`
 
 
 -----
@@ -641,6 +718,23 @@ __Usage:__
 
 
 
+### Net_app.list_quota_rules
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_quota_rules.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.list_quota_rules.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.list_quota_rules.js`
+
+
+-----
+
+
+
+
 ### Net_app.list_replications
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_replications.js).
@@ -777,6 +871,40 @@ __Usage:__
 
 
 
+### Net_app.switch_active_replica_zone
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.switch_active_replica_zone.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.switch_active_replica_zone.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.switch_active_replica_zone.js`
+
+
+-----
+
+
+
+
+### Net_app.sync_replication
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.sync_replication.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.sync_replication.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.sync_replication.js`
+
+
+-----
+
+
+
+
 ### Net_app.update_active_directory
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_active_directory.js).
@@ -862,6 +990,23 @@ __Usage:__
 
 
 
+### Net_app.update_quota_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_quota_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_quota_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.update_quota_rule.js`
+
+
+-----
+
+
+
+
 ### Net_app.update_replication
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_replication.js).
@@ -923,6 +1068,23 @@ __Usage:__
 
 
 `node packages/google-cloud-netapp/samples/generated/v1/net_app.update_volume.js`
+
+
+-----
+
+
+
+
+### Net_app.validate_directory_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.validate_directory_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.validate_directory_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.validate_directory_service.js`
 
 
 -----

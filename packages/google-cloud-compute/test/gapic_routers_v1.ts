@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -341,7 +341,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -382,7 +382,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -439,7 +439,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
@@ -483,6 +483,176 @@ describe('v1.RoutersClient', () => {
     });
   });
 
+  describe('deleteRoutePolicy', () => {
+    it('invokes deleteRoutePolicy without error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.deleteRoutePolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteRoutePolicy(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteRoutePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRoutePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteRoutePolicy without error using callback', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.deleteRoutePolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteRoutePolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteRoutePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRoutePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteRoutePolicy with error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteRoutePolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteRoutePolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteRoutePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRoutePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteRoutePolicy with closed client', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteRoutePolicy(request), expectedError);
+    });
+  });
+
   describe('get', () => {
     it('invokes get without error', async () => {
       const client = new routersModule.v1.RoutersClient({
@@ -508,7 +678,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Router()
       );
@@ -548,7 +718,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Router()
       );
@@ -603,7 +773,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -671,7 +841,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.NatIpInfoResponse()
       );
@@ -712,7 +882,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.NatIpInfoResponse()
       );
@@ -769,7 +939,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNatIpInfo = stubSimpleCall(
         undefined,
@@ -816,6 +986,176 @@ describe('v1.RoutersClient', () => {
     });
   });
 
+  describe('getRoutePolicy', () => {
+    it('invokes getRoutePolicy without error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RoutersGetRoutePolicyResponse()
+      );
+      client.innerApiCalls.getRoutePolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.getRoutePolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRoutePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRoutePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRoutePolicy without error using callback', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RoutersGetRoutePolicyResponse()
+      );
+      client.innerApiCalls.getRoutePolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getRoutePolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IRoutersGetRoutePolicyResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRoutePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRoutePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRoutePolicy with error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getRoutePolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getRoutePolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getRoutePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRoutePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRoutePolicy with closed client', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getRoutePolicy(request), expectedError);
+    });
+  });
+
   describe('getRouterStatus', () => {
     it('invokes getRouterStatus without error', async () => {
       const client = new routersModule.v1.RoutersClient({
@@ -841,7 +1181,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.RouterStatusResponse()
       );
@@ -882,7 +1222,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.RouterStatusResponse()
       );
@@ -939,7 +1279,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRouterStatus = stubSimpleCall(
         undefined,
@@ -1006,7 +1346,7 @@ describe('v1.RoutersClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1042,7 +1382,7 @@ describe('v1.RoutersClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1094,7 +1434,7 @@ describe('v1.RoutersClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -1158,7 +1498,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1198,7 +1538,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1253,7 +1593,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.patch(request), expectedError);
@@ -1296,6 +1636,176 @@ describe('v1.RoutersClient', () => {
     });
   });
 
+  describe('patchRoutePolicy', () => {
+    it('invokes patchRoutePolicy without error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patchRoutePolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.patchRoutePolicy(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.patchRoutePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchRoutePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchRoutePolicy without error using callback', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patchRoutePolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.patchRoutePolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.patchRoutePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchRoutePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchRoutePolicy with error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.patchRoutePolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.patchRoutePolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.patchRoutePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchRoutePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchRoutePolicy with closed client', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.patchRoutePolicy(request), expectedError);
+    });
+  });
+
   describe('preview', () => {
     it('invokes preview without error', async () => {
       const client = new routersModule.v1.RoutersClient({
@@ -1321,7 +1831,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.RoutersPreviewResponse()
       );
@@ -1362,7 +1872,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.RoutersPreviewResponse()
       );
@@ -1419,7 +1929,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.preview = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.preview(request), expectedError);
@@ -1488,7 +1998,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1529,7 +2039,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1586,7 +2096,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.update = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.update(request), expectedError);
@@ -1630,6 +2140,176 @@ describe('v1.RoutersClient', () => {
     });
   });
 
+  describe('updateRoutePolicy', () => {
+    it('invokes updateRoutePolicy without error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.updateRoutePolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateRoutePolicy(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateRoutePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRoutePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateRoutePolicy without error using callback', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.updateRoutePolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateRoutePolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateRoutePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRoutePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateRoutePolicy with error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateRoutePolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateRoutePolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateRoutePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRoutePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateRoutePolicy with closed client', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateRoutePolicy(request), expectedError);
+    });
+  });
+
   describe('aggregatedList', () => {
     it('uses async iteration with aggregatedList without error', async () => {
       const client = new routersModule.v1.RoutersClient({
@@ -1645,7 +2325,7 @@ describe('v1.RoutersClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         [
           'tuple_key_1',
@@ -1705,7 +2385,7 @@ describe('v1.RoutersClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.aggregatedList.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1759,7 +2439,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.VmEndpointNatMappings()
@@ -1808,7 +2488,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.VmEndpointNatMappings()
@@ -1875,7 +2555,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNatMappingInfo = stubSimpleCall(
         undefined,
@@ -1916,7 +2596,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.VmEndpointNatMappings()
@@ -1987,7 +2667,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.getNatMappingInfo.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2047,7 +2727,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.VmEndpointNatMappings()
@@ -2107,7 +2787,7 @@ describe('v1.RoutersClient', () => {
         ['router']
       );
       request.router = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.getNatMappingInfo.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2155,7 +2835,7 @@ describe('v1.RoutersClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Router()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Router()),
@@ -2192,7 +2872,7 @@ describe('v1.RoutersClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Router()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Router()),
@@ -2244,7 +2924,7 @@ describe('v1.RoutersClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -2276,7 +2956,7 @@ describe('v1.RoutersClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Router()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Router()),
@@ -2332,7 +3012,7 @@ describe('v1.RoutersClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -2385,7 +3065,7 @@ describe('v1.RoutersClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Router()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Router()),
@@ -2432,7 +3112,7 @@ describe('v1.RoutersClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2452,6 +3132,748 @@ describe('v1.RoutersClient', () => {
       );
       assert(
         (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listBgpRoutes', () => {
+    it('invokes listBgpRoutes without error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListBgpRoutesRoutersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.compute.v1.BgpRoute()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.BgpRoute()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.BgpRoute()),
+      ];
+      client.innerApiCalls.listBgpRoutes = stubSimpleCall(expectedResponse);
+      const [response] = await client.listBgpRoutes(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listBgpRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBgpRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBgpRoutes without error using callback', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListBgpRoutesRoutersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.compute.v1.BgpRoute()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.BgpRoute()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.BgpRoute()),
+      ];
+      client.innerApiCalls.listBgpRoutes =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listBgpRoutes(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IBgpRoute[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listBgpRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBgpRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBgpRoutes with error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListBgpRoutesRoutersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listBgpRoutes = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listBgpRoutes(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listBgpRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBgpRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBgpRoutesStream without error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListBgpRoutesRoutersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.compute.v1.BgpRoute()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.BgpRoute()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.BgpRoute()),
+      ];
+      client.descriptors.page.listBgpRoutes.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listBgpRoutesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.compute.v1.BgpRoute[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.compute.v1.BgpRoute) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listBgpRoutes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBgpRoutes, request)
+      );
+      assert(
+        (client.descriptors.page.listBgpRoutes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listBgpRoutesStream with error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListBgpRoutesRoutersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBgpRoutes.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listBgpRoutesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.compute.v1.BgpRoute[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.compute.v1.BgpRoute) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listBgpRoutes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBgpRoutes, request)
+      );
+      assert(
+        (client.descriptors.page.listBgpRoutes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listBgpRoutes without error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListBgpRoutesRoutersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.compute.v1.BgpRoute()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.BgpRoute()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.BgpRoute()),
+      ];
+      client.descriptors.page.listBgpRoutes.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.compute.v1.IBgpRoute[] = [];
+      const iterable = client.listBgpRoutesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listBgpRoutes.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listBgpRoutes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listBgpRoutes with error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListBgpRoutesRoutersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBgpRoutesRoutersRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBgpRoutes.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listBgpRoutesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.compute.v1.IBgpRoute[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listBgpRoutes.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listBgpRoutes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listRoutePolicies', () => {
+    it('invokes listRoutePolicies without error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.compute.v1.RoutePolicy()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.RoutePolicy()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.RoutePolicy()),
+      ];
+      client.innerApiCalls.listRoutePolicies = stubSimpleCall(expectedResponse);
+      const [response] = await client.listRoutePolicies(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listRoutePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRoutePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRoutePolicies without error using callback', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.compute.v1.RoutePolicy()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.RoutePolicy()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.RoutePolicy()),
+      ];
+      client.innerApiCalls.listRoutePolicies =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listRoutePolicies(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IRoutePolicy[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listRoutePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRoutePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRoutePolicies with error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listRoutePolicies = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listRoutePolicies(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listRoutePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRoutePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRoutePoliciesStream without error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.compute.v1.RoutePolicy()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.RoutePolicy()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.RoutePolicy()),
+      ];
+      client.descriptors.page.listRoutePolicies.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listRoutePoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.compute.v1.RoutePolicy[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.compute.v1.RoutePolicy) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listRoutePolicies.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listRoutePolicies, request)
+      );
+      assert(
+        (client.descriptors.page.listRoutePolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listRoutePoliciesStream with error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRoutePolicies.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listRoutePoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.compute.v1.RoutePolicy[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.compute.v1.RoutePolicy) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listRoutePolicies.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listRoutePolicies, request)
+      );
+      assert(
+        (client.descriptors.page.listRoutePolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listRoutePolicies without error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.compute.v1.RoutePolicy()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.RoutePolicy()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.RoutePolicy()),
+      ];
+      client.descriptors.page.listRoutePolicies.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.compute.v1.IRoutePolicy[] = [];
+      const iterable = client.listRoutePoliciesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRoutePolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listRoutePolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listRoutePolicies with error', async () => {
+      const client = new routersModule.v1.RoutersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest',
+        ['router']
+      );
+      request.router = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&router=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRoutePolicies.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listRoutePoliciesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.compute.v1.IRoutePolicy[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRoutePolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listRoutePolicies.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3179,7 +3179,7 @@ export class ConfigClient {
     ) as AsyncIterable<protos.google.cloud.config.v1.IRevision>;
   }
   /**
-   * Lists {@link protos.google.cloud.config.v1.Resource|Resource}s in a given revision.
+   * Lists {@link protos.google.cloud.config.v1.Resource|Resources} in a given revision.
    *
    * @param {Object} request
    *   The request object that will be sent.

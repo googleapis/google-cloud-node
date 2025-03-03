@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -336,7 +336,7 @@ describe('v2beta.CompletionServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.CompleteQueryResponse()
       );
@@ -369,7 +369,7 @@ describe('v2beta.CompletionServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.CompleteQueryResponse()
       );
@@ -418,7 +418,7 @@ describe('v2beta.CompletionServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.completeQuery = stubSimpleCall(
         undefined,
@@ -474,7 +474,7 @@ describe('v2beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -509,7 +509,7 @@ describe('v2beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -565,7 +565,7 @@ describe('v2beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importCompletionData = stubLongRunningCall(
         undefined,
@@ -598,7 +598,7 @@ describe('v2beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importCompletionData = stubLongRunningCall(
         undefined,
@@ -1199,6 +1199,46 @@ describe('v2beta.CompletionServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('alertConfig', () => {
+      const fakePath = '/rendered/path/alertConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new completionserviceModule.v2beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.alertConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.alertConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('alertConfigPath', () => {
+        const result = client.alertConfigPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.alertConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAlertConfigName', () => {
+        const result = client.matchProjectFromAlertConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.alertConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('attributesConfig', () => {
       const fakePath = '/rendered/path/attributesConfig';
       const expectedParameters = {

@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -480,7 +483,7 @@
                     "SpacesService": {
                       "options": {
                         "(google.api.default_host)": "meet.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/meetings.space.created,https://www.googleapis.com/auth/meetings.space.readonly"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/meetings.space.created,https://www.googleapis.com/auth/meetings.space.readonly,https://www.googleapis.com/auth/meetings.space.settings"
                       },
                       "methods": {
                         "CreateSpace": {
@@ -1203,9 +1206,110 @@
                         "entryPointAccess": {
                           "type": "EntryPointAccess",
                           "id": 2
+                        },
+                        "moderation": {
+                          "type": "Moderation",
+                          "id": 3
+                        },
+                        "moderationRestrictions": {
+                          "type": "ModerationRestrictions",
+                          "id": 4
+                        },
+                        "attendanceReportGenerationType": {
+                          "type": "AttendanceReportGenerationType",
+                          "id": 6
+                        },
+                        "artifactConfig": {
+                          "type": "ArtifactConfig",
+                          "id": 7
                         }
                       },
                       "nested": {
+                        "ModerationRestrictions": {
+                          "fields": {
+                            "chatRestriction": {
+                              "type": "RestrictionType",
+                              "id": 1
+                            },
+                            "reactionRestriction": {
+                              "type": "RestrictionType",
+                              "id": 2
+                            },
+                            "presentRestriction": {
+                              "type": "RestrictionType",
+                              "id": 3
+                            },
+                            "defaultJoinAsViewerType": {
+                              "type": "DefaultJoinAsViewerType",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "RestrictionType": {
+                              "values": {
+                                "RESTRICTION_TYPE_UNSPECIFIED": 0,
+                                "HOSTS_ONLY": 1,
+                                "NO_RESTRICTION": 2
+                              }
+                            },
+                            "DefaultJoinAsViewerType": {
+                              "values": {
+                                "DEFAULT_JOIN_AS_VIEWER_TYPE_UNSPECIFIED": 0,
+                                "ON": 1,
+                                "OFF": 2
+                              }
+                            }
+                          }
+                        },
+                        "ArtifactConfig": {
+                          "fields": {
+                            "recordingConfig": {
+                              "type": "RecordingConfig",
+                              "id": 1
+                            },
+                            "transcriptionConfig": {
+                              "type": "TranscriptionConfig",
+                              "id": 2
+                            },
+                            "smartNotesConfig": {
+                              "type": "SmartNotesConfig",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "RecordingConfig": {
+                              "fields": {
+                                "autoRecordingGeneration": {
+                                  "type": "AutoGenerationType",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "TranscriptionConfig": {
+                              "fields": {
+                                "autoTranscriptionGeneration": {
+                                  "type": "AutoGenerationType",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "SmartNotesConfig": {
+                              "fields": {
+                                "autoSmartNotesGeneration": {
+                                  "type": "AutoGenerationType",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "AutoGenerationType": {
+                              "values": {
+                                "AUTO_GENERATION_TYPE_UNSPECIFIED": 0,
+                                "ON": 1,
+                                "OFF": 2
+                              }
+                            }
+                          }
+                        },
                         "AccessType": {
                           "values": {
                             "ACCESS_TYPE_UNSPECIFIED": 0,
@@ -1219,6 +1323,57 @@
                             "ENTRY_POINT_ACCESS_UNSPECIFIED": 0,
                             "ALL": 1,
                             "CREATOR_APP_ONLY": 2
+                          }
+                        },
+                        "Moderation": {
+                          "values": {
+                            "MODERATION_UNSPECIFIED": 0,
+                            "OFF": 1,
+                            "ON": 2
+                          }
+                        },
+                        "AttendanceReportGenerationType": {
+                          "values": {
+                            "ATTENDANCE_REPORT_GENERATION_TYPE_UNSPECIFIED": 0,
+                            "GENERATE_REPORT": 1,
+                            "DO_NOT_GENERATE": 2
+                          }
+                        }
+                      }
+                    },
+                    "Member": {
+                      "options": {
+                        "(google.api.resource).type": "meet.googleapis.com/Member",
+                        "(google.api.resource).pattern": "spaces/{space}/members/{member}",
+                        "(google.api.resource).plural": "members",
+                        "(google.api.resource).singular": "member"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "email": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "role": {
+                          "type": "Role",
+                          "id": 3
+                        },
+                        "user": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Role": {
+                          "values": {
+                            "ROLE_UNSPECIFIED": 0,
+                            "COHOST": 1
                           }
                         }
                       }
@@ -1607,7 +1762,8 @@
                     },
                     "SpacesService": {
                       "options": {
-                        "(google.api.default_host)": "meet.googleapis.com"
+                        "(google.api.default_host)": "meet.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/meetings.conference.media.audio.readonly,https://www.googleapis.com/auth/meetings.conference.media.readonly,https://www.googleapis.com/auth/meetings.conference.media.video.readonly,https://www.googleapis.com/auth/meetings.space.created,https://www.googleapis.com/auth/meetings.space.readonly,https://www.googleapis.com/auth/meetings.space.settings"
                       },
                       "methods": {
                         "CreateSpace": {
@@ -1668,6 +1824,26 @@
                             }
                           ]
                         },
+                        "ConnectActiveConference": {
+                          "requestType": "ConnectActiveConferenceRequest",
+                          "responseType": "ConnectActiveConferenceResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2beta/{name=spaces/*}:connectActiveConference",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta/{name=spaces/*}:connectActiveConference",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "EndActiveConference": {
                           "requestType": "EndActiveConferenceRequest",
                           "responseType": "google.protobuf.Empty",
@@ -1687,12 +1863,87 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "CreateMember": {
+                          "requestType": "CreateMemberRequest",
+                          "responseType": "Member",
+                          "options": {
+                            "(google.api.http).post": "/v2beta/{parent=spaces/*}/members",
+                            "(google.api.http).body": "member",
+                            "(google.api.method_signature)": "parent,member"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta/{parent=spaces/*}/members",
+                                "body": "member"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,member"
+                            }
+                          ]
+                        },
+                        "GetMember": {
+                          "requestType": "GetMemberRequest",
+                          "responseType": "Member",
+                          "options": {
+                            "(google.api.http).get": "/v2beta/{name=spaces/*/members/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta/{name=spaces/*/members/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListMembers": {
+                          "requestType": "ListMembersRequest",
+                          "responseType": "ListMembersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2beta/{parent=spaces/*}/members",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta/{parent=spaces/*}/members"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteMember": {
+                          "requestType": "DeleteMemberRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v2beta/{name=spaces/*/members/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2beta/{name=spaces/*/members/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
                     "ConferenceRecordsService": {
                       "options": {
-                        "(google.api.default_host)": "meet.googleapis.com"
+                        "(google.api.default_host)": "meet.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/meetings.space.created,https://www.googleapis.com/auth/meetings.space.readonly"
                       },
                       "methods": {
                         "GetConferenceRecord": {
@@ -1947,6 +2198,37 @@
                         }
                       }
                     },
+                    "ConnectActiveConferenceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "meet.googleapis.com/Space"
+                          }
+                        },
+                        "offer": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ConnectActiveConferenceResponse": {
+                      "fields": {
+                        "answer": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "traceId": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "EndActiveConferenceRequest": {
                       "fields": {
                         "name": {
@@ -1955,6 +2237,88 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "meet.googleapis.com/Space"
+                          }
+                        }
+                      }
+                    },
+                    "CreateMemberRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "meet.googleapis.com/Member"
+                          }
+                        },
+                        "member": {
+                          "type": "Member",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetMemberRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "meet.googleapis.com/Member"
+                          }
+                        }
+                      }
+                    },
+                    "ListMembersRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "meet.googleapis.com/Member"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListMembersResponse": {
+                      "fields": {
+                        "members": {
+                          "rule": "repeated",
+                          "type": "Member",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteMemberRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "meet.googleapis.com/Member"
                           }
                         }
                       }

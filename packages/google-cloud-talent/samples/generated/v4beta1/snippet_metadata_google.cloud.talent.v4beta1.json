@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-talent",
-        "version": "6.3.1",
+        "version": "6.4.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -710,7 +710,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 333,
+                    "end": 340,
                     "type": "FULL"
                 }
             ],
@@ -782,6 +782,10 @@
                     {
                         "name": "keyword_match_mode",
                         "type": ".google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode"
+                    },
+                    {
+                        "name": "relevance_threshold",
+                        "type": ".google.cloud.talent.v4beta1.SearchJobsRequest.RelevanceThreshold"
                     }
                 ],
                 "resultType": ".google.cloud.talent.v4beta1.SearchJobsResponse",
@@ -810,7 +814,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 333,
+                    "end": 340,
                     "type": "FULL"
                 }
             ],
@@ -882,6 +886,10 @@
                     {
                         "name": "keyword_match_mode",
                         "type": ".google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode"
+                    },
+                    {
+                        "name": "relevance_threshold",
+                        "type": ".google.cloud.talent.v4beta1.SearchJobsRequest.RelevanceThreshold"
                     }
                 ],
                 "resultType": ".google.cloud.talent.v4beta1.SearchJobsResponse",

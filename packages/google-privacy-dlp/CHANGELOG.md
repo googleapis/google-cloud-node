@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.12.0...dlp-v5.13.0) (2025-02-28)
+
+
+### Features
+
+* [dlp] discovery of Vertex AI datasets ([#6041](https://github.com/googleapis/google-cloud-node/issues/6041)) ([65beb7c](https://github.com/googleapis/google-cloud-node/commit/65beb7cee55e4f37a7449175905f896609ad001a))
+
+## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.11.0...dlp-v5.12.0) (2024-10-30)
+
+
+### Features
+
+* [dlp] discovery of BigQuery snapshots ([#5757](https://github.com/googleapis/google-cloud-node/issues/5757)) ([3f262fc](https://github.com/googleapis/google-cloud-node/commit/3f262fc59aa6054bd22f6868e76e7c686a9444a3))
+
+## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.10.0...dlp-v5.11.0) (2024-09-24)
+
+
+### Features
+
+* [dlp] action for publishing data profiles to SecOps (formelly known as Chronicle) ([#5691](https://github.com/googleapis/google-cloud-node/issues/5691)) ([106d029](https://github.com/googleapis/google-cloud-node/commit/106d029eacd05fc890dffd1169a19d4596d93c54))
+
 ## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.9.0...dlp-v5.10.0) (2024-08-19)
 
 

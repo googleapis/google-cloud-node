@@ -30,6 +30,11 @@
                 "deleteJob"
               ]
             },
+            "CancelJob": {
+              "methods": [
+                "cancelJob"
+              ]
+            },
             "ListJobs": {
               "methods": [
                 "listJobs",
@@ -67,6 +72,11 @@
             "DeleteJob": {
               "methods": [
                 "deleteJob"
+              ]
+            },
+            "CancelJob": {
+              "methods": [
+                "cancelJob"
               ]
             },
             "ListJobs": {

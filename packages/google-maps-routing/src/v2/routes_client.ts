@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -258,7 +258,7 @@ export class RoutesClient {
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough();
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -492,7 +492,10 @@ export class RoutesClient {
    *   request in addition to the default route. A reference route is a route with
    *   a different route calculation objective than the default route. For example
    *   a `FUEL_EFFICIENT` reference route calculation takes into account various
-   *   parameters that would generate an optimal fuel efficient route.
+   *   parameters that would generate an optimal fuel efficient route. When using
+   *   this feature, look for
+   *   {@link protos.google.maps.routing.v2.Route.route_labels|`route_labels`} on the
+   *   resulting routes.
    * @param {number[]} [request.extraComputations]
    *   Optional. A list of extra computations which may be used to complete the
    *   request. Note: These extra computations may return extra fields on the

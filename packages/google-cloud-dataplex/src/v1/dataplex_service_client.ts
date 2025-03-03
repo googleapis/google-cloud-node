@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -261,6 +261,9 @@ export class DataplexServiceClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      metadataJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataJobs/{metadataJob}'
+      ),
       partitionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}/partitions/{partition}'
       ),
@@ -393,6 +396,9 @@ export class DataplexServiceClient {
               get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',
             },
             {
+              get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',
+            },
+            {
               get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',
             },
             {
@@ -400,6 +406,18 @@ export class DataplexServiceClient {
             },
             {
               get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',
             },
           ],
         },
@@ -445,6 +463,10 @@ export class DataplexServiceClient {
               body: '*',
             },
             {
+              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
               post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',
               body: '*',
             },
@@ -454,6 +476,22 @@ export class DataplexServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -500,6 +538,10 @@ export class DataplexServiceClient {
               body: '*',
             },
             {
+              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
               post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',
               body: '*',
             },
@@ -511,24 +553,55 @@ export class DataplexServiceClient {
               post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',
+              body: '*',
+            },
           ],
         },
         {
           selector: 'google.longrunning.Operations.CancelOperation',
           post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
           body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
+          ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
+          ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
+          ],
         },
       ];
     }
@@ -3835,7 +3908,7 @@ export class DataplexServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listLakes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4041,7 +4114,7 @@ export class DataplexServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listLakeActions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4240,7 +4313,7 @@ export class DataplexServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listZones`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4444,7 +4517,7 @@ export class DataplexServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listZoneActions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4646,7 +4719,7 @@ export class DataplexServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAssets`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4852,7 +4925,7 @@ export class DataplexServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAssetActions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5051,7 +5124,7 @@ export class DataplexServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTasks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5253,7 +5326,7 @@ export class DataplexServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5462,7 +5535,7 @@ export class DataplexServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEnvironments`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5680,7 +5753,7 @@ export class DataplexServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSessions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5909,7 +5982,7 @@ export class DataplexServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -5922,6 +5995,20 @@ export class DataplexServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5958,6 +6045,13 @@ export class DataplexServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5993,11 +6087,11 @@ export class DataplexServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -6006,6 +6100,20 @@ export class DataplexServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -6036,7 +6144,7 @@ export class DataplexServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -6049,6 +6157,20 @@ export class DataplexServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -7047,6 +7169,58 @@ export class DataplexServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified metadataJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadataJob
+   * @returns {string} Resource name string.
+   */
+  metadataJobPath(project: string, location: string, metadataJob: string) {
+    return this.pathTemplates.metadataJobPathTemplate.render({
+      project: project,
+      location: location,
+      metadataJob: metadataJob,
+    });
+  }
+
+  /**
+   * Parse the project from MetadataJob resource.
+   *
+   * @param {string} metadataJobName
+   *   A fully-qualified path representing MetadataJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMetadataJobName(metadataJobName: string) {
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .project;
+  }
+
+  /**
+   * Parse the location from MetadataJob resource.
+   *
+   * @param {string} metadataJobName
+   *   A fully-qualified path representing MetadataJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMetadataJobName(metadataJobName: string) {
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .location;
+  }
+
+  /**
+   * Parse the metadataJob from MetadataJob resource.
+   *
+   * @param {string} metadataJobName
+   *   A fully-qualified path representing MetadataJob resource.
+   * @returns {string} A string representing the metadataJob.
+   */
+  matchMetadataJobFromMetadataJobName(metadataJobName: string) {
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .metadataJob;
   }
 
   /**

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -325,7 +325,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Taxonomy()
       );
@@ -356,7 +356,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Taxonomy()
       );
@@ -403,7 +403,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTaxonomy = stubSimpleCall(
         undefined,
@@ -455,7 +455,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -486,7 +486,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -533,7 +533,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTaxonomy = stubSimpleCall(
         undefined,
@@ -586,7 +586,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['taxonomy', 'name']
       );
       request.taxonomy.name = defaultValue1;
-      const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Taxonomy()
       );
@@ -618,7 +618,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['taxonomy', 'name']
       );
       request.taxonomy.name = defaultValue1;
-      const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Taxonomy()
       );
@@ -666,7 +666,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['taxonomy', 'name']
       );
       request.taxonomy.name = defaultValue1;
-      const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTaxonomy = stubSimpleCall(
         undefined,
@@ -719,7 +719,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Taxonomy()
       );
@@ -750,7 +750,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Taxonomy()
       );
@@ -797,7 +797,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTaxonomy = stubSimpleCall(
         undefined,
@@ -849,7 +849,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.PolicyTag()
       );
@@ -880,7 +880,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.PolicyTag()
       );
@@ -927,7 +927,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPolicyTag = stubSimpleCall(
         undefined,
@@ -979,7 +979,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1010,7 +1010,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1057,7 +1057,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePolicyTag = stubSimpleCall(
         undefined,
@@ -1110,7 +1110,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['policyTag', 'name']
       );
       request.policyTag.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.PolicyTag()
       );
@@ -1142,7 +1142,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['policyTag', 'name']
       );
       request.policyTag.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.PolicyTag()
       );
@@ -1190,7 +1190,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['policyTag', 'name']
       );
       request.policyTag.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePolicyTag = stubSimpleCall(
         undefined,
@@ -1243,7 +1243,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.PolicyTag()
       );
@@ -1274,7 +1274,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.PolicyTag()
       );
@@ -1321,7 +1321,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPolicyTag = stubSimpleCall(
         undefined,
@@ -1373,7 +1373,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1404,7 +1404,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1451,7 +1451,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -1503,7 +1503,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1534,7 +1534,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1581,7 +1581,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -1633,7 +1633,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1665,7 +1665,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1712,7 +1712,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -1764,7 +1764,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.Taxonomy()
@@ -1803,7 +1803,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.Taxonomy()
@@ -1858,7 +1858,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTaxonomies = stubSimpleCall(
         undefined,
@@ -1889,7 +1889,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.Taxonomy()
@@ -1950,7 +1950,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTaxonomies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2000,7 +2000,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.Taxonomy()
@@ -2049,7 +2049,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTaxonomies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2092,7 +2092,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.PolicyTag()
@@ -2131,7 +2131,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.PolicyTag()
@@ -2186,7 +2186,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPolicyTags = stubSimpleCall(
         undefined,
@@ -2217,7 +2217,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.PolicyTag()
@@ -2278,7 +2278,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPolicyTags.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2328,7 +2328,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.PolicyTag()
@@ -2378,7 +2378,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPolicyTags.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

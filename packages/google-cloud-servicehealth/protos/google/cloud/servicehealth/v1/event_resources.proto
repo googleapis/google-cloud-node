@@ -387,6 +387,9 @@ message Location {
 message Product {
   // Google Cloud product impacted by the event. Example: `"Google Cloud SQL"`
   string product_name = 1;
+
+  // Unique identifier for the product.
+  string id = 2;
 }
 
 // Represents the Google Cloud products and locations impacted by the event.
@@ -451,6 +454,7 @@ message Asset {
   string asset_type = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
+// Requests list of events.
 message ListEventsRequest {
   // Required. Parent value using the form
   // `projects/{project_id}/locations/{location}/events`.
@@ -484,7 +488,8 @@ message ListEventsRequest {
   // response. The expression takes the following forms: <br>
   // *   field=value for `category` and `state`<br>
   // *   field &lt;, >, &lt;=, or >= value for `update_time` <br>
-  // Examples: `category=INCIDENT`, `update_time>=2000-01-01T11:30:00-04:00`
+  // Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`,
+  // `event_impacts.product.product_name:"Eventarc"`
   // <br>
   //
   // Multiple filter queries are separated by spaces. Example:
@@ -494,13 +499,14 @@ message ListEventsRequest {
   // AND and OR expressions explicitly.
   //
   // Filter is supported for the following fields: `category`, `state`,
-  // `update_time`
+  // `update_time`, `event_impacts.product.product_name`
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Event fields to include in response.
   EventView view = 6 [(google.api.field_behavior) = OPTIONAL];
 }
 
+// Response to request for listing events.
 message ListEventsResponse {
   // Output only. List of events.
   repeated Event events = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
@@ -516,7 +522,7 @@ message ListEventsResponse {
   repeated string unreachable = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
-// Message for getting an event
+// Gets information about a specific event.
 message GetEventRequest {
   // Required. Unique name of the event in this scope including project
   // and location using the form
@@ -533,6 +539,7 @@ message GetEventRequest {
   ];
 }
 
+// Requests list of events that affect an organization.
 message ListOrganizationEventsRequest {
   // Required. Parent value using the form
   // `organizations/{organization_id}/locations/{location}/organizationEvents`.
@@ -573,7 +580,7 @@ message ListOrganizationEventsRequest {
   // *   field=value for `category` and `state`
   // *   field &lt;, >, &lt;=, or >= value for `update_time`
   //
-  // Examples: `category=INCIDENT`, `update_time>=2000-01-01T11:30:00-04:00`
+  // Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`
   //
   // Multiple filter queries are space-separated. Example:
   // `category=INCIDENT state=ACTIVE`.
@@ -589,6 +596,7 @@ message ListOrganizationEventsRequest {
   OrganizationEventView view = 6 [(google.api.field_behavior) = OPTIONAL];
 }
 
+// Response to request for listing organization events.
 message ListOrganizationEventsResponse {
   // Output only. List of organization events affecting an organization.
   repeated OrganizationEvent organization_events = 1
@@ -605,6 +613,7 @@ message ListOrganizationEventsResponse {
   repeated string unreachable = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
+// Gets information about a specific event affecting an organization.
 message GetOrganizationEventRequest {
   // Required. Unique name of the event in this scope including organization and
   // event ID using the form
@@ -623,7 +632,7 @@ message GetOrganizationEventRequest {
   ];
 }
 
-// Message for requesting list of OrganizationImpacts
+// Requests list of projects under an organization affected by an event.
 message ListOrganizationImpactsRequest {
   // Required. Parent value using the form
   // `organizations/{organization_id}/locations/{location}/organizationImpacts`.
@@ -677,6 +686,8 @@ message ListOrganizationImpactsRequest {
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
+// Response to request for listing projects under an organization affected by an
+// event.
 message ListOrganizationImpactsResponse {
   // Output only. List of
   // [impacts](/service-health/docs/reference/rest/v1beta/organizations.locations.organizationImpacts#OrganizationImpact)
@@ -695,6 +706,7 @@ message ListOrganizationImpactsResponse {
   repeated string unreachable = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
+// Gets information about an event that affects a project under an organization.
 message GetOrganizationImpactRequest {
   // Required. Name of the resource using the form
   // `organizations/{organization_id}/locations/global/organizationImpacts/{organization_impact_id}`.

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(name, stateSignal) {
+function main(name) {
   // [START gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SignalZoneState_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -39,9 +39,15 @@ function main(name, stateSignal) {
    */
   // const requestId = 'abc123'
   /**
-   *  Required. The state signal to send for this zone.
+   *  Optional. The state signal to send for this zone. Either state_signal or
+   *  provisioning_state_signal must be set, but not both.
    */
   // const stateSignal = {}
+  /**
+   *  Optional. The provisioning state signal to send for this zone. Either
+   *  state_signal or provisioning_state_signal must be set, but not both.
+   */
+  // const provisioningStateSignal = {}
 
   // Imports the Gdchardwaremanagement library
   const {GDCHardwareManagementClient} = require('@google-cloud/gdchardwaremanagement').v1alpha;
@@ -53,7 +59,6 @@ function main(name, stateSignal) {
     // Construct request
     const request = {
       name,
-      stateSignal,
     };
 
     // Run request

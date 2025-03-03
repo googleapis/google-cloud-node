@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -343,7 +343,7 @@ describe('v1.MachineTypesClient', () => {
         ['machineType']
       );
       request.machineType = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&machine_type=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&machine_type=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.MachineType()
       );
@@ -383,7 +383,7 @@ describe('v1.MachineTypesClient', () => {
         ['machineType']
       );
       request.machineType = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&machine_type=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&machine_type=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.MachineType()
       );
@@ -438,7 +438,7 @@ describe('v1.MachineTypesClient', () => {
         ['machineType']
       );
       request.machineType = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&machine_type=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&machine_type=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -496,7 +496,7 @@ describe('v1.MachineTypesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         [
           'tuple_key_1',
@@ -556,7 +556,7 @@ describe('v1.MachineTypesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.aggregatedList.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -605,7 +605,7 @@ describe('v1.MachineTypesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.MachineType()),
         generateSampleMessage(new protos.google.cloud.compute.v1.MachineType()),
@@ -642,7 +642,7 @@ describe('v1.MachineTypesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.MachineType()),
         generateSampleMessage(new protos.google.cloud.compute.v1.MachineType()),
@@ -694,7 +694,7 @@ describe('v1.MachineTypesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -726,7 +726,7 @@ describe('v1.MachineTypesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.MachineType()),
         generateSampleMessage(new protos.google.cloud.compute.v1.MachineType()),
@@ -785,7 +785,7 @@ describe('v1.MachineTypesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -841,7 +841,7 @@ describe('v1.MachineTypesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.MachineType()),
         generateSampleMessage(new protos.google.cloud.compute.v1.MachineType()),
@@ -888,7 +888,7 @@ describe('v1.MachineTypesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

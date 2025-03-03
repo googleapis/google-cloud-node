@@ -1,5 +1,40 @@
 # Changelog
 
+## [4.12.1](https://github.com/googleapis/google-cloud-node/compare/data-v4.12.0...data-v4.12.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6011](https://github.com/googleapis/google-cloud-node/issues/6011)) ([ee865ff](https://github.com/googleapis/google-cloud-node/commit/ee865ff34a696fbd657e4cfb6cc4be2f6651f77a))
+
+## [4.12.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.11.0...data-v4.12.0) (2024-12-18)
+
+
+### Features
+
+* [analytics-data] add the `EmptyFilter` type to the Data API v1alpha ([#5845](https://github.com/googleapis/google-cloud-node/issues/5845)) ([1bcd241](https://github.com/googleapis/google-cloud-node/commit/1bcd2412bd72ce3c3d9b03128c44138964c8a0e6))
+
+## [4.11.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.10.0...data-v4.11.0) (2024-11-21)
+
+
+### Features
+
+* [analytics-data] add `EmptyFilter` type to the Data API v1beta ([#5831](https://github.com/googleapis/google-cloud-node/issues/5831)) ([ced8054](https://github.com/googleapis/google-cloud-node/commit/ced80544ee74321deb881ee42dc5c2db05fbd0a4))
+
+## [4.10.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.9.0...data-v4.10.0) (2024-10-30)
+
+
+### Features
+
+* [analytics-data] add `SamplingLevel` type to Data API v1alpha ([#5759](https://github.com/googleapis/google-cloud-node/issues/5759)) ([96bb1b5](https://github.com/googleapis/google-cloud-node/commit/96bb1b51a7d1481cb16d2d9ca6bc984b3258688d))
+
+## [4.9.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.8.0...data-v4.9.0) (2024-09-24)
+
+
+### Features
+
+* [analytics-data] add `GetPropertyQuotasSnapshot` method to the Data API v1alpha ([#5692](https://github.com/googleapis/google-cloud-node/issues/5692)) ([a143a79](https://github.com/googleapis/google-cloud-node/commit/a143a7926ab91dce75a2db2d831d498d3f3524d8))
+
 ## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.7.0...data-v4.8.0) (2024-08-09)
 
 

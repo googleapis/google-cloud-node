@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -126,6 +126,15 @@ function main(location) {
    *  Input for tool parameter key value match metric.
    */
   // const toolParameterKvMatchInput = {}
+  /**
+   *  Translation metrics.
+   *  Input for Comet metric.
+   */
+  // const cometInput = {}
+  /**
+   *  Input for Metricx metric.
+   */
+  // const metricxInput = {}
   /**
    *  Required. The resource name of the Location to evaluate the instances.
    *  Format: `projects/{project}/locations/{location}`

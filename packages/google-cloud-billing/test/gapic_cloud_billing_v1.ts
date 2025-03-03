@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -323,7 +323,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
@@ -354,7 +354,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
@@ -401,7 +401,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getBillingAccount = stubSimpleCall(
         undefined,
@@ -453,7 +453,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
@@ -485,7 +485,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
@@ -532,7 +532,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBillingAccount = stubSimpleCall(
         undefined,
@@ -584,7 +584,7 @@ describe('v1.CloudBillingClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
@@ -616,7 +616,7 @@ describe('v1.CloudBillingClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
@@ -663,7 +663,7 @@ describe('v1.CloudBillingClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBillingAccount = stubSimpleCall(
         undefined,
@@ -715,7 +715,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.ProjectBillingInfo()
       );
@@ -747,7 +747,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.ProjectBillingInfo()
       );
@@ -794,7 +794,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProjectBillingInfo = stubSimpleCall(
         undefined,
@@ -852,7 +852,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.ProjectBillingInfo()
       );
@@ -884,7 +884,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.ProjectBillingInfo()
       );
@@ -931,7 +931,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateProjectBillingInfo = stubSimpleCall(
         undefined,
@@ -989,7 +989,7 @@ describe('v1.CloudBillingClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1020,7 +1020,7 @@ describe('v1.CloudBillingClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1067,7 +1067,7 @@ describe('v1.CloudBillingClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -1119,7 +1119,7 @@ describe('v1.CloudBillingClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1150,7 +1150,7 @@ describe('v1.CloudBillingClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1197,7 +1197,7 @@ describe('v1.CloudBillingClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -1249,7 +1249,7 @@ describe('v1.CloudBillingClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1281,7 +1281,7 @@ describe('v1.CloudBillingClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1328,7 +1328,7 @@ describe('v1.CloudBillingClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -1385,7 +1385,7 @@ describe('v1.CloudBillingClient', () => {
         ['destinationParent']
       );
       request.destinationParent = defaultValue2;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&destination_parent=${defaultValue2}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&destination_parent=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
@@ -1422,7 +1422,7 @@ describe('v1.CloudBillingClient', () => {
         ['destinationParent']
       );
       request.destinationParent = defaultValue2;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&destination_parent=${defaultValue2}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&destination_parent=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
@@ -1474,7 +1474,7 @@ describe('v1.CloudBillingClient', () => {
         ['destinationParent']
       );
       request.destinationParent = defaultValue2;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&destination_parent=${defaultValue2}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&destination_parent=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.moveBillingAccount = stubSimpleCall(
         undefined,
@@ -1531,7 +1531,7 @@ describe('v1.CloudBillingClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.billing.v1.BillingAccount()
@@ -1571,7 +1571,7 @@ describe('v1.CloudBillingClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.billing.v1.BillingAccount()
@@ -1626,7 +1626,7 @@ describe('v1.CloudBillingClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listBillingAccounts = stubSimpleCall(
         undefined,
@@ -1657,7 +1657,7 @@ describe('v1.CloudBillingClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.billing.v1.BillingAccount()
@@ -1717,7 +1717,7 @@ describe('v1.CloudBillingClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBillingAccounts.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1766,7 +1766,7 @@ describe('v1.CloudBillingClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.billing.v1.BillingAccount()
@@ -1815,7 +1815,7 @@ describe('v1.CloudBillingClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBillingAccounts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1857,7 +1857,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.billing.v1.ProjectBillingInfo()
@@ -1897,7 +1897,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.billing.v1.ProjectBillingInfo()
@@ -1952,7 +1952,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProjectBillingInfo = stubSimpleCall(
         undefined,
@@ -1986,7 +1986,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.billing.v1.ProjectBillingInfo()
@@ -2053,7 +2053,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProjectBillingInfo.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2109,7 +2109,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.billing.v1.ProjectBillingInfo()
@@ -2163,7 +2163,7 @@ describe('v1.CloudBillingClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProjectBillingInfo.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

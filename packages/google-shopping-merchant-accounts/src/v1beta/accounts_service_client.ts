@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -207,6 +207,9 @@ export class AccountsServiceClient {
       ),
       accountTaxPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/accounttax/{tax}'
+      ),
+      autofeedSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/autofeedSettings'
       ),
       businessIdentityPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/businessIdentity'
@@ -543,10 +546,13 @@ export class AccountsServiceClient {
    * @param {google.shopping.merchant.accounts.v1beta.CreateAndConfigureAccountRequest.AcceptTermsOfService} [request.acceptTermsOfService]
    *   Optional. The Terms of Service (ToS) to be accepted immediately upon
    *   account creation.
-   * @param {number[]} [request.service]
-   *   Optional. If specified, an account service between the account to be
-   *   created and the provider account is initialized as part of the
-   *   creation.
+   * @param {number[]} request.service
+   *   Required. An account service between the account to be created and the
+   *   provider account is initialized as part of the creation. At least one such
+   *   service needs to be provided. Currently exactly one of these needs to be
+   *   `account_aggregation`, which means you can only create sub accounts, not
+   *   standalone account through this method. Additional `account_management` or
+   *   `product_management` services may be provided.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -640,12 +646,18 @@ export class AccountsServiceClient {
    * Deletes the specified account regardless of its type: standalone, MCA or
    * sub-account. Deleting an MCA leads to the deletion of all of its
    * sub-accounts. Executing this method requires admin access.
+   * The deletion succeeds only if the account does not provide services
+   * to any other account and has no processed offers. You can use the `force`
+   * parameter to override this.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the account to delete.
    *   Format: `accounts/{account}`
+   * @param {boolean} [request.force]
+   *   Optional. If set to `true`, the account is deleted even if it provides
+   *   services to other accounts or has processed offers.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -840,7 +852,8 @@ export class AccountsServiceClient {
    * constraints of the request such as page size or filters.
    * This is not just listing the sub-accounts of an MCA, but all accounts the
    * calling user has access to including other MCAs, linked accounts,
-   * standalone accounts and so on.
+   * standalone accounts and so on. If no filter is provided, then it returns
+   * accounts the user is directly added to.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1351,6 +1364,31 @@ export class AccountsServiceClient {
    */
   matchTaxFromAccountTaxName(accountTaxName: string) {
     return this.pathTemplates.accountTaxPathTemplate.match(accountTaxName).tax;
+  }
+
+  /**
+   * Return a fully-qualified autofeedSettings resource name string.
+   *
+   * @param {string} account
+   * @returns {string} Resource name string.
+   */
+  autofeedSettingsPath(account: string) {
+    return this.pathTemplates.autofeedSettingsPathTemplate.render({
+      account: account,
+    });
+  }
+
+  /**
+   * Parse the account from AutofeedSettings resource.
+   *
+   * @param {string} autofeedSettingsName
+   *   A fully-qualified path representing AutofeedSettings resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
+    return this.pathTemplates.autofeedSettingsPathTemplate.match(
+      autofeedSettingsName
+    ).account;
   }
 
   /**

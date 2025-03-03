@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -352,7 +352,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryResponse()
       );
@@ -384,7 +384,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryResponse()
       );
@@ -431,7 +431,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchGetAssetsHistory = stubSimpleCall(
         undefined,
@@ -489,7 +489,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
@@ -520,7 +520,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
@@ -567,7 +567,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFeed = stubSimpleCall(
         undefined,
@@ -619,7 +619,7 @@ describe('v1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
@@ -650,7 +650,7 @@ describe('v1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
@@ -697,7 +697,7 @@ describe('v1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFeed = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getFeed(request), expectedError);
@@ -746,7 +746,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListFeedsResponse()
       );
@@ -777,7 +777,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListFeedsResponse()
       );
@@ -824,7 +824,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFeeds = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listFeeds(request), expectedError);
@@ -874,7 +874,7 @@ describe('v1.AssetServiceClient', () => {
         ['feed', 'name']
       );
       request.feed.name = defaultValue1;
-      const expectedHeaderRequestParams = `feed.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feed.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
@@ -906,7 +906,7 @@ describe('v1.AssetServiceClient', () => {
         ['feed', 'name']
       );
       request.feed.name = defaultValue1;
-      const expectedHeaderRequestParams = `feed.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feed.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
@@ -954,7 +954,7 @@ describe('v1.AssetServiceClient', () => {
         ['feed', 'name']
       );
       request.feed.name = defaultValue1;
-      const expectedHeaderRequestParams = `feed.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feed.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFeed = stubSimpleCall(
         undefined,
@@ -1007,7 +1007,7 @@ describe('v1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1038,7 +1038,7 @@ describe('v1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1085,7 +1085,7 @@ describe('v1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFeed = stubSimpleCall(
         undefined,
@@ -1138,7 +1138,7 @@ describe('v1.AssetServiceClient', () => {
         ['analysisQuery', 'scope']
       );
       request.analysisQuery.scope = defaultValue1;
-      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyResponse()
       );
@@ -1170,7 +1170,7 @@ describe('v1.AssetServiceClient', () => {
         ['analysisQuery', 'scope']
       );
       request.analysisQuery.scope = defaultValue1;
-      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyResponse()
       );
@@ -1218,7 +1218,7 @@ describe('v1.AssetServiceClient', () => {
         ['analysisQuery', 'scope']
       );
       request.analysisQuery.scope = defaultValue1;
-      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeIamPolicy = stubSimpleCall(
         undefined,
@@ -1271,7 +1271,7 @@ describe('v1.AssetServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeMoveResponse()
       );
@@ -1302,7 +1302,7 @@ describe('v1.AssetServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeMoveResponse()
       );
@@ -1349,7 +1349,7 @@ describe('v1.AssetServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeMove = stubSimpleCall(
         undefined,
@@ -1401,7 +1401,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.QueryAssetsResponse()
       );
@@ -1432,7 +1432,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.QueryAssetsResponse()
       );
@@ -1479,7 +1479,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryAssets = stubSimpleCall(
         undefined,
@@ -1531,7 +1531,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.SavedQuery()
       );
@@ -1562,7 +1562,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.SavedQuery()
       );
@@ -1609,7 +1609,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSavedQuery = stubSimpleCall(
         undefined,
@@ -1661,7 +1661,7 @@ describe('v1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.SavedQuery()
       );
@@ -1692,7 +1692,7 @@ describe('v1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.SavedQuery()
       );
@@ -1739,7 +1739,7 @@ describe('v1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSavedQuery = stubSimpleCall(
         undefined,
@@ -1792,7 +1792,7 @@ describe('v1.AssetServiceClient', () => {
         ['savedQuery', 'name']
       );
       request.savedQuery.name = defaultValue1;
-      const expectedHeaderRequestParams = `saved_query.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `saved_query.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.SavedQuery()
       );
@@ -1824,7 +1824,7 @@ describe('v1.AssetServiceClient', () => {
         ['savedQuery', 'name']
       );
       request.savedQuery.name = defaultValue1;
-      const expectedHeaderRequestParams = `saved_query.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `saved_query.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.SavedQuery()
       );
@@ -1872,7 +1872,7 @@ describe('v1.AssetServiceClient', () => {
         ['savedQuery', 'name']
       );
       request.savedQuery.name = defaultValue1;
-      const expectedHeaderRequestParams = `saved_query.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `saved_query.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSavedQuery = stubSimpleCall(
         undefined,
@@ -1925,7 +1925,7 @@ describe('v1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1956,7 +1956,7 @@ describe('v1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2003,7 +2003,7 @@ describe('v1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSavedQuery = stubSimpleCall(
         undefined,
@@ -2055,7 +2055,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse()
       );
@@ -2087,7 +2087,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse()
       );
@@ -2134,7 +2134,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchGetEffectiveIamPolicies = stubSimpleCall(
         undefined,
@@ -2192,7 +2192,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2224,7 +2224,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2278,7 +2278,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportAssets = stubLongRunningCall(
         undefined,
@@ -2309,7 +2309,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportAssets = stubLongRunningCall(
         undefined,
@@ -2383,7 +2383,7 @@ describe('v1.AssetServiceClient', () => {
         ['analysisQuery', 'scope']
       );
       request.analysisQuery.scope = defaultValue1;
-      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2417,7 +2417,7 @@ describe('v1.AssetServiceClient', () => {
         ['analysisQuery', 'scope']
       );
       request.analysisQuery.scope = defaultValue1;
-      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2472,7 +2472,7 @@ describe('v1.AssetServiceClient', () => {
         ['analysisQuery', 'scope']
       );
       request.analysisQuery.scope = defaultValue1;
-      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeIamPolicyLongrunning = stubLongRunningCall(
         undefined,
@@ -2507,7 +2507,7 @@ describe('v1.AssetServiceClient', () => {
         ['analysisQuery', 'scope']
       );
       request.analysisQuery.scope = defaultValue1;
-      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeIamPolicyLongrunning = stubLongRunningCall(
         undefined,
@@ -2584,7 +2584,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
@@ -2617,7 +2617,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
@@ -2666,7 +2666,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAssets = stubSimpleCall(
         undefined,
@@ -2697,7 +2697,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
@@ -2748,7 +2748,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssets.createStream = stubPageStreamingCall(
         undefined,
@@ -2796,7 +2796,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
@@ -2839,7 +2839,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2883,7 +2883,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.ResourceSearchResult()
@@ -2923,7 +2923,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.ResourceSearchResult()
@@ -2978,7 +2978,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchAllResources = stubSimpleCall(
         undefined,
@@ -3009,7 +3009,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.ResourceSearchResult()
@@ -3070,7 +3070,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAllResources.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3120,7 +3120,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.ResourceSearchResult()
@@ -3170,7 +3170,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAllResources.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3213,7 +3213,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.IamPolicySearchResult()
@@ -3253,7 +3253,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.IamPolicySearchResult()
@@ -3310,7 +3310,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchAllIamPolicies = stubSimpleCall(
         undefined,
@@ -3341,7 +3341,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.IamPolicySearchResult()
@@ -3402,7 +3402,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAllIamPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3452,7 +3452,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.IamPolicySearchResult()
@@ -3502,7 +3502,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAllIamPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3545,7 +3545,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
@@ -3578,7 +3578,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
@@ -3627,7 +3627,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSavedQueries = stubSimpleCall(
         undefined,
@@ -3658,7 +3658,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
@@ -3712,7 +3712,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSavedQueries.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3761,7 +3761,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
@@ -3804,7 +3804,7 @@ describe('v1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSavedQueries.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3846,7 +3846,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
@@ -3886,7 +3886,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
@@ -3943,7 +3943,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeOrgPolicies = stubSimpleCall(
         undefined,
@@ -3974,7 +3974,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
@@ -4037,7 +4037,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.analyzeOrgPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4089,7 +4089,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
@@ -4139,7 +4139,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.analyzeOrgPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4182,7 +4182,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
@@ -4223,7 +4223,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
@@ -4280,7 +4280,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeOrgPolicyGovernedContainers = stubSimpleCall(
         undefined,
@@ -4314,7 +4314,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
@@ -4386,7 +4386,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.analyzeOrgPolicyGovernedContainers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4447,7 +4447,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
@@ -4501,7 +4501,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.analyzeOrgPolicyGovernedContainers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4548,7 +4548,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
@@ -4588,7 +4588,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
@@ -4645,7 +4645,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeOrgPolicyGovernedAssets = stubSimpleCall(
         undefined,
@@ -4679,7 +4679,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
@@ -4751,7 +4751,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.analyzeOrgPolicyGovernedAssets.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4812,7 +4812,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
@@ -4866,7 +4866,7 @@ describe('v1.AssetServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.analyzeOrgPolicyGovernedAssets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

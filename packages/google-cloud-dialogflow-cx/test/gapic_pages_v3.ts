@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -318,7 +318,7 @@ describe('v3.PagesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Page()
       );
@@ -349,7 +349,7 @@ describe('v3.PagesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Page()
       );
@@ -396,7 +396,7 @@ describe('v3.PagesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPage = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getPage(request), expectedError);
@@ -445,7 +445,7 @@ describe('v3.PagesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Page()
       );
@@ -476,7 +476,7 @@ describe('v3.PagesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Page()
       );
@@ -523,7 +523,7 @@ describe('v3.PagesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPage = stubSimpleCall(
         undefined,
@@ -576,7 +576,7 @@ describe('v3.PagesClient', () => {
         ['page', 'name']
       );
       request.page.name = defaultValue1;
-      const expectedHeaderRequestParams = `page.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `page.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Page()
       );
@@ -608,7 +608,7 @@ describe('v3.PagesClient', () => {
         ['page', 'name']
       );
       request.page.name = defaultValue1;
-      const expectedHeaderRequestParams = `page.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `page.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Page()
       );
@@ -656,7 +656,7 @@ describe('v3.PagesClient', () => {
         ['page', 'name']
       );
       request.page.name = defaultValue1;
-      const expectedHeaderRequestParams = `page.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `page.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePage = stubSimpleCall(
         undefined,
@@ -709,7 +709,7 @@ describe('v3.PagesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -740,7 +740,7 @@ describe('v3.PagesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -787,7 +787,7 @@ describe('v3.PagesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePage = stubSimpleCall(
         undefined,
@@ -839,7 +839,7 @@ describe('v3.PagesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Page()),
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Page()),
@@ -872,7 +872,7 @@ describe('v3.PagesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Page()),
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Page()),
@@ -921,7 +921,7 @@ describe('v3.PagesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPages = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listPages(request), expectedError);
@@ -949,7 +949,7 @@ describe('v3.PagesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Page()),
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Page()),
@@ -1003,7 +1003,7 @@ describe('v3.PagesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPages.createStream = stubPageStreamingCall(
         undefined,
@@ -1054,7 +1054,7 @@ describe('v3.PagesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Page()),
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Page()),
@@ -1096,7 +1096,7 @@ describe('v3.PagesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPages.asyncIterate = stubAsyncIterationCall(
         undefined,

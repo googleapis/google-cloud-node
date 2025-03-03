@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -602,12 +602,12 @@ export class RegionCommitmentsClient {
       );
   }
   /**
-   * Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: auto_renew.
+   * Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be updated: auto_renew and plan.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.commitment
-   *   Name of the commitment for which auto renew is being updated.
+   *   Name of the commitment that you want to update.
    * @param {google.cloud.compute.v1.Commitment} request.commitmentResource
    *   The body resource for this request
    * @param {string} request.paths
@@ -889,7 +889,7 @@ export class RegionCommitmentsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `list`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.filter

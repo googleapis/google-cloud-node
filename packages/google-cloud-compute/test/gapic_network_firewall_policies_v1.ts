@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -355,7 +355,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -392,7 +392,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -445,7 +445,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addAssociation = stubSimpleCall(
         undefined,
@@ -488,6 +488,167 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
     });
   });
 
+  describe('addPacketMirroringRule', () => {
+    it('invokes addPacketMirroringRule without error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.addPacketMirroringRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.addPacketMirroringRule(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addPacketMirroringRule without error using callback', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.addPacketMirroringRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.addPacketMirroringRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addPacketMirroringRule with error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addPacketMirroringRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.addPacketMirroringRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.addPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addPacketMirroringRule with closed client', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.addPacketMirroringRule(request),
+        expectedError
+      );
+    });
+  });
+
   describe('addRule', () => {
     it('invokes addRule without error', async () => {
       const client =
@@ -509,7 +670,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -546,7 +707,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -599,7 +760,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addRule = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.addRule(request), expectedError);
@@ -660,7 +821,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -697,7 +858,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -750,7 +911,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cloneRules = stubSimpleCall(
         undefined,
@@ -814,7 +975,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -851,7 +1012,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -904,7 +1065,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
@@ -965,7 +1126,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.FirewallPolicy()
       );
@@ -1001,7 +1162,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.FirewallPolicy()
       );
@@ -1052,7 +1213,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -1112,7 +1273,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.FirewallPolicyAssociation()
       );
@@ -1149,7 +1310,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.FirewallPolicyAssociation()
       );
@@ -1202,7 +1363,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAssociation = stubSimpleCall(
         undefined,
@@ -1266,7 +1427,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -1303,7 +1464,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -1356,7 +1517,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -1399,6 +1560,167 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
     });
   });
 
+  describe('getPacketMirroringRule', () => {
+    it('invokes getPacketMirroringRule without error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.FirewallPolicyRule()
+      );
+      client.innerApiCalls.getPacketMirroringRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getPacketMirroringRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPacketMirroringRule without error using callback', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.FirewallPolicyRule()
+      );
+      client.innerApiCalls.getPacketMirroringRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getPacketMirroringRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IFirewallPolicyRule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPacketMirroringRule with error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getPacketMirroringRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getPacketMirroringRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPacketMirroringRule with closed client', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getPacketMirroringRule(request),
+        expectedError
+      );
+    });
+  });
+
   describe('getRule', () => {
     it('invokes getRule without error', async () => {
       const client =
@@ -1420,7 +1742,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.FirewallPolicyRule()
       );
@@ -1457,7 +1779,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.FirewallPolicyRule()
       );
@@ -1510,7 +1832,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRule = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getRule(request), expectedError);
@@ -1566,7 +1888,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1598,7 +1920,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1646,7 +1968,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -1702,7 +2024,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1738,7 +2060,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1789,7 +2111,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.patch(request), expectedError);
@@ -1828,6 +2150,167 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
     });
   });
 
+  describe('patchPacketMirroringRule', () => {
+    it('invokes patchPacketMirroringRule without error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patchPacketMirroringRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.patchPacketMirroringRule(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.patchPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchPacketMirroringRule without error using callback', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patchPacketMirroringRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.patchPacketMirroringRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.patchPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchPacketMirroringRule with error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.patchPacketMirroringRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.patchPacketMirroringRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.patchPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchPacketMirroringRule with closed client', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.patchPacketMirroringRule(request),
+        expectedError
+      );
+    });
+  });
+
   describe('patchRule', () => {
     it('invokes patchRule without error', async () => {
       const client =
@@ -1849,7 +2332,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1886,7 +2369,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1939,7 +2422,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patchRule = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.patchRule(request), expectedError);
@@ -2000,7 +2483,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2037,7 +2520,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2090,7 +2573,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeAssociation = stubSimpleCall(
         undefined,
@@ -2133,6 +2616,167 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
     });
   });
 
+  describe('removePacketMirroringRule', () => {
+    it('invokes removePacketMirroringRule without error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.removePacketMirroringRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.removePacketMirroringRule(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removePacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removePacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removePacketMirroringRule without error using callback', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.removePacketMirroringRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.removePacketMirroringRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removePacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removePacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removePacketMirroringRule with error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removePacketMirroringRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.removePacketMirroringRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.removePacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removePacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removePacketMirroringRule with closed client', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.removePacketMirroringRule(request),
+        expectedError
+      );
+    });
+  });
+
   describe('removeRule', () => {
     it('invokes removeRule without error', async () => {
       const client =
@@ -2154,7 +2798,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2191,7 +2835,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2244,7 +2888,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&firewall_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeRule = stubSimpleCall(
         undefined,
@@ -2308,7 +2952,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -2345,7 +2989,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -2398,7 +3042,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -2462,7 +3106,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -2500,7 +3144,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -2553,7 +3197,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -2596,6 +3240,112 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
     });
   });
 
+  describe('aggregatedList', () => {
+    it('uses async iteration with aggregatedList without error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AggregatedListNetworkFirewallPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AggregatedListNetworkFirewallPoliciesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        [
+          'tuple_key_1',
+          generateSampleMessage(
+            new protos.google.cloud.compute.v1.FirewallPoliciesScopedList()
+          ),
+        ],
+        [
+          'tuple_key_2',
+          generateSampleMessage(
+            new protos.google.cloud.compute.v1.FirewallPoliciesScopedList()
+          ),
+        ],
+        [
+          'tuple_key_3',
+          generateSampleMessage(
+            new protos.google.cloud.compute.v1.FirewallPoliciesScopedList()
+          ),
+        ],
+      ];
+      client.descriptors.page.aggregatedList.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: Array<
+        [string, protos.google.cloud.compute.v1.IFirewallPoliciesScopedList]
+      > = [];
+      const iterable = client.aggregatedListAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with aggregatedList with error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AggregatedListNetworkFirewallPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AggregatedListNetworkFirewallPoliciesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.aggregatedList.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.aggregatedListAsync(request);
+      await assert.rejects(async () => {
+        const responses: Array<
+          [string, protos.google.cloud.compute.v1.IFirewallPoliciesScopedList]
+        > = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
   describe('list', () => {
     it('invokes list without error', async () => {
       const client =
@@ -2612,7 +3362,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.FirewallPolicy()
@@ -2651,7 +3401,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.FirewallPolicy()
@@ -2705,7 +3455,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -2733,7 +3483,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.FirewallPolicy()
@@ -2794,7 +3544,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -2846,7 +3596,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.FirewallPolicy()
@@ -2895,7 +3645,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

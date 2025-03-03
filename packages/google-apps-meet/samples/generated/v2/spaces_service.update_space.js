@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,9 +34,11 @@ function main(space) {
   // const space = {}
   /**
    *  Optional. Field mask used to specify the fields to be updated in the space.
-   *  If update_mask isn't provided, it defaults to '*' and updates all
-   *  fields provided in the request, including deleting fields not set in the
+   *  If update_mask isn't provided(not set, set with empty paths, or only has ""
+   *  as paths), it defaults to update all fields provided with values in the
    *  request.
+   *  Using "*" as update_mask will update all fields, including deleting fields
+   *  not set in the request.
    */
   // const updateMask = {}
 

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -354,7 +354,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.Policy()
       );
@@ -388,7 +388,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.Policy()
       );
@@ -438,7 +438,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPolicy = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getPolicy(request), expectedError);
@@ -494,7 +494,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['policy', 'name']
       );
       request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.Policy()
       );
@@ -529,7 +529,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['policy', 'name']
       );
       request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.Policy()
       );
@@ -580,7 +580,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['policy', 'name']
       );
       request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePolicy = stubSimpleCall(
         undefined,
@@ -639,7 +639,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.Attestor()
       );
@@ -673,7 +673,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.Attestor()
       );
@@ -723,7 +723,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAttestor = stubSimpleCall(
         undefined,
@@ -781,7 +781,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.Attestor()
       );
@@ -815,7 +815,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.Attestor()
       );
@@ -865,7 +865,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAttestor = stubSimpleCall(
         undefined,
@@ -924,7 +924,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['attestor', 'name']
       );
       request.attestor.name = defaultValue1;
-      const expectedHeaderRequestParams = `attestor.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attestor.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.Attestor()
       );
@@ -959,7 +959,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['attestor', 'name']
       );
       request.attestor.name = defaultValue1;
-      const expectedHeaderRequestParams = `attestor.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attestor.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.Attestor()
       );
@@ -1010,7 +1010,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['attestor', 'name']
       );
       request.attestor.name = defaultValue1;
-      const expectedHeaderRequestParams = `attestor.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attestor.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAttestor = stubSimpleCall(
         undefined,
@@ -1069,7 +1069,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1103,7 +1103,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1153,7 +1153,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAttestor = stubSimpleCall(
         undefined,
@@ -1211,7 +1211,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.binaryauthorization.v1.Attestor()
@@ -1253,7 +1253,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.binaryauthorization.v1.Attestor()
@@ -1313,7 +1313,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAttestors = stubSimpleCall(
         undefined,
@@ -1347,7 +1347,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.binaryauthorization.v1.Attestor()
@@ -1411,7 +1411,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAttestors.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1464,7 +1464,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.binaryauthorization.v1.Attestor()
@@ -1517,7 +1517,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAttestors.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

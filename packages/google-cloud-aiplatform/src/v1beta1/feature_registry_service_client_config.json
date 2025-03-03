@@ -44,6 +44,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "BatchCreateFeatures": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetFeature": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -57,6 +61,38 @@
           "retry_params_name": "default"
         },
         "DeleteFeature": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateFeatureMonitor": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetFeatureMonitor": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListFeatureMonitors": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateFeatureMonitor": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteFeatureMonitor": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateFeatureMonitorJob": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetFeatureMonitorJob": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListFeatureMonitorJobs": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

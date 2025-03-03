@@ -1,5 +1,26 @@
 # Changelog
 
+## [3.6.1](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.6.0...storage-transfer-v3.6.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6019](https://github.com/googleapis/google-cloud-node/issues/6019)) ([734397c](https://github.com/googleapis/google-cloud-node/commit/734397c6b98d0aafe8832544da3f483b1eade1b2))
+
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.5.0...storage-transfer-v3.6.0) (2025-01-23)
+
+
+### Features
+
+* [Many APIs] Reasoning Engine v1 GAPIC release ([#5965](https://github.com/googleapis/google-cloud-node/issues/5965)) ([050db4d](https://github.com/googleapis/google-cloud-node/commit/050db4d28f9a203ce2d41db21eb74b3ecb6b4a16))
+
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.4.0...storage-transfer-v3.5.0) (2024-12-18)
+
+
+### Features
+
+* [storagetransfer] support cross-bucket replication ([#5891](https://github.com/googleapis/google-cloud-node/issues/5891)) ([ad37361](https://github.com/googleapis/google-cloud-node/commit/ad373612766920e82241e0ef609abc27be4ab9bb))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.3.0...storage-transfer-v3.4.0) (2024-08-19)
 
 

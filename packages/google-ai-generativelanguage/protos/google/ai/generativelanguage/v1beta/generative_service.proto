@@ -74,6 +74,10 @@ service GenerativeService {
     option (google.api.http) = {
       post: "/v1beta/{model=models/*}:streamGenerateContent"
       body: "*"
+      additional_bindings {
+        post: "/v1beta/{model=tunedModels/*}:streamGenerateContent"
+        body: "*"
+      }
     };
     option (google.api.method_signature) = "model,contents";
   }
@@ -144,7 +148,7 @@ enum TaskType {
 message GenerateContentRequest {
   // Required. The name of the `Model` to use for generating the completion.
   //
-  // Format: `name=models/{model}`.
+  // Format: `models/{model}`.
   string model = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -196,8 +200,8 @@ message GenerateContentRequest {
   // `SafetyCategory` provided in the list, the API will use the default safety
   // setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
   // HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
-  // HARM_CATEGORY_HARASSMENT are supported. Refer to the
-  // [guide](https://ai.google.dev/gemini-api/docs/safety-settings)
+  // HARM_CATEGORY_HARASSMENT, HARM_CATEGORY_CIVIC_INTEGRITY are supported.
+  // Refer to the [guide](https://ai.google.dev/gemini-api/docs/safety-settings)
   // for detailed information on available safety settings. Also refer to the
   // [Safety guidance](https://ai.google.dev/gemini-api/docs/safety-guidance) to
   // learn how to incorporate safety considerations in your AI applications.
@@ -219,9 +223,45 @@ message GenerateContentRequest {
   ];
 }
 
+// The configuration for the prebuilt speaker to use.
+message PrebuiltVoiceConfig {
+  // The name of the preset voice to use.
+  optional string voice_name = 1;
+}
+
+// The configuration for the voice to use.
+message VoiceConfig {
+  // The configuration for the speaker to use.
+  oneof voice_config {
+    // The configuration for the prebuilt voice to use.
+    PrebuiltVoiceConfig prebuilt_voice_config = 1;
+  }
+}
+
+// The speech generation config.
+message SpeechConfig {
+  // The configuration for the speaker to use.
+  VoiceConfig voice_config = 1;
+}
+
 // Configuration options for model generation and outputs. Not all parameters
 // are configurable for every model.
 message GenerationConfig {
+  // Supported modalities of the response.
+  enum Modality {
+    // Default value.
+    MODALITY_UNSPECIFIED = 0;
+
+    // Indicates the model should return text.
+    TEXT = 1;
+
+    // Indicates the model should return images.
+    IMAGE = 2;
+
+    // Indicates the model should return audio.
+    AUDIO = 3;
+  }
+
   // Optional. Number of generated responses to return.
   //
   // Currently, this value can only be set to 1. If unset, this will default
@@ -280,6 +320,7 @@ message GenerationConfig {
   // Supported MIME types are:
   // `text/plain`: (default) Text output.
   // `application/json`: JSON response in the response candidates.
+  // `text/x.enum`: ENUM as a string response in the response candidates.
   // Refer to the
   // [docs](https://ai.google.dev/gemini-api/docs/prompting_with_media#plain_text_formats)
   // for a list of all supported text MIME types.
@@ -295,6 +336,70 @@ message GenerationConfig {
   // Refer to the [JSON text generation
   // guide](https://ai.google.dev/gemini-api/docs/json-mode) for more details.
   Schema response_schema = 14 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Presence penalty applied to the next token's logprobs if the
+  // token has already been seen in the response.
+  //
+  // This penalty is binary on/off and not dependant on the number of times the
+  // token is used (after the first). Use
+  // [frequency_penalty][google.ai.generativelanguage.v1beta.GenerationConfig.frequency_penalty]
+  // for a penalty that increases with each use.
+  //
+  // A positive penalty will discourage the use of tokens that have already
+  // been used in the response, increasing the vocabulary.
+  //
+  // A negative penalty will encourage the use of tokens that have already been
+  // used in the response, decreasing the vocabulary.
+  optional float presence_penalty = 15 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Frequency penalty applied to the next token's logprobs,
+  // multiplied by the number of times each token has been seen in the respponse
+  // so far.
+  //
+  // A positive penalty will discourage the use of tokens that have already
+  // been used, proportional to the number of times the token has been used:
+  // The more a token is used, the more dificult it is for the model to use
+  // that token again increasing the vocabulary of responses.
+  //
+  // Caution: A _negative_ penalty will encourage the model to reuse tokens
+  // proportional to the number of times the token has been used. Small
+  // negative values will reduce the vocabulary of a response. Larger negative
+  // values will cause the model to start repeating a common token  until it
+  // hits the
+  // [max_output_tokens][google.ai.generativelanguage.v1beta.GenerationConfig.max_output_tokens]
+  // limit.
+  optional float frequency_penalty = 16
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If true, export the logprobs results in response.
+  optional bool response_logprobs = 17 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Only valid if
+  // [response_logprobs=True][google.ai.generativelanguage.v1beta.GenerationConfig.response_logprobs].
+  // This sets the number of top logprobs to return at each decoding step in the
+  // [Candidate.logprobs_result][google.ai.generativelanguage.v1beta.Candidate.logprobs_result].
+  optional int32 logprobs = 18 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Enables enhanced civic answers. It may not be available for all
+  // models.
+  optional bool enable_enhanced_civic_answers = 19
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The requested modalities of the response. Represents the set of
+  // modalities that the model can return, and should be expected in the
+  // response. This is an exact match to the modalities of the response.
+  //
+  // A model may have multiple combinations of supported modalities. If the
+  // requested modalities do not match any of the supported combinations, an
+  // error will be returned.
+  //
+  // An empty list is equivalent to requesting only text.
+  repeated Modality response_modalities = 20
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The speech generation config.
+  optional SpeechConfig speech_config = 21
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Configuration for retrieving grounding content from a `Corpus` or
@@ -353,6 +458,9 @@ message GenerateContentResponse {
 
       // Prompt was blocked due to prohibited content.
       PROHIBITED_CONTENT = 4;
+
+      // Candidates blocked due to unsafe image generation content.
+      IMAGE_SAFETY = 5;
     }
 
     // Optional. If set, the prompt was blocked and no candidates are returned.
@@ -390,6 +498,9 @@ message GenerateContentResponse {
 
   // Output only. Metadata on the generation requests' token usage.
   UsageMetadata usage_metadata = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The model version used to generate the response.
+  string model_version = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // A response candidate generated from the model.
@@ -430,6 +541,10 @@ message Candidate {
 
     // The function call generated by the model is invalid.
     MALFORMED_FUNCTION_CALL = 10;
+
+    // Token generation stopped because generated images contain safety
+    // violations.
+    IMAGE_SAFETY = 11;
   }
 
   // Output only. Index of the candidate in the list of response candidates.
@@ -468,6 +583,47 @@ message Candidate {
   // This field is populated for `GenerateAnswer` calls.
   repeated GroundingAttribution grounding_attributions = 8
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Grounding metadata for the candidate.
+  //
+  // This field is populated for `GenerateContent` calls.
+  GroundingMetadata grounding_metadata = 9
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Average log probability score of the candidate.
+  double avg_logprobs = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Log-likelihood scores for the response tokens and top tokens
+  LogprobsResult logprobs_result = 11
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Logprobs Result
+message LogprobsResult {
+  // Candidate for the logprobs token and score.
+  message Candidate {
+    // The candidate’s token string value.
+    optional string token = 1;
+
+    // The candidate’s token id value.
+    optional int32 token_id = 3;
+
+    // The candidate's log probability.
+    optional float log_probability = 2;
+  }
+
+  // Candidates with top log probabilities at each decoding step.
+  message TopCandidates {
+    // Sorted by log probability in descending order.
+    repeated Candidate candidates = 1;
+  }
+
+  // Length = total number of decoding steps.
+  repeated TopCandidates top_candidates = 1;
+
+  // Length = total number of decoding steps.
+  // The chosen candidates may or may not be in top_candidates.
+  repeated Candidate chosen_candidates = 2;
 }
 
 // Identifier for the source contributing to this attribution.
@@ -512,6 +668,99 @@ message GroundingAttribution {
 
   // Grounding source content that makes up this attribution.
   Content content = 2;
+}
+
+// Metadata related to retrieval in the grounding flow.
+message RetrievalMetadata {
+  // Optional. Score indicating how likely information from google search could
+  // help answer the prompt. The score is in the range [0, 1], where 0 is the
+  // least likely and 1 is the most likely. This score is only populated when
+  // google search grounding and dynamic retrieval is enabled. It will be
+  // compared to the threshold to determine whether to trigger google search.
+  float google_search_dynamic_retrieval_score = 2
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Metadata returned to client when grounding is enabled.
+message GroundingMetadata {
+  // Optional. Google search entry for the following-up web searches.
+  optional SearchEntryPoint search_entry_point = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // List of supporting references retrieved from specified grounding source.
+  repeated GroundingChunk grounding_chunks = 2;
+
+  // List of grounding support.
+  repeated GroundingSupport grounding_supports = 3;
+
+  // Metadata related to retrieval in the grounding flow.
+  optional RetrievalMetadata retrieval_metadata = 4;
+
+  // Web search queries for the following-up web search.
+  repeated string web_search_queries = 5;
+}
+
+// Google search entry point.
+message SearchEntryPoint {
+  // Optional. Web content snippet that can be embedded in a web page or an app
+  // webview.
+  string rendered_content = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Base64 encoded JSON representing array of <search term, search
+  // url> tuple.
+  bytes sdk_blob = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Grounding chunk.
+message GroundingChunk {
+  // Chunk from the web.
+  message Web {
+    // URI reference of the chunk.
+    optional string uri = 1;
+
+    // Title of the chunk.
+    optional string title = 2;
+  }
+
+  // Chunk type.
+  oneof chunk_type {
+    // Grounding chunk from the web.
+    Web web = 1;
+  }
+}
+
+// Segment of the content.
+message Segment {
+  // Output only. The index of a Part object within its parent Content object.
+  int32 part_index = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Start index in the given Part, measured in bytes. Offset from
+  // the start of the Part, inclusive, starting at zero.
+  int32 start_index = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. End index in the given Part, measured in bytes. Offset from
+  // the start of the Part, exclusive, starting at zero.
+  int32 end_index = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The text corresponding to the segment from the response.
+  string text = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Grounding support.
+message GroundingSupport {
+  // Segment of the content this support belongs to.
+  optional Segment segment = 1;
+
+  // A list of indices (into 'grounding_chunk') specifying the
+  // citations associated with the claim. For instance [1,3,4] means
+  // that grounding_chunk[1], grounding_chunk[3],
+  // grounding_chunk[4] are the retrieved content attributed to the claim.
+  repeated int32 grounding_chunk_indices = 2;
+
+  // Confidence score of the support references. Ranges from 0 to 1. 1 is the
+  // most confident. This list must have the same size as the
+  // grounding_chunk_indices.
+  repeated float confidence_scores = 3;
 }
 
 // Request to generate a grounded answer from the `Model`.
@@ -782,7 +1031,6 @@ message CountTokensResponse {
   // non-negative.
   int32 total_tokens = 1;
 
-  // Number of tokens in the cached part of the prompt, i.e. in the cached
-  // content.
+  // Number of tokens in the cached part of the prompt (the cached content).
   int32 cached_content_token_count = 5;
 }

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ function main(parent) {
   // const parent = 'abc123'
   /**
    *  The maximum number of conversations to return in the response. A valid page
-   *  size ranges from 0 to 1,000 inclusive. If the page size is zero or
+   *  size ranges from 0 to 100,000 inclusive. If the page size is zero or
    *  unspecified, a default page size of 100 will be chosen. Note that a call
    *  might return fewer results than the requested page size.
    */
@@ -50,6 +50,22 @@ function main(parent) {
    *  conversations with specific properties.
    */
   // const filter = 'abc123'
+  /**
+   *  Optional. The attribute by which to order conversations in the response.
+   *  If empty, conversations will be ordered by descending creation time.
+   *  Supported values are one of the following:
+   *  * create_time
+   *  * customer_satisfaction_rating
+   *  * duration
+   *  * latest_analysis
+   *  * start_time
+   *  * turn_count
+   *  The default sort order is ascending. To specify order, append `asc` or
+   *  `desc` (`create_time desc`).
+   *  For more details, see Google AIPs
+   *  Ordering (https://google.aip.dev/132#ordering).
+   */
+  // const orderBy = 'abc123'
   /**
    *  The level of details of the conversation. Default is `BASIC`.
    */

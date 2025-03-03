@@ -88,11 +88,27 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ResumeInstances": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "SetInstanceTemplate": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetTargetPools": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "StartInstances": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "StopInstances": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "SuspendInstances": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

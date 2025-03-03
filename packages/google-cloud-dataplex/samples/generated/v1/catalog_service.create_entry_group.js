@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,12 +39,12 @@ function main(parent, entryGroupId, entryGroup) {
    */
   // const entryGroupId = 'abc123'
   /**
-   *  Required. EntryGroup Resource
+   *  Required. EntryGroup Resource.
    */
   // const entryGroup = {}
   /**
-   *  Optional. Only validate the request, but do not perform mutations.
-   *  The default is false.
+   *  Optional. The service validates the request without performing any
+   *  mutations. The default is false.
    */
   // const validateOnly = true
 

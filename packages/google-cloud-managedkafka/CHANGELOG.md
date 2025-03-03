@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.3.0...managedkafka-v0.3.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6013](https://github.com/googleapis/google-cloud-node/issues/6013)) ([cd3a2d4](https://github.com/googleapis/google-cloud-node/commit/cd3a2d44fc7a9b3798346162ba19df1c748fba58))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.2.0...managedkafka-v0.3.0) (2025-01-11)
+
+
+### Features
+
+* [managedkafka] adds new resource_definition option ([#5928](https://github.com/googleapis/google-cloud-node/issues/5928)) ([45fd1c9](https://github.com/googleapis/google-cloud-node/commit/45fd1c9c4f638aed431d7da19e9ebc8d91528333))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.1.0...managedkafka-v0.2.0) (2024-12-18)
+
+
+### Features
+
+* [managedkafka] A new field `satisfies_pzi` is added to message `.google.cloud.managedkafka.v1.Cluster` ([#5857](https://github.com/googleapis/google-cloud-node/issues/5857)) ([59c05a0](https://github.com/googleapis/google-cloud-node/commit/59c05a038b42b0b01ec15131c3f5dee585757b83))
+
 ## 0.1.0 (2024-06-12)
 
 

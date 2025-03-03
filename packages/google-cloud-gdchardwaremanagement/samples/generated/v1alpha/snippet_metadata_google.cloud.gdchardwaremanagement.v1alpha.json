@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-gdchardwaremanagement",
-        "version": "0.1.0",
+        "version": "0.4.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -266,7 +266,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -282,6 +282,10 @@
                     {
                         "name": "request_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "type",
+                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -310,7 +314,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -488,6 +492,50 @@
                 "method": {
                     "shortName": "UpdateSite",
                     "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateSite",
+                    "service": {
+                        "shortName": "GDCHardwareManagement",
+                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_async",
+            "title": "GDCHardwareManagement deleteSite Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a site.",
+            "canonical": true,
+            "file": "g_d_c_hardware_management.delete_site.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteSite",
+                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteSite",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "GDCHardwareManagementClient",
+                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+                },
+                "method": {
+                    "shortName": "DeleteSite",
+                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteSite",
                     "service": {
                         "shortName": "GDCHardwareManagement",
                         "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
@@ -746,7 +794,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -1120,6 +1168,50 @@
             }
         },
         {
+            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RecordActionOnComment_async",
+            "title": "GDCHardwareManagement recordActionOnComment Sample",
+            "origin": "API_DEFINITION",
+            "description": " Record Action on a Comment. If the Action specified in the request is READ, the viewed time in the comment is set to the time the request was received. If the comment is already marked as read, subsequent calls will be ignored. If the Action is UNREAD, the viewed time is cleared from the comment.",
+            "canonical": true,
+            "file": "g_d_c_hardware_management.record_action_on_comment.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RecordActionOnComment",
+                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RecordActionOnComment",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "action_type",
+                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType"
+                    }
+                ],
+                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Comment",
+                "client": {
+                    "shortName": "GDCHardwareManagementClient",
+                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+                },
+                "method": {
+                    "shortName": "RecordActionOnComment",
+                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RecordActionOnComment",
+                    "service": {
+                        "shortName": "GDCHardwareManagement",
+                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListChangeLogEntries_async",
             "title": "GDCHardwareManagement listChangeLogEntries Sample",
             "origin": "API_DEFINITION",
@@ -1226,7 +1318,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -1322,7 +1414,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -1562,7 +1654,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 70,
                     "type": "FULL"
                 }
             ],
@@ -1582,6 +1674,10 @@
                     {
                         "name": "state_signal",
                         "type": ".google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal"
+                    },
+                    {
+                        "name": "provisioning_state_signal",
+                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

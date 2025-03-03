@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -318,7 +318,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Project()
       );
@@ -349,7 +349,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Project()
       );
@@ -396,7 +396,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProject = stubSimpleCall(
         undefined,
@@ -448,7 +448,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Project()
       );
@@ -479,7 +479,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Project()
       );
@@ -526,7 +526,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.acceptTerms = stubSimpleCall(
         undefined,
@@ -578,7 +578,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListEnrolledSolutionsResponse()
       );
@@ -610,7 +610,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListEnrolledSolutionsResponse()
       );
@@ -657,7 +657,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEnrolledSolutions = stubSimpleCall(
         undefined,
@@ -715,7 +715,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.LoggingConfig()
       );
@@ -746,7 +746,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.LoggingConfig()
       );
@@ -793,7 +793,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getLoggingConfig = stubSimpleCall(
         undefined,
@@ -846,7 +846,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['loggingConfig', 'name']
       );
       request.loggingConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `logging_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `logging_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.LoggingConfig()
       );
@@ -879,7 +879,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['loggingConfig', 'name']
       );
       request.loggingConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `logging_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `logging_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.LoggingConfig()
       );
@@ -927,7 +927,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['loggingConfig', 'name']
       );
       request.loggingConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `logging_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `logging_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateLoggingConfig = stubSimpleCall(
         undefined,
@@ -980,7 +980,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AlertConfig()
       );
@@ -1011,7 +1011,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AlertConfig()
       );
@@ -1058,7 +1058,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAlertConfig = stubSimpleCall(
         undefined,
@@ -1111,7 +1111,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['alertConfig', 'name']
       );
       request.alertConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `alert_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `alert_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AlertConfig()
       );
@@ -1143,7 +1143,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['alertConfig', 'name']
       );
       request.alertConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `alert_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `alert_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AlertConfig()
       );
@@ -1191,7 +1191,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['alertConfig', 'name']
       );
       request.alertConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `alert_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `alert_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAlertConfig = stubSimpleCall(
         undefined,
@@ -1244,7 +1244,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1277,7 +1277,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1331,7 +1331,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enrollSolution = stubLongRunningCall(
         undefined,
@@ -1362,7 +1362,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enrollSolution = stubLongRunningCall(
         undefined,

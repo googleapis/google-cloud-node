@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -1655,7 +1658,8 @@
                             "TSV": 13,
                             "AUDIO": 15,
                             "VIDEO": 16,
-                            "EXECUTABLE": 17
+                            "EXECUTABLE": 17,
+                            "AI_MODEL": 18
                           }
                         }
                       }
@@ -2423,6 +2427,10 @@
                           "type": "string",
                           "id": 4
                         },
+                        "example": {
+                          "type": "string",
+                          "id": 8
+                        },
                         "versions": {
                           "rule": "repeated",
                           "type": "VersionDescription",
@@ -2536,7 +2544,8 @@
                             "CREDENTIAL": 4,
                             "GOVERNMENT_ID": 5,
                             "DOCUMENT": 6,
-                            "CONTEXTUAL_INFORMATION": 7
+                            "CONTEXTUAL_INFORMATION": 7,
+                            "CUSTOM": 8
                           }
                         }
                       }
@@ -4963,6 +4972,8 @@
                           "oneof": [
                             "exportData",
                             "pubSubNotification",
+                            "publishToChronicle",
+                            "publishToScc",
                             "tagResources"
                           ]
                         }
@@ -4975,6 +4986,14 @@
                         "pubSubNotification": {
                           "type": "PubSubNotification",
                           "id": 2
+                        },
+                        "publishToChronicle": {
+                          "type": "PublishToChronicle",
+                          "id": 3
+                        },
+                        "publishToScc": {
+                          "type": "PublishToSecurityCommandCenter",
+                          "id": 4
                         },
                         "tagResources": {
                           "type": "TagResources",
@@ -5028,6 +5047,12 @@
                             "SCORE_INCREASED": 3,
                             "ERROR_CHANGED": 4
                           }
+                        },
+                        "PublishToChronicle": {
+                          "fields": {}
+                        },
+                        "PublishToSecurityCommandCenter": {
+                          "fields": {}
                         },
                         "TagResources": {
                           "fields": {
@@ -5095,6 +5120,10 @@
                           "type": "string",
                           "id": 5
                         },
+                        "otherCloudStartingLocation": {
+                          "type": "OtherCloudDiscoveryStartingLocation",
+                          "id": 8
+                        },
                         "inspectTemplates": {
                           "rule": "repeated",
                           "type": "string",
@@ -5152,7 +5181,8 @@
                       "values": {
                         "BIG_QUERY_TABLE_TYPE_UNSPECIFIED": 0,
                         "BIG_QUERY_TABLE_TYPE_TABLE": 1,
-                        "BIG_QUERY_TABLE_TYPE_EXTERNAL_BIG_LAKE": 2
+                        "BIG_QUERY_TABLE_TYPE_EXTERNAL_BIG_LAKE": 2,
+                        "BIG_QUERY_TABLE_TYPE_SNAPSHOT": 3
                       }
                     },
                     "DataProfileUpdateFrequency": {
@@ -5204,6 +5234,10 @@
                           "type": "OrgConfig",
                           "id": 2
                         },
+                        "otherCloudStartingLocation": {
+                          "type": "OtherCloudDiscoveryStartingLocation",
+                          "id": 12
+                        },
                         "inspectTemplates": {
                           "rule": "repeated",
                           "type": "string",
@@ -5254,6 +5288,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "processingLocation": {
+                          "type": "ProcessingLocation",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -5285,7 +5326,9 @@
                             "bigQueryTarget",
                             "cloudSqlTarget",
                             "secretsTarget",
-                            "cloudStorageTarget"
+                            "cloudStorageTarget",
+                            "otherCloudTarget",
+                            "vertexDatasetTarget"
                           ]
                         }
                       },
@@ -5305,6 +5348,14 @@
                         "cloudStorageTarget": {
                           "type": "CloudStorageDiscoveryTarget",
                           "id": 4
+                        },
+                        "otherCloudTarget": {
+                          "type": "OtherCloudDiscoveryTarget",
+                          "id": 5
+                        },
+                        "vertexDatasetTarget": {
+                          "type": "VertexDatasetDiscoveryTarget",
+                          "id": 7
                         }
                       }
                     },
@@ -5956,6 +6007,257 @@
                         }
                       }
                     },
+                    "OtherCloudDiscoveryTarget": {
+                      "oneofs": {
+                        "cadence": {
+                          "oneof": [
+                            "generationCadence",
+                            "disabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dataSourceType": {
+                          "type": "DataSourceType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filter": {
+                          "type": "DiscoveryOtherCloudFilter",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "conditions": {
+                          "type": "DiscoveryOtherCloudConditions",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "generationCadence": {
+                          "type": "DiscoveryOtherCloudGenerationCadence",
+                          "id": 4
+                        },
+                        "disabled": {
+                          "type": "Disabled",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "DiscoveryOtherCloudFilter": {
+                      "oneofs": {
+                        "filter": {
+                          "oneof": [
+                            "collection",
+                            "singleResource",
+                            "others"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "collection": {
+                          "type": "OtherCloudResourceCollection",
+                          "id": 1
+                        },
+                        "singleResource": {
+                          "type": "OtherCloudSingleResourceReference",
+                          "id": 2
+                        },
+                        "others": {
+                          "type": "AllOtherResources",
+                          "id": 100,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "OtherCloudResourceCollection": {
+                      "oneofs": {
+                        "pattern": {
+                          "oneof": [
+                            "includeRegexes"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "includeRegexes": {
+                          "type": "OtherCloudResourceRegexes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "OtherCloudResourceRegexes": {
+                      "fields": {
+                        "patterns": {
+                          "rule": "repeated",
+                          "type": "OtherCloudResourceRegex",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "OtherCloudResourceRegex": {
+                      "oneofs": {
+                        "resourceRegex": {
+                          "oneof": [
+                            "amazonS3BucketRegex"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "amazonS3BucketRegex": {
+                          "type": "AmazonS3BucketRegex",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AwsAccountRegex": {
+                      "fields": {
+                        "accountIdRegex": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AmazonS3BucketRegex": {
+                      "fields": {
+                        "awsAccountRegex": {
+                          "type": "AwsAccountRegex",
+                          "id": 1
+                        },
+                        "bucketNameRegex": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "OtherCloudSingleResourceReference": {
+                      "oneofs": {
+                        "resource": {
+                          "oneof": [
+                            "amazonS3Bucket"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "amazonS3Bucket": {
+                          "type": "AmazonS3Bucket",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AwsAccount": {
+                      "fields": {
+                        "accountId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AmazonS3Bucket": {
+                      "fields": {
+                        "awsAccount": {
+                          "type": "AwsAccount",
+                          "id": 1
+                        },
+                        "bucketName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DiscoveryOtherCloudConditions": {
+                      "oneofs": {
+                        "conditions": {
+                          "oneof": [
+                            "amazonS3BucketConditions"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "minAge": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
+                        },
+                        "amazonS3BucketConditions": {
+                          "type": "AmazonS3BucketConditions",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AmazonS3BucketConditions": {
+                      "fields": {
+                        "bucketTypes": {
+                          "rule": "repeated",
+                          "type": "BucketType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "objectStorageClasses": {
+                          "rule": "repeated",
+                          "type": "ObjectStorageClass",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "BucketType": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "TYPE_ALL_SUPPORTED": 1,
+                            "TYPE_GENERAL_PURPOSE": 2
+                          }
+                        },
+                        "ObjectStorageClass": {
+                          "values": {
+                            "UNSPECIFIED": 0,
+                            "ALL_SUPPORTED_CLASSES": 1,
+                            "STANDARD": 2,
+                            "STANDARD_INFREQUENT_ACCESS": 4,
+                            "GLACIER_INSTANT_RETRIEVAL": 6,
+                            "INTELLIGENT_TIERING": 7
+                          }
+                        }
+                      }
+                    },
+                    "DiscoveryOtherCloudGenerationCadence": {
+                      "fields": {
+                        "refreshFrequency": {
+                          "type": "DataProfileUpdateFrequency",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inspectTemplateModifiedCadence": {
+                          "type": "DiscoveryInspectTemplateModifiedCadence",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "DiscoveryStartingLocation": {
                       "oneofs": {
                         "location": {
@@ -5976,8 +6278,171 @@
                         }
                       }
                     },
+                    "OtherCloudDiscoveryStartingLocation": {
+                      "oneofs": {
+                        "location": {
+                          "oneof": [
+                            "awsLocation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "awsLocation": {
+                          "type": "AwsDiscoveryStartingLocation",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "AwsDiscoveryStartingLocation": {
+                          "oneofs": {
+                            "scope": {
+                              "oneof": [
+                                "accountId",
+                                "allAssetInventoryAssets"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "accountId": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "allAssetInventoryAssets": {
+                              "type": "bool",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
                     "AllOtherResources": {
                       "fields": {}
+                    },
+                    "VertexDatasetDiscoveryTarget": {
+                      "oneofs": {
+                        "cadence": {
+                          "oneof": [
+                            "generationCadence",
+                            "disabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "DiscoveryVertexDatasetFilter",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "conditions": {
+                          "type": "DiscoveryVertexDatasetConditions",
+                          "id": 2
+                        },
+                        "generationCadence": {
+                          "type": "DiscoveryVertexDatasetGenerationCadence",
+                          "id": 3
+                        },
+                        "disabled": {
+                          "type": "Disabled",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DiscoveryVertexDatasetFilter": {
+                      "oneofs": {
+                        "filter": {
+                          "oneof": [
+                            "collection",
+                            "vertexDatasetResourceReference",
+                            "others"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "collection": {
+                          "type": "VertexDatasetCollection",
+                          "id": 1
+                        },
+                        "vertexDatasetResourceReference": {
+                          "type": "VertexDatasetResourceReference",
+                          "id": 2
+                        },
+                        "others": {
+                          "type": "AllOtherResources",
+                          "id": 100
+                        }
+                      }
+                    },
+                    "VertexDatasetCollection": {
+                      "oneofs": {
+                        "pattern": {
+                          "oneof": [
+                            "vertexDatasetRegexes"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "vertexDatasetRegexes": {
+                          "type": "VertexDatasetRegexes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "VertexDatasetRegexes": {
+                      "fields": {
+                        "patterns": {
+                          "rule": "repeated",
+                          "type": "VertexDatasetRegex",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "VertexDatasetRegex": {
+                      "fields": {
+                        "projectIdRegex": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "VertexDatasetResourceReference": {
+                      "fields": {
+                        "datasetResourceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DiscoveryVertexDatasetConditions": {
+                      "fields": {
+                        "createdAfter": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "minAge": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DiscoveryVertexDatasetGenerationCadence": {
+                      "fields": {
+                        "refreshFrequency": {
+                          "type": "DataProfileUpdateFrequency",
+                          "id": 1
+                        },
+                        "inspectTemplateModifiedCadence": {
+                          "type": "DiscoveryInspectTemplateModifiedCadence",
+                          "id": 2
+                        }
+                      }
                     },
                     "DlpJob": {
                       "options": {
@@ -6962,6 +7427,11 @@
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 23
+                        },
+                        "relatedResources": {
+                          "rule": "repeated",
+                          "type": "RelatedResource",
+                          "id": 41
                         }
                       },
                       "nested": {
@@ -7270,6 +7740,11 @@
                         "fileStoreIsEmpty": {
                           "type": "bool",
                           "id": 23
+                        },
+                        "relatedResources": {
+                          "rule": "repeated",
+                          "type": "RelatedResource",
+                          "id": 26
                         }
                       },
                       "nested": {
@@ -7279,6 +7754,14 @@
                             "RUNNING": 1,
                             "DONE": 2
                           }
+                        }
+                      }
+                    },
+                    "RelatedResource": {
+                      "fields": {
+                        "fullResource": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -7856,7 +8339,36 @@
                             "CLUSTER_IMAGE": 6,
                             "CLUSTER_ARCHIVE": 7,
                             "CLUSTER_MULTIMEDIA": 8,
-                            "CLUSTER_EXECUTABLE": 9
+                            "CLUSTER_EXECUTABLE": 9,
+                            "CLUSTER_AI_MODEL": 10
+                          }
+                        }
+                      }
+                    },
+                    "ProcessingLocation": {
+                      "fields": {
+                        "imageFallbackLocation": {
+                          "type": "ImageFallbackLocation",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "MultiRegionProcessing": {
+                          "fields": {}
+                        },
+                        "GlobalProcessing": {
+                          "fields": {}
+                        },
+                        "ImageFallbackLocation": {
+                          "fields": {
+                            "multiRegionProcessing": {
+                              "type": "MultiRegionProcessing",
+                              "id": 100
+                            },
+                            "globalProcessing": {
+                              "type": "GlobalProcessing",
+                              "id": 200
+                            }
                           }
                         }
                       }

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3169,7 +3169,7 @@
                              * @property {number|null} [pageSize] ListAccountIssuesRequest pageSize
                              * @property {string|null} [pageToken] ListAccountIssuesRequest pageToken
                              * @property {string|null} [languageCode] ListAccountIssuesRequest languageCode
-                             * @property {google.type.ITimeZone|null} [timeZone] ListAccountIssuesRequest timeZone
+                             * @property {string|null} [timeZone] ListAccountIssuesRequest timeZone
                              */
     
                             /**
@@ -3221,11 +3221,11 @@
     
                             /**
                              * ListAccountIssuesRequest timeZone.
-                             * @member {google.type.ITimeZone|null|undefined} timeZone
+                             * @member {string} timeZone
                              * @memberof google.shopping.merchant.accounts.v1beta.ListAccountIssuesRequest
                              * @instance
                              */
-                            ListAccountIssuesRequest.prototype.timeZone = null;
+                            ListAccountIssuesRequest.prototype.timeZone = "";
     
                             /**
                              * Creates a new ListAccountIssuesRequest instance using the specified properties.
@@ -3260,7 +3260,7 @@
                                 if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.languageCode);
                                 if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
-                                    $root.google.type.TimeZone.encode(message.timeZone, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.timeZone);
                                 return writer;
                             };
     
@@ -3312,7 +3312,7 @@
                                             break;
                                         }
                                     case 5: {
-                                            message.timeZone = $root.google.type.TimeZone.decode(reader, reader.uint32());
+                                            message.timeZone = reader.string();
                                             break;
                                         }
                                     default:
@@ -3362,11 +3362,9 @@
                                 if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                     if (!$util.isString(message.languageCode))
                                         return "languageCode: string expected";
-                                if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
-                                    var error = $root.google.type.TimeZone.verify(message.timeZone);
-                                    if (error)
-                                        return "timeZone." + error;
-                                }
+                                if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                    if (!$util.isString(message.timeZone))
+                                        return "timeZone: string expected";
                                 return null;
                             };
     
@@ -3390,11 +3388,8 @@
                                     message.pageToken = String(object.pageToken);
                                 if (object.languageCode != null)
                                     message.languageCode = String(object.languageCode);
-                                if (object.timeZone != null) {
-                                    if (typeof object.timeZone !== "object")
-                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.ListAccountIssuesRequest.timeZone: object expected");
-                                    message.timeZone = $root.google.type.TimeZone.fromObject(object.timeZone);
-                                }
+                                if (object.timeZone != null)
+                                    message.timeZone = String(object.timeZone);
                                 return message;
                             };
     
@@ -3416,7 +3411,7 @@
                                     object.pageSize = 0;
                                     object.pageToken = "";
                                     object.languageCode = "";
-                                    object.timeZone = null;
+                                    object.timeZone = "";
                                 }
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     object.parent = message.parent;
@@ -3427,7 +3422,7 @@
                                 if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                     object.languageCode = message.languageCode;
                                 if (message.timeZone != null && message.hasOwnProperty("timeZone"))
-                                    object.timeZone = $root.google.type.TimeZone.toObject(message.timeZone, options);
+                                    object.timeZone = message.timeZone;
                                 return object;
                             };
     
@@ -5081,7 +5076,7 @@
                                  * Properties of an AddAccountService.
                                  * @memberof google.shopping.merchant.accounts.v1beta.CreateAndConfigureAccountRequest
                                  * @interface IAddAccountService
-                                 * @property {google.protobuf.IEmpty|null} [accountAggregation] AddAccountService accountAggregation
+                                 * @property {google.shopping.merchant.accounts.v1beta.IAccountAggregation|null} [accountAggregation] AddAccountService accountAggregation
                                  * @property {string|null} [provider] AddAccountService provider
                                  */
     
@@ -5102,7 +5097,7 @@
     
                                 /**
                                  * AddAccountService accountAggregation.
-                                 * @member {google.protobuf.IEmpty|null|undefined} accountAggregation
+                                 * @member {google.shopping.merchant.accounts.v1beta.IAccountAggregation|null|undefined} accountAggregation
                                  * @memberof google.shopping.merchant.accounts.v1beta.CreateAndConfigureAccountRequest.AddAccountService
                                  * @instance
                                  */
@@ -5168,7 +5163,7 @@
                                     if (message.provider != null && Object.hasOwnProperty.call(message, "provider"))
                                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.provider);
                                     if (message.accountAggregation != null && Object.hasOwnProperty.call(message, "accountAggregation"))
-                                        $root.google.protobuf.Empty.encode(message.accountAggregation, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                        $root.google.shopping.merchant.accounts.v1beta.AccountAggregation.encode(message.accountAggregation, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -5203,8 +5198,8 @@
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         switch (tag >>> 3) {
-                                        case 2: {
-                                                message.accountAggregation = $root.google.protobuf.Empty.decode(reader, reader.uint32());
+                                        case 103: {
+                                                message.accountAggregation = $root.google.shopping.merchant.accounts.v1beta.AccountAggregation.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         case 1: {
@@ -5250,7 +5245,7 @@
                                     if (message.accountAggregation != null && message.hasOwnProperty("accountAggregation")) {
                                         properties.serviceType = 1;
                                         {
-                                            var error = $root.google.protobuf.Empty.verify(message.accountAggregation);
+                                            var error = $root.google.shopping.merchant.accounts.v1beta.AccountAggregation.verify(message.accountAggregation);
                                             if (error)
                                                 return "accountAggregation." + error;
                                         }
@@ -5278,7 +5273,7 @@
                                     if (object.accountAggregation != null) {
                                         if (typeof object.accountAggregation !== "object")
                                             throw TypeError(".google.shopping.merchant.accounts.v1beta.CreateAndConfigureAccountRequest.AddAccountService.accountAggregation: object expected");
-                                        message.accountAggregation = $root.google.protobuf.Empty.fromObject(object.accountAggregation);
+                                        message.accountAggregation = $root.google.shopping.merchant.accounts.v1beta.AccountAggregation.fromObject(object.accountAggregation);
                                     }
                                     if (object.provider != null)
                                         message.provider = String(object.provider);
@@ -5304,7 +5299,7 @@
                                             object._provider = "provider";
                                     }
                                     if (message.accountAggregation != null && message.hasOwnProperty("accountAggregation")) {
-                                        object.accountAggregation = $root.google.protobuf.Empty.toObject(message.accountAggregation, options);
+                                        object.accountAggregation = $root.google.shopping.merchant.accounts.v1beta.AccountAggregation.toObject(message.accountAggregation, options);
                                         if (options.oneofs)
                                             object.serviceType = "accountAggregation";
                                     }
@@ -5350,6 +5345,7 @@
                              * @memberof google.shopping.merchant.accounts.v1beta
                              * @interface IDeleteAccountRequest
                              * @property {string|null} [name] DeleteAccountRequest name
+                             * @property {boolean|null} [force] DeleteAccountRequest force
                              */
     
                             /**
@@ -5374,6 +5370,14 @@
                              * @instance
                              */
                             DeleteAccountRequest.prototype.name = "";
+    
+                            /**
+                             * DeleteAccountRequest force.
+                             * @member {boolean} force
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteAccountRequest
+                             * @instance
+                             */
+                            DeleteAccountRequest.prototype.force = false;
     
                             /**
                              * Creates a new DeleteAccountRequest instance using the specified properties.
@@ -5401,6 +5405,8 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.force);
                                 return writer;
                             };
     
@@ -5437,6 +5443,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.force = reader.bool();
                                             break;
                                         }
                                     default:
@@ -5477,6 +5487,9 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.force != null && message.hasOwnProperty("force"))
+                                    if (typeof message.force !== "boolean")
+                                        return "force: boolean expected";
                                 return null;
                             };
     
@@ -5494,6 +5507,8 @@
                                 var message = new $root.google.shopping.merchant.accounts.v1beta.DeleteAccountRequest();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                if (object.force != null)
+                                    message.force = Boolean(object.force);
                                 return message;
                             };
     
@@ -5510,10 +5525,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.name = "";
+                                    object.force = false;
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
+                                if (message.force != null && message.hasOwnProperty("force"))
+                                    object.force = message.force;
                                 return object;
                             };
     
@@ -6777,6 +6796,181 @@
                             };
     
                             return ListSubAccountsResponse;
+                        })();
+    
+                        v1beta.AccountAggregation = (function() {
+    
+                            /**
+                             * Properties of an AccountAggregation.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IAccountAggregation
+                             */
+    
+                            /**
+                             * Constructs a new AccountAggregation.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an AccountAggregation.
+                             * @implements IAccountAggregation
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IAccountAggregation=} [properties] Properties to set
+                             */
+                            function AccountAggregation(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new AccountAggregation instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.AccountAggregation
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAccountAggregation=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.AccountAggregation} AccountAggregation instance
+                             */
+                            AccountAggregation.create = function create(properties) {
+                                return new AccountAggregation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AccountAggregation message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AccountAggregation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.AccountAggregation
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAccountAggregation} message AccountAggregation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AccountAggregation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AccountAggregation message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AccountAggregation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.AccountAggregation
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAccountAggregation} message AccountAggregation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AccountAggregation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AccountAggregation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.AccountAggregation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.AccountAggregation} AccountAggregation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AccountAggregation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.AccountAggregation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AccountAggregation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.AccountAggregation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.AccountAggregation} AccountAggregation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AccountAggregation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AccountAggregation message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.AccountAggregation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AccountAggregation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AccountAggregation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.AccountAggregation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.AccountAggregation} AccountAggregation
+                             */
+                            AccountAggregation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.AccountAggregation)
+                                    return object;
+                                return new $root.google.shopping.merchant.accounts.v1beta.AccountAggregation();
+                            };
+    
+                            /**
+                             * Creates a plain object from an AccountAggregation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.AccountAggregation
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.AccountAggregation} message AccountAggregation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AccountAggregation.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this AccountAggregation to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.AccountAggregation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AccountAggregation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AccountAggregation
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.AccountAggregation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AccountAggregation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.AccountAggregation";
+                            };
+    
+                            return AccountAggregation;
                         })();
     
                         v1beta.UserService = (function() {
@@ -8719,6 +8913,797 @@
                             return ListUsersResponse;
                         })();
     
+                        v1beta.AutofeedSettingsService = (function() {
+    
+                            /**
+                             * Constructs a new AutofeedSettingsService service.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an AutofeedSettingsService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function AutofeedSettingsService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (AutofeedSettingsService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AutofeedSettingsService;
+    
+                            /**
+                             * Creates new AutofeedSettingsService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettingsService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {AutofeedSettingsService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            AutofeedSettingsService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.AutofeedSettingsService|getAutofeedSettings}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettingsService
+                             * @typedef GetAutofeedSettingsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.AutofeedSettings} [response] AutofeedSettings
+                             */
+    
+                            /**
+                             * Calls GetAutofeedSettings.
+                             * @function getAutofeedSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest} request GetAutofeedSettingsRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.AutofeedSettingsService.GetAutofeedSettingsCallback} callback Node-style callback called with the error, if any, and AutofeedSettings
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AutofeedSettingsService.prototype.getAutofeedSettings = function getAutofeedSettings(request, callback) {
+                                return this.rpcCall(getAutofeedSettings, $root.google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest, $root.google.shopping.merchant.accounts.v1beta.AutofeedSettings, request, callback);
+                            }, "name", { value: "GetAutofeedSettings" });
+    
+                            /**
+                             * Calls GetAutofeedSettings.
+                             * @function getAutofeedSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest} request GetAutofeedSettingsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.AutofeedSettings>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.AutofeedSettingsService|updateAutofeedSettings}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettingsService
+                             * @typedef UpdateAutofeedSettingsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.AutofeedSettings} [response] AutofeedSettings
+                             */
+    
+                            /**
+                             * Calls UpdateAutofeedSettings.
+                             * @function updateAutofeedSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest} request UpdateAutofeedSettingsRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.AutofeedSettingsService.UpdateAutofeedSettingsCallback} callback Node-style callback called with the error, if any, and AutofeedSettings
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AutofeedSettingsService.prototype.updateAutofeedSettings = function updateAutofeedSettings(request, callback) {
+                                return this.rpcCall(updateAutofeedSettings, $root.google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest, $root.google.shopping.merchant.accounts.v1beta.AutofeedSettings, request, callback);
+                            }, "name", { value: "UpdateAutofeedSettings" });
+    
+                            /**
+                             * Calls UpdateAutofeedSettings.
+                             * @function updateAutofeedSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest} request UpdateAutofeedSettingsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.AutofeedSettings>} Promise
+                             * @variation 2
+                             */
+    
+                            return AutofeedSettingsService;
+                        })();
+    
+                        v1beta.AutofeedSettings = (function() {
+    
+                            /**
+                             * Properties of an AutofeedSettings.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IAutofeedSettings
+                             * @property {string|null} [name] AutofeedSettings name
+                             * @property {boolean|null} [enableProducts] AutofeedSettings enableProducts
+                             * @property {boolean|null} [eligible] AutofeedSettings eligible
+                             */
+    
+                            /**
+                             * Constructs a new AutofeedSettings.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an AutofeedSettings.
+                             * @implements IAutofeedSettings
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutofeedSettings=} [properties] Properties to set
+                             */
+                            function AutofeedSettings(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AutofeedSettings name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettings
+                             * @instance
+                             */
+                            AutofeedSettings.prototype.name = "";
+    
+                            /**
+                             * AutofeedSettings enableProducts.
+                             * @member {boolean} enableProducts
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettings
+                             * @instance
+                             */
+                            AutofeedSettings.prototype.enableProducts = false;
+    
+                            /**
+                             * AutofeedSettings eligible.
+                             * @member {boolean} eligible
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettings
+                             * @instance
+                             */
+                            AutofeedSettings.prototype.eligible = false;
+    
+                            /**
+                             * Creates a new AutofeedSettings instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutofeedSettings=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutofeedSettings} AutofeedSettings instance
+                             */
+                            AutofeedSettings.create = function create(properties) {
+                                return new AutofeedSettings(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AutofeedSettings message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutofeedSettings.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutofeedSettings} message AutofeedSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutofeedSettings.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.enableProducts != null && Object.hasOwnProperty.call(message, "enableProducts"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enableProducts);
+                                if (message.eligible != null && Object.hasOwnProperty.call(message, "eligible"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.eligible);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AutofeedSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutofeedSettings.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutofeedSettings} message AutofeedSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutofeedSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AutofeedSettings message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutofeedSettings} AutofeedSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutofeedSettings.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.AutofeedSettings();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.enableProducts = reader.bool();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.eligible = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AutofeedSettings message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutofeedSettings} AutofeedSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutofeedSettings.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AutofeedSettings message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettings
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AutofeedSettings.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.enableProducts != null && message.hasOwnProperty("enableProducts"))
+                                    if (typeof message.enableProducts !== "boolean")
+                                        return "enableProducts: boolean expected";
+                                if (message.eligible != null && message.hasOwnProperty("eligible"))
+                                    if (typeof message.eligible !== "boolean")
+                                        return "eligible: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AutofeedSettings message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettings
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutofeedSettings} AutofeedSettings
+                             */
+                            AutofeedSettings.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.AutofeedSettings)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.AutofeedSettings();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.enableProducts != null)
+                                    message.enableProducts = Boolean(object.enableProducts);
+                                if (object.eligible != null)
+                                    message.eligible = Boolean(object.eligible);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AutofeedSettings message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.AutofeedSettings} message AutofeedSettings
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AutofeedSettings.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.enableProducts = false;
+                                    object.eligible = false;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.enableProducts != null && message.hasOwnProperty("enableProducts"))
+                                    object.enableProducts = message.enableProducts;
+                                if (message.eligible != null && message.hasOwnProperty("eligible"))
+                                    object.eligible = message.eligible;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AutofeedSettings to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettings
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AutofeedSettings.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AutofeedSettings
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutofeedSettings
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AutofeedSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.AutofeedSettings";
+                            };
+    
+                            return AutofeedSettings;
+                        })();
+    
+                        v1beta.GetAutofeedSettingsRequest = (function() {
+    
+                            /**
+                             * Properties of a GetAutofeedSettingsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IGetAutofeedSettingsRequest
+                             * @property {string|null} [name] GetAutofeedSettingsRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetAutofeedSettingsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a GetAutofeedSettingsRequest.
+                             * @implements IGetAutofeedSettingsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest=} [properties] Properties to set
+                             */
+                            function GetAutofeedSettingsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetAutofeedSettingsRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest
+                             * @instance
+                             */
+                            GetAutofeedSettingsRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetAutofeedSettingsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest} GetAutofeedSettingsRequest instance
+                             */
+                            GetAutofeedSettingsRequest.create = function create(properties) {
+                                return new GetAutofeedSettingsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetAutofeedSettingsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest} message GetAutofeedSettingsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetAutofeedSettingsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetAutofeedSettingsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest} message GetAutofeedSettingsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetAutofeedSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetAutofeedSettingsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest} GetAutofeedSettingsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetAutofeedSettingsRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetAutofeedSettingsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest} GetAutofeedSettingsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetAutofeedSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetAutofeedSettingsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetAutofeedSettingsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetAutofeedSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest} GetAutofeedSettingsRequest
+                             */
+                            GetAutofeedSettingsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetAutofeedSettingsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest} message GetAutofeedSettingsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetAutofeedSettingsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetAutofeedSettingsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetAutofeedSettingsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetAutofeedSettingsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetAutofeedSettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest";
+                            };
+    
+                            return GetAutofeedSettingsRequest;
+                        })();
+    
+                        v1beta.UpdateAutofeedSettingsRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateAutofeedSettingsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IUpdateAutofeedSettingsRequest
+                             * @property {google.shopping.merchant.accounts.v1beta.IAutofeedSettings|null} [autofeedSettings] UpdateAutofeedSettingsRequest autofeedSettings
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateAutofeedSettingsRequest updateMask
+                             */
+    
+                            /**
+                             * Constructs a new UpdateAutofeedSettingsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an UpdateAutofeedSettingsRequest.
+                             * @implements IUpdateAutofeedSettingsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest=} [properties] Properties to set
+                             */
+                            function UpdateAutofeedSettingsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateAutofeedSettingsRequest autofeedSettings.
+                             * @member {google.shopping.merchant.accounts.v1beta.IAutofeedSettings|null|undefined} autofeedSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest
+                             * @instance
+                             */
+                            UpdateAutofeedSettingsRequest.prototype.autofeedSettings = null;
+    
+                            /**
+                             * UpdateAutofeedSettingsRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest
+                             * @instance
+                             */
+                            UpdateAutofeedSettingsRequest.prototype.updateMask = null;
+    
+                            /**
+                             * Creates a new UpdateAutofeedSettingsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest} UpdateAutofeedSettingsRequest instance
+                             */
+                            UpdateAutofeedSettingsRequest.create = function create(properties) {
+                                return new UpdateAutofeedSettingsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateAutofeedSettingsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest} message UpdateAutofeedSettingsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateAutofeedSettingsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.autofeedSettings != null && Object.hasOwnProperty.call(message, "autofeedSettings"))
+                                    $root.google.shopping.merchant.accounts.v1beta.AutofeedSettings.encode(message.autofeedSettings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateAutofeedSettingsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest} message UpdateAutofeedSettingsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateAutofeedSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateAutofeedSettingsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest} UpdateAutofeedSettingsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateAutofeedSettingsRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.autofeedSettings = $root.google.shopping.merchant.accounts.v1beta.AutofeedSettings.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateAutofeedSettingsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest} UpdateAutofeedSettingsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateAutofeedSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateAutofeedSettingsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateAutofeedSettingsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.autofeedSettings != null && message.hasOwnProperty("autofeedSettings")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.AutofeedSettings.verify(message.autofeedSettings);
+                                    if (error)
+                                        return "autofeedSettings." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateAutofeedSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest} UpdateAutofeedSettingsRequest
+                             */
+                            UpdateAutofeedSettingsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest();
+                                if (object.autofeedSettings != null) {
+                                    if (typeof object.autofeedSettings !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest.autofeedSettings: object expected");
+                                    message.autofeedSettings = $root.google.shopping.merchant.accounts.v1beta.AutofeedSettings.fromObject(object.autofeedSettings);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateAutofeedSettingsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest} message UpdateAutofeedSettingsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateAutofeedSettingsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.autofeedSettings = null;
+                                    object.updateMask = null;
+                                }
+                                if (message.autofeedSettings != null && message.hasOwnProperty("autofeedSettings"))
+                                    object.autofeedSettings = $root.google.shopping.merchant.accounts.v1beta.AutofeedSettings.toObject(message.autofeedSettings, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateAutofeedSettingsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateAutofeedSettingsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateAutofeedSettingsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateAutofeedSettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest";
+                            };
+    
+                            return UpdateAutofeedSettingsRequest;
+                        })();
+    
                         v1beta.BusinessIdentityService = (function() {
     
                             /**
@@ -10022,6 +11007,7 @@
                              * @property {google.type.IPhoneNumber|null} [phone] BusinessInfo phone
                              * @property {google.shopping.merchant.accounts.v1beta.PhoneVerificationState|null} [phoneVerificationState] BusinessInfo phoneVerificationState
                              * @property {google.shopping.merchant.accounts.v1beta.ICustomerService|null} [customerService] BusinessInfo customerService
+                             * @property {string|null} [koreanBusinessRegistrationNumber] BusinessInfo koreanBusinessRegistrationNumber
                              */
     
                             /**
@@ -10079,6 +11065,14 @@
                              */
                             BusinessInfo.prototype.customerService = null;
     
+                            /**
+                             * BusinessInfo koreanBusinessRegistrationNumber.
+                             * @member {string|null|undefined} koreanBusinessRegistrationNumber
+                             * @memberof google.shopping.merchant.accounts.v1beta.BusinessInfo
+                             * @instance
+                             */
+                            BusinessInfo.prototype.koreanBusinessRegistrationNumber = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -10127,6 +11121,17 @@
                             });
     
                             /**
+                             * BusinessInfo _koreanBusinessRegistrationNumber.
+                             * @member {"koreanBusinessRegistrationNumber"|undefined} _koreanBusinessRegistrationNumber
+                             * @memberof google.shopping.merchant.accounts.v1beta.BusinessInfo
+                             * @instance
+                             */
+                            Object.defineProperty(BusinessInfo.prototype, "_koreanBusinessRegistrationNumber", {
+                                get: $util.oneOfGetter($oneOfFields = ["koreanBusinessRegistrationNumber"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
                              * Creates a new BusinessInfo instance using the specified properties.
                              * @function create
                              * @memberof google.shopping.merchant.accounts.v1beta.BusinessInfo
@@ -10160,6 +11165,8 @@
                                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.phoneVerificationState);
                                 if (message.customerService != null && Object.hasOwnProperty.call(message, "customerService"))
                                     $root.google.shopping.merchant.accounts.v1beta.CustomerService.encode(message.customerService, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.koreanBusinessRegistrationNumber != null && Object.hasOwnProperty.call(message, "koreanBusinessRegistrationNumber"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.koreanBusinessRegistrationNumber);
                                 return writer;
                             };
     
@@ -10212,6 +11219,10 @@
                                         }
                                     case 5: {
                                             message.customerService = $root.google.shopping.merchant.accounts.v1beta.CustomerService.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.koreanBusinessRegistrationNumber = reader.string();
                                             break;
                                         }
                                     default:
@@ -10288,6 +11299,11 @@
                                             return "customerService." + error;
                                     }
                                 }
+                                if (message.koreanBusinessRegistrationNumber != null && message.hasOwnProperty("koreanBusinessRegistrationNumber")) {
+                                    properties._koreanBusinessRegistrationNumber = 1;
+                                    if (!$util.isString(message.koreanBusinessRegistrationNumber))
+                                        return "koreanBusinessRegistrationNumber: string expected";
+                                }
                                 return null;
                             };
     
@@ -10340,6 +11356,8 @@
                                         throw TypeError(".google.shopping.merchant.accounts.v1beta.BusinessInfo.customerService: object expected");
                                     message.customerService = $root.google.shopping.merchant.accounts.v1beta.CustomerService.fromObject(object.customerService);
                                 }
+                                if (object.koreanBusinessRegistrationNumber != null)
+                                    message.koreanBusinessRegistrationNumber = String(object.koreanBusinessRegistrationNumber);
                                 return message;
                             };
     
@@ -10379,6 +11397,11 @@
                                     object.customerService = $root.google.shopping.merchant.accounts.v1beta.CustomerService.toObject(message.customerService, options);
                                     if (options.oneofs)
                                         object._customerService = "customerService";
+                                }
+                                if (message.koreanBusinessRegistrationNumber != null && message.hasOwnProperty("koreanBusinessRegistrationNumber")) {
+                                    object.koreanBusinessRegistrationNumber = message.koreanBusinessRegistrationNumber;
+                                    if (options.oneofs)
+                                        object._koreanBusinessRegistrationNumber = "koreanBusinessRegistrationNumber";
                                 }
                                 return object;
                             };

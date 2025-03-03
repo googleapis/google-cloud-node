@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -374,7 +374,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -418,7 +418,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -478,7 +478,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addAssociation = stubSimpleCall(
         undefined,
@@ -556,7 +556,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -600,7 +600,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -660,7 +660,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addRule = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.addRule(request), expectedError);
@@ -735,7 +735,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -779,7 +779,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -839,7 +839,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cloneRules = stubSimpleCall(
         undefined,
@@ -917,7 +917,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -961,7 +961,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1021,7 +1021,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
@@ -1096,7 +1096,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.FirewallPolicy()
       );
@@ -1139,7 +1139,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.FirewallPolicy()
       );
@@ -1197,7 +1197,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -1271,7 +1271,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.FirewallPolicyAssociation()
       );
@@ -1315,7 +1315,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.FirewallPolicyAssociation()
       );
@@ -1375,7 +1375,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAssociation = stubSimpleCall(
         undefined,
@@ -1448,7 +1448,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponse()
       );
@@ -1488,7 +1488,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponse()
       );
@@ -1543,7 +1543,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEffectiveFirewalls = stubSimpleCall(
         undefined,
@@ -1622,7 +1622,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -1666,7 +1666,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -1726,7 +1726,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -1804,7 +1804,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.FirewallPolicyRule()
       );
@@ -1848,7 +1848,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.FirewallPolicyRule()
       );
@@ -1908,7 +1908,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRule = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getRule(request), expectedError);
@@ -1978,7 +1978,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2017,7 +2017,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2072,7 +2072,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -2142,7 +2142,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2185,7 +2185,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2243,7 +2243,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.patch(request), expectedError);
@@ -2317,7 +2317,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2361,7 +2361,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2421,7 +2421,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patchRule = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.patchRule(request), expectedError);
@@ -2496,7 +2496,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2540,7 +2540,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2600,7 +2600,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeAssociation = stubSimpleCall(
         undefined,
@@ -2678,7 +2678,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2722,7 +2722,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2782,7 +2782,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&firewall_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeRule = stubSimpleCall(
         undefined,
@@ -2860,7 +2860,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -2904,7 +2904,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -2964,7 +2964,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -3042,7 +3042,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -3087,7 +3087,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -3147,7 +3147,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -3220,7 +3220,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.FirewallPolicy()
@@ -3266,7 +3266,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.FirewallPolicy()
@@ -3327,7 +3327,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -3362,7 +3362,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.FirewallPolicy()
@@ -3430,7 +3430,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -3489,7 +3489,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.FirewallPolicy()
@@ -3545,7 +3545,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

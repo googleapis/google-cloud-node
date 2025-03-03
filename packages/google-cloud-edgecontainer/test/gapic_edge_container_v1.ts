@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -360,7 +360,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.Cluster()
       );
@@ -391,7 +391,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.Cluster()
       );
@@ -438,7 +438,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCluster = stubSimpleCall(
         undefined,
@@ -490,7 +490,7 @@ describe('v1.EdgeContainerClient', () => {
         ['cluster']
       );
       request.cluster = defaultValue1;
-      const expectedHeaderRequestParams = `cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenResponse()
       );
@@ -522,7 +522,7 @@ describe('v1.EdgeContainerClient', () => {
         ['cluster']
       );
       request.cluster = defaultValue1;
-      const expectedHeaderRequestParams = `cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenResponse()
       );
@@ -569,7 +569,7 @@ describe('v1.EdgeContainerClient', () => {
         ['cluster']
       );
       request.cluster = defaultValue1;
-      const expectedHeaderRequestParams = `cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateAccessToken = stubSimpleCall(
         undefined,
@@ -621,7 +621,7 @@ describe('v1.EdgeContainerClient', () => {
         ['cluster']
       );
       request.cluster = defaultValue1;
-      const expectedHeaderRequestParams = `cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse()
       );
@@ -653,7 +653,7 @@ describe('v1.EdgeContainerClient', () => {
         ['cluster']
       );
       request.cluster = defaultValue1;
-      const expectedHeaderRequestParams = `cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse()
       );
@@ -700,7 +700,7 @@ describe('v1.EdgeContainerClient', () => {
         ['cluster']
       );
       request.cluster = defaultValue1;
-      const expectedHeaderRequestParams = `cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateOfflineCredential = stubSimpleCall(
         undefined,
@@ -758,7 +758,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.NodePool()
       );
@@ -789,7 +789,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.NodePool()
       );
@@ -836,7 +836,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNodePool = stubSimpleCall(
         undefined,
@@ -888,7 +888,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.Machine()
       );
@@ -919,7 +919,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.Machine()
       );
@@ -966,7 +966,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMachine = stubSimpleCall(
         undefined,
@@ -1018,7 +1018,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.VpnConnection()
       );
@@ -1049,7 +1049,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.VpnConnection()
       );
@@ -1096,7 +1096,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getVpnConnection = stubSimpleCall(
         undefined,
@@ -1148,7 +1148,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ServerConfig()
       );
@@ -1179,7 +1179,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ServerConfig()
       );
@@ -1226,7 +1226,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getServerConfig = stubSimpleCall(
         undefined,
@@ -1278,7 +1278,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1311,7 +1311,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1365,7 +1365,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubLongRunningCall(
         undefined,
@@ -1396,7 +1396,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubLongRunningCall(
         undefined,
@@ -1473,7 +1473,7 @@ describe('v1.EdgeContainerClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1507,7 +1507,7 @@ describe('v1.EdgeContainerClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1562,7 +1562,7 @@ describe('v1.EdgeContainerClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubLongRunningCall(
         undefined,
@@ -1594,7 +1594,7 @@ describe('v1.EdgeContainerClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubLongRunningCall(
         undefined,
@@ -1670,7 +1670,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1703,7 +1703,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1757,7 +1757,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.upgradeCluster = stubLongRunningCall(
         undefined,
@@ -1788,7 +1788,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.upgradeCluster = stubLongRunningCall(
         undefined,
@@ -1864,7 +1864,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1897,7 +1897,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1951,7 +1951,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubLongRunningCall(
         undefined,
@@ -1982,7 +1982,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubLongRunningCall(
         undefined,
@@ -2058,7 +2058,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2091,7 +2091,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2145,7 +2145,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNodePool = stubLongRunningCall(
         undefined,
@@ -2176,7 +2176,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNodePool = stubLongRunningCall(
         undefined,
@@ -2253,7 +2253,7 @@ describe('v1.EdgeContainerClient', () => {
         ['nodePool', 'name']
       );
       request.nodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `node_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `node_pool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2287,7 +2287,7 @@ describe('v1.EdgeContainerClient', () => {
         ['nodePool', 'name']
       );
       request.nodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `node_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `node_pool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2342,7 +2342,7 @@ describe('v1.EdgeContainerClient', () => {
         ['nodePool', 'name']
       );
       request.nodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `node_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `node_pool.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNodePool = stubLongRunningCall(
         undefined,
@@ -2374,7 +2374,7 @@ describe('v1.EdgeContainerClient', () => {
         ['nodePool', 'name']
       );
       request.nodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `node_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `node_pool.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNodePool = stubLongRunningCall(
         undefined,
@@ -2450,7 +2450,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2483,7 +2483,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2537,7 +2537,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNodePool = stubLongRunningCall(
         undefined,
@@ -2568,7 +2568,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNodePool = stubLongRunningCall(
         undefined,
@@ -2644,7 +2644,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2677,7 +2677,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2731,7 +2731,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createVpnConnection = stubLongRunningCall(
         undefined,
@@ -2762,7 +2762,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createVpnConnection = stubLongRunningCall(
         undefined,
@@ -2838,7 +2838,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2871,7 +2871,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2925,7 +2925,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteVpnConnection = stubLongRunningCall(
         undefined,
@@ -2956,7 +2956,7 @@ describe('v1.EdgeContainerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteVpnConnection = stubLongRunningCall(
         undefined,
@@ -3032,7 +3032,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.Cluster()
@@ -3071,7 +3071,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.Cluster()
@@ -3126,7 +3126,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listClusters = stubSimpleCall(
         undefined,
@@ -3157,7 +3157,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.Cluster()
@@ -3217,7 +3217,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.createStream = stubPageStreamingCall(
         undefined,
@@ -3268,7 +3268,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.Cluster()
@@ -3317,7 +3317,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3359,7 +3359,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.NodePool()
@@ -3398,7 +3398,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.NodePool()
@@ -3453,7 +3453,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNodePools = stubSimpleCall(
         undefined,
@@ -3484,7 +3484,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.NodePool()
@@ -3544,7 +3544,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNodePools.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3593,7 +3593,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.NodePool()
@@ -3642,7 +3642,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNodePools.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3684,7 +3684,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.Machine()
@@ -3723,7 +3723,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.Machine()
@@ -3778,7 +3778,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMachines = stubSimpleCall(
         undefined,
@@ -3809,7 +3809,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.Machine()
@@ -3869,7 +3869,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMachines.createStream = stubPageStreamingCall(
         undefined,
@@ -3920,7 +3920,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.Machine()
@@ -3969,7 +3969,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMachines.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4011,7 +4011,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.VpnConnection()
@@ -4051,7 +4051,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.VpnConnection()
@@ -4108,7 +4108,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listVpnConnections = stubSimpleCall(
         undefined,
@@ -4139,7 +4139,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.VpnConnection()
@@ -4200,7 +4200,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVpnConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4250,7 +4250,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.edgecontainer.v1.VpnConnection()
@@ -4300,7 +4300,7 @@ describe('v1.EdgeContainerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVpnConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

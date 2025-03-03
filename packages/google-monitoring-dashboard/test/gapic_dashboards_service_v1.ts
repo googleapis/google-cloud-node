@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -321,7 +321,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -352,7 +352,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -399,7 +399,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDashboard = stubSimpleCall(
         undefined,
@@ -451,7 +451,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -482,7 +482,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -529,7 +529,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDashboard = stubSimpleCall(
         undefined,
@@ -581,7 +581,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -612,7 +612,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -659,7 +659,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDashboard = stubSimpleCall(
         undefined,
@@ -712,7 +712,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['dashboard', 'name']
       );
       request.dashboard.name = defaultValue1;
-      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -744,7 +744,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['dashboard', 'name']
       );
       request.dashboard.name = defaultValue1;
-      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -792,7 +792,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['dashboard', 'name']
       );
       request.dashboard.name = defaultValue1;
-      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDashboard = stubSimpleCall(
         undefined,
@@ -845,7 +845,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.dashboard.v1.Dashboard()
@@ -884,7 +884,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.dashboard.v1.Dashboard()
@@ -939,7 +939,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDashboards = stubSimpleCall(
         undefined,
@@ -970,7 +970,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.dashboard.v1.Dashboard()
@@ -1030,7 +1030,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDashboards.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1079,7 +1079,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.dashboard.v1.Dashboard()
@@ -1128,7 +1128,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDashboards.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -44,6 +44,10 @@ function main(input, voice, audioConfig) {
    *  Whether and what timepoints are returned in the response.
    */
   // const enableTimePointing = [1,2,3,4]
+  /**
+   *  Advanced voice options.
+   */
+  // const advancedVoiceOptions = {}
 
   // Imports the Texttospeech library
   const {TextToSpeechClient} = require('@google-cloud/text-to-speech').v1beta1;

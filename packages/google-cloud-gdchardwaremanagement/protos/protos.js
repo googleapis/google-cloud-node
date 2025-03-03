@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -79,6 +79,24 @@
                         values[valuesById[0] = "POWER_SUPPLY_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "POWER_SUPPLY_AC"] = 1;
                         values[valuesById[2] = "POWER_SUPPLY_DC"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * Entity enum.
+                     * @name google.cloud.gdchardwaremanagement.v1alpha.Entity
+                     * @enum {number}
+                     * @property {number} ENTITY_UNSPECIFIED=0 ENTITY_UNSPECIFIED value
+                     * @property {number} GOOGLE=1 GOOGLE value
+                     * @property {number} CUSTOMER=2 CUSTOMER value
+                     * @property {number} VENDOR=3 VENDOR value
+                     */
+                    v1alpha.Entity = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ENTITY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "GOOGLE"] = 1;
+                        values[valuesById[2] = "CUSTOMER"] = 2;
+                        values[valuesById[3] = "VENDOR"] = 3;
                         return values;
                     })();
     
@@ -498,6 +516,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 12:
                                 case 3:
                                 case 4:
                                 case 5:
@@ -615,6 +634,10 @@
                             case "SUBMITTED":
                             case 2:
                                 message.state = 2;
+                                break;
+                            case "INFO_COMPLETE":
+                            case 12:
+                                message.state = 12;
                                 break;
                             case "ACCEPTED":
                             case 3:
@@ -828,6 +851,7 @@
                          * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
                          * @property {number} DRAFT=1 DRAFT value
                          * @property {number} SUBMITTED=2 SUBMITTED value
+                         * @property {number} INFO_COMPLETE=12 INFO_COMPLETE value
                          * @property {number} ACCEPTED=3 ACCEPTED value
                          * @property {number} ADDITIONAL_INFO_NEEDED=4 ADDITIONAL_INFO_NEEDED value
                          * @property {number} BUILDING=5 BUILDING value
@@ -843,6 +867,7 @@
                             values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "DRAFT"] = 1;
                             values[valuesById[2] = "SUBMITTED"] = 2;
+                            values[valuesById[12] = "INFO_COMPLETE"] = 12;
                             values[valuesById[3] = "ACCEPTED"] = 3;
                             values[valuesById[4] = "ADDITIONAL_INFO_NEEDED"] = 4;
                             values[valuesById[5] = "BUILDING"] = 5;
@@ -890,6 +915,7 @@
                          * @property {string|null} [googleMapsPinUri] Site googleMapsPinUri
                          * @property {Array.<google.cloud.gdchardwaremanagement.v1alpha.ITimePeriod>|null} [accessTimes] Site accessTimes
                          * @property {string|null} [notes] Site notes
+                         * @property {string|null} [customerSiteId] Site customerSiteId
                          */
     
                         /**
@@ -990,6 +1016,14 @@
                         Site.prototype.notes = "";
     
                         /**
+                         * Site customerSiteId.
+                         * @member {string} customerSiteId
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Site
+                         * @instance
+                         */
+                        Site.prototype.customerSiteId = "";
+    
+                        /**
                          * Creates a new Site instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.Site
@@ -1035,6 +1069,8 @@
                                     $root.google.cloud.gdchardwaremanagement.v1alpha.TimePeriod.encode(message.accessTimes[i], writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             if (message.notes != null && Object.hasOwnProperty.call(message, "notes"))
                                 writer.uint32(/* id 27, wireType 2 =*/218).string(message.notes);
+                            if (message.customerSiteId != null && Object.hasOwnProperty.call(message, "customerSiteId"))
+                                writer.uint32(/* id 28, wireType 2 =*/226).string(message.customerSiteId);
                             return writer;
                         };
     
@@ -1130,6 +1166,10 @@
                                         message.notes = reader.string();
                                         break;
                                     }
+                                case 28: {
+                                        message.customerSiteId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1212,6 +1252,9 @@
                             if (message.notes != null && message.hasOwnProperty("notes"))
                                 if (!$util.isString(message.notes))
                                     return "notes: string expected";
+                            if (message.customerSiteId != null && message.hasOwnProperty("customerSiteId"))
+                                if (!$util.isString(message.customerSiteId))
+                                    return "customerSiteId: string expected";
                             return null;
                         };
     
@@ -1269,6 +1312,8 @@
                             }
                             if (object.notes != null)
                                 message.notes = String(object.notes);
+                            if (object.customerSiteId != null)
+                                message.customerSiteId = String(object.customerSiteId);
                             return message;
                         };
     
@@ -1298,6 +1343,7 @@
                                 object.displayName = "";
                                 object.description = "";
                                 object.notes = "";
+                                object.customerSiteId = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1326,6 +1372,8 @@
                             }
                             if (message.notes != null && message.hasOwnProperty("notes"))
                                 object.notes = message.notes;
+                            if (message.customerSiteId != null && message.hasOwnProperty("customerSiteId"))
+                                object.customerSiteId = message.customerSiteId;
                             return object;
                         };
     
@@ -1923,6 +1971,7 @@
                          * @property {string|null} [zone] Hardware zone
                          * @property {google.type.IDate|null} [requestedInstallationDate] Hardware requestedInstallationDate
                          * @property {google.type.IDate|null} [actualInstallationDate] Hardware actualInstallationDate
+                         * @property {Array.<google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo>|null} [machineInfos] Hardware machineInfos
                          */
     
                         /**
@@ -1935,6 +1984,7 @@
                          */
                         function Hardware(properties) {
                             this.labels = {};
+                            this.machineInfos = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -2078,6 +2128,14 @@
                         Hardware.prototype.actualInstallationDate = null;
     
                         /**
+                         * Hardware machineInfos.
+                         * @member {Array.<google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo>} machineInfos
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware
+                         * @instance
+                         */
+                        Hardware.prototype.machineInfos = $util.emptyArray;
+    
+                        /**
                          * Creates a new Hardware instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware
@@ -2136,6 +2194,9 @@
                                 $root.google.type.Date.encode(message.requestedInstallationDate, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             if (message.actualInstallationDate != null && Object.hasOwnProperty.call(message, "actualInstallationDate"))
                                 $root.google.type.Date.encode(message.actualInstallationDate, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            if (message.machineInfos != null && message.machineInfos.length)
+                                for (var i = 0; i < message.machineInfos.length; ++i)
+                                    $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.encode(message.machineInfos[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             return writer;
                         };
     
@@ -2257,6 +2318,12 @@
                                         message.actualInstallationDate = $root.google.type.Date.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 20: {
+                                        if (!(message.machineInfos && message.machineInfos.length))
+                                            message.machineInfos = [];
+                                        message.machineInfos.push($root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2374,6 +2441,15 @@
                                 if (error)
                                     return "actualInstallationDate." + error;
                             }
+                            if (message.machineInfos != null && message.hasOwnProperty("machineInfos")) {
+                                if (!Array.isArray(message.machineInfos))
+                                    return "machineInfos: array expected";
+                                for (var i = 0; i < message.machineInfos.length; ++i) {
+                                    var error = $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.verify(message.machineInfos[i]);
+                                    if (error)
+                                        return "machineInfos." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -2486,6 +2562,16 @@
                                     throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Hardware.actualInstallationDate: object expected");
                                 message.actualInstallationDate = $root.google.type.Date.fromObject(object.actualInstallationDate);
                             }
+                            if (object.machineInfos) {
+                                if (!Array.isArray(object.machineInfos))
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Hardware.machineInfos: array expected");
+                                message.machineInfos = [];
+                                for (var i = 0; i < object.machineInfos.length; ++i) {
+                                    if (typeof object.machineInfos[i] !== "object")
+                                        throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Hardware.machineInfos: object expected");
+                                    message.machineInfos[i] = $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.fromObject(object.machineInfos[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -2502,6 +2588,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.machineInfos = [];
                             if (options.objects || options.defaults)
                                 object.labels = {};
                             if (options.defaults) {
@@ -2560,6 +2648,11 @@
                                 object.requestedInstallationDate = $root.google.type.Date.toObject(message.requestedInstallationDate, options);
                             if (message.actualInstallationDate != null && message.hasOwnProperty("actualInstallationDate"))
                                 object.actualInstallationDate = $root.google.type.Date.toObject(message.actualInstallationDate, options);
+                            if (message.machineInfos && message.machineInfos.length) {
+                                object.machineInfos = [];
+                                for (var j = 0; j < message.machineInfos.length; ++j)
+                                    object.machineInfos[j] = $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.toObject(message.machineInfos[j], options);
+                            }
                             return object;
                         };
     
@@ -2588,6 +2681,939 @@
                             }
                             return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.Hardware";
                         };
+    
+                        Hardware.MacAddress = (function() {
+    
+                            /**
+                             * Properties of a MacAddress.
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware
+                             * @interface IMacAddress
+                             * @property {string|null} [address] MacAddress address
+                             * @property {google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType|null} [type] MacAddress type
+                             * @property {string|null} [ipv4Address] MacAddress ipv4Address
+                             */
+    
+                            /**
+                             * Constructs a new MacAddress.
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware
+                             * @classdesc Represents a MacAddress.
+                             * @implements IMacAddress
+                             * @constructor
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMacAddress=} [properties] Properties to set
+                             */
+                            function MacAddress(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MacAddress address.
+                             * @member {string} address
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
+                             * @instance
+                             */
+                            MacAddress.prototype.address = "";
+    
+                            /**
+                             * MacAddress type.
+                             * @member {google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType} type
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
+                             * @instance
+                             */
+                            MacAddress.prototype.type = 0;
+    
+                            /**
+                             * MacAddress ipv4Address.
+                             * @member {string} ipv4Address
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
+                             * @instance
+                             */
+                            MacAddress.prototype.ipv4Address = "";
+    
+                            /**
+                             * Creates a new MacAddress instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMacAddress=} [properties] Properties to set
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress} MacAddress instance
+                             */
+                            MacAddress.create = function create(properties) {
+                                return new MacAddress(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MacAddress message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMacAddress} message MacAddress message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MacAddress.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.address != null && Object.hasOwnProperty.call(message, "address"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.address);
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
+                                if (message.ipv4Address != null && Object.hasOwnProperty.call(message, "ipv4Address"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.ipv4Address);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MacAddress message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMacAddress} message MacAddress message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MacAddress.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MacAddress message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress} MacAddress
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MacAddress.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.address = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.ipv4Address = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MacAddress message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress} MacAddress
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MacAddress.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MacAddress message.
+                             * @function verify
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MacAddress.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.address != null && message.hasOwnProperty("address"))
+                                    if (!$util.isString(message.address))
+                                        return "address: string expected";
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.ipv4Address != null && message.hasOwnProperty("ipv4Address"))
+                                    if (!$util.isString(message.ipv4Address))
+                                        return "ipv4Address: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MacAddress message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress} MacAddress
+                             */
+                            MacAddress.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress)
+                                    return object;
+                                var message = new $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress();
+                                if (object.address != null)
+                                    message.address = String(object.address);
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "ADDRESS_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "NIC":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "BMC":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                case "VIRTUAL":
+                                case 3:
+                                    message.type = 3;
+                                    break;
+                                }
+                                if (object.ipv4Address != null)
+                                    message.ipv4Address = String(object.ipv4Address);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MacAddress message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress} message MacAddress
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MacAddress.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.address = "";
+                                    object.type = options.enums === String ? "ADDRESS_TYPE_UNSPECIFIED" : 0;
+                                    object.ipv4Address = "";
+                                }
+                                if (message.address != null && message.hasOwnProperty("address"))
+                                    object.address = message.address;
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType[message.type] === undefined ? message.type : $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType[message.type] : message.type;
+                                if (message.ipv4Address != null && message.hasOwnProperty("ipv4Address"))
+                                    object.ipv4Address = message.ipv4Address;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MacAddress to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MacAddress.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MacAddress
+                             * @function getTypeUrl
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MacAddress.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress";
+                            };
+    
+                            /**
+                             * AddressType enum.
+                             * @name google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType
+                             * @enum {number}
+                             * @property {number} ADDRESS_TYPE_UNSPECIFIED=0 ADDRESS_TYPE_UNSPECIFIED value
+                             * @property {number} NIC=1 NIC value
+                             * @property {number} BMC=2 BMC value
+                             * @property {number} VIRTUAL=3 VIRTUAL value
+                             */
+                            MacAddress.AddressType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ADDRESS_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "NIC"] = 1;
+                                values[valuesById[2] = "BMC"] = 2;
+                                values[valuesById[3] = "VIRTUAL"] = 3;
+                                return values;
+                            })();
+    
+                            return MacAddress;
+                        })();
+    
+                        Hardware.DiskInfo = (function() {
+    
+                            /**
+                             * Properties of a DiskInfo.
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware
+                             * @interface IDiskInfo
+                             * @property {string|null} [manufacturer] DiskInfo manufacturer
+                             * @property {number|null} [slot] DiskInfo slot
+                             * @property {string|null} [serialNumber] DiskInfo serialNumber
+                             * @property {string|null} [psid] DiskInfo psid
+                             * @property {string|null} [partNumber] DiskInfo partNumber
+                             * @property {string|null} [modelNumber] DiskInfo modelNumber
+                             */
+    
+                            /**
+                             * Constructs a new DiskInfo.
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware
+                             * @classdesc Represents a DiskInfo.
+                             * @implements IDiskInfo
+                             * @constructor
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.IDiskInfo=} [properties] Properties to set
+                             */
+                            function DiskInfo(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DiskInfo manufacturer.
+                             * @member {string} manufacturer
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @instance
+                             */
+                            DiskInfo.prototype.manufacturer = "";
+    
+                            /**
+                             * DiskInfo slot.
+                             * @member {number} slot
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @instance
+                             */
+                            DiskInfo.prototype.slot = 0;
+    
+                            /**
+                             * DiskInfo serialNumber.
+                             * @member {string} serialNumber
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @instance
+                             */
+                            DiskInfo.prototype.serialNumber = "";
+    
+                            /**
+                             * DiskInfo psid.
+                             * @member {string} psid
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @instance
+                             */
+                            DiskInfo.prototype.psid = "";
+    
+                            /**
+                             * DiskInfo partNumber.
+                             * @member {string} partNumber
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @instance
+                             */
+                            DiskInfo.prototype.partNumber = "";
+    
+                            /**
+                             * DiskInfo modelNumber.
+                             * @member {string} modelNumber
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @instance
+                             */
+                            DiskInfo.prototype.modelNumber = "";
+    
+                            /**
+                             * Creates a new DiskInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.IDiskInfo=} [properties] Properties to set
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo} DiskInfo instance
+                             */
+                            DiskInfo.create = function create(properties) {
+                                return new DiskInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DiskInfo message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.IDiskInfo} message DiskInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DiskInfo.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.manufacturer != null && Object.hasOwnProperty.call(message, "manufacturer"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.manufacturer);
+                                if (message.slot != null && Object.hasOwnProperty.call(message, "slot"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.slot);
+                                if (message.serialNumber != null && Object.hasOwnProperty.call(message, "serialNumber"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.serialNumber);
+                                if (message.psid != null && Object.hasOwnProperty.call(message, "psid"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.psid);
+                                if (message.partNumber != null && Object.hasOwnProperty.call(message, "partNumber"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.partNumber);
+                                if (message.modelNumber != null && Object.hasOwnProperty.call(message, "modelNumber"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.modelNumber);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DiskInfo message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.IDiskInfo} message DiskInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DiskInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DiskInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo} DiskInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DiskInfo.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.manufacturer = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.slot = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.serialNumber = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.psid = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.partNumber = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.modelNumber = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DiskInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo} DiskInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DiskInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DiskInfo message.
+                             * @function verify
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DiskInfo.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.manufacturer != null && message.hasOwnProperty("manufacturer"))
+                                    if (!$util.isString(message.manufacturer))
+                                        return "manufacturer: string expected";
+                                if (message.slot != null && message.hasOwnProperty("slot"))
+                                    if (!$util.isInteger(message.slot))
+                                        return "slot: integer expected";
+                                if (message.serialNumber != null && message.hasOwnProperty("serialNumber"))
+                                    if (!$util.isString(message.serialNumber))
+                                        return "serialNumber: string expected";
+                                if (message.psid != null && message.hasOwnProperty("psid"))
+                                    if (!$util.isString(message.psid))
+                                        return "psid: string expected";
+                                if (message.partNumber != null && message.hasOwnProperty("partNumber"))
+                                    if (!$util.isString(message.partNumber))
+                                        return "partNumber: string expected";
+                                if (message.modelNumber != null && message.hasOwnProperty("modelNumber"))
+                                    if (!$util.isString(message.modelNumber))
+                                        return "modelNumber: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DiskInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo} DiskInfo
+                             */
+                            DiskInfo.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo)
+                                    return object;
+                                var message = new $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo();
+                                if (object.manufacturer != null)
+                                    message.manufacturer = String(object.manufacturer);
+                                if (object.slot != null)
+                                    message.slot = object.slot | 0;
+                                if (object.serialNumber != null)
+                                    message.serialNumber = String(object.serialNumber);
+                                if (object.psid != null)
+                                    message.psid = String(object.psid);
+                                if (object.partNumber != null)
+                                    message.partNumber = String(object.partNumber);
+                                if (object.modelNumber != null)
+                                    message.modelNumber = String(object.modelNumber);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DiskInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo} message DiskInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DiskInfo.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.manufacturer = "";
+                                    object.slot = 0;
+                                    object.serialNumber = "";
+                                    object.psid = "";
+                                    object.partNumber = "";
+                                    object.modelNumber = "";
+                                }
+                                if (message.manufacturer != null && message.hasOwnProperty("manufacturer"))
+                                    object.manufacturer = message.manufacturer;
+                                if (message.slot != null && message.hasOwnProperty("slot"))
+                                    object.slot = message.slot;
+                                if (message.serialNumber != null && message.hasOwnProperty("serialNumber"))
+                                    object.serialNumber = message.serialNumber;
+                                if (message.psid != null && message.hasOwnProperty("psid"))
+                                    object.psid = message.psid;
+                                if (message.partNumber != null && message.hasOwnProperty("partNumber"))
+                                    object.partNumber = message.partNumber;
+                                if (message.modelNumber != null && message.hasOwnProperty("modelNumber"))
+                                    object.modelNumber = message.modelNumber;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DiskInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DiskInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DiskInfo
+                             * @function getTypeUrl
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DiskInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo";
+                            };
+    
+                            return DiskInfo;
+                        })();
+    
+                        Hardware.MachineInfo = (function() {
+    
+                            /**
+                             * Properties of a MachineInfo.
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware
+                             * @interface IMachineInfo
+                             * @property {string|null} [serviceTag] MachineInfo serviceTag
+                             * @property {Array.<google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMacAddress>|null} [macAddresses] MachineInfo macAddresses
+                             * @property {string|null} [name] MachineInfo name
+                             * @property {Array.<google.cloud.gdchardwaremanagement.v1alpha.Hardware.IDiskInfo>|null} [diskInfos] MachineInfo diskInfos
+                             */
+    
+                            /**
+                             * Constructs a new MachineInfo.
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware
+                             * @classdesc Represents a MachineInfo.
+                             * @implements IMachineInfo
+                             * @constructor
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo=} [properties] Properties to set
+                             */
+                            function MachineInfo(properties) {
+                                this.macAddresses = [];
+                                this.diskInfos = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MachineInfo serviceTag.
+                             * @member {string} serviceTag
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo
+                             * @instance
+                             */
+                            MachineInfo.prototype.serviceTag = "";
+    
+                            /**
+                             * MachineInfo macAddresses.
+                             * @member {Array.<google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMacAddress>} macAddresses
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo
+                             * @instance
+                             */
+                            MachineInfo.prototype.macAddresses = $util.emptyArray;
+    
+                            /**
+                             * MachineInfo name.
+                             * @member {string} name
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo
+                             * @instance
+                             */
+                            MachineInfo.prototype.name = "";
+    
+                            /**
+                             * MachineInfo diskInfos.
+                             * @member {Array.<google.cloud.gdchardwaremanagement.v1alpha.Hardware.IDiskInfo>} diskInfos
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo
+                             * @instance
+                             */
+                            MachineInfo.prototype.diskInfos = $util.emptyArray;
+    
+                            /**
+                             * Creates a new MachineInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo=} [properties] Properties to set
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo} MachineInfo instance
+                             */
+                            MachineInfo.create = function create(properties) {
+                                return new MachineInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MachineInfo message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo} message MachineInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MachineInfo.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.serviceTag != null && Object.hasOwnProperty.call(message, "serviceTag"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceTag);
+                                if (message.macAddresses != null && message.macAddresses.length)
+                                    for (var i = 0; i < message.macAddresses.length; ++i)
+                                        $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.encode(message.macAddresses[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
+                                if (message.diskInfos != null && message.diskInfos.length)
+                                    for (var i = 0; i < message.diskInfos.length; ++i)
+                                        $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo.encode(message.diskInfos[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MachineInfo message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo} message MachineInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MachineInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MachineInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo} MachineInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MachineInfo.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.serviceTag = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.macAddresses && message.macAddresses.length))
+                                                message.macAddresses = [];
+                                            message.macAddresses.push($root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.diskInfos && message.diskInfos.length))
+                                                message.diskInfos = [];
+                                            message.diskInfos.push($root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MachineInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo} MachineInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MachineInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MachineInfo message.
+                             * @function verify
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MachineInfo.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.serviceTag != null && message.hasOwnProperty("serviceTag"))
+                                    if (!$util.isString(message.serviceTag))
+                                        return "serviceTag: string expected";
+                                if (message.macAddresses != null && message.hasOwnProperty("macAddresses")) {
+                                    if (!Array.isArray(message.macAddresses))
+                                        return "macAddresses: array expected";
+                                    for (var i = 0; i < message.macAddresses.length; ++i) {
+                                        var error = $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.verify(message.macAddresses[i]);
+                                        if (error)
+                                            return "macAddresses." + error;
+                                    }
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.diskInfos != null && message.hasOwnProperty("diskInfos")) {
+                                    if (!Array.isArray(message.diskInfos))
+                                        return "diskInfos: array expected";
+                                    for (var i = 0; i < message.diskInfos.length; ++i) {
+                                        var error = $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo.verify(message.diskInfos[i]);
+                                        if (error)
+                                            return "diskInfos." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MachineInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo} MachineInfo
+                             */
+                            MachineInfo.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo)
+                                    return object;
+                                var message = new $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo();
+                                if (object.serviceTag != null)
+                                    message.serviceTag = String(object.serviceTag);
+                                if (object.macAddresses) {
+                                    if (!Array.isArray(object.macAddresses))
+                                        throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.macAddresses: array expected");
+                                    message.macAddresses = [];
+                                    for (var i = 0; i < object.macAddresses.length; ++i) {
+                                        if (typeof object.macAddresses[i] !== "object")
+                                            throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.macAddresses: object expected");
+                                        message.macAddresses[i] = $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.fromObject(object.macAddresses[i]);
+                                    }
+                                }
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.diskInfos) {
+                                    if (!Array.isArray(object.diskInfos))
+                                        throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.diskInfos: array expected");
+                                    message.diskInfos = [];
+                                    for (var i = 0; i < object.diskInfos.length; ++i) {
+                                        if (typeof object.diskInfos[i] !== "object")
+                                            throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.diskInfos: object expected");
+                                        message.diskInfos[i] = $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo.fromObject(object.diskInfos[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MachineInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo} message MachineInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MachineInfo.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.macAddresses = [];
+                                    object.diskInfos = [];
+                                }
+                                if (options.defaults) {
+                                    object.serviceTag = "";
+                                    object.name = "";
+                                }
+                                if (message.serviceTag != null && message.hasOwnProperty("serviceTag"))
+                                    object.serviceTag = message.serviceTag;
+                                if (message.macAddresses && message.macAddresses.length) {
+                                    object.macAddresses = [];
+                                    for (var j = 0; j < message.macAddresses.length; ++j)
+                                        object.macAddresses[j] = $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.toObject(message.macAddresses[j], options);
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.diskInfos && message.diskInfos.length) {
+                                    object.diskInfos = [];
+                                    for (var j = 0; j < message.diskInfos.length; ++j)
+                                        object.diskInfos[j] = $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo.toObject(message.diskInfos[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MachineInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MachineInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MachineInfo
+                             * @function getTypeUrl
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MachineInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo";
+                            };
+    
+                            return MachineInfo;
+                        })();
     
                         /**
                          * State enum.
@@ -2627,6 +3653,8 @@
                          * @property {Object.<string,string>|null} [labels] Comment labels
                          * @property {string|null} [author] Comment author
                          * @property {string|null} [text] Comment text
+                         * @property {google.protobuf.ITimestamp|null} [customerViewedTime] Comment customerViewedTime
+                         * @property {google.cloud.gdchardwaremanagement.v1alpha.Entity|null} [authorEntity] Comment authorEntity
                          */
     
                         /**
@@ -2686,6 +3714,22 @@
                         Comment.prototype.text = "";
     
                         /**
+                         * Comment customerViewedTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} customerViewedTime
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Comment
+                         * @instance
+                         */
+                        Comment.prototype.customerViewedTime = null;
+    
+                        /**
+                         * Comment authorEntity.
+                         * @member {google.cloud.gdchardwaremanagement.v1alpha.Entity} authorEntity
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Comment
+                         * @instance
+                         */
+                        Comment.prototype.authorEntity = 0;
+    
+                        /**
                          * Creates a new Comment instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.Comment
@@ -2720,6 +3764,10 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.author);
                             if (message.text != null && Object.hasOwnProperty.call(message, "text"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.text);
+                            if (message.customerViewedTime != null && Object.hasOwnProperty.call(message, "customerViewedTime"))
+                                $root.google.protobuf.Timestamp.encode(message.customerViewedTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.authorEntity != null && Object.hasOwnProperty.call(message, "authorEntity"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.authorEntity);
                             return writer;
                         };
     
@@ -2793,6 +3841,14 @@
                                         message.text = reader.string();
                                         break;
                                     }
+                                case 6: {
+                                        message.customerViewedTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.authorEntity = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2850,6 +3906,21 @@
                             if (message.text != null && message.hasOwnProperty("text"))
                                 if (!$util.isString(message.text))
                                     return "text: string expected";
+                            if (message.customerViewedTime != null && message.hasOwnProperty("customerViewedTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.customerViewedTime);
+                                if (error)
+                                    return "customerViewedTime." + error;
+                            }
+                            if (message.authorEntity != null && message.hasOwnProperty("authorEntity"))
+                                switch (message.authorEntity) {
+                                default:
+                                    return "authorEntity: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -2883,6 +3954,35 @@
                                 message.author = String(object.author);
                             if (object.text != null)
                                 message.text = String(object.text);
+                            if (object.customerViewedTime != null) {
+                                if (typeof object.customerViewedTime !== "object")
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Comment.customerViewedTime: object expected");
+                                message.customerViewedTime = $root.google.protobuf.Timestamp.fromObject(object.customerViewedTime);
+                            }
+                            switch (object.authorEntity) {
+                            default:
+                                if (typeof object.authorEntity === "number") {
+                                    message.authorEntity = object.authorEntity;
+                                    break;
+                                }
+                                break;
+                            case "ENTITY_UNSPECIFIED":
+                            case 0:
+                                message.authorEntity = 0;
+                                break;
+                            case "GOOGLE":
+                            case 1:
+                                message.authorEntity = 1;
+                                break;
+                            case "CUSTOMER":
+                            case 2:
+                                message.authorEntity = 2;
+                                break;
+                            case "VENDOR":
+                            case 3:
+                                message.authorEntity = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -2906,6 +4006,8 @@
                                 object.createTime = null;
                                 object.author = "";
                                 object.text = "";
+                                object.customerViewedTime = null;
+                                object.authorEntity = options.enums === String ? "ENTITY_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2921,6 +4023,10 @@
                                 object.author = message.author;
                             if (message.text != null && message.hasOwnProperty("text"))
                                 object.text = message.text;
+                            if (message.customerViewedTime != null && message.hasOwnProperty("customerViewedTime"))
+                                object.customerViewedTime = $root.google.protobuf.Timestamp.toObject(message.customerViewedTime, options);
+                            if (message.authorEntity != null && message.hasOwnProperty("authorEntity"))
+                                object.authorEntity = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.Entity[message.authorEntity] === undefined ? message.authorEntity : $root.google.cloud.gdchardwaremanagement.v1alpha.Entity[message.authorEntity] : message.authorEntity;
                             return object;
                         };
     
@@ -3794,6 +4900,8 @@
                          * @property {string|null} [ciqUri] Zone ciqUri
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.IZoneNetworkConfig|null} [networkConfig] Zone networkConfig
                          * @property {string|null} [globallyUniqueId] Zone globallyUniqueId
+                         * @property {Array.<google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig>|null} [subscriptionConfigs] Zone subscriptionConfigs
+                         * @property {google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState|null} [provisioningState] Zone provisioningState
                          */
     
                         /**
@@ -3807,6 +4915,7 @@
                         function Zone(properties) {
                             this.labels = {};
                             this.contacts = [];
+                            this.subscriptionConfigs = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -3894,6 +5003,22 @@
                         Zone.prototype.globallyUniqueId = "";
     
                         /**
+                         * Zone subscriptionConfigs.
+                         * @member {Array.<google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig>} subscriptionConfigs
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Zone
+                         * @instance
+                         */
+                        Zone.prototype.subscriptionConfigs = $util.emptyArray;
+    
+                        /**
+                         * Zone provisioningState.
+                         * @member {google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState} provisioningState
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Zone
+                         * @instance
+                         */
+                        Zone.prototype.provisioningState = 0;
+    
+                        /**
                          * Creates a new Zone instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.Zone
@@ -3939,6 +5064,11 @@
                                 $root.google.cloud.gdchardwaremanagement.v1alpha.ZoneNetworkConfig.encode(message.networkConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.globallyUniqueId != null && Object.hasOwnProperty.call(message, "globallyUniqueId"))
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.globallyUniqueId);
+                            if (message.subscriptionConfigs != null && message.subscriptionConfigs.length)
+                                for (var i = 0; i < message.subscriptionConfigs.length; ++i)
+                                    $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.encode(message.subscriptionConfigs[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.provisioningState != null && Object.hasOwnProperty.call(message, "provisioningState"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.provisioningState);
                             return writer;
                         };
     
@@ -4034,6 +5164,16 @@
                                         message.globallyUniqueId = reader.string();
                                         break;
                                     }
+                                case 13: {
+                                        if (!(message.subscriptionConfigs && message.subscriptionConfigs.length))
+                                            message.subscriptionConfigs = [];
+                                        message.subscriptionConfigs.push($root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 14: {
+                                        message.provisioningState = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4127,6 +5267,25 @@
                             if (message.globallyUniqueId != null && message.hasOwnProperty("globallyUniqueId"))
                                 if (!$util.isString(message.globallyUniqueId))
                                     return "globallyUniqueId: string expected";
+                            if (message.subscriptionConfigs != null && message.hasOwnProperty("subscriptionConfigs")) {
+                                if (!Array.isArray(message.subscriptionConfigs))
+                                    return "subscriptionConfigs: array expected";
+                                for (var i = 0; i < message.subscriptionConfigs.length; ++i) {
+                                    var error = $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.verify(message.subscriptionConfigs[i]);
+                                    if (error)
+                                        return "subscriptionConfigs." + error;
+                                }
+                            }
+                            if (message.provisioningState != null && message.hasOwnProperty("provisioningState"))
+                                switch (message.provisioningState) {
+                                default:
+                                    return "provisioningState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -4222,6 +5381,40 @@
                             }
                             if (object.globallyUniqueId != null)
                                 message.globallyUniqueId = String(object.globallyUniqueId);
+                            if (object.subscriptionConfigs) {
+                                if (!Array.isArray(object.subscriptionConfigs))
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Zone.subscriptionConfigs: array expected");
+                                message.subscriptionConfigs = [];
+                                for (var i = 0; i < object.subscriptionConfigs.length; ++i) {
+                                    if (typeof object.subscriptionConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Zone.subscriptionConfigs: object expected");
+                                    message.subscriptionConfigs[i] = $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.fromObject(object.subscriptionConfigs[i]);
+                                }
+                            }
+                            switch (object.provisioningState) {
+                            default:
+                                if (typeof object.provisioningState === "number") {
+                                    message.provisioningState = object.provisioningState;
+                                    break;
+                                }
+                                break;
+                            case "PROVISIONING_STATE_UNSPECIFIED":
+                            case 0:
+                                message.provisioningState = 0;
+                                break;
+                            case "PROVISIONING_REQUIRED":
+                            case 1:
+                                message.provisioningState = 1;
+                                break;
+                            case "PROVISIONING_IN_PROGRESS":
+                            case 2:
+                                message.provisioningState = 2;
+                                break;
+                            case "PROVISIONING_COMPLETE":
+                            case 3:
+                                message.provisioningState = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -4238,8 +5431,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.contacts = [];
+                                object.subscriptionConfigs = [];
+                            }
                             if (options.objects || options.defaults)
                                 object.labels = {};
                             if (options.defaults) {
@@ -4251,6 +5446,7 @@
                                 object.ciqUri = "";
                                 object.networkConfig = null;
                                 object.globallyUniqueId = "";
+                                object.provisioningState = options.enums === String ? "PROVISIONING_STATE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4279,6 +5475,13 @@
                                 object.networkConfig = $root.google.cloud.gdchardwaremanagement.v1alpha.ZoneNetworkConfig.toObject(message.networkConfig, options);
                             if (message.globallyUniqueId != null && message.hasOwnProperty("globallyUniqueId"))
                                 object.globallyUniqueId = message.globallyUniqueId;
+                            if (message.subscriptionConfigs && message.subscriptionConfigs.length) {
+                                object.subscriptionConfigs = [];
+                                for (var j = 0; j < message.subscriptionConfigs.length; ++j)
+                                    object.subscriptionConfigs[j] = $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.toObject(message.subscriptionConfigs[j], options);
+                            }
+                            if (message.provisioningState != null && message.hasOwnProperty("provisioningState"))
+                                object.provisioningState = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState[message.provisioningState] === undefined ? message.provisioningState : $root.google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState[message.provisioningState] : message.provisioningState;
                             return object;
                         };
     
@@ -4331,6 +5534,24 @@
                             values[valuesById[7] = "CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED"] = 7;
                             values[valuesById[3] = "ACTIVE"] = 3;
                             values[valuesById[4] = "CANCELLED"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * ProvisioningState enum.
+                         * @name google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState
+                         * @enum {number}
+                         * @property {number} PROVISIONING_STATE_UNSPECIFIED=0 PROVISIONING_STATE_UNSPECIFIED value
+                         * @property {number} PROVISIONING_REQUIRED=1 PROVISIONING_REQUIRED value
+                         * @property {number} PROVISIONING_IN_PROGRESS=2 PROVISIONING_IN_PROGRESS value
+                         * @property {number} PROVISIONING_COMPLETE=3 PROVISIONING_COMPLETE value
+                         */
+                        Zone.ProvisioningState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PROVISIONING_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PROVISIONING_REQUIRED"] = 1;
+                            values[valuesById[2] = "PROVISIONING_IN_PROGRESS"] = 2;
+                            values[valuesById[3] = "PROVISIONING_COMPLETE"] = 3;
                             return values;
                         })();
     
@@ -6656,6 +7877,8 @@
                          * @property {string|null} [kubernetesControlPlaneIpv4Range] ZoneNetworkConfig kubernetesControlPlaneIpv4Range
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.ISubnet|null} [managementIpv4Subnet] ZoneNetworkConfig managementIpv4Subnet
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.ISubnet|null} [kubernetesIpv4Subnet] ZoneNetworkConfig kubernetesIpv4Subnet
+                         * @property {Array.<string>|null} [dnsIpv4Addresses] ZoneNetworkConfig dnsIpv4Addresses
+                         * @property {number|null} [kubernetesPrimaryVlanId] ZoneNetworkConfig kubernetesPrimaryVlanId
                          */
     
                         /**
@@ -6667,6 +7890,7 @@
                          * @param {google.cloud.gdchardwaremanagement.v1alpha.IZoneNetworkConfig=} [properties] Properties to set
                          */
                         function ZoneNetworkConfig(properties) {
+                            this.dnsIpv4Addresses = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6714,6 +7938,22 @@
                         ZoneNetworkConfig.prototype.kubernetesIpv4Subnet = null;
     
                         /**
+                         * ZoneNetworkConfig dnsIpv4Addresses.
+                         * @member {Array.<string>} dnsIpv4Addresses
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.ZoneNetworkConfig
+                         * @instance
+                         */
+                        ZoneNetworkConfig.prototype.dnsIpv4Addresses = $util.emptyArray;
+    
+                        /**
+                         * ZoneNetworkConfig kubernetesPrimaryVlanId.
+                         * @member {number} kubernetesPrimaryVlanId
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.ZoneNetworkConfig
+                         * @instance
+                         */
+                        ZoneNetworkConfig.prototype.kubernetesPrimaryVlanId = 0;
+    
+                        /**
                          * Creates a new ZoneNetworkConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.ZoneNetworkConfig
@@ -6747,6 +7987,11 @@
                                 $root.google.cloud.gdchardwaremanagement.v1alpha.Subnet.encode(message.managementIpv4Subnet, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.kubernetesIpv4Subnet != null && Object.hasOwnProperty.call(message, "kubernetesIpv4Subnet"))
                                 $root.google.cloud.gdchardwaremanagement.v1alpha.Subnet.encode(message.kubernetesIpv4Subnet, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.dnsIpv4Addresses != null && message.dnsIpv4Addresses.length)
+                                for (var i = 0; i < message.dnsIpv4Addresses.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.dnsIpv4Addresses[i]);
+                            if (message.kubernetesPrimaryVlanId != null && Object.hasOwnProperty.call(message, "kubernetesPrimaryVlanId"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.kubernetesPrimaryVlanId);
                             return writer;
                         };
     
@@ -6799,6 +8044,16 @@
                                     }
                                 case 5: {
                                         message.kubernetesIpv4Subnet = $root.google.cloud.gdchardwaremanagement.v1alpha.Subnet.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.dnsIpv4Addresses && message.dnsIpv4Addresses.length))
+                                            message.dnsIpv4Addresses = [];
+                                        message.dnsIpv4Addresses.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.kubernetesPrimaryVlanId = reader.int32();
                                         break;
                                     }
                                 default:
@@ -6855,6 +8110,16 @@
                                 if (error)
                                     return "kubernetesIpv4Subnet." + error;
                             }
+                            if (message.dnsIpv4Addresses != null && message.hasOwnProperty("dnsIpv4Addresses")) {
+                                if (!Array.isArray(message.dnsIpv4Addresses))
+                                    return "dnsIpv4Addresses: array expected";
+                                for (var i = 0; i < message.dnsIpv4Addresses.length; ++i)
+                                    if (!$util.isString(message.dnsIpv4Addresses[i]))
+                                        return "dnsIpv4Addresses: string[] expected";
+                            }
+                            if (message.kubernetesPrimaryVlanId != null && message.hasOwnProperty("kubernetesPrimaryVlanId"))
+                                if (!$util.isInteger(message.kubernetesPrimaryVlanId))
+                                    return "kubernetesPrimaryVlanId: integer expected";
                             return null;
                         };
     
@@ -6886,6 +8151,15 @@
                                     throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.ZoneNetworkConfig.kubernetesIpv4Subnet: object expected");
                                 message.kubernetesIpv4Subnet = $root.google.cloud.gdchardwaremanagement.v1alpha.Subnet.fromObject(object.kubernetesIpv4Subnet);
                             }
+                            if (object.dnsIpv4Addresses) {
+                                if (!Array.isArray(object.dnsIpv4Addresses))
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.ZoneNetworkConfig.dnsIpv4Addresses: array expected");
+                                message.dnsIpv4Addresses = [];
+                                for (var i = 0; i < object.dnsIpv4Addresses.length; ++i)
+                                    message.dnsIpv4Addresses[i] = String(object.dnsIpv4Addresses[i]);
+                            }
+                            if (object.kubernetesPrimaryVlanId != null)
+                                message.kubernetesPrimaryVlanId = object.kubernetesPrimaryVlanId | 0;
                             return message;
                         };
     
@@ -6902,12 +8176,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dnsIpv4Addresses = [];
                             if (options.defaults) {
                                 object.machineMgmtIpv4Range = "";
                                 object.kubernetesNodeIpv4Range = "";
                                 object.kubernetesControlPlaneIpv4Range = "";
                                 object.managementIpv4Subnet = null;
                                 object.kubernetesIpv4Subnet = null;
+                                object.kubernetesPrimaryVlanId = 0;
                             }
                             if (message.machineMgmtIpv4Range != null && message.hasOwnProperty("machineMgmtIpv4Range"))
                                 object.machineMgmtIpv4Range = message.machineMgmtIpv4Range;
@@ -6919,6 +8196,13 @@
                                 object.managementIpv4Subnet = $root.google.cloud.gdchardwaremanagement.v1alpha.Subnet.toObject(message.managementIpv4Subnet, options);
                             if (message.kubernetesIpv4Subnet != null && message.hasOwnProperty("kubernetesIpv4Subnet"))
                                 object.kubernetesIpv4Subnet = $root.google.cloud.gdchardwaremanagement.v1alpha.Subnet.toObject(message.kubernetesIpv4Subnet, options);
+                            if (message.dnsIpv4Addresses && message.dnsIpv4Addresses.length) {
+                                object.dnsIpv4Addresses = [];
+                                for (var j = 0; j < message.dnsIpv4Addresses.length; ++j)
+                                    object.dnsIpv4Addresses[j] = message.dnsIpv4Addresses[j];
+                            }
+                            if (message.kubernetesPrimaryVlanId != null && message.hasOwnProperty("kubernetesPrimaryVlanId"))
+                                object.kubernetesPrimaryVlanId = message.kubernetesPrimaryVlanId;
                             return object;
                         };
     
@@ -8261,6 +9545,317 @@
                         return HardwareLocation;
                     })();
     
+                    v1alpha.SubscriptionConfig = (function() {
+    
+                        /**
+                         * Properties of a SubscriptionConfig.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha
+                         * @interface ISubscriptionConfig
+                         * @property {string|null} [subscriptionId] SubscriptionConfig subscriptionId
+                         * @property {string|null} [billingId] SubscriptionConfig billingId
+                         * @property {google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.SubscriptionState|null} [state] SubscriptionConfig state
+                         */
+    
+                        /**
+                         * Constructs a new SubscriptionConfig.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha
+                         * @classdesc Represents a SubscriptionConfig.
+                         * @implements ISubscriptionConfig
+                         * @constructor
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig=} [properties] Properties to set
+                         */
+                        function SubscriptionConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SubscriptionConfig subscriptionId.
+                         * @member {string} subscriptionId
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @instance
+                         */
+                        SubscriptionConfig.prototype.subscriptionId = "";
+    
+                        /**
+                         * SubscriptionConfig billingId.
+                         * @member {string} billingId
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @instance
+                         */
+                        SubscriptionConfig.prototype.billingId = "";
+    
+                        /**
+                         * SubscriptionConfig state.
+                         * @member {google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.SubscriptionState} state
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @instance
+                         */
+                        SubscriptionConfig.prototype.state = 0;
+    
+                        /**
+                         * Creates a new SubscriptionConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig=} [properties] Properties to set
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig} SubscriptionConfig instance
+                         */
+                        SubscriptionConfig.create = function create(properties) {
+                            return new SubscriptionConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SubscriptionConfig message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig} message SubscriptionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SubscriptionConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.subscriptionId != null && Object.hasOwnProperty.call(message, "subscriptionId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.subscriptionId);
+                            if (message.billingId != null && Object.hasOwnProperty.call(message, "billingId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.billingId);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SubscriptionConfig message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig} message SubscriptionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SubscriptionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SubscriptionConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig} SubscriptionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SubscriptionConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.subscriptionId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.billingId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SubscriptionConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig} SubscriptionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SubscriptionConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SubscriptionConfig message.
+                         * @function verify
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SubscriptionConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.subscriptionId != null && message.hasOwnProperty("subscriptionId"))
+                                if (!$util.isString(message.subscriptionId))
+                                    return "subscriptionId: string expected";
+                            if (message.billingId != null && message.hasOwnProperty("billingId"))
+                                if (!$util.isString(message.billingId))
+                                    return "billingId: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SubscriptionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig} SubscriptionConfig
+                         */
+                        SubscriptionConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig)
+                                return object;
+                            var message = new $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig();
+                            if (object.subscriptionId != null)
+                                message.subscriptionId = String(object.subscriptionId);
+                            if (object.billingId != null)
+                                message.billingId = String(object.billingId);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "SUBSCRIPTION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ACTIVE":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "INACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "ERROR":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "FAILED_TO_RETRIEVE":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "COMPLETED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SubscriptionConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig} message SubscriptionConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SubscriptionConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.subscriptionId = "";
+                                object.billingId = "";
+                                object.state = options.enums === String ? "SUBSCRIPTION_STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.subscriptionId != null && message.hasOwnProperty("subscriptionId"))
+                                object.subscriptionId = message.subscriptionId;
+                            if (message.billingId != null && message.hasOwnProperty("billingId"))
+                                object.billingId = message.billingId;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.SubscriptionState[message.state] === undefined ? message.state : $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.SubscriptionState[message.state] : message.state;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SubscriptionConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SubscriptionConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SubscriptionConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SubscriptionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig";
+                        };
+    
+                        /**
+                         * SubscriptionState enum.
+                         * @name google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.SubscriptionState
+                         * @enum {number}
+                         * @property {number} SUBSCRIPTION_STATE_UNSPECIFIED=0 SUBSCRIPTION_STATE_UNSPECIFIED value
+                         * @property {number} ACTIVE=1 ACTIVE value
+                         * @property {number} INACTIVE=2 INACTIVE value
+                         * @property {number} ERROR=3 ERROR value
+                         * @property {number} FAILED_TO_RETRIEVE=4 FAILED_TO_RETRIEVE value
+                         * @property {number} COMPLETED=5 COMPLETED value
+                         */
+                        SubscriptionConfig.SubscriptionState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SUBSCRIPTION_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ACTIVE"] = 1;
+                            values[valuesById[2] = "INACTIVE"] = 2;
+                            values[valuesById[3] = "ERROR"] = 3;
+                            values[valuesById[4] = "FAILED_TO_RETRIEVE"] = 4;
+                            values[valuesById[5] = "COMPLETED"] = 5;
+                            return values;
+                        })();
+    
+                        return SubscriptionConfig;
+                    })();
+    
                     v1alpha.GDCHardwareManagement = (function() {
     
                         /**
@@ -8619,6 +10214,39 @@
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
                          * @instance
                          * @param {google.cloud.gdchardwaremanagement.v1alpha.IUpdateSiteRequest} request UpdateSiteRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement|deleteSite}.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @typedef DeleteSiteCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteSite.
+                         * @function deleteSite
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @instance
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest} request DeleteSiteRequest message or plain object
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteSiteCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(GDCHardwareManagement.prototype.deleteSite = function deleteSite(request, callback) {
+                            return this.rpcCall(deleteSite, $root.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteSite" });
+    
+                        /**
+                         * Calls DeleteSite.
+                         * @function deleteSite
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @instance
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest} request DeleteSiteRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
@@ -9049,6 +10677,39 @@
                          * @instance
                          * @param {google.cloud.gdchardwaremanagement.v1alpha.ICreateCommentRequest} request CreateCommentRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement|recordActionOnComment}.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @typedef RecordActionOnCommentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.Comment} [response] Comment
+                         */
+    
+                        /**
+                         * Calls RecordActionOnComment.
+                         * @function recordActionOnComment
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @instance
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest} request RecordActionOnCommentRequest message or plain object
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RecordActionOnCommentCallback} callback Node-style callback called with the error, if any, and Comment
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(GDCHardwareManagement.prototype.recordActionOnComment = function recordActionOnComment(request, callback) {
+                            return this.rpcCall(recordActionOnComment, $root.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest, $root.google.cloud.gdchardwaremanagement.v1alpha.Comment, request, callback);
+                        }, "name", { value: "RecordActionOnComment" });
+    
+                        /**
+                         * Calls RecordActionOnComment.
+                         * @function recordActionOnComment
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @instance
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest} request RecordActionOnCommentRequest message or plain object
+                         * @returns {Promise<google.cloud.gdchardwaremanagement.v1alpha.Comment>} Promise
                          * @variation 2
                          */
     
@@ -10968,6 +12629,7 @@
                          * @interface ISubmitOrderRequest
                          * @property {string|null} [name] SubmitOrderRequest name
                          * @property {string|null} [requestId] SubmitOrderRequest requestId
+                         * @property {google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type|null} [type] SubmitOrderRequest type
                          */
     
                         /**
@@ -11002,6 +12664,14 @@
                         SubmitOrderRequest.prototype.requestId = "";
     
                         /**
+                         * SubmitOrderRequest type.
+                         * @member {google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type} type
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest
+                         * @instance
+                         */
+                        SubmitOrderRequest.prototype.type = 0;
+    
+                        /**
                          * Creates a new SubmitOrderRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest
@@ -11029,6 +12699,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
                             return writer;
                         };
     
@@ -11069,6 +12741,10 @@
                                     }
                                 case 2: {
                                         message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.type = reader.int32();
                                         break;
                                     }
                                 default:
@@ -11112,6 +12788,15 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -11131,6 +12816,26 @@
                                 message.name = String(object.name);
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "INFO_PENDING":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "INFO_COMPLETE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -11150,11 +12855,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.requestId = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type[message.type] === undefined ? message.type : $root.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type[message.type] : message.type;
                             return object;
                         };
     
@@ -11183,6 +12891,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest";
                         };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} INFO_PENDING=1 INFO_PENDING value
+                         * @property {number} INFO_COMPLETE=2 INFO_COMPLETE value
+                         */
+                        SubmitOrderRequest.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INFO_PENDING"] = 1;
+                            values[valuesById[2] = "INFO_COMPLETE"] = 2;
+                            return values;
+                        })();
     
                         return SubmitOrderRequest;
                     })();
@@ -12510,6 +14234,233 @@
                         };
     
                         return UpdateSiteRequest;
+                    })();
+    
+                    v1alpha.DeleteSiteRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteSiteRequest.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha
+                         * @interface IDeleteSiteRequest
+                         * @property {string|null} [name] DeleteSiteRequest name
+                         * @property {string|null} [requestId] DeleteSiteRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSiteRequest.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha
+                         * @classdesc Represents a DeleteSiteRequest.
+                         * @implements IDeleteSiteRequest
+                         * @constructor
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest=} [properties] Properties to set
+                         */
+                        function DeleteSiteRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSiteRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest
+                         * @instance
+                         */
+                        DeleteSiteRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteSiteRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest
+                         * @instance
+                         */
+                        DeleteSiteRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteSiteRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest=} [properties] Properties to set
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest} DeleteSiteRequest instance
+                         */
+                        DeleteSiteRequest.create = function create(properties) {
+                            return new DeleteSiteRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSiteRequest message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest} message DeleteSiteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSiteRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSiteRequest message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest} message DeleteSiteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSiteRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSiteRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest} DeleteSiteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSiteRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSiteRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest} DeleteSiteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSiteRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSiteRequest message.
+                         * @function verify
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSiteRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSiteRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest} DeleteSiteRequest
+                         */
+                        DeleteSiteRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest)
+                                return object;
+                            var message = new $root.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSiteRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest} message DeleteSiteRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSiteRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSiteRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSiteRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteSiteRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteSiteRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest";
+                        };
+    
+                        return DeleteSiteRequest;
                     })();
     
                     v1alpha.ListHardwareGroupsRequest = (function() {
@@ -16658,6 +18609,273 @@
                         return CreateCommentRequest;
                     })();
     
+                    v1alpha.RecordActionOnCommentRequest = (function() {
+    
+                        /**
+                         * Properties of a RecordActionOnCommentRequest.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha
+                         * @interface IRecordActionOnCommentRequest
+                         * @property {string|null} [name] RecordActionOnCommentRequest name
+                         * @property {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType|null} [actionType] RecordActionOnCommentRequest actionType
+                         */
+    
+                        /**
+                         * Constructs a new RecordActionOnCommentRequest.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha
+                         * @classdesc Represents a RecordActionOnCommentRequest.
+                         * @implements IRecordActionOnCommentRequest
+                         * @constructor
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest=} [properties] Properties to set
+                         */
+                        function RecordActionOnCommentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RecordActionOnCommentRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @instance
+                         */
+                        RecordActionOnCommentRequest.prototype.name = "";
+    
+                        /**
+                         * RecordActionOnCommentRequest actionType.
+                         * @member {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType} actionType
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @instance
+                         */
+                        RecordActionOnCommentRequest.prototype.actionType = 0;
+    
+                        /**
+                         * Creates a new RecordActionOnCommentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest} RecordActionOnCommentRequest instance
+                         */
+                        RecordActionOnCommentRequest.create = function create(properties) {
+                            return new RecordActionOnCommentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RecordActionOnCommentRequest message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest} message RecordActionOnCommentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RecordActionOnCommentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.actionType != null && Object.hasOwnProperty.call(message, "actionType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.actionType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RecordActionOnCommentRequest message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest} message RecordActionOnCommentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RecordActionOnCommentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RecordActionOnCommentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest} RecordActionOnCommentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RecordActionOnCommentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.actionType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RecordActionOnCommentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest} RecordActionOnCommentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RecordActionOnCommentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RecordActionOnCommentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RecordActionOnCommentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.actionType != null && message.hasOwnProperty("actionType"))
+                                switch (message.actionType) {
+                                default:
+                                    return "actionType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RecordActionOnCommentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest} RecordActionOnCommentRequest
+                         */
+                        RecordActionOnCommentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest)
+                                return object;
+                            var message = new $root.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.actionType) {
+                            default:
+                                if (typeof object.actionType === "number") {
+                                    message.actionType = object.actionType;
+                                    break;
+                                }
+                                break;
+                            case "ACTION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.actionType = 0;
+                                break;
+                            case "READ":
+                            case 1:
+                                message.actionType = 1;
+                                break;
+                            case "UNREAD":
+                            case 2:
+                                message.actionType = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RecordActionOnCommentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest} message RecordActionOnCommentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RecordActionOnCommentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.actionType = options.enums === String ? "ACTION_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.actionType != null && message.hasOwnProperty("actionType"))
+                                object.actionType = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType[message.actionType] === undefined ? message.actionType : $root.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType[message.actionType] : message.actionType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RecordActionOnCommentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RecordActionOnCommentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RecordActionOnCommentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RecordActionOnCommentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest";
+                        };
+    
+                        /**
+                         * ActionType enum.
+                         * @name google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType
+                         * @enum {number}
+                         * @property {number} ACTION_TYPE_UNSPECIFIED=0 ACTION_TYPE_UNSPECIFIED value
+                         * @property {number} READ=1 READ value
+                         * @property {number} UNREAD=2 UNREAD value
+                         */
+                        RecordActionOnCommentRequest.ActionType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ACTION_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "READ"] = 1;
+                            values[valuesById[2] = "UNREAD"] = 2;
+                            return values;
+                        })();
+    
+                        return RecordActionOnCommentRequest;
+                    })();
+    
                     v1alpha.ListChangeLogEntriesRequest = (function() {
     
                         /**
@@ -19793,6 +22011,7 @@
                          * @property {string|null} [name] SignalZoneStateRequest name
                          * @property {string|null} [requestId] SignalZoneStateRequest requestId
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal|null} [stateSignal] SignalZoneStateRequest stateSignal
+                         * @property {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal|null} [provisioningStateSignal] SignalZoneStateRequest provisioningStateSignal
                          */
     
                         /**
@@ -19835,6 +22054,14 @@
                         SignalZoneStateRequest.prototype.stateSignal = 0;
     
                         /**
+                         * SignalZoneStateRequest provisioningStateSignal.
+                         * @member {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal} provisioningStateSignal
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest
+                         * @instance
+                         */
+                        SignalZoneStateRequest.prototype.provisioningStateSignal = 0;
+    
+                        /**
                          * Creates a new SignalZoneStateRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest
@@ -19864,6 +22091,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
                             if (message.stateSignal != null && Object.hasOwnProperty.call(message, "stateSignal"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.stateSignal);
+                            if (message.provisioningStateSignal != null && Object.hasOwnProperty.call(message, "provisioningStateSignal"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.provisioningStateSignal);
                             return writer;
                         };
     
@@ -19908,6 +22137,10 @@
                                     }
                                 case 3: {
                                         message.stateSignal = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.provisioningStateSignal = reader.int32();
                                         break;
                                     }
                                 default:
@@ -19957,6 +22190,16 @@
                                     return "stateSignal: enum value expected";
                                 case 0:
                                 case 1:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.provisioningStateSignal != null && message.hasOwnProperty("provisioningStateSignal"))
+                                switch (message.provisioningStateSignal) {
+                                default:
+                                    return "provisioningStateSignal: enum value expected";
+                                case 0:
+                                case 1:
                                 case 2:
                                     break;
                                 }
@@ -19990,6 +22233,10 @@
                             case 0:
                                 message.stateSignal = 0;
                                 break;
+                            case "FACTORY_TURNUP_CHECKS_PASSED":
+                            case 1:
+                                message.stateSignal = 1;
+                                break;
                             case "READY_FOR_SITE_TURNUP":
                             case 1:
                                 message.stateSignal = 1;
@@ -19997,6 +22244,26 @@
                             case "FACTORY_TURNUP_CHECKS_FAILED":
                             case 2:
                                 message.stateSignal = 2;
+                                break;
+                            }
+                            switch (object.provisioningStateSignal) {
+                            default:
+                                if (typeof object.provisioningStateSignal === "number") {
+                                    message.provisioningStateSignal = object.provisioningStateSignal;
+                                    break;
+                                }
+                                break;
+                            case "PROVISIONING_STATE_SIGNAL_UNSPECIFIED":
+                            case 0:
+                                message.provisioningStateSignal = 0;
+                                break;
+                            case "PROVISIONING_IN_PROGRESS":
+                            case 1:
+                                message.provisioningStateSignal = 1;
+                                break;
+                            case "PROVISIONING_COMPLETE":
+                            case 2:
+                                message.provisioningStateSignal = 2;
                                 break;
                             }
                             return message;
@@ -20019,6 +22286,7 @@
                                 object.name = "";
                                 object.requestId = "";
                                 object.stateSignal = options.enums === String ? "STATE_SIGNAL_UNSPECIFIED" : 0;
+                                object.provisioningStateSignal = options.enums === String ? "PROVISIONING_STATE_SIGNAL_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -20026,6 +22294,8 @@
                                 object.requestId = message.requestId;
                             if (message.stateSignal != null && message.hasOwnProperty("stateSignal"))
                                 object.stateSignal = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal[message.stateSignal] === undefined ? message.stateSignal : $root.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal[message.stateSignal] : message.stateSignal;
+                            if (message.provisioningStateSignal != null && message.hasOwnProperty("provisioningStateSignal"))
+                                object.provisioningStateSignal = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal[message.provisioningStateSignal] === undefined ? message.provisioningStateSignal : $root.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal[message.provisioningStateSignal] : message.provisioningStateSignal;
                             return object;
                         };
     
@@ -20060,14 +22330,32 @@
                          * @name google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal
                          * @enum {number}
                          * @property {number} STATE_SIGNAL_UNSPECIFIED=0 STATE_SIGNAL_UNSPECIFIED value
+                         * @property {number} FACTORY_TURNUP_CHECKS_PASSED=1 FACTORY_TURNUP_CHECKS_PASSED value
                          * @property {number} READY_FOR_SITE_TURNUP=1 READY_FOR_SITE_TURNUP value
                          * @property {number} FACTORY_TURNUP_CHECKS_FAILED=2 FACTORY_TURNUP_CHECKS_FAILED value
                          */
                         SignalZoneStateRequest.StateSignal = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "STATE_SIGNAL_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "READY_FOR_SITE_TURNUP"] = 1;
+                            values[valuesById[1] = "FACTORY_TURNUP_CHECKS_PASSED"] = 1;
+                            values["READY_FOR_SITE_TURNUP"] = 1;
                             values[valuesById[2] = "FACTORY_TURNUP_CHECKS_FAILED"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ProvisioningStateSignal enum.
+                         * @name google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal
+                         * @enum {number}
+                         * @property {number} PROVISIONING_STATE_SIGNAL_UNSPECIFIED=0 PROVISIONING_STATE_SIGNAL_UNSPECIFIED value
+                         * @property {number} PROVISIONING_IN_PROGRESS=1 PROVISIONING_IN_PROGRESS value
+                         * @property {number} PROVISIONING_COMPLETE=2 PROVISIONING_COMPLETE value
+                         */
+                        SignalZoneStateRequest.ProvisioningStateSignal = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PROVISIONING_STATE_SIGNAL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PROVISIONING_IN_PROGRESS"] = 1;
+                            values[valuesById[2] = "PROVISIONING_COMPLETE"] = 2;
                             return values;
                         })();
     

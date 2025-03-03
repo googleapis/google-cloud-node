@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -355,7 +355,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ManagedService()
       );
@@ -386,7 +386,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ManagedService()
       );
@@ -433,7 +433,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getService = stubSimpleCall(
         undefined,
@@ -490,7 +490,7 @@ describe('v1.ServiceManagerClient', () => {
         ['configId']
       );
       request.configId = defaultValue2;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}&config_id=${defaultValue2}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}&config_id=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.Service()
       );
@@ -526,7 +526,7 @@ describe('v1.ServiceManagerClient', () => {
         ['configId']
       );
       request.configId = defaultValue2;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}&config_id=${defaultValue2}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}&config_id=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.Service()
       );
@@ -575,7 +575,7 @@ describe('v1.ServiceManagerClient', () => {
         ['configId']
       );
       request.configId = defaultValue2;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}&config_id=${defaultValue2}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}&config_id=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getServiceConfig = stubSimpleCall(
         undefined,
@@ -632,7 +632,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.Service()
       );
@@ -664,7 +664,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.Service()
       );
@@ -708,7 +708,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServiceConfig = stubSimpleCall(
         undefined,
@@ -765,7 +765,7 @@ describe('v1.ServiceManagerClient', () => {
         ['rolloutId']
       );
       request.rolloutId = defaultValue2;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}&rollout_id=${defaultValue2}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}&rollout_id=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.Rollout()
       );
@@ -801,7 +801,7 @@ describe('v1.ServiceManagerClient', () => {
         ['rolloutId']
       );
       request.rolloutId = defaultValue2;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}&rollout_id=${defaultValue2}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}&rollout_id=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.Rollout()
       );
@@ -853,7 +853,7 @@ describe('v1.ServiceManagerClient', () => {
         ['rolloutId']
       );
       request.rolloutId = defaultValue2;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}&rollout_id=${defaultValue2}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}&rollout_id=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getServiceRollout = stubSimpleCall(
         undefined,
@@ -1132,7 +1132,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1165,7 +1165,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1219,7 +1219,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteService = stubLongRunningCall(
         undefined,
@@ -1250,7 +1250,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteService = stubLongRunningCall(
         undefined,
@@ -1326,7 +1326,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1359,7 +1359,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1413,7 +1413,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteService = stubLongRunningCall(
         undefined,
@@ -1444,7 +1444,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteService = stubLongRunningCall(
         undefined,
@@ -1520,7 +1520,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1553,7 +1553,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1607,7 +1607,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.submitConfigSource = stubLongRunningCall(
         undefined,
@@ -1638,7 +1638,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.submitConfigSource = stubLongRunningCall(
         undefined,
@@ -1714,7 +1714,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1747,7 +1747,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1801,7 +1801,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServiceRollout = stubLongRunningCall(
         undefined,
@@ -1832,7 +1832,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServiceRollout = stubLongRunningCall(
         undefined,
@@ -2147,7 +2147,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.Service()),
         generateSampleMessage(new protos.google.api.Service()),
@@ -2181,7 +2181,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.Service()),
         generateSampleMessage(new protos.google.api.Service()),
@@ -2230,7 +2230,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listServiceConfigs = stubSimpleCall(
         undefined,
@@ -2261,7 +2261,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.Service()),
         generateSampleMessage(new protos.google.api.Service()),
@@ -2312,7 +2312,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServiceConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2358,7 +2358,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.Service()),
         generateSampleMessage(new protos.google.api.Service()),
@@ -2401,7 +2401,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServiceConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2443,7 +2443,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.servicemanagement.v1.Rollout()
@@ -2483,7 +2483,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.servicemanagement.v1.Rollout()
@@ -2538,7 +2538,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listServiceRollouts = stubSimpleCall(
         undefined,
@@ -2569,7 +2569,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.servicemanagement.v1.Rollout()
@@ -2629,7 +2629,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServiceRollouts.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2678,7 +2678,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.servicemanagement.v1.Rollout()
@@ -2727,7 +2727,7 @@ describe('v1.ServiceManagerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServiceRollouts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

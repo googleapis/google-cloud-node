@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -1075,6 +1078,58 @@
                             }
                           }
                         },
+                        "ScheduleOptionsV2": {
+                          "oneofs": {
+                            "schedule": {
+                              "oneof": [
+                                "timeBasedSchedule",
+                                "manualSchedule",
+                                "eventDrivenSchedule"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "timeBasedSchedule": {
+                              "type": "TimeBasedSchedule",
+                              "id": 1
+                            },
+                            "manualSchedule": {
+                              "type": "ManualSchedule",
+                              "id": 2
+                            },
+                            "eventDrivenSchedule": {
+                              "type": "EventDrivenSchedule",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "TimeBasedSchedule": {
+                          "fields": {
+                            "schedule": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2
+                            },
+                            "endTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ManualSchedule": {
+                          "fields": {}
+                        },
+                        "EventDrivenSchedule": {
+                          "fields": {
+                            "pubsubSubscription": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
                         "UserInfo": {
                           "oneofs": {
                             "_email": {
@@ -1142,6 +1197,10 @@
                               "type": "ScheduleOptions",
                               "id": 24
                             },
+                            "scheduleOptionsV2": {
+                              "type": "ScheduleOptionsV2",
+                              "id": 31
+                            },
                             "dataRefreshWindowDays": {
                               "type": "int32",
                               "id": 12
@@ -1201,6 +1260,13 @@
                             "encryptionConfiguration": {
                               "type": "EncryptionConfiguration",
                               "id": 28
+                            },
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 32,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },

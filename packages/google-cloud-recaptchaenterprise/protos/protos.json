@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -209,6 +212,44 @@
                             },
                             {
                               "(google.api.method_signature)": "name,ip_override_data"
+                            }
+                          ]
+                        },
+                        "RemoveIpOverride": {
+                          "requestType": "RemoveIpOverrideRequest",
+                          "responseType": "RemoveIpOverrideResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/keys/*}:removeIpOverride",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,ip_override_data"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/keys/*}:removeIpOverride",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,ip_override_data"
+                            }
+                          ]
+                        },
+                        "ListIpOverrides": {
+                          "requestType": "ListIpOverridesRequest",
+                          "responseType": "ListIpOverridesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/keys/*}:listIpOverrides",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/keys/*}:listIpOverrides"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
                             }
                           ]
                         },
@@ -1245,6 +1286,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "challenge": {
+                          "type": "Challenge",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1258,6 +1306,14 @@
                             "LOW_CONFIDENCE_SCORE": 5,
                             "SUSPECTED_CARDING": 6,
                             "SUSPECTED_CHARGEBACK": 7
+                          }
+                        },
+                        "Challenge": {
+                          "values": {
+                            "CHALLENGE_UNSPECIFIED": 0,
+                            "NOCAPTCHA": 1,
+                            "PASSED": 2,
+                            "FAILED": 3
                           }
                         }
                       }
@@ -2409,6 +2465,67 @@
                     "AddIpOverrideResponse": {
                       "fields": {}
                     },
+                    "RemoveIpOverrideRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
+                          }
+                        },
+                        "ipOverrideData": {
+                          "type": "IpOverrideData",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RemoveIpOverrideResponse": {
+                      "fields": {}
+                    },
+                    "ListIpOverridesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListIpOverridesResponse": {
+                      "fields": {
+                        "ipOverrides": {
+                          "rule": "repeated",
+                          "type": "IpOverrideData",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "RelatedAccountGroupMembership": {
                       "options": {
                         "(google.api.resource).type": "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership",
@@ -2486,7 +2603,8 @@
                             "WAF_SERVICE_UNSPECIFIED": 0,
                             "CA": 1,
                             "FASTLY": 3,
-                            "CLOUDFLARE": 4
+                            "CLOUDFLARE": 4,
+                            "AKAMAI": 5
                           }
                         }
                       }

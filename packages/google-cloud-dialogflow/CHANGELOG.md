@@ -4,6 +4,50 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [6.14.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.13.0...dialogflow-v6.14.0) (2025-01-23)
+
+
+### Features
+
+* [dialogflow] add Model Armor API ([#5952](https://github.com/googleapis/google-cloud-node/issues/5952)) ([d765c81](https://github.com/googleapis/google-cloud-node/commit/d765c81cca8ce084f5a9505e717962e8ed649dfd))
+
+## [6.13.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.12.0...dialogflow-v6.13.0) (2024-12-18)
+
+
+### Features
+
+* [dialogflow] add new fields for delivering intermediate transcriptions through PubSub ([#5881](https://github.com/googleapis/google-cloud-node/issues/5881)) ([7c8a115](https://github.com/googleapis/google-cloud-node/commit/7c8a115c88865b3aadfa649b3b2a89207d5502c2))
+* [dialogflow] make TrainingPhrase name field output-only ([#5861](https://github.com/googleapis/google-cloud-node/issues/5861)) ([7238530](https://github.com/googleapis/google-cloud-node/commit/72385303b7b0d8f3f5462d05c490f0200415fc20))
+* [dialogflow] properly mark TrainingPhrase name field output-only ([#5862](https://github.com/googleapis/google-cloud-node/issues/5862)) ([522c389](https://github.com/googleapis/google-cloud-node/commit/522c389d50d175c26afcbe513e98824eb9e190e9))
+
+## [6.12.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.11.0...dialogflow-v6.12.0) (2024-11-21)
+
+
+### Features
+
+* [dialogflow] add options of query_source, search_config, end_user_metadata and exact_search ([#5813](https://github.com/googleapis/google-cloud-node/issues/5813)) ([b0358c6](https://github.com/googleapis/google-cloud-node/commit/b0358c61fa5a644681d922a4de1de405d0fddc28))
+
+## [6.11.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.10.0...dialogflow-v6.11.0) (2024-11-14)
+
+
+### Features
+
+* [dialogflow] add options of query_source, search_config, end_user_metadata and exact_search ([#5789](https://github.com/googleapis/google-cloud-node/issues/5789)) ([25a2241](https://github.com/googleapis/google-cloud-node/commit/25a2241eac52e8e501d81021f227387a08197ad1))
+
+## [6.10.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.9.0...dialogflow-v6.10.0) (2024-10-10)
+
+
+### Features
+
+* [dialogflow] created new boolean fields in conversation dataset for zone isolation and zone separation compliance status ([#5710](https://github.com/googleapis/google-cloud-node/issues/5710)) ([fd737ec](https://github.com/googleapis/google-cloud-node/commit/fd737ecc5e6681fbd97d7a20e39cbbdb4ec0595a))
+
+## [6.9.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.8.0...dialogflow-v6.9.0) (2024-09-24)
+
+
+### Features
+
+* [dialogflow] created new boolean fields in conversation model for zone isolation and zone separation compliance status ([#5693](https://github.com/googleapis/google-cloud-node/issues/5693)) ([0d37602](https://github.com/googleapis/google-cloud-node/commit/0d37602ddd7aa47895a44838e01e4476ce91d1cf))
+
 ## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.7.0...dialogflow-v6.8.0) (2024-08-09)
 
 

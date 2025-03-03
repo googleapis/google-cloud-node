@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -360,7 +360,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -402,7 +402,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -460,7 +460,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addRule = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.addRule(request), expectedError);
@@ -531,7 +531,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -573,7 +573,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -631,7 +631,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
@@ -702,7 +702,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SecurityPolicy()
       );
@@ -743,7 +743,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SecurityPolicy()
       );
@@ -799,7 +799,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -869,7 +869,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SecurityPolicyRule()
       );
@@ -911,7 +911,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SecurityPolicyRule()
       );
@@ -969,7 +969,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRule = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getRule(request), expectedError);
@@ -1035,7 +1035,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1072,7 +1072,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1125,7 +1125,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -1191,7 +1191,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1232,7 +1232,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1288,7 +1288,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.patch(request), expectedError);
@@ -1358,7 +1358,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1400,7 +1400,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1458,7 +1458,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patchRule = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.patchRule(request), expectedError);
@@ -1529,7 +1529,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1571,7 +1571,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1629,7 +1629,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&security_policy=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeRule = stubSimpleCall(
         undefined,
@@ -1677,6 +1677,177 @@ describe('v1.RegionSecurityPoliciesClient', () => {
     });
   });
 
+  describe('setLabels', () => {
+    it('invokes setLabels without error', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setLabels = stubSimpleCall(expectedResponse);
+      const [response] = await client.setLabels(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setLabels without error using callback', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setLabels =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setLabels(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setLabels with error', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setLabels = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.setLabels(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setLabels with closed client', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionSecurityPolicyRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setLabels(request), expectedError);
+    });
+  });
+
   describe('list', () => {
     it('invokes list without error', async () => {
       const client =
@@ -1698,7 +1869,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.SecurityPolicy()
@@ -1742,7 +1913,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.SecurityPolicy()
@@ -1801,7 +1972,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -1834,7 +2005,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.SecurityPolicy()
@@ -1900,7 +2071,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1957,7 +2128,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.SecurityPolicy()
@@ -2011,7 +2182,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

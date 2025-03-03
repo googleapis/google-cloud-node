@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -199,6 +199,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public testIamPermissionsRepo(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+
+                    /**
+                     * Calls CreateBranchRule.
+                     * @param request CreateBranchRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createBranchRule(request: google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.CreateBranchRuleCallback): void;
+
+                    /**
+                     * Calls CreateBranchRule.
+                     * @param request CreateBranchRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createBranchRule(request: google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListBranchRules.
+                     * @param request ListBranchRulesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListBranchRulesResponse
+                     */
+                    public listBranchRules(request: google.cloud.securesourcemanager.v1.IListBranchRulesRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.ListBranchRulesCallback): void;
+
+                    /**
+                     * Calls ListBranchRules.
+                     * @param request ListBranchRulesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listBranchRules(request: google.cloud.securesourcemanager.v1.IListBranchRulesRequest): Promise<google.cloud.securesourcemanager.v1.ListBranchRulesResponse>;
+
+                    /**
+                     * Calls GetBranchRule.
+                     * @param request GetBranchRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BranchRule
+                     */
+                    public getBranchRule(request: google.cloud.securesourcemanager.v1.IGetBranchRuleRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.GetBranchRuleCallback): void;
+
+                    /**
+                     * Calls GetBranchRule.
+                     * @param request GetBranchRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getBranchRule(request: google.cloud.securesourcemanager.v1.IGetBranchRuleRequest): Promise<google.cloud.securesourcemanager.v1.BranchRule>;
+
+                    /**
+                     * Calls UpdateBranchRule.
+                     * @param request UpdateBranchRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateBranchRule(request: google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateBranchRuleCallback): void;
+
+                    /**
+                     * Calls UpdateBranchRule.
+                     * @param request UpdateBranchRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateBranchRule(request: google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteBranchRule.
+                     * @param request DeleteBranchRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteBranchRule(request: google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteBranchRuleCallback): void;
+
+                    /**
+                     * Calls DeleteBranchRule.
+                     * @param request DeleteBranchRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteBranchRule(request: google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace SecureSourceManager {
@@ -279,6 +349,41 @@ export namespace google {
                      * @param [response] TestIamPermissionsResponse
                      */
                     type TestIamPermissionsRepoCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|createBranchRule}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateBranchRuleCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|listBranchRules}.
+                     * @param error Error, if any
+                     * @param [response] ListBranchRulesResponse
+                     */
+                    type ListBranchRulesCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.ListBranchRulesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|getBranchRule}.
+                     * @param error Error, if any
+                     * @param [response] BranchRule
+                     */
+                    type GetBranchRuleCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.BranchRule) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|updateBranchRule}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateBranchRuleCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|deleteBranchRule}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteBranchRuleCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of an Instance. */
@@ -574,6 +679,9 @@ export namespace google {
 
                         /** PrivateConfig sshServiceAttachment */
                         sshServiceAttachment?: (string|null);
+
+                        /** PrivateConfig pscAllowedProjects */
+                        pscAllowedProjects?: (string[]|null);
                     }
 
                     /** Represents a PrivateConfig. */
@@ -596,6 +704,9 @@ export namespace google {
 
                         /** PrivateConfig sshServiceAttachment. */
                         public sshServiceAttachment: string;
+
+                        /** PrivateConfig pscAllowedProjects. */
+                        public pscAllowedProjects: string[];
 
                         /**
                          * Creates a new PrivateConfig instance using the specified properties.
@@ -1041,6 +1152,287 @@ export namespace google {
 
                         /**
                          * Gets the default type url for InitialConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a BranchRule. */
+                interface IBranchRule {
+
+                    /** BranchRule name */
+                    name?: (string|null);
+
+                    /** BranchRule uid */
+                    uid?: (string|null);
+
+                    /** BranchRule createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BranchRule updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BranchRule annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** BranchRule etag */
+                    etag?: (string|null);
+
+                    /** BranchRule includePattern */
+                    includePattern?: (string|null);
+
+                    /** BranchRule disabled */
+                    disabled?: (boolean|null);
+
+                    /** BranchRule requirePullRequest */
+                    requirePullRequest?: (boolean|null);
+
+                    /** BranchRule minimumReviewsCount */
+                    minimumReviewsCount?: (number|null);
+
+                    /** BranchRule minimumApprovalsCount */
+                    minimumApprovalsCount?: (number|null);
+
+                    /** BranchRule requireCommentsResolved */
+                    requireCommentsResolved?: (boolean|null);
+
+                    /** BranchRule allowStaleReviews */
+                    allowStaleReviews?: (boolean|null);
+
+                    /** BranchRule requireLinearHistory */
+                    requireLinearHistory?: (boolean|null);
+
+                    /** BranchRule requiredStatusChecks */
+                    requiredStatusChecks?: (google.cloud.securesourcemanager.v1.BranchRule.ICheck[]|null);
+                }
+
+                /** Represents a BranchRule. */
+                class BranchRule implements IBranchRule {
+
+                    /**
+                     * Constructs a new BranchRule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IBranchRule);
+
+                    /** BranchRule name. */
+                    public name: string;
+
+                    /** BranchRule uid. */
+                    public uid: string;
+
+                    /** BranchRule createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BranchRule updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BranchRule annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** BranchRule etag. */
+                    public etag: string;
+
+                    /** BranchRule includePattern. */
+                    public includePattern: string;
+
+                    /** BranchRule disabled. */
+                    public disabled: boolean;
+
+                    /** BranchRule requirePullRequest. */
+                    public requirePullRequest: boolean;
+
+                    /** BranchRule minimumReviewsCount. */
+                    public minimumReviewsCount: number;
+
+                    /** BranchRule minimumApprovalsCount. */
+                    public minimumApprovalsCount: number;
+
+                    /** BranchRule requireCommentsResolved. */
+                    public requireCommentsResolved: boolean;
+
+                    /** BranchRule allowStaleReviews. */
+                    public allowStaleReviews: boolean;
+
+                    /** BranchRule requireLinearHistory. */
+                    public requireLinearHistory: boolean;
+
+                    /** BranchRule requiredStatusChecks. */
+                    public requiredStatusChecks: google.cloud.securesourcemanager.v1.BranchRule.ICheck[];
+
+                    /**
+                     * Creates a new BranchRule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BranchRule instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IBranchRule): google.cloud.securesourcemanager.v1.BranchRule;
+
+                    /**
+                     * Encodes the specified BranchRule message. Does not implicitly {@link google.cloud.securesourcemanager.v1.BranchRule.verify|verify} messages.
+                     * @param message BranchRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IBranchRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BranchRule message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.BranchRule.verify|verify} messages.
+                     * @param message BranchRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IBranchRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BranchRule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BranchRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.BranchRule;
+
+                    /**
+                     * Decodes a BranchRule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BranchRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.BranchRule;
+
+                    /**
+                     * Verifies a BranchRule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BranchRule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BranchRule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.BranchRule;
+
+                    /**
+                     * Creates a plain object from a BranchRule message. Also converts values to other types if specified.
+                     * @param message BranchRule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.BranchRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BranchRule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BranchRule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BranchRule {
+
+                    /** Properties of a Check. */
+                    interface ICheck {
+
+                        /** Check context */
+                        context?: (string|null);
+                    }
+
+                    /** Represents a Check. */
+                    class Check implements ICheck {
+
+                        /**
+                         * Constructs a new Check.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securesourcemanager.v1.BranchRule.ICheck);
+
+                        /** Check context. */
+                        public context: string;
+
+                        /**
+                         * Creates a new Check instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Check instance
+                         */
+                        public static create(properties?: google.cloud.securesourcemanager.v1.BranchRule.ICheck): google.cloud.securesourcemanager.v1.BranchRule.Check;
+
+                        /**
+                         * Encodes the specified Check message. Does not implicitly {@link google.cloud.securesourcemanager.v1.BranchRule.Check.verify|verify} messages.
+                         * @param message Check message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securesourcemanager.v1.BranchRule.ICheck, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Check message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.BranchRule.Check.verify|verify} messages.
+                         * @param message Check message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securesourcemanager.v1.BranchRule.ICheck, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Check message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Check
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.BranchRule.Check;
+
+                        /**
+                         * Decodes a Check message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Check
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.BranchRule.Check;
+
+                        /**
+                         * Verifies a Check message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Check message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Check
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.BranchRule.Check;
+
+                        /**
+                         * Creates a plain object from a Check message. Also converts values to other types if specified.
+                         * @param message Check
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securesourcemanager.v1.BranchRule.Check, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Check to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Check
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -1740,6 +2132,9 @@ export namespace google {
 
                     /** ListRepositoriesRequest filter */
                     filter?: (string|null);
+
+                    /** ListRepositoriesRequest instance */
+                    instance?: (string|null);
                 }
 
                 /** Represents a ListRepositoriesRequest. */
@@ -1762,6 +2157,9 @@ export namespace google {
 
                     /** ListRepositoriesRequest filter. */
                     public filter: string;
+
+                    /** ListRepositoriesRequest instance. */
+                    public instance: string;
 
                     /**
                      * Creates a new ListRepositoriesRequest instance using the specified properties.
@@ -2247,6 +2645,636 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteRepositoryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetBranchRuleRequest. */
+                interface IGetBranchRuleRequest {
+
+                    /** GetBranchRuleRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetBranchRuleRequest. */
+                class GetBranchRuleRequest implements IGetBranchRuleRequest {
+
+                    /**
+                     * Constructs a new GetBranchRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IGetBranchRuleRequest);
+
+                    /** GetBranchRuleRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetBranchRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetBranchRuleRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IGetBranchRuleRequest): google.cloud.securesourcemanager.v1.GetBranchRuleRequest;
+
+                    /**
+                     * Encodes the specified GetBranchRuleRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.GetBranchRuleRequest.verify|verify} messages.
+                     * @param message GetBranchRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IGetBranchRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetBranchRuleRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.GetBranchRuleRequest.verify|verify} messages.
+                     * @param message GetBranchRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IGetBranchRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetBranchRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetBranchRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.GetBranchRuleRequest;
+
+                    /**
+                     * Decodes a GetBranchRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetBranchRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.GetBranchRuleRequest;
+
+                    /**
+                     * Verifies a GetBranchRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetBranchRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetBranchRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.GetBranchRuleRequest;
+
+                    /**
+                     * Creates a plain object from a GetBranchRuleRequest message. Also converts values to other types if specified.
+                     * @param message GetBranchRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.GetBranchRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetBranchRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetBranchRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateBranchRuleRequest. */
+                interface ICreateBranchRuleRequest {
+
+                    /** CreateBranchRuleRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateBranchRuleRequest branchRule */
+                    branchRule?: (google.cloud.securesourcemanager.v1.IBranchRule|null);
+
+                    /** CreateBranchRuleRequest branchRuleId */
+                    branchRuleId?: (string|null);
+                }
+
+                /** Represents a CreateBranchRuleRequest. */
+                class CreateBranchRuleRequest implements ICreateBranchRuleRequest {
+
+                    /**
+                     * Constructs a new CreateBranchRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest);
+
+                    /** CreateBranchRuleRequest parent. */
+                    public parent: string;
+
+                    /** CreateBranchRuleRequest branchRule. */
+                    public branchRule?: (google.cloud.securesourcemanager.v1.IBranchRule|null);
+
+                    /** CreateBranchRuleRequest branchRuleId. */
+                    public branchRuleId: string;
+
+                    /**
+                     * Creates a new CreateBranchRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateBranchRuleRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest): google.cloud.securesourcemanager.v1.CreateBranchRuleRequest;
+
+                    /**
+                     * Encodes the specified CreateBranchRuleRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.CreateBranchRuleRequest.verify|verify} messages.
+                     * @param message CreateBranchRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateBranchRuleRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.CreateBranchRuleRequest.verify|verify} messages.
+                     * @param message CreateBranchRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateBranchRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateBranchRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.CreateBranchRuleRequest;
+
+                    /**
+                     * Decodes a CreateBranchRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateBranchRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.CreateBranchRuleRequest;
+
+                    /**
+                     * Verifies a CreateBranchRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateBranchRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateBranchRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.CreateBranchRuleRequest;
+
+                    /**
+                     * Creates a plain object from a CreateBranchRuleRequest message. Also converts values to other types if specified.
+                     * @param message CreateBranchRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.CreateBranchRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateBranchRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateBranchRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBranchRulesRequest. */
+                interface IListBranchRulesRequest {
+
+                    /** ListBranchRulesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListBranchRulesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListBranchRulesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListBranchRulesRequest. */
+                class ListBranchRulesRequest implements IListBranchRulesRequest {
+
+                    /**
+                     * Constructs a new ListBranchRulesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IListBranchRulesRequest);
+
+                    /** ListBranchRulesRequest parent. */
+                    public parent: string;
+
+                    /** ListBranchRulesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListBranchRulesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListBranchRulesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBranchRulesRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IListBranchRulesRequest): google.cloud.securesourcemanager.v1.ListBranchRulesRequest;
+
+                    /**
+                     * Encodes the specified ListBranchRulesRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListBranchRulesRequest.verify|verify} messages.
+                     * @param message ListBranchRulesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IListBranchRulesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBranchRulesRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListBranchRulesRequest.verify|verify} messages.
+                     * @param message ListBranchRulesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IListBranchRulesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBranchRulesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBranchRulesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ListBranchRulesRequest;
+
+                    /**
+                     * Decodes a ListBranchRulesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBranchRulesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ListBranchRulesRequest;
+
+                    /**
+                     * Verifies a ListBranchRulesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBranchRulesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBranchRulesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ListBranchRulesRequest;
+
+                    /**
+                     * Creates a plain object from a ListBranchRulesRequest message. Also converts values to other types if specified.
+                     * @param message ListBranchRulesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ListBranchRulesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBranchRulesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBranchRulesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteBranchRuleRequest. */
+                interface IDeleteBranchRuleRequest {
+
+                    /** DeleteBranchRuleRequest name */
+                    name?: (string|null);
+
+                    /** DeleteBranchRuleRequest allowMissing */
+                    allowMissing?: (boolean|null);
+                }
+
+                /** Represents a DeleteBranchRuleRequest. */
+                class DeleteBranchRuleRequest implements IDeleteBranchRuleRequest {
+
+                    /**
+                     * Constructs a new DeleteBranchRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest);
+
+                    /** DeleteBranchRuleRequest name. */
+                    public name: string;
+
+                    /** DeleteBranchRuleRequest allowMissing. */
+                    public allowMissing: boolean;
+
+                    /**
+                     * Creates a new DeleteBranchRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteBranchRuleRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest): google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest;
+
+                    /**
+                     * Encodes the specified DeleteBranchRuleRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest.verify|verify} messages.
+                     * @param message DeleteBranchRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteBranchRuleRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest.verify|verify} messages.
+                     * @param message DeleteBranchRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteBranchRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteBranchRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest;
+
+                    /**
+                     * Decodes a DeleteBranchRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteBranchRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest;
+
+                    /**
+                     * Verifies a DeleteBranchRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteBranchRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteBranchRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteBranchRuleRequest message. Also converts values to other types if specified.
+                     * @param message DeleteBranchRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteBranchRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteBranchRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateBranchRuleRequest. */
+                interface IUpdateBranchRuleRequest {
+
+                    /** UpdateBranchRuleRequest branchRule */
+                    branchRule?: (google.cloud.securesourcemanager.v1.IBranchRule|null);
+
+                    /** UpdateBranchRuleRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** UpdateBranchRuleRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateBranchRuleRequest. */
+                class UpdateBranchRuleRequest implements IUpdateBranchRuleRequest {
+
+                    /**
+                     * Constructs a new UpdateBranchRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest);
+
+                    /** UpdateBranchRuleRequest branchRule. */
+                    public branchRule?: (google.cloud.securesourcemanager.v1.IBranchRule|null);
+
+                    /** UpdateBranchRuleRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** UpdateBranchRuleRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateBranchRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateBranchRuleRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest): google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest;
+
+                    /**
+                     * Encodes the specified UpdateBranchRuleRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest.verify|verify} messages.
+                     * @param message UpdateBranchRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateBranchRuleRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest.verify|verify} messages.
+                     * @param message UpdateBranchRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateBranchRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateBranchRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest;
+
+                    /**
+                     * Decodes an UpdateBranchRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateBranchRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest;
+
+                    /**
+                     * Verifies an UpdateBranchRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateBranchRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateBranchRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateBranchRuleRequest message. Also converts values to other types if specified.
+                     * @param message UpdateBranchRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateBranchRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateBranchRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBranchRulesResponse. */
+                interface IListBranchRulesResponse {
+
+                    /** ListBranchRulesResponse branchRules */
+                    branchRules?: (google.cloud.securesourcemanager.v1.IBranchRule[]|null);
+
+                    /** ListBranchRulesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListBranchRulesResponse. */
+                class ListBranchRulesResponse implements IListBranchRulesResponse {
+
+                    /**
+                     * Constructs a new ListBranchRulesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IListBranchRulesResponse);
+
+                    /** ListBranchRulesResponse branchRules. */
+                    public branchRules: google.cloud.securesourcemanager.v1.IBranchRule[];
+
+                    /** ListBranchRulesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListBranchRulesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBranchRulesResponse instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IListBranchRulesResponse): google.cloud.securesourcemanager.v1.ListBranchRulesResponse;
+
+                    /**
+                     * Encodes the specified ListBranchRulesResponse message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListBranchRulesResponse.verify|verify} messages.
+                     * @param message ListBranchRulesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IListBranchRulesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBranchRulesResponse message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListBranchRulesResponse.verify|verify} messages.
+                     * @param message ListBranchRulesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IListBranchRulesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBranchRulesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBranchRulesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ListBranchRulesResponse;
+
+                    /**
+                     * Decodes a ListBranchRulesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBranchRulesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ListBranchRulesResponse;
+
+                    /**
+                     * Verifies a ListBranchRulesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBranchRulesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBranchRulesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ListBranchRulesResponse;
+
+                    /**
+                     * Creates a plain object from a ListBranchRulesResponse message. Also converts values to other types if specified.
+                     * @param message ListBranchRulesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ListBranchRulesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBranchRulesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBranchRulesResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

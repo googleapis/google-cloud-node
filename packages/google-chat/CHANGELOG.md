@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.12.0...chat-v0.13.0) (2025-02-28)
+
+
+### Features
+
+* [chat] Add DeletionType.SPACE_MEMBER. This is returned when a message sent by an app is deleted by a human in a space ([#6030](https://github.com/googleapis/google-cloud-node/issues/6030)) ([550aafa](https://github.com/googleapis/google-cloud-node/commit/550aafa7c23eabaf2ecbe5c035294428290f7020))
+
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.11.0...chat-v0.12.0) (2025-01-29)
+
+
+### Features
+
+* [chat] A new field `custom_emoji_metadata` is added to message `.google.chat.v1.Annotation` ([#5988](https://github.com/googleapis/google-cloud-node/issues/5988)) ([8da9b83](https://github.com/googleapis/google-cloud-node/commit/8da9b835776d424f55b9d1c97eb8964224a50ac4))
+
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.10.0...chat-v0.11.0) (2024-12-18)
+
+
+### Features
+
+* [chat] Add missing field annotations in space.proto, message.proto, reaction.proto, space_event.proto, membership.proto, attachment.proto ([#5870](https://github.com/googleapis/google-cloud-node/issues/5870)) ([0730fb1](https://github.com/googleapis/google-cloud-node/commit/0730fb1e6bce2ddb6e0cd0c38424ca03cf740cb5))
+* [chat] Chat Apps can now retrieve the import mode expire time information to know when to complete the import mode properly ([#5860](https://github.com/googleapis/google-cloud-node/issues/5860)) ([02b43ef](https://github.com/googleapis/google-cloud-node/commit/02b43ef30f6e45488dfea3bf7b4c15a5641b0755))
+
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.9.0...chat-v0.10.0) (2024-10-10)
+
+
+### Features
+
+* [chat] Add doc for permission settings & announcement space support ([#5731](https://github.com/googleapis/google-cloud-node/issues/5731)) ([d5a4a46](https://github.com/googleapis/google-cloud-node/commit/d5a4a469cfc03b75356e33e9659aa720ff6ee71d))
+
 ## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.8.0...chat-v0.9.0) (2024-09-13)
 
 

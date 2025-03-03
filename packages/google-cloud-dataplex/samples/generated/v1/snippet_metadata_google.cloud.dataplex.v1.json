@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dataplex",
-        "version": "3.11.0",
+        "version": "3.14.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -15,7 +15,7 @@
             "regionTag": "dataplex_v1_generated_CatalogService_CreateEntryType_async",
             "title": "CatalogService createEntryType Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates an EntryType",
+            "description": " Creates an EntryType.",
             "canonical": true,
             "file": "catalog_service.create_entry_type.js",
             "language": "JAVASCRIPT",
@@ -67,7 +67,7 @@
             "regionTag": "dataplex_v1_generated_CatalogService_UpdateEntryType_async",
             "title": "CatalogService updateEntryType Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates a EntryType resource.",
+            "description": " Updates an EntryType.",
             "canonical": true,
             "file": "catalog_service.update_entry_type.js",
             "language": "JAVASCRIPT",
@@ -115,7 +115,7 @@
             "regionTag": "dataplex_v1_generated_CatalogService_DeleteEntryType_async",
             "title": "CatalogService deleteEntryType Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes a EntryType resource.",
+            "description": " Deletes an EntryType.",
             "canonical": true,
             "file": "catalog_service.delete_entry_type.js",
             "language": "JAVASCRIPT",
@@ -215,7 +215,7 @@
             "regionTag": "dataplex_v1_generated_CatalogService_GetEntryType_async",
             "title": "CatalogService getEntryType Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves a EntryType resource.",
+            "description": " Gets an EntryType.",
             "canonical": true,
             "file": "catalog_service.get_entry_type.js",
             "language": "JAVASCRIPT",
@@ -255,7 +255,7 @@
             "regionTag": "dataplex_v1_generated_CatalogService_CreateAspectType_async",
             "title": "CatalogService createAspectType Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates an AspectType",
+            "description": " Creates an AspectType.",
             "canonical": true,
             "file": "catalog_service.create_aspect_type.js",
             "language": "JAVASCRIPT",
@@ -307,7 +307,7 @@
             "regionTag": "dataplex_v1_generated_CatalogService_UpdateAspectType_async",
             "title": "CatalogService updateAspectType Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates a AspectType resource.",
+            "description": " Updates an AspectType.",
             "canonical": true,
             "file": "catalog_service.update_aspect_type.js",
             "language": "JAVASCRIPT",
@@ -355,14 +355,14 @@
             "regionTag": "dataplex_v1_generated_CatalogService_DeleteAspectType_async",
             "title": "CatalogService deleteAspectType Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes a AspectType resource.",
+            "description": " Deletes an AspectType.",
             "canonical": true,
             "file": "catalog_service.delete_aspect_type.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 61,
                     "type": "FULL"
                 }
             ],
@@ -455,7 +455,7 @@
             "regionTag": "dataplex_v1_generated_CatalogService_GetAspectType_async",
             "title": "CatalogService getAspectType Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves a AspectType resource.",
+            "description": " Gets an AspectType.",
             "canonical": true,
             "file": "catalog_service.get_aspect_type.js",
             "language": "JAVASCRIPT",
@@ -495,7 +495,7 @@
             "regionTag": "dataplex_v1_generated_CatalogService_CreateEntryGroup_async",
             "title": "CatalogService createEntryGroup Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates an EntryGroup",
+            "description": " Creates an EntryGroup.",
             "canonical": true,
             "file": "catalog_service.create_entry_group.js",
             "language": "JAVASCRIPT",
@@ -547,7 +547,7 @@
             "regionTag": "dataplex_v1_generated_CatalogService_UpdateEntryGroup_async",
             "title": "CatalogService updateEntryGroup Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates a EntryGroup resource.",
+            "description": " Updates an EntryGroup.",
             "canonical": true,
             "file": "catalog_service.update_entry_group.js",
             "language": "JAVASCRIPT",
@@ -595,14 +595,14 @@
             "regionTag": "dataplex_v1_generated_CatalogService_DeleteEntryGroup_async",
             "title": "CatalogService deleteEntryGroup Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes a EntryGroup resource.",
+            "description": " Deletes an EntryGroup.",
             "canonical": true,
             "file": "catalog_service.delete_entry_group.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 61,
                     "type": "FULL"
                 }
             ],
@@ -695,7 +695,7 @@
             "regionTag": "dataplex_v1_generated_CatalogService_GetEntryGroup_async",
             "title": "CatalogService getEntryGroup Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves a EntryGroup resource.",
+            "description": " Gets an EntryGroup.",
             "canonical": true,
             "file": "catalog_service.get_entry_group.js",
             "language": "JAVASCRIPT",
@@ -742,7 +742,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],
@@ -790,7 +790,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 84,
+                    "end": 89,
                     "type": "FULL"
                 }
             ],
@@ -879,14 +879,14 @@
             "regionTag": "dataplex_v1_generated_CatalogService_ListEntries_async",
             "title": "CatalogService listEntries Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists entries within an entry group.",
+            "description": " Lists Entries within an EntryGroup.",
             "canonical": true,
             "file": "catalog_service.list_entries.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 86,
                     "type": "FULL"
                 }
             ],
@@ -931,14 +931,14 @@
             "regionTag": "dataplex_v1_generated_CatalogService_GetEntry_async",
             "title": "CatalogService getEntry Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets a single entry.",
+            "description": " Gets an Entry. **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is changing. For more information, see [Changes to BigQuery metadata stored in Dataplex Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).",
             "canonical": true,
             "file": "catalog_service.get_entry.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 69,
                     "type": "FULL"
                 }
             ],
@@ -983,14 +983,14 @@
             "regionTag": "dataplex_v1_generated_CatalogService_LookupEntry_async",
             "title": "CatalogService lookupEntry Sample",
             "origin": "API_DEFINITION",
-            "description": " Looks up a single entry.",
+            "description": " Looks up a single Entry by name using the permission on the source system. **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is changing. For more information, see [Changes to BigQuery metadata stored in Dataplex Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).",
             "canonical": true,
             "file": "catalog_service.lookup_entry.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -1039,14 +1039,14 @@
             "regionTag": "dataplex_v1_generated_CatalogService_SearchEntries_async",
             "title": "CatalogService searchEntries Sample",
             "origin": "API_DEFINITION",
-            "description": " Searches for entries matching given query and scope.",
+            "description": " Searches for Entries matching the given query and scope.",
             "canonical": true,
             "file": "catalog_service.search_entries.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 89,
                     "type": "FULL"
                 }
             ],
@@ -1088,6 +1088,194 @@
                 "method": {
                     "shortName": "SearchEntries",
                     "fullName": "google.cloud.dataplex.v1.CatalogService.SearchEntries",
+                    "service": {
+                        "shortName": "CatalogService",
+                        "fullName": "google.cloud.dataplex.v1.CatalogService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_CatalogService_CreateMetadataJob_async",
+            "title": "CatalogService createMetadataJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a metadata job. For example, use a metadata job to import Dataplex Catalog entries and aspects from a third-party system into Dataplex.",
+            "canonical": true,
+            "file": "catalog_service.create_metadata_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateMetadataJob",
+                "fullName": "google.cloud.dataplex.v1.CatalogService.CreateMetadataJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "metadata_job",
+                        "type": ".google.cloud.dataplex.v1.MetadataJob"
+                    },
+                    {
+                        "name": "metadata_job_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "CatalogServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.CatalogServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateMetadataJob",
+                    "fullName": "google.cloud.dataplex.v1.CatalogService.CreateMetadataJob",
+                    "service": {
+                        "shortName": "CatalogService",
+                        "fullName": "google.cloud.dataplex.v1.CatalogService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_CatalogService_GetMetadataJob_async",
+            "title": "CatalogService getMetadataJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a metadata job.",
+            "canonical": true,
+            "file": "catalog_service.get_metadata_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetMetadataJob",
+                "fullName": "google.cloud.dataplex.v1.CatalogService.GetMetadataJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.MetadataJob",
+                "client": {
+                    "shortName": "CatalogServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.CatalogServiceClient"
+                },
+                "method": {
+                    "shortName": "GetMetadataJob",
+                    "fullName": "google.cloud.dataplex.v1.CatalogService.GetMetadataJob",
+                    "service": {
+                        "shortName": "CatalogService",
+                        "fullName": "google.cloud.dataplex.v1.CatalogService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_CatalogService_ListMetadataJobs_async",
+            "title": "CatalogService listMetadataJobs Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists metadata jobs.",
+            "canonical": true,
+            "file": "catalog_service.list_metadata_jobs.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 84,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListMetadataJobs",
+                "fullName": "google.cloud.dataplex.v1.CatalogService.ListMetadataJobs",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.ListMetadataJobsResponse",
+                "client": {
+                    "shortName": "CatalogServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.CatalogServiceClient"
+                },
+                "method": {
+                    "shortName": "ListMetadataJobs",
+                    "fullName": "google.cloud.dataplex.v1.CatalogService.ListMetadataJobs",
+                    "service": {
+                        "shortName": "CatalogService",
+                        "fullName": "google.cloud.dataplex.v1.CatalogService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_CatalogService_CancelMetadataJob_async",
+            "title": "CatalogService cancelMetadataJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Cancels a metadata job. If you cancel a metadata import job that is in progress, the changes in the job might be partially applied. We recommend that you reset the state of the entry groups in your project by running another metadata job that reverts the changes from the canceled job.",
+            "canonical": true,
+            "file": "catalog_service.cancel_metadata_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CancelMetadataJob",
+                "fullName": "google.cloud.dataplex.v1.CatalogService.CancelMetadataJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "CatalogServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.CatalogServiceClient"
+                },
+                "method": {
+                    "shortName": "CancelMetadataJob",
+                    "fullName": "google.cloud.dataplex.v1.CatalogService.CancelMetadataJob",
                     "service": {
                         "shortName": "CatalogService",
                         "fullName": "google.cloud.dataplex.v1.CatalogService"
@@ -3078,7 +3266,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -3126,7 +3314,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 57,
+                    "end": 63,
                     "type": "FULL"
                 }
             ],
@@ -3138,6 +3326,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

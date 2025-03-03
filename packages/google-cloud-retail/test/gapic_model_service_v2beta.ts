@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -357,7 +357,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Model()
       );
@@ -388,7 +388,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Model()
       );
@@ -435,7 +435,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getModel = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getModel(request), expectedError);
@@ -484,7 +484,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Model()
       );
@@ -515,7 +515,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Model()
       );
@@ -562,7 +562,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseModel = stubSimpleCall(
         undefined,
@@ -614,7 +614,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Model()
       );
@@ -645,7 +645,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Model()
       );
@@ -692,7 +692,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeModel = stubSimpleCall(
         undefined,
@@ -744,7 +744,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -775,7 +775,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -822,7 +822,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteModel = stubSimpleCall(
         undefined,
@@ -875,7 +875,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['model', 'name']
       );
       request.model.name = defaultValue1;
-      const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Model()
       );
@@ -907,7 +907,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['model', 'name']
       );
       request.model.name = defaultValue1;
-      const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Model()
       );
@@ -955,7 +955,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['model', 'name']
       );
       request.model.name = defaultValue1;
-      const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateModel = stubSimpleCall(
         undefined,
@@ -1008,7 +1008,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1040,7 +1040,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1094,7 +1094,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createModel = stubLongRunningCall(
         undefined,
@@ -1125,7 +1125,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createModel = stubLongRunningCall(
         undefined,
@@ -1198,7 +1198,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1230,7 +1230,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1284,7 +1284,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.tuneModel = stubLongRunningCall(
         undefined,
@@ -1315,7 +1315,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.tuneModel = stubLongRunningCall(
         undefined,
@@ -1388,7 +1388,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Model()),
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Model()),
@@ -1421,7 +1421,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Model()),
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Model()),
@@ -1470,7 +1470,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listModels = stubSimpleCall(
         undefined,
@@ -1501,7 +1501,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Model()),
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Model()),
@@ -1555,7 +1555,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listModels.createStream = stubPageStreamingCall(
         undefined,
@@ -1606,7 +1606,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Model()),
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Model()),
@@ -1649,7 +1649,7 @@ describe('v2beta.ModelServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listModels.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2182,6 +2182,44 @@ describe('v2beta.ModelServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('alertConfig', () => {
+      const fakePath = '/rendered/path/alertConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new modelserviceModule.v2beta.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.alertConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.alertConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('alertConfigPath', () => {
+        const result = client.alertConfigPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.alertConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAlertConfigName', () => {
+        const result = client.matchProjectFromAlertConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.alertConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('attributesConfig', () => {
       const fakePath = '/rendered/path/attributesConfig';
       const expectedParameters = {

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,6 +30,11 @@ function main(name) {
    */
   /**
    *  Required. Resource name of the space.
+   *  Format: `spaces/{space}`.
+   *  `{space}` is the resource identifier for the space. It's a unique,
+   *  server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
+   *  For more information, see How Meet identifies a meeting
+   *  space (https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
    */
   // const name = 'abc123'
 

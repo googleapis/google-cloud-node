@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-storagetransfer",
-        "version": "3.4.0",
+        "version": "3.6.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -198,7 +198,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 86,
                     "type": "FULL"
                 }
             ],

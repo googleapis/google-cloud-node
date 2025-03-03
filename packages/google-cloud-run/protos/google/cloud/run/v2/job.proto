@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import "google/api/launch_stage.proto";
 import "google/api/resource.proto";
 import "google/api/routing.proto";
 import "google/cloud/run/v2/condition.proto";
+import "google/cloud/run/v2/execution.proto";
 import "google/cloud/run/v2/execution_template.proto";
 import "google/cloud/run/v2/k8s.min.proto";
 import "google/cloud/run/v2/vendor_settings.proto";
@@ -419,7 +420,7 @@ message Job {
   // Set the launch stage to a preview stage on input to allow use of preview
   // features in that stage. On read (or output), describes whether the resource
   // uses preview features.
-  // <p>
+  //
   // For example, if ALPHA is provided as input, but only BETA and GA-level
   // features are used, this field will be BETA on output.
   google.api.LaunchStage launch_stage = 14;

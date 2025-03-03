@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -369,7 +369,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
         ['interconnectRemoteLocation']
       );
       request.interconnectRemoteLocation = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect_remote_location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&interconnect_remote_location=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.InterconnectRemoteLocation()
       );
@@ -407,7 +407,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
         ['interconnectRemoteLocation']
       );
       request.interconnectRemoteLocation = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect_remote_location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&interconnect_remote_location=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.InterconnectRemoteLocation()
       );
@@ -460,7 +460,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
         ['interconnectRemoteLocation']
       );
       request.interconnectRemoteLocation = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect_remote_location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&interconnect_remote_location=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -519,7 +519,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InterconnectRemoteLocation()
@@ -560,7 +560,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InterconnectRemoteLocation()
@@ -618,7 +618,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -648,7 +648,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InterconnectRemoteLocation()
@@ -714,7 +714,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -771,7 +771,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InterconnectRemoteLocation()
@@ -823,7 +823,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

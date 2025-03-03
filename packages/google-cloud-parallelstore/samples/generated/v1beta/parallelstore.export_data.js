@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -57,9 +57,12 @@ function main(name) {
   /**
    *  Optional. User-specified Service Account (SA) credentials to be used when
    *  performing the transfer.
-   *  Format: `projects/{project_id}/serviceAccounts/{service_account}`
+   *  Use one of the following formats:
+   *  * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *  * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *  * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
    *  If unspecified, the Parallelstore service agent is used:
-   *  service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
+   *  `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
    */
   // const serviceAccount = 'abc123'
 

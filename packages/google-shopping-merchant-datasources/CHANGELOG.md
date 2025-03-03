@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.2.0...datasources-v0.3.0) (2025-01-11)
+
+
+### Features
+
+* [merchantapi] New field `product_review_data_source` added in message `.google.shopping.merchant.datasources.v1beta.DataSource` to specify the datasource of the product review ([#5932](https://github.com/googleapis/google-cloud-node/issues/5932)) ([866f6b0](https://github.com/googleapis/google-cloud-node/commit/866f6b008669065da0f50eccd445b18b6476fd12))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.1.0...datasources-v0.2.0) (2024-10-10)
+
+
+### Features
+
+* [merchantapi] Add FileUploads service ([#5711](https://github.com/googleapis/google-cloud-node/issues/5711)) ([667316b](https://github.com/googleapis/google-cloud-node/commit/667316b70270f59b10cfb41c687ef9375b683f53))
+* [merchantapi] adding some more information about supplemental data sources ([#5733](https://github.com/googleapis/google-cloud-node/issues/5733)) ([3a101aa](https://github.com/googleapis/google-cloud-node/commit/3a101aaf6fa743f4f0854973b7a22202fef29f0f))
+
 ## 0.1.0 (2024-06-05)
 
 

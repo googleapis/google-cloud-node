@@ -33,6 +33,10 @@ option (google.api.resource_definition) = {
   type: "metastore.googleapis.com/Service"
   pattern: "projects/{project}/locations/{location}/services/{service}"
 };
+option (google.api.resource_definition) = {
+  type: "cloudkms.googleapis.com/CryptoKey"
+  pattern: "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
+};
 
 // Runtime configuration for a workload.
 message RuntimeConfig {
@@ -128,6 +132,13 @@ message ExecutionConfig {
   // **This field requires a Cloud Storage bucket name, not a `gs://...` URI to
   // a Cloud Storage bucket.**
   string staging_bucket = 10 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Authentication configuration used to set the default identity for
+  // the workload execution. The config specifies the type of identity
+  // (service account or user) that will be used by workloads to access
+  // resources on the project(s).
+  AuthenticationConfig authentication_config = 11
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Spark History Server configuration for the workload.
@@ -472,6 +483,31 @@ message GkeNodePoolConfig {
       [(google.api.field_behavior) = OPTIONAL];
 }
 
+// Authentication configuration for a workload is used to set the default
+// identity for the workload execution.
+// The config specifies the type of identity (service account or user) that
+// will be used by workloads to access resources on the project(s).
+message AuthenticationConfig {
+  // Authentication types for workload execution.
+  enum AuthenticationType {
+    // If AuthenticationType is unspecified then END_USER_CREDENTIALS is used
+    // for 3.0 and newer runtimes, and SERVICE_ACCOUNT is used for older
+    // runtimes.
+    AUTHENTICATION_TYPE_UNSPECIFIED = 0;
+
+    // Use service account credentials for authenticating to other services.
+    SERVICE_ACCOUNT = 1;
+
+    // Use OAuth credentials associated with the workload creator/user for
+    // authenticating to other services.
+    END_USER_CREDENTIALS = 2;
+  }
+
+  // Optional. Authentication type for the user workload running in containers.
+  AuthenticationType user_workload_authentication_type = 1
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
 // Autotuning configuration of the workload.
 message AutotuningConfig {
   // Scenario represents a specific goal that autotuning will attempt to achieve
@@ -512,10 +548,11 @@ enum Component {
   // Unspecified component. Specifying this will cause Cluster creation to fail.
   COMPONENT_UNSPECIFIED = 0;
 
-  // The Anaconda python distribution. The Anaconda component is not supported
-  // in the Dataproc [2.0 image]
-  // (/https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-release-2.0).
-  // The 2.0 image is pre-installed with Miniconda.
+  // The Anaconda component is no longer supported or applicable to
+  // [supported Dataproc on Compute Engine image versions]
+  // (https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-version-clusters#supported-dataproc-image-versions).
+  // It cannot be activated on clusters created with supported Dataproc on
+  // Compute Engine image versions.
   ANACONDA = 5;
 
   // Docker

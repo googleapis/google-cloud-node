@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -360,7 +360,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Endpoint()
       );
@@ -391,7 +391,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Endpoint()
       );
@@ -438,7 +438,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEndpoint = stubSimpleCall(
         undefined,
@@ -491,7 +491,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint', 'name']
       );
       request.endpoint.name = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Endpoint()
       );
@@ -523,7 +523,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint', 'name']
       );
       request.endpoint.name = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Endpoint()
       );
@@ -571,7 +571,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint', 'name']
       );
       request.endpoint.name = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEndpoint = stubSimpleCall(
         undefined,
@@ -624,7 +624,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -657,7 +657,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -711,7 +711,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEndpoint = stubLongRunningCall(
         undefined,
@@ -742,7 +742,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEndpoint = stubLongRunningCall(
         undefined,
@@ -803,6 +803,208 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
   });
 
+  describe('updateEndpointLongRunning', () => {
+    it('invokes updateEndpointLongRunning without error', async () => {
+      const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest()
+      );
+      request.endpoint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest',
+        ['endpoint', 'name']
+      );
+      request.endpoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateEndpointLongRunning =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateEndpointLongRunning(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEndpointLongRunning without error using callback', async () => {
+      const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest()
+      );
+      request.endpoint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest',
+        ['endpoint', 'name']
+      );
+      request.endpoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateEndpointLongRunning =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateEndpointLongRunning(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+              protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEndpointLongRunning with call error', async () => {
+      const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest()
+      );
+      request.endpoint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest',
+        ['endpoint', 'name']
+      );
+      request.endpoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateEndpointLongRunning = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateEndpointLongRunning(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEndpointLongRunning with LRO error', async () => {
+      const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest()
+      );
+      request.endpoint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest',
+        ['endpoint', 'name']
+      );
+      request.endpoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateEndpointLongRunning = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateEndpointLongRunning(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateEndpointLongRunningProgress without error', async () => {
+      const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkUpdateEndpointLongRunningProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateEndpointLongRunningProgress with error', async () => {
+      const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateEndpointLongRunningProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('deleteEndpoint', () => {
     it('invokes deleteEndpoint without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
@@ -818,7 +1020,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -851,7 +1053,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -905,7 +1107,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEndpoint = stubLongRunningCall(
         undefined,
@@ -936,7 +1138,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEndpoint = stubLongRunningCall(
         undefined,
@@ -1012,7 +1214,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1044,7 +1246,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1098,7 +1300,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployModel = stubLongRunningCall(
         undefined,
@@ -1129,7 +1331,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployModel = stubLongRunningCall(
         undefined,
@@ -1202,7 +1404,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1235,7 +1437,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1289,7 +1491,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployModel = stubLongRunningCall(
         undefined,
@@ -1320,7 +1522,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployModel = stubLongRunningCall(
         undefined,
@@ -1396,7 +1598,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1429,7 +1631,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1483,7 +1685,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.mutateDeployedModel = stubLongRunningCall(
         undefined,
@@ -1514,7 +1716,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.mutateDeployedModel = stubLongRunningCall(
         undefined,
@@ -1590,7 +1792,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Endpoint()
@@ -1629,7 +1831,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Endpoint()
@@ -1684,7 +1886,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEndpoints = stubSimpleCall(
         undefined,
@@ -1715,7 +1917,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Endpoint()
@@ -1775,7 +1977,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEndpoints.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1824,7 +2026,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Endpoint()
@@ -1873,7 +2075,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEndpoints.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3888,6 +4090,192 @@ describe('v1beta1.EndpointServiceClient', () => {
         assert.strictEqual(result, 'featureGroupValue');
         assert(
           (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureMonitor', () => {
+      const fakePath = '/rendered/path/featureMonitor';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+        feature_monitor: 'featureMonitorValue',
+      };
+      const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.featureMonitorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureMonitorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureMonitorPath', () => {
+        const result = client.featureMonitorPath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue',
+          'featureMonitorValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureMonitorName', () => {
+        const result = client.matchProjectFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureMonitorName', () => {
+        const result = client.matchLocationFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromFeatureMonitorName', () => {
+        const result = client.matchFeatureGroupFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorFromFeatureMonitorName', () => {
+        const result =
+          client.matchFeatureMonitorFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'featureMonitorValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureMonitorJob', () => {
+      const fakePath = '/rendered/path/featureMonitorJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+        feature_monitor: 'featureMonitorValue',
+        feature_monitor_job: 'featureMonitorJobValue',
+      };
+      const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.featureMonitorJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureMonitorJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureMonitorJobPath', () => {
+        const result = client.featureMonitorJobPath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue',
+          'featureMonitorValue',
+          'featureMonitorJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureMonitorJobName', () => {
+        const result = client.matchProjectFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureMonitorJobName', () => {
+        const result = client.matchLocationFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromFeatureMonitorJobName', () => {
+        const result =
+          client.matchFeatureGroupFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorFromFeatureMonitorJobName', () => {
+        const result =
+          client.matchFeatureMonitorFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'featureMonitorValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorJobFromFeatureMonitorJobName', () => {
+        const result =
+          client.matchFeatureMonitorJobFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'featureMonitorJobValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

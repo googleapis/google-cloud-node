@@ -89,9 +89,9 @@ message CreateStoragePoolRequest {
   ];
 
   // Required. Id of the requesting storage pool. Must be unique within the
-  // parent resource. Must contain only letters, numbers, underscore and hyphen,
-  // with the first character a letter or underscore, the last a letter or
-  // underscore or a number, and a 63 character maximum.
+  // parent resource. Must contain only letters, numbers and hyphen, with the
+  // first character a letter, the last a letter or a number, and a 63 character
+  // maximum.
   string storage_pool_id = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. The required parameters to create a new storage pool.
@@ -114,6 +114,18 @@ message UpdateStoragePoolRequest {
 
 // DeleteStoragePoolRequest deletes a Storage Pool.
 message DeleteStoragePoolRequest {
+  // Required. Name of the storage pool
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "netapp.googleapis.com/StoragePool"
+    }
+  ];
+}
+
+// SwitchActiveReplicaZoneRequest switch the active/replica zone for a regional
+// storagePool.
+message SwitchActiveReplicaZoneRequest {
   // Required. Name of the storage pool
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
@@ -231,9 +243,35 @@ message StoragePool {
   // regions.
   optional bool global_access_allowed = 17 [deprecated = true];
 
+  // Optional. True if the storage pool supports Auto Tiering enabled volumes.
+  // Default is false. Auto-tiering can be enabled after storage pool creation
+  // but it can't be disabled once enabled.
+  bool allow_auto_tiering = 18 [(google.api.field_behavior) = OPTIONAL];
+
   // Optional. Specifies the replica zone for regional storagePool.
   string replica_zone = 20 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Specifies the active zone for regional storagePool.
   string zone = 21 [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. Reserved for future use
+  bool satisfies_pzs = 23 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Reserved for future use
+  bool satisfies_pzi = 24 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// ValidateDirectoryServiceRequest validates the directory service policy
+// attached to the storage pool.
+message ValidateDirectoryServiceRequest {
+  // Required. Name of the storage pool
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "netapp.googleapis.com/StoragePool"
+    }
+  ];
+
+  // Type of directory service policy attached to the storage pool.
+  DirectoryServiceType directory_service_type = 2;
 }

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,6 +23,8 @@ function main() {
   const accountIssueServiceClient = new accounts.AccountIssueServiceClient();
   const accountsServiceClient = new accounts.AccountsServiceClient();
   const accountTaxServiceClient = new accounts.AccountTaxServiceClient();
+  const autofeedSettingsServiceClient =
+    new accounts.AutofeedSettingsServiceClient();
   const businessIdentityServiceClient =
     new accounts.BusinessIdentityServiceClient();
   const businessInfoServiceClient = new accounts.BusinessInfoServiceClient();

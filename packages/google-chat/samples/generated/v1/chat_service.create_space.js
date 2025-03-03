@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,9 @@ function main(space) {
    */
   /**
    *  Required. The `displayName` and `spaceType` fields must be populated.  Only
-   *  `SpaceType.SPACE` is supported.
-   *  If you receive the error message `ALREADY_EXISTS` when creating a space,
+   *  `SpaceType.SPACE`  and `SpaceType.GROUP_CHAT` are supported.
+   *  `SpaceType.GROUP_CHAT` can only be used if `importMode` is set to true.
+   *  If you receive the error message `ALREADY_EXISTS`,
    *  try a different `displayName`. An existing space within the Google
    *  Workspace organization might already use this display name.
    *  The space `name` is assigned on the server so anything specified in this

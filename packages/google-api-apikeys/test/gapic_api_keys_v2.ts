@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -350,7 +350,7 @@ describe('v2.ApiKeysClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.apikeys.v2.Key()
       );
@@ -381,7 +381,7 @@ describe('v2.ApiKeysClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.apikeys.v2.Key()
       );
@@ -428,7 +428,7 @@ describe('v2.ApiKeysClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getKey = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getKey(request), expectedError);
@@ -477,7 +477,7 @@ describe('v2.ApiKeysClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyStringResponse()
       );
@@ -508,7 +508,7 @@ describe('v2.ApiKeysClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyStringResponse()
       );
@@ -555,7 +555,7 @@ describe('v2.ApiKeysClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getKeyString = stubSimpleCall(
         undefined,
@@ -687,7 +687,7 @@ describe('v2.ApiKeysClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -719,7 +719,7 @@ describe('v2.ApiKeysClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -773,7 +773,7 @@ describe('v2.ApiKeysClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createKey = stubLongRunningCall(
         undefined,
@@ -804,7 +804,7 @@ describe('v2.ApiKeysClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createKey = stubLongRunningCall(
         undefined,
@@ -878,7 +878,7 @@ describe('v2.ApiKeysClient', () => {
         ['key', 'name']
       );
       request.key.name = defaultValue1;
-      const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `key.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -911,7 +911,7 @@ describe('v2.ApiKeysClient', () => {
         ['key', 'name']
       );
       request.key.name = defaultValue1;
-      const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `key.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -966,7 +966,7 @@ describe('v2.ApiKeysClient', () => {
         ['key', 'name']
       );
       request.key.name = defaultValue1;
-      const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `key.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateKey = stubLongRunningCall(
         undefined,
@@ -998,7 +998,7 @@ describe('v2.ApiKeysClient', () => {
         ['key', 'name']
       );
       request.key.name = defaultValue1;
-      const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `key.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateKey = stubLongRunningCall(
         undefined,
@@ -1071,7 +1071,7 @@ describe('v2.ApiKeysClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1103,7 +1103,7 @@ describe('v2.ApiKeysClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1157,7 +1157,7 @@ describe('v2.ApiKeysClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteKey = stubLongRunningCall(
         undefined,
@@ -1188,7 +1188,7 @@ describe('v2.ApiKeysClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteKey = stubLongRunningCall(
         undefined,
@@ -1261,7 +1261,7 @@ describe('v2.ApiKeysClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1293,7 +1293,7 @@ describe('v2.ApiKeysClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1347,7 +1347,7 @@ describe('v2.ApiKeysClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteKey = stubLongRunningCall(
         undefined,
@@ -1378,7 +1378,7 @@ describe('v2.ApiKeysClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteKey = stubLongRunningCall(
         undefined,
@@ -1451,7 +1451,7 @@ describe('v2.ApiKeysClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
@@ -1484,7 +1484,7 @@ describe('v2.ApiKeysClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
@@ -1533,7 +1533,7 @@ describe('v2.ApiKeysClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listKeys = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listKeys(request), expectedError);
@@ -1561,7 +1561,7 @@ describe('v2.ApiKeysClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
@@ -1612,7 +1612,7 @@ describe('v2.ApiKeysClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKeys.createStream = stubPageStreamingCall(
         undefined,
@@ -1660,7 +1660,7 @@ describe('v2.ApiKeysClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
@@ -1702,7 +1702,7 @@ describe('v2.ApiKeysClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKeys.asyncIterate = stubAsyncIterationCall(
         undefined,

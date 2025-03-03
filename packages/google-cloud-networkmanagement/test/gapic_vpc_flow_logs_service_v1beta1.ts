@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -376,7 +376,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig()
       );
@@ -409,7 +409,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig()
       );
@@ -457,7 +457,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getVpcFlowLogsConfig = stubSimpleCall(
         undefined,
@@ -511,7 +511,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -545,7 +545,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -600,7 +600,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createVpcFlowLogsConfig = stubLongRunningCall(
         undefined,
@@ -635,7 +635,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createVpcFlowLogsConfig = stubLongRunningCall(
         undefined,
@@ -716,7 +716,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['vpcFlowLogsConfig', 'name']
       );
       request.vpcFlowLogsConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vpc_flow_logs_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vpc_flow_logs_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -751,7 +751,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['vpcFlowLogsConfig', 'name']
       );
       request.vpcFlowLogsConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vpc_flow_logs_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vpc_flow_logs_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -807,7 +807,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['vpcFlowLogsConfig', 'name']
       );
       request.vpcFlowLogsConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vpc_flow_logs_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vpc_flow_logs_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateVpcFlowLogsConfig = stubLongRunningCall(
         undefined,
@@ -843,7 +843,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['vpcFlowLogsConfig', 'name']
       );
       request.vpcFlowLogsConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vpc_flow_logs_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vpc_flow_logs_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateVpcFlowLogsConfig = stubLongRunningCall(
         undefined,
@@ -923,7 +923,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -957,7 +957,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1012,7 +1012,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteVpcFlowLogsConfig = stubLongRunningCall(
         undefined,
@@ -1047,7 +1047,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteVpcFlowLogsConfig = stubLongRunningCall(
         undefined,
@@ -1127,7 +1127,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig()
@@ -1168,7 +1168,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig()
@@ -1226,7 +1226,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listVpcFlowLogsConfigs = stubSimpleCall(
         undefined,
@@ -1261,7 +1261,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig()
@@ -1331,7 +1331,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVpcFlowLogsConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1390,7 +1390,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig()
@@ -1445,7 +1445,7 @@ describe('v1beta1.VpcFlowLogsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVpcFlowLogsConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

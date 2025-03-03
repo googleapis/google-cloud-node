@@ -127,6 +127,10 @@ message TunedModel {
 
   // Required. The tuning task that creates the tuned model.
   TuningTask tuning_task = 10 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. List of project numbers that have read access to the tuned model.
+  repeated int64 reader_project_numbers = 14
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Tuned model as a source for training a new model.
@@ -215,16 +219,16 @@ message Hyperparameters {
 message Dataset {
   // Inline data or a reference to the data.
   oneof dataset {
-    // Optional. Inline examples.
+    // Optional. Inline examples with simple input/output text.
     TuningExamples examples = 1 [(google.api.field_behavior) = OPTIONAL];
   }
 }
 
 // A set of tuning examples. Can be training or validation data.
 message TuningExamples {
-  // Required. The examples. Example input can be for text or discuss, but all
-  // examples in a set must be of the same type.
-  repeated TuningExample examples = 1 [(google.api.field_behavior) = REQUIRED];
+  // The examples. Example input can be for text or discuss, but all examples
+  // in a set must be of the same type.
+  repeated TuningExample examples = 1;
 }
 
 // A single example for tuning.

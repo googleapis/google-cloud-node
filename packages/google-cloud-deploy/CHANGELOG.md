@@ -1,5 +1,33 @@
 # Changelog
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v4.3.0...deploy-v4.4.0) (2024-12-18)
+
+
+### Features
+
+* [deploy] A new field `dns_endpoint` is added to message `.google.cloud.deploy.v1.GkeCluster` ([#5849](https://github.com/googleapis/google-cloud-node/issues/5849)) ([9320175](https://github.com/googleapis/google-cloud-node/commit/932017559e975fbab4c0ce13fcc808e08425c117))
+
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v4.2.0...deploy-v4.3.0) (2024-11-14)
+
+
+### Features
+
+* [deploy] A new field `timed_promote_release_rule` is added to message `.google.cloud.deploy.v1.AutomationRule` ([#5806](https://github.com/googleapis/google-cloud-node/issues/5806)) ([0e61aec](https://github.com/googleapis/google-cloud-node/commit/0e61aecf4629e76bc05609c35b9911681f012d24))
+
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v4.1.0...deploy-v4.2.0) (2024-10-30)
+
+
+### Features
+
+* [deploy] added new fields for the Automation Repair rule ([#5774](https://github.com/googleapis/google-cloud-node/issues/5774)) ([099d1b3](https://github.com/googleapis/google-cloud-node/commit/099d1b3ff7d6e8e43ab79f5d62c344c269eb806f))
+
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v4.0.0...deploy-v4.1.0) (2024-10-10)
+
+
+### Features
+
+* [deploy] added support for deploy policies ([#5717](https://github.com/googleapis/google-cloud-node/issues/5717)) ([8d51ea3](https://github.com/googleapis/google-cloud-node/commit/8d51ea34e6efd1e88e0394b8e8d9dadf1a37c406))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.8.0...deploy-v4.0.0) (2024-08-09)
 
 

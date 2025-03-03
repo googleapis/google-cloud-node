@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -46,6 +46,11 @@ function main(parent, message) {
   /**
    *  Optional. Specifies whether a message starts a thread or replies to one.
    *  Only supported in named spaces.
+   *  When responding to user
+   *  interactions (https://developers.google.com/workspace/chat/receive-respond-interactions),
+   *  this field is ignored. For interactions within a thread, the reply is
+   *  created in the same thread. Otherwise, the reply is created as a new
+   *  thread.
    */
   // const messageReplyOption = {}
   /**

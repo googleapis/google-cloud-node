@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -62,6 +62,10 @@ function main(parent) {
    *  PostgreSQL RDBMS to enrich with child data objects and metadata.
    */
   // const postgresqlRdbms = {}
+  /**
+   *  SQLServer RDBMS to enrich with child data objects and metadata.
+   */
+  // const sqlServerRdbms = {}
 
   // Imports the Datastream library
   const {DatastreamClient} = require('@google-cloud/datastream').v1;

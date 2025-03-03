@@ -1,3 +1,4 @@
 [
+  "../../protos/google/cloud/eventarc/publishing/v1/cloud_event.proto",
   "../../protos/google/cloud/eventarc/publishing/v1/publisher.proto"
 ]

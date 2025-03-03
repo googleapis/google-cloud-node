@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import {
   GenerativeServiceClient,
   ModelServiceClient,
   PermissionServiceClient,
+  PredictionServiceClient,
   RetrieverServiceClient,
   TextServiceClient,
 } from '@google-ai/generativelanguage';
@@ -44,6 +45,9 @@ function doStuffWithModelServiceClient(client: ModelServiceClient) {
   client.close();
 }
 function doStuffWithPermissionServiceClient(client: PermissionServiceClient) {
+  client.close();
+}
+function doStuffWithPredictionServiceClient(client: PredictionServiceClient) {
   client.close();
 }
 function doStuffWithRetrieverServiceClient(client: RetrieverServiceClient) {
@@ -72,6 +76,9 @@ function main() {
   // check that the client instance can be created
   const permissionServiceClient = new PermissionServiceClient();
   doStuffWithPermissionServiceClient(permissionServiceClient);
+  // check that the client instance can be created
+  const predictionServiceClient = new PredictionServiceClient();
+  doStuffWithPredictionServiceClient(predictionServiceClient);
   // check that the client instance can be created
   const retrieverServiceClient = new RetrieverServiceClient();
   doStuffWithRetrieverServiceClient(retrieverServiceClient);

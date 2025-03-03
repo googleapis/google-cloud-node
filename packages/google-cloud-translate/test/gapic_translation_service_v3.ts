@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -360,7 +360,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.TranslateTextResponse()
       );
@@ -391,7 +391,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.TranslateTextResponse()
       );
@@ -438,7 +438,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.translateText = stubSimpleCall(
         undefined,
@@ -490,7 +490,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.RomanizeTextResponse()
       );
@@ -521,7 +521,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.RomanizeTextResponse()
       );
@@ -568,7 +568,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.romanizeText = stubSimpleCall(
         undefined,
@@ -620,7 +620,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.DetectLanguageResponse()
       );
@@ -651,7 +651,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.DetectLanguageResponse()
       );
@@ -698,7 +698,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.detectLanguage = stubSimpleCall(
         undefined,
@@ -750,7 +750,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.SupportedLanguages()
       );
@@ -782,7 +782,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.SupportedLanguages()
       );
@@ -829,7 +829,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSupportedLanguages = stubSimpleCall(
         undefined,
@@ -887,7 +887,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.TranslateDocumentResponse()
       );
@@ -918,7 +918,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.TranslateDocumentResponse()
       );
@@ -965,7 +965,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.translateDocument = stubSimpleCall(
         undefined,
@@ -1017,7 +1017,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.Glossary()
       );
@@ -1048,7 +1048,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.Glossary()
       );
@@ -1095,7 +1095,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGlossary = stubSimpleCall(
         undefined,
@@ -1147,7 +1147,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.GlossaryEntry()
       );
@@ -1178,7 +1178,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.GlossaryEntry()
       );
@@ -1225,7 +1225,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGlossaryEntry = stubSimpleCall(
         undefined,
@@ -1277,7 +1277,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.GlossaryEntry()
       );
@@ -1309,7 +1309,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.GlossaryEntry()
       );
@@ -1356,7 +1356,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGlossaryEntry = stubSimpleCall(
         undefined,
@@ -1409,7 +1409,7 @@ describe('v3.TranslationServiceClient', () => {
         ['glossaryEntry', 'name']
       );
       request.glossaryEntry.name = defaultValue1;
-      const expectedHeaderRequestParams = `glossary_entry.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `glossary_entry.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.GlossaryEntry()
       );
@@ -1442,7 +1442,7 @@ describe('v3.TranslationServiceClient', () => {
         ['glossaryEntry', 'name']
       );
       request.glossaryEntry.name = defaultValue1;
-      const expectedHeaderRequestParams = `glossary_entry.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `glossary_entry.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.GlossaryEntry()
       );
@@ -1490,7 +1490,7 @@ describe('v3.TranslationServiceClient', () => {
         ['glossaryEntry', 'name']
       );
       request.glossaryEntry.name = defaultValue1;
-      const expectedHeaderRequestParams = `glossary_entry.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `glossary_entry.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGlossaryEntry = stubSimpleCall(
         undefined,
@@ -1543,7 +1543,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1575,7 +1575,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1622,7 +1622,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGlossaryEntry = stubSimpleCall(
         undefined,
@@ -1674,7 +1674,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.Dataset()
       );
@@ -1705,7 +1705,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.Dataset()
       );
@@ -1752,7 +1752,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataset = stubSimpleCall(
         undefined,
@@ -1804,7 +1804,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.AdaptiveMtDataset()
       );
@@ -1836,7 +1836,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.AdaptiveMtDataset()
       );
@@ -1883,7 +1883,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAdaptiveMtDataset = stubSimpleCall(
         undefined,
@@ -1941,7 +1941,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1973,7 +1973,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2020,7 +2020,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAdaptiveMtDataset = stubSimpleCall(
         undefined,
@@ -2078,7 +2078,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.AdaptiveMtDataset()
       );
@@ -2110,7 +2110,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.AdaptiveMtDataset()
       );
@@ -2157,7 +2157,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAdaptiveMtDataset = stubSimpleCall(
         undefined,
@@ -2209,7 +2209,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.AdaptiveMtTranslateResponse()
       );
@@ -2241,7 +2241,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.AdaptiveMtTranslateResponse()
       );
@@ -2288,7 +2288,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.adaptiveMtTranslate = stubSimpleCall(
         undefined,
@@ -2340,7 +2340,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.AdaptiveMtFile()
       );
@@ -2371,7 +2371,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.AdaptiveMtFile()
       );
@@ -2418,7 +2418,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAdaptiveMtFile = stubSimpleCall(
         undefined,
@@ -2470,7 +2470,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2502,7 +2502,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2549,7 +2549,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAdaptiveMtFile = stubSimpleCall(
         undefined,
@@ -2601,7 +2601,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.ImportAdaptiveMtFileResponse()
       );
@@ -2633,7 +2633,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.ImportAdaptiveMtFileResponse()
       );
@@ -2680,7 +2680,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importAdaptiveMtFile = stubSimpleCall(
         undefined,
@@ -2732,7 +2732,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.Model()
       );
@@ -2763,7 +2763,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.translation.v3.Model()
       );
@@ -2810,7 +2810,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getModel = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getModel(request), expectedError);
@@ -2859,7 +2859,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2892,7 +2892,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2946,7 +2946,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchTranslateText = stubLongRunningCall(
         undefined,
@@ -2977,7 +2977,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchTranslateText = stubLongRunningCall(
         undefined,
@@ -3053,7 +3053,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3086,7 +3086,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3140,7 +3140,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchTranslateDocument = stubLongRunningCall(
         undefined,
@@ -3174,7 +3174,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchTranslateDocument = stubLongRunningCall(
         undefined,
@@ -3250,7 +3250,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3283,7 +3283,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3337,7 +3337,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGlossary = stubLongRunningCall(
         undefined,
@@ -3368,7 +3368,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGlossary = stubLongRunningCall(
         undefined,
@@ -3445,7 +3445,7 @@ describe('v3.TranslationServiceClient', () => {
         ['glossary', 'name']
       );
       request.glossary.name = defaultValue1;
-      const expectedHeaderRequestParams = `glossary.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `glossary.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3479,7 +3479,7 @@ describe('v3.TranslationServiceClient', () => {
         ['glossary', 'name']
       );
       request.glossary.name = defaultValue1;
-      const expectedHeaderRequestParams = `glossary.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `glossary.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3534,7 +3534,7 @@ describe('v3.TranslationServiceClient', () => {
         ['glossary', 'name']
       );
       request.glossary.name = defaultValue1;
-      const expectedHeaderRequestParams = `glossary.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `glossary.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGlossary = stubLongRunningCall(
         undefined,
@@ -3566,7 +3566,7 @@ describe('v3.TranslationServiceClient', () => {
         ['glossary', 'name']
       );
       request.glossary.name = defaultValue1;
-      const expectedHeaderRequestParams = `glossary.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `glossary.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGlossary = stubLongRunningCall(
         undefined,
@@ -3642,7 +3642,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3675,7 +3675,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3729,7 +3729,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGlossary = stubLongRunningCall(
         undefined,
@@ -3760,7 +3760,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGlossary = stubLongRunningCall(
         undefined,
@@ -3836,7 +3836,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3869,7 +3869,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3923,7 +3923,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataset = stubLongRunningCall(
         undefined,
@@ -3954,7 +3954,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataset = stubLongRunningCall(
         undefined,
@@ -4030,7 +4030,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4063,7 +4063,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4117,7 +4117,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataset = stubLongRunningCall(
         undefined,
@@ -4148,7 +4148,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataset = stubLongRunningCall(
         undefined,
@@ -4224,7 +4224,7 @@ describe('v3.TranslationServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4256,7 +4256,7 @@ describe('v3.TranslationServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4310,7 +4310,7 @@ describe('v3.TranslationServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importData = stubLongRunningCall(
         undefined,
@@ -4341,7 +4341,7 @@ describe('v3.TranslationServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importData = stubLongRunningCall(
         undefined,
@@ -4414,7 +4414,7 @@ describe('v3.TranslationServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4446,7 +4446,7 @@ describe('v3.TranslationServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4500,7 +4500,7 @@ describe('v3.TranslationServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportData = stubLongRunningCall(
         undefined,
@@ -4531,7 +4531,7 @@ describe('v3.TranslationServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportData = stubLongRunningCall(
         undefined,
@@ -4604,7 +4604,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4636,7 +4636,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4690,7 +4690,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createModel = stubLongRunningCall(
         undefined,
@@ -4721,7 +4721,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createModel = stubLongRunningCall(
         undefined,
@@ -4794,7 +4794,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4826,7 +4826,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4880,7 +4880,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteModel = stubLongRunningCall(
         undefined,
@@ -4911,7 +4911,7 @@ describe('v3.TranslationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteModel = stubLongRunningCall(
         undefined,
@@ -4984,7 +4984,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.Glossary()
@@ -5023,7 +5023,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.Glossary()
@@ -5078,7 +5078,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGlossaries = stubSimpleCall(
         undefined,
@@ -5109,7 +5109,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.Glossary()
@@ -5169,7 +5169,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGlossaries.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5218,7 +5218,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.Glossary()
@@ -5267,7 +5267,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGlossaries.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5309,7 +5309,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.GlossaryEntry()
@@ -5349,7 +5349,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.GlossaryEntry()
@@ -5404,7 +5404,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGlossaryEntries = stubSimpleCall(
         undefined,
@@ -5435,7 +5435,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.GlossaryEntry()
@@ -5496,7 +5496,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGlossaryEntries.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5546,7 +5546,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.GlossaryEntry()
@@ -5595,7 +5595,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGlossaryEntries.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5638,7 +5638,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.translation.v3.Dataset()),
         generateSampleMessage(new protos.google.cloud.translation.v3.Dataset()),
@@ -5671,7 +5671,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.translation.v3.Dataset()),
         generateSampleMessage(new protos.google.cloud.translation.v3.Dataset()),
@@ -5720,7 +5720,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDatasets = stubSimpleCall(
         undefined,
@@ -5751,7 +5751,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.translation.v3.Dataset()),
         generateSampleMessage(new protos.google.cloud.translation.v3.Dataset()),
@@ -5805,7 +5805,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(
         undefined,
@@ -5856,7 +5856,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.translation.v3.Dataset()),
         generateSampleMessage(new protos.google.cloud.translation.v3.Dataset()),
@@ -5899,7 +5899,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5941,7 +5941,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.AdaptiveMtDataset()
@@ -5981,7 +5981,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.AdaptiveMtDataset()
@@ -6038,7 +6038,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAdaptiveMtDatasets = stubSimpleCall(
         undefined,
@@ -6072,7 +6072,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.AdaptiveMtDataset()
@@ -6139,7 +6139,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAdaptiveMtDatasets.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6195,7 +6195,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.AdaptiveMtDataset()
@@ -6249,7 +6249,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAdaptiveMtDatasets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6296,7 +6296,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.AdaptiveMtFile()
@@ -6336,7 +6336,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.AdaptiveMtFile()
@@ -6391,7 +6391,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAdaptiveMtFiles = stubSimpleCall(
         undefined,
@@ -6422,7 +6422,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.AdaptiveMtFile()
@@ -6483,7 +6483,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAdaptiveMtFiles.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6533,7 +6533,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.AdaptiveMtFile()
@@ -6583,7 +6583,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAdaptiveMtFiles.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6626,7 +6626,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.AdaptiveMtSentence()
@@ -6666,7 +6666,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.AdaptiveMtSentence()
@@ -6723,7 +6723,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAdaptiveMtSentences = stubSimpleCall(
         undefined,
@@ -6757,7 +6757,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.AdaptiveMtSentence()
@@ -6824,7 +6824,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAdaptiveMtSentences.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6880,7 +6880,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.translation.v3.AdaptiveMtSentence()
@@ -6934,7 +6934,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAdaptiveMtSentences.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6981,7 +6981,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.translation.v3.Example()),
         generateSampleMessage(new protos.google.cloud.translation.v3.Example()),
@@ -7014,7 +7014,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.translation.v3.Example()),
         generateSampleMessage(new protos.google.cloud.translation.v3.Example()),
@@ -7063,7 +7063,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listExamples = stubSimpleCall(
         undefined,
@@ -7094,7 +7094,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.translation.v3.Example()),
         generateSampleMessage(new protos.google.cloud.translation.v3.Example()),
@@ -7148,7 +7148,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExamples.createStream = stubPageStreamingCall(
         undefined,
@@ -7199,7 +7199,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.translation.v3.Example()),
         generateSampleMessage(new protos.google.cloud.translation.v3.Example()),
@@ -7242,7 +7242,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExamples.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7284,7 +7284,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.translation.v3.Model()),
         generateSampleMessage(new protos.google.cloud.translation.v3.Model()),
@@ -7317,7 +7317,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.translation.v3.Model()),
         generateSampleMessage(new protos.google.cloud.translation.v3.Model()),
@@ -7366,7 +7366,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listModels = stubSimpleCall(
         undefined,
@@ -7397,7 +7397,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.translation.v3.Model()),
         generateSampleMessage(new protos.google.cloud.translation.v3.Model()),
@@ -7451,7 +7451,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listModels.createStream = stubPageStreamingCall(
         undefined,
@@ -7502,7 +7502,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.translation.v3.Model()),
         generateSampleMessage(new protos.google.cloud.translation.v3.Model()),
@@ -7545,7 +7545,7 @@ describe('v3.TranslationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listModels.asyncIterate = stubAsyncIterationCall(
         undefined,

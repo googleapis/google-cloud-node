@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -665,6 +665,48 @@ describe('v1beta.BusinessInfoServiceClient', () => {
         assert.strictEqual(result, 'taxValue');
         assert(
           (client.pathTemplates.accountTaxPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('autofeedSettings', () => {
+      const fakePath = '/rendered/path/autofeedSettings';
+      const expectedParameters = {
+        account: 'accountValue',
+      };
+      const client =
+        new businessinfoserviceModule.v1beta.BusinessInfoServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.autofeedSettingsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.autofeedSettingsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('autofeedSettingsPath', () => {
+        const result = client.autofeedSettingsPath('accountValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.autofeedSettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromAutofeedSettingsName', () => {
+        const result = client.matchAccountFromAutofeedSettingsName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (client.pathTemplates.autofeedSettingsPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

@@ -31,6 +31,21 @@ option (google.api.resource_definition) = {
   pattern: "projects/{project}/regions/{region}/networkAttachments/{networkattachment}"
 };
 
+// PSC config that is used to automatically create forwarding rule via
+// ServiceConnectionMap.
+message PSCAutomationConfig {
+  // Required. Project id used to create forwarding rule.
+  string project_id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The full name of the Google Compute Engine
+  // [network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks).
+  // [Format](https://cloud.google.com/compute/docs/reference/rest/v1/networks/insert):
+  // `projects/{project}/global/networks/{network}`.
+  // Where {project} is a project number, as in '12345', and {network} is
+  // network name.
+  string network = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
 // Represents configuration for private service connect.
 message PrivateServiceConnectConfig {
   // Required. If true, expose the IndexEndpoint via private service connect.
@@ -40,6 +55,13 @@ message PrivateServiceConnectConfig {
   // A list of Projects from which the forwarding rule will target the service
   // attachment.
   repeated string project_allowlist = 2;
+
+  // Optional. If set to true, enable secure private service connect with IAM
+  // authorization. Otherwise, private service connect will be done without
+  // authorization. Note latency will be slightly increased if authorization is
+  // enabled.
+  bool enable_secure_private_service_connect = 4
+      [(google.api.field_behavior) = OPTIONAL];
 
   // Output only. The name of the generated service attachment resource.
   // This is only populated if the endpoint is deployed with

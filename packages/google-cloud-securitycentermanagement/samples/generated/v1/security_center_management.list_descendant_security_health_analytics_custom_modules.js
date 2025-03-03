@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. Name of the parent organization, folder, or project in which to
-   *  list custom modules, specified in one of the following formats:
+   *  list custom modules, in one of the following formats:
    *  * `organizations/{organization}/locations/{location}`
    *  * `folders/{folder}/locations/{location}`
    *  * `projects/{project}/locations/{location}`
@@ -42,7 +42,10 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  Optional. A token identifying a page of results the server should return.
+   *  Optional. A pagination token returned from a previous request. Provide this
+   *  token to retrieve the next page of results.
+   *  When paginating, the rest of the request must match the request that
+   *  generated the page token.
    */
   // const pageToken = 'abc123'
 

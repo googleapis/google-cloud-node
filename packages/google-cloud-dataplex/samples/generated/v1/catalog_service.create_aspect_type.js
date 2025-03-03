@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ function main(parent, aspectTypeId, aspectType) {
   /**
    *  Required. The resource name of the AspectType, of the form:
    *  projects/{project_number}/locations/{location_id}
-   *  where `location_id` refers to a GCP region.
+   *  where `location_id` refers to a Google Cloud region.
    */
   // const parent = 'abc123'
   /**
@@ -39,12 +39,12 @@ function main(parent, aspectTypeId, aspectType) {
    */
   // const aspectTypeId = 'abc123'
   /**
-   *  Required. AspectType Resource
+   *  Required. AspectType Resource.
    */
   // const aspectType = {}
   /**
-   *  Optional. Only validate the request, but do not perform mutations.
-   *  The default is false.
+   *  Optional. The service validates the request without performing any
+   *  mutations. The default is false.
    */
   // const validateOnly = true
 

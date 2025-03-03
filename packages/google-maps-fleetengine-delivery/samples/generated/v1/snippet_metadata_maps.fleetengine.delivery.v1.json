@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-delivery",
-        "version": "0.1.0",
+        "version": "0.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -100,6 +100,50 @@
                 "method": {
                     "shortName": "GetDeliveryVehicle",
                     "fullName": "maps.fleetengine.delivery.v1.DeliveryService.GetDeliveryVehicle",
+                    "service": {
+                        "shortName": "DeliveryService",
+                        "fullName": "maps.fleetengine.delivery.v1.DeliveryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "fleetengine_v1_generated_DeliveryService_DeleteDeliveryVehicle_async",
+            "title": "DeliveryService deleteDeliveryVehicle Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a DeliveryVehicle from the Fleet Engine. Returns FAILED_PRECONDITION if the DeliveryVehicle has OPEN Tasks assigned to it.",
+            "canonical": true,
+            "file": "delivery_service.delete_delivery_vehicle.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteDeliveryVehicle",
+                "fullName": "maps.fleetengine.delivery.v1.DeliveryService.DeleteDeliveryVehicle",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "header",
+                        "type": ".maps.fleetengine.delivery.v1.DeliveryRequestHeader"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "DeliveryServiceClient",
+                    "fullName": "maps.fleetengine.delivery.v1.DeliveryServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteDeliveryVehicle",
+                    "fullName": "maps.fleetengine.delivery.v1.DeliveryService.DeleteDeliveryVehicle",
                     "service": {
                         "shortName": "DeliveryService",
                         "fullName": "maps.fleetengine.delivery.v1.DeliveryService"
@@ -214,7 +258,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 86,
+                    "end": 90,
                     "type": "FULL"
                 }
             ],
@@ -292,6 +336,50 @@
                 "method": {
                     "shortName": "GetTask",
                     "fullName": "maps.fleetengine.delivery.v1.DeliveryService.GetTask",
+                    "service": {
+                        "shortName": "DeliveryService",
+                        "fullName": "maps.fleetengine.delivery.v1.DeliveryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "fleetengine_v1_generated_DeliveryService_DeleteTask_async",
+            "title": "DeliveryService deleteTask Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a single Task. Returns FAILED_PRECONDITION if the Task is OPEN and assigned to a DeliveryVehicle.",
+            "canonical": true,
+            "file": "delivery_service.delete_task.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteTask",
+                "fullName": "maps.fleetengine.delivery.v1.DeliveryService.DeleteTask",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "header",
+                        "type": ".maps.fleetengine.delivery.v1.DeliveryRequestHeader"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "DeliveryServiceClient",
+                    "fullName": "maps.fleetengine.delivery.v1.DeliveryServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteTask",
+                    "fullName": "maps.fleetengine.delivery.v1.DeliveryService.DeleteTask",
                     "service": {
                         "shortName": "DeliveryService",
                         "fullName": "maps.fleetengine.delivery.v1.DeliveryService"

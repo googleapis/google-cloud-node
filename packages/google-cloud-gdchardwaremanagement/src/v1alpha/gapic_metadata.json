@@ -35,6 +35,11 @@
                 "getComment"
               ]
             },
+            "RecordActionOnComment": {
+              "methods": [
+                "recordActionOnComment"
+              ]
+            },
             "GetChangeLogEntry": {
               "methods": [
                 "getChangeLogEntry"
@@ -78,6 +83,11 @@
             "UpdateSite": {
               "methods": [
                 "updateSite"
+              ]
+            },
+            "DeleteSite": {
+              "methods": [
+                "deleteSite"
               ]
             },
             "CreateHardwareGroup": {
@@ -221,6 +231,11 @@
                 "getComment"
               ]
             },
+            "RecordActionOnComment": {
+              "methods": [
+                "recordActionOnComment"
+              ]
+            },
             "GetChangeLogEntry": {
               "methods": [
                 "getChangeLogEntry"
@@ -264,6 +279,11 @@
             "UpdateSite": {
               "methods": [
                 "updateSite"
+              ]
+            },
+            "DeleteSite": {
+              "methods": [
+                "deleteSite"
               ]
             },
             "CreateHardwareGroup": {

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -280,7 +280,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Fulfillment()
       );
@@ -311,7 +311,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Fulfillment()
       );
@@ -358,7 +358,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFulfillment = stubSimpleCall(
         undefined,
@@ -411,7 +411,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         ['fulfillment', 'name']
       );
       request.fulfillment.name = defaultValue1;
-      const expectedHeaderRequestParams = `fulfillment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `fulfillment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Fulfillment()
       );
@@ -443,7 +443,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         ['fulfillment', 'name']
       );
       request.fulfillment.name = defaultValue1;
-      const expectedHeaderRequestParams = `fulfillment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `fulfillment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Fulfillment()
       );
@@ -491,7 +491,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         ['fulfillment', 'name']
       );
       request.fulfillment.name = defaultValue1;
-      const expectedHeaderRequestParams = `fulfillment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `fulfillment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFulfillment = stubSimpleCall(
         undefined,
@@ -3637,6 +3637,211 @@ describe('v2beta1.FulfillmentsClient', () => {
               .projectLocationKnowledgeBaseDocumentPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationPhoneNumber', () => {
+      const fakePath = '/rendered/path/projectLocationPhoneNumber';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        phone_number: 'phoneNumberValue',
+      };
+      const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationPhoneNumberPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationPhoneNumberPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationPhoneNumberPath', () => {
+        const result = client.projectLocationPhoneNumberPath(
+          'projectValue',
+          'locationValue',
+          'phoneNumberValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationPhoneNumberPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationPhoneNumberName', () => {
+        const result =
+          client.matchProjectFromProjectLocationPhoneNumberName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPhoneNumberPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationPhoneNumberName', () => {
+        const result =
+          client.matchLocationFromProjectLocationPhoneNumberName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPhoneNumberPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPhoneNumberFromProjectLocationPhoneNumberName', () => {
+        const result =
+          client.matchPhoneNumberFromProjectLocationPhoneNumberName(fakePath);
+        assert.strictEqual(result, 'phoneNumberValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPhoneNumberPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectPhoneNumber', () => {
+      const fakePath = '/rendered/path/projectPhoneNumber';
+      const expectedParameters = {
+        project: 'projectValue',
+        phone_number: 'phoneNumberValue',
+      };
+      const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectPhoneNumberPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPhoneNumberPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPhoneNumberPath', () => {
+        const result = client.projectPhoneNumberPath(
+          'projectValue',
+          'phoneNumberValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectPhoneNumberPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectPhoneNumberName', () => {
+        const result = client.matchProjectFromProjectPhoneNumberName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectPhoneNumberPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPhoneNumberFromProjectPhoneNumberName', () => {
+        const result =
+          client.matchPhoneNumberFromProjectPhoneNumberName(fakePath);
+        assert.strictEqual(result, 'phoneNumberValue');
+        assert(
+          (
+            client.pathTemplates.projectPhoneNumberPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('sipTrunk', () => {
+      const fakePath = '/rendered/path/sipTrunk';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        siptrunk: 'siptrunkValue',
+      };
+      const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.sipTrunkPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.sipTrunkPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('sipTrunkPath', () => {
+        const result = client.sipTrunkPath(
+          'projectValue',
+          'locationValue',
+          'siptrunkValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.sipTrunkPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSipTrunkName', () => {
+        const result = client.matchProjectFromSipTrunkName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.sipTrunkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSipTrunkName', () => {
+        const result = client.matchLocationFromSipTrunkName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.sipTrunkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSiptrunkFromSipTrunkName', () => {
+        const result = client.matchSiptrunkFromSipTrunkName(fakePath);
+        assert.strictEqual(result, 'siptrunkValue');
+        assert(
+          (client.pathTemplates.sipTrunkPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

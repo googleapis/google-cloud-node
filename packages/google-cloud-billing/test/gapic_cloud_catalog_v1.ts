@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -532,7 +532,7 @@ describe('v1.CloudCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.billing.v1.Sku()),
         generateSampleMessage(new protos.google.cloud.billing.v1.Sku()),
@@ -565,7 +565,7 @@ describe('v1.CloudCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.billing.v1.Sku()),
         generateSampleMessage(new protos.google.cloud.billing.v1.Sku()),
@@ -614,7 +614,7 @@ describe('v1.CloudCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSkus = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listSkus(request), expectedError);
@@ -642,7 +642,7 @@ describe('v1.CloudCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.billing.v1.Sku()),
         generateSampleMessage(new protos.google.cloud.billing.v1.Sku()),
@@ -693,7 +693,7 @@ describe('v1.CloudCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSkus.createStream = stubPageStreamingCall(
         undefined,
@@ -741,7 +741,7 @@ describe('v1.CloudCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.billing.v1.Sku()),
         generateSampleMessage(new protos.google.cloud.billing.v1.Sku()),
@@ -783,7 +783,7 @@ describe('v1.CloudCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSkus.asyncIterate = stubAsyncIterationCall(
         undefined,

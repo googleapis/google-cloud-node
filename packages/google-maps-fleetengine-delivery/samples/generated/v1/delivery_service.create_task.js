@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -59,6 +59,10 @@ function main(parent, taskId, task) {
    *  tasks, but required for all other task types)
    *  * `planned_location` (optional for `UNAVAILABLE` tasks)
    *  * `task_duration`
+   *  The following fields can be optionally set:
+   *  * `target_time_window`
+   *  * `task_tracking_view_config`
+   *  * `attributes`
    *  Note: The Task's `name` field is ignored. All other Task fields must not be
    *  set; otherwise, an error is returned.
    */

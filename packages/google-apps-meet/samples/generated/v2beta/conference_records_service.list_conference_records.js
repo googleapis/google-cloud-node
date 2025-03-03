@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,13 +40,19 @@ function main() {
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. User specified filtering condition in EBNF format. The following
-   *  are the filterable fields:
+   *  Optional. User specified filtering condition in EBNF
+   *  format (https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+   *  The following are the filterable fields:
    *  * `space.meeting_code`
    *  * `space.name`
    *  * `start_time`
    *  * `end_time`
-   *  For example, `space.meeting_code = "abc-mnop-xyz"`.
+   *  For example, consider the following filters:
+   *  * `space.name = "spaces/NAME"`
+   *  * `space.meeting_code = "abc-mnop-xyz"`
+   *  * `start_time>="2024-01-01T00:00:00.000Z" AND
+   *  start_time<="2024-01-02T00:00:00.000Z"`
+   *  * `end_time IS NULL`
    */
   // const filter = 'abc123'
 

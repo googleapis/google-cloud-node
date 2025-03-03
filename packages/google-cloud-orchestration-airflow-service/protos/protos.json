@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -1195,15 +1198,24 @@
                                 },
                                 "softwareConfig": {
                                   "type": "SoftwareConfig",
-                                  "id": 4
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "nodeConfig": {
                                   "type": "NodeConfig",
-                                  "id": 5
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "privateEnvironmentConfig": {
                                   "type": "PrivateEnvironmentConfig",
-                                  "id": 7
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "webServerNetworkAccessControl": {
                                   "type": "WebServerNetworkAccessControl",
@@ -1406,7 +1418,10 @@
                               "fields": {
                                 "imageVersion": {
                                   "type": "string",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "airflowConfigOverrides": {
                                   "keyType": "string",
@@ -1524,11 +1539,17 @@
                                 },
                                 "network": {
                                   "type": "string",
-                                  "id": 3
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "subnetwork": {
                                   "type": "string",
-                                  "id": 4
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "diskSizeGb": {
                                   "type": "int32",
@@ -1541,7 +1562,10 @@
                                 },
                                 "serviceAccount": {
                                   "type": "string",
-                                  "id": 7
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "tags": {
                                   "rule": "repeated",
@@ -1987,11 +2011,17 @@
                               "fields": {
                                 "name": {
                                   "type": "string",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "IDENTIFIER"
+                                  }
                                 },
                                 "config": {
                                   "type": "EnvironmentConfig",
-                                  "id": 2
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "uuid": {
                                   "type": "string",
@@ -2012,7 +2042,10 @@
                                 "labels": {
                                   "keyType": "string",
                                   "type": "string",
-                                  "id": 7
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "satisfiesPzs": {
                                   "type": "bool",
@@ -3535,15 +3568,24 @@
                                 },
                                 "softwareConfig": {
                                   "type": "SoftwareConfig",
-                                  "id": 4
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "nodeConfig": {
                                   "type": "NodeConfig",
-                                  "id": 5
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "privateEnvironmentConfig": {
                                   "type": "PrivateEnvironmentConfig",
-                                  "id": 7
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "webServerNetworkAccessControl": {
                                   "type": "WebServerNetworkAccessControl",
@@ -3684,7 +3726,10 @@
                               "fields": {
                                 "imageVersion": {
                                   "type": "string",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "airflowConfigOverrides": {
                                   "keyType": "string",
@@ -4443,11 +4488,17 @@
                               "fields": {
                                 "name": {
                                   "type": "string",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "IDENTIFIER"
+                                  }
                                 },
                                 "config": {
                                   "type": "EnvironmentConfig",
-                                  "id": 2
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "uuid": {
                                   "type": "string",

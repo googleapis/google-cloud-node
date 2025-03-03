@@ -21,6 +21,7 @@
   * [G_d_c_hardware_management.delete_hardware](#g_d_c_hardware_management.delete_hardware)
   * [G_d_c_hardware_management.delete_hardware_group](#g_d_c_hardware_management.delete_hardware_group)
   * [G_d_c_hardware_management.delete_order](#g_d_c_hardware_management.delete_order)
+  * [G_d_c_hardware_management.delete_site](#g_d_c_hardware_management.delete_site)
   * [G_d_c_hardware_management.delete_zone](#g_d_c_hardware_management.delete_zone)
   * [G_d_c_hardware_management.get_change_log_entry](#g_d_c_hardware_management.get_change_log_entry)
   * [G_d_c_hardware_management.get_comment](#g_d_c_hardware_management.get_comment)
@@ -38,6 +39,7 @@
   * [G_d_c_hardware_management.list_sites](#g_d_c_hardware_management.list_sites)
   * [G_d_c_hardware_management.list_skus](#g_d_c_hardware_management.list_skus)
   * [G_d_c_hardware_management.list_zones](#g_d_c_hardware_management.list_zones)
+  * [G_d_c_hardware_management.record_action_on_comment](#g_d_c_hardware_management.record_action_on_comment)
   * [G_d_c_hardware_management.signal_zone_state](#g_d_c_hardware_management.signal_zone_state)
   * [G_d_c_hardware_management.submit_order](#g_d_c_hardware_management.submit_order)
   * [G_d_c_hardware_management.update_hardware](#g_d_c_hardware_management.update_hardware)
@@ -208,6 +210,23 @@ __Usage:__
 
 
 `node packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_order.js`
+
+
+-----
+
+
+
+
+### G_d_c_hardware_management.delete_site
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_site.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_site.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_site.js`
 
 
 -----
@@ -497,6 +516,23 @@ __Usage:__
 
 
 `node packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_zones.js`
+
+
+-----
+
+
+
+
+### G_d_c_hardware_management.record_action_on_comment
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.record_action_on_comment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.record_action_on_comment.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.record_action_on_comment.js`
 
 
 -----

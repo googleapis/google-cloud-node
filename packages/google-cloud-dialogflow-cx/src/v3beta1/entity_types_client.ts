@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -574,8 +574,8 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the entity type.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/entityTypes/<Entity Type ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
    * @param {string} request.languageCode
    *   The language to retrieve the entity type for. The following fields are
    *   language dependent:
@@ -685,7 +685,7 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to create a entity type for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.EntityType} request.entityType
    *   Required. The entity type to create.
    * @param {string} request.languageCode
@@ -914,8 +914,8 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the entity type to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/entityTypes/<Entity Type ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
    * @param {boolean} request.force
    *   This field has no effect for entity type not being used.
    *   For entity types that are used by intents or pages:
@@ -1026,12 +1026,11 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent agent to export entity types.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string[]} request.entityTypes
    *   Required. The name of the entity types to export.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/entityTypes/<EntityType ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
    * @param {string} [request.entityTypesUri]
    *   Optional. The [Google Cloud
    *   Storage](https://cloud.google.com/storage/docs/) URI to export the entity
@@ -1197,7 +1196,7 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to import the entity types into.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.entityTypesUri
    *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
    *   to import entity types from. The format of this URI must be
@@ -1214,13 +1213,13 @@ export class EntityTypesClient {
    *   Required. Merge option for importing entity types.
    * @param {string} [request.targetEntityType]
    *   Optional. The target entity type to import into.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/entity_types/<EntityType ID>`.
-   *   If set, there should be only one entity type included in
-   *   {@link protos.google.cloud.dialogflow.cx.v3beta1.ImportEntityTypesRequest.entity_types|entity_types},
-   *   of which the type should match the type of the target entity type. All
-   *   {@link protos.google.cloud.dialogflow.cx.v3beta1.EntityType.entities|entities} in the
-   *   imported entity type will be added to the target entity type.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entity_types/<EntityTypeID>`.
+   *    If set, there should be only one entity type included in
+   *    {@link protos.google.cloud.dialogflow.cx.v3beta1.ImportEntityTypesRequest.entity_types|entity_types},
+   *    of which the type should match the type of the target entity type. All
+   *    {@link protos.google.cloud.dialogflow.cx.v3beta1.EntityType.entities|entities} in the
+   *    imported entity type will be added to the target entity type.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1357,7 +1356,7 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all entity types for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.languageCode
    *   The language to list entity types for. The following fields are language
    *   dependent:
@@ -1464,12 +1463,12 @@ export class EntityTypesClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEntityTypes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all entity types for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.languageCode
    *   The language to list entity types for. The following fields are language
    *   dependent:
@@ -1529,7 +1528,7 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all entity types for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.languageCode
    *   The language to list entity types for. The following fields are language
    *   dependent:
@@ -1691,7 +1690,7 @@ export class EntityTypesClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1704,6 +1703,20 @@ export class EntityTypesClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1740,6 +1753,13 @@ export class EntityTypesClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1775,11 +1795,11 @@ export class EntityTypesClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1788,6 +1808,20 @@ export class EntityTypesClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1818,7 +1852,7 @@ export class EntityTypesClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1831,6 +1865,20 @@ export class EntityTypesClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,9 +29,9 @@ function main(endpoint) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the Endpoint requested to serve the prediction.
+   *  Required. The name of the endpoint requested to serve the prediction.
    *  Format:
-   *  `projects/{project}/locations/{location}/endpoints/openapi`
+   *  `projects/{project}/locations/{location}/endpoints/{endpoint}`
    */
   // const endpoint = 'abc123'
   /**

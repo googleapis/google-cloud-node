@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -102,6 +102,8 @@ const NetworkEndpointGroupsClient = v1.NetworkEndpointGroupsClient;
 type NetworkEndpointGroupsClient = v1.NetworkEndpointGroupsClient;
 const NetworkFirewallPoliciesClient = v1.NetworkFirewallPoliciesClient;
 type NetworkFirewallPoliciesClient = v1.NetworkFirewallPoliciesClient;
+const NetworkProfilesClient = v1.NetworkProfilesClient;
+type NetworkProfilesClient = v1.NetworkProfilesClient;
 const NetworksClient = v1.NetworksClient;
 type NetworksClient = v1.NetworksClient;
 const NodeGroupsClient = v1.NodeGroupsClient;
@@ -265,6 +267,7 @@ export {
   NetworkEdgeSecurityServicesClient,
   NetworkEndpointGroupsClient,
   NetworkFirewallPoliciesClient,
+  NetworkProfilesClient,
   NetworksClient,
   NodeGroupsClient,
   NodeTemplatesClient,
@@ -367,6 +370,7 @@ export default {
   NetworkEdgeSecurityServicesClient,
   NetworkEndpointGroupsClient,
   NetworkFirewallPoliciesClient,
+  NetworkProfilesClient,
   NetworksClient,
   NodeGroupsClient,
   NodeTemplatesClient,

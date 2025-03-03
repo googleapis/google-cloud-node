@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -359,7 +359,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetDocumentResponse()
       );
@@ -390,7 +390,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetDocumentResponse()
       );
@@ -437,7 +437,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDocument = stubSimpleCall(
         undefined,
@@ -489,7 +489,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DatasetSchema()
       );
@@ -520,7 +520,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DatasetSchema()
       );
@@ -567,7 +567,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDatasetSchema = stubSimpleCall(
         undefined,
@@ -620,7 +620,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['datasetSchema', 'name']
       );
       request.datasetSchema.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset_schema.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset_schema.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DatasetSchema()
       );
@@ -653,7 +653,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['datasetSchema', 'name']
       );
       request.datasetSchema.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset_schema.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset_schema.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DatasetSchema()
       );
@@ -701,7 +701,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['datasetSchema', 'name']
       );
       request.datasetSchema.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset_schema.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset_schema.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDatasetSchema = stubSimpleCall(
         undefined,
@@ -755,7 +755,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -789,7 +789,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -844,7 +844,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataset = stubLongRunningCall(
         undefined,
@@ -876,7 +876,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataset = stubLongRunningCall(
         undefined,
@@ -952,7 +952,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -985,7 +985,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1039,7 +1039,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importDocuments = stubLongRunningCall(
         undefined,
@@ -1070,7 +1070,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importDocuments = stubLongRunningCall(
         undefined,
@@ -1146,7 +1146,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1179,7 +1179,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1233,7 +1233,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchDeleteDocuments = stubLongRunningCall(
         undefined,
@@ -1264,7 +1264,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchDeleteDocuments = stubLongRunningCall(
         undefined,
@@ -1340,7 +1340,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
@@ -1379,7 +1379,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
@@ -1436,7 +1436,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDocuments = stubSimpleCall(
         undefined,
@@ -1467,7 +1467,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
@@ -1530,7 +1530,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDocuments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1582,7 +1582,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
@@ -1632,7 +1632,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDocuments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

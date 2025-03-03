@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.5.1](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v1.5.0...gkemulticloud-v1.5.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6013](https://github.com/googleapis/google-cloud-node/issues/6013)) ([cd3a2d4](https://github.com/googleapis/google-cloud-node/commit/cd3a2d44fc7a9b3798346162ba19df1c748fba58))
+
+## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v1.4.0...gkemulticloud-v1.5.0) (2024-09-24)
+
+
+### Features
+
+* [gkemulticloud] An optional field `security_posture_config` in message `.google.cloud.gkemulticloud.v1.AttachedCluster` is added ([#5682](https://github.com/googleapis/google-cloud-node/issues/5682)) ([8f2a389](https://github.com/googleapis/google-cloud-node/commit/8f2a38960f4abe81c7ae4d085e3168c4b7ce07b2))
+
 ## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v1.3.0...gkemulticloud-v1.4.0) (2024-05-21)
 
 

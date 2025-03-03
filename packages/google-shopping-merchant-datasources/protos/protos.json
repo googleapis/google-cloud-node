@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -13,7 +16,7 @@
                         "csharp_namespace": "Google.Shopping.Merchant.DataSources.V1Beta",
                         "go_package": "cloud.google.com/go/shopping/merchant/datasources/apiv1beta/datasourcespb;datasourcespb",
                         "java_multiple_files": true,
-                        "java_outer_classname": "FileInputsProto",
+                        "java_outer_classname": "FileUploadsProto",
                         "java_package": "com.google.shopping.merchant.datasources.v1beta",
                         "php_namespace": "Google\\Shopping\\Merchant\\DataSources\\V1beta",
                         "ruby_package": "Google::Shopping::Merchant::DataSources::V1beta",
@@ -153,45 +156,40 @@
                                 "supplementalProductDataSource",
                                 "localInventoryDataSource",
                                 "regionalInventoryDataSource",
-                                "promotionDataSource"
+                                "promotionDataSource",
+                                "productReviewDataSource",
+                                "merchantReviewDataSource"
                               ]
                             }
                           },
                           "fields": {
                             "primaryProductDataSource": {
                               "type": "PrimaryProductDataSource",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 4
                             },
                             "supplementalProductDataSource": {
                               "type": "SupplementalProductDataSource",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 5
                             },
                             "localInventoryDataSource": {
                               "type": "LocalInventoryDataSource",
-                              "id": 6,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 6
                             },
                             "regionalInventoryDataSource": {
                               "type": "RegionalInventoryDataSource",
-                              "id": 7,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 7
                             },
                             "promotionDataSource": {
                               "type": "PromotionDataSource",
-                              "id": 8,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 8
+                            },
+                            "productReviewDataSource": {
+                              "type": "ProductReviewDataSource",
+                              "id": 9
+                            },
+                            "merchantReviewDataSource": {
+                              "type": "MerchantReviewDataSource",
+                              "id": 12
                             },
                             "name": {
                               "type": "string",
@@ -397,9 +395,28 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "defaultRule": {
+                              "type": "DefaultRule",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
+                            "DefaultRule": {
+                              "fields": {
+                                "takeFromDataSources": {
+                                  "rule": "repeated",
+                                  "type": "DataSourceReference",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
                             "Channel": {
                               "values": {
                                 "CHANNEL_UNSPECIFIED": 0,
@@ -438,6 +455,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "IMMUTABLE",
                                 "proto3_optional": true
+                              }
+                            },
+                            "referencingPrimaryDataSources": {
+                              "rule": "repeated",
+                              "type": "DataSourceReference",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           }
@@ -492,6 +517,43 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            }
+                          }
+                        },
+                        "ProductReviewDataSource": {
+                          "fields": {}
+                        },
+                        "MerchantReviewDataSource": {
+                          "fields": {}
+                        },
+                        "DataSourceReference": {
+                          "oneofs": {
+                            "dataSourceId": {
+                              "oneof": [
+                                "self",
+                                "primaryDataSourceName",
+                                "supplementalDataSourceName"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "self": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "primaryDataSourceName": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "supplementalDataSourceName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -604,6 +666,176 @@
                                 "UPLOAD": 1,
                                 "FETCH": 2,
                                 "GOOGLE_SHEETS": 3
+                              }
+                            }
+                          }
+                        },
+                        "FileUploadsService": {
+                          "options": {
+                            "(google.api.default_host)": "merchantapi.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/content"
+                          },
+                          "methods": {
+                            "GetFileUpload": {
+                              "requestType": "GetFileUploadRequest",
+                              "responseType": "FileUpload",
+                              "options": {
+                                "(google.api.http).get": "/datasources/v1beta/{name=accounts/*/dataSources/*/fileUploads/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/datasources/v1beta/{name=accounts/*/dataSources/*/fileUploads/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "FileUpload": {
+                          "options": {
+                            "(google.api.resource).type": "merchantapi.googleapis.com/FileUpload",
+                            "(google.api.resource).pattern": "accounts/{account}/dataSources/{datasource}/fileUploads/{fileupload}",
+                            "(google.api.resource).plural": "fileUploads",
+                            "(google.api.resource).singular": "fileUpload"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "dataSourceId": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "processingState": {
+                              "type": "ProcessingState",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "issues": {
+                              "rule": "repeated",
+                              "type": "Issue",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "itemsTotal": {
+                              "type": "int64",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "itemsCreated": {
+                              "type": "int64",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "itemsUpdated": {
+                              "type": "int64",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "uploadTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Issue": {
+                              "fields": {
+                                "title": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "code": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "count": {
+                                  "type": "int64",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "severity": {
+                                  "type": "Severity",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "documentationUri": {
+                                  "type": "string",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "Severity": {
+                                  "values": {
+                                    "SEVERITY_UNSPECIFIED": 0,
+                                    "WARNING": 1,
+                                    "ERROR": 2
+                                  }
+                                }
+                              }
+                            },
+                            "ProcessingState": {
+                              "values": {
+                                "PROCESSING_STATE_UNSPECIFIED": 0,
+                                "FAILED": 1,
+                                "IN_PROGRESS": 2,
+                                "SUCCEEDED": 3
+                              }
+                            }
+                          }
+                        },
+                        "GetFileUploadRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/FileUpload"
                               }
                             }
                           }
@@ -2402,6 +2634,18 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
                 }
               }
             }

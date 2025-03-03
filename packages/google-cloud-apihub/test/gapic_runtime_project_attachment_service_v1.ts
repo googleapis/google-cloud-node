@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -364,7 +364,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.RuntimeProjectAttachment()
       );
@@ -399,7 +399,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.RuntimeProjectAttachment()
       );
@@ -449,7 +449,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRuntimeProjectAttachment = stubSimpleCall(
         undefined,
@@ -513,7 +513,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.RuntimeProjectAttachment()
       );
@@ -548,7 +548,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.RuntimeProjectAttachment()
       );
@@ -598,7 +598,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRuntimeProjectAttachment = stubSimpleCall(
         undefined,
@@ -662,7 +662,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -697,7 +697,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -747,7 +747,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRuntimeProjectAttachment = stubSimpleCall(
         undefined,
@@ -811,7 +811,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.LookupRuntimeProjectAttachmentResponse()
       );
@@ -846,7 +846,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.LookupRuntimeProjectAttachmentResponse()
       );
@@ -896,7 +896,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.lookupRuntimeProjectAttachment = stubSimpleCall(
         undefined,
@@ -960,7 +960,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apihub.v1.RuntimeProjectAttachment()
@@ -1003,7 +1003,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apihub.v1.RuntimeProjectAttachment()
@@ -1063,7 +1063,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRuntimeProjectAttachments = stubSimpleCall(
         undefined,
@@ -1100,7 +1100,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apihub.v1.RuntimeProjectAttachment()
@@ -1175,7 +1175,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRuntimeProjectAttachments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1239,7 +1239,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apihub.v1.RuntimeProjectAttachment()
@@ -1296,7 +1296,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRuntimeProjectAttachments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

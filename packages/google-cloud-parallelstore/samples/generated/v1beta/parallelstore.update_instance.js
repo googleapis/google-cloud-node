@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,14 +29,14 @@ function main(updateMask, instance) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Mask of fields to update .Field mask is used to specify the
+   *  Required. Mask of fields to update. Field mask is used to specify the
    *  fields to be overwritten in the Instance resource by the update. At least
    *  one path must be supplied in this field. The fields specified in the
    *  update_mask are relative to the resource, not the full request.
    */
   // const updateMask = {}
   /**
-   *  Required. The instance to update
+   *  Required. The instance to update.
    */
   // const instance = {}
   /**

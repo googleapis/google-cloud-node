@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/cloudcontrolspartner-v0.3.1...cloudcontrolspartner-v0.4.0) (2025-01-28)
+
+
+### Features
+
+* [cloudcontrolspartner] A new method `CreateCustomer` is added to service `CloudControlsPartnerCore` ([#5980](https://github.com/googleapis/google-cloud-node/issues/5980)) ([e5e13cb](https://github.com/googleapis/google-cloud-node/commit/e5e13cb8af58de2a6dc9b8735e9cae045c0b551c))
+
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/cloudcontrolspartner-v0.3.0...cloudcontrolspartner-v0.3.1) (2024-09-24)
+
+
+### Bug Fixes
+
+* [cloudcontrolspartner] Field behavior for field `display_name` in message `.google.cloud.cloudcontrolspartner.v1beta.Customer` is changed ([#5679](https://github.com/googleapis/google-cloud-node/issues/5679)) ([727e997](https://github.com/googleapis/google-cloud-node/commit/727e9971f7980f0b2c6ae14b209d10678e9b857d))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/cloudcontrolspartner-v0.2.0...cloudcontrolspartner-v0.3.0) (2024-05-21)
 
 

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-service",
-        "version": "3.6.0",
+        "version": "3.6.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -399,7 +399,7 @@
             "regionTag": "composer_v1_generated_Environments_ListWorkloads_async",
             "title": "Environments listWorkloads Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists workloads in a Cloud Composer environment. Workload is a unit that runs a single Composer component. This method is supported for Cloud Composer environments in versions composer-3.*.*-airflow-*.*.* and newer.",
+            "description": " Lists workloads in a Cloud Composer environment. Workload is a unit that runs a single Composer component. This method is supported for Cloud Composer environments in versions composer-2.*.*-airflow-*.*.* and newer.",
             "canonical": true,
             "file": "environments.list_workloads.js",
             "language": "JAVASCRIPT",

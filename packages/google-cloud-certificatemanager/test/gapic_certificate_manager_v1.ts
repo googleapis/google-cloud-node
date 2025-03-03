@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -362,7 +362,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.Certificate()
       );
@@ -393,7 +393,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.Certificate()
       );
@@ -440,7 +440,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCertificate = stubSimpleCall(
         undefined,
@@ -492,7 +492,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CertificateMap()
       );
@@ -523,7 +523,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CertificateMap()
       );
@@ -570,7 +570,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCertificateMap = stubSimpleCall(
         undefined,
@@ -622,7 +622,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CertificateMapEntry()
       );
@@ -654,7 +654,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CertificateMapEntry()
       );
@@ -701,7 +701,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCertificateMapEntry = stubSimpleCall(
         undefined,
@@ -759,7 +759,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DnsAuthorization()
       );
@@ -791,7 +791,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DnsAuthorization()
       );
@@ -838,7 +838,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDnsAuthorization = stubSimpleCall(
         undefined,
@@ -890,7 +890,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig()
       );
@@ -922,7 +922,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig()
       );
@@ -969,7 +969,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCertificateIssuanceConfig = stubSimpleCall(
         undefined,
@@ -1027,7 +1027,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.TrustConfig()
       );
@@ -1058,7 +1058,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.TrustConfig()
       );
@@ -1105,7 +1105,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTrustConfig = stubSimpleCall(
         undefined,
@@ -1157,7 +1157,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1190,7 +1190,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1244,7 +1244,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificate = stubLongRunningCall(
         undefined,
@@ -1275,7 +1275,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificate = stubLongRunningCall(
         undefined,
@@ -1352,7 +1352,7 @@ describe('v1.CertificateManagerClient', () => {
         ['certificate', 'name']
       );
       request.certificate.name = defaultValue1;
-      const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `certificate.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1386,7 +1386,7 @@ describe('v1.CertificateManagerClient', () => {
         ['certificate', 'name']
       );
       request.certificate.name = defaultValue1;
-      const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `certificate.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1441,7 +1441,7 @@ describe('v1.CertificateManagerClient', () => {
         ['certificate', 'name']
       );
       request.certificate.name = defaultValue1;
-      const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `certificate.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificate = stubLongRunningCall(
         undefined,
@@ -1473,7 +1473,7 @@ describe('v1.CertificateManagerClient', () => {
         ['certificate', 'name']
       );
       request.certificate.name = defaultValue1;
-      const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `certificate.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificate = stubLongRunningCall(
         undefined,
@@ -1549,7 +1549,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1582,7 +1582,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1636,7 +1636,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificate = stubLongRunningCall(
         undefined,
@@ -1667,7 +1667,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificate = stubLongRunningCall(
         undefined,
@@ -1743,7 +1743,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1776,7 +1776,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1830,7 +1830,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificateMap = stubLongRunningCall(
         undefined,
@@ -1861,7 +1861,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificateMap = stubLongRunningCall(
         undefined,
@@ -1938,7 +1938,7 @@ describe('v1.CertificateManagerClient', () => {
         ['certificateMap', 'name']
       );
       request.certificateMap.name = defaultValue1;
-      const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1972,7 +1972,7 @@ describe('v1.CertificateManagerClient', () => {
         ['certificateMap', 'name']
       );
       request.certificateMap.name = defaultValue1;
-      const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2027,7 +2027,7 @@ describe('v1.CertificateManagerClient', () => {
         ['certificateMap', 'name']
       );
       request.certificateMap.name = defaultValue1;
-      const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificateMap = stubLongRunningCall(
         undefined,
@@ -2059,7 +2059,7 @@ describe('v1.CertificateManagerClient', () => {
         ['certificateMap', 'name']
       );
       request.certificateMap.name = defaultValue1;
-      const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificateMap = stubLongRunningCall(
         undefined,
@@ -2135,7 +2135,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2168,7 +2168,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2222,7 +2222,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificateMap = stubLongRunningCall(
         undefined,
@@ -2253,7 +2253,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificateMap = stubLongRunningCall(
         undefined,
@@ -2329,7 +2329,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2362,7 +2362,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2416,7 +2416,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificateMapEntry = stubLongRunningCall(
         undefined,
@@ -2450,7 +2450,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificateMapEntry = stubLongRunningCall(
         undefined,
@@ -2528,7 +2528,7 @@ describe('v1.CertificateManagerClient', () => {
         ['certificateMapEntry', 'name']
       );
       request.certificateMapEntry.name = defaultValue1;
-      const expectedHeaderRequestParams = `certificate_map_entry.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `certificate_map_entry.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2562,7 +2562,7 @@ describe('v1.CertificateManagerClient', () => {
         ['certificateMapEntry', 'name']
       );
       request.certificateMapEntry.name = defaultValue1;
-      const expectedHeaderRequestParams = `certificate_map_entry.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `certificate_map_entry.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2617,7 +2617,7 @@ describe('v1.CertificateManagerClient', () => {
         ['certificateMapEntry', 'name']
       );
       request.certificateMapEntry.name = defaultValue1;
-      const expectedHeaderRequestParams = `certificate_map_entry.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `certificate_map_entry.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificateMapEntry = stubLongRunningCall(
         undefined,
@@ -2652,7 +2652,7 @@ describe('v1.CertificateManagerClient', () => {
         ['certificateMapEntry', 'name']
       );
       request.certificateMapEntry.name = defaultValue1;
-      const expectedHeaderRequestParams = `certificate_map_entry.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `certificate_map_entry.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificateMapEntry = stubLongRunningCall(
         undefined,
@@ -2729,7 +2729,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2762,7 +2762,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2816,7 +2816,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificateMapEntry = stubLongRunningCall(
         undefined,
@@ -2850,7 +2850,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificateMapEntry = stubLongRunningCall(
         undefined,
@@ -2927,7 +2927,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2960,7 +2960,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3014,7 +3014,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDnsAuthorization = stubLongRunningCall(
         undefined,
@@ -3048,7 +3048,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDnsAuthorization = stubLongRunningCall(
         undefined,
@@ -3125,7 +3125,7 @@ describe('v1.CertificateManagerClient', () => {
         ['dnsAuthorization', 'name']
       );
       request.dnsAuthorization.name = defaultValue1;
-      const expectedHeaderRequestParams = `dns_authorization.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dns_authorization.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3159,7 +3159,7 @@ describe('v1.CertificateManagerClient', () => {
         ['dnsAuthorization', 'name']
       );
       request.dnsAuthorization.name = defaultValue1;
-      const expectedHeaderRequestParams = `dns_authorization.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dns_authorization.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3214,7 +3214,7 @@ describe('v1.CertificateManagerClient', () => {
         ['dnsAuthorization', 'name']
       );
       request.dnsAuthorization.name = defaultValue1;
-      const expectedHeaderRequestParams = `dns_authorization.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dns_authorization.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDnsAuthorization = stubLongRunningCall(
         undefined,
@@ -3249,7 +3249,7 @@ describe('v1.CertificateManagerClient', () => {
         ['dnsAuthorization', 'name']
       );
       request.dnsAuthorization.name = defaultValue1;
-      const expectedHeaderRequestParams = `dns_authorization.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dns_authorization.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDnsAuthorization = stubLongRunningCall(
         undefined,
@@ -3325,7 +3325,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3358,7 +3358,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3412,7 +3412,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDnsAuthorization = stubLongRunningCall(
         undefined,
@@ -3446,7 +3446,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDnsAuthorization = stubLongRunningCall(
         undefined,
@@ -3522,7 +3522,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3555,7 +3555,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3609,7 +3609,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificateIssuanceConfig =
         stubLongRunningCall(undefined, expectedError);
@@ -3641,7 +3641,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificateIssuanceConfig =
         stubLongRunningCall(undefined, undefined, expectedError);
@@ -3715,7 +3715,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3748,7 +3748,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3802,7 +3802,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificateIssuanceConfig =
         stubLongRunningCall(undefined, expectedError);
@@ -3834,7 +3834,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificateIssuanceConfig =
         stubLongRunningCall(undefined, undefined, expectedError);
@@ -3908,7 +3908,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3941,7 +3941,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3995,7 +3995,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTrustConfig = stubLongRunningCall(
         undefined,
@@ -4026,7 +4026,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTrustConfig = stubLongRunningCall(
         undefined,
@@ -4103,7 +4103,7 @@ describe('v1.CertificateManagerClient', () => {
         ['trustConfig', 'name']
       );
       request.trustConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `trust_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `trust_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4137,7 +4137,7 @@ describe('v1.CertificateManagerClient', () => {
         ['trustConfig', 'name']
       );
       request.trustConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `trust_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `trust_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4192,7 +4192,7 @@ describe('v1.CertificateManagerClient', () => {
         ['trustConfig', 'name']
       );
       request.trustConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `trust_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `trust_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTrustConfig = stubLongRunningCall(
         undefined,
@@ -4224,7 +4224,7 @@ describe('v1.CertificateManagerClient', () => {
         ['trustConfig', 'name']
       );
       request.trustConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `trust_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `trust_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTrustConfig = stubLongRunningCall(
         undefined,
@@ -4300,7 +4300,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4333,7 +4333,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4387,7 +4387,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTrustConfig = stubLongRunningCall(
         undefined,
@@ -4418,7 +4418,7 @@ describe('v1.CertificateManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTrustConfig = stubLongRunningCall(
         undefined,
@@ -4494,7 +4494,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.Certificate()
@@ -4533,7 +4533,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.Certificate()
@@ -4590,7 +4590,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCertificates = stubSimpleCall(
         undefined,
@@ -4621,7 +4621,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.Certificate()
@@ -4682,7 +4682,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificates.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4732,7 +4732,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.Certificate()
@@ -4782,7 +4782,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificates.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4825,7 +4825,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMap()
@@ -4865,7 +4865,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMap()
@@ -4922,7 +4922,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCertificateMaps = stubSimpleCall(
         undefined,
@@ -4953,7 +4953,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMap()
@@ -5016,7 +5016,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateMaps.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5068,7 +5068,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMap()
@@ -5118,7 +5118,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateMaps.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5161,7 +5161,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMapEntry()
@@ -5201,7 +5201,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMapEntry()
@@ -5258,7 +5258,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCertificateMapEntries = stubSimpleCall(
         undefined,
@@ -5292,7 +5292,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMapEntry()
@@ -5361,7 +5361,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateMapEntries.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5419,7 +5419,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMapEntry()
@@ -5473,7 +5473,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateMapEntries.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5520,7 +5520,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.DnsAuthorization()
@@ -5560,7 +5560,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.DnsAuthorization()
@@ -5617,7 +5617,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDnsAuthorizations = stubSimpleCall(
         undefined,
@@ -5651,7 +5651,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.DnsAuthorization()
@@ -5720,7 +5720,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDnsAuthorizations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5778,7 +5778,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.DnsAuthorization()
@@ -5832,7 +5832,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDnsAuthorizations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5879,7 +5879,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig()
@@ -5919,7 +5919,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig()
@@ -5976,7 +5976,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCertificateIssuanceConfigs = stubSimpleCall(
         undefined,
@@ -6010,7 +6010,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig()
@@ -6082,7 +6082,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateIssuanceConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6143,7 +6143,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig()
@@ -6197,7 +6197,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateIssuanceConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6244,7 +6244,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.TrustConfig()
@@ -6283,7 +6283,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.TrustConfig()
@@ -6340,7 +6340,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTrustConfigs = stubSimpleCall(
         undefined,
@@ -6371,7 +6371,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.TrustConfig()
@@ -6432,7 +6432,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTrustConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6482,7 +6482,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.TrustConfig()
@@ -6532,7 +6532,7 @@ describe('v1.CertificateManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTrustConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

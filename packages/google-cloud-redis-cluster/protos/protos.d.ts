@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -132,6 +132,118 @@ export namespace google {
                          * @returns Promise
                          */
                         public getClusterCertificateAuthority(request: google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest): Promise<google.cloud.redis.cluster.v1.CertificateAuthority>;
+
+                        /**
+                         * Calls RescheduleClusterMaintenance.
+                         * @param request RescheduleClusterMaintenanceRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public rescheduleClusterMaintenance(request: google.cloud.redis.cluster.v1.IRescheduleClusterMaintenanceRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.RescheduleClusterMaintenanceCallback): void;
+
+                        /**
+                         * Calls RescheduleClusterMaintenance.
+                         * @param request RescheduleClusterMaintenanceRequest message or plain object
+                         * @returns Promise
+                         */
+                        public rescheduleClusterMaintenance(request: google.cloud.redis.cluster.v1.IRescheduleClusterMaintenanceRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls ListBackupCollections.
+                         * @param request ListBackupCollectionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListBackupCollectionsResponse
+                         */
+                        public listBackupCollections(request: google.cloud.redis.cluster.v1.IListBackupCollectionsRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.ListBackupCollectionsCallback): void;
+
+                        /**
+                         * Calls ListBackupCollections.
+                         * @param request ListBackupCollectionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listBackupCollections(request: google.cloud.redis.cluster.v1.IListBackupCollectionsRequest): Promise<google.cloud.redis.cluster.v1.ListBackupCollectionsResponse>;
+
+                        /**
+                         * Calls GetBackupCollection.
+                         * @param request GetBackupCollectionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and BackupCollection
+                         */
+                        public getBackupCollection(request: google.cloud.redis.cluster.v1.IGetBackupCollectionRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.GetBackupCollectionCallback): void;
+
+                        /**
+                         * Calls GetBackupCollection.
+                         * @param request GetBackupCollectionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getBackupCollection(request: google.cloud.redis.cluster.v1.IGetBackupCollectionRequest): Promise<google.cloud.redis.cluster.v1.BackupCollection>;
+
+                        /**
+                         * Calls ListBackups.
+                         * @param request ListBackupsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListBackupsResponse
+                         */
+                        public listBackups(request: google.cloud.redis.cluster.v1.IListBackupsRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.ListBackupsCallback): void;
+
+                        /**
+                         * Calls ListBackups.
+                         * @param request ListBackupsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listBackups(request: google.cloud.redis.cluster.v1.IListBackupsRequest): Promise<google.cloud.redis.cluster.v1.ListBackupsResponse>;
+
+                        /**
+                         * Calls GetBackup.
+                         * @param request GetBackupRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Backup
+                         */
+                        public getBackup(request: google.cloud.redis.cluster.v1.IGetBackupRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.GetBackupCallback): void;
+
+                        /**
+                         * Calls GetBackup.
+                         * @param request GetBackupRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getBackup(request: google.cloud.redis.cluster.v1.IGetBackupRequest): Promise<google.cloud.redis.cluster.v1.Backup>;
+
+                        /**
+                         * Calls DeleteBackup.
+                         * @param request DeleteBackupRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteBackup(request: google.cloud.redis.cluster.v1.IDeleteBackupRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.DeleteBackupCallback): void;
+
+                        /**
+                         * Calls DeleteBackup.
+                         * @param request DeleteBackupRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteBackup(request: google.cloud.redis.cluster.v1.IDeleteBackupRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls ExportBackup.
+                         * @param request ExportBackupRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public exportBackup(request: google.cloud.redis.cluster.v1.IExportBackupRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.ExportBackupCallback): void;
+
+                        /**
+                         * Calls ExportBackup.
+                         * @param request ExportBackupRequest message or plain object
+                         * @returns Promise
+                         */
+                        public exportBackup(request: google.cloud.redis.cluster.v1.IExportBackupRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls BackupCluster.
+                         * @param request BackupClusterRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public backupCluster(request: google.cloud.redis.cluster.v1.IBackupClusterRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.BackupClusterCallback): void;
+
+                        /**
+                         * Calls BackupCluster.
+                         * @param request BackupClusterRequest message or plain object
+                         * @returns Promise
+                         */
+                        public backupCluster(request: google.cloud.redis.cluster.v1.IBackupClusterRequest): Promise<google.longrunning.Operation>;
                     }
 
                     namespace CloudRedisCluster {
@@ -177,6 +289,69 @@ export namespace google {
                          * @param [response] CertificateAuthority
                          */
                         type GetClusterCertificateAuthorityCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.CertificateAuthority) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|rescheduleClusterMaintenance}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type RescheduleClusterMaintenanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|listBackupCollections}.
+                         * @param error Error, if any
+                         * @param [response] ListBackupCollectionsResponse
+                         */
+                        type ListBackupCollectionsCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.ListBackupCollectionsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|getBackupCollection}.
+                         * @param error Error, if any
+                         * @param [response] BackupCollection
+                         */
+                        type GetBackupCollectionCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.BackupCollection) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|listBackups}.
+                         * @param error Error, if any
+                         * @param [response] ListBackupsResponse
+                         */
+                        type ListBackupsCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.ListBackupsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|getBackup}.
+                         * @param error Error, if any
+                         * @param [response] Backup
+                         */
+                        type GetBackupCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.Backup) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|deleteBackup}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteBackupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|exportBackup}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type ExportBackupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|backupCluster}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type BackupClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                    }
+
+                    /** PscConnectionStatus enum. */
+                    enum PscConnectionStatus {
+                        PSC_CONNECTION_STATUS_UNSPECIFIED = 0,
+                        PSC_CONNECTION_STATUS_ACTIVE = 1,
+                        PSC_CONNECTION_STATUS_NOT_FOUND = 2
                     }
 
                     /** AuthorizationMode enum. */
@@ -200,6 +375,14 @@ export namespace google {
                         TRANSIT_ENCRYPTION_MODE_UNSPECIFIED = 0,
                         TRANSIT_ENCRYPTION_MODE_DISABLED = 1,
                         TRANSIT_ENCRYPTION_MODE_SERVER_AUTHENTICATION = 2
+                    }
+
+                    /** ConnectionType enum. */
+                    enum ConnectionType {
+                        CONNECTION_TYPE_UNSPECIFIED = 0,
+                        CONNECTION_TYPE_DISCOVERY = 1,
+                        CONNECTION_TYPE_PRIMARY = 2,
+                        CONNECTION_TYPE_READER = 3
                     }
 
                     /** Properties of a CreateClusterRequest. */
@@ -941,8 +1124,965 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a ListBackupCollectionsRequest. */
+                    interface IListBackupCollectionsRequest {
+
+                        /** ListBackupCollectionsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListBackupCollectionsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListBackupCollectionsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListBackupCollectionsRequest. */
+                    class ListBackupCollectionsRequest implements IListBackupCollectionsRequest {
+
+                        /**
+                         * Constructs a new ListBackupCollectionsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IListBackupCollectionsRequest);
+
+                        /** ListBackupCollectionsRequest parent. */
+                        public parent: string;
+
+                        /** ListBackupCollectionsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListBackupCollectionsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListBackupCollectionsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListBackupCollectionsRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IListBackupCollectionsRequest): google.cloud.redis.cluster.v1.ListBackupCollectionsRequest;
+
+                        /**
+                         * Encodes the specified ListBackupCollectionsRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.ListBackupCollectionsRequest.verify|verify} messages.
+                         * @param message ListBackupCollectionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IListBackupCollectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListBackupCollectionsRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ListBackupCollectionsRequest.verify|verify} messages.
+                         * @param message ListBackupCollectionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IListBackupCollectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListBackupCollectionsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListBackupCollectionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ListBackupCollectionsRequest;
+
+                        /**
+                         * Decodes a ListBackupCollectionsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListBackupCollectionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ListBackupCollectionsRequest;
+
+                        /**
+                         * Verifies a ListBackupCollectionsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListBackupCollectionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListBackupCollectionsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ListBackupCollectionsRequest;
+
+                        /**
+                         * Creates a plain object from a ListBackupCollectionsRequest message. Also converts values to other types if specified.
+                         * @param message ListBackupCollectionsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ListBackupCollectionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListBackupCollectionsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListBackupCollectionsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListBackupCollectionsResponse. */
+                    interface IListBackupCollectionsResponse {
+
+                        /** ListBackupCollectionsResponse backupCollections */
+                        backupCollections?: (google.cloud.redis.cluster.v1.IBackupCollection[]|null);
+
+                        /** ListBackupCollectionsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListBackupCollectionsResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListBackupCollectionsResponse. */
+                    class ListBackupCollectionsResponse implements IListBackupCollectionsResponse {
+
+                        /**
+                         * Constructs a new ListBackupCollectionsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IListBackupCollectionsResponse);
+
+                        /** ListBackupCollectionsResponse backupCollections. */
+                        public backupCollections: google.cloud.redis.cluster.v1.IBackupCollection[];
+
+                        /** ListBackupCollectionsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListBackupCollectionsResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListBackupCollectionsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListBackupCollectionsResponse instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IListBackupCollectionsResponse): google.cloud.redis.cluster.v1.ListBackupCollectionsResponse;
+
+                        /**
+                         * Encodes the specified ListBackupCollectionsResponse message. Does not implicitly {@link google.cloud.redis.cluster.v1.ListBackupCollectionsResponse.verify|verify} messages.
+                         * @param message ListBackupCollectionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IListBackupCollectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListBackupCollectionsResponse message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ListBackupCollectionsResponse.verify|verify} messages.
+                         * @param message ListBackupCollectionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IListBackupCollectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListBackupCollectionsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListBackupCollectionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ListBackupCollectionsResponse;
+
+                        /**
+                         * Decodes a ListBackupCollectionsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListBackupCollectionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ListBackupCollectionsResponse;
+
+                        /**
+                         * Verifies a ListBackupCollectionsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListBackupCollectionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListBackupCollectionsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ListBackupCollectionsResponse;
+
+                        /**
+                         * Creates a plain object from a ListBackupCollectionsResponse message. Also converts values to other types if specified.
+                         * @param message ListBackupCollectionsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ListBackupCollectionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListBackupCollectionsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListBackupCollectionsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetBackupCollectionRequest. */
+                    interface IGetBackupCollectionRequest {
+
+                        /** GetBackupCollectionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetBackupCollectionRequest. */
+                    class GetBackupCollectionRequest implements IGetBackupCollectionRequest {
+
+                        /**
+                         * Constructs a new GetBackupCollectionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IGetBackupCollectionRequest);
+
+                        /** GetBackupCollectionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetBackupCollectionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetBackupCollectionRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IGetBackupCollectionRequest): google.cloud.redis.cluster.v1.GetBackupCollectionRequest;
+
+                        /**
+                         * Encodes the specified GetBackupCollectionRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.GetBackupCollectionRequest.verify|verify} messages.
+                         * @param message GetBackupCollectionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IGetBackupCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetBackupCollectionRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.GetBackupCollectionRequest.verify|verify} messages.
+                         * @param message GetBackupCollectionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IGetBackupCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetBackupCollectionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetBackupCollectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.GetBackupCollectionRequest;
+
+                        /**
+                         * Decodes a GetBackupCollectionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetBackupCollectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.GetBackupCollectionRequest;
+
+                        /**
+                         * Verifies a GetBackupCollectionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetBackupCollectionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetBackupCollectionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.GetBackupCollectionRequest;
+
+                        /**
+                         * Creates a plain object from a GetBackupCollectionRequest message. Also converts values to other types if specified.
+                         * @param message GetBackupCollectionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.GetBackupCollectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetBackupCollectionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetBackupCollectionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListBackupsRequest. */
+                    interface IListBackupsRequest {
+
+                        /** ListBackupsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListBackupsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListBackupsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListBackupsRequest. */
+                    class ListBackupsRequest implements IListBackupsRequest {
+
+                        /**
+                         * Constructs a new ListBackupsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IListBackupsRequest);
+
+                        /** ListBackupsRequest parent. */
+                        public parent: string;
+
+                        /** ListBackupsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListBackupsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListBackupsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListBackupsRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IListBackupsRequest): google.cloud.redis.cluster.v1.ListBackupsRequest;
+
+                        /**
+                         * Encodes the specified ListBackupsRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.ListBackupsRequest.verify|verify} messages.
+                         * @param message ListBackupsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IListBackupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListBackupsRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ListBackupsRequest.verify|verify} messages.
+                         * @param message ListBackupsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IListBackupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListBackupsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListBackupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ListBackupsRequest;
+
+                        /**
+                         * Decodes a ListBackupsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListBackupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ListBackupsRequest;
+
+                        /**
+                         * Verifies a ListBackupsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListBackupsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListBackupsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ListBackupsRequest;
+
+                        /**
+                         * Creates a plain object from a ListBackupsRequest message. Also converts values to other types if specified.
+                         * @param message ListBackupsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ListBackupsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListBackupsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListBackupsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListBackupsResponse. */
+                    interface IListBackupsResponse {
+
+                        /** ListBackupsResponse backups */
+                        backups?: (google.cloud.redis.cluster.v1.IBackup[]|null);
+
+                        /** ListBackupsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListBackupsResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListBackupsResponse. */
+                    class ListBackupsResponse implements IListBackupsResponse {
+
+                        /**
+                         * Constructs a new ListBackupsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IListBackupsResponse);
+
+                        /** ListBackupsResponse backups. */
+                        public backups: google.cloud.redis.cluster.v1.IBackup[];
+
+                        /** ListBackupsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListBackupsResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListBackupsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListBackupsResponse instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IListBackupsResponse): google.cloud.redis.cluster.v1.ListBackupsResponse;
+
+                        /**
+                         * Encodes the specified ListBackupsResponse message. Does not implicitly {@link google.cloud.redis.cluster.v1.ListBackupsResponse.verify|verify} messages.
+                         * @param message ListBackupsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IListBackupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListBackupsResponse message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ListBackupsResponse.verify|verify} messages.
+                         * @param message ListBackupsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IListBackupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListBackupsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListBackupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ListBackupsResponse;
+
+                        /**
+                         * Decodes a ListBackupsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListBackupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ListBackupsResponse;
+
+                        /**
+                         * Verifies a ListBackupsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListBackupsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListBackupsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ListBackupsResponse;
+
+                        /**
+                         * Creates a plain object from a ListBackupsResponse message. Also converts values to other types if specified.
+                         * @param message ListBackupsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ListBackupsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListBackupsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListBackupsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetBackupRequest. */
+                    interface IGetBackupRequest {
+
+                        /** GetBackupRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetBackupRequest. */
+                    class GetBackupRequest implements IGetBackupRequest {
+
+                        /**
+                         * Constructs a new GetBackupRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IGetBackupRequest);
+
+                        /** GetBackupRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetBackupRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetBackupRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IGetBackupRequest): google.cloud.redis.cluster.v1.GetBackupRequest;
+
+                        /**
+                         * Encodes the specified GetBackupRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.GetBackupRequest.verify|verify} messages.
+                         * @param message GetBackupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IGetBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetBackupRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.GetBackupRequest.verify|verify} messages.
+                         * @param message GetBackupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IGetBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetBackupRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.GetBackupRequest;
+
+                        /**
+                         * Decodes a GetBackupRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.GetBackupRequest;
+
+                        /**
+                         * Verifies a GetBackupRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetBackupRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.GetBackupRequest;
+
+                        /**
+                         * Creates a plain object from a GetBackupRequest message. Also converts values to other types if specified.
+                         * @param message GetBackupRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.GetBackupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetBackupRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetBackupRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteBackupRequest. */
+                    interface IDeleteBackupRequest {
+
+                        /** DeleteBackupRequest name */
+                        name?: (string|null);
+
+                        /** DeleteBackupRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a DeleteBackupRequest. */
+                    class DeleteBackupRequest implements IDeleteBackupRequest {
+
+                        /**
+                         * Constructs a new DeleteBackupRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IDeleteBackupRequest);
+
+                        /** DeleteBackupRequest name. */
+                        public name: string;
+
+                        /** DeleteBackupRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new DeleteBackupRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteBackupRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IDeleteBackupRequest): google.cloud.redis.cluster.v1.DeleteBackupRequest;
+
+                        /**
+                         * Encodes the specified DeleteBackupRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.DeleteBackupRequest.verify|verify} messages.
+                         * @param message DeleteBackupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IDeleteBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteBackupRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.DeleteBackupRequest.verify|verify} messages.
+                         * @param message DeleteBackupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IDeleteBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteBackupRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.DeleteBackupRequest;
+
+                        /**
+                         * Decodes a DeleteBackupRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.DeleteBackupRequest;
+
+                        /**
+                         * Verifies a DeleteBackupRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteBackupRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.DeleteBackupRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteBackupRequest message. Also converts values to other types if specified.
+                         * @param message DeleteBackupRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.DeleteBackupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteBackupRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteBackupRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ExportBackupRequest. */
+                    interface IExportBackupRequest {
+
+                        /** ExportBackupRequest gcsBucket */
+                        gcsBucket?: (string|null);
+
+                        /** ExportBackupRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents an ExportBackupRequest. */
+                    class ExportBackupRequest implements IExportBackupRequest {
+
+                        /**
+                         * Constructs a new ExportBackupRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IExportBackupRequest);
+
+                        /** ExportBackupRequest gcsBucket. */
+                        public gcsBucket?: (string|null);
+
+                        /** ExportBackupRequest name. */
+                        public name: string;
+
+                        /** ExportBackupRequest destination. */
+                        public destination?: "gcsBucket";
+
+                        /**
+                         * Creates a new ExportBackupRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExportBackupRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IExportBackupRequest): google.cloud.redis.cluster.v1.ExportBackupRequest;
+
+                        /**
+                         * Encodes the specified ExportBackupRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.ExportBackupRequest.verify|verify} messages.
+                         * @param message ExportBackupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IExportBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExportBackupRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ExportBackupRequest.verify|verify} messages.
+                         * @param message ExportBackupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IExportBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExportBackupRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExportBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ExportBackupRequest;
+
+                        /**
+                         * Decodes an ExportBackupRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExportBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ExportBackupRequest;
+
+                        /**
+                         * Verifies an ExportBackupRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExportBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExportBackupRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ExportBackupRequest;
+
+                        /**
+                         * Creates a plain object from an ExportBackupRequest message. Also converts values to other types if specified.
+                         * @param message ExportBackupRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ExportBackupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExportBackupRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExportBackupRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a BackupClusterRequest. */
+                    interface IBackupClusterRequest {
+
+                        /** BackupClusterRequest name */
+                        name?: (string|null);
+
+                        /** BackupClusterRequest ttl */
+                        ttl?: (google.protobuf.IDuration|null);
+
+                        /** BackupClusterRequest backupId */
+                        backupId?: (string|null);
+                    }
+
+                    /** Represents a BackupClusterRequest. */
+                    class BackupClusterRequest implements IBackupClusterRequest {
+
+                        /**
+                         * Constructs a new BackupClusterRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IBackupClusterRequest);
+
+                        /** BackupClusterRequest name. */
+                        public name: string;
+
+                        /** BackupClusterRequest ttl. */
+                        public ttl?: (google.protobuf.IDuration|null);
+
+                        /** BackupClusterRequest backupId. */
+                        public backupId?: (string|null);
+
+                        /** BackupClusterRequest _backupId. */
+                        public _backupId?: "backupId";
+
+                        /**
+                         * Creates a new BackupClusterRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BackupClusterRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IBackupClusterRequest): google.cloud.redis.cluster.v1.BackupClusterRequest;
+
+                        /**
+                         * Encodes the specified BackupClusterRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.BackupClusterRequest.verify|verify} messages.
+                         * @param message BackupClusterRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IBackupClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BackupClusterRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.BackupClusterRequest.verify|verify} messages.
+                         * @param message BackupClusterRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IBackupClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BackupClusterRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BackupClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.BackupClusterRequest;
+
+                        /**
+                         * Decodes a BackupClusterRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BackupClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.BackupClusterRequest;
+
+                        /**
+                         * Verifies a BackupClusterRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BackupClusterRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BackupClusterRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.BackupClusterRequest;
+
+                        /**
+                         * Creates a plain object from a BackupClusterRequest message. Also converts values to other types if specified.
+                         * @param message BackupClusterRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.BackupClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BackupClusterRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BackupClusterRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a Cluster. */
                     interface ICluster {
+
+                        /** Cluster gcsSource */
+                        gcsSource?: (google.cloud.redis.cluster.v1.Cluster.IGcsBackupSource|null);
+
+                        /** Cluster managedBackupSource */
+                        managedBackupSource?: (google.cloud.redis.cluster.v1.Cluster.IManagedBackupSource|null);
 
                         /** Cluster name */
                         name?: (string|null);
@@ -998,8 +2138,35 @@ export namespace google {
                         /** Cluster zoneDistributionConfig */
                         zoneDistributionConfig?: (google.cloud.redis.cluster.v1.IZoneDistributionConfig|null);
 
+                        /** Cluster crossClusterReplicationConfig */
+                        crossClusterReplicationConfig?: (google.cloud.redis.cluster.v1.ICrossClusterReplicationConfig|null);
+
                         /** Cluster deletionProtectionEnabled */
                         deletionProtectionEnabled?: (boolean|null);
+
+                        /** Cluster maintenancePolicy */
+                        maintenancePolicy?: (google.cloud.redis.cluster.v1.IClusterMaintenancePolicy|null);
+
+                        /** Cluster maintenanceSchedule */
+                        maintenanceSchedule?: (google.cloud.redis.cluster.v1.IClusterMaintenanceSchedule|null);
+
+                        /** Cluster pscServiceAttachments */
+                        pscServiceAttachments?: (google.cloud.redis.cluster.v1.IPscServiceAttachment[]|null);
+
+                        /** Cluster clusterEndpoints */
+                        clusterEndpoints?: (google.cloud.redis.cluster.v1.IClusterEndpoint[]|null);
+
+                        /** Cluster backupCollection */
+                        backupCollection?: (string|null);
+
+                        /** Cluster kmsKey */
+                        kmsKey?: (string|null);
+
+                        /** Cluster automatedBackupConfig */
+                        automatedBackupConfig?: (google.cloud.redis.cluster.v1.IAutomatedBackupConfig|null);
+
+                        /** Cluster encryptionInfo */
+                        encryptionInfo?: (google.cloud.redis.cluster.v1.IEncryptionInfo|null);
                     }
 
                     /** Represents a Cluster. */
@@ -1010,6 +2177,12 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.redis.cluster.v1.ICluster);
+
+                        /** Cluster gcsSource. */
+                        public gcsSource?: (google.cloud.redis.cluster.v1.Cluster.IGcsBackupSource|null);
+
+                        /** Cluster managedBackupSource. */
+                        public managedBackupSource?: (google.cloud.redis.cluster.v1.Cluster.IManagedBackupSource|null);
 
                         /** Cluster name. */
                         public name: string;
@@ -1065,8 +2238,38 @@ export namespace google {
                         /** Cluster zoneDistributionConfig. */
                         public zoneDistributionConfig?: (google.cloud.redis.cluster.v1.IZoneDistributionConfig|null);
 
+                        /** Cluster crossClusterReplicationConfig. */
+                        public crossClusterReplicationConfig?: (google.cloud.redis.cluster.v1.ICrossClusterReplicationConfig|null);
+
                         /** Cluster deletionProtectionEnabled. */
                         public deletionProtectionEnabled?: (boolean|null);
+
+                        /** Cluster maintenancePolicy. */
+                        public maintenancePolicy?: (google.cloud.redis.cluster.v1.IClusterMaintenancePolicy|null);
+
+                        /** Cluster maintenanceSchedule. */
+                        public maintenanceSchedule?: (google.cloud.redis.cluster.v1.IClusterMaintenanceSchedule|null);
+
+                        /** Cluster pscServiceAttachments. */
+                        public pscServiceAttachments: google.cloud.redis.cluster.v1.IPscServiceAttachment[];
+
+                        /** Cluster clusterEndpoints. */
+                        public clusterEndpoints: google.cloud.redis.cluster.v1.IClusterEndpoint[];
+
+                        /** Cluster backupCollection. */
+                        public backupCollection?: (string|null);
+
+                        /** Cluster kmsKey. */
+                        public kmsKey?: (string|null);
+
+                        /** Cluster automatedBackupConfig. */
+                        public automatedBackupConfig?: (google.cloud.redis.cluster.v1.IAutomatedBackupConfig|null);
+
+                        /** Cluster encryptionInfo. */
+                        public encryptionInfo?: (google.cloud.redis.cluster.v1.IEncryptionInfo|null);
+
+                        /** Cluster importSources. */
+                        public importSources?: ("gcsSource"|"managedBackupSource");
 
                         /** Cluster _replicaCount. */
                         public _replicaCount?: "replicaCount";
@@ -1082,6 +2285,18 @@ export namespace google {
 
                         /** Cluster _deletionProtectionEnabled. */
                         public _deletionProtectionEnabled?: "deletionProtectionEnabled";
+
+                        /** Cluster _maintenancePolicy. */
+                        public _maintenancePolicy?: "maintenancePolicy";
+
+                        /** Cluster _maintenanceSchedule. */
+                        public _maintenanceSchedule?: "maintenanceSchedule";
+
+                        /** Cluster _backupCollection. */
+                        public _backupCollection?: "backupCollection";
+
+                        /** Cluster _kmsKey. */
+                        public _kmsKey?: "kmsKey";
 
                         /**
                          * Creates a new Cluster instance using the specified properties.
@@ -1375,6 +2590,200 @@ export namespace google {
                             }
                         }
 
+                        /** Properties of a GcsBackupSource. */
+                        interface IGcsBackupSource {
+
+                            /** GcsBackupSource uris */
+                            uris?: (string[]|null);
+                        }
+
+                        /** Represents a GcsBackupSource. */
+                        class GcsBackupSource implements IGcsBackupSource {
+
+                            /**
+                             * Constructs a new GcsBackupSource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.redis.cluster.v1.Cluster.IGcsBackupSource);
+
+                            /** GcsBackupSource uris. */
+                            public uris: string[];
+
+                            /**
+                             * Creates a new GcsBackupSource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GcsBackupSource instance
+                             */
+                            public static create(properties?: google.cloud.redis.cluster.v1.Cluster.IGcsBackupSource): google.cloud.redis.cluster.v1.Cluster.GcsBackupSource;
+
+                            /**
+                             * Encodes the specified GcsBackupSource message. Does not implicitly {@link google.cloud.redis.cluster.v1.Cluster.GcsBackupSource.verify|verify} messages.
+                             * @param message GcsBackupSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.redis.cluster.v1.Cluster.IGcsBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GcsBackupSource message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.Cluster.GcsBackupSource.verify|verify} messages.
+                             * @param message GcsBackupSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.redis.cluster.v1.Cluster.IGcsBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GcsBackupSource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GcsBackupSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.Cluster.GcsBackupSource;
+
+                            /**
+                             * Decodes a GcsBackupSource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GcsBackupSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.Cluster.GcsBackupSource;
+
+                            /**
+                             * Verifies a GcsBackupSource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GcsBackupSource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GcsBackupSource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.Cluster.GcsBackupSource;
+
+                            /**
+                             * Creates a plain object from a GcsBackupSource message. Also converts values to other types if specified.
+                             * @param message GcsBackupSource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.redis.cluster.v1.Cluster.GcsBackupSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GcsBackupSource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GcsBackupSource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ManagedBackupSource. */
+                        interface IManagedBackupSource {
+
+                            /** ManagedBackupSource backup */
+                            backup?: (string|null);
+                        }
+
+                        /** Represents a ManagedBackupSource. */
+                        class ManagedBackupSource implements IManagedBackupSource {
+
+                            /**
+                             * Constructs a new ManagedBackupSource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.redis.cluster.v1.Cluster.IManagedBackupSource);
+
+                            /** ManagedBackupSource backup. */
+                            public backup: string;
+
+                            /**
+                             * Creates a new ManagedBackupSource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ManagedBackupSource instance
+                             */
+                            public static create(properties?: google.cloud.redis.cluster.v1.Cluster.IManagedBackupSource): google.cloud.redis.cluster.v1.Cluster.ManagedBackupSource;
+
+                            /**
+                             * Encodes the specified ManagedBackupSource message. Does not implicitly {@link google.cloud.redis.cluster.v1.Cluster.ManagedBackupSource.verify|verify} messages.
+                             * @param message ManagedBackupSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.redis.cluster.v1.Cluster.IManagedBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ManagedBackupSource message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.Cluster.ManagedBackupSource.verify|verify} messages.
+                             * @param message ManagedBackupSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.redis.cluster.v1.Cluster.IManagedBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ManagedBackupSource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ManagedBackupSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.Cluster.ManagedBackupSource;
+
+                            /**
+                             * Decodes a ManagedBackupSource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ManagedBackupSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.Cluster.ManagedBackupSource;
+
+                            /**
+                             * Verifies a ManagedBackupSource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ManagedBackupSource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ManagedBackupSource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.Cluster.ManagedBackupSource;
+
+                            /**
+                             * Creates a plain object from a ManagedBackupSource message. Also converts values to other types if specified.
+                             * @param message ManagedBackupSource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.redis.cluster.v1.Cluster.ManagedBackupSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ManagedBackupSource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ManagedBackupSource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** State enum. */
                         enum State {
                             STATE_UNSPECIFIED = 0,
@@ -1383,6 +2792,1417 @@ export namespace google {
                             UPDATING = 3,
                             DELETING = 4
                         }
+                    }
+
+                    /** Properties of an AutomatedBackupConfig. */
+                    interface IAutomatedBackupConfig {
+
+                        /** AutomatedBackupConfig fixedFrequencySchedule */
+                        fixedFrequencySchedule?: (google.cloud.redis.cluster.v1.AutomatedBackupConfig.IFixedFrequencySchedule|null);
+
+                        /** AutomatedBackupConfig automatedBackupMode */
+                        automatedBackupMode?: (google.cloud.redis.cluster.v1.AutomatedBackupConfig.AutomatedBackupMode|keyof typeof google.cloud.redis.cluster.v1.AutomatedBackupConfig.AutomatedBackupMode|null);
+
+                        /** AutomatedBackupConfig retention */
+                        retention?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents an AutomatedBackupConfig. */
+                    class AutomatedBackupConfig implements IAutomatedBackupConfig {
+
+                        /**
+                         * Constructs a new AutomatedBackupConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IAutomatedBackupConfig);
+
+                        /** AutomatedBackupConfig fixedFrequencySchedule. */
+                        public fixedFrequencySchedule?: (google.cloud.redis.cluster.v1.AutomatedBackupConfig.IFixedFrequencySchedule|null);
+
+                        /** AutomatedBackupConfig automatedBackupMode. */
+                        public automatedBackupMode: (google.cloud.redis.cluster.v1.AutomatedBackupConfig.AutomatedBackupMode|keyof typeof google.cloud.redis.cluster.v1.AutomatedBackupConfig.AutomatedBackupMode);
+
+                        /** AutomatedBackupConfig retention. */
+                        public retention?: (google.protobuf.IDuration|null);
+
+                        /** AutomatedBackupConfig schedule. */
+                        public schedule?: "fixedFrequencySchedule";
+
+                        /** AutomatedBackupConfig _retention. */
+                        public _retention?: "retention";
+
+                        /**
+                         * Creates a new AutomatedBackupConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AutomatedBackupConfig instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IAutomatedBackupConfig): google.cloud.redis.cluster.v1.AutomatedBackupConfig;
+
+                        /**
+                         * Encodes the specified AutomatedBackupConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1.AutomatedBackupConfig.verify|verify} messages.
+                         * @param message AutomatedBackupConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IAutomatedBackupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AutomatedBackupConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.AutomatedBackupConfig.verify|verify} messages.
+                         * @param message AutomatedBackupConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IAutomatedBackupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AutomatedBackupConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AutomatedBackupConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.AutomatedBackupConfig;
+
+                        /**
+                         * Decodes an AutomatedBackupConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AutomatedBackupConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.AutomatedBackupConfig;
+
+                        /**
+                         * Verifies an AutomatedBackupConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AutomatedBackupConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AutomatedBackupConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.AutomatedBackupConfig;
+
+                        /**
+                         * Creates a plain object from an AutomatedBackupConfig message. Also converts values to other types if specified.
+                         * @param message AutomatedBackupConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.AutomatedBackupConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AutomatedBackupConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AutomatedBackupConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AutomatedBackupConfig {
+
+                        /** Properties of a FixedFrequencySchedule. */
+                        interface IFixedFrequencySchedule {
+
+                            /** FixedFrequencySchedule startTime */
+                            startTime?: (google.type.ITimeOfDay|null);
+                        }
+
+                        /** Represents a FixedFrequencySchedule. */
+                        class FixedFrequencySchedule implements IFixedFrequencySchedule {
+
+                            /**
+                             * Constructs a new FixedFrequencySchedule.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.redis.cluster.v1.AutomatedBackupConfig.IFixedFrequencySchedule);
+
+                            /** FixedFrequencySchedule startTime. */
+                            public startTime?: (google.type.ITimeOfDay|null);
+
+                            /** FixedFrequencySchedule _startTime. */
+                            public _startTime?: "startTime";
+
+                            /**
+                             * Creates a new FixedFrequencySchedule instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FixedFrequencySchedule instance
+                             */
+                            public static create(properties?: google.cloud.redis.cluster.v1.AutomatedBackupConfig.IFixedFrequencySchedule): google.cloud.redis.cluster.v1.AutomatedBackupConfig.FixedFrequencySchedule;
+
+                            /**
+                             * Encodes the specified FixedFrequencySchedule message. Does not implicitly {@link google.cloud.redis.cluster.v1.AutomatedBackupConfig.FixedFrequencySchedule.verify|verify} messages.
+                             * @param message FixedFrequencySchedule message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.redis.cluster.v1.AutomatedBackupConfig.IFixedFrequencySchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FixedFrequencySchedule message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.AutomatedBackupConfig.FixedFrequencySchedule.verify|verify} messages.
+                             * @param message FixedFrequencySchedule message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.redis.cluster.v1.AutomatedBackupConfig.IFixedFrequencySchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FixedFrequencySchedule message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FixedFrequencySchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.AutomatedBackupConfig.FixedFrequencySchedule;
+
+                            /**
+                             * Decodes a FixedFrequencySchedule message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FixedFrequencySchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.AutomatedBackupConfig.FixedFrequencySchedule;
+
+                            /**
+                             * Verifies a FixedFrequencySchedule message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FixedFrequencySchedule message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FixedFrequencySchedule
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.AutomatedBackupConfig.FixedFrequencySchedule;
+
+                            /**
+                             * Creates a plain object from a FixedFrequencySchedule message. Also converts values to other types if specified.
+                             * @param message FixedFrequencySchedule
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.redis.cluster.v1.AutomatedBackupConfig.FixedFrequencySchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FixedFrequencySchedule to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FixedFrequencySchedule
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** AutomatedBackupMode enum. */
+                        enum AutomatedBackupMode {
+                            AUTOMATED_BACKUP_MODE_UNSPECIFIED = 0,
+                            DISABLED = 1,
+                            ENABLED = 2
+                        }
+                    }
+
+                    /** Properties of a BackupCollection. */
+                    interface IBackupCollection {
+
+                        /** BackupCollection name */
+                        name?: (string|null);
+
+                        /** BackupCollection clusterUid */
+                        clusterUid?: (string|null);
+
+                        /** BackupCollection cluster */
+                        cluster?: (string|null);
+
+                        /** BackupCollection kmsKey */
+                        kmsKey?: (string|null);
+
+                        /** BackupCollection uid */
+                        uid?: (string|null);
+                    }
+
+                    /** Represents a BackupCollection. */
+                    class BackupCollection implements IBackupCollection {
+
+                        /**
+                         * Constructs a new BackupCollection.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IBackupCollection);
+
+                        /** BackupCollection name. */
+                        public name: string;
+
+                        /** BackupCollection clusterUid. */
+                        public clusterUid: string;
+
+                        /** BackupCollection cluster. */
+                        public cluster: string;
+
+                        /** BackupCollection kmsKey. */
+                        public kmsKey: string;
+
+                        /** BackupCollection uid. */
+                        public uid: string;
+
+                        /**
+                         * Creates a new BackupCollection instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BackupCollection instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IBackupCollection): google.cloud.redis.cluster.v1.BackupCollection;
+
+                        /**
+                         * Encodes the specified BackupCollection message. Does not implicitly {@link google.cloud.redis.cluster.v1.BackupCollection.verify|verify} messages.
+                         * @param message BackupCollection message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IBackupCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BackupCollection message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.BackupCollection.verify|verify} messages.
+                         * @param message BackupCollection message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IBackupCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BackupCollection message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BackupCollection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.BackupCollection;
+
+                        /**
+                         * Decodes a BackupCollection message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BackupCollection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.BackupCollection;
+
+                        /**
+                         * Verifies a BackupCollection message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BackupCollection message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BackupCollection
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.BackupCollection;
+
+                        /**
+                         * Creates a plain object from a BackupCollection message. Also converts values to other types if specified.
+                         * @param message BackupCollection
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.BackupCollection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BackupCollection to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BackupCollection
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Backup. */
+                    interface IBackup {
+
+                        /** Backup name */
+                        name?: (string|null);
+
+                        /** Backup createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Backup cluster */
+                        cluster?: (string|null);
+
+                        /** Backup clusterUid */
+                        clusterUid?: (string|null);
+
+                        /** Backup totalSizeBytes */
+                        totalSizeBytes?: (number|Long|string|null);
+
+                        /** Backup expireTime */
+                        expireTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Backup engineVersion */
+                        engineVersion?: (string|null);
+
+                        /** Backup backupFiles */
+                        backupFiles?: (google.cloud.redis.cluster.v1.IBackupFile[]|null);
+
+                        /** Backup nodeType */
+                        nodeType?: (google.cloud.redis.cluster.v1.NodeType|keyof typeof google.cloud.redis.cluster.v1.NodeType|null);
+
+                        /** Backup replicaCount */
+                        replicaCount?: (number|null);
+
+                        /** Backup shardCount */
+                        shardCount?: (number|null);
+
+                        /** Backup backupType */
+                        backupType?: (google.cloud.redis.cluster.v1.Backup.BackupType|keyof typeof google.cloud.redis.cluster.v1.Backup.BackupType|null);
+
+                        /** Backup state */
+                        state?: (google.cloud.redis.cluster.v1.Backup.State|keyof typeof google.cloud.redis.cluster.v1.Backup.State|null);
+
+                        /** Backup encryptionInfo */
+                        encryptionInfo?: (google.cloud.redis.cluster.v1.IEncryptionInfo|null);
+
+                        /** Backup uid */
+                        uid?: (string|null);
+                    }
+
+                    /** Represents a Backup. */
+                    class Backup implements IBackup {
+
+                        /**
+                         * Constructs a new Backup.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IBackup);
+
+                        /** Backup name. */
+                        public name: string;
+
+                        /** Backup createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Backup cluster. */
+                        public cluster: string;
+
+                        /** Backup clusterUid. */
+                        public clusterUid: string;
+
+                        /** Backup totalSizeBytes. */
+                        public totalSizeBytes: (number|Long|string);
+
+                        /** Backup expireTime. */
+                        public expireTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Backup engineVersion. */
+                        public engineVersion: string;
+
+                        /** Backup backupFiles. */
+                        public backupFiles: google.cloud.redis.cluster.v1.IBackupFile[];
+
+                        /** Backup nodeType. */
+                        public nodeType: (google.cloud.redis.cluster.v1.NodeType|keyof typeof google.cloud.redis.cluster.v1.NodeType);
+
+                        /** Backup replicaCount. */
+                        public replicaCount: number;
+
+                        /** Backup shardCount. */
+                        public shardCount: number;
+
+                        /** Backup backupType. */
+                        public backupType: (google.cloud.redis.cluster.v1.Backup.BackupType|keyof typeof google.cloud.redis.cluster.v1.Backup.BackupType);
+
+                        /** Backup state. */
+                        public state: (google.cloud.redis.cluster.v1.Backup.State|keyof typeof google.cloud.redis.cluster.v1.Backup.State);
+
+                        /** Backup encryptionInfo. */
+                        public encryptionInfo?: (google.cloud.redis.cluster.v1.IEncryptionInfo|null);
+
+                        /** Backup uid. */
+                        public uid: string;
+
+                        /**
+                         * Creates a new Backup instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Backup instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IBackup): google.cloud.redis.cluster.v1.Backup;
+
+                        /**
+                         * Encodes the specified Backup message. Does not implicitly {@link google.cloud.redis.cluster.v1.Backup.verify|verify} messages.
+                         * @param message Backup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IBackup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Backup message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.Backup.verify|verify} messages.
+                         * @param message Backup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IBackup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Backup message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Backup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.Backup;
+
+                        /**
+                         * Decodes a Backup message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Backup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.Backup;
+
+                        /**
+                         * Verifies a Backup message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Backup message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Backup
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.Backup;
+
+                        /**
+                         * Creates a plain object from a Backup message. Also converts values to other types if specified.
+                         * @param message Backup
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.Backup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Backup to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Backup
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Backup {
+
+                        /** BackupType enum. */
+                        enum BackupType {
+                            BACKUP_TYPE_UNSPECIFIED = 0,
+                            ON_DEMAND = 1,
+                            AUTOMATED = 2
+                        }
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            CREATING = 1,
+                            ACTIVE = 2,
+                            DELETING = 3,
+                            SUSPENDED = 4
+                        }
+                    }
+
+                    /** Properties of a BackupFile. */
+                    interface IBackupFile {
+
+                        /** BackupFile fileName */
+                        fileName?: (string|null);
+
+                        /** BackupFile sizeBytes */
+                        sizeBytes?: (number|Long|string|null);
+
+                        /** BackupFile createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a BackupFile. */
+                    class BackupFile implements IBackupFile {
+
+                        /**
+                         * Constructs a new BackupFile.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IBackupFile);
+
+                        /** BackupFile fileName. */
+                        public fileName: string;
+
+                        /** BackupFile sizeBytes. */
+                        public sizeBytes: (number|Long|string);
+
+                        /** BackupFile createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new BackupFile instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BackupFile instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IBackupFile): google.cloud.redis.cluster.v1.BackupFile;
+
+                        /**
+                         * Encodes the specified BackupFile message. Does not implicitly {@link google.cloud.redis.cluster.v1.BackupFile.verify|verify} messages.
+                         * @param message BackupFile message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IBackupFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BackupFile message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.BackupFile.verify|verify} messages.
+                         * @param message BackupFile message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IBackupFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BackupFile message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BackupFile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.BackupFile;
+
+                        /**
+                         * Decodes a BackupFile message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BackupFile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.BackupFile;
+
+                        /**
+                         * Verifies a BackupFile message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BackupFile message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BackupFile
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.BackupFile;
+
+                        /**
+                         * Creates a plain object from a BackupFile message. Also converts values to other types if specified.
+                         * @param message BackupFile
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.BackupFile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BackupFile to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BackupFile
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PscServiceAttachment. */
+                    interface IPscServiceAttachment {
+
+                        /** PscServiceAttachment serviceAttachment */
+                        serviceAttachment?: (string|null);
+
+                        /** PscServiceAttachment connectionType */
+                        connectionType?: (google.cloud.redis.cluster.v1.ConnectionType|keyof typeof google.cloud.redis.cluster.v1.ConnectionType|null);
+                    }
+
+                    /** Represents a PscServiceAttachment. */
+                    class PscServiceAttachment implements IPscServiceAttachment {
+
+                        /**
+                         * Constructs a new PscServiceAttachment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IPscServiceAttachment);
+
+                        /** PscServiceAttachment serviceAttachment. */
+                        public serviceAttachment: string;
+
+                        /** PscServiceAttachment connectionType. */
+                        public connectionType: (google.cloud.redis.cluster.v1.ConnectionType|keyof typeof google.cloud.redis.cluster.v1.ConnectionType);
+
+                        /**
+                         * Creates a new PscServiceAttachment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PscServiceAttachment instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IPscServiceAttachment): google.cloud.redis.cluster.v1.PscServiceAttachment;
+
+                        /**
+                         * Encodes the specified PscServiceAttachment message. Does not implicitly {@link google.cloud.redis.cluster.v1.PscServiceAttachment.verify|verify} messages.
+                         * @param message PscServiceAttachment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IPscServiceAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PscServiceAttachment message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.PscServiceAttachment.verify|verify} messages.
+                         * @param message PscServiceAttachment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IPscServiceAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PscServiceAttachment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PscServiceAttachment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.PscServiceAttachment;
+
+                        /**
+                         * Decodes a PscServiceAttachment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PscServiceAttachment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.PscServiceAttachment;
+
+                        /**
+                         * Verifies a PscServiceAttachment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PscServiceAttachment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PscServiceAttachment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.PscServiceAttachment;
+
+                        /**
+                         * Creates a plain object from a PscServiceAttachment message. Also converts values to other types if specified.
+                         * @param message PscServiceAttachment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.PscServiceAttachment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PscServiceAttachment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PscServiceAttachment
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CrossClusterReplicationConfig. */
+                    interface ICrossClusterReplicationConfig {
+
+                        /** CrossClusterReplicationConfig clusterRole */
+                        clusterRole?: (google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.ClusterRole|keyof typeof google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.ClusterRole|null);
+
+                        /** CrossClusterReplicationConfig primaryCluster */
+                        primaryCluster?: (google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IRemoteCluster|null);
+
+                        /** CrossClusterReplicationConfig secondaryClusters */
+                        secondaryClusters?: (google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IRemoteCluster[]|null);
+
+                        /** CrossClusterReplicationConfig updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CrossClusterReplicationConfig membership */
+                        membership?: (google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IMembership|null);
+                    }
+
+                    /** Represents a CrossClusterReplicationConfig. */
+                    class CrossClusterReplicationConfig implements ICrossClusterReplicationConfig {
+
+                        /**
+                         * Constructs a new CrossClusterReplicationConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.ICrossClusterReplicationConfig);
+
+                        /** CrossClusterReplicationConfig clusterRole. */
+                        public clusterRole: (google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.ClusterRole|keyof typeof google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.ClusterRole);
+
+                        /** CrossClusterReplicationConfig primaryCluster. */
+                        public primaryCluster?: (google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IRemoteCluster|null);
+
+                        /** CrossClusterReplicationConfig secondaryClusters. */
+                        public secondaryClusters: google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IRemoteCluster[];
+
+                        /** CrossClusterReplicationConfig updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CrossClusterReplicationConfig membership. */
+                        public membership?: (google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IMembership|null);
+
+                        /**
+                         * Creates a new CrossClusterReplicationConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CrossClusterReplicationConfig instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.ICrossClusterReplicationConfig): google.cloud.redis.cluster.v1.CrossClusterReplicationConfig;
+
+                        /**
+                         * Encodes the specified CrossClusterReplicationConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.verify|verify} messages.
+                         * @param message CrossClusterReplicationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.ICrossClusterReplicationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CrossClusterReplicationConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.verify|verify} messages.
+                         * @param message CrossClusterReplicationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.ICrossClusterReplicationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CrossClusterReplicationConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CrossClusterReplicationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.CrossClusterReplicationConfig;
+
+                        /**
+                         * Decodes a CrossClusterReplicationConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CrossClusterReplicationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.CrossClusterReplicationConfig;
+
+                        /**
+                         * Verifies a CrossClusterReplicationConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CrossClusterReplicationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CrossClusterReplicationConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.CrossClusterReplicationConfig;
+
+                        /**
+                         * Creates a plain object from a CrossClusterReplicationConfig message. Also converts values to other types if specified.
+                         * @param message CrossClusterReplicationConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.CrossClusterReplicationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CrossClusterReplicationConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CrossClusterReplicationConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CrossClusterReplicationConfig {
+
+                        /** Properties of a RemoteCluster. */
+                        interface IRemoteCluster {
+
+                            /** RemoteCluster cluster */
+                            cluster?: (string|null);
+
+                            /** RemoteCluster uid */
+                            uid?: (string|null);
+                        }
+
+                        /** Represents a RemoteCluster. */
+                        class RemoteCluster implements IRemoteCluster {
+
+                            /**
+                             * Constructs a new RemoteCluster.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IRemoteCluster);
+
+                            /** RemoteCluster cluster. */
+                            public cluster: string;
+
+                            /** RemoteCluster uid. */
+                            public uid: string;
+
+                            /**
+                             * Creates a new RemoteCluster instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RemoteCluster instance
+                             */
+                            public static create(properties?: google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IRemoteCluster): google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.RemoteCluster;
+
+                            /**
+                             * Encodes the specified RemoteCluster message. Does not implicitly {@link google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.RemoteCluster.verify|verify} messages.
+                             * @param message RemoteCluster message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IRemoteCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RemoteCluster message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.RemoteCluster.verify|verify} messages.
+                             * @param message RemoteCluster message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IRemoteCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RemoteCluster message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RemoteCluster
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.RemoteCluster;
+
+                            /**
+                             * Decodes a RemoteCluster message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RemoteCluster
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.RemoteCluster;
+
+                            /**
+                             * Verifies a RemoteCluster message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RemoteCluster message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RemoteCluster
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.RemoteCluster;
+
+                            /**
+                             * Creates a plain object from a RemoteCluster message. Also converts values to other types if specified.
+                             * @param message RemoteCluster
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.RemoteCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RemoteCluster to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RemoteCluster
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Membership. */
+                        interface IMembership {
+
+                            /** Membership primaryCluster */
+                            primaryCluster?: (google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IRemoteCluster|null);
+
+                            /** Membership secondaryClusters */
+                            secondaryClusters?: (google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IRemoteCluster[]|null);
+                        }
+
+                        /** Represents a Membership. */
+                        class Membership implements IMembership {
+
+                            /**
+                             * Constructs a new Membership.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IMembership);
+
+                            /** Membership primaryCluster. */
+                            public primaryCluster?: (google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IRemoteCluster|null);
+
+                            /** Membership secondaryClusters. */
+                            public secondaryClusters: google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IRemoteCluster[];
+
+                            /**
+                             * Creates a new Membership instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Membership instance
+                             */
+                            public static create(properties?: google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IMembership): google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.Membership;
+
+                            /**
+                             * Encodes the specified Membership message. Does not implicitly {@link google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.Membership.verify|verify} messages.
+                             * @param message Membership message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IMembership, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Membership message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.Membership.verify|verify} messages.
+                             * @param message Membership message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.IMembership, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Membership message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Membership
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.Membership;
+
+                            /**
+                             * Decodes a Membership message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Membership
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.Membership;
+
+                            /**
+                             * Verifies a Membership message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Membership message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Membership
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.Membership;
+
+                            /**
+                             * Creates a plain object from a Membership message. Also converts values to other types if specified.
+                             * @param message Membership
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.redis.cluster.v1.CrossClusterReplicationConfig.Membership, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Membership to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Membership
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** ClusterRole enum. */
+                        enum ClusterRole {
+                            CLUSTER_ROLE_UNSPECIFIED = 0,
+                            NONE = 1,
+                            PRIMARY = 2,
+                            SECONDARY = 3
+                        }
+                    }
+
+                    /** Properties of a ClusterMaintenancePolicy. */
+                    interface IClusterMaintenancePolicy {
+
+                        /** ClusterMaintenancePolicy createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ClusterMaintenancePolicy updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ClusterMaintenancePolicy weeklyMaintenanceWindow */
+                        weeklyMaintenanceWindow?: (google.cloud.redis.cluster.v1.IClusterWeeklyMaintenanceWindow[]|null);
+                    }
+
+                    /** Represents a ClusterMaintenancePolicy. */
+                    class ClusterMaintenancePolicy implements IClusterMaintenancePolicy {
+
+                        /**
+                         * Constructs a new ClusterMaintenancePolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IClusterMaintenancePolicy);
+
+                        /** ClusterMaintenancePolicy createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ClusterMaintenancePolicy updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ClusterMaintenancePolicy weeklyMaintenanceWindow. */
+                        public weeklyMaintenanceWindow: google.cloud.redis.cluster.v1.IClusterWeeklyMaintenanceWindow[];
+
+                        /**
+                         * Creates a new ClusterMaintenancePolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClusterMaintenancePolicy instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IClusterMaintenancePolicy): google.cloud.redis.cluster.v1.ClusterMaintenancePolicy;
+
+                        /**
+                         * Encodes the specified ClusterMaintenancePolicy message. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterMaintenancePolicy.verify|verify} messages.
+                         * @param message ClusterMaintenancePolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IClusterMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClusterMaintenancePolicy message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterMaintenancePolicy.verify|verify} messages.
+                         * @param message ClusterMaintenancePolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IClusterMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClusterMaintenancePolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClusterMaintenancePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ClusterMaintenancePolicy;
+
+                        /**
+                         * Decodes a ClusterMaintenancePolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClusterMaintenancePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ClusterMaintenancePolicy;
+
+                        /**
+                         * Verifies a ClusterMaintenancePolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClusterMaintenancePolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClusterMaintenancePolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ClusterMaintenancePolicy;
+
+                        /**
+                         * Creates a plain object from a ClusterMaintenancePolicy message. Also converts values to other types if specified.
+                         * @param message ClusterMaintenancePolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ClusterMaintenancePolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClusterMaintenancePolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClusterMaintenancePolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ClusterWeeklyMaintenanceWindow. */
+                    interface IClusterWeeklyMaintenanceWindow {
+
+                        /** ClusterWeeklyMaintenanceWindow day */
+                        day?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
+
+                        /** ClusterWeeklyMaintenanceWindow startTime */
+                        startTime?: (google.type.ITimeOfDay|null);
+                    }
+
+                    /** Represents a ClusterWeeklyMaintenanceWindow. */
+                    class ClusterWeeklyMaintenanceWindow implements IClusterWeeklyMaintenanceWindow {
+
+                        /**
+                         * Constructs a new ClusterWeeklyMaintenanceWindow.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IClusterWeeklyMaintenanceWindow);
+
+                        /** ClusterWeeklyMaintenanceWindow day. */
+                        public day: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
+
+                        /** ClusterWeeklyMaintenanceWindow startTime. */
+                        public startTime?: (google.type.ITimeOfDay|null);
+
+                        /**
+                         * Creates a new ClusterWeeklyMaintenanceWindow instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClusterWeeklyMaintenanceWindow instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IClusterWeeklyMaintenanceWindow): google.cloud.redis.cluster.v1.ClusterWeeklyMaintenanceWindow;
+
+                        /**
+                         * Encodes the specified ClusterWeeklyMaintenanceWindow message. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterWeeklyMaintenanceWindow.verify|verify} messages.
+                         * @param message ClusterWeeklyMaintenanceWindow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IClusterWeeklyMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClusterWeeklyMaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterWeeklyMaintenanceWindow.verify|verify} messages.
+                         * @param message ClusterWeeklyMaintenanceWindow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IClusterWeeklyMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClusterWeeklyMaintenanceWindow message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClusterWeeklyMaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ClusterWeeklyMaintenanceWindow;
+
+                        /**
+                         * Decodes a ClusterWeeklyMaintenanceWindow message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClusterWeeklyMaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ClusterWeeklyMaintenanceWindow;
+
+                        /**
+                         * Verifies a ClusterWeeklyMaintenanceWindow message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClusterWeeklyMaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClusterWeeklyMaintenanceWindow
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ClusterWeeklyMaintenanceWindow;
+
+                        /**
+                         * Creates a plain object from a ClusterWeeklyMaintenanceWindow message. Also converts values to other types if specified.
+                         * @param message ClusterWeeklyMaintenanceWindow
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ClusterWeeklyMaintenanceWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClusterWeeklyMaintenanceWindow to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClusterWeeklyMaintenanceWindow
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ClusterMaintenanceSchedule. */
+                    interface IClusterMaintenanceSchedule {
+
+                        /** ClusterMaintenanceSchedule startTime */
+                        startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ClusterMaintenanceSchedule endTime */
+                        endTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a ClusterMaintenanceSchedule. */
+                    class ClusterMaintenanceSchedule implements IClusterMaintenanceSchedule {
+
+                        /**
+                         * Constructs a new ClusterMaintenanceSchedule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IClusterMaintenanceSchedule);
+
+                        /** ClusterMaintenanceSchedule startTime. */
+                        public startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ClusterMaintenanceSchedule endTime. */
+                        public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new ClusterMaintenanceSchedule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClusterMaintenanceSchedule instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IClusterMaintenanceSchedule): google.cloud.redis.cluster.v1.ClusterMaintenanceSchedule;
+
+                        /**
+                         * Encodes the specified ClusterMaintenanceSchedule message. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterMaintenanceSchedule.verify|verify} messages.
+                         * @param message ClusterMaintenanceSchedule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IClusterMaintenanceSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClusterMaintenanceSchedule message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterMaintenanceSchedule.verify|verify} messages.
+                         * @param message ClusterMaintenanceSchedule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IClusterMaintenanceSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClusterMaintenanceSchedule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClusterMaintenanceSchedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ClusterMaintenanceSchedule;
+
+                        /**
+                         * Decodes a ClusterMaintenanceSchedule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClusterMaintenanceSchedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ClusterMaintenanceSchedule;
+
+                        /**
+                         * Verifies a ClusterMaintenanceSchedule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClusterMaintenanceSchedule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClusterMaintenanceSchedule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ClusterMaintenanceSchedule;
+
+                        /**
+                         * Creates a plain object from a ClusterMaintenanceSchedule message. Also converts values to other types if specified.
+                         * @param message ClusterMaintenanceSchedule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ClusterMaintenanceSchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClusterMaintenanceSchedule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClusterMaintenanceSchedule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a PscConfig. */
@@ -1608,6 +4428,15 @@ export namespace google {
 
                         /** PscConnection network */
                         network?: (string|null);
+
+                        /** PscConnection serviceAttachment */
+                        serviceAttachment?: (string|null);
+
+                        /** PscConnection pscConnectionStatus */
+                        pscConnectionStatus?: (google.cloud.redis.cluster.v1.PscConnectionStatus|keyof typeof google.cloud.redis.cluster.v1.PscConnectionStatus|null);
+
+                        /** PscConnection connectionType */
+                        connectionType?: (google.cloud.redis.cluster.v1.ConnectionType|keyof typeof google.cloud.redis.cluster.v1.ConnectionType|null);
                     }
 
                     /** Represents a PscConnection. */
@@ -1633,6 +4462,15 @@ export namespace google {
 
                         /** PscConnection network. */
                         public network: string;
+
+                        /** PscConnection serviceAttachment. */
+                        public serviceAttachment: string;
+
+                        /** PscConnection pscConnectionStatus. */
+                        public pscConnectionStatus: (google.cloud.redis.cluster.v1.PscConnectionStatus|keyof typeof google.cloud.redis.cluster.v1.PscConnectionStatus);
+
+                        /** PscConnection connectionType. */
+                        public connectionType: (google.cloud.redis.cluster.v1.ConnectionType|keyof typeof google.cloud.redis.cluster.v1.ConnectionType);
 
                         /**
                          * Creates a new PscConnection instance using the specified properties.
@@ -1706,6 +4544,348 @@ export namespace google {
 
                         /**
                          * Gets the default type url for PscConnection
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ClusterEndpoint. */
+                    interface IClusterEndpoint {
+
+                        /** ClusterEndpoint connections */
+                        connections?: (google.cloud.redis.cluster.v1.IConnectionDetail[]|null);
+                    }
+
+                    /** Represents a ClusterEndpoint. */
+                    class ClusterEndpoint implements IClusterEndpoint {
+
+                        /**
+                         * Constructs a new ClusterEndpoint.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IClusterEndpoint);
+
+                        /** ClusterEndpoint connections. */
+                        public connections: google.cloud.redis.cluster.v1.IConnectionDetail[];
+
+                        /**
+                         * Creates a new ClusterEndpoint instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClusterEndpoint instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IClusterEndpoint): google.cloud.redis.cluster.v1.ClusterEndpoint;
+
+                        /**
+                         * Encodes the specified ClusterEndpoint message. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterEndpoint.verify|verify} messages.
+                         * @param message ClusterEndpoint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IClusterEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClusterEndpoint message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterEndpoint.verify|verify} messages.
+                         * @param message ClusterEndpoint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IClusterEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClusterEndpoint message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClusterEndpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ClusterEndpoint;
+
+                        /**
+                         * Decodes a ClusterEndpoint message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClusterEndpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ClusterEndpoint;
+
+                        /**
+                         * Verifies a ClusterEndpoint message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClusterEndpoint message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClusterEndpoint
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ClusterEndpoint;
+
+                        /**
+                         * Creates a plain object from a ClusterEndpoint message. Also converts values to other types if specified.
+                         * @param message ClusterEndpoint
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ClusterEndpoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClusterEndpoint to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClusterEndpoint
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ConnectionDetail. */
+                    interface IConnectionDetail {
+
+                        /** ConnectionDetail pscAutoConnection */
+                        pscAutoConnection?: (google.cloud.redis.cluster.v1.IPscAutoConnection|null);
+
+                        /** ConnectionDetail pscConnection */
+                        pscConnection?: (google.cloud.redis.cluster.v1.IPscConnection|null);
+                    }
+
+                    /** Represents a ConnectionDetail. */
+                    class ConnectionDetail implements IConnectionDetail {
+
+                        /**
+                         * Constructs a new ConnectionDetail.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IConnectionDetail);
+
+                        /** ConnectionDetail pscAutoConnection. */
+                        public pscAutoConnection?: (google.cloud.redis.cluster.v1.IPscAutoConnection|null);
+
+                        /** ConnectionDetail pscConnection. */
+                        public pscConnection?: (google.cloud.redis.cluster.v1.IPscConnection|null);
+
+                        /** ConnectionDetail connection. */
+                        public connection?: ("pscAutoConnection"|"pscConnection");
+
+                        /**
+                         * Creates a new ConnectionDetail instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConnectionDetail instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IConnectionDetail): google.cloud.redis.cluster.v1.ConnectionDetail;
+
+                        /**
+                         * Encodes the specified ConnectionDetail message. Does not implicitly {@link google.cloud.redis.cluster.v1.ConnectionDetail.verify|verify} messages.
+                         * @param message ConnectionDetail message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IConnectionDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConnectionDetail message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ConnectionDetail.verify|verify} messages.
+                         * @param message ConnectionDetail message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IConnectionDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConnectionDetail message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConnectionDetail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ConnectionDetail;
+
+                        /**
+                         * Decodes a ConnectionDetail message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConnectionDetail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ConnectionDetail;
+
+                        /**
+                         * Verifies a ConnectionDetail message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConnectionDetail message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConnectionDetail
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ConnectionDetail;
+
+                        /**
+                         * Creates a plain object from a ConnectionDetail message. Also converts values to other types if specified.
+                         * @param message ConnectionDetail
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ConnectionDetail, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConnectionDetail to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConnectionDetail
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PscAutoConnection. */
+                    interface IPscAutoConnection {
+
+                        /** PscAutoConnection pscConnectionId */
+                        pscConnectionId?: (string|null);
+
+                        /** PscAutoConnection address */
+                        address?: (string|null);
+
+                        /** PscAutoConnection forwardingRule */
+                        forwardingRule?: (string|null);
+
+                        /** PscAutoConnection projectId */
+                        projectId?: (string|null);
+
+                        /** PscAutoConnection network */
+                        network?: (string|null);
+
+                        /** PscAutoConnection serviceAttachment */
+                        serviceAttachment?: (string|null);
+
+                        /** PscAutoConnection pscConnectionStatus */
+                        pscConnectionStatus?: (google.cloud.redis.cluster.v1.PscConnectionStatus|keyof typeof google.cloud.redis.cluster.v1.PscConnectionStatus|null);
+
+                        /** PscAutoConnection connectionType */
+                        connectionType?: (google.cloud.redis.cluster.v1.ConnectionType|keyof typeof google.cloud.redis.cluster.v1.ConnectionType|null);
+                    }
+
+                    /** Represents a PscAutoConnection. */
+                    class PscAutoConnection implements IPscAutoConnection {
+
+                        /**
+                         * Constructs a new PscAutoConnection.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IPscAutoConnection);
+
+                        /** PscAutoConnection pscConnectionId. */
+                        public pscConnectionId: string;
+
+                        /** PscAutoConnection address. */
+                        public address: string;
+
+                        /** PscAutoConnection forwardingRule. */
+                        public forwardingRule: string;
+
+                        /** PscAutoConnection projectId. */
+                        public projectId: string;
+
+                        /** PscAutoConnection network. */
+                        public network: string;
+
+                        /** PscAutoConnection serviceAttachment. */
+                        public serviceAttachment: string;
+
+                        /** PscAutoConnection pscConnectionStatus. */
+                        public pscConnectionStatus: (google.cloud.redis.cluster.v1.PscConnectionStatus|keyof typeof google.cloud.redis.cluster.v1.PscConnectionStatus);
+
+                        /** PscAutoConnection connectionType. */
+                        public connectionType: (google.cloud.redis.cluster.v1.ConnectionType|keyof typeof google.cloud.redis.cluster.v1.ConnectionType);
+
+                        /**
+                         * Creates a new PscAutoConnection instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PscAutoConnection instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IPscAutoConnection): google.cloud.redis.cluster.v1.PscAutoConnection;
+
+                        /**
+                         * Encodes the specified PscAutoConnection message. Does not implicitly {@link google.cloud.redis.cluster.v1.PscAutoConnection.verify|verify} messages.
+                         * @param message PscAutoConnection message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IPscAutoConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PscAutoConnection message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.PscAutoConnection.verify|verify} messages.
+                         * @param message PscAutoConnection message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IPscAutoConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PscAutoConnection message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PscAutoConnection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.PscAutoConnection;
+
+                        /**
+                         * Decodes a PscAutoConnection message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PscAutoConnection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.PscAutoConnection;
+
+                        /**
+                         * Verifies a PscAutoConnection message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PscAutoConnection message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PscAutoConnection
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.PscAutoConnection;
+
+                        /**
+                         * Creates a plain object from a PscAutoConnection message. Also converts values to other types if specified.
+                         * @param message PscAutoConnection
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.PscAutoConnection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PscAutoConnection to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PscAutoConnection
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -2606,6 +5786,263 @@ export namespace google {
                             SINGLE_ZONE = 2
                         }
                     }
+
+                    /** Properties of a RescheduleClusterMaintenanceRequest. */
+                    interface IRescheduleClusterMaintenanceRequest {
+
+                        /** RescheduleClusterMaintenanceRequest name */
+                        name?: (string|null);
+
+                        /** RescheduleClusterMaintenanceRequest rescheduleType */
+                        rescheduleType?: (google.cloud.redis.cluster.v1.RescheduleClusterMaintenanceRequest.RescheduleType|keyof typeof google.cloud.redis.cluster.v1.RescheduleClusterMaintenanceRequest.RescheduleType|null);
+
+                        /** RescheduleClusterMaintenanceRequest scheduleTime */
+                        scheduleTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a RescheduleClusterMaintenanceRequest. */
+                    class RescheduleClusterMaintenanceRequest implements IRescheduleClusterMaintenanceRequest {
+
+                        /**
+                         * Constructs a new RescheduleClusterMaintenanceRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IRescheduleClusterMaintenanceRequest);
+
+                        /** RescheduleClusterMaintenanceRequest name. */
+                        public name: string;
+
+                        /** RescheduleClusterMaintenanceRequest rescheduleType. */
+                        public rescheduleType: (google.cloud.redis.cluster.v1.RescheduleClusterMaintenanceRequest.RescheduleType|keyof typeof google.cloud.redis.cluster.v1.RescheduleClusterMaintenanceRequest.RescheduleType);
+
+                        /** RescheduleClusterMaintenanceRequest scheduleTime. */
+                        public scheduleTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new RescheduleClusterMaintenanceRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RescheduleClusterMaintenanceRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IRescheduleClusterMaintenanceRequest): google.cloud.redis.cluster.v1.RescheduleClusterMaintenanceRequest;
+
+                        /**
+                         * Encodes the specified RescheduleClusterMaintenanceRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.RescheduleClusterMaintenanceRequest.verify|verify} messages.
+                         * @param message RescheduleClusterMaintenanceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IRescheduleClusterMaintenanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RescheduleClusterMaintenanceRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.RescheduleClusterMaintenanceRequest.verify|verify} messages.
+                         * @param message RescheduleClusterMaintenanceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IRescheduleClusterMaintenanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RescheduleClusterMaintenanceRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RescheduleClusterMaintenanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.RescheduleClusterMaintenanceRequest;
+
+                        /**
+                         * Decodes a RescheduleClusterMaintenanceRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RescheduleClusterMaintenanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.RescheduleClusterMaintenanceRequest;
+
+                        /**
+                         * Verifies a RescheduleClusterMaintenanceRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RescheduleClusterMaintenanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RescheduleClusterMaintenanceRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.RescheduleClusterMaintenanceRequest;
+
+                        /**
+                         * Creates a plain object from a RescheduleClusterMaintenanceRequest message. Also converts values to other types if specified.
+                         * @param message RescheduleClusterMaintenanceRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.RescheduleClusterMaintenanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RescheduleClusterMaintenanceRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RescheduleClusterMaintenanceRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace RescheduleClusterMaintenanceRequest {
+
+                        /** RescheduleType enum. */
+                        enum RescheduleType {
+                            RESCHEDULE_TYPE_UNSPECIFIED = 0,
+                            IMMEDIATE = 1,
+                            SPECIFIC_TIME = 3
+                        }
+                    }
+
+                    /** Properties of an EncryptionInfo. */
+                    interface IEncryptionInfo {
+
+                        /** EncryptionInfo encryptionType */
+                        encryptionType?: (google.cloud.redis.cluster.v1.EncryptionInfo.Type|keyof typeof google.cloud.redis.cluster.v1.EncryptionInfo.Type|null);
+
+                        /** EncryptionInfo kmsKeyVersions */
+                        kmsKeyVersions?: (string[]|null);
+
+                        /** EncryptionInfo kmsKeyPrimaryState */
+                        kmsKeyPrimaryState?: (google.cloud.redis.cluster.v1.EncryptionInfo.KmsKeyState|keyof typeof google.cloud.redis.cluster.v1.EncryptionInfo.KmsKeyState|null);
+
+                        /** EncryptionInfo lastUpdateTime */
+                        lastUpdateTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents an EncryptionInfo. */
+                    class EncryptionInfo implements IEncryptionInfo {
+
+                        /**
+                         * Constructs a new EncryptionInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IEncryptionInfo);
+
+                        /** EncryptionInfo encryptionType. */
+                        public encryptionType: (google.cloud.redis.cluster.v1.EncryptionInfo.Type|keyof typeof google.cloud.redis.cluster.v1.EncryptionInfo.Type);
+
+                        /** EncryptionInfo kmsKeyVersions. */
+                        public kmsKeyVersions: string[];
+
+                        /** EncryptionInfo kmsKeyPrimaryState. */
+                        public kmsKeyPrimaryState: (google.cloud.redis.cluster.v1.EncryptionInfo.KmsKeyState|keyof typeof google.cloud.redis.cluster.v1.EncryptionInfo.KmsKeyState);
+
+                        /** EncryptionInfo lastUpdateTime. */
+                        public lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new EncryptionInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EncryptionInfo instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IEncryptionInfo): google.cloud.redis.cluster.v1.EncryptionInfo;
+
+                        /**
+                         * Encodes the specified EncryptionInfo message. Does not implicitly {@link google.cloud.redis.cluster.v1.EncryptionInfo.verify|verify} messages.
+                         * @param message EncryptionInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IEncryptionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EncryptionInfo message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.EncryptionInfo.verify|verify} messages.
+                         * @param message EncryptionInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IEncryptionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EncryptionInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EncryptionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.EncryptionInfo;
+
+                        /**
+                         * Decodes an EncryptionInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EncryptionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.EncryptionInfo;
+
+                        /**
+                         * Verifies an EncryptionInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EncryptionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EncryptionInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.EncryptionInfo;
+
+                        /**
+                         * Creates a plain object from an EncryptionInfo message. Also converts values to other types if specified.
+                         * @param message EncryptionInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.EncryptionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EncryptionInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EncryptionInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace EncryptionInfo {
+
+                        /** Type enum. */
+                        enum Type {
+                            TYPE_UNSPECIFIED = 0,
+                            GOOGLE_DEFAULT_ENCRYPTION = 1,
+                            CUSTOMER_MANAGED_ENCRYPTION = 2
+                        }
+
+                        /** KmsKeyState enum. */
+                        enum KmsKeyState {
+                            KMS_KEY_STATE_UNSPECIFIED = 0,
+                            ENABLED = 1,
+                            PERMISSION_DENIED = 2,
+                            DISABLED = 3,
+                            DESTROYED = 4,
+                            DESTROY_SCHEDULED = 5,
+                            EKM_KEY_UNREACHABLE_DETECTED = 6,
+                            BILLING_DISABLED = 7,
+                            UNKNOWN_FAILURE = 8
+                        }
+                    }
                 }
 
                 /** Namespace v1beta1. */
@@ -2714,6 +6151,118 @@ export namespace google {
                          * @returns Promise
                          */
                         public getClusterCertificateAuthority(request: google.cloud.redis.cluster.v1beta1.IGetClusterCertificateAuthorityRequest): Promise<google.cloud.redis.cluster.v1beta1.CertificateAuthority>;
+
+                        /**
+                         * Calls RescheduleClusterMaintenance.
+                         * @param request RescheduleClusterMaintenanceRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public rescheduleClusterMaintenance(request: google.cloud.redis.cluster.v1beta1.IRescheduleClusterMaintenanceRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.RescheduleClusterMaintenanceCallback): void;
+
+                        /**
+                         * Calls RescheduleClusterMaintenance.
+                         * @param request RescheduleClusterMaintenanceRequest message or plain object
+                         * @returns Promise
+                         */
+                        public rescheduleClusterMaintenance(request: google.cloud.redis.cluster.v1beta1.IRescheduleClusterMaintenanceRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls ListBackupCollections.
+                         * @param request ListBackupCollectionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListBackupCollectionsResponse
+                         */
+                        public listBackupCollections(request: google.cloud.redis.cluster.v1beta1.IListBackupCollectionsRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.ListBackupCollectionsCallback): void;
+
+                        /**
+                         * Calls ListBackupCollections.
+                         * @param request ListBackupCollectionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listBackupCollections(request: google.cloud.redis.cluster.v1beta1.IListBackupCollectionsRequest): Promise<google.cloud.redis.cluster.v1beta1.ListBackupCollectionsResponse>;
+
+                        /**
+                         * Calls GetBackupCollection.
+                         * @param request GetBackupCollectionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and BackupCollection
+                         */
+                        public getBackupCollection(request: google.cloud.redis.cluster.v1beta1.IGetBackupCollectionRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.GetBackupCollectionCallback): void;
+
+                        /**
+                         * Calls GetBackupCollection.
+                         * @param request GetBackupCollectionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getBackupCollection(request: google.cloud.redis.cluster.v1beta1.IGetBackupCollectionRequest): Promise<google.cloud.redis.cluster.v1beta1.BackupCollection>;
+
+                        /**
+                         * Calls ListBackups.
+                         * @param request ListBackupsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListBackupsResponse
+                         */
+                        public listBackups(request: google.cloud.redis.cluster.v1beta1.IListBackupsRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.ListBackupsCallback): void;
+
+                        /**
+                         * Calls ListBackups.
+                         * @param request ListBackupsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listBackups(request: google.cloud.redis.cluster.v1beta1.IListBackupsRequest): Promise<google.cloud.redis.cluster.v1beta1.ListBackupsResponse>;
+
+                        /**
+                         * Calls GetBackup.
+                         * @param request GetBackupRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Backup
+                         */
+                        public getBackup(request: google.cloud.redis.cluster.v1beta1.IGetBackupRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.GetBackupCallback): void;
+
+                        /**
+                         * Calls GetBackup.
+                         * @param request GetBackupRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getBackup(request: google.cloud.redis.cluster.v1beta1.IGetBackupRequest): Promise<google.cloud.redis.cluster.v1beta1.Backup>;
+
+                        /**
+                         * Calls DeleteBackup.
+                         * @param request DeleteBackupRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteBackup(request: google.cloud.redis.cluster.v1beta1.IDeleteBackupRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.DeleteBackupCallback): void;
+
+                        /**
+                         * Calls DeleteBackup.
+                         * @param request DeleteBackupRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteBackup(request: google.cloud.redis.cluster.v1beta1.IDeleteBackupRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls ExportBackup.
+                         * @param request ExportBackupRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public exportBackup(request: google.cloud.redis.cluster.v1beta1.IExportBackupRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.ExportBackupCallback): void;
+
+                        /**
+                         * Calls ExportBackup.
+                         * @param request ExportBackupRequest message or plain object
+                         * @returns Promise
+                         */
+                        public exportBackup(request: google.cloud.redis.cluster.v1beta1.IExportBackupRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls BackupCluster.
+                         * @param request BackupClusterRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public backupCluster(request: google.cloud.redis.cluster.v1beta1.IBackupClusterRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.BackupClusterCallback): void;
+
+                        /**
+                         * Calls BackupCluster.
+                         * @param request BackupClusterRequest message or plain object
+                         * @returns Promise
+                         */
+                        public backupCluster(request: google.cloud.redis.cluster.v1beta1.IBackupClusterRequest): Promise<google.longrunning.Operation>;
                     }
 
                     namespace CloudRedisCluster {
@@ -2759,6 +6308,69 @@ export namespace google {
                          * @param [response] CertificateAuthority
                          */
                         type GetClusterCertificateAuthorityCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.CertificateAuthority) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|rescheduleClusterMaintenance}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type RescheduleClusterMaintenanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|listBackupCollections}.
+                         * @param error Error, if any
+                         * @param [response] ListBackupCollectionsResponse
+                         */
+                        type ListBackupCollectionsCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.ListBackupCollectionsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|getBackupCollection}.
+                         * @param error Error, if any
+                         * @param [response] BackupCollection
+                         */
+                        type GetBackupCollectionCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.BackupCollection) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|listBackups}.
+                         * @param error Error, if any
+                         * @param [response] ListBackupsResponse
+                         */
+                        type ListBackupsCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.ListBackupsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|getBackup}.
+                         * @param error Error, if any
+                         * @param [response] Backup
+                         */
+                        type GetBackupCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.Backup) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|deleteBackup}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteBackupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|exportBackup}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type ExportBackupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|backupCluster}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type BackupClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                    }
+
+                    /** PscConnectionStatus enum. */
+                    enum PscConnectionStatus {
+                        PSC_CONNECTION_STATUS_UNSPECIFIED = 0,
+                        PSC_CONNECTION_STATUS_ACTIVE = 1,
+                        PSC_CONNECTION_STATUS_NOT_FOUND = 2
                     }
 
                     /** AuthorizationMode enum. */
@@ -2782,6 +6394,14 @@ export namespace google {
                         TRANSIT_ENCRYPTION_MODE_UNSPECIFIED = 0,
                         TRANSIT_ENCRYPTION_MODE_DISABLED = 1,
                         TRANSIT_ENCRYPTION_MODE_SERVER_AUTHENTICATION = 2
+                    }
+
+                    /** ConnectionType enum. */
+                    enum ConnectionType {
+                        CONNECTION_TYPE_UNSPECIFIED = 0,
+                        CONNECTION_TYPE_DISCOVERY = 1,
+                        CONNECTION_TYPE_PRIMARY = 2,
+                        CONNECTION_TYPE_READER = 3
                     }
 
                     /** Properties of a CreateClusterRequest. */
@@ -3523,8 +7143,965 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a ListBackupCollectionsRequest. */
+                    interface IListBackupCollectionsRequest {
+
+                        /** ListBackupCollectionsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListBackupCollectionsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListBackupCollectionsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListBackupCollectionsRequest. */
+                    class ListBackupCollectionsRequest implements IListBackupCollectionsRequest {
+
+                        /**
+                         * Constructs a new ListBackupCollectionsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IListBackupCollectionsRequest);
+
+                        /** ListBackupCollectionsRequest parent. */
+                        public parent: string;
+
+                        /** ListBackupCollectionsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListBackupCollectionsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListBackupCollectionsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListBackupCollectionsRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IListBackupCollectionsRequest): google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest;
+
+                        /**
+                         * Encodes the specified ListBackupCollectionsRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest.verify|verify} messages.
+                         * @param message ListBackupCollectionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IListBackupCollectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListBackupCollectionsRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest.verify|verify} messages.
+                         * @param message ListBackupCollectionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IListBackupCollectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListBackupCollectionsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListBackupCollectionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest;
+
+                        /**
+                         * Decodes a ListBackupCollectionsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListBackupCollectionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest;
+
+                        /**
+                         * Verifies a ListBackupCollectionsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListBackupCollectionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListBackupCollectionsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest;
+
+                        /**
+                         * Creates a plain object from a ListBackupCollectionsRequest message. Also converts values to other types if specified.
+                         * @param message ListBackupCollectionsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListBackupCollectionsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListBackupCollectionsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListBackupCollectionsResponse. */
+                    interface IListBackupCollectionsResponse {
+
+                        /** ListBackupCollectionsResponse backupCollections */
+                        backupCollections?: (google.cloud.redis.cluster.v1beta1.IBackupCollection[]|null);
+
+                        /** ListBackupCollectionsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListBackupCollectionsResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListBackupCollectionsResponse. */
+                    class ListBackupCollectionsResponse implements IListBackupCollectionsResponse {
+
+                        /**
+                         * Constructs a new ListBackupCollectionsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IListBackupCollectionsResponse);
+
+                        /** ListBackupCollectionsResponse backupCollections. */
+                        public backupCollections: google.cloud.redis.cluster.v1beta1.IBackupCollection[];
+
+                        /** ListBackupCollectionsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListBackupCollectionsResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListBackupCollectionsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListBackupCollectionsResponse instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IListBackupCollectionsResponse): google.cloud.redis.cluster.v1beta1.ListBackupCollectionsResponse;
+
+                        /**
+                         * Encodes the specified ListBackupCollectionsResponse message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListBackupCollectionsResponse.verify|verify} messages.
+                         * @param message ListBackupCollectionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IListBackupCollectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListBackupCollectionsResponse message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListBackupCollectionsResponse.verify|verify} messages.
+                         * @param message ListBackupCollectionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IListBackupCollectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListBackupCollectionsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListBackupCollectionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ListBackupCollectionsResponse;
+
+                        /**
+                         * Decodes a ListBackupCollectionsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListBackupCollectionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ListBackupCollectionsResponse;
+
+                        /**
+                         * Verifies a ListBackupCollectionsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListBackupCollectionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListBackupCollectionsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ListBackupCollectionsResponse;
+
+                        /**
+                         * Creates a plain object from a ListBackupCollectionsResponse message. Also converts values to other types if specified.
+                         * @param message ListBackupCollectionsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ListBackupCollectionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListBackupCollectionsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListBackupCollectionsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetBackupCollectionRequest. */
+                    interface IGetBackupCollectionRequest {
+
+                        /** GetBackupCollectionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetBackupCollectionRequest. */
+                    class GetBackupCollectionRequest implements IGetBackupCollectionRequest {
+
+                        /**
+                         * Constructs a new GetBackupCollectionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IGetBackupCollectionRequest);
+
+                        /** GetBackupCollectionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetBackupCollectionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetBackupCollectionRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IGetBackupCollectionRequest): google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest;
+
+                        /**
+                         * Encodes the specified GetBackupCollectionRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest.verify|verify} messages.
+                         * @param message GetBackupCollectionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IGetBackupCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetBackupCollectionRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest.verify|verify} messages.
+                         * @param message GetBackupCollectionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IGetBackupCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetBackupCollectionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetBackupCollectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest;
+
+                        /**
+                         * Decodes a GetBackupCollectionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetBackupCollectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest;
+
+                        /**
+                         * Verifies a GetBackupCollectionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetBackupCollectionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetBackupCollectionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest;
+
+                        /**
+                         * Creates a plain object from a GetBackupCollectionRequest message. Also converts values to other types if specified.
+                         * @param message GetBackupCollectionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetBackupCollectionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetBackupCollectionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListBackupsRequest. */
+                    interface IListBackupsRequest {
+
+                        /** ListBackupsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListBackupsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListBackupsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListBackupsRequest. */
+                    class ListBackupsRequest implements IListBackupsRequest {
+
+                        /**
+                         * Constructs a new ListBackupsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IListBackupsRequest);
+
+                        /** ListBackupsRequest parent. */
+                        public parent: string;
+
+                        /** ListBackupsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListBackupsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListBackupsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListBackupsRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IListBackupsRequest): google.cloud.redis.cluster.v1beta1.ListBackupsRequest;
+
+                        /**
+                         * Encodes the specified ListBackupsRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListBackupsRequest.verify|verify} messages.
+                         * @param message ListBackupsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IListBackupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListBackupsRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListBackupsRequest.verify|verify} messages.
+                         * @param message ListBackupsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IListBackupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListBackupsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListBackupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ListBackupsRequest;
+
+                        /**
+                         * Decodes a ListBackupsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListBackupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ListBackupsRequest;
+
+                        /**
+                         * Verifies a ListBackupsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListBackupsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListBackupsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ListBackupsRequest;
+
+                        /**
+                         * Creates a plain object from a ListBackupsRequest message. Also converts values to other types if specified.
+                         * @param message ListBackupsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ListBackupsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListBackupsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListBackupsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListBackupsResponse. */
+                    interface IListBackupsResponse {
+
+                        /** ListBackupsResponse backups */
+                        backups?: (google.cloud.redis.cluster.v1beta1.IBackup[]|null);
+
+                        /** ListBackupsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListBackupsResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListBackupsResponse. */
+                    class ListBackupsResponse implements IListBackupsResponse {
+
+                        /**
+                         * Constructs a new ListBackupsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IListBackupsResponse);
+
+                        /** ListBackupsResponse backups. */
+                        public backups: google.cloud.redis.cluster.v1beta1.IBackup[];
+
+                        /** ListBackupsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListBackupsResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListBackupsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListBackupsResponse instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IListBackupsResponse): google.cloud.redis.cluster.v1beta1.ListBackupsResponse;
+
+                        /**
+                         * Encodes the specified ListBackupsResponse message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListBackupsResponse.verify|verify} messages.
+                         * @param message ListBackupsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IListBackupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListBackupsResponse message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListBackupsResponse.verify|verify} messages.
+                         * @param message ListBackupsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IListBackupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListBackupsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListBackupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ListBackupsResponse;
+
+                        /**
+                         * Decodes a ListBackupsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListBackupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ListBackupsResponse;
+
+                        /**
+                         * Verifies a ListBackupsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListBackupsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListBackupsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ListBackupsResponse;
+
+                        /**
+                         * Creates a plain object from a ListBackupsResponse message. Also converts values to other types if specified.
+                         * @param message ListBackupsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ListBackupsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListBackupsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListBackupsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetBackupRequest. */
+                    interface IGetBackupRequest {
+
+                        /** GetBackupRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetBackupRequest. */
+                    class GetBackupRequest implements IGetBackupRequest {
+
+                        /**
+                         * Constructs a new GetBackupRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IGetBackupRequest);
+
+                        /** GetBackupRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetBackupRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetBackupRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IGetBackupRequest): google.cloud.redis.cluster.v1beta1.GetBackupRequest;
+
+                        /**
+                         * Encodes the specified GetBackupRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetBackupRequest.verify|verify} messages.
+                         * @param message GetBackupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IGetBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetBackupRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetBackupRequest.verify|verify} messages.
+                         * @param message GetBackupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IGetBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetBackupRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.GetBackupRequest;
+
+                        /**
+                         * Decodes a GetBackupRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.GetBackupRequest;
+
+                        /**
+                         * Verifies a GetBackupRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetBackupRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.GetBackupRequest;
+
+                        /**
+                         * Creates a plain object from a GetBackupRequest message. Also converts values to other types if specified.
+                         * @param message GetBackupRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.GetBackupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetBackupRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetBackupRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteBackupRequest. */
+                    interface IDeleteBackupRequest {
+
+                        /** DeleteBackupRequest name */
+                        name?: (string|null);
+
+                        /** DeleteBackupRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a DeleteBackupRequest. */
+                    class DeleteBackupRequest implements IDeleteBackupRequest {
+
+                        /**
+                         * Constructs a new DeleteBackupRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IDeleteBackupRequest);
+
+                        /** DeleteBackupRequest name. */
+                        public name: string;
+
+                        /** DeleteBackupRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new DeleteBackupRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteBackupRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IDeleteBackupRequest): google.cloud.redis.cluster.v1beta1.DeleteBackupRequest;
+
+                        /**
+                         * Encodes the specified DeleteBackupRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.DeleteBackupRequest.verify|verify} messages.
+                         * @param message DeleteBackupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IDeleteBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteBackupRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.DeleteBackupRequest.verify|verify} messages.
+                         * @param message DeleteBackupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IDeleteBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteBackupRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.DeleteBackupRequest;
+
+                        /**
+                         * Decodes a DeleteBackupRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.DeleteBackupRequest;
+
+                        /**
+                         * Verifies a DeleteBackupRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteBackupRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.DeleteBackupRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteBackupRequest message. Also converts values to other types if specified.
+                         * @param message DeleteBackupRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.DeleteBackupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteBackupRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteBackupRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ExportBackupRequest. */
+                    interface IExportBackupRequest {
+
+                        /** ExportBackupRequest gcsBucket */
+                        gcsBucket?: (string|null);
+
+                        /** ExportBackupRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents an ExportBackupRequest. */
+                    class ExportBackupRequest implements IExportBackupRequest {
+
+                        /**
+                         * Constructs a new ExportBackupRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IExportBackupRequest);
+
+                        /** ExportBackupRequest gcsBucket. */
+                        public gcsBucket?: (string|null);
+
+                        /** ExportBackupRequest name. */
+                        public name: string;
+
+                        /** ExportBackupRequest destination. */
+                        public destination?: "gcsBucket";
+
+                        /**
+                         * Creates a new ExportBackupRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExportBackupRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IExportBackupRequest): google.cloud.redis.cluster.v1beta1.ExportBackupRequest;
+
+                        /**
+                         * Encodes the specified ExportBackupRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ExportBackupRequest.verify|verify} messages.
+                         * @param message ExportBackupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IExportBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExportBackupRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ExportBackupRequest.verify|verify} messages.
+                         * @param message ExportBackupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IExportBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExportBackupRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExportBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ExportBackupRequest;
+
+                        /**
+                         * Decodes an ExportBackupRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExportBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ExportBackupRequest;
+
+                        /**
+                         * Verifies an ExportBackupRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExportBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExportBackupRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ExportBackupRequest;
+
+                        /**
+                         * Creates a plain object from an ExportBackupRequest message. Also converts values to other types if specified.
+                         * @param message ExportBackupRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ExportBackupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExportBackupRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExportBackupRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a BackupClusterRequest. */
+                    interface IBackupClusterRequest {
+
+                        /** BackupClusterRequest name */
+                        name?: (string|null);
+
+                        /** BackupClusterRequest ttl */
+                        ttl?: (google.protobuf.IDuration|null);
+
+                        /** BackupClusterRequest backupId */
+                        backupId?: (string|null);
+                    }
+
+                    /** Represents a BackupClusterRequest. */
+                    class BackupClusterRequest implements IBackupClusterRequest {
+
+                        /**
+                         * Constructs a new BackupClusterRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IBackupClusterRequest);
+
+                        /** BackupClusterRequest name. */
+                        public name: string;
+
+                        /** BackupClusterRequest ttl. */
+                        public ttl?: (google.protobuf.IDuration|null);
+
+                        /** BackupClusterRequest backupId. */
+                        public backupId?: (string|null);
+
+                        /** BackupClusterRequest _backupId. */
+                        public _backupId?: "backupId";
+
+                        /**
+                         * Creates a new BackupClusterRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BackupClusterRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IBackupClusterRequest): google.cloud.redis.cluster.v1beta1.BackupClusterRequest;
+
+                        /**
+                         * Encodes the specified BackupClusterRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.BackupClusterRequest.verify|verify} messages.
+                         * @param message BackupClusterRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IBackupClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BackupClusterRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.BackupClusterRequest.verify|verify} messages.
+                         * @param message BackupClusterRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IBackupClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BackupClusterRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BackupClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.BackupClusterRequest;
+
+                        /**
+                         * Decodes a BackupClusterRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BackupClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.BackupClusterRequest;
+
+                        /**
+                         * Verifies a BackupClusterRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BackupClusterRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BackupClusterRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.BackupClusterRequest;
+
+                        /**
+                         * Creates a plain object from a BackupClusterRequest message. Also converts values to other types if specified.
+                         * @param message BackupClusterRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.BackupClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BackupClusterRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BackupClusterRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a Cluster. */
                     interface ICluster {
+
+                        /** Cluster gcsSource */
+                        gcsSource?: (google.cloud.redis.cluster.v1beta1.Cluster.IGcsBackupSource|null);
+
+                        /** Cluster managedBackupSource */
+                        managedBackupSource?: (google.cloud.redis.cluster.v1beta1.Cluster.IManagedBackupSource|null);
 
                         /** Cluster name */
                         name?: (string|null);
@@ -3580,8 +8157,35 @@ export namespace google {
                         /** Cluster zoneDistributionConfig */
                         zoneDistributionConfig?: (google.cloud.redis.cluster.v1beta1.IZoneDistributionConfig|null);
 
+                        /** Cluster crossClusterReplicationConfig */
+                        crossClusterReplicationConfig?: (google.cloud.redis.cluster.v1beta1.ICrossClusterReplicationConfig|null);
+
                         /** Cluster deletionProtectionEnabled */
                         deletionProtectionEnabled?: (boolean|null);
+
+                        /** Cluster maintenancePolicy */
+                        maintenancePolicy?: (google.cloud.redis.cluster.v1beta1.IClusterMaintenancePolicy|null);
+
+                        /** Cluster maintenanceSchedule */
+                        maintenanceSchedule?: (google.cloud.redis.cluster.v1beta1.IClusterMaintenanceSchedule|null);
+
+                        /** Cluster pscServiceAttachments */
+                        pscServiceAttachments?: (google.cloud.redis.cluster.v1beta1.IPscServiceAttachment[]|null);
+
+                        /** Cluster clusterEndpoints */
+                        clusterEndpoints?: (google.cloud.redis.cluster.v1beta1.IClusterEndpoint[]|null);
+
+                        /** Cluster backupCollection */
+                        backupCollection?: (string|null);
+
+                        /** Cluster kmsKey */
+                        kmsKey?: (string|null);
+
+                        /** Cluster automatedBackupConfig */
+                        automatedBackupConfig?: (google.cloud.redis.cluster.v1beta1.IAutomatedBackupConfig|null);
+
+                        /** Cluster encryptionInfo */
+                        encryptionInfo?: (google.cloud.redis.cluster.v1beta1.IEncryptionInfo|null);
                     }
 
                     /** Represents a Cluster. */
@@ -3592,6 +8196,12 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.redis.cluster.v1beta1.ICluster);
+
+                        /** Cluster gcsSource. */
+                        public gcsSource?: (google.cloud.redis.cluster.v1beta1.Cluster.IGcsBackupSource|null);
+
+                        /** Cluster managedBackupSource. */
+                        public managedBackupSource?: (google.cloud.redis.cluster.v1beta1.Cluster.IManagedBackupSource|null);
 
                         /** Cluster name. */
                         public name: string;
@@ -3647,8 +8257,38 @@ export namespace google {
                         /** Cluster zoneDistributionConfig. */
                         public zoneDistributionConfig?: (google.cloud.redis.cluster.v1beta1.IZoneDistributionConfig|null);
 
+                        /** Cluster crossClusterReplicationConfig. */
+                        public crossClusterReplicationConfig?: (google.cloud.redis.cluster.v1beta1.ICrossClusterReplicationConfig|null);
+
                         /** Cluster deletionProtectionEnabled. */
                         public deletionProtectionEnabled?: (boolean|null);
+
+                        /** Cluster maintenancePolicy. */
+                        public maintenancePolicy?: (google.cloud.redis.cluster.v1beta1.IClusterMaintenancePolicy|null);
+
+                        /** Cluster maintenanceSchedule. */
+                        public maintenanceSchedule?: (google.cloud.redis.cluster.v1beta1.IClusterMaintenanceSchedule|null);
+
+                        /** Cluster pscServiceAttachments. */
+                        public pscServiceAttachments: google.cloud.redis.cluster.v1beta1.IPscServiceAttachment[];
+
+                        /** Cluster clusterEndpoints. */
+                        public clusterEndpoints: google.cloud.redis.cluster.v1beta1.IClusterEndpoint[];
+
+                        /** Cluster backupCollection. */
+                        public backupCollection?: (string|null);
+
+                        /** Cluster kmsKey. */
+                        public kmsKey?: (string|null);
+
+                        /** Cluster automatedBackupConfig. */
+                        public automatedBackupConfig?: (google.cloud.redis.cluster.v1beta1.IAutomatedBackupConfig|null);
+
+                        /** Cluster encryptionInfo. */
+                        public encryptionInfo?: (google.cloud.redis.cluster.v1beta1.IEncryptionInfo|null);
+
+                        /** Cluster importSources. */
+                        public importSources?: ("gcsSource"|"managedBackupSource");
 
                         /** Cluster _replicaCount. */
                         public _replicaCount?: "replicaCount";
@@ -3664,6 +8304,18 @@ export namespace google {
 
                         /** Cluster _deletionProtectionEnabled. */
                         public _deletionProtectionEnabled?: "deletionProtectionEnabled";
+
+                        /** Cluster _maintenancePolicy. */
+                        public _maintenancePolicy?: "maintenancePolicy";
+
+                        /** Cluster _maintenanceSchedule. */
+                        public _maintenanceSchedule?: "maintenanceSchedule";
+
+                        /** Cluster _backupCollection. */
+                        public _backupCollection?: "backupCollection";
+
+                        /** Cluster _kmsKey. */
+                        public _kmsKey?: "kmsKey";
 
                         /**
                          * Creates a new Cluster instance using the specified properties.
@@ -3957,6 +8609,200 @@ export namespace google {
                             }
                         }
 
+                        /** Properties of a GcsBackupSource. */
+                        interface IGcsBackupSource {
+
+                            /** GcsBackupSource uris */
+                            uris?: (string[]|null);
+                        }
+
+                        /** Represents a GcsBackupSource. */
+                        class GcsBackupSource implements IGcsBackupSource {
+
+                            /**
+                             * Constructs a new GcsBackupSource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.redis.cluster.v1beta1.Cluster.IGcsBackupSource);
+
+                            /** GcsBackupSource uris. */
+                            public uris: string[];
+
+                            /**
+                             * Creates a new GcsBackupSource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GcsBackupSource instance
+                             */
+                            public static create(properties?: google.cloud.redis.cluster.v1beta1.Cluster.IGcsBackupSource): google.cloud.redis.cluster.v1beta1.Cluster.GcsBackupSource;
+
+                            /**
+                             * Encodes the specified GcsBackupSource message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.Cluster.GcsBackupSource.verify|verify} messages.
+                             * @param message GcsBackupSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.redis.cluster.v1beta1.Cluster.IGcsBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GcsBackupSource message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.Cluster.GcsBackupSource.verify|verify} messages.
+                             * @param message GcsBackupSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.Cluster.IGcsBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GcsBackupSource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GcsBackupSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.Cluster.GcsBackupSource;
+
+                            /**
+                             * Decodes a GcsBackupSource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GcsBackupSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.Cluster.GcsBackupSource;
+
+                            /**
+                             * Verifies a GcsBackupSource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GcsBackupSource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GcsBackupSource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.Cluster.GcsBackupSource;
+
+                            /**
+                             * Creates a plain object from a GcsBackupSource message. Also converts values to other types if specified.
+                             * @param message GcsBackupSource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.redis.cluster.v1beta1.Cluster.GcsBackupSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GcsBackupSource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GcsBackupSource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ManagedBackupSource. */
+                        interface IManagedBackupSource {
+
+                            /** ManagedBackupSource backup */
+                            backup?: (string|null);
+                        }
+
+                        /** Represents a ManagedBackupSource. */
+                        class ManagedBackupSource implements IManagedBackupSource {
+
+                            /**
+                             * Constructs a new ManagedBackupSource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.redis.cluster.v1beta1.Cluster.IManagedBackupSource);
+
+                            /** ManagedBackupSource backup. */
+                            public backup: string;
+
+                            /**
+                             * Creates a new ManagedBackupSource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ManagedBackupSource instance
+                             */
+                            public static create(properties?: google.cloud.redis.cluster.v1beta1.Cluster.IManagedBackupSource): google.cloud.redis.cluster.v1beta1.Cluster.ManagedBackupSource;
+
+                            /**
+                             * Encodes the specified ManagedBackupSource message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.Cluster.ManagedBackupSource.verify|verify} messages.
+                             * @param message ManagedBackupSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.redis.cluster.v1beta1.Cluster.IManagedBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ManagedBackupSource message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.Cluster.ManagedBackupSource.verify|verify} messages.
+                             * @param message ManagedBackupSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.Cluster.IManagedBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ManagedBackupSource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ManagedBackupSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.Cluster.ManagedBackupSource;
+
+                            /**
+                             * Decodes a ManagedBackupSource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ManagedBackupSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.Cluster.ManagedBackupSource;
+
+                            /**
+                             * Verifies a ManagedBackupSource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ManagedBackupSource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ManagedBackupSource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.Cluster.ManagedBackupSource;
+
+                            /**
+                             * Creates a plain object from a ManagedBackupSource message. Also converts values to other types if specified.
+                             * @param message ManagedBackupSource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.redis.cluster.v1beta1.Cluster.ManagedBackupSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ManagedBackupSource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ManagedBackupSource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** State enum. */
                         enum State {
                             STATE_UNSPECIFIED = 0,
@@ -3965,6 +8811,1417 @@ export namespace google {
                             UPDATING = 3,
                             DELETING = 4
                         }
+                    }
+
+                    /** Properties of an AutomatedBackupConfig. */
+                    interface IAutomatedBackupConfig {
+
+                        /** AutomatedBackupConfig fixedFrequencySchedule */
+                        fixedFrequencySchedule?: (google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.IFixedFrequencySchedule|null);
+
+                        /** AutomatedBackupConfig automatedBackupMode */
+                        automatedBackupMode?: (google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.AutomatedBackupMode|keyof typeof google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.AutomatedBackupMode|null);
+
+                        /** AutomatedBackupConfig retention */
+                        retention?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents an AutomatedBackupConfig. */
+                    class AutomatedBackupConfig implements IAutomatedBackupConfig {
+
+                        /**
+                         * Constructs a new AutomatedBackupConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IAutomatedBackupConfig);
+
+                        /** AutomatedBackupConfig fixedFrequencySchedule. */
+                        public fixedFrequencySchedule?: (google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.IFixedFrequencySchedule|null);
+
+                        /** AutomatedBackupConfig automatedBackupMode. */
+                        public automatedBackupMode: (google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.AutomatedBackupMode|keyof typeof google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.AutomatedBackupMode);
+
+                        /** AutomatedBackupConfig retention. */
+                        public retention?: (google.protobuf.IDuration|null);
+
+                        /** AutomatedBackupConfig schedule. */
+                        public schedule?: "fixedFrequencySchedule";
+
+                        /** AutomatedBackupConfig _retention. */
+                        public _retention?: "retention";
+
+                        /**
+                         * Creates a new AutomatedBackupConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AutomatedBackupConfig instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IAutomatedBackupConfig): google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig;
+
+                        /**
+                         * Encodes the specified AutomatedBackupConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.verify|verify} messages.
+                         * @param message AutomatedBackupConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IAutomatedBackupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AutomatedBackupConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.verify|verify} messages.
+                         * @param message AutomatedBackupConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IAutomatedBackupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AutomatedBackupConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AutomatedBackupConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig;
+
+                        /**
+                         * Decodes an AutomatedBackupConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AutomatedBackupConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig;
+
+                        /**
+                         * Verifies an AutomatedBackupConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AutomatedBackupConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AutomatedBackupConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig;
+
+                        /**
+                         * Creates a plain object from an AutomatedBackupConfig message. Also converts values to other types if specified.
+                         * @param message AutomatedBackupConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AutomatedBackupConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AutomatedBackupConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AutomatedBackupConfig {
+
+                        /** Properties of a FixedFrequencySchedule. */
+                        interface IFixedFrequencySchedule {
+
+                            /** FixedFrequencySchedule startTime */
+                            startTime?: (google.type.ITimeOfDay|null);
+                        }
+
+                        /** Represents a FixedFrequencySchedule. */
+                        class FixedFrequencySchedule implements IFixedFrequencySchedule {
+
+                            /**
+                             * Constructs a new FixedFrequencySchedule.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.IFixedFrequencySchedule);
+
+                            /** FixedFrequencySchedule startTime. */
+                            public startTime?: (google.type.ITimeOfDay|null);
+
+                            /** FixedFrequencySchedule _startTime. */
+                            public _startTime?: "startTime";
+
+                            /**
+                             * Creates a new FixedFrequencySchedule instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FixedFrequencySchedule instance
+                             */
+                            public static create(properties?: google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.IFixedFrequencySchedule): google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.FixedFrequencySchedule;
+
+                            /**
+                             * Encodes the specified FixedFrequencySchedule message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.FixedFrequencySchedule.verify|verify} messages.
+                             * @param message FixedFrequencySchedule message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.IFixedFrequencySchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FixedFrequencySchedule message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.FixedFrequencySchedule.verify|verify} messages.
+                             * @param message FixedFrequencySchedule message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.IFixedFrequencySchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FixedFrequencySchedule message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FixedFrequencySchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.FixedFrequencySchedule;
+
+                            /**
+                             * Decodes a FixedFrequencySchedule message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FixedFrequencySchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.FixedFrequencySchedule;
+
+                            /**
+                             * Verifies a FixedFrequencySchedule message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FixedFrequencySchedule message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FixedFrequencySchedule
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.FixedFrequencySchedule;
+
+                            /**
+                             * Creates a plain object from a FixedFrequencySchedule message. Also converts values to other types if specified.
+                             * @param message FixedFrequencySchedule
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.FixedFrequencySchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FixedFrequencySchedule to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FixedFrequencySchedule
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** AutomatedBackupMode enum. */
+                        enum AutomatedBackupMode {
+                            AUTOMATED_BACKUP_MODE_UNSPECIFIED = 0,
+                            DISABLED = 1,
+                            ENABLED = 2
+                        }
+                    }
+
+                    /** Properties of a BackupCollection. */
+                    interface IBackupCollection {
+
+                        /** BackupCollection name */
+                        name?: (string|null);
+
+                        /** BackupCollection clusterUid */
+                        clusterUid?: (string|null);
+
+                        /** BackupCollection cluster */
+                        cluster?: (string|null);
+
+                        /** BackupCollection kmsKey */
+                        kmsKey?: (string|null);
+
+                        /** BackupCollection uid */
+                        uid?: (string|null);
+                    }
+
+                    /** Represents a BackupCollection. */
+                    class BackupCollection implements IBackupCollection {
+
+                        /**
+                         * Constructs a new BackupCollection.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IBackupCollection);
+
+                        /** BackupCollection name. */
+                        public name: string;
+
+                        /** BackupCollection clusterUid. */
+                        public clusterUid: string;
+
+                        /** BackupCollection cluster. */
+                        public cluster: string;
+
+                        /** BackupCollection kmsKey. */
+                        public kmsKey: string;
+
+                        /** BackupCollection uid. */
+                        public uid: string;
+
+                        /**
+                         * Creates a new BackupCollection instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BackupCollection instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IBackupCollection): google.cloud.redis.cluster.v1beta1.BackupCollection;
+
+                        /**
+                         * Encodes the specified BackupCollection message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.BackupCollection.verify|verify} messages.
+                         * @param message BackupCollection message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IBackupCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BackupCollection message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.BackupCollection.verify|verify} messages.
+                         * @param message BackupCollection message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IBackupCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BackupCollection message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BackupCollection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.BackupCollection;
+
+                        /**
+                         * Decodes a BackupCollection message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BackupCollection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.BackupCollection;
+
+                        /**
+                         * Verifies a BackupCollection message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BackupCollection message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BackupCollection
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.BackupCollection;
+
+                        /**
+                         * Creates a plain object from a BackupCollection message. Also converts values to other types if specified.
+                         * @param message BackupCollection
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.BackupCollection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BackupCollection to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BackupCollection
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Backup. */
+                    interface IBackup {
+
+                        /** Backup name */
+                        name?: (string|null);
+
+                        /** Backup createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Backup cluster */
+                        cluster?: (string|null);
+
+                        /** Backup clusterUid */
+                        clusterUid?: (string|null);
+
+                        /** Backup totalSizeBytes */
+                        totalSizeBytes?: (number|Long|string|null);
+
+                        /** Backup expireTime */
+                        expireTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Backup engineVersion */
+                        engineVersion?: (string|null);
+
+                        /** Backup backupFiles */
+                        backupFiles?: (google.cloud.redis.cluster.v1beta1.IBackupFile[]|null);
+
+                        /** Backup nodeType */
+                        nodeType?: (google.cloud.redis.cluster.v1beta1.NodeType|keyof typeof google.cloud.redis.cluster.v1beta1.NodeType|null);
+
+                        /** Backup replicaCount */
+                        replicaCount?: (number|null);
+
+                        /** Backup shardCount */
+                        shardCount?: (number|null);
+
+                        /** Backup backupType */
+                        backupType?: (google.cloud.redis.cluster.v1beta1.Backup.BackupType|keyof typeof google.cloud.redis.cluster.v1beta1.Backup.BackupType|null);
+
+                        /** Backup state */
+                        state?: (google.cloud.redis.cluster.v1beta1.Backup.State|keyof typeof google.cloud.redis.cluster.v1beta1.Backup.State|null);
+
+                        /** Backup encryptionInfo */
+                        encryptionInfo?: (google.cloud.redis.cluster.v1beta1.IEncryptionInfo|null);
+
+                        /** Backup uid */
+                        uid?: (string|null);
+                    }
+
+                    /** Represents a Backup. */
+                    class Backup implements IBackup {
+
+                        /**
+                         * Constructs a new Backup.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IBackup);
+
+                        /** Backup name. */
+                        public name: string;
+
+                        /** Backup createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Backup cluster. */
+                        public cluster: string;
+
+                        /** Backup clusterUid. */
+                        public clusterUid: string;
+
+                        /** Backup totalSizeBytes. */
+                        public totalSizeBytes: (number|Long|string);
+
+                        /** Backup expireTime. */
+                        public expireTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Backup engineVersion. */
+                        public engineVersion: string;
+
+                        /** Backup backupFiles. */
+                        public backupFiles: google.cloud.redis.cluster.v1beta1.IBackupFile[];
+
+                        /** Backup nodeType. */
+                        public nodeType: (google.cloud.redis.cluster.v1beta1.NodeType|keyof typeof google.cloud.redis.cluster.v1beta1.NodeType);
+
+                        /** Backup replicaCount. */
+                        public replicaCount: number;
+
+                        /** Backup shardCount. */
+                        public shardCount: number;
+
+                        /** Backup backupType. */
+                        public backupType: (google.cloud.redis.cluster.v1beta1.Backup.BackupType|keyof typeof google.cloud.redis.cluster.v1beta1.Backup.BackupType);
+
+                        /** Backup state. */
+                        public state: (google.cloud.redis.cluster.v1beta1.Backup.State|keyof typeof google.cloud.redis.cluster.v1beta1.Backup.State);
+
+                        /** Backup encryptionInfo. */
+                        public encryptionInfo?: (google.cloud.redis.cluster.v1beta1.IEncryptionInfo|null);
+
+                        /** Backup uid. */
+                        public uid: string;
+
+                        /**
+                         * Creates a new Backup instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Backup instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IBackup): google.cloud.redis.cluster.v1beta1.Backup;
+
+                        /**
+                         * Encodes the specified Backup message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.Backup.verify|verify} messages.
+                         * @param message Backup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IBackup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Backup message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.Backup.verify|verify} messages.
+                         * @param message Backup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IBackup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Backup message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Backup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.Backup;
+
+                        /**
+                         * Decodes a Backup message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Backup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.Backup;
+
+                        /**
+                         * Verifies a Backup message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Backup message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Backup
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.Backup;
+
+                        /**
+                         * Creates a plain object from a Backup message. Also converts values to other types if specified.
+                         * @param message Backup
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.Backup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Backup to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Backup
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Backup {
+
+                        /** BackupType enum. */
+                        enum BackupType {
+                            BACKUP_TYPE_UNSPECIFIED = 0,
+                            ON_DEMAND = 1,
+                            AUTOMATED = 2
+                        }
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            CREATING = 1,
+                            ACTIVE = 2,
+                            DELETING = 3,
+                            SUSPENDED = 4
+                        }
+                    }
+
+                    /** Properties of a BackupFile. */
+                    interface IBackupFile {
+
+                        /** BackupFile fileName */
+                        fileName?: (string|null);
+
+                        /** BackupFile sizeBytes */
+                        sizeBytes?: (number|Long|string|null);
+
+                        /** BackupFile createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a BackupFile. */
+                    class BackupFile implements IBackupFile {
+
+                        /**
+                         * Constructs a new BackupFile.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IBackupFile);
+
+                        /** BackupFile fileName. */
+                        public fileName: string;
+
+                        /** BackupFile sizeBytes. */
+                        public sizeBytes: (number|Long|string);
+
+                        /** BackupFile createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new BackupFile instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BackupFile instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IBackupFile): google.cloud.redis.cluster.v1beta1.BackupFile;
+
+                        /**
+                         * Encodes the specified BackupFile message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.BackupFile.verify|verify} messages.
+                         * @param message BackupFile message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IBackupFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BackupFile message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.BackupFile.verify|verify} messages.
+                         * @param message BackupFile message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IBackupFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BackupFile message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BackupFile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.BackupFile;
+
+                        /**
+                         * Decodes a BackupFile message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BackupFile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.BackupFile;
+
+                        /**
+                         * Verifies a BackupFile message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BackupFile message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BackupFile
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.BackupFile;
+
+                        /**
+                         * Creates a plain object from a BackupFile message. Also converts values to other types if specified.
+                         * @param message BackupFile
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.BackupFile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BackupFile to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BackupFile
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PscServiceAttachment. */
+                    interface IPscServiceAttachment {
+
+                        /** PscServiceAttachment serviceAttachment */
+                        serviceAttachment?: (string|null);
+
+                        /** PscServiceAttachment connectionType */
+                        connectionType?: (google.cloud.redis.cluster.v1beta1.ConnectionType|keyof typeof google.cloud.redis.cluster.v1beta1.ConnectionType|null);
+                    }
+
+                    /** Represents a PscServiceAttachment. */
+                    class PscServiceAttachment implements IPscServiceAttachment {
+
+                        /**
+                         * Constructs a new PscServiceAttachment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IPscServiceAttachment);
+
+                        /** PscServiceAttachment serviceAttachment. */
+                        public serviceAttachment: string;
+
+                        /** PscServiceAttachment connectionType. */
+                        public connectionType: (google.cloud.redis.cluster.v1beta1.ConnectionType|keyof typeof google.cloud.redis.cluster.v1beta1.ConnectionType);
+
+                        /**
+                         * Creates a new PscServiceAttachment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PscServiceAttachment instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IPscServiceAttachment): google.cloud.redis.cluster.v1beta1.PscServiceAttachment;
+
+                        /**
+                         * Encodes the specified PscServiceAttachment message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.PscServiceAttachment.verify|verify} messages.
+                         * @param message PscServiceAttachment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IPscServiceAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PscServiceAttachment message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.PscServiceAttachment.verify|verify} messages.
+                         * @param message PscServiceAttachment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IPscServiceAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PscServiceAttachment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PscServiceAttachment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.PscServiceAttachment;
+
+                        /**
+                         * Decodes a PscServiceAttachment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PscServiceAttachment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.PscServiceAttachment;
+
+                        /**
+                         * Verifies a PscServiceAttachment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PscServiceAttachment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PscServiceAttachment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.PscServiceAttachment;
+
+                        /**
+                         * Creates a plain object from a PscServiceAttachment message. Also converts values to other types if specified.
+                         * @param message PscServiceAttachment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.PscServiceAttachment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PscServiceAttachment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PscServiceAttachment
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CrossClusterReplicationConfig. */
+                    interface ICrossClusterReplicationConfig {
+
+                        /** CrossClusterReplicationConfig clusterRole */
+                        clusterRole?: (google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.ClusterRole|keyof typeof google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.ClusterRole|null);
+
+                        /** CrossClusterReplicationConfig primaryCluster */
+                        primaryCluster?: (google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IRemoteCluster|null);
+
+                        /** CrossClusterReplicationConfig secondaryClusters */
+                        secondaryClusters?: (google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IRemoteCluster[]|null);
+
+                        /** CrossClusterReplicationConfig updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CrossClusterReplicationConfig membership */
+                        membership?: (google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IMembership|null);
+                    }
+
+                    /** Represents a CrossClusterReplicationConfig. */
+                    class CrossClusterReplicationConfig implements ICrossClusterReplicationConfig {
+
+                        /**
+                         * Constructs a new CrossClusterReplicationConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.ICrossClusterReplicationConfig);
+
+                        /** CrossClusterReplicationConfig clusterRole. */
+                        public clusterRole: (google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.ClusterRole|keyof typeof google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.ClusterRole);
+
+                        /** CrossClusterReplicationConfig primaryCluster. */
+                        public primaryCluster?: (google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IRemoteCluster|null);
+
+                        /** CrossClusterReplicationConfig secondaryClusters. */
+                        public secondaryClusters: google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IRemoteCluster[];
+
+                        /** CrossClusterReplicationConfig updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CrossClusterReplicationConfig membership. */
+                        public membership?: (google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IMembership|null);
+
+                        /**
+                         * Creates a new CrossClusterReplicationConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CrossClusterReplicationConfig instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.ICrossClusterReplicationConfig): google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig;
+
+                        /**
+                         * Encodes the specified CrossClusterReplicationConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.verify|verify} messages.
+                         * @param message CrossClusterReplicationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.ICrossClusterReplicationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CrossClusterReplicationConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.verify|verify} messages.
+                         * @param message CrossClusterReplicationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.ICrossClusterReplicationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CrossClusterReplicationConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CrossClusterReplicationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig;
+
+                        /**
+                         * Decodes a CrossClusterReplicationConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CrossClusterReplicationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig;
+
+                        /**
+                         * Verifies a CrossClusterReplicationConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CrossClusterReplicationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CrossClusterReplicationConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig;
+
+                        /**
+                         * Creates a plain object from a CrossClusterReplicationConfig message. Also converts values to other types if specified.
+                         * @param message CrossClusterReplicationConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CrossClusterReplicationConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CrossClusterReplicationConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CrossClusterReplicationConfig {
+
+                        /** Properties of a RemoteCluster. */
+                        interface IRemoteCluster {
+
+                            /** RemoteCluster cluster */
+                            cluster?: (string|null);
+
+                            /** RemoteCluster uid */
+                            uid?: (string|null);
+                        }
+
+                        /** Represents a RemoteCluster. */
+                        class RemoteCluster implements IRemoteCluster {
+
+                            /**
+                             * Constructs a new RemoteCluster.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IRemoteCluster);
+
+                            /** RemoteCluster cluster. */
+                            public cluster: string;
+
+                            /** RemoteCluster uid. */
+                            public uid: string;
+
+                            /**
+                             * Creates a new RemoteCluster instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RemoteCluster instance
+                             */
+                            public static create(properties?: google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IRemoteCluster): google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.RemoteCluster;
+
+                            /**
+                             * Encodes the specified RemoteCluster message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.RemoteCluster.verify|verify} messages.
+                             * @param message RemoteCluster message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IRemoteCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RemoteCluster message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.RemoteCluster.verify|verify} messages.
+                             * @param message RemoteCluster message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IRemoteCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RemoteCluster message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RemoteCluster
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.RemoteCluster;
+
+                            /**
+                             * Decodes a RemoteCluster message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RemoteCluster
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.RemoteCluster;
+
+                            /**
+                             * Verifies a RemoteCluster message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RemoteCluster message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RemoteCluster
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.RemoteCluster;
+
+                            /**
+                             * Creates a plain object from a RemoteCluster message. Also converts values to other types if specified.
+                             * @param message RemoteCluster
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.RemoteCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RemoteCluster to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RemoteCluster
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Membership. */
+                        interface IMembership {
+
+                            /** Membership primaryCluster */
+                            primaryCluster?: (google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IRemoteCluster|null);
+
+                            /** Membership secondaryClusters */
+                            secondaryClusters?: (google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IRemoteCluster[]|null);
+                        }
+
+                        /** Represents a Membership. */
+                        class Membership implements IMembership {
+
+                            /**
+                             * Constructs a new Membership.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IMembership);
+
+                            /** Membership primaryCluster. */
+                            public primaryCluster?: (google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IRemoteCluster|null);
+
+                            /** Membership secondaryClusters. */
+                            public secondaryClusters: google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IRemoteCluster[];
+
+                            /**
+                             * Creates a new Membership instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Membership instance
+                             */
+                            public static create(properties?: google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IMembership): google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.Membership;
+
+                            /**
+                             * Encodes the specified Membership message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.Membership.verify|verify} messages.
+                             * @param message Membership message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IMembership, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Membership message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.Membership.verify|verify} messages.
+                             * @param message Membership message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.IMembership, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Membership message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Membership
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.Membership;
+
+                            /**
+                             * Decodes a Membership message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Membership
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.Membership;
+
+                            /**
+                             * Verifies a Membership message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Membership message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Membership
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.Membership;
+
+                            /**
+                             * Creates a plain object from a Membership message. Also converts values to other types if specified.
+                             * @param message Membership
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.redis.cluster.v1beta1.CrossClusterReplicationConfig.Membership, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Membership to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Membership
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** ClusterRole enum. */
+                        enum ClusterRole {
+                            CLUSTER_ROLE_UNSPECIFIED = 0,
+                            NONE = 1,
+                            PRIMARY = 2,
+                            SECONDARY = 3
+                        }
+                    }
+
+                    /** Properties of a ClusterMaintenancePolicy. */
+                    interface IClusterMaintenancePolicy {
+
+                        /** ClusterMaintenancePolicy createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ClusterMaintenancePolicy updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ClusterMaintenancePolicy weeklyMaintenanceWindow */
+                        weeklyMaintenanceWindow?: (google.cloud.redis.cluster.v1beta1.IClusterWeeklyMaintenanceWindow[]|null);
+                    }
+
+                    /** Represents a ClusterMaintenancePolicy. */
+                    class ClusterMaintenancePolicy implements IClusterMaintenancePolicy {
+
+                        /**
+                         * Constructs a new ClusterMaintenancePolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IClusterMaintenancePolicy);
+
+                        /** ClusterMaintenancePolicy createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ClusterMaintenancePolicy updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ClusterMaintenancePolicy weeklyMaintenanceWindow. */
+                        public weeklyMaintenanceWindow: google.cloud.redis.cluster.v1beta1.IClusterWeeklyMaintenanceWindow[];
+
+                        /**
+                         * Creates a new ClusterMaintenancePolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClusterMaintenancePolicy instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IClusterMaintenancePolicy): google.cloud.redis.cluster.v1beta1.ClusterMaintenancePolicy;
+
+                        /**
+                         * Encodes the specified ClusterMaintenancePolicy message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterMaintenancePolicy.verify|verify} messages.
+                         * @param message ClusterMaintenancePolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IClusterMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClusterMaintenancePolicy message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterMaintenancePolicy.verify|verify} messages.
+                         * @param message ClusterMaintenancePolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IClusterMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClusterMaintenancePolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClusterMaintenancePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ClusterMaintenancePolicy;
+
+                        /**
+                         * Decodes a ClusterMaintenancePolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClusterMaintenancePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ClusterMaintenancePolicy;
+
+                        /**
+                         * Verifies a ClusterMaintenancePolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClusterMaintenancePolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClusterMaintenancePolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ClusterMaintenancePolicy;
+
+                        /**
+                         * Creates a plain object from a ClusterMaintenancePolicy message. Also converts values to other types if specified.
+                         * @param message ClusterMaintenancePolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ClusterMaintenancePolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClusterMaintenancePolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClusterMaintenancePolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ClusterWeeklyMaintenanceWindow. */
+                    interface IClusterWeeklyMaintenanceWindow {
+
+                        /** ClusterWeeklyMaintenanceWindow day */
+                        day?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
+
+                        /** ClusterWeeklyMaintenanceWindow startTime */
+                        startTime?: (google.type.ITimeOfDay|null);
+                    }
+
+                    /** Represents a ClusterWeeklyMaintenanceWindow. */
+                    class ClusterWeeklyMaintenanceWindow implements IClusterWeeklyMaintenanceWindow {
+
+                        /**
+                         * Constructs a new ClusterWeeklyMaintenanceWindow.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IClusterWeeklyMaintenanceWindow);
+
+                        /** ClusterWeeklyMaintenanceWindow day. */
+                        public day: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
+
+                        /** ClusterWeeklyMaintenanceWindow startTime. */
+                        public startTime?: (google.type.ITimeOfDay|null);
+
+                        /**
+                         * Creates a new ClusterWeeklyMaintenanceWindow instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClusterWeeklyMaintenanceWindow instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IClusterWeeklyMaintenanceWindow): google.cloud.redis.cluster.v1beta1.ClusterWeeklyMaintenanceWindow;
+
+                        /**
+                         * Encodes the specified ClusterWeeklyMaintenanceWindow message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterWeeklyMaintenanceWindow.verify|verify} messages.
+                         * @param message ClusterWeeklyMaintenanceWindow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IClusterWeeklyMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClusterWeeklyMaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterWeeklyMaintenanceWindow.verify|verify} messages.
+                         * @param message ClusterWeeklyMaintenanceWindow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IClusterWeeklyMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClusterWeeklyMaintenanceWindow message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClusterWeeklyMaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ClusterWeeklyMaintenanceWindow;
+
+                        /**
+                         * Decodes a ClusterWeeklyMaintenanceWindow message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClusterWeeklyMaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ClusterWeeklyMaintenanceWindow;
+
+                        /**
+                         * Verifies a ClusterWeeklyMaintenanceWindow message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClusterWeeklyMaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClusterWeeklyMaintenanceWindow
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ClusterWeeklyMaintenanceWindow;
+
+                        /**
+                         * Creates a plain object from a ClusterWeeklyMaintenanceWindow message. Also converts values to other types if specified.
+                         * @param message ClusterWeeklyMaintenanceWindow
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ClusterWeeklyMaintenanceWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClusterWeeklyMaintenanceWindow to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClusterWeeklyMaintenanceWindow
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ClusterMaintenanceSchedule. */
+                    interface IClusterMaintenanceSchedule {
+
+                        /** ClusterMaintenanceSchedule startTime */
+                        startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ClusterMaintenanceSchedule endTime */
+                        endTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a ClusterMaintenanceSchedule. */
+                    class ClusterMaintenanceSchedule implements IClusterMaintenanceSchedule {
+
+                        /**
+                         * Constructs a new ClusterMaintenanceSchedule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IClusterMaintenanceSchedule);
+
+                        /** ClusterMaintenanceSchedule startTime. */
+                        public startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ClusterMaintenanceSchedule endTime. */
+                        public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new ClusterMaintenanceSchedule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClusterMaintenanceSchedule instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IClusterMaintenanceSchedule): google.cloud.redis.cluster.v1beta1.ClusterMaintenanceSchedule;
+
+                        /**
+                         * Encodes the specified ClusterMaintenanceSchedule message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterMaintenanceSchedule.verify|verify} messages.
+                         * @param message ClusterMaintenanceSchedule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IClusterMaintenanceSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClusterMaintenanceSchedule message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterMaintenanceSchedule.verify|verify} messages.
+                         * @param message ClusterMaintenanceSchedule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IClusterMaintenanceSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClusterMaintenanceSchedule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClusterMaintenanceSchedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ClusterMaintenanceSchedule;
+
+                        /**
+                         * Decodes a ClusterMaintenanceSchedule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClusterMaintenanceSchedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ClusterMaintenanceSchedule;
+
+                        /**
+                         * Verifies a ClusterMaintenanceSchedule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClusterMaintenanceSchedule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClusterMaintenanceSchedule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ClusterMaintenanceSchedule;
+
+                        /**
+                         * Creates a plain object from a ClusterMaintenanceSchedule message. Also converts values to other types if specified.
+                         * @param message ClusterMaintenanceSchedule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ClusterMaintenanceSchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClusterMaintenanceSchedule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClusterMaintenanceSchedule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a PscConfig. */
@@ -4190,6 +10447,15 @@ export namespace google {
 
                         /** PscConnection network */
                         network?: (string|null);
+
+                        /** PscConnection serviceAttachment */
+                        serviceAttachment?: (string|null);
+
+                        /** PscConnection pscConnectionStatus */
+                        pscConnectionStatus?: (google.cloud.redis.cluster.v1beta1.PscConnectionStatus|keyof typeof google.cloud.redis.cluster.v1beta1.PscConnectionStatus|null);
+
+                        /** PscConnection connectionType */
+                        connectionType?: (google.cloud.redis.cluster.v1beta1.ConnectionType|keyof typeof google.cloud.redis.cluster.v1beta1.ConnectionType|null);
                     }
 
                     /** Represents a PscConnection. */
@@ -4215,6 +10481,15 @@ export namespace google {
 
                         /** PscConnection network. */
                         public network: string;
+
+                        /** PscConnection serviceAttachment. */
+                        public serviceAttachment: string;
+
+                        /** PscConnection pscConnectionStatus. */
+                        public pscConnectionStatus: (google.cloud.redis.cluster.v1beta1.PscConnectionStatus|keyof typeof google.cloud.redis.cluster.v1beta1.PscConnectionStatus);
+
+                        /** PscConnection connectionType. */
+                        public connectionType: (google.cloud.redis.cluster.v1beta1.ConnectionType|keyof typeof google.cloud.redis.cluster.v1beta1.ConnectionType);
 
                         /**
                          * Creates a new PscConnection instance using the specified properties.
@@ -4288,6 +10563,348 @@ export namespace google {
 
                         /**
                          * Gets the default type url for PscConnection
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ClusterEndpoint. */
+                    interface IClusterEndpoint {
+
+                        /** ClusterEndpoint connections */
+                        connections?: (google.cloud.redis.cluster.v1beta1.IConnectionDetail[]|null);
+                    }
+
+                    /** Represents a ClusterEndpoint. */
+                    class ClusterEndpoint implements IClusterEndpoint {
+
+                        /**
+                         * Constructs a new ClusterEndpoint.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IClusterEndpoint);
+
+                        /** ClusterEndpoint connections. */
+                        public connections: google.cloud.redis.cluster.v1beta1.IConnectionDetail[];
+
+                        /**
+                         * Creates a new ClusterEndpoint instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClusterEndpoint instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IClusterEndpoint): google.cloud.redis.cluster.v1beta1.ClusterEndpoint;
+
+                        /**
+                         * Encodes the specified ClusterEndpoint message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterEndpoint.verify|verify} messages.
+                         * @param message ClusterEndpoint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IClusterEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClusterEndpoint message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterEndpoint.verify|verify} messages.
+                         * @param message ClusterEndpoint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IClusterEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClusterEndpoint message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClusterEndpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ClusterEndpoint;
+
+                        /**
+                         * Decodes a ClusterEndpoint message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClusterEndpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ClusterEndpoint;
+
+                        /**
+                         * Verifies a ClusterEndpoint message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClusterEndpoint message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClusterEndpoint
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ClusterEndpoint;
+
+                        /**
+                         * Creates a plain object from a ClusterEndpoint message. Also converts values to other types if specified.
+                         * @param message ClusterEndpoint
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ClusterEndpoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClusterEndpoint to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClusterEndpoint
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ConnectionDetail. */
+                    interface IConnectionDetail {
+
+                        /** ConnectionDetail pscAutoConnection */
+                        pscAutoConnection?: (google.cloud.redis.cluster.v1beta1.IPscAutoConnection|null);
+
+                        /** ConnectionDetail pscConnection */
+                        pscConnection?: (google.cloud.redis.cluster.v1beta1.IPscConnection|null);
+                    }
+
+                    /** Represents a ConnectionDetail. */
+                    class ConnectionDetail implements IConnectionDetail {
+
+                        /**
+                         * Constructs a new ConnectionDetail.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IConnectionDetail);
+
+                        /** ConnectionDetail pscAutoConnection. */
+                        public pscAutoConnection?: (google.cloud.redis.cluster.v1beta1.IPscAutoConnection|null);
+
+                        /** ConnectionDetail pscConnection. */
+                        public pscConnection?: (google.cloud.redis.cluster.v1beta1.IPscConnection|null);
+
+                        /** ConnectionDetail connection. */
+                        public connection?: ("pscAutoConnection"|"pscConnection");
+
+                        /**
+                         * Creates a new ConnectionDetail instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConnectionDetail instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IConnectionDetail): google.cloud.redis.cluster.v1beta1.ConnectionDetail;
+
+                        /**
+                         * Encodes the specified ConnectionDetail message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ConnectionDetail.verify|verify} messages.
+                         * @param message ConnectionDetail message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IConnectionDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConnectionDetail message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ConnectionDetail.verify|verify} messages.
+                         * @param message ConnectionDetail message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IConnectionDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConnectionDetail message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConnectionDetail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ConnectionDetail;
+
+                        /**
+                         * Decodes a ConnectionDetail message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConnectionDetail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ConnectionDetail;
+
+                        /**
+                         * Verifies a ConnectionDetail message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConnectionDetail message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConnectionDetail
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ConnectionDetail;
+
+                        /**
+                         * Creates a plain object from a ConnectionDetail message. Also converts values to other types if specified.
+                         * @param message ConnectionDetail
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ConnectionDetail, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConnectionDetail to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConnectionDetail
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PscAutoConnection. */
+                    interface IPscAutoConnection {
+
+                        /** PscAutoConnection pscConnectionId */
+                        pscConnectionId?: (string|null);
+
+                        /** PscAutoConnection address */
+                        address?: (string|null);
+
+                        /** PscAutoConnection forwardingRule */
+                        forwardingRule?: (string|null);
+
+                        /** PscAutoConnection projectId */
+                        projectId?: (string|null);
+
+                        /** PscAutoConnection network */
+                        network?: (string|null);
+
+                        /** PscAutoConnection serviceAttachment */
+                        serviceAttachment?: (string|null);
+
+                        /** PscAutoConnection pscConnectionStatus */
+                        pscConnectionStatus?: (google.cloud.redis.cluster.v1beta1.PscConnectionStatus|keyof typeof google.cloud.redis.cluster.v1beta1.PscConnectionStatus|null);
+
+                        /** PscAutoConnection connectionType */
+                        connectionType?: (google.cloud.redis.cluster.v1beta1.ConnectionType|keyof typeof google.cloud.redis.cluster.v1beta1.ConnectionType|null);
+                    }
+
+                    /** Represents a PscAutoConnection. */
+                    class PscAutoConnection implements IPscAutoConnection {
+
+                        /**
+                         * Constructs a new PscAutoConnection.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IPscAutoConnection);
+
+                        /** PscAutoConnection pscConnectionId. */
+                        public pscConnectionId: string;
+
+                        /** PscAutoConnection address. */
+                        public address: string;
+
+                        /** PscAutoConnection forwardingRule. */
+                        public forwardingRule: string;
+
+                        /** PscAutoConnection projectId. */
+                        public projectId: string;
+
+                        /** PscAutoConnection network. */
+                        public network: string;
+
+                        /** PscAutoConnection serviceAttachment. */
+                        public serviceAttachment: string;
+
+                        /** PscAutoConnection pscConnectionStatus. */
+                        public pscConnectionStatus: (google.cloud.redis.cluster.v1beta1.PscConnectionStatus|keyof typeof google.cloud.redis.cluster.v1beta1.PscConnectionStatus);
+
+                        /** PscAutoConnection connectionType. */
+                        public connectionType: (google.cloud.redis.cluster.v1beta1.ConnectionType|keyof typeof google.cloud.redis.cluster.v1beta1.ConnectionType);
+
+                        /**
+                         * Creates a new PscAutoConnection instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PscAutoConnection instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IPscAutoConnection): google.cloud.redis.cluster.v1beta1.PscAutoConnection;
+
+                        /**
+                         * Encodes the specified PscAutoConnection message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.PscAutoConnection.verify|verify} messages.
+                         * @param message PscAutoConnection message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IPscAutoConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PscAutoConnection message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.PscAutoConnection.verify|verify} messages.
+                         * @param message PscAutoConnection message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IPscAutoConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PscAutoConnection message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PscAutoConnection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.PscAutoConnection;
+
+                        /**
+                         * Decodes a PscAutoConnection message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PscAutoConnection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.PscAutoConnection;
+
+                        /**
+                         * Verifies a PscAutoConnection message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PscAutoConnection message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PscAutoConnection
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.PscAutoConnection;
+
+                        /**
+                         * Creates a plain object from a PscAutoConnection message. Also converts values to other types if specified.
+                         * @param message PscAutoConnection
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.PscAutoConnection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PscAutoConnection to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PscAutoConnection
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -5186,6 +11803,263 @@ export namespace google {
                             ZONE_DISTRIBUTION_MODE_UNSPECIFIED = 0,
                             MULTI_ZONE = 1,
                             SINGLE_ZONE = 2
+                        }
+                    }
+
+                    /** Properties of a RescheduleClusterMaintenanceRequest. */
+                    interface IRescheduleClusterMaintenanceRequest {
+
+                        /** RescheduleClusterMaintenanceRequest name */
+                        name?: (string|null);
+
+                        /** RescheduleClusterMaintenanceRequest rescheduleType */
+                        rescheduleType?: (google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest.RescheduleType|keyof typeof google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest.RescheduleType|null);
+
+                        /** RescheduleClusterMaintenanceRequest scheduleTime */
+                        scheduleTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a RescheduleClusterMaintenanceRequest. */
+                    class RescheduleClusterMaintenanceRequest implements IRescheduleClusterMaintenanceRequest {
+
+                        /**
+                         * Constructs a new RescheduleClusterMaintenanceRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IRescheduleClusterMaintenanceRequest);
+
+                        /** RescheduleClusterMaintenanceRequest name. */
+                        public name: string;
+
+                        /** RescheduleClusterMaintenanceRequest rescheduleType. */
+                        public rescheduleType: (google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest.RescheduleType|keyof typeof google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest.RescheduleType);
+
+                        /** RescheduleClusterMaintenanceRequest scheduleTime. */
+                        public scheduleTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new RescheduleClusterMaintenanceRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RescheduleClusterMaintenanceRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IRescheduleClusterMaintenanceRequest): google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest;
+
+                        /**
+                         * Encodes the specified RescheduleClusterMaintenanceRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest.verify|verify} messages.
+                         * @param message RescheduleClusterMaintenanceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IRescheduleClusterMaintenanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RescheduleClusterMaintenanceRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest.verify|verify} messages.
+                         * @param message RescheduleClusterMaintenanceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IRescheduleClusterMaintenanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RescheduleClusterMaintenanceRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RescheduleClusterMaintenanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest;
+
+                        /**
+                         * Decodes a RescheduleClusterMaintenanceRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RescheduleClusterMaintenanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest;
+
+                        /**
+                         * Verifies a RescheduleClusterMaintenanceRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RescheduleClusterMaintenanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RescheduleClusterMaintenanceRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest;
+
+                        /**
+                         * Creates a plain object from a RescheduleClusterMaintenanceRequest message. Also converts values to other types if specified.
+                         * @param message RescheduleClusterMaintenanceRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RescheduleClusterMaintenanceRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RescheduleClusterMaintenanceRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace RescheduleClusterMaintenanceRequest {
+
+                        /** RescheduleType enum. */
+                        enum RescheduleType {
+                            RESCHEDULE_TYPE_UNSPECIFIED = 0,
+                            IMMEDIATE = 1,
+                            SPECIFIC_TIME = 3
+                        }
+                    }
+
+                    /** Properties of an EncryptionInfo. */
+                    interface IEncryptionInfo {
+
+                        /** EncryptionInfo encryptionType */
+                        encryptionType?: (google.cloud.redis.cluster.v1beta1.EncryptionInfo.Type|keyof typeof google.cloud.redis.cluster.v1beta1.EncryptionInfo.Type|null);
+
+                        /** EncryptionInfo kmsKeyVersions */
+                        kmsKeyVersions?: (string[]|null);
+
+                        /** EncryptionInfo kmsKeyPrimaryState */
+                        kmsKeyPrimaryState?: (google.cloud.redis.cluster.v1beta1.EncryptionInfo.KmsKeyState|keyof typeof google.cloud.redis.cluster.v1beta1.EncryptionInfo.KmsKeyState|null);
+
+                        /** EncryptionInfo lastUpdateTime */
+                        lastUpdateTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents an EncryptionInfo. */
+                    class EncryptionInfo implements IEncryptionInfo {
+
+                        /**
+                         * Constructs a new EncryptionInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IEncryptionInfo);
+
+                        /** EncryptionInfo encryptionType. */
+                        public encryptionType: (google.cloud.redis.cluster.v1beta1.EncryptionInfo.Type|keyof typeof google.cloud.redis.cluster.v1beta1.EncryptionInfo.Type);
+
+                        /** EncryptionInfo kmsKeyVersions. */
+                        public kmsKeyVersions: string[];
+
+                        /** EncryptionInfo kmsKeyPrimaryState. */
+                        public kmsKeyPrimaryState: (google.cloud.redis.cluster.v1beta1.EncryptionInfo.KmsKeyState|keyof typeof google.cloud.redis.cluster.v1beta1.EncryptionInfo.KmsKeyState);
+
+                        /** EncryptionInfo lastUpdateTime. */
+                        public lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new EncryptionInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EncryptionInfo instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IEncryptionInfo): google.cloud.redis.cluster.v1beta1.EncryptionInfo;
+
+                        /**
+                         * Encodes the specified EncryptionInfo message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.EncryptionInfo.verify|verify} messages.
+                         * @param message EncryptionInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IEncryptionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EncryptionInfo message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.EncryptionInfo.verify|verify} messages.
+                         * @param message EncryptionInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IEncryptionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EncryptionInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EncryptionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.EncryptionInfo;
+
+                        /**
+                         * Decodes an EncryptionInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EncryptionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.EncryptionInfo;
+
+                        /**
+                         * Verifies an EncryptionInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EncryptionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EncryptionInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.EncryptionInfo;
+
+                        /**
+                         * Creates a plain object from an EncryptionInfo message. Also converts values to other types if specified.
+                         * @param message EncryptionInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.EncryptionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EncryptionInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EncryptionInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace EncryptionInfo {
+
+                        /** Type enum. */
+                        enum Type {
+                            TYPE_UNSPECIFIED = 0,
+                            GOOGLE_DEFAULT_ENCRYPTION = 1,
+                            CUSTOMER_MANAGED_ENCRYPTION = 2
+                        }
+
+                        /** KmsKeyState enum. */
+                        enum KmsKeyState {
+                            KMS_KEY_STATE_UNSPECIFIED = 0,
+                            ENABLED = 1,
+                            PERMISSION_DENIED = 2,
+                            DISABLED = 3,
+                            DESTROYED = 4,
+                            DESTROY_SCHEDULED = 5,
+                            EKM_KEY_UNREACHABLE_DETECTED = 6,
+                            BILLING_DISABLED = 7,
+                            UNKNOWN_FAILURE = 8
                         }
                     }
                 }
@@ -7054,6 +13928,115 @@ export namespace google {
             UNORDERED_LIST = 6,
             NON_EMPTY_DEFAULT = 7,
             IDENTIFIER = 8
+        }
+
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -9478,6 +16461,9 @@ export namespace google {
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
 
             /** FieldOptions .google.api.resourceReference */
             ".google.api.resourceReference"?: (google.api.IResourceReference|null);
@@ -12993,6 +19979,137 @@ export namespace google {
 
             /**
              * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** DayOfWeek enum. */
+        enum DayOfWeek {
+            DAY_OF_WEEK_UNSPECIFIED = 0,
+            MONDAY = 1,
+            TUESDAY = 2,
+            WEDNESDAY = 3,
+            THURSDAY = 4,
+            FRIDAY = 5,
+            SATURDAY = 6,
+            SUNDAY = 7
+        }
+
+        /** Properties of a TimeOfDay. */
+        interface ITimeOfDay {
+
+            /** TimeOfDay hours */
+            hours?: (number|null);
+
+            /** TimeOfDay minutes */
+            minutes?: (number|null);
+
+            /** TimeOfDay seconds */
+            seconds?: (number|null);
+
+            /** TimeOfDay nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a TimeOfDay. */
+        class TimeOfDay implements ITimeOfDay {
+
+            /**
+             * Constructs a new TimeOfDay.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.ITimeOfDay);
+
+            /** TimeOfDay hours. */
+            public hours: number;
+
+            /** TimeOfDay minutes. */
+            public minutes: number;
+
+            /** TimeOfDay seconds. */
+            public seconds: number;
+
+            /** TimeOfDay nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new TimeOfDay instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TimeOfDay instance
+             */
+            public static create(properties?: google.type.ITimeOfDay): google.type.TimeOfDay;
+
+            /**
+             * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.TimeOfDay;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.TimeOfDay;
+
+            /**
+             * Verifies a TimeOfDay message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TimeOfDay
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.TimeOfDay;
+
+            /**
+             * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
+             * @param message TimeOfDay
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.TimeOfDay, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TimeOfDay to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TimeOfDay
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

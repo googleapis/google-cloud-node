@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dataproc",
-        "version": "5.9.0",
+        "version": "5.13.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1486,7 +1486,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],

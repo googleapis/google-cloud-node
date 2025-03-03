@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -278,7 +281,10 @@
                         },
                         "validationState": {
                           "type": "ValidationState",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "validateTime": {
                           "type": "google.protobuf.Timestamp",

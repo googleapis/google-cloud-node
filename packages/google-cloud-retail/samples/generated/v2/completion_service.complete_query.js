@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -94,8 +94,8 @@ function main(catalog, query) {
    */
   // const maxSuggestions = 1234
   /**
-   *  If true, attribute suggestions are enabled and provided in response.
-   *  This field is only available for "cloud-retail" dataset.
+   *  If true, attribute suggestions are enabled and provided in the response.
+   *  This field is only available for the "cloud-retail" dataset.
    */
   // const enableAttributeSuggestions = true
   /**

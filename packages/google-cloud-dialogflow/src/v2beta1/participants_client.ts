@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -335,6 +335,15 @@ export class ParticipantsClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
         ),
+      projectLocationPhoneNumberPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/phoneNumbers/{phone_number}'
+      ),
+      projectPhoneNumberPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/phoneNumbers/{phone_number}'
+      ),
+      sipTrunkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sipTrunks/{siptrunk}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -432,7 +441,7 @@ export class ParticipantsClient {
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough();
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -889,8 +898,8 @@ export class ParticipantsClient {
    *   Note: this field should only be used if you are connecting to a Dialogflow
    *   CX agent.
    * @param {string} request.cxCurrentPage
-   *   The unique identifier of the CX page to override the `current_page` in the
-   *   session.
+   *   The unique identifier of the Dialogflow CX page to override the
+   *   `current_page` in the session.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/flows/<Flow ID>/pages/<Page ID>`.
    *
@@ -903,11 +912,12 @@ export class ParticipantsClient {
    *
    *   Note: this field should only be used if you are connecting to a Dialogflow
    *   CX agent.
-   * @param {google.protobuf.Timestamp} request.messageSendTime
+   * @param {google.protobuf.Timestamp} [request.messageSendTime]
    *   Optional. The send time of the message from end user or human agent's
    *   perspective. It is used for identifying the same message under one
    *   participant.
    *
+   *   For BatchCreateMessages API only:
    *   Given two messages under the same participant:
    *   * If send time are different regardless of whether the content of the
    *   messages are exactly the same, the conversation will regard them as
@@ -1369,7 +1379,7 @@ export class ParticipantsClient {
    *   default 100 and at most 100.
    * @param {string} [request.previousSuggestedQuery]
    *   Optional. The previously suggested query for the given conversation. This
-   *   helps identify whether the next suggestion we generate is resonably
+   *   helps identify whether the next suggestion we generate is reasonably
    *   different from the previous one. This is useful to avoid similar
    *   suggestions within the conversation.
    * @param {object} [options]
@@ -1729,7 +1739,7 @@ export class ParticipantsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listParticipants`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1958,7 +1968,7 @@ export class ParticipantsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSuggestions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4477,6 +4487,160 @@ export class ParticipantsClient {
     return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
       projectLocationKnowledgeBaseDocumentName
     ).document;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationPhoneNumber resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} phone_number
+   * @returns {string} Resource name string.
+   */
+  projectLocationPhoneNumberPath(
+    project: string,
+    location: string,
+    phoneNumber: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.render({
+      project: project,
+      location: location,
+      phone_number: phoneNumber,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationPhoneNumber resource.
+   *
+   * @param {string} projectLocationPhoneNumberName
+   *   A fully-qualified path representing project_location_phone_number resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationPhoneNumberName(
+    projectLocationPhoneNumberName: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.match(
+      projectLocationPhoneNumberName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationPhoneNumber resource.
+   *
+   * @param {string} projectLocationPhoneNumberName
+   *   A fully-qualified path representing project_location_phone_number resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationPhoneNumberName(
+    projectLocationPhoneNumberName: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.match(
+      projectLocationPhoneNumberName
+    ).location;
+  }
+
+  /**
+   * Parse the phone_number from ProjectLocationPhoneNumber resource.
+   *
+   * @param {string} projectLocationPhoneNumberName
+   *   A fully-qualified path representing project_location_phone_number resource.
+   * @returns {string} A string representing the phone_number.
+   */
+  matchPhoneNumberFromProjectLocationPhoneNumberName(
+    projectLocationPhoneNumberName: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.match(
+      projectLocationPhoneNumberName
+    ).phone_number;
+  }
+
+  /**
+   * Return a fully-qualified projectPhoneNumber resource name string.
+   *
+   * @param {string} project
+   * @param {string} phone_number
+   * @returns {string} Resource name string.
+   */
+  projectPhoneNumberPath(project: string, phoneNumber: string) {
+    return this.pathTemplates.projectPhoneNumberPathTemplate.render({
+      project: project,
+      phone_number: phoneNumber,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectPhoneNumber resource.
+   *
+   * @param {string} projectPhoneNumberName
+   *   A fully-qualified path representing project_phone_number resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectPhoneNumberName(projectPhoneNumberName: string) {
+    return this.pathTemplates.projectPhoneNumberPathTemplate.match(
+      projectPhoneNumberName
+    ).project;
+  }
+
+  /**
+   * Parse the phone_number from ProjectPhoneNumber resource.
+   *
+   * @param {string} projectPhoneNumberName
+   *   A fully-qualified path representing project_phone_number resource.
+   * @returns {string} A string representing the phone_number.
+   */
+  matchPhoneNumberFromProjectPhoneNumberName(projectPhoneNumberName: string) {
+    return this.pathTemplates.projectPhoneNumberPathTemplate.match(
+      projectPhoneNumberName
+    ).phone_number;
+  }
+
+  /**
+   * Return a fully-qualified sipTrunk resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} siptrunk
+   * @returns {string} Resource name string.
+   */
+  sipTrunkPath(project: string, location: string, siptrunk: string) {
+    return this.pathTemplates.sipTrunkPathTemplate.render({
+      project: project,
+      location: location,
+      siptrunk: siptrunk,
+    });
+  }
+
+  /**
+   * Parse the project from SipTrunk resource.
+   *
+   * @param {string} sipTrunkName
+   *   A fully-qualified path representing SipTrunk resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSipTrunkName(sipTrunkName: string) {
+    return this.pathTemplates.sipTrunkPathTemplate.match(sipTrunkName).project;
+  }
+
+  /**
+   * Parse the location from SipTrunk resource.
+   *
+   * @param {string} sipTrunkName
+   *   A fully-qualified path representing SipTrunk resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSipTrunkName(sipTrunkName: string) {
+    return this.pathTemplates.sipTrunkPathTemplate.match(sipTrunkName).location;
+  }
+
+  /**
+   * Parse the siptrunk from SipTrunk resource.
+   *
+   * @param {string} sipTrunkName
+   *   A fully-qualified path representing SipTrunk resource.
+   * @returns {string} A string representing the siptrunk.
+   */
+  matchSiptrunkFromSipTrunkName(sipTrunkName: string) {
+    return this.pathTemplates.sipTrunkPathTemplate.match(sipTrunkName).siptrunk;
   }
 
   /**

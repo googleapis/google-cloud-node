@@ -40,19 +40,19 @@ message Attributes {
   // within the context of Product Ads.
   optional string cpp_ads_redirect = 42;
 
-  // Low Price of the aggregate offer.
+  // Low Price of the CSS Product.
   google.shopping.type.Price low_price = 3;
 
-  // High Price of the aggregate offer.
+  // High Price of the CSS Product.
   google.shopping.type.Price high_price = 4;
 
-  // The number of aggregate offers.
+  // The number of CSS Products.
   optional int64 number_of_offers = 5;
 
   // Condition of the headline offer.
   optional string headline_offer_condition = 6;
 
-  // Headline Price of the aggregate offer.
+  // Headline Price of the CSS Product.
   google.shopping.type.Price headline_offer_price = 7;
 
   // Link to the headline offer.
@@ -61,7 +61,7 @@ message Attributes {
   // Mobile Link to the headline offer.
   optional string headline_offer_mobile_link = 9;
 
-  // Headline Price of the aggregate offer.
+  // Headline Price of the CSS Product.
   google.shopping.type.Price headline_offer_shipping_price = 41;
 
   // Title of the item.
@@ -205,6 +205,13 @@ message Attributes {
 
   // Custom label 4 for custom grouping of items in a Shopping campaign.
   optional string custom_label_4 = 50;
+
+  // Number and amount of installments to pay for an item.
+  HeadlineOfferInstallment headline_offer_installment = 51;
+
+  // Number of periods (months or years) and amount of payment per period
+  // for an item with an associated subscription contract.
+  HeadlineOfferSubscriptionCost headline_offer_subscription_cost = 52;
 }
 
 // The certification for the product. Use the this attribute to describe
@@ -274,15 +281,15 @@ message CssProductStatus {
     // The name of the destination
     string destination = 1;
 
-    // List of country codes (ISO 3166-1 alpha-2) where the aggregate offer is
+    // List of country codes (ISO 3166-1 alpha-2) where the CSS Product is
     // approved.
     repeated string approved_countries = 2;
 
-    // List of country codes (ISO 3166-1 alpha-2) where the aggregate offer is
+    // List of country codes (ISO 3166-1 alpha-2) where the CSS Product is
     // pending approval.
     repeated string pending_countries = 3;
 
-    // List of country codes (ISO 3166-1 alpha-2) where the aggregate offer is
+    // List of country codes (ISO 3166-1 alpha-2) where the CSS Product is
     // disapproved.
     repeated string disapproved_countries = 4;
   }
@@ -292,7 +299,7 @@ message CssProductStatus {
     // The error code of the issue.
     string code = 1;
 
-    // How this issue affects serving of the aggregate offer.
+    // How this issue affects serving of the CSS Product.
     string servability = 2;
 
     // Whether the issue can be resolved by the merchant.
@@ -314,7 +321,7 @@ message CssProductStatus {
     string documentation = 8;
 
     // List of country codes (ISO 3166-1 alpha-2) where issue applies to the
-    // aggregate offer.
+    // CSS Product.
     repeated string applicable_countries = 9;
   }
 
@@ -335,4 +342,43 @@ message CssProductStatus {
   // Date on which the item expires, in [ISO
   // 8601](http://en.wikipedia.org/wiki/ISO_8601) format.
   google.protobuf.Timestamp google_expiration_date = 7;
+}
+
+// The SubscriptionCost of the product.
+message HeadlineOfferSubscriptionCost {
+  // The type of subscription period.
+  // Supported values are:
+  //   * "`month`"
+  //   * "`year`"
+  SubscriptionPeriod period = 1;
+
+  // The number of subscription periods the buyer has to pay.
+  int64 period_length = 2;
+
+  // The amount the buyer has to pay per subscription period.
+  google.shopping.type.Price amount = 3;
+}
+
+// A message that represents installment.
+message HeadlineOfferInstallment {
+  // The number of installments the buyer has to pay.
+  int64 months = 1;
+
+  // The amount the buyer has to pay per month.
+  google.shopping.type.Price amount = 2;
+
+  // The up-front down payment amount the buyer has to pay.
+  google.shopping.type.Price downpayment = 3;
+}
+
+// The subscription period of the product.
+enum SubscriptionPeriod {
+  // Indicates that the subscription period is unspecified.
+  SUBSCRIPTION_PERIOD_UNSPECIFIED = 0;
+
+  // Indicates that the subscription period is month.
+  MONTH = 1;
+
+  // Indicates that the subscription period is year.
+  YEAR = 2;
 }

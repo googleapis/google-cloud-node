@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,34 +31,34 @@ function main(parent) {
   /**
    *  Required. The resource name of the AspectType location, of the form:
    *  `projects/{project_number}/locations/{location_id}`
-   *  where `location_id` refers to a GCP region.
+   *  where `location_id` refers to a Google Cloud region.
    */
   // const parent = 'abc123'
   /**
    *  Optional. Maximum number of AspectTypes to return. The service may return
-   *  fewer than this value. If unspecified, at most 10 AspectTypes will be
-   *  returned. The maximum value is 1000; values above 1000 will be coerced to
-   *  1000.
+   *  fewer than this value. If unspecified, the service returns at most 10
+   *  AspectTypes. The maximum value is 1000; values above 1000 will be coerced
+   *  to 1000.
    */
   // const pageSize = 1234
   /**
    *  Optional. Page token received from a previous `ListAspectTypes` call.
    *  Provide this to retrieve the subsequent page. When paginating, all other
-   *  parameters provided to `ListAspectTypes` must match the call that provided
-   *  the page token.
+   *  parameters you provide to `ListAspectTypes` must match the call that
+   *  provided the page token.
    */
   // const pageToken = 'abc123'
   /**
    *  Optional. Filter request. Filters are case-sensitive.
-   *  The following formats are supported:
-   *  labels.key1 = "value1"
-   *  labels:key1
-   *  name = "value"
-   *  These restrictions can be coinjoined with AND, OR and NOT conjunctions.
+   *  The service supports the following formats:
+   *  * labels.key1 = "value1"
+   *  * labels:key1
+   *  * name = "value"
+   *  These restrictions can be conjoined with AND, OR, and NOT conjunctions.
    */
   // const filter = 'abc123'
   /**
-   *  Optional. Order by fields (`name` or `create_time`) for the result.
+   *  Optional. Orders the result by `name` or `create_time` fields.
    *  If not specified, the ordering is undefined.
    */
   // const orderBy = 'abc123'

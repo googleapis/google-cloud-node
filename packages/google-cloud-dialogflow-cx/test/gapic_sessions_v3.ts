@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -315,7 +315,7 @@ describe('v3.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DetectIntentResponse()
       );
@@ -346,7 +346,7 @@ describe('v3.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DetectIntentResponse()
       );
@@ -393,7 +393,7 @@ describe('v3.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.detectIntent = stubSimpleCall(
         undefined,
@@ -445,7 +445,7 @@ describe('v3.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.MatchIntentResponse()
       );
@@ -476,7 +476,7 @@ describe('v3.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.MatchIntentResponse()
       );
@@ -523,7 +523,7 @@ describe('v3.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.matchIntent = stubSimpleCall(
         undefined,
@@ -576,7 +576,7 @@ describe('v3.SessionsClient', () => {
         ['matchIntentRequest', 'session']
       );
       request.matchIntentRequest.session = defaultValue1;
-      const expectedHeaderRequestParams = `match_intent_request.session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `match_intent_request.session=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.FulfillIntentResponse()
       );
@@ -608,7 +608,7 @@ describe('v3.SessionsClient', () => {
         ['matchIntentRequest', 'session']
       );
       request.matchIntentRequest.session = defaultValue1;
-      const expectedHeaderRequestParams = `match_intent_request.session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `match_intent_request.session=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.FulfillIntentResponse()
       );
@@ -656,7 +656,7 @@ describe('v3.SessionsClient', () => {
         ['matchIntentRequest', 'session']
       );
       request.matchIntentRequest.session = defaultValue1;
-      const expectedHeaderRequestParams = `match_intent_request.session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `match_intent_request.session=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fulfillIntent = stubSimpleCall(
         undefined,
@@ -709,7 +709,7 @@ describe('v3.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.AnswerFeedback()
       );
@@ -741,7 +741,7 @@ describe('v3.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.AnswerFeedback()
       );
@@ -788,7 +788,7 @@ describe('v3.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.submitAnswerFeedback = stubSimpleCall(
         undefined,
@@ -840,7 +840,7 @@ describe('v3.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DetectIntentResponse()
       );
@@ -885,7 +885,7 @@ describe('v3.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DetectIntentResponse()
       );
@@ -931,7 +931,7 @@ describe('v3.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.serverStreamingDetectIntent =
         stubServerStreamingCall(undefined, expectedError);

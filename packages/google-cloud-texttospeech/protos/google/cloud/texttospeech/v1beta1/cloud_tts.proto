@@ -21,7 +21,6 @@ import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.TextToSpeech.V1Beta1";
 option go_package = "cloud.google.com/go/texttospeech/apiv1beta1/texttospeechpb;texttospeechpb";
 option java_multiple_files = true;
@@ -116,6 +115,11 @@ enum AudioEncoding {
   // 8-bit samples that compand 14-bit audio samples using G.711 PCMU/A-law.
   // Audio content returned as ALAW also contains a WAV header.
   ALAW = 6;
+
+  // Uncompressed 16-bit signed little-endian samples (Linear PCM).
+  // Note that as opposed to LINEAR16, audio will not be wrapped in a WAV (or
+  // any other) header.
+  PCM = 7;
 }
 
 // The top-level message sent by the client for the `ListVoices` method.
@@ -154,6 +158,13 @@ message Voice {
   int32 natural_sample_rate_hertz = 4;
 }
 
+// Used for advanced voice options.
+message AdvancedVoiceOptions {
+  // Only for Journey voices. If false, the synthesis will be context aware
+  // and have higher latency.
+  optional bool low_latency_journey_synthesis = 1;
+}
+
 // The top-level message sent by the client for the `SynthesizeSpeech` method.
 message SynthesizeSpeechRequest {
   // The type of timepoint information that is returned in the response.
@@ -176,6 +187,60 @@ message SynthesizeSpeechRequest {
 
   // Whether and what timepoints are returned in the response.
   repeated TimepointType enable_time_pointing = 4;
+
+  // Advanced voice options.
+  optional AdvancedVoiceOptions advanced_voice_options = 8;
+}
+
+// Pronunciation customization for a phrase.
+message CustomPronunciationParams {
+  // The phonetic encoding of the phrase.
+  enum PhoneticEncoding {
+    // Not specified.
+    PHONETIC_ENCODING_UNSPECIFIED = 0;
+
+    // IPA. (e.g. apple -> ˈæpəl )
+    // https://en.wikipedia.org/wiki/International_Phonetic_Alphabet
+    PHONETIC_ENCODING_IPA = 1;
+
+    // X-SAMPA (e.g. apple -> "{p@l" )
+    // https://en.wikipedia.org/wiki/X-SAMPA
+    PHONETIC_ENCODING_X_SAMPA = 2;
+  }
+
+  // The phrase to which the customization will be applied.
+  // The phrase can be multiple words (in the case of proper nouns etc), but
+  // should not span to a whole sentence.
+  optional string phrase = 1;
+
+  // The phonetic encoding of the phrase.
+  optional PhoneticEncoding phonetic_encoding = 2;
+
+  // The pronunciation of the phrase. This must be in the phonetic encoding
+  // specified above.
+  optional string pronunciation = 3;
+}
+
+// A collection of pronunciation customizations.
+message CustomPronunciations {
+  // The pronunciation customizations to be applied.
+  repeated CustomPronunciationParams pronunciations = 1;
+}
+
+// A collection of turns for multi-speaker synthesis.
+message MultiSpeakerMarkup {
+  // A Multi-speaker turn.
+  message Turn {
+    // Required. The speaker of the turn, for example, 'O' or 'Q'. Please refer
+    // to documentation for available speakers.
+    string speaker = 1 [(google.api.field_behavior) = REQUIRED];
+
+    // Required. The text to speak.
+    string text = 2 [(google.api.field_behavior) = REQUIRED];
+  }
+
+  // Required. Speaker turns.
+  repeated Turn turns = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Contains text input to be synthesized. Either `text` or `ssml` must be
@@ -194,7 +259,26 @@ message SynthesisInput {
     // more information, see
     // [SSML](https://cloud.google.com/text-to-speech/docs/ssml).
     string ssml = 2;
+
+    // The multi-speaker input to be synthesized. Only applicable for
+    // multi-speaker synthesis.
+    MultiSpeakerMarkup multi_speaker_markup = 4;
   }
+
+  // Optional. The pronunciation customizations to be applied to the input. If
+  // this is set, the input will be synthesized using the given pronunciation
+  // customizations.
+  //
+  // The initial support will be for EFIGS (English, French,
+  // Italian, German, Spanish) languages, as provided in
+  // VoiceSelectionParams. Journey and Instant Clone voices are
+  // not supported yet.
+  //
+  // In order to customize the pronunciation of a phrase, there must be an exact
+  // match of the phrase in the input types. If using SSML, the phrase must not
+  // be inside a phoneme tag (entirely or partially).
+  CustomPronunciations custom_pronunciations = 3
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Description of which voice to use for a synthesis request.
@@ -228,6 +312,11 @@ message VoiceSelectionParams {
   // the service will choose the custom voice matching the specified
   // configuration.
   CustomVoiceParams custom_voice = 4;
+
+  // Optional. The configuration for a voice clone. If
+  // [VoiceCloneParams.voice_clone_key] is set, the service will choose the
+  // voice clone matching the specified configuration.
+  VoiceCloneParams voice_clone = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Description of audio data to be synthesized.
@@ -315,6 +404,12 @@ message CustomVoiceParams {
       [deprecated = true, (google.api.field_behavior) = OPTIONAL];
 }
 
+// The configuration of Voice Clone feature.
+message VoiceCloneParams {
+  // Required. Created by GenerateVoiceCloningKey.
+  string voice_cloning_key = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
 // The message returned to the client by the `SynthesizeSpeech` method.
 message SynthesizeSpeechResponse {
   // The audio data bytes encoded as specified in the request, including the
@@ -342,10 +437,25 @@ message Timepoint {
   double time_seconds = 3;
 }
 
+// Description of the desired output audio data.
+message StreamingAudioConfig {
+  // Required. The format of the audio byte stream.
+  // For now, streaming only supports PCM and OGG_OPUS. All other encodings
+  // will return an error.
+  AudioEncoding audio_encoding = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The synthesis sample rate (in hertz) for this audio.
+  int32 sample_rate_hertz = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
 // Provides configuration information for the StreamingSynthesize request.
 message StreamingSynthesizeConfig {
   // Required. The desired voice of the synthesized audio.
   VoiceSelectionParams voice = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The configuration of the synthesized audio.
+  StreamingAudioConfig streaming_audio_config = 4
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Input to be synthesized.

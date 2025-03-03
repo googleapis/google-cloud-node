@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -331,7 +331,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Api()
       );
@@ -362,7 +362,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Api()
       );
@@ -409,7 +409,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createApi = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.createApi(request), expectedError);
@@ -458,7 +458,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Api()
       );
@@ -489,7 +489,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Api()
       );
@@ -536,7 +536,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getApi = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getApi(request), expectedError);
@@ -586,7 +586,7 @@ describe('v1.ApiHubClient', () => {
         ['api', 'name']
       );
       request.api.name = defaultValue1;
-      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Api()
       );
@@ -618,7 +618,7 @@ describe('v1.ApiHubClient', () => {
         ['api', 'name']
       );
       request.api.name = defaultValue1;
-      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Api()
       );
@@ -666,7 +666,7 @@ describe('v1.ApiHubClient', () => {
         ['api', 'name']
       );
       request.api.name = defaultValue1;
-      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateApi = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.updateApi(request), expectedError);
@@ -716,7 +716,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -747,7 +747,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -794,7 +794,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteApi = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.deleteApi(request), expectedError);
@@ -843,7 +843,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Version()
       );
@@ -874,7 +874,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Version()
       );
@@ -921,7 +921,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createVersion = stubSimpleCall(
         undefined,
@@ -973,7 +973,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Version()
       );
@@ -1004,7 +1004,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Version()
       );
@@ -1051,7 +1051,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getVersion = stubSimpleCall(
         undefined,
@@ -1104,7 +1104,7 @@ describe('v1.ApiHubClient', () => {
         ['version', 'name']
       );
       request.version.name = defaultValue1;
-      const expectedHeaderRequestParams = `version.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `version.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Version()
       );
@@ -1136,7 +1136,7 @@ describe('v1.ApiHubClient', () => {
         ['version', 'name']
       );
       request.version.name = defaultValue1;
-      const expectedHeaderRequestParams = `version.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `version.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Version()
       );
@@ -1184,7 +1184,7 @@ describe('v1.ApiHubClient', () => {
         ['version', 'name']
       );
       request.version.name = defaultValue1;
-      const expectedHeaderRequestParams = `version.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `version.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateVersion = stubSimpleCall(
         undefined,
@@ -1237,7 +1237,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1268,7 +1268,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1315,7 +1315,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteVersion = stubSimpleCall(
         undefined,
@@ -1367,7 +1367,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Spec()
       );
@@ -1398,7 +1398,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Spec()
       );
@@ -1445,7 +1445,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSpec = stubSimpleCall(
         undefined,
@@ -1497,7 +1497,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Spec()
       );
@@ -1528,7 +1528,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Spec()
       );
@@ -1575,7 +1575,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSpec = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSpec(request), expectedError);
@@ -1624,7 +1624,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.SpecContents()
       );
@@ -1655,7 +1655,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.SpecContents()
       );
@@ -1702,7 +1702,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSpecContents = stubSimpleCall(
         undefined,
@@ -1755,7 +1755,7 @@ describe('v1.ApiHubClient', () => {
         ['spec', 'name']
       );
       request.spec.name = defaultValue1;
-      const expectedHeaderRequestParams = `spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `spec.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Spec()
       );
@@ -1787,7 +1787,7 @@ describe('v1.ApiHubClient', () => {
         ['spec', 'name']
       );
       request.spec.name = defaultValue1;
-      const expectedHeaderRequestParams = `spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `spec.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Spec()
       );
@@ -1835,7 +1835,7 @@ describe('v1.ApiHubClient', () => {
         ['spec', 'name']
       );
       request.spec.name = defaultValue1;
-      const expectedHeaderRequestParams = `spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `spec.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSpec = stubSimpleCall(
         undefined,
@@ -1888,7 +1888,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1919,7 +1919,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1966,7 +1966,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSpec = stubSimpleCall(
         undefined,
@@ -2018,7 +2018,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ApiOperation()
       );
@@ -2049,7 +2049,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ApiOperation()
       );
@@ -2096,7 +2096,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getApiOperation = stubSimpleCall(
         undefined,
@@ -2148,7 +2148,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Definition()
       );
@@ -2179,7 +2179,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Definition()
       );
@@ -2226,7 +2226,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDefinition = stubSimpleCall(
         undefined,
@@ -2278,7 +2278,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Deployment()
       );
@@ -2309,7 +2309,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Deployment()
       );
@@ -2356,7 +2356,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDeployment = stubSimpleCall(
         undefined,
@@ -2408,7 +2408,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Deployment()
       );
@@ -2439,7 +2439,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Deployment()
       );
@@ -2486,7 +2486,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDeployment = stubSimpleCall(
         undefined,
@@ -2539,7 +2539,7 @@ describe('v1.ApiHubClient', () => {
         ['deployment', 'name']
       );
       request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Deployment()
       );
@@ -2571,7 +2571,7 @@ describe('v1.ApiHubClient', () => {
         ['deployment', 'name']
       );
       request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Deployment()
       );
@@ -2619,7 +2619,7 @@ describe('v1.ApiHubClient', () => {
         ['deployment', 'name']
       );
       request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDeployment = stubSimpleCall(
         undefined,
@@ -2672,7 +2672,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2703,7 +2703,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2750,7 +2750,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDeployment = stubSimpleCall(
         undefined,
@@ -2802,7 +2802,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Attribute()
       );
@@ -2833,7 +2833,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Attribute()
       );
@@ -2880,7 +2880,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAttribute = stubSimpleCall(
         undefined,
@@ -2932,7 +2932,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Attribute()
       );
@@ -2963,7 +2963,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Attribute()
       );
@@ -3010,7 +3010,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAttribute = stubSimpleCall(
         undefined,
@@ -3063,7 +3063,7 @@ describe('v1.ApiHubClient', () => {
         ['attribute', 'name']
       );
       request.attribute.name = defaultValue1;
-      const expectedHeaderRequestParams = `attribute.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attribute.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Attribute()
       );
@@ -3095,7 +3095,7 @@ describe('v1.ApiHubClient', () => {
         ['attribute', 'name']
       );
       request.attribute.name = defaultValue1;
-      const expectedHeaderRequestParams = `attribute.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attribute.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.Attribute()
       );
@@ -3143,7 +3143,7 @@ describe('v1.ApiHubClient', () => {
         ['attribute', 'name']
       );
       request.attribute.name = defaultValue1;
-      const expectedHeaderRequestParams = `attribute.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attribute.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAttribute = stubSimpleCall(
         undefined,
@@ -3196,7 +3196,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3227,7 +3227,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3274,7 +3274,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAttribute = stubSimpleCall(
         undefined,
@@ -3326,7 +3326,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ExternalApi()
       );
@@ -3357,7 +3357,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ExternalApi()
       );
@@ -3404,7 +3404,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createExternalApi = stubSimpleCall(
         undefined,
@@ -3456,7 +3456,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ExternalApi()
       );
@@ -3487,7 +3487,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ExternalApi()
       );
@@ -3534,7 +3534,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getExternalApi = stubSimpleCall(
         undefined,
@@ -3587,7 +3587,7 @@ describe('v1.ApiHubClient', () => {
         ['externalApi', 'name']
       );
       request.externalApi.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_api.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `external_api.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ExternalApi()
       );
@@ -3619,7 +3619,7 @@ describe('v1.ApiHubClient', () => {
         ['externalApi', 'name']
       );
       request.externalApi.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_api.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `external_api.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ExternalApi()
       );
@@ -3667,7 +3667,7 @@ describe('v1.ApiHubClient', () => {
         ['externalApi', 'name']
       );
       request.externalApi.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_api.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `external_api.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateExternalApi = stubSimpleCall(
         undefined,
@@ -3720,7 +3720,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3751,7 +3751,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3798,7 +3798,7 @@ describe('v1.ApiHubClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteExternalApi = stubSimpleCall(
         undefined,
@@ -3850,7 +3850,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Api()),
@@ -3883,7 +3883,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Api()),
@@ -3932,7 +3932,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listApis = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listApis(request), expectedError);
@@ -3960,7 +3960,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Api()),
@@ -4011,7 +4011,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApis.createStream = stubPageStreamingCall(
         undefined,
@@ -4059,7 +4059,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Api()),
@@ -4101,7 +4101,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApis.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -4144,7 +4144,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Version()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Version()),
@@ -4177,7 +4177,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Version()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Version()),
@@ -4226,7 +4226,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listVersions = stubSimpleCall(
         undefined,
@@ -4257,7 +4257,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Version()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Version()),
@@ -4308,7 +4308,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVersions.createStream = stubPageStreamingCall(
         undefined,
@@ -4356,7 +4356,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Version()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Version()),
@@ -4399,7 +4399,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVersions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4441,7 +4441,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Spec()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Spec()),
@@ -4474,7 +4474,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Spec()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Spec()),
@@ -4523,7 +4523,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSpecs = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listSpecs(request), expectedError);
@@ -4551,7 +4551,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Spec()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Spec()),
@@ -4602,7 +4602,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSpecs.createStream = stubPageStreamingCall(
         undefined,
@@ -4650,7 +4650,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Spec()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Spec()),
@@ -4692,7 +4692,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSpecs.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -4735,7 +4735,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.ApiOperation()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.ApiOperation()),
@@ -4768,7 +4768,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.ApiOperation()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.ApiOperation()),
@@ -4817,7 +4817,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listApiOperations = stubSimpleCall(
         undefined,
@@ -4848,7 +4848,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.ApiOperation()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.ApiOperation()),
@@ -4902,7 +4902,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApiOperations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4951,7 +4951,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.ApiOperation()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.ApiOperation()),
@@ -4994,7 +4994,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApiOperations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5036,7 +5036,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Deployment()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Deployment()),
@@ -5069,7 +5069,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Deployment()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Deployment()),
@@ -5118,7 +5118,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDeployments = stubSimpleCall(
         undefined,
@@ -5149,7 +5149,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Deployment()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Deployment()),
@@ -5203,7 +5203,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeployments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5252,7 +5252,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Deployment()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Deployment()),
@@ -5295,7 +5295,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeployments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5337,7 +5337,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Attribute()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Attribute()),
@@ -5370,7 +5370,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Attribute()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Attribute()),
@@ -5419,7 +5419,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAttributes = stubSimpleCall(
         undefined,
@@ -5450,7 +5450,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Attribute()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Attribute()),
@@ -5504,7 +5504,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAttributes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5553,7 +5553,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.Attribute()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.Attribute()),
@@ -5596,7 +5596,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAttributes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5638,7 +5638,7 @@ describe('v1.ApiHubClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.SearchResult()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.SearchResult()),
@@ -5671,7 +5671,7 @@ describe('v1.ApiHubClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.SearchResult()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.SearchResult()),
@@ -5720,7 +5720,7 @@ describe('v1.ApiHubClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchResources = stubSimpleCall(
         undefined,
@@ -5751,7 +5751,7 @@ describe('v1.ApiHubClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.SearchResult()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.SearchResult()),
@@ -5805,7 +5805,7 @@ describe('v1.ApiHubClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchResources.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5854,7 +5854,7 @@ describe('v1.ApiHubClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.SearchResult()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.SearchResult()),
@@ -5897,7 +5897,7 @@ describe('v1.ApiHubClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchResources.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5939,7 +5939,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.ExternalApi()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.ExternalApi()),
@@ -5972,7 +5972,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.ExternalApi()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.ExternalApi()),
@@ -6021,7 +6021,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listExternalApis = stubSimpleCall(
         undefined,
@@ -6052,7 +6052,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.ExternalApi()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.ExternalApi()),
@@ -6106,7 +6106,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExternalApis.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6155,7 +6155,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apihub.v1.ExternalApi()),
         generateSampleMessage(new protos.google.cloud.apihub.v1.ExternalApi()),
@@ -6198,7 +6198,7 @@ describe('v1.ApiHubClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExternalApis.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

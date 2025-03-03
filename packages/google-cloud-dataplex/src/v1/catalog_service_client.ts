@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -44,10 +44,10 @@ const version = require('../../../package.json').version;
 
 /**
  *  The primary resources offered by this service are EntryGroups, EntryTypes,
- *  AspectTypes, Entry and Aspect which collectively allow a data administrator
- *  to organize, manage, secure and catalog data across their organization
- *  located across cloud projects in a variety of storage systems including Cloud
- *  Storage and BigQuery.
+ *  AspectTypes, and Entries. They collectively let data administrators organize,
+ *  manage, secure, and catalog data located across cloud projects in their
+ *  organization in a variety of storage systems, including Cloud Storage and
+ *  BigQuery.
  * @class
  * @memberof v1
  */
@@ -261,6 +261,9 @@ export class CatalogServiceClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      metadataJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataJobs/{metadataJob}'
+      ),
       partitionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}/partitions/{partition}'
       ),
@@ -315,6 +318,11 @@ export class CatalogServiceClient {
         'nextPageToken',
         'results'
       ),
+      listMetadataJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'metadataJobs'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -368,6 +376,9 @@ export class CatalogServiceClient {
               get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',
             },
             {
+              get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',
+            },
+            {
               get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',
             },
             {
@@ -375,6 +386,18 @@ export class CatalogServiceClient {
             },
             {
               get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',
             },
           ],
         },
@@ -420,6 +443,10 @@ export class CatalogServiceClient {
               body: '*',
             },
             {
+              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
               post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',
               body: '*',
             },
@@ -429,6 +456,22 @@ export class CatalogServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -475,6 +518,10 @@ export class CatalogServiceClient {
               body: '*',
             },
             {
+              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
               post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',
               body: '*',
             },
@@ -486,24 +533,55 @@ export class CatalogServiceClient {
               post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',
+              body: '*',
+            },
           ],
         },
         {
           selector: 'google.longrunning.Operations.CancelOperation',
           post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
           body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
+          ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
+          ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
+          ],
         },
       ];
     }
@@ -564,6 +642,12 @@ export class CatalogServiceClient {
     const deleteEntryGroupMetadata = protoFilesRoot.lookup(
       '.google.cloud.dataplex.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const createMetadataJobResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.MetadataJob'
+    ) as gax.protobuf.Type;
+    const createMetadataJobMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createEntryType: new this._gaxModule.LongrunningDescriptor(
@@ -610,6 +694,11 @@ export class CatalogServiceClient {
         this.operationsClient,
         deleteEntryGroupResponse.decode.bind(deleteEntryGroupResponse),
         deleteEntryGroupMetadata.decode.bind(deleteEntryGroupMetadata)
+      ),
+      createMetadataJob: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createMetadataJobResponse.decode.bind(createMetadataJobResponse),
+        createMetadataJobMetadata.decode.bind(createMetadataJobMetadata)
       ),
     };
 
@@ -685,6 +774,10 @@ export class CatalogServiceClient {
       'getEntry',
       'lookupEntry',
       'searchEntries',
+      'createMetadataJob',
+      'getMetadataJob',
+      'listMetadataJobs',
+      'cancelMetadataJob',
     ];
     for (const methodName of catalogServiceStubMethods) {
       const callPromise = this.catalogServiceStub.then(
@@ -803,7 +896,7 @@ export class CatalogServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Retrieves a EntryType resource.
+   * Gets an EntryType.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -888,7 +981,7 @@ export class CatalogServiceClient {
     return this.innerApiCalls.getEntryType(request, options, callback);
   }
   /**
-   * Retrieves a AspectType resource.
+   * Gets an AspectType.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -973,7 +1066,7 @@ export class CatalogServiceClient {
     return this.innerApiCalls.getAspectType(request, options, callback);
   }
   /**
-   * Retrieves a EntryGroup resource.
+   * Gets an EntryGroup.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1068,20 +1161,21 @@ export class CatalogServiceClient {
    * @param {string} request.entryId
    *   Required. Entry identifier. It has to be unique within an Entry Group.
    *
-   *   Entries corresponding to Google Cloud resources use Entry ID format based
-   *   on Full Resource Names
-   *   (https://cloud.google.com/apis/design/resource_names#full_resource_name).
-   *   The format is a Full Resource Name of the resource without the
-   *   prefix double slashes in the API Service Name part of Full Resource Name.
-   *   This allows retrieval of entries using their associated resource name.
+   *   Entries corresponding to Google Cloud resources use an Entry ID format
+   *   based on [full resource
+   *   names](https://cloud.google.com/apis/design/resource_names#full_resource_name).
+   *   The format is a full resource name of the resource without the
+   *   prefix double slashes in the API service name part of the full resource
+   *   name. This allows retrieval of entries using their associated resource
+   *   name.
    *
-   *   For example if the Full Resource Name of a resource is
+   *   For example, if the full resource name of a resource is
    *   `//library.googleapis.com/shelves/shelf1/books/book2`,
    *   then the suggested entry_id is
    *   `library.googleapis.com/shelves/shelf1/books/book2`.
    *
    *   It is also suggested to follow the same convention for entries
-   *   corresponding to resources from other providers or systems than Google
+   *   corresponding to resources from providers or systems other than Google
    *   Cloud.
    *
    *   The maximum size of the field is 4000 characters.
@@ -1175,28 +1269,34 @@ export class CatalogServiceClient {
    *   Optional. Mask of fields to update. To update Aspects, the update_mask must
    *   contain the value "aspects".
    *
-   *   If the update_mask is empty, all modifiable fields present in the request
-   *   will be updated.
+   *   If the update_mask is empty, the service will update all modifiable fields
+   *   present in the request.
    * @param {boolean} [request.allowMissing]
-   *   Optional. If set to true and the entry does not exist, it will be created.
+   *   Optional. If set to true and the entry doesn't exist, the service will
+   *   create it.
    * @param {boolean} [request.deleteMissingAspects]
-   *   Optional. If set to true and the aspect_keys specify aspect ranges, any
-   *   existing aspects from that range not provided in the request will be
-   *   deleted.
+   *   Optional. If set to true and the aspect_keys specify aspect ranges, the
+   *   service deletes any existing aspects from that range that weren't provided
+   *   in the request.
    * @param {string[]} [request.aspectKeys]
-   *   Optional. The map keys of the Aspects which should be modified. Supports
-   *   the following syntaxes:
-   *   * <aspect_type_reference> - matches aspect on given type and empty path
-   *   * <aspect_type_reference>@path - matches aspect on given type and specified
-   *   path
-   *   * <aspect_type_reference>* - matches aspects on given type for all paths
-   *   * *@path - matches aspects of all types on the given path
+   *   Optional. The map keys of the Aspects which the service should modify. It
+   *   supports the following syntaxes:
    *
-   *   Existing aspects matching the syntax will not be removed unless
+   *   * `<aspect_type_reference>` - matches an aspect of the given type and empty
+   *   path.
+   *   * `<aspect_type_reference>@path` - matches an aspect of the given type and
+   *   specified path. For example, to attach an aspect to a field that is
+   *   specified by the `schema` aspect, the path should have the format
+   *   `Schema.<field_name>`.
+   *   * `<aspect_type_reference>@*` - matches aspects of the given type for all
+   *   paths.
+   *   * `*@path` - matches aspects of all types on the given path.
+   *
+   *   The service will not remove existing aspects matching the syntax unless
    *   `delete_missing_aspects` is set to true.
    *
-   *   If this field is left empty, it will be treated as specifying exactly those
-   *   Aspects present in the request.
+   *   If this field is left empty, the service treats it as specifying
+   *   exactly those Aspects present in the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1360,7 +1460,12 @@ export class CatalogServiceClient {
     return this.innerApiCalls.deleteEntry(request, options, callback);
   }
   /**
-   * Gets a single entry.
+   * Gets an Entry.
+   *
+   * **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is
+   * changing. For more information, see [Changes to BigQuery metadata stored in
+   * Dataplex
+   * Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1368,13 +1473,14 @@ export class CatalogServiceClient {
    *   Required. The resource name of the Entry:
    *   `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`.
    * @param {google.cloud.dataplex.v1.EntryView} [request.view]
-   *   Optional. View for controlling which parts of an entry are to be returned.
+   *   Optional. View to control which parts of an entry the service should
+   *   return.
    * @param {string[]} [request.aspectTypes]
    *   Optional. Limits the aspects returned to the provided aspect types.
-   *   Only works if the CUSTOM view is selected.
+   *   It only works for CUSTOM view.
    * @param {string[]} [request.paths]
    *   Optional. Limits the aspects returned to those associated with the provided
-   *   paths within the Entry. Only works if the CUSTOM view is selected.
+   *   paths within the Entry. It only works for CUSTOM view.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1451,7 +1557,12 @@ export class CatalogServiceClient {
     return this.innerApiCalls.getEntry(request, options, callback);
   }
   /**
-   * Looks up a single entry.
+   * Looks up a single Entry by name using the permission on the source system.
+   *
+   * **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is
+   * changing. For more information, see [Changes to BigQuery metadata stored in
+   * Dataplex
+   * Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1459,13 +1570,14 @@ export class CatalogServiceClient {
    *   Required. The project to which the request should be attributed in the
    *   following form: `projects/{project}/locations/{location}`.
    * @param {google.cloud.dataplex.v1.EntryView} [request.view]
-   *   Optional. View for controlling which parts of an entry are to be returned.
+   *   Optional. View to control which parts of an entry the service should
+   *   return.
    * @param {string[]} [request.aspectTypes]
    *   Optional. Limits the aspects returned to the provided aspect types.
-   *   Only works if the CUSTOM view is selected.
+   *   It only works for CUSTOM view.
    * @param {string[]} [request.paths]
    *   Optional. Limits the aspects returned to those associated with the provided
-   *   paths within the Entry. Only works if the CUSTOM view is selected.
+   *   paths within the Entry. It only works for CUSTOM view.
    * @param {string} request.entry
    *   Required. The resource name of the Entry:
    *   `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`.
@@ -1546,23 +1658,204 @@ export class CatalogServiceClient {
     this.initialize();
     return this.innerApiCalls.lookupEntry(request, options, callback);
   }
+  /**
+   * Gets a metadata job.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the metadata job, in the format
+   *   `projects/{project_id_or_number}/locations/{location_id}/metadataJobs/{metadata_job_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.MetadataJob|MetadataJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/catalog_service.get_metadata_job.js</caption>
+   * region_tag:dataplex_v1_generated_CatalogService_GetMetadataJob_async
+   */
+  getMetadataJob(
+    request?: protos.google.cloud.dataplex.v1.IGetMetadataJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IMetadataJob,
+      protos.google.cloud.dataplex.v1.IGetMetadataJobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getMetadataJob(
+    request: protos.google.cloud.dataplex.v1.IGetMetadataJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IMetadataJob,
+      protos.google.cloud.dataplex.v1.IGetMetadataJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getMetadataJob(
+    request: protos.google.cloud.dataplex.v1.IGetMetadataJobRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IMetadataJob,
+      protos.google.cloud.dataplex.v1.IGetMetadataJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getMetadataJob(
+    request?: protos.google.cloud.dataplex.v1.IGetMetadataJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dataplex.v1.IMetadataJob,
+          | protos.google.cloud.dataplex.v1.IGetMetadataJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IMetadataJob,
+      protos.google.cloud.dataplex.v1.IGetMetadataJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IMetadataJob,
+      protos.google.cloud.dataplex.v1.IGetMetadataJobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getMetadataJob(request, options, callback);
+  }
+  /**
+   * Cancels a metadata job.
+   *
+   * If you cancel a metadata import job that is in progress, the changes in the
+   * job might be partially applied. We recommend that you reset the state of
+   * the entry groups in your project by running another metadata job that
+   * reverts the changes from the canceled job.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the job, in the format
+   *   `projects/{project_id_or_number}/locations/{location_id}/metadataJobs/{metadata_job_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/catalog_service.cancel_metadata_job.js</caption>
+   * region_tag:dataplex_v1_generated_CatalogService_CancelMetadataJob_async
+   */
+  cancelMetadataJob(
+    request?: protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  cancelMetadataJob(
+    request: protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelMetadataJob(
+    request: protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelMetadataJob(
+    request?: protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.cancelMetadataJob(request, options, callback);
+  }
 
   /**
-   * Creates an EntryType
+   * Creates an EntryType.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the EntryType, of the form:
    *   projects/{project_number}/locations/{location_id}
-   *   where `location_id` refers to a GCP region.
+   *   where `location_id` refers to a Google Cloud region.
    * @param {string} request.entryTypeId
    *   Required. EntryType identifier.
    * @param {google.cloud.dataplex.v1.EntryType} request.entryType
-   *   Required. EntryType Resource
+   *   Required. EntryType Resource.
    * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the request, but do not perform mutations.
-   *   The default is false.
+   *   Optional. The service validates the request without performing any
+   *   mutations. The default is false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1693,17 +1986,17 @@ export class CatalogServiceClient {
     >;
   }
   /**
-   * Updates a EntryType resource.
+   * Updates an EntryType.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.dataplex.v1.EntryType} request.entryType
-   *   Required. EntryType Resource
+   *   Required. EntryType Resource.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update.
    * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the request, but do not perform mutations.
-   *   The default is false.
+   *   Optional. The service validates the request without performing any
+   *   mutations. The default is false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1834,7 +2127,7 @@ export class CatalogServiceClient {
     >;
   }
   /**
-   * Deletes a EntryType resource.
+   * Deletes an EntryType.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1843,7 +2136,7 @@ export class CatalogServiceClient {
    *   `projects/{project_number}/locations/{location_id}/entryTypes/{entry_type_id}`.
    * @param {string} [request.etag]
    *   Optional. If the client provided etag value does not match the current etag
-   *   value, the DeleteEntryTypeRequest method returns an ABORTED error response
+   *   value, the DeleteEntryTypeRequest method returns an ABORTED error response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1974,21 +2267,21 @@ export class CatalogServiceClient {
     >;
   }
   /**
-   * Creates an AspectType
+   * Creates an AspectType.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the AspectType, of the form:
    *   projects/{project_number}/locations/{location_id}
-   *   where `location_id` refers to a GCP region.
+   *   where `location_id` refers to a Google Cloud region.
    * @param {string} request.aspectTypeId
    *   Required. AspectType identifier.
    * @param {google.cloud.dataplex.v1.AspectType} request.aspectType
-   *   Required. AspectType Resource
+   *   Required. AspectType Resource.
    * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the request, but do not perform mutations.
-   *   The default is false.
+   *   Optional. The service validates the request without performing any
+   *   mutations. The default is false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2119,7 +2412,7 @@ export class CatalogServiceClient {
     >;
   }
   /**
-   * Updates a AspectType resource.
+   * Updates an AspectType.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2260,7 +2553,7 @@ export class CatalogServiceClient {
     >;
   }
   /**
-   * Deletes a AspectType resource.
+   * Deletes an AspectType.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2269,7 +2562,8 @@ export class CatalogServiceClient {
    *   `projects/{project_number}/locations/{location_id}/aspectTypes/{aspect_type_id}`.
    * @param {string} [request.etag]
    *   Optional. If the client provided etag value does not match the current etag
-   *   value, the DeleteAspectTypeRequest method returns an ABORTED error response
+   *   value, the DeleteAspectTypeRequest method returns an ABORTED error
+   *   response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2400,7 +2694,7 @@ export class CatalogServiceClient {
     >;
   }
   /**
-   * Creates an EntryGroup
+   * Creates an EntryGroup.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2411,10 +2705,10 @@ export class CatalogServiceClient {
    * @param {string} request.entryGroupId
    *   Required. EntryGroup identifier.
    * @param {google.cloud.dataplex.v1.EntryGroup} request.entryGroup
-   *   Required. EntryGroup Resource
+   *   Required. EntryGroup Resource.
    * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the request, but do not perform mutations.
-   *   The default is false.
+   *   Optional. The service validates the request without performing any
+   *   mutations. The default is false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2545,17 +2839,17 @@ export class CatalogServiceClient {
     >;
   }
   /**
-   * Updates a EntryGroup resource.
+   * Updates an EntryGroup.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.dataplex.v1.EntryGroup} request.entryGroup
-   *   Required. EntryGroup Resource
+   *   Required. EntryGroup Resource.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update.
    * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the request, but do not perform mutations.
-   *   The default is false.
+   *   Optional. The service validates the request, without performing any
+   *   mutations. The default is false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2686,7 +2980,7 @@ export class CatalogServiceClient {
     >;
   }
   /**
-   * Deletes a EntryGroup resource.
+   * Deletes an EntryGroup.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2695,7 +2989,8 @@ export class CatalogServiceClient {
    *   `projects/{project_number}/locations/{location_id}/entryGroups/{entry_group_id}`.
    * @param {string} [request.etag]
    *   Optional. If the client provided etag value does not match the current etag
-   *   value, the DeleteEntryGroupRequest method returns an ABORTED error response
+   *   value, the DeleteEntryGroupRequest method returns an ABORTED error
+   *   response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2826,6 +3121,152 @@ export class CatalogServiceClient {
     >;
   }
   /**
+   * Creates a metadata job. For example, use a metadata job to import Dataplex
+   * Catalog entries and aspects from a third-party system into Dataplex.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent location, in the format
+   *   `projects/{project_id_or_number}/locations/{location_id}`
+   * @param {google.cloud.dataplex.v1.MetadataJob} request.metadataJob
+   *   Required. The metadata job resource.
+   * @param {string} [request.metadataJobId]
+   *   Optional. The metadata job ID. If not provided, a unique ID is generated
+   *   with the prefix `metadata-job-`.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. The service validates the request without performing any
+   *   mutations. The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/catalog_service.create_metadata_job.js</caption>
+   * region_tag:dataplex_v1_generated_CatalogService_CreateMetadataJob_async
+   */
+  createMetadataJob(
+    request?: protos.google.cloud.dataplex.v1.ICreateMetadataJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IMetadataJob,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createMetadataJob(
+    request: protos.google.cloud.dataplex.v1.ICreateMetadataJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IMetadataJob,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createMetadataJob(
+    request: protos.google.cloud.dataplex.v1.ICreateMetadataJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IMetadataJob,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createMetadataJob(
+    request?: protos.google.cloud.dataplex.v1.ICreateMetadataJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IMetadataJob,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IMetadataJob,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IMetadataJob,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createMetadataJob(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createMetadataJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/catalog_service.create_metadata_job.js</caption>
+   * region_tag:dataplex_v1_generated_CatalogService_CreateMetadataJob_async
+   */
+  async checkCreateMetadataJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataplex.v1.MetadataJob,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createMetadataJob,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataplex.v1.MetadataJob,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
+  }
+  /**
    * Lists EntryType resources in a project and location.
    *
    * @param {Object} request
@@ -2833,27 +3274,28 @@ export class CatalogServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the EntryType location, of the form:
    *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a GCP region.
+   *   where `location_id` refers to a Google Cloud region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of EntryTypes to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 EntryTypes will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
+   *   fewer than this value. If unspecified, the service returns at most 10
+   *   EntryTypes. The maximum value is 1000; values above 1000 will be coerced to
    *   1000.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListEntryTypes` call.
    *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListEntryTypes` must match the call that provided
-   *   the page token.
+   *   parameters you provided to `ListEntryTypes` must match the call that
+   *   provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request. Filters are case-sensitive.
-   *   The following formats are supported:
+   *   The service supports the following formats:
    *
-   *   labels.key1 = "value1"
-   *   labels:key1
-   *   name = "value"
-   *   These restrictions can be coinjoined with AND, OR and NOT conjunctions.
+   *   * labels.key1 = "value1"
+   *   * labels:key1
+   *   * name = "value"
+   *
+   *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
    * @param {string} [request.orderBy]
-   *   Optional. Order by fields (`name` or `create_time`) for the result.
+   *   Optional. Orders the result by `name` or `create_time` fields.
    *   If not specified, the ordering is undefined.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2943,33 +3385,34 @@ export class CatalogServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEntryTypes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the EntryType location, of the form:
    *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a GCP region.
+   *   where `location_id` refers to a Google Cloud region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of EntryTypes to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 EntryTypes will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
+   *   fewer than this value. If unspecified, the service returns at most 10
+   *   EntryTypes. The maximum value is 1000; values above 1000 will be coerced to
    *   1000.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListEntryTypes` call.
    *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListEntryTypes` must match the call that provided
-   *   the page token.
+   *   parameters you provided to `ListEntryTypes` must match the call that
+   *   provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request. Filters are case-sensitive.
-   *   The following formats are supported:
+   *   The service supports the following formats:
    *
-   *   labels.key1 = "value1"
-   *   labels:key1
-   *   name = "value"
-   *   These restrictions can be coinjoined with AND, OR and NOT conjunctions.
+   *   * labels.key1 = "value1"
+   *   * labels:key1
+   *   * name = "value"
+   *
+   *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
    * @param {string} [request.orderBy]
-   *   Optional. Order by fields (`name` or `create_time`) for the result.
+   *   Optional. Orders the result by `name` or `create_time` fields.
    *   If not specified, the ordering is undefined.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -3013,27 +3456,28 @@ export class CatalogServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the EntryType location, of the form:
    *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a GCP region.
+   *   where `location_id` refers to a Google Cloud region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of EntryTypes to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 EntryTypes will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
+   *   fewer than this value. If unspecified, the service returns at most 10
+   *   EntryTypes. The maximum value is 1000; values above 1000 will be coerced to
    *   1000.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListEntryTypes` call.
    *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListEntryTypes` must match the call that provided
-   *   the page token.
+   *   parameters you provided to `ListEntryTypes` must match the call that
+   *   provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request. Filters are case-sensitive.
-   *   The following formats are supported:
+   *   The service supports the following formats:
    *
-   *   labels.key1 = "value1"
-   *   labels:key1
-   *   name = "value"
-   *   These restrictions can be coinjoined with AND, OR and NOT conjunctions.
+   *   * labels.key1 = "value1"
+   *   * labels:key1
+   *   * name = "value"
+   *
+   *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
    * @param {string} [request.orderBy]
-   *   Optional. Order by fields (`name` or `create_time`) for the result.
+   *   Optional. Orders the result by `name` or `create_time` fields.
    *   If not specified, the ordering is undefined.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -3076,27 +3520,28 @@ export class CatalogServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the AspectType location, of the form:
    *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a GCP region.
+   *   where `location_id` refers to a Google Cloud region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of AspectTypes to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 AspectTypes will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   fewer than this value. If unspecified, the service returns at most 10
+   *   AspectTypes. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListAspectTypes` call.
    *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListAspectTypes` must match the call that provided
-   *   the page token.
+   *   parameters you provide to `ListAspectTypes` must match the call that
+   *   provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request. Filters are case-sensitive.
-   *   The following formats are supported:
+   *   The service supports the following formats:
    *
-   *   labels.key1 = "value1"
-   *   labels:key1
-   *   name = "value"
-   *   These restrictions can be coinjoined with AND, OR and NOT conjunctions.
+   *   * labels.key1 = "value1"
+   *   * labels:key1
+   *   * name = "value"
+   *
+   *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
    * @param {string} [request.orderBy]
-   *   Optional. Order by fields (`name` or `create_time`) for the result.
+   *   Optional. Orders the result by `name` or `create_time` fields.
    *   If not specified, the ordering is undefined.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -3186,33 +3631,34 @@ export class CatalogServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAspectTypes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the AspectType location, of the form:
    *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a GCP region.
+   *   where `location_id` refers to a Google Cloud region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of AspectTypes to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 AspectTypes will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   fewer than this value. If unspecified, the service returns at most 10
+   *   AspectTypes. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListAspectTypes` call.
    *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListAspectTypes` must match the call that provided
-   *   the page token.
+   *   parameters you provide to `ListAspectTypes` must match the call that
+   *   provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request. Filters are case-sensitive.
-   *   The following formats are supported:
+   *   The service supports the following formats:
    *
-   *   labels.key1 = "value1"
-   *   labels:key1
-   *   name = "value"
-   *   These restrictions can be coinjoined with AND, OR and NOT conjunctions.
+   *   * labels.key1 = "value1"
+   *   * labels:key1
+   *   * name = "value"
+   *
+   *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
    * @param {string} [request.orderBy]
-   *   Optional. Order by fields (`name` or `create_time`) for the result.
+   *   Optional. Orders the result by `name` or `create_time` fields.
    *   If not specified, the ordering is undefined.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -3256,27 +3702,28 @@ export class CatalogServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the AspectType location, of the form:
    *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a GCP region.
+   *   where `location_id` refers to a Google Cloud region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of AspectTypes to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 AspectTypes will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   fewer than this value. If unspecified, the service returns at most 10
+   *   AspectTypes. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListAspectTypes` call.
    *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListAspectTypes` must match the call that provided
-   *   the page token.
+   *   parameters you provide to `ListAspectTypes` must match the call that
+   *   provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request. Filters are case-sensitive.
-   *   The following formats are supported:
+   *   The service supports the following formats:
    *
-   *   labels.key1 = "value1"
-   *   labels:key1
-   *   name = "value"
-   *   These restrictions can be coinjoined with AND, OR and NOT conjunctions.
+   *   * labels.key1 = "value1"
+   *   * labels:key1
+   *   * name = "value"
+   *
+   *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
    * @param {string} [request.orderBy]
-   *   Optional. Order by fields (`name` or `create_time`) for the result.
+   *   Optional. Orders the result by `name` or `create_time` fields.
    *   If not specified, the ordering is undefined.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -3319,17 +3766,17 @@ export class CatalogServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the entryGroup location, of the form:
    *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a GCP region.
+   *   where `location_id` refers to a Google Cloud region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of EntryGroups to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 EntryGroups will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   fewer than this value. If unspecified, the service returns at most 10
+   *   EntryGroups. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListEntryGroups` call.
    *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListEntryGroups` must match the call that provided
-   *   the page token.
+   *   parameters you provide to `ListEntryGroups` must match the call that
+   *   provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
    * @param {string} [request.orderBy]
@@ -3422,23 +3869,23 @@ export class CatalogServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEntryGroups`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the entryGroup location, of the form:
    *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a GCP region.
+   *   where `location_id` refers to a Google Cloud region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of EntryGroups to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 EntryGroups will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   fewer than this value. If unspecified, the service returns at most 10
+   *   EntryGroups. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListEntryGroups` call.
    *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListEntryGroups` must match the call that provided
-   *   the page token.
+   *   parameters you provide to `ListEntryGroups` must match the call that
+   *   provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
    * @param {string} [request.orderBy]
@@ -3485,17 +3932,17 @@ export class CatalogServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the entryGroup location, of the form:
    *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a GCP region.
+   *   where `location_id` refers to a Google Cloud region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of EntryGroups to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 EntryGroups will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   fewer than this value. If unspecified, the service returns at most 10
+   *   EntryGroups. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListEntryGroups` call.
    *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListEntryGroups` must match the call that provided
-   *   the page token.
+   *   parameters you provide to `ListEntryGroups` must match the call that
+   *   provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
    * @param {string} [request.orderBy]
@@ -3534,7 +3981,7 @@ export class CatalogServiceClient {
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IEntryGroup>;
   }
   /**
-   * Lists entries within an entry group.
+   * Lists Entries within an EntryGroup.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3542,23 +3989,35 @@ export class CatalogServiceClient {
    *   Required. The resource name of the parent Entry Group:
    *   `projects/{project}/locations/{location}/entryGroups/{entry_group}`.
    * @param {number} [request.pageSize]
+   *   Optional. Number of items to return per page. If there are remaining
+   *   results, the service returns a next_page_token. If unspecified, the service
+   *   returns at most 10 Entries. The maximum value is 100; values above 100 will
+   *   be coerced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The pagination token returned by a previous request.
+   *   Optional. Page token received from a previous `ListEntries` call. Provide
+   *   this to retrieve the subsequent page.
    * @param {string} [request.filter]
-   *   Optional. A filter on the entries to return.
-   *   Filters are case-sensitive.
-   *   The request can be filtered by the following fields:
-   *   entry_type, entry_source.display_name.
-   *   The comparison operators are =, !=, <, >, <=, >= (strings are compared
-   *   according to lexical order)
-   *   The logical operators AND, OR, NOT can be used
-   *   in the filter. Wildcard "*" can be used, but for entry_type the full
-   *   project id or number needs to be provided. Example filter expressions:
-   *   "entry_source.display_name=AnExampleDisplayName"
-   *   "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
-   *   "entry_type=projects/example-project/locations/us/entryTypes/a* OR
-   *    entry_type=projects/another-project/locations/*"
-   *   "NOT entry_source.display_name=AnotherExampleDisplayName"
+   *   Optional. A filter on the entries to return. Filters are case-sensitive.
+   *   You can filter the request by the following fields:
+   *
+   *   * entry_type
+   *   * entry_source.display_name
+   *
+   *   The comparison operators are =, !=, <, >, <=, >=. The service compares
+   *   strings according to lexical order.
+   *
+   *   You can use the logical operators AND, OR, NOT in the filter.
+   *
+   *   You can use Wildcard "*", but for entry_type you need to provide the
+   *   full project id or number.
+   *
+   *   Example filter expressions:
+   *
+   *   * "entry_source.display_name=AnExampleDisplayName"
+   *   * "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
+   *   * "entry_type=projects/example-project/locations/us/entryTypes/a* OR
+   *   entry_type=projects/another-project/locations/*"
+   *   * "NOT entry_source.display_name=AnotherExampleDisplayName"
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3641,30 +4100,42 @@ export class CatalogServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEntries`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent Entry Group:
    *   `projects/{project}/locations/{location}/entryGroups/{entry_group}`.
    * @param {number} [request.pageSize]
+   *   Optional. Number of items to return per page. If there are remaining
+   *   results, the service returns a next_page_token. If unspecified, the service
+   *   returns at most 10 Entries. The maximum value is 100; values above 100 will
+   *   be coerced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The pagination token returned by a previous request.
+   *   Optional. Page token received from a previous `ListEntries` call. Provide
+   *   this to retrieve the subsequent page.
    * @param {string} [request.filter]
-   *   Optional. A filter on the entries to return.
-   *   Filters are case-sensitive.
-   *   The request can be filtered by the following fields:
-   *   entry_type, entry_source.display_name.
-   *   The comparison operators are =, !=, <, >, <=, >= (strings are compared
-   *   according to lexical order)
-   *   The logical operators AND, OR, NOT can be used
-   *   in the filter. Wildcard "*" can be used, but for entry_type the full
-   *   project id or number needs to be provided. Example filter expressions:
-   *   "entry_source.display_name=AnExampleDisplayName"
-   *   "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
-   *   "entry_type=projects/example-project/locations/us/entryTypes/a* OR
-   *    entry_type=projects/another-project/locations/*"
-   *   "NOT entry_source.display_name=AnotherExampleDisplayName"
+   *   Optional. A filter on the entries to return. Filters are case-sensitive.
+   *   You can filter the request by the following fields:
+   *
+   *   * entry_type
+   *   * entry_source.display_name
+   *
+   *   The comparison operators are =, !=, <, >, <=, >=. The service compares
+   *   strings according to lexical order.
+   *
+   *   You can use the logical operators AND, OR, NOT in the filter.
+   *
+   *   You can use Wildcard "*", but for entry_type you need to provide the
+   *   full project id or number.
+   *
+   *   Example filter expressions:
+   *
+   *   * "entry_source.display_name=AnExampleDisplayName"
+   *   * "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
+   *   * "entry_type=projects/example-project/locations/us/entryTypes/a* OR
+   *   entry_type=projects/another-project/locations/*"
+   *   * "NOT entry_source.display_name=AnotherExampleDisplayName"
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3708,23 +4179,35 @@ export class CatalogServiceClient {
    *   Required. The resource name of the parent Entry Group:
    *   `projects/{project}/locations/{location}/entryGroups/{entry_group}`.
    * @param {number} [request.pageSize]
+   *   Optional. Number of items to return per page. If there are remaining
+   *   results, the service returns a next_page_token. If unspecified, the service
+   *   returns at most 10 Entries. The maximum value is 100; values above 100 will
+   *   be coerced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The pagination token returned by a previous request.
+   *   Optional. Page token received from a previous `ListEntries` call. Provide
+   *   this to retrieve the subsequent page.
    * @param {string} [request.filter]
-   *   Optional. A filter on the entries to return.
-   *   Filters are case-sensitive.
-   *   The request can be filtered by the following fields:
-   *   entry_type, entry_source.display_name.
-   *   The comparison operators are =, !=, <, >, <=, >= (strings are compared
-   *   according to lexical order)
-   *   The logical operators AND, OR, NOT can be used
-   *   in the filter. Wildcard "*" can be used, but for entry_type the full
-   *   project id or number needs to be provided. Example filter expressions:
-   *   "entry_source.display_name=AnExampleDisplayName"
-   *   "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
-   *   "entry_type=projects/example-project/locations/us/entryTypes/a* OR
-   *    entry_type=projects/another-project/locations/*"
-   *   "NOT entry_source.display_name=AnotherExampleDisplayName"
+   *   Optional. A filter on the entries to return. Filters are case-sensitive.
+   *   You can filter the request by the following fields:
+   *
+   *   * entry_type
+   *   * entry_source.display_name
+   *
+   *   The comparison operators are =, !=, <, >, <=, >=. The service compares
+   *   strings according to lexical order.
+   *
+   *   You can use the logical operators AND, OR, NOT in the filter.
+   *
+   *   You can use Wildcard "*", but for entry_type you need to provide the
+   *   full project id or number.
+   *
+   *   Example filter expressions:
+   *
+   *   * "entry_source.display_name=AnExampleDisplayName"
+   *   * "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
+   *   * "entry_type=projects/example-project/locations/us/entryTypes/a* OR
+   *   entry_type=projects/another-project/locations/*"
+   *   * "NOT entry_source.display_name=AnotherExampleDisplayName"
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3759,7 +4242,7 @@ export class CatalogServiceClient {
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IEntry>;
   }
   /**
-   * Searches for entries matching given query and scope.
+   * Searches for Entries matching the given query and scope.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3768,16 +4251,27 @@ export class CatalogServiceClient {
    *   following form: `projects/{project}/locations/{location}`.
    * @param {string} request.query
    *   Required. The query against which entries in scope should be matched.
+   *   The query syntax is defined in [Search syntax for Dataplex
+   *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
    * @param {number} [request.pageSize]
-   *   Optional. Pagination.
+   *   Optional. Number of results in the search page. If <=0, then defaults
+   *   to 10. Max limit for page_size is 1000. Throws an invalid argument for
+   *   page_size > 1000.
    * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `SearchEntries` call. Provide
+   *   this to retrieve the subsequent page.
    * @param {string} [request.orderBy]
-   *   Optional. Ordering of the results. Supported options to be added later.
+   *   Optional. Specifies the ordering of results.
+   *   Supported values are:
+   *
+   *   * `relevance` (default)
+   *   * `last_modified_timestamp`
+   *   * `last_modified_timestamp asc`
    * @param {string} [request.scope]
-   *   Optional. The scope under which the search should be operating. Should
-   *   either be organizations/<org_id> or projects/<project_ref>. If left
-   *   unspecified, it will default to the organization where the project provided
-   *   in `name` is located.
+   *   Optional. The scope under which the search should be operating. It must
+   *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
+   *   unspecified, it defaults to the organization where the project provided in
+   *   `name` is located.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3860,7 +4354,7 @@ export class CatalogServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchEntries`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -3868,16 +4362,27 @@ export class CatalogServiceClient {
    *   following form: `projects/{project}/locations/{location}`.
    * @param {string} request.query
    *   Required. The query against which entries in scope should be matched.
+   *   The query syntax is defined in [Search syntax for Dataplex
+   *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
    * @param {number} [request.pageSize]
-   *   Optional. Pagination.
+   *   Optional. Number of results in the search page. If <=0, then defaults
+   *   to 10. Max limit for page_size is 1000. Throws an invalid argument for
+   *   page_size > 1000.
    * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `SearchEntries` call. Provide
+   *   this to retrieve the subsequent page.
    * @param {string} [request.orderBy]
-   *   Optional. Ordering of the results. Supported options to be added later.
+   *   Optional. Specifies the ordering of results.
+   *   Supported values are:
+   *
+   *   * `relevance` (default)
+   *   * `last_modified_timestamp`
+   *   * `last_modified_timestamp asc`
    * @param {string} [request.scope]
-   *   Optional. The scope under which the search should be operating. Should
-   *   either be organizations/<org_id> or projects/<project_ref>. If left
-   *   unspecified, it will default to the organization where the project provided
-   *   in `name` is located.
+   *   Optional. The scope under which the search should be operating. It must
+   *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
+   *   unspecified, it defaults to the organization where the project provided in
+   *   `name` is located.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3922,16 +4427,27 @@ export class CatalogServiceClient {
    *   following form: `projects/{project}/locations/{location}`.
    * @param {string} request.query
    *   Required. The query against which entries in scope should be matched.
+   *   The query syntax is defined in [Search syntax for Dataplex
+   *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
    * @param {number} [request.pageSize]
-   *   Optional. Pagination.
+   *   Optional. Number of results in the search page. If <=0, then defaults
+   *   to 10. Max limit for page_size is 1000. Throws an invalid argument for
+   *   page_size > 1000.
    * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `SearchEntries` call. Provide
+   *   this to retrieve the subsequent page.
    * @param {string} [request.orderBy]
-   *   Optional. Ordering of the results. Supported options to be added later.
+   *   Optional. Specifies the ordering of results.
+   *   Supported values are:
+   *
+   *   * `relevance` (default)
+   *   * `last_modified_timestamp`
+   *   * `last_modified_timestamp asc`
    * @param {string} [request.scope]
-   *   Optional. The scope under which the search should be operating. Should
-   *   either be organizations/<org_id> or projects/<project_ref>. If left
-   *   unspecified, it will default to the organization where the project provided
-   *   in `name` is located.
+   *   Optional. The scope under which the search should be operating. It must
+   *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
+   *   unspecified, it defaults to the organization where the project provided in
+   *   `name` is located.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3964,6 +4480,249 @@ export class CatalogServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.ISearchEntriesResult>;
+  }
+  /**
+   * Lists metadata jobs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent location, in the format
+   *   `projects/{project_id_or_number}/locations/{location_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of metadata jobs to return. The service might
+   *   return fewer jobs than this value. If unspecified, at most 10 jobs are
+   *   returned. The maximum value is 1,000.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token received from a previous `ListMetadataJobs` call.
+   *   Provide this token to retrieve the subsequent page of results. When
+   *   paginating, all other parameters that are provided to the
+   *   `ListMetadataJobs` request must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request. Filters are case-sensitive.
+   *   The service supports the following formats:
+   *
+   *   * `labels.key1 = "value1"`
+   *   * `labels:key1`
+   *   * `name = "value"`
+   *
+   *   You can combine filters with `AND`, `OR`, and `NOT` operators.
+   * @param {string} [request.orderBy]
+   *   Optional. The field to sort the results by, either `name` or `create_time`.
+   *   If not specified, the ordering is undefined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.MetadataJob|MetadataJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMetadataJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMetadataJobs(
+    request?: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IMetadataJob[],
+      protos.google.cloud.dataplex.v1.IListMetadataJobsRequest | null,
+      protos.google.cloud.dataplex.v1.IListMetadataJobsResponse,
+    ]
+  >;
+  listMetadataJobs(
+    request: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+      | protos.google.cloud.dataplex.v1.IListMetadataJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataplex.v1.IMetadataJob
+    >
+  ): void;
+  listMetadataJobs(
+    request: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+      | protos.google.cloud.dataplex.v1.IListMetadataJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataplex.v1.IMetadataJob
+    >
+  ): void;
+  listMetadataJobs(
+    request?: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+          | protos.google.cloud.dataplex.v1.IListMetadataJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IMetadataJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+      | protos.google.cloud.dataplex.v1.IListMetadataJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataplex.v1.IMetadataJob
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IMetadataJob[],
+      protos.google.cloud.dataplex.v1.IListMetadataJobsRequest | null,
+      protos.google.cloud.dataplex.v1.IListMetadataJobsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listMetadataJobs(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listMetadataJobs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent location, in the format
+   *   `projects/{project_id_or_number}/locations/{location_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of metadata jobs to return. The service might
+   *   return fewer jobs than this value. If unspecified, at most 10 jobs are
+   *   returned. The maximum value is 1,000.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token received from a previous `ListMetadataJobs` call.
+   *   Provide this token to retrieve the subsequent page of results. When
+   *   paginating, all other parameters that are provided to the
+   *   `ListMetadataJobs` request must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request. Filters are case-sensitive.
+   *   The service supports the following formats:
+   *
+   *   * `labels.key1 = "value1"`
+   *   * `labels:key1`
+   *   * `name = "value"`
+   *
+   *   You can combine filters with `AND`, `OR`, and `NOT` operators.
+   * @param {string} [request.orderBy]
+   *   Optional. The field to sort the results by, either `name` or `create_time`.
+   *   If not specified, the ordering is undefined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.MetadataJob|MetadataJob} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMetadataJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMetadataJobsStream(
+    request?: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMetadataJobs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listMetadataJobs.createStream(
+      this.innerApiCalls.listMetadataJobs as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listMetadataJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent location, in the format
+   *   `projects/{project_id_or_number}/locations/{location_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of metadata jobs to return. The service might
+   *   return fewer jobs than this value. If unspecified, at most 10 jobs are
+   *   returned. The maximum value is 1,000.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token received from a previous `ListMetadataJobs` call.
+   *   Provide this token to retrieve the subsequent page of results. When
+   *   paginating, all other parameters that are provided to the
+   *   `ListMetadataJobs` request must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request. Filters are case-sensitive.
+   *   The service supports the following formats:
+   *
+   *   * `labels.key1 = "value1"`
+   *   * `labels:key1`
+   *   * `name = "value"`
+   *
+   *   You can combine filters with `AND`, `OR`, and `NOT` operators.
+   * @param {string} [request.orderBy]
+   *   Optional. The field to sort the results by, either `name` or `create_time`.
+   *   If not specified, the ordering is undefined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataplex.v1.MetadataJob|MetadataJob}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/catalog_service.list_metadata_jobs.js</caption>
+   * region_tag:dataplex_v1_generated_CatalogService_ListMetadataJobs_async
+   */
+  listMetadataJobsAsync(
+    request?: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.dataplex.v1.IMetadataJob> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMetadataJobs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listMetadataJobs.asyncIterate(
+      this.innerApiCalls['listMetadataJobs'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dataplex.v1.IMetadataJob>;
   }
   /**
    * Gets information about a location.
@@ -4075,7 +4834,7 @@ export class CatalogServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -4088,6 +4847,20 @@ export class CatalogServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -4124,6 +4897,13 @@ export class CatalogServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -4159,11 +4939,11 @@ export class CatalogServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -4172,6 +4952,20 @@ export class CatalogServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -4202,7 +4996,7 @@ export class CatalogServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -4215,6 +5009,20 @@ export class CatalogServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -5213,6 +6021,58 @@ export class CatalogServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified metadataJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadataJob
+   * @returns {string} Resource name string.
+   */
+  metadataJobPath(project: string, location: string, metadataJob: string) {
+    return this.pathTemplates.metadataJobPathTemplate.render({
+      project: project,
+      location: location,
+      metadataJob: metadataJob,
+    });
+  }
+
+  /**
+   * Parse the project from MetadataJob resource.
+   *
+   * @param {string} metadataJobName
+   *   A fully-qualified path representing MetadataJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMetadataJobName(metadataJobName: string) {
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .project;
+  }
+
+  /**
+   * Parse the location from MetadataJob resource.
+   *
+   * @param {string} metadataJobName
+   *   A fully-qualified path representing MetadataJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMetadataJobName(metadataJobName: string) {
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .location;
+  }
+
+  /**
+   * Parse the metadataJob from MetadataJob resource.
+   *
+   * @param {string} metadataJobName
+   *   A fully-qualified path representing MetadataJob resource.
+   * @returns {string} A string representing the metadataJob.
+   */
+  matchMetadataJobFromMetadataJobName(metadataJobName: string) {
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .metadataJob;
   }
 
   /**

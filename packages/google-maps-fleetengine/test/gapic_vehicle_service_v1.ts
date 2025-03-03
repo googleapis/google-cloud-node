@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -464,6 +464,110 @@ describe('v1.VehicleServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close();
             await assert.rejects(client.getVehicle(request), expectedError);
+        });
+    });
+
+    describe('deleteVehicle', () => {
+        it('invokes deleteVehicle without error', async () => {
+            const client = new vehicleserviceModule.v1.VehicleServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.v1.DeleteVehicleRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedHeaderRequestParams = 'provider_id=providers%2Fvalue';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteVehicle = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteVehicle(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteVehicle as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteVehicle as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteVehicle without error using callback', async () => {
+            const client = new vehicleserviceModule.v1.VehicleServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.v1.DeleteVehicleRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedHeaderRequestParams = 'provider_id=providers%2Fvalue';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteVehicle = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteVehicle(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteVehicle as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteVehicle as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteVehicle with error', async () => {
+            const client = new vehicleserviceModule.v1.VehicleServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.v1.DeleteVehicleRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedHeaderRequestParams = 'provider_id=providers%2Fvalue';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteVehicle = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteVehicle(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteVehicle as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteVehicle as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteVehicle with closed client', async () => {
+            const client = new vehicleserviceModule.v1.VehicleServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.v1.DeleteVehicleRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close();
+            await assert.rejects(client.deleteVehicle(request), expectedError);
         });
     });
 

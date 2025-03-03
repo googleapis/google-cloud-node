@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -216,6 +216,9 @@ export class ConsumerProcurementServiceClient {
       billingAccountPathTemplate: new this._gaxModule.PathTemplate(
         'billingAccounts/{billing_account}'
       ),
+      licensePoolPathTemplate: new this._gaxModule.PathTemplate(
+        'billingAccounts/{billing_account}/orders/{order}/licensePool'
+      ),
       orderPathTemplate: new this._gaxModule.PathTemplate(
         'billingAccounts/{billing_account}/orders/{order}'
       ),
@@ -258,12 +261,34 @@ export class ConsumerProcurementServiceClient {
     const placeOrderMetadata = protoFilesRoot.lookup(
       '.google.cloud.commerce.consumer.procurement.v1.PlaceOrderMetadata'
     ) as gax.protobuf.Type;
+    const modifyOrderResponse = protoFilesRoot.lookup(
+      '.google.cloud.commerce.consumer.procurement.v1.Order'
+    ) as gax.protobuf.Type;
+    const modifyOrderMetadata = protoFilesRoot.lookup(
+      '.google.cloud.commerce.consumer.procurement.v1.ModifyOrderMetadata'
+    ) as gax.protobuf.Type;
+    const cancelOrderResponse = protoFilesRoot.lookup(
+      '.google.cloud.commerce.consumer.procurement.v1.Order'
+    ) as gax.protobuf.Type;
+    const cancelOrderMetadata = protoFilesRoot.lookup(
+      '.google.cloud.commerce.consumer.procurement.v1.CancelOrderMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       placeOrder: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         placeOrderResponse.decode.bind(placeOrderResponse),
         placeOrderMetadata.decode.bind(placeOrderMetadata)
+      ),
+      modifyOrder: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        modifyOrderResponse.decode.bind(modifyOrderResponse),
+        modifyOrderMetadata.decode.bind(modifyOrderMetadata)
+      ),
+      cancelOrder: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        cancelOrderResponse.decode.bind(cancelOrderResponse),
+        cancelOrderMetadata.decode.bind(cancelOrderMetadata)
       ),
     };
 
@@ -321,6 +346,8 @@ export class ConsumerProcurementServiceClient {
       'placeOrder',
       'getOrder',
       'listOrders',
+      'modifyOrder',
+      'cancelOrder',
     ];
     for (const methodName of consumerProcurementServiceStubMethods) {
       const callPromise = this.consumerProcurementServiceStub.then(
@@ -561,7 +588,7 @@ export class ConsumerProcurementServiceClient {
    * @param {string} [request.requestId]
    *   Optional. A unique identifier for this request.
    *   The server will ignore subsequent requests that provide a duplicate request
-   *   ID for at least 120 minutes after the first request.
+   *   ID for at least 24 hours after the first request.
    *
    *   The request ID must be a valid
    *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
@@ -695,6 +722,298 @@ export class ConsumerProcurementServiceClient {
     >;
   }
   /**
+   * Modifies an existing
+   * {@link protos.google.cloud.commerce.consumer.procurement.v1.Order|Order} resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the order to update.
+   * @param {number[]} [request.modifications]
+   *   Optional. Modifications for an existing Order created by an Offer.
+   *   Required when Offer based Order is being modified, except for when going
+   *   from an offer to a public plan.
+   * @param {string} [request.displayName]
+   *   Optional. Updated display name of the order, leave as empty if you do not
+   *   want to update current display name.
+   * @param {string} [request.etag]
+   *   Optional. The weak etag, which can be optionally populated, of the order
+   *   that this modify request is based on. Validation checking will only happen
+   *   if the invoker supplies this field.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/consumer_procurement_service.modify_order.js</caption>
+   * region_tag:cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_ModifyOrder_async
+   */
+  modifyOrder(
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.IModifyOrderRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1.IModifyOrderMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  modifyOrder(
+    request: protos.google.cloud.commerce.consumer.procurement.v1.IModifyOrderRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1.IModifyOrderMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  modifyOrder(
+    request: protos.google.cloud.commerce.consumer.procurement.v1.IModifyOrderRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1.IModifyOrderMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  modifyOrder(
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.IModifyOrderRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+            protos.google.cloud.commerce.consumer.procurement.v1.IModifyOrderMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1.IModifyOrderMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1.IModifyOrderMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.modifyOrder(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `modifyOrder()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/consumer_procurement_service.modify_order.js</caption>
+   * region_tag:cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_ModifyOrder_async
+   */
+  async checkModifyOrderProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.commerce.consumer.procurement.v1.Order,
+      protos.google.cloud.commerce.consumer.procurement.v1.ModifyOrderMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.modifyOrder,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.commerce.consumer.procurement.v1.Order,
+      protos.google.cloud.commerce.consumer.procurement.v1.ModifyOrderMetadata
+    >;
+  }
+  /**
+   * Cancels an existing
+   * {@link protos.google.cloud.commerce.consumer.procurement.v1.Order|Order}. Every product
+   * procured in the Order will be cancelled.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the order.
+   * @param {string} [request.etag]
+   *   Optional. The weak etag, which can be optionally populated, of the order
+   *   that this cancel request is based on. Validation checking will only happen
+   *   if the invoker supplies this field.
+   * @param {google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest.CancellationPolicy} [request.cancellationPolicy]
+   *   Optional. Cancellation policy of this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/consumer_procurement_service.cancel_order.js</caption>
+   * region_tag:cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_CancelOrder_async
+   */
+  cancelOrder(
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.ICancelOrderRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1.ICancelOrderMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  cancelOrder(
+    request: protos.google.cloud.commerce.consumer.procurement.v1.ICancelOrderRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1.ICancelOrderMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelOrder(
+    request: protos.google.cloud.commerce.consumer.procurement.v1.ICancelOrderRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1.ICancelOrderMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelOrder(
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.ICancelOrderRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+            protos.google.cloud.commerce.consumer.procurement.v1.ICancelOrderMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1.ICancelOrderMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1.ICancelOrderMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.cancelOrder(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `cancelOrder()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/consumer_procurement_service.cancel_order.js</caption>
+   * region_tag:cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_CancelOrder_async
+   */
+  async checkCancelOrderProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.commerce.consumer.procurement.v1.Order,
+      protos.google.cloud.commerce.consumer.procurement.v1.CancelOrderMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.cancelOrder,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.commerce.consumer.procurement.v1.Order,
+      protos.google.cloud.commerce.consumer.procurement.v1.CancelOrderMetadata
+    >;
+  }
+  /**
    * Lists {@link protos.google.cloud.commerce.consumer.procurement.v1.Order|Order}
    * resources that the user has access to, within the scope of the parent
    * resource.
@@ -717,6 +1036,7 @@ export class ConsumerProcurementServiceClient {
    *   Supported query attributes are
    *
    *   * `display_name`
+   *
    *
    *   If the query contains special characters other than letters,
    *   underscore, or digits, the phrase must be quoted with double quotes. For
@@ -814,7 +1134,7 @@ export class ConsumerProcurementServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listOrders`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -833,6 +1153,7 @@ export class ConsumerProcurementServiceClient {
    *   Supported query attributes are
    *
    *   * `display_name`
+   *
    *
    *   If the query contains special characters other than letters,
    *   underscore, or digits, the phrase must be quoted with double quotes. For
@@ -897,6 +1218,7 @@ export class ConsumerProcurementServiceClient {
    *   Supported query attributes are
    *
    *   * `display_name`
+   *
    *
    *   If the query contains special characters other than letters,
    *   underscore, or digits, the phrase must be quoted with double quotes. For
@@ -971,7 +1293,7 @@ export class ConsumerProcurementServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -984,6 +1306,20 @@ export class ConsumerProcurementServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1020,6 +1356,13 @@ export class ConsumerProcurementServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1055,11 +1398,11 @@ export class ConsumerProcurementServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1068,6 +1411,20 @@ export class ConsumerProcurementServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1098,7 +1455,7 @@ export class ConsumerProcurementServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1111,6 +1468,20 @@ export class ConsumerProcurementServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1141,6 +1512,44 @@ export class ConsumerProcurementServiceClient {
     return this.pathTemplates.billingAccountPathTemplate.match(
       billingAccountName
     ).billing_account;
+  }
+
+  /**
+   * Return a fully-qualified licensePool resource name string.
+   *
+   * @param {string} billing_account
+   * @param {string} order
+   * @returns {string} Resource name string.
+   */
+  licensePoolPath(billingAccount: string, order: string) {
+    return this.pathTemplates.licensePoolPathTemplate.render({
+      billing_account: billingAccount,
+      order: order,
+    });
+  }
+
+  /**
+   * Parse the billing_account from LicensePool resource.
+   *
+   * @param {string} licensePoolName
+   *   A fully-qualified path representing LicensePool resource.
+   * @returns {string} A string representing the billing_account.
+   */
+  matchBillingAccountFromLicensePoolName(licensePoolName: string) {
+    return this.pathTemplates.licensePoolPathTemplate.match(licensePoolName)
+      .billing_account;
+  }
+
+  /**
+   * Parse the order from LicensePool resource.
+   *
+   * @param {string} licensePoolName
+   *   A fully-qualified path representing LicensePool resource.
+   * @returns {string} A string representing the order.
+   */
+  matchOrderFromLicensePoolName(licensePoolName: string) {
+    return this.pathTemplates.licensePoolPathTemplate.match(licensePoolName)
+      .order;
   }
 
   /**

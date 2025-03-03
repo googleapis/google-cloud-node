@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-products",
-        "version": "0.1.0",
+        "version": "0.1.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -70,7 +70,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -114,7 +114,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 58,
                     "type": "FULL"
                 }
             ],

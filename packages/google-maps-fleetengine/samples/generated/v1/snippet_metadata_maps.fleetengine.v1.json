@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-fleetengine",
-        "version": "0.1.0",
+        "version": "0.5.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -124,6 +124,50 @@
                 "method": {
                     "shortName": "GetTrip",
                     "fullName": "maps.fleetengine.v1.TripService.GetTrip",
+                    "service": {
+                        "shortName": "TripService",
+                        "fullName": "maps.fleetengine.v1.TripService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "fleetengine_v1_generated_TripService_DeleteTrip_async",
+            "title": "TripService deleteTrip Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a single Trip. Returns FAILED_PRECONDITION if the Trip is active and assigned to a vehicle.",
+            "canonical": true,
+            "file": "trip_service.delete_trip.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteTrip",
+                "fullName": "maps.fleetengine.v1.TripService.DeleteTrip",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "header",
+                        "type": ".maps.fleetengine.v1.RequestHeader"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "TripServiceClient",
+                    "fullName": "maps.fleetengine.v1.TripServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteTrip",
+                    "fullName": "maps.fleetengine.v1.TripService.DeleteTrip",
                     "service": {
                         "shortName": "TripService",
                         "fullName": "maps.fleetengine.v1.TripService"
@@ -400,6 +444,50 @@
                 "method": {
                     "shortName": "GetVehicle",
                     "fullName": "maps.fleetengine.v1.VehicleService.GetVehicle",
+                    "service": {
+                        "shortName": "VehicleService",
+                        "fullName": "maps.fleetengine.v1.VehicleService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "fleetengine_v1_generated_VehicleService_DeleteVehicle_async",
+            "title": "TripService deleteVehicle Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a Vehicle from the Fleet Engine. Returns FAILED_PRECONDITION if the Vehicle has active Trips. assigned to it.",
+            "canonical": true,
+            "file": "vehicle_service.delete_vehicle.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteVehicle",
+                "fullName": "maps.fleetengine.v1.VehicleService.DeleteVehicle",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "header",
+                        "type": ".maps.fleetengine.v1.RequestHeader"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "VehicleServiceClient",
+                    "fullName": "maps.fleetengine.v1.VehicleServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteVehicle",
+                    "fullName": "maps.fleetengine.v1.VehicleService.DeleteVehicle",
                     "service": {
                         "shortName": "VehicleService",
                         "fullName": "maps.fleetengine.v1.VehicleService"

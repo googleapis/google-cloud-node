@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -284,7 +284,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.GenerateContentResponse()
       );
@@ -315,7 +315,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.GenerateContentResponse()
       );
@@ -362,7 +362,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateContent = stubSimpleCall(
         undefined,
@@ -414,7 +414,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.EmbedContentResponse()
       );
@@ -445,7 +445,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.EmbedContentResponse()
       );
@@ -492,7 +492,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.embedContent = stubSimpleCall(
         undefined,
@@ -544,7 +544,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.BatchEmbedContentsResponse()
       );
@@ -576,7 +576,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.BatchEmbedContentsResponse()
       );
@@ -623,7 +623,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchEmbedContents = stubSimpleCall(
         undefined,
@@ -675,7 +675,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.CountTokensResponse()
       );
@@ -706,7 +706,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.CountTokensResponse()
       );
@@ -753,7 +753,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.countTokens = stubSimpleCall(
         undefined,
@@ -805,7 +805,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.GenerateContentResponse()
       );
@@ -850,7 +850,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.GenerateContentResponse()
       );
@@ -896,7 +896,7 @@ describe('v1.GenerativeServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.streamGenerateContent = stubServerStreamingCall(
         undefined,

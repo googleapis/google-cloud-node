@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -318,7 +318,7 @@ describe('v3.WebhooksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Webhook()
       );
@@ -349,7 +349,7 @@ describe('v3.WebhooksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Webhook()
       );
@@ -396,7 +396,7 @@ describe('v3.WebhooksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWebhook = stubSimpleCall(
         undefined,
@@ -448,7 +448,7 @@ describe('v3.WebhooksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Webhook()
       );
@@ -479,7 +479,7 @@ describe('v3.WebhooksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Webhook()
       );
@@ -526,7 +526,7 @@ describe('v3.WebhooksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWebhook = stubSimpleCall(
         undefined,
@@ -579,7 +579,7 @@ describe('v3.WebhooksClient', () => {
         ['webhook', 'name']
       );
       request.webhook.name = defaultValue1;
-      const expectedHeaderRequestParams = `webhook.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `webhook.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Webhook()
       );
@@ -611,7 +611,7 @@ describe('v3.WebhooksClient', () => {
         ['webhook', 'name']
       );
       request.webhook.name = defaultValue1;
-      const expectedHeaderRequestParams = `webhook.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `webhook.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Webhook()
       );
@@ -659,7 +659,7 @@ describe('v3.WebhooksClient', () => {
         ['webhook', 'name']
       );
       request.webhook.name = defaultValue1;
-      const expectedHeaderRequestParams = `webhook.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `webhook.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWebhook = stubSimpleCall(
         undefined,
@@ -712,7 +712,7 @@ describe('v3.WebhooksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -743,7 +743,7 @@ describe('v3.WebhooksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -790,7 +790,7 @@ describe('v3.WebhooksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWebhook = stubSimpleCall(
         undefined,
@@ -842,7 +842,7 @@ describe('v3.WebhooksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.Webhook()
@@ -881,7 +881,7 @@ describe('v3.WebhooksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.Webhook()
@@ -936,7 +936,7 @@ describe('v3.WebhooksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listWebhooks = stubSimpleCall(
         undefined,
@@ -967,7 +967,7 @@ describe('v3.WebhooksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.Webhook()
@@ -1027,7 +1027,7 @@ describe('v3.WebhooksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWebhooks.createStream = stubPageStreamingCall(
         undefined,
@@ -1078,7 +1078,7 @@ describe('v3.WebhooksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.Webhook()
@@ -1127,7 +1127,7 @@ describe('v3.WebhooksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWebhooks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

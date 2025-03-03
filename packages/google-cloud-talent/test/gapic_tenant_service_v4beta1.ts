@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -320,7 +320,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Tenant()
       );
@@ -351,7 +351,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Tenant()
       );
@@ -398,7 +398,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTenant = stubSimpleCall(
         undefined,
@@ -450,7 +450,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Tenant()
       );
@@ -481,7 +481,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Tenant()
       );
@@ -528,7 +528,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTenant = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getTenant(request), expectedError);
@@ -578,7 +578,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['tenant', 'name']
       );
       request.tenant.name = defaultValue1;
-      const expectedHeaderRequestParams = `tenant.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tenant.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Tenant()
       );
@@ -610,7 +610,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['tenant', 'name']
       );
       request.tenant.name = defaultValue1;
-      const expectedHeaderRequestParams = `tenant.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tenant.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Tenant()
       );
@@ -658,7 +658,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['tenant', 'name']
       );
       request.tenant.name = defaultValue1;
-      const expectedHeaderRequestParams = `tenant.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tenant.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTenant = stubSimpleCall(
         undefined,
@@ -711,7 +711,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -742,7 +742,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -789,7 +789,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTenant = stubSimpleCall(
         undefined,
@@ -841,7 +841,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Tenant()),
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Tenant()),
@@ -874,7 +874,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Tenant()),
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Tenant()),
@@ -923,7 +923,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTenants = stubSimpleCall(
         undefined,
@@ -954,7 +954,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Tenant()),
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Tenant()),
@@ -1008,7 +1008,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTenants.createStream = stubPageStreamingCall(
         undefined,
@@ -1059,7 +1059,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Tenant()),
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Tenant()),
@@ -1102,7 +1102,7 @@ describe('v4beta1.TenantServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTenants.asyncIterate = stubAsyncIterationCall(
         undefined,

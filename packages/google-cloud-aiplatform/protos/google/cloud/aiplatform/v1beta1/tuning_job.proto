@@ -21,6 +21,7 @@ import "google/api/resource.proto";
 import "google/cloud/aiplatform/v1beta1/content.proto";
 import "google/cloud/aiplatform/v1beta1/encryption_spec.proto";
 import "google/cloud/aiplatform/v1beta1/job_state.proto";
+import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
 
@@ -52,6 +53,9 @@ message TuningJob {
 
     // Tuning Spec for Distillation.
     DistillationSpec distillation_spec = 17;
+
+    // Tuning Spec for open sourced and third party partner models.
+    PartnerModelTuningSpec partner_model_tuning_spec = 21;
   }
 
   // Output only. Identifier. Resource name of a TuningJob. Format:
@@ -144,6 +148,15 @@ message TuningJob {
   // then all resources created by the TuningJob will be encrypted with the
   // provided encryption key.
   EncryptionSpec encryption_spec = 16;
+
+  // The service account that the tuningJob workload runs as.
+  // If not specified, the Vertex AI Secure Fine-Tuned Service Agent in the
+  // project will be used. See
+  // https://cloud.google.com/iam/docs/service-agents#vertex-ai-secure-fine-tuning-service-agent
+  //
+  // Users starting the pipeline must have the `iam.serviceAccounts.actAs`
+  // permission on this service account.
+  string service_account = 22;
 }
 
 // The Model Registry Model and Online Prediction Endpoint assiociated with
@@ -384,7 +397,7 @@ message SupervisedHyperParameters {
   AdapterSize adapter_size = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Tuning Spec for Supervised Tuning.
+// Tuning Spec for Supervised Tuning for first party models.
 message SupervisedTuningSpec {
   // Required. Cloud Storage path to file containing training dataset for
   // tuning. The dataset must be formatted as a JSONL file.
@@ -449,4 +462,42 @@ message DistillationHyperParameters {
   // Optional. Adapter size for distillation.
   SupervisedHyperParameters.AdapterSize adapter_size = 3
       [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Tuning spec for Partner models.
+message PartnerModelTuningSpec {
+  // Required. Cloud Storage path to file containing training dataset for
+  // tuning. The dataset must be formatted as a JSONL file.
+  string training_dataset_uri = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Cloud Storage path to file containing validation dataset for
+  // tuning. The dataset must be formatted as a JSONL file.
+  string validation_dataset_uri = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Hyperparameters for tuning. The accepted hyper_parameters and their valid
+  // range of values will differ depending on the base model.
+  map<string, google.protobuf.Value> hyper_parameters = 3;
+}
+
+// TunedModel Reference for legacy model migration.
+message TunedModelRef {
+  // The Tuned Model Reference for the model.
+  oneof tuned_model_ref {
+    // Support migration from model registry.
+    string tuned_model = 1 [(google.api.resource_reference) = {
+      type: "aiplatform.googleapis.com/Model"
+    }];
+
+    // Support migration from tuning job list page, from gemini-1.0-pro-002
+    // to 1.5 and above.
+    string tuning_job = 2 [(google.api.resource_reference) = {
+      type: "aiplatform.googleapis.com/TuningJob"
+    }];
+
+    // Support migration from tuning job list page, from bison model to gemini
+    // model.
+    string pipeline_job = 3 [(google.api.resource_reference) = {
+      type: "aiplatform.googleapis.com/PipelineJob"
+    }];
+  }
 }

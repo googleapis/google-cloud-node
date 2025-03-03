@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -325,7 +325,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.Reservation()
       );
@@ -356,7 +356,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.Reservation()
       );
@@ -403,7 +403,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createReservation = stubSimpleCall(
         undefined,
@@ -455,7 +455,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.Reservation()
       );
@@ -486,7 +486,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.Reservation()
       );
@@ -533,7 +533,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getReservation = stubSimpleCall(
         undefined,
@@ -585,7 +585,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -616,7 +616,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -663,7 +663,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteReservation = stubSimpleCall(
         undefined,
@@ -716,7 +716,7 @@ describe('v1.ReservationServiceClient', () => {
         ['reservation', 'name']
       );
       request.reservation.name = defaultValue1;
-      const expectedHeaderRequestParams = `reservation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `reservation.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.Reservation()
       );
@@ -748,7 +748,7 @@ describe('v1.ReservationServiceClient', () => {
         ['reservation', 'name']
       );
       request.reservation.name = defaultValue1;
-      const expectedHeaderRequestParams = `reservation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `reservation.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.Reservation()
       );
@@ -796,7 +796,7 @@ describe('v1.ReservationServiceClient', () => {
         ['reservation', 'name']
       );
       request.reservation.name = defaultValue1;
-      const expectedHeaderRequestParams = `reservation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `reservation.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateReservation = stubSimpleCall(
         undefined,
@@ -834,6 +834,137 @@ describe('v1.ReservationServiceClient', () => {
     });
   });
 
+  describe('failoverReservation', () => {
+    it('invokes failoverReservation without error', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.FailoverReservationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.Reservation()
+      );
+      client.innerApiCalls.failoverReservation =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.failoverReservation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.failoverReservation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.failoverReservation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes failoverReservation without error using callback', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.FailoverReservationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.Reservation()
+      );
+      client.innerApiCalls.failoverReservation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.failoverReservation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.bigquery.reservation.v1.IReservation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.failoverReservation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.failoverReservation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes failoverReservation with error', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.FailoverReservationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.failoverReservation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.failoverReservation(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.failoverReservation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.failoverReservation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes failoverReservation with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.FailoverReservationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.failoverReservation(request), expectedError);
+    });
+  });
+
   describe('createCapacityCommitment', () => {
     it('invokes createCapacityCommitment without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
@@ -849,7 +980,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
       );
@@ -881,7 +1012,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
       );
@@ -928,7 +1059,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCapacityCommitment = stubSimpleCall(
         undefined,
@@ -986,7 +1117,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
       );
@@ -1018,7 +1149,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
       );
@@ -1065,7 +1196,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCapacityCommitment = stubSimpleCall(
         undefined,
@@ -1123,7 +1254,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1155,7 +1286,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1202,7 +1333,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCapacityCommitment = stubSimpleCall(
         undefined,
@@ -1261,7 +1392,7 @@ describe('v1.ReservationServiceClient', () => {
         ['capacityCommitment', 'name']
       );
       request.capacityCommitment.name = defaultValue1;
-      const expectedHeaderRequestParams = `capacity_commitment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `capacity_commitment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
       );
@@ -1294,7 +1425,7 @@ describe('v1.ReservationServiceClient', () => {
         ['capacityCommitment', 'name']
       );
       request.capacityCommitment.name = defaultValue1;
-      const expectedHeaderRequestParams = `capacity_commitment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `capacity_commitment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
       );
@@ -1342,7 +1473,7 @@ describe('v1.ReservationServiceClient', () => {
         ['capacityCommitment', 'name']
       );
       request.capacityCommitment.name = defaultValue1;
-      const expectedHeaderRequestParams = `capacity_commitment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `capacity_commitment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCapacityCommitment = stubSimpleCall(
         undefined,
@@ -1401,7 +1532,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentResponse()
       );
@@ -1433,7 +1564,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentResponse()
       );
@@ -1480,7 +1611,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.splitCapacityCommitment = stubSimpleCall(
         undefined,
@@ -1538,7 +1669,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
       );
@@ -1570,7 +1701,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
       );
@@ -1617,7 +1748,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.mergeCapacityCommitments = stubSimpleCall(
         undefined,
@@ -1675,7 +1806,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.Assignment()
       );
@@ -1706,7 +1837,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.Assignment()
       );
@@ -1753,7 +1884,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAssignment = stubSimpleCall(
         undefined,
@@ -1805,7 +1936,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1836,7 +1967,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1883,7 +2014,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAssignment = stubSimpleCall(
         undefined,
@@ -1935,7 +2066,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.Assignment()
       );
@@ -1966,7 +2097,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.Assignment()
       );
@@ -2013,7 +2144,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.moveAssignment = stubSimpleCall(
         undefined,
@@ -2066,7 +2197,7 @@ describe('v1.ReservationServiceClient', () => {
         ['assignment', 'name']
       );
       request.assignment.name = defaultValue1;
-      const expectedHeaderRequestParams = `assignment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `assignment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.Assignment()
       );
@@ -2098,7 +2229,7 @@ describe('v1.ReservationServiceClient', () => {
         ['assignment', 'name']
       );
       request.assignment.name = defaultValue1;
-      const expectedHeaderRequestParams = `assignment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `assignment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.Assignment()
       );
@@ -2146,7 +2277,7 @@ describe('v1.ReservationServiceClient', () => {
         ['assignment', 'name']
       );
       request.assignment.name = defaultValue1;
-      const expectedHeaderRequestParams = `assignment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `assignment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAssignment = stubSimpleCall(
         undefined,
@@ -2199,7 +2330,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.BiReservation()
       );
@@ -2230,7 +2361,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.BiReservation()
       );
@@ -2277,7 +2408,7 @@ describe('v1.ReservationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getBiReservation = stubSimpleCall(
         undefined,
@@ -2330,7 +2461,7 @@ describe('v1.ReservationServiceClient', () => {
         ['biReservation', 'name']
       );
       request.biReservation.name = defaultValue1;
-      const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.BiReservation()
       );
@@ -2363,7 +2494,7 @@ describe('v1.ReservationServiceClient', () => {
         ['biReservation', 'name']
       );
       request.biReservation.name = defaultValue1;
-      const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.BiReservation()
       );
@@ -2411,7 +2542,7 @@ describe('v1.ReservationServiceClient', () => {
         ['biReservation', 'name']
       );
       request.biReservation.name = defaultValue1;
-      const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBiReservation = stubSimpleCall(
         undefined,
@@ -2464,7 +2595,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Reservation()
@@ -2503,7 +2634,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Reservation()
@@ -2560,7 +2691,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listReservations = stubSimpleCall(
         undefined,
@@ -2591,7 +2722,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Reservation()
@@ -2654,7 +2785,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReservations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2706,7 +2837,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Reservation()
@@ -2756,7 +2887,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReservations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2799,7 +2930,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
@@ -2839,7 +2970,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
@@ -2896,7 +3027,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCapacityCommitments = stubSimpleCall(
         undefined,
@@ -2930,7 +3061,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
@@ -2999,7 +3130,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCapacityCommitments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3057,7 +3188,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
@@ -3111,7 +3242,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCapacityCommitments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3158,7 +3289,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Assignment()
@@ -3197,7 +3328,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Assignment()
@@ -3254,7 +3385,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAssignments = stubSimpleCall(
         undefined,
@@ -3285,7 +3416,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Assignment()
@@ -3348,7 +3479,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssignments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3400,7 +3531,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Assignment()
@@ -3450,7 +3581,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssignments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3494,7 +3625,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Assignment()
@@ -3535,7 +3666,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Assignment()
@@ -3594,7 +3725,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchAssignments = stubSimpleCall(
         undefined,
@@ -3627,7 +3758,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Assignment()
@@ -3692,7 +3823,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAssignments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3746,7 +3877,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Assignment()
@@ -3798,7 +3929,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAssignments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3842,7 +3973,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Assignment()
@@ -3882,7 +4013,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Assignment()
@@ -3939,7 +4070,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchAllAssignments = stubSimpleCall(
         undefined,
@@ -3970,7 +4101,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Assignment()
@@ -4033,7 +4164,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAllAssignments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4085,7 +4216,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.reservation.v1.Assignment()
@@ -4135,7 +4266,7 @@ describe('v1.ReservationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAllAssignments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

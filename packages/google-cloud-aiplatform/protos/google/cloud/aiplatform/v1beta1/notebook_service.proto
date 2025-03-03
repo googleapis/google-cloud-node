@@ -172,6 +172,20 @@ service NotebookService {
     };
   }
 
+  // Stops a NotebookRuntime.
+  rpc StopNotebookRuntime(StopNotebookRuntimeRequest)
+      returns (google.longrunning.Operation) {
+    option (google.api.http) = {
+      post: "/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*}:stop"
+      body: "*"
+    };
+    option (google.api.method_signature) = "name";
+    option (google.longrunning.operation_info) = {
+      response_type: "StopNotebookRuntimeResponse"
+      metadata_type: "StopNotebookRuntimeOperationMetadata"
+    };
+  }
+
   // Creates a NotebookExecutionJob.
   rpc CreateNotebookExecutionJob(CreateNotebookExecutionJobRequest)
       returns (google.longrunning.Operation) {
@@ -300,6 +314,8 @@ message ListNotebookRuntimeTemplatesRequest {
   //     * A key including a space must be quoted. `labels."a key"`.
   //   * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
   //   [USER_DEFINED, ONE_CLICK].
+  //   * `machineType` supports = and !=.
+  //   * `acceleratorType` supports = and !=.
   //
   // Some examples:
   //
@@ -307,6 +323,8 @@ message ListNotebookRuntimeTemplatesRequest {
   //   * `displayName="myDisplayName"`
   //   * `labels.myKey="myValue"`
   //   * `notebookRuntimeType=USER_DEFINED`
+  //   * `machineType=e2-standard-4`
+  //   * `acceleratorType=NVIDIA_TESLA_T4`
   string filter = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The standard list page size.
@@ -471,6 +489,8 @@ message ListNotebookRuntimesRequest {
   //   UI_RESOURCE_STATE_CREATION_FAILED].
   //   * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
   //   [USER_DEFINED, ONE_CLICK].
+  //   * `machineType` supports = and !=.
+  //   * `acceleratorType` supports = and !=.
   //
   // Some examples:
   //
@@ -482,6 +502,8 @@ message ListNotebookRuntimesRequest {
   //   * `runtimeUser="test@google.com"`
   //   * `uiState=UI_RESOURCE_STATE_BEING_DELETED`
   //   * `notebookRuntimeType=USER_DEFINED`
+  //   * `machineType=e2-standard-4`
+  //   * `acceleratorType=NVIDIA_TESLA_T4`
   string filter = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The standard list page size.
@@ -598,6 +620,32 @@ message StartNotebookRuntimeOperationMetadata {
 // [NotebookService.StartNotebookRuntime][google.cloud.aiplatform.v1beta1.NotebookService.StartNotebookRuntime].
 message StartNotebookRuntimeResponse {}
 
+// Request message for
+// [NotebookService.StopNotebookRuntime][google.cloud.aiplatform.v1beta1.NotebookService.StopNotebookRuntime].
+message StopNotebookRuntimeRequest {
+  // Required. The name of the NotebookRuntime resource to be stopped.
+  // Instead of checking whether the name is in valid NotebookRuntime resource
+  // name format, directly throw NotFound exception if there is no such
+  // NotebookRuntime in spanner.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "aiplatform.googleapis.com/NotebookRuntime"
+    }
+  ];
+}
+
+// Metadata information for
+// [NotebookService.StopNotebookRuntime][google.cloud.aiplatform.v1beta1.NotebookService.StopNotebookRuntime].
+message StopNotebookRuntimeOperationMetadata {
+  // The operation generic information.
+  GenericOperationMetadata generic_metadata = 1;
+}
+
+// Response message for
+// [NotebookService.StopNotebookRuntime][google.cloud.aiplatform.v1beta1.NotebookService.StopNotebookRuntime].
+message StopNotebookRuntimeResponse {}
+
 // Request message for [NotebookService.CreateNotebookExecutionJob]
 message CreateNotebookExecutionJobRequest {
   // Required. The resource name of the Location to create the
@@ -673,7 +721,8 @@ message ListNotebookExecutionJobsRequest {
 
   // Optional. The standard list page token.
   // Typically obtained via
-  // [ListNotebookExecutionJobs.next_page_token][] of the previous
+  // [ListNotebookExecutionJobsResponse.next_page_token][google.cloud.aiplatform.v1beta1.ListNotebookExecutionJobsResponse.next_page_token]
+  // of the previous
   // [NotebookService.ListNotebookExecutionJobs][google.cloud.aiplatform.v1beta1.NotebookService.ListNotebookExecutionJobs]
   // call.
   string page_token = 4 [(google.api.field_behavior) = OPTIONAL];
@@ -698,8 +747,9 @@ message ListNotebookExecutionJobsResponse {
   repeated NotebookExecutionJob notebook_execution_jobs = 1;
 
   // A token to retrieve next page of results.
-  // Pass to [ListNotebookExecutionJobs.page_token][] to obtain that
-  // page.
+  // Pass to
+  // [ListNotebookExecutionJobsRequest.page_token][google.cloud.aiplatform.v1beta1.ListNotebookExecutionJobsRequest.page_token]
+  // to obtain that page.
   string next_page_token = 2;
 }
 

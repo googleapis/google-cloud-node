@@ -359,13 +359,13 @@ message ProcessOptions {
           [(google.api.field_behavior) = OPTIONAL];
 
       // Optional. The number of tokens to group together when evaluating
-      // semantic similarity.
+      // semantic similarity. THIS FIELD IS NOT YET USED.
       bool semantic_chunking_group_size = 3
           [(google.api.field_behavior) = OPTIONAL];
 
       // Optional. The percentile of cosine dissimilarity that must be exceeded
       // between a group of tokens and the next. The smaller this number is, the
-      // more chunks will be generated.
+      // more chunks will be generated. THIS FIELD IS NOT YET USED.
       int32 breakpoint_percentile_threshold = 4
           [(google.api.field_behavior) = OPTIONAL];
     }
@@ -384,8 +384,9 @@ message ProcessOptions {
   // If a page range is set, only the given pages are extracted and processed
   // from the document. In the output document,
   // [Document.Page.page_number][google.cloud.documentai.v1beta3.Document.Page.page_number]
-  // refers to the page number in the original document. This configuration
-  // only applies to sync requests.
+  // refers to the page number in the original document.
+  // This configuration only applies to online processing with
+  // [ProcessDocument][google.cloud.documentai.v1beta3.DocumentProcessorService.ProcessDocument].
   oneof page_range {
     // Which pages to process (1-indexed).
     IndividualPageSelector individual_page_selector = 5;

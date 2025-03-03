@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -351,7 +351,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ConferenceRecord()
       );
@@ -386,7 +386,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ConferenceRecord()
       );
@@ -436,7 +436,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConferenceRecord = stubSimpleCall(
         undefined,
@@ -494,7 +494,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.Participant()
       );
@@ -528,7 +528,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.Participant()
       );
@@ -578,7 +578,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getParticipant = stubSimpleCall(
         undefined,
@@ -636,7 +636,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ParticipantSession()
       );
@@ -671,7 +671,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ParticipantSession()
       );
@@ -721,7 +721,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getParticipantSession = stubSimpleCall(
         undefined,
@@ -785,7 +785,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.Recording()
       );
@@ -819,7 +819,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.Recording()
       );
@@ -869,7 +869,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRecording = stubSimpleCall(
         undefined,
@@ -927,7 +927,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.Transcript()
       );
@@ -961,7 +961,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.Transcript()
       );
@@ -1011,7 +1011,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTranscript = stubSimpleCall(
         undefined,
@@ -1069,7 +1069,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.TranscriptEntry()
       );
@@ -1104,7 +1104,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.TranscriptEntry()
       );
@@ -1154,7 +1154,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTranscriptEntry = stubSimpleCall(
         undefined,
@@ -1477,7 +1477,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Participant()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Participant()),
@@ -1513,7 +1513,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Participant()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Participant()),
@@ -1565,7 +1565,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listParticipants = stubSimpleCall(
         undefined,
@@ -1599,7 +1599,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Participant()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Participant()),
@@ -1656,7 +1656,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listParticipants.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1708,7 +1708,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Participant()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Participant()),
@@ -1754,7 +1754,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listParticipants.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1799,7 +1799,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.apps.meet.v2beta.ParticipantSession()
@@ -1842,7 +1842,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.apps.meet.v2beta.ParticipantSession()
@@ -1900,7 +1900,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listParticipantSessions = stubSimpleCall(
         undefined,
@@ -1937,7 +1937,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.apps.meet.v2beta.ParticipantSession()
@@ -2007,7 +2007,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listParticipantSessions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2066,7 +2066,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.apps.meet.v2beta.ParticipantSession()
@@ -2123,7 +2123,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listParticipantSessions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2173,7 +2173,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Recording()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Recording()),
@@ -2209,7 +2209,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Recording()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Recording()),
@@ -2261,7 +2261,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRecordings = stubSimpleCall(
         undefined,
@@ -2295,7 +2295,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Recording()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Recording()),
@@ -2352,7 +2352,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRecordings.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2404,7 +2404,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Recording()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Recording()),
@@ -2450,7 +2450,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRecordings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2495,7 +2495,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Transcript()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Transcript()),
@@ -2531,7 +2531,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Transcript()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Transcript()),
@@ -2583,7 +2583,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTranscripts = stubSimpleCall(
         undefined,
@@ -2617,7 +2617,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Transcript()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Transcript()),
@@ -2674,7 +2674,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTranscripts.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2726,7 +2726,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Transcript()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Transcript()),
@@ -2772,7 +2772,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTranscripts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2817,7 +2817,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.apps.meet.v2beta.TranscriptEntry()
@@ -2860,7 +2860,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.apps.meet.v2beta.TranscriptEntry()
@@ -2918,7 +2918,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTranscriptEntries = stubSimpleCall(
         undefined,
@@ -2955,7 +2955,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.apps.meet.v2beta.TranscriptEntry()
@@ -3024,7 +3024,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTranscriptEntries.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3082,7 +3082,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.apps.meet.v2beta.TranscriptEntry()
@@ -3138,7 +3138,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTranscriptEntries.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3209,6 +3209,58 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         assert.strictEqual(result, 'conferenceRecordValue');
         assert(
           (client.pathTemplates.conferenceRecordPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('member', () => {
+      const fakePath = '/rendered/path/member';
+      const expectedParameters = {
+        space: 'spaceValue',
+        member: 'memberValue',
+      };
+      const client =
+        new conferencerecordsserviceModule.v2beta.ConferenceRecordsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.memberPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.memberPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('memberPath', () => {
+        const result = client.memberPath('spaceValue', 'memberValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.memberPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchSpaceFromMemberName', () => {
+        const result = client.matchSpaceFromMemberName(fakePath);
+        assert.strictEqual(result, 'spaceValue');
+        assert(
+          (client.pathTemplates.memberPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMemberFromMemberName', () => {
+        const result = client.matchMemberFromMemberName(fakePath);
+        assert.strictEqual(result, 'memberValue');
+        assert(
+          (client.pathTemplates.memberPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

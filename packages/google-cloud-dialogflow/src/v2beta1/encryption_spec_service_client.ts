@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -333,6 +333,15 @@ export class EncryptionSpecServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
         ),
+      projectLocationPhoneNumberPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/phoneNumbers/{phone_number}'
+      ),
+      projectPhoneNumberPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/phoneNumbers/{phone_number}'
+      ),
+      sipTrunkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sipTrunks/{siptrunk}'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -925,7 +934,7 @@ export class EncryptionSpecServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -938,6 +947,20 @@ export class EncryptionSpecServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -974,6 +997,13 @@ export class EncryptionSpecServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1009,11 +1039,11 @@ export class EncryptionSpecServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1022,6 +1052,20 @@ export class EncryptionSpecServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1052,7 +1096,7 @@ export class EncryptionSpecServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1065,6 +1109,20 @@ export class EncryptionSpecServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3363,6 +3421,160 @@ export class EncryptionSpecServiceClient {
     return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
       projectLocationKnowledgeBaseDocumentName
     ).document;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationPhoneNumber resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} phone_number
+   * @returns {string} Resource name string.
+   */
+  projectLocationPhoneNumberPath(
+    project: string,
+    location: string,
+    phoneNumber: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.render({
+      project: project,
+      location: location,
+      phone_number: phoneNumber,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationPhoneNumber resource.
+   *
+   * @param {string} projectLocationPhoneNumberName
+   *   A fully-qualified path representing project_location_phone_number resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationPhoneNumberName(
+    projectLocationPhoneNumberName: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.match(
+      projectLocationPhoneNumberName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationPhoneNumber resource.
+   *
+   * @param {string} projectLocationPhoneNumberName
+   *   A fully-qualified path representing project_location_phone_number resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationPhoneNumberName(
+    projectLocationPhoneNumberName: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.match(
+      projectLocationPhoneNumberName
+    ).location;
+  }
+
+  /**
+   * Parse the phone_number from ProjectLocationPhoneNumber resource.
+   *
+   * @param {string} projectLocationPhoneNumberName
+   *   A fully-qualified path representing project_location_phone_number resource.
+   * @returns {string} A string representing the phone_number.
+   */
+  matchPhoneNumberFromProjectLocationPhoneNumberName(
+    projectLocationPhoneNumberName: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.match(
+      projectLocationPhoneNumberName
+    ).phone_number;
+  }
+
+  /**
+   * Return a fully-qualified projectPhoneNumber resource name string.
+   *
+   * @param {string} project
+   * @param {string} phone_number
+   * @returns {string} Resource name string.
+   */
+  projectPhoneNumberPath(project: string, phoneNumber: string) {
+    return this.pathTemplates.projectPhoneNumberPathTemplate.render({
+      project: project,
+      phone_number: phoneNumber,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectPhoneNumber resource.
+   *
+   * @param {string} projectPhoneNumberName
+   *   A fully-qualified path representing project_phone_number resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectPhoneNumberName(projectPhoneNumberName: string) {
+    return this.pathTemplates.projectPhoneNumberPathTemplate.match(
+      projectPhoneNumberName
+    ).project;
+  }
+
+  /**
+   * Parse the phone_number from ProjectPhoneNumber resource.
+   *
+   * @param {string} projectPhoneNumberName
+   *   A fully-qualified path representing project_phone_number resource.
+   * @returns {string} A string representing the phone_number.
+   */
+  matchPhoneNumberFromProjectPhoneNumberName(projectPhoneNumberName: string) {
+    return this.pathTemplates.projectPhoneNumberPathTemplate.match(
+      projectPhoneNumberName
+    ).phone_number;
+  }
+
+  /**
+   * Return a fully-qualified sipTrunk resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} siptrunk
+   * @returns {string} Resource name string.
+   */
+  sipTrunkPath(project: string, location: string, siptrunk: string) {
+    return this.pathTemplates.sipTrunkPathTemplate.render({
+      project: project,
+      location: location,
+      siptrunk: siptrunk,
+    });
+  }
+
+  /**
+   * Parse the project from SipTrunk resource.
+   *
+   * @param {string} sipTrunkName
+   *   A fully-qualified path representing SipTrunk resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSipTrunkName(sipTrunkName: string) {
+    return this.pathTemplates.sipTrunkPathTemplate.match(sipTrunkName).project;
+  }
+
+  /**
+   * Parse the location from SipTrunk resource.
+   *
+   * @param {string} sipTrunkName
+   *   A fully-qualified path representing SipTrunk resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSipTrunkName(sipTrunkName: string) {
+    return this.pathTemplates.sipTrunkPathTemplate.match(sipTrunkName).location;
+  }
+
+  /**
+   * Parse the siptrunk from SipTrunk resource.
+   *
+   * @param {string} sipTrunkName
+   *   A fully-qualified path representing SipTrunk resource.
+   * @returns {string} A string representing the siptrunk.
+   */
+  matchSiptrunkFromSipTrunkName(sipTrunkName: string) {
+    return this.pathTemplates.sipTrunkPathTemplate.match(sipTrunkName).siptrunk;
   }
 
   /**

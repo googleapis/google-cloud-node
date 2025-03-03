@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -336,7 +336,7 @@ describe('v1.ImagesClient', () => {
         ['image']
       );
       request.image = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&image=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -372,7 +372,7 @@ describe('v1.ImagesClient', () => {
         ['image']
       );
       request.image = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&image=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -424,7 +424,7 @@ describe('v1.ImagesClient', () => {
         ['image']
       );
       request.image = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&image=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
@@ -483,7 +483,7 @@ describe('v1.ImagesClient', () => {
         ['image']
       );
       request.image = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&image=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -519,7 +519,7 @@ describe('v1.ImagesClient', () => {
         ['image']
       );
       request.image = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&image=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -571,7 +571,7 @@ describe('v1.ImagesClient', () => {
         ['image']
       );
       request.image = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&image=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deprecate = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.deprecate(request), expectedError);
@@ -630,7 +630,7 @@ describe('v1.ImagesClient', () => {
         ['image']
       );
       request.image = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&image=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Image()
       );
@@ -665,7 +665,7 @@ describe('v1.ImagesClient', () => {
         ['image']
       );
       request.image = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&image=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Image()
       );
@@ -715,7 +715,7 @@ describe('v1.ImagesClient', () => {
         ['image']
       );
       request.image = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&image=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -773,7 +773,7 @@ describe('v1.ImagesClient', () => {
         ['family']
       );
       request.family = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&family=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&family=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Image()
       );
@@ -809,7 +809,7 @@ describe('v1.ImagesClient', () => {
         ['family']
       );
       request.family = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&family=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&family=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Image()
       );
@@ -861,7 +861,7 @@ describe('v1.ImagesClient', () => {
         ['family']
       );
       request.family = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&family=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&family=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFromFamily = stubSimpleCall(
         undefined,
@@ -923,7 +923,7 @@ describe('v1.ImagesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -959,7 +959,7 @@ describe('v1.ImagesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -1011,7 +1011,7 @@ describe('v1.ImagesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -1068,7 +1068,7 @@ describe('v1.ImagesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1099,7 +1099,7 @@ describe('v1.ImagesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1146,7 +1146,7 @@ describe('v1.ImagesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -1200,7 +1200,7 @@ describe('v1.ImagesClient', () => {
         ['image']
       );
       request.image = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&image=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1235,7 +1235,7 @@ describe('v1.ImagesClient', () => {
         ['image']
       );
       request.image = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&image=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1285,7 +1285,7 @@ describe('v1.ImagesClient', () => {
         ['image']
       );
       request.image = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&image=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.patch(request), expectedError);
@@ -1343,7 +1343,7 @@ describe('v1.ImagesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -1379,7 +1379,7 @@ describe('v1.ImagesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -1431,7 +1431,7 @@ describe('v1.ImagesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -1493,7 +1493,7 @@ describe('v1.ImagesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1529,7 +1529,7 @@ describe('v1.ImagesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1581,7 +1581,7 @@ describe('v1.ImagesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setLabels = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.setLabels(request), expectedError);
@@ -1640,7 +1640,7 @@ describe('v1.ImagesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -1677,7 +1677,7 @@ describe('v1.ImagesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -1729,7 +1729,7 @@ describe('v1.ImagesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -1786,7 +1786,7 @@ describe('v1.ImagesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Image()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Image()),
@@ -1818,7 +1818,7 @@ describe('v1.ImagesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Image()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Image()),
@@ -1865,7 +1865,7 @@ describe('v1.ImagesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -1892,7 +1892,7 @@ describe('v1.ImagesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Image()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Image()),
@@ -1943,7 +1943,7 @@ describe('v1.ImagesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1991,7 +1991,7 @@ describe('v1.ImagesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Image()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Image()),
@@ -2033,7 +2033,7 @@ describe('v1.ImagesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

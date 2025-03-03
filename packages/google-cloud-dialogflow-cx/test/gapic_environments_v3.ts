@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -357,7 +357,7 @@ describe('v3.EnvironmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Environment()
       );
@@ -388,7 +388,7 @@ describe('v3.EnvironmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Environment()
       );
@@ -435,7 +435,7 @@ describe('v3.EnvironmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEnvironment = stubSimpleCall(
         undefined,
@@ -487,7 +487,7 @@ describe('v3.EnvironmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -518,7 +518,7 @@ describe('v3.EnvironmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -565,7 +565,7 @@ describe('v3.EnvironmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEnvironment = stubSimpleCall(
         undefined,
@@ -617,7 +617,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -650,7 +650,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -704,7 +704,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEnvironment = stubLongRunningCall(
         undefined,
@@ -735,7 +735,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEnvironment = stubLongRunningCall(
         undefined,
@@ -812,7 +812,7 @@ describe('v3.EnvironmentsClient', () => {
         ['environment', 'name']
       );
       request.environment.name = defaultValue1;
-      const expectedHeaderRequestParams = `environment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -846,7 +846,7 @@ describe('v3.EnvironmentsClient', () => {
         ['environment', 'name']
       );
       request.environment.name = defaultValue1;
-      const expectedHeaderRequestParams = `environment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -901,7 +901,7 @@ describe('v3.EnvironmentsClient', () => {
         ['environment', 'name']
       );
       request.environment.name = defaultValue1;
-      const expectedHeaderRequestParams = `environment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEnvironment = stubLongRunningCall(
         undefined,
@@ -933,7 +933,7 @@ describe('v3.EnvironmentsClient', () => {
         ['environment', 'name']
       );
       request.environment.name = defaultValue1;
-      const expectedHeaderRequestParams = `environment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEnvironment = stubLongRunningCall(
         undefined,
@@ -1009,7 +1009,7 @@ describe('v3.EnvironmentsClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1042,7 +1042,7 @@ describe('v3.EnvironmentsClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1096,7 +1096,7 @@ describe('v3.EnvironmentsClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runContinuousTest = stubLongRunningCall(
         undefined,
@@ -1127,7 +1127,7 @@ describe('v3.EnvironmentsClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runContinuousTest = stubLongRunningCall(
         undefined,
@@ -1203,7 +1203,7 @@ describe('v3.EnvironmentsClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1235,7 +1235,7 @@ describe('v3.EnvironmentsClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1289,7 +1289,7 @@ describe('v3.EnvironmentsClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployFlow = stubLongRunningCall(
         undefined,
@@ -1320,7 +1320,7 @@ describe('v3.EnvironmentsClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployFlow = stubLongRunningCall(
         undefined,
@@ -1393,7 +1393,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.Environment()
@@ -1432,7 +1432,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.Environment()
@@ -1487,7 +1487,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEnvironments = stubSimpleCall(
         undefined,
@@ -1518,7 +1518,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.Environment()
@@ -1579,7 +1579,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEnvironments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1629,7 +1629,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.Environment()
@@ -1678,7 +1678,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEnvironments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1721,7 +1721,7 @@ describe('v3.EnvironmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.Environment()
@@ -1761,7 +1761,7 @@ describe('v3.EnvironmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.Environment()
@@ -1816,7 +1816,7 @@ describe('v3.EnvironmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.lookupEnvironmentHistory = stubSimpleCall(
         undefined,
@@ -1850,7 +1850,7 @@ describe('v3.EnvironmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.Environment()
@@ -1917,7 +1917,7 @@ describe('v3.EnvironmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.lookupEnvironmentHistory.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1973,7 +1973,7 @@ describe('v3.EnvironmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.Environment()
@@ -2026,7 +2026,7 @@ describe('v3.EnvironmentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.lookupEnvironmentHistory.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2073,7 +2073,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.ContinuousTestResult()
@@ -2113,7 +2113,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.ContinuousTestResult()
@@ -2170,7 +2170,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listContinuousTestResults = stubSimpleCall(
         undefined,
@@ -2204,7 +2204,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.ContinuousTestResult()
@@ -2273,7 +2273,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listContinuousTestResults.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2331,7 +2331,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.ContinuousTestResult()
@@ -2385,7 +2385,7 @@ describe('v3.EnvironmentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listContinuousTestResults.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

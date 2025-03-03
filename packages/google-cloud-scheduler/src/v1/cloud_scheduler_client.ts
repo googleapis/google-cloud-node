@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1045,11 +1045,7 @@ export class CloudSchedulerClient {
    *   request the next page of results, page_token must be the value of
    *   {@link protos.google.cloud.scheduler.v1.ListJobsResponse.next_page_token|next_page_token}
    *   returned from the previous call to
-   *   {@link protos.google.cloud.scheduler.v1.CloudScheduler.ListJobs|ListJobs}. It is an
-   *   error to switch the value of
-   *   {@link protos.google.cloud.scheduler.v1.ListJobsRequest.filter|filter} or
-   *   {@link protos.google.cloud.scheduler.v1.ListJobsRequest.order_by|order_by} while
-   *   iterating through pages.
+   *   {@link protos.google.cloud.scheduler.v1.CloudScheduler.ListJobs|ListJobs}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1149,11 +1145,7 @@ export class CloudSchedulerClient {
    *   request the next page of results, page_token must be the value of
    *   {@link protos.google.cloud.scheduler.v1.ListJobsResponse.next_page_token|next_page_token}
    *   returned from the previous call to
-   *   {@link protos.google.cloud.scheduler.v1.CloudScheduler.ListJobs|ListJobs}. It is an
-   *   error to switch the value of
-   *   {@link protos.google.cloud.scheduler.v1.ListJobsRequest.filter|filter} or
-   *   {@link protos.google.cloud.scheduler.v1.ListJobsRequest.order_by|order_by} while
-   *   iterating through pages.
+   *   {@link protos.google.cloud.scheduler.v1.CloudScheduler.ListJobs|ListJobs}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1209,11 +1201,7 @@ export class CloudSchedulerClient {
    *   request the next page of results, page_token must be the value of
    *   {@link protos.google.cloud.scheduler.v1.ListJobsResponse.next_page_token|next_page_token}
    *   returned from the previous call to
-   *   {@link protos.google.cloud.scheduler.v1.CloudScheduler.ListJobs|ListJobs}. It is an
-   *   error to switch the value of
-   *   {@link protos.google.cloud.scheduler.v1.ListJobsRequest.filter|filter} or
-   *   {@link protos.google.cloud.scheduler.v1.ListJobsRequest.order_by|order_by} while
-   *   iterating through pages.
+   *   {@link protos.google.cloud.scheduler.v1.CloudScheduler.ListJobs|ListJobs}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

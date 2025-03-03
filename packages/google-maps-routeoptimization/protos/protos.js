@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11899,6 +11899,7 @@
                              * @property {google.protobuf.IDuration|null} [totalDuration] Transition totalDuration
                              * @property {google.protobuf.ITimestamp|null} [startTime] Transition startTime
                              * @property {google.maps.routeoptimization.v1.ShipmentRoute.IEncodedPolyline|null} [routePolyline] Transition routePolyline
+                             * @property {string|null} [routeToken] Transition routeToken
                              * @property {Object.<string,google.maps.routeoptimization.v1.ShipmentRoute.IVehicleLoad>|null} [vehicleLoads] Transition vehicleLoads
                              */
     
@@ -11991,6 +11992,14 @@
                             Transition.prototype.routePolyline = null;
     
                             /**
+                             * Transition routeToken.
+                             * @member {string} routeToken
+                             * @memberof google.maps.routeoptimization.v1.ShipmentRoute.Transition
+                             * @instance
+                             */
+                            Transition.prototype.routeToken = "";
+    
+                            /**
                              * Transition vehicleLoads.
                              * @member {Object.<string,google.maps.routeoptimization.v1.ShipmentRoute.IVehicleLoad>} vehicleLoads
                              * @memberof google.maps.routeoptimization.v1.ShipmentRoute.Transition
@@ -12045,6 +12054,8 @@
                                         writer.uint32(/* id 11, wireType 2 =*/90).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                         $root.google.maps.routeoptimization.v1.ShipmentRoute.VehicleLoad.encode(message.vehicleLoads[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                     }
+                                if (message.routeToken != null && Object.hasOwnProperty.call(message, "routeToken"))
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.routeToken);
                                 return writer;
                             };
     
@@ -12113,6 +12124,10 @@
                                         }
                                     case 9: {
                                             message.routePolyline = $root.google.maps.routeoptimization.v1.ShipmentRoute.EncodedPolyline.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.routeToken = reader.string();
                                             break;
                                         }
                                     case 11: {
@@ -12214,6 +12229,9 @@
                                     if (error)
                                         return "routePolyline." + error;
                                 }
+                                if (message.routeToken != null && message.hasOwnProperty("routeToken"))
+                                    if (!$util.isString(message.routeToken))
+                                        return "routeToken: string expected";
                                 if (message.vehicleLoads != null && message.hasOwnProperty("vehicleLoads")) {
                                     if (!$util.isObject(message.vehicleLoads))
                                         return "vehicleLoads: object expected";
@@ -12278,6 +12296,8 @@
                                         throw TypeError(".google.maps.routeoptimization.v1.ShipmentRoute.Transition.routePolyline: object expected");
                                     message.routePolyline = $root.google.maps.routeoptimization.v1.ShipmentRoute.EncodedPolyline.fromObject(object.routePolyline);
                                 }
+                                if (object.routeToken != null)
+                                    message.routeToken = String(object.routeToken);
                                 if (object.vehicleLoads) {
                                     if (typeof object.vehicleLoads !== "object")
                                         throw TypeError(".google.maps.routeoptimization.v1.ShipmentRoute.Transition.vehicleLoads: object expected");
@@ -12316,6 +12336,7 @@
                                     object.totalDuration = null;
                                     object.startTime = null;
                                     object.routePolyline = null;
+                                    object.routeToken = "";
                                 }
                                 if (message.travelDuration != null && message.hasOwnProperty("travelDuration"))
                                     object.travelDuration = $root.google.protobuf.Duration.toObject(message.travelDuration, options);
@@ -12341,6 +12362,8 @@
                                     for (var j = 0; j < keys2.length; ++j)
                                         object.vehicleLoads[keys2[j]] = $root.google.maps.routeoptimization.v1.ShipmentRoute.VehicleLoad.toObject(message.vehicleLoads[keys2[j]], options);
                                 }
+                                if (message.routeToken != null && message.hasOwnProperty("routeToken"))
+                                    object.routeToken = message.routeToken;
                                 return object;
                             };
     

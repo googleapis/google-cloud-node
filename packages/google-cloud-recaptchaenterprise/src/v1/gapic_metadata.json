@@ -55,6 +55,11 @@
                 "addIpOverride"
               ]
             },
+            "RemoveIpOverride": {
+              "methods": [
+                "removeIpOverride"
+              ]
+            },
             "GetMetrics": {
               "methods": [
                 "getMetrics"
@@ -90,6 +95,13 @@
                 "listKeys",
                 "listKeysStream",
                 "listKeysAsync"
+              ]
+            },
+            "ListIpOverrides": {
+              "methods": [
+                "listIpOverrides",
+                "listIpOverridesStream",
+                "listIpOverridesAsync"
               ]
             },
             "ListFirewallPolicies": {
@@ -170,6 +182,11 @@
                 "addIpOverride"
               ]
             },
+            "RemoveIpOverride": {
+              "methods": [
+                "removeIpOverride"
+              ]
+            },
             "GetMetrics": {
               "methods": [
                 "getMetrics"
@@ -205,6 +222,13 @@
                 "listKeys",
                 "listKeysStream",
                 "listKeysAsync"
+              ]
+            },
+            "ListIpOverrides": {
+              "methods": [
+                "listIpOverrides",
+                "listIpOverridesStream",
+                "listIpOverridesAsync"
               ]
             },
             "ListFirewallPolicies": {

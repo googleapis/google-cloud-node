@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -363,7 +363,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.functions.v2alpha.Function()
       );
@@ -394,7 +394,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.functions.v2alpha.Function()
       );
@@ -441,7 +441,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFunction = stubSimpleCall(
         undefined,
@@ -493,7 +493,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.functions.v2alpha.GenerateUploadUrlResponse()
       );
@@ -524,7 +524,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.functions.v2alpha.GenerateUploadUrlResponse()
       );
@@ -571,7 +571,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateUploadUrl = stubSimpleCall(
         undefined,
@@ -623,7 +623,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.functions.v2alpha.GenerateDownloadUrlResponse()
       );
@@ -655,7 +655,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.functions.v2alpha.GenerateDownloadUrlResponse()
       );
@@ -702,7 +702,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateDownloadUrl = stubSimpleCall(
         undefined,
@@ -754,7 +754,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.functions.v2alpha.ListRuntimesResponse()
       );
@@ -785,7 +785,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.functions.v2alpha.ListRuntimesResponse()
       );
@@ -832,7 +832,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRuntimes = stubSimpleCall(
         undefined,
@@ -884,7 +884,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -917,7 +917,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -971,7 +971,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFunction = stubLongRunningCall(
         undefined,
@@ -1002,7 +1002,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFunction = stubLongRunningCall(
         undefined,
@@ -1079,7 +1079,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['function', 'name']
       );
       request.function.name = defaultValue1;
-      const expectedHeaderRequestParams = `function.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `function.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1113,7 +1113,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['function', 'name']
       );
       request.function.name = defaultValue1;
-      const expectedHeaderRequestParams = `function.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `function.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1168,7 +1168,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['function', 'name']
       );
       request.function.name = defaultValue1;
-      const expectedHeaderRequestParams = `function.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `function.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFunction = stubLongRunningCall(
         undefined,
@@ -1200,7 +1200,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['function', 'name']
       );
       request.function.name = defaultValue1;
-      const expectedHeaderRequestParams = `function.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `function.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFunction = stubLongRunningCall(
         undefined,
@@ -1276,7 +1276,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1309,7 +1309,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1363,7 +1363,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFunction = stubLongRunningCall(
         undefined,
@@ -1394,7 +1394,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFunction = stubLongRunningCall(
         undefined,
@@ -1470,7 +1470,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.functions.v2alpha.Function()
@@ -1509,7 +1509,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.functions.v2alpha.Function()
@@ -1564,7 +1564,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFunctions = stubSimpleCall(
         undefined,
@@ -1595,7 +1595,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.functions.v2alpha.Function()
@@ -1655,7 +1655,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFunctions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1704,7 +1704,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.functions.v2alpha.Function()
@@ -1753,7 +1753,7 @@ describe('v2alpha.FunctionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFunctions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

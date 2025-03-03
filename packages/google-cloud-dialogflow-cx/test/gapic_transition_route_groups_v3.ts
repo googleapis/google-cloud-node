@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -337,7 +337,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup()
       );
@@ -370,7 +370,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup()
       );
@@ -418,7 +418,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTransitionRouteGroup = stubSimpleCall(
         undefined,
@@ -478,7 +478,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup()
       );
@@ -511,7 +511,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup()
       );
@@ -559,7 +559,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTransitionRouteGroup = stubSimpleCall(
         undefined,
@@ -620,7 +620,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['transitionRouteGroup', 'name']
       );
       request.transitionRouteGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `transition_route_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `transition_route_group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup()
       );
@@ -654,7 +654,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['transitionRouteGroup', 'name']
       );
       request.transitionRouteGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `transition_route_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `transition_route_group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup()
       );
@@ -703,7 +703,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['transitionRouteGroup', 'name']
       );
       request.transitionRouteGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `transition_route_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `transition_route_group.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTransitionRouteGroup = stubSimpleCall(
         undefined,
@@ -764,7 +764,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -797,7 +797,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -845,7 +845,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTransitionRouteGroup = stubSimpleCall(
         undefined,
@@ -905,7 +905,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup()
@@ -946,7 +946,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup()
@@ -1004,7 +1004,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTransitionRouteGroups = stubSimpleCall(
         undefined,
@@ -1039,7 +1039,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup()
@@ -1109,7 +1109,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTransitionRouteGroups.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1168,7 +1168,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup()
@@ -1223,7 +1223,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTransitionRouteGroups.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

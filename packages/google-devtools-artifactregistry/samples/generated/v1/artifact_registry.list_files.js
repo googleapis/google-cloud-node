@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,15 +38,40 @@ function main(parent) {
    *  case insensitive. The fields eligible for filtering are:
    *    * `name`
    *    * `owner`
-   *   An example of using a filter:
-   *    * `name="projects/p1/locations/us-central1/repositories/repo1/files/a/b/*"` --> Files with an
-   *    ID starting with "a/b/".
-   *    * `owner="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"` -->
-   *    Files owned by the version `1.0` in package `pkg1`.
+   *    * `annotations`
+   *  Examples of using a filter:
+   *   To filter the results of your request to files with the name `my_file.txt`
+   *   in project `my-project` in the `us-central` region, in repository
+   *   `my-repo`, append the following filter expression to your request:
+   *    * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-file.txt"`
+   *   You can also use wildcards to match any number of characters before or
+   *   after the value:
+   *    * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-*"`
+   *    * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file.txt"`
+   *    * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file*"`
+   *   To filter the results of your request to files owned by the version `1.0`
+   *   in package `pkg1`, append the following filter expression to your request:
+   *    * `owner="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
+   *   To filter the results of your request to files with the annotation
+   *   key-value pair `external_link`: `external_link_value`, append the
+   *   following filter expression to your request:
+   *    * `"annotations.external_link:external_link_value"`
+   *   To filter just for a specific annotation key `external_link`, append the
+   *   following filter expression to your request:
+   *    * `"annotations.external_link"`
+   *   If the annotation key or value contains special characters, you can escape
+   *   them by surrounding the value with backticks. For example, to filter the
+   *   results of your request to files with the annotation key-value pair
+   *   `external.link`:`https://example.com/my-file`, append the following
+   *   filter expression to your request:
+   *    * `` "annotations.`external.link`:`https://example.com/my-file`" ``
+   *   You can also filter with annotations with a wildcard to
+   *   match any number of characters before or after the value:
+   *    * `` "annotations.*_link:`*example.com*`" ``
    */
   // const filter = 'abc123'
   /**
-   *  The maximum number of files to return.
+   *  The maximum number of files to return. Maximum page size is 1,000.
    */
   // const pageSize = 1234
   /**

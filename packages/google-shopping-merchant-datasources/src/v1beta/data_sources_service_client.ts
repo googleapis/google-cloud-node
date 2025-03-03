@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -206,6 +206,9 @@ export class DataSourcesServiceClient {
       ),
       dataSourcePathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/dataSources/{datasource}'
+      ),
+      fileUploadPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/dataSources/{datasource}/fileUploads/{fileupload}'
       ),
     };
 
@@ -1164,6 +1167,58 @@ export class DataSourcesServiceClient {
   matchDatasourceFromDataSourceName(dataSourceName: string) {
     return this.pathTemplates.dataSourcePathTemplate.match(dataSourceName)
       .datasource;
+  }
+
+  /**
+   * Return a fully-qualified fileUpload resource name string.
+   *
+   * @param {string} account
+   * @param {string} datasource
+   * @param {string} fileupload
+   * @returns {string} Resource name string.
+   */
+  fileUploadPath(account: string, datasource: string, fileupload: string) {
+    return this.pathTemplates.fileUploadPathTemplate.render({
+      account: account,
+      datasource: datasource,
+      fileupload: fileupload,
+    });
+  }
+
+  /**
+   * Parse the account from FileUpload resource.
+   *
+   * @param {string} fileUploadName
+   *   A fully-qualified path representing FileUpload resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromFileUploadName(fileUploadName: string) {
+    return this.pathTemplates.fileUploadPathTemplate.match(fileUploadName)
+      .account;
+  }
+
+  /**
+   * Parse the datasource from FileUpload resource.
+   *
+   * @param {string} fileUploadName
+   *   A fully-qualified path representing FileUpload resource.
+   * @returns {string} A string representing the datasource.
+   */
+  matchDatasourceFromFileUploadName(fileUploadName: string) {
+    return this.pathTemplates.fileUploadPathTemplate.match(fileUploadName)
+      .datasource;
+  }
+
+  /**
+   * Parse the fileupload from FileUpload resource.
+   *
+   * @param {string} fileUploadName
+   *   A fully-qualified path representing FileUpload resource.
+   * @returns {string} A string representing the fileupload.
+   */
+  matchFileuploadFromFileUploadName(fileUploadName: string) {
+    return this.pathTemplates.fileUploadPathTemplate.match(fileUploadName)
+      .fileupload;
   }
 
   /**

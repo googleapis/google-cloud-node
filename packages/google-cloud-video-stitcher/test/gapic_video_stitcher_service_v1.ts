@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -370,7 +370,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CdnKey()
       );
@@ -402,7 +402,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CdnKey()
       );
@@ -450,7 +450,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCdnKey = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getCdnKey(request), expectedError);
@@ -501,7 +501,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.VodSession()
       );
@@ -533,7 +533,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.VodSession()
       );
@@ -581,7 +581,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createVodSession = stubSimpleCall(
         undefined,
@@ -635,7 +635,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.VodSession()
       );
@@ -667,7 +667,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.VodSession()
       );
@@ -715,7 +715,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getVodSession = stubSimpleCall(
         undefined,
@@ -769,7 +769,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
       );
@@ -802,7 +802,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
       );
@@ -850,7 +850,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getVodStitchDetail = stubSimpleCall(
         undefined,
@@ -904,7 +904,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
       );
@@ -936,7 +936,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
       );
@@ -984,7 +984,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getVodAdTagDetail = stubSimpleCall(
         undefined,
@@ -1038,7 +1038,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
       );
@@ -1071,7 +1071,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
       );
@@ -1119,7 +1119,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getLiveAdTagDetail = stubSimpleCall(
         undefined,
@@ -1173,7 +1173,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.Slate()
       );
@@ -1205,7 +1205,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.Slate()
       );
@@ -1253,7 +1253,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSlate = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSlate(request), expectedError);
@@ -1304,7 +1304,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.LiveSession()
       );
@@ -1336,7 +1336,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.LiveSession()
       );
@@ -1384,7 +1384,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createLiveSession = stubSimpleCall(
         undefined,
@@ -1438,7 +1438,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.LiveSession()
       );
@@ -1470,7 +1470,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.LiveSession()
       );
@@ -1518,7 +1518,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getLiveSession = stubSimpleCall(
         undefined,
@@ -1572,7 +1572,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.LiveConfig()
       );
@@ -1604,7 +1604,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.LiveConfig()
       );
@@ -1652,7 +1652,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getLiveConfig = stubSimpleCall(
         undefined,
@@ -1706,7 +1706,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.VodConfig()
       );
@@ -1738,7 +1738,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.VodConfig()
       );
@@ -1786,7 +1786,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getVodConfig = stubSimpleCall(
         undefined,
@@ -1840,7 +1840,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1873,7 +1873,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1928,7 +1928,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCdnKey = stubLongRunningCall(
         undefined,
@@ -1960,7 +1960,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCdnKey = stubLongRunningCall(
         undefined,
@@ -2036,7 +2036,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2069,7 +2069,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2124,7 +2124,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCdnKey = stubLongRunningCall(
         undefined,
@@ -2156,7 +2156,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCdnKey = stubLongRunningCall(
         undefined,
@@ -2233,7 +2233,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['cdnKey', 'name']
       );
       request.cdnKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2267,7 +2267,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['cdnKey', 'name']
       );
       request.cdnKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2323,7 +2323,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['cdnKey', 'name']
       );
       request.cdnKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCdnKey = stubLongRunningCall(
         undefined,
@@ -2356,7 +2356,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['cdnKey', 'name']
       );
       request.cdnKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCdnKey = stubLongRunningCall(
         undefined,
@@ -2432,7 +2432,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2465,7 +2465,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2520,7 +2520,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSlate = stubLongRunningCall(
         undefined,
@@ -2552,7 +2552,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSlate = stubLongRunningCall(
         undefined,
@@ -2629,7 +2629,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['slate', 'name']
       );
       request.slate.name = defaultValue1;
-      const expectedHeaderRequestParams = `slate.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `slate.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2663,7 +2663,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['slate', 'name']
       );
       request.slate.name = defaultValue1;
-      const expectedHeaderRequestParams = `slate.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `slate.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2719,7 +2719,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['slate', 'name']
       );
       request.slate.name = defaultValue1;
-      const expectedHeaderRequestParams = `slate.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `slate.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSlate = stubLongRunningCall(
         undefined,
@@ -2752,7 +2752,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['slate', 'name']
       );
       request.slate.name = defaultValue1;
-      const expectedHeaderRequestParams = `slate.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `slate.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSlate = stubLongRunningCall(
         undefined,
@@ -2828,7 +2828,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2861,7 +2861,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2916,7 +2916,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSlate = stubLongRunningCall(
         undefined,
@@ -2948,7 +2948,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSlate = stubLongRunningCall(
         undefined,
@@ -3024,7 +3024,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3058,7 +3058,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3113,7 +3113,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createLiveConfig = stubLongRunningCall(
         undefined,
@@ -3145,7 +3145,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createLiveConfig = stubLongRunningCall(
         undefined,
@@ -3224,7 +3224,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3258,7 +3258,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3313,7 +3313,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteLiveConfig = stubLongRunningCall(
         undefined,
@@ -3345,7 +3345,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteLiveConfig = stubLongRunningCall(
         undefined,
@@ -3425,7 +3425,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['liveConfig', 'name']
       );
       request.liveConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `live_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `live_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3460,7 +3460,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['liveConfig', 'name']
       );
       request.liveConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `live_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `live_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3516,7 +3516,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['liveConfig', 'name']
       );
       request.liveConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `live_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `live_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateLiveConfig = stubLongRunningCall(
         undefined,
@@ -3549,7 +3549,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['liveConfig', 'name']
       );
       request.liveConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `live_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `live_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateLiveConfig = stubLongRunningCall(
         undefined,
@@ -3628,7 +3628,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3662,7 +3662,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3717,7 +3717,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createVodConfig = stubLongRunningCall(
         undefined,
@@ -3749,7 +3749,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createVodConfig = stubLongRunningCall(
         undefined,
@@ -3828,7 +3828,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3862,7 +3862,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3917,7 +3917,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteVodConfig = stubLongRunningCall(
         undefined,
@@ -3949,7 +3949,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteVodConfig = stubLongRunningCall(
         undefined,
@@ -4029,7 +4029,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['vodConfig', 'name']
       );
       request.vodConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vod_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vod_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4064,7 +4064,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['vodConfig', 'name']
       );
       request.vodConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vod_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vod_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4120,7 +4120,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['vodConfig', 'name']
       );
       request.vodConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vod_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vod_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateVodConfig = stubLongRunningCall(
         undefined,
@@ -4153,7 +4153,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['vodConfig', 'name']
       );
       request.vodConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vod_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vod_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateVodConfig = stubLongRunningCall(
         undefined,
@@ -4232,7 +4232,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.CdnKey()
@@ -4272,7 +4272,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.CdnKey()
@@ -4328,7 +4328,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCdnKeys = stubSimpleCall(
         undefined,
@@ -4360,7 +4360,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.CdnKey()
@@ -4421,7 +4421,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCdnKeys.createStream = stubPageStreamingCall(
         undefined,
@@ -4473,7 +4473,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.CdnKey()
@@ -4523,7 +4523,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCdnKeys.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -4568,7 +4568,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
@@ -4609,7 +4609,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
@@ -4667,7 +4667,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listVodStitchDetails = stubSimpleCall(
         undefined,
@@ -4699,7 +4699,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
@@ -4761,7 +4761,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVodStitchDetails.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4812,7 +4812,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
@@ -4863,7 +4863,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVodStitchDetails.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4907,7 +4907,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
@@ -4948,7 +4948,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
@@ -5006,7 +5006,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listVodAdTagDetails = stubSimpleCall(
         undefined,
@@ -5038,7 +5038,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
@@ -5100,7 +5100,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVodAdTagDetails.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5151,7 +5151,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
@@ -5202,7 +5202,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVodAdTagDetails.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5246,7 +5246,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
@@ -5287,7 +5287,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
@@ -5345,7 +5345,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listLiveAdTagDetails = stubSimpleCall(
         undefined,
@@ -5377,7 +5377,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
@@ -5439,7 +5439,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLiveAdTagDetails.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5490,7 +5490,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
@@ -5541,7 +5541,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLiveAdTagDetails.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5585,7 +5585,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.Slate()
@@ -5625,7 +5625,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.Slate()
@@ -5681,7 +5681,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSlates = stubSimpleCall(
         undefined,
@@ -5713,7 +5713,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.Slate()
@@ -5774,7 +5774,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSlates.createStream = stubPageStreamingCall(
         undefined,
@@ -5826,7 +5826,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.Slate()
@@ -5876,7 +5876,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSlates.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -5921,7 +5921,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.LiveConfig()
@@ -5961,7 +5961,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.LiveConfig()
@@ -6017,7 +6017,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listLiveConfigs = stubSimpleCall(
         undefined,
@@ -6049,7 +6049,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.LiveConfig()
@@ -6111,7 +6111,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLiveConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6162,7 +6162,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.LiveConfig()
@@ -6212,7 +6212,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLiveConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6256,7 +6256,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.VodConfig()
@@ -6296,7 +6296,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.VodConfig()
@@ -6352,7 +6352,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listVodConfigs = stubSimpleCall(
         undefined,
@@ -6384,7 +6384,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.VodConfig()
@@ -6445,7 +6445,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVodConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6495,7 +6495,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.video.stitcher.v1.VodConfig()
@@ -6545,7 +6545,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVodConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

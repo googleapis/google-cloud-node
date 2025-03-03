@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/run/v2/build.proto",
   "../../protos/google/cloud/run/v2/condition.proto",
   "../../protos/google/cloud/run/v2/execution.proto",
   "../../protos/google/cloud/run/v2/execution_template.proto",

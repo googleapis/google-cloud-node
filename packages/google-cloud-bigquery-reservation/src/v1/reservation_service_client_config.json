@@ -45,6 +45,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "FailoverReservation": {
+          "timeout_millis": 300000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateCapacityCommitment": {
           "timeout_millis": 300000,
           "retry_codes_name": "non_idempotent",

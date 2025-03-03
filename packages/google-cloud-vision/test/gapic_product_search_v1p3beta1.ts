@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -353,7 +353,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.ProductSet()
       );
@@ -384,7 +384,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.ProductSet()
       );
@@ -431,7 +431,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createProductSet = stubSimpleCall(
         undefined,
@@ -483,7 +483,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.ProductSet()
       );
@@ -514,7 +514,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.ProductSet()
       );
@@ -561,7 +561,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProductSet = stubSimpleCall(
         undefined,
@@ -614,7 +614,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['productSet', 'name']
       );
       request.productSet.name = defaultValue1;
-      const expectedHeaderRequestParams = `product_set.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product_set.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.ProductSet()
       );
@@ -646,7 +646,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['productSet', 'name']
       );
       request.productSet.name = defaultValue1;
-      const expectedHeaderRequestParams = `product_set.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product_set.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.ProductSet()
       );
@@ -694,7 +694,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['productSet', 'name']
       );
       request.productSet.name = defaultValue1;
-      const expectedHeaderRequestParams = `product_set.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product_set.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateProductSet = stubSimpleCall(
         undefined,
@@ -747,7 +747,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -778,7 +778,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -825,7 +825,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProductSet = stubSimpleCall(
         undefined,
@@ -877,7 +877,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.Product()
       );
@@ -908,7 +908,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.Product()
       );
@@ -955,7 +955,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createProduct = stubSimpleCall(
         undefined,
@@ -1007,7 +1007,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.Product()
       );
@@ -1038,7 +1038,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.Product()
       );
@@ -1085,7 +1085,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProduct = stubSimpleCall(
         undefined,
@@ -1138,7 +1138,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['product', 'name']
       );
       request.product.name = defaultValue1;
-      const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.Product()
       );
@@ -1170,7 +1170,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['product', 'name']
       );
       request.product.name = defaultValue1;
-      const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.Product()
       );
@@ -1218,7 +1218,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['product', 'name']
       );
       request.product.name = defaultValue1;
-      const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateProduct = stubSimpleCall(
         undefined,
@@ -1271,7 +1271,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1302,7 +1302,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1349,7 +1349,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProduct = stubSimpleCall(
         undefined,
@@ -1401,7 +1401,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.ReferenceImage()
       );
@@ -1433,7 +1433,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.ReferenceImage()
       );
@@ -1480,7 +1480,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createReferenceImage = stubSimpleCall(
         undefined,
@@ -1532,7 +1532,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1564,7 +1564,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1611,7 +1611,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteReferenceImage = stubSimpleCall(
         undefined,
@@ -1663,7 +1663,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.ReferenceImage()
       );
@@ -1694,7 +1694,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p3beta1.ReferenceImage()
       );
@@ -1741,7 +1741,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getReferenceImage = stubSimpleCall(
         undefined,
@@ -1793,7 +1793,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1825,7 +1825,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1872,7 +1872,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addProductToProductSet = stubSimpleCall(
         undefined,
@@ -1930,7 +1930,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1962,7 +1962,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2009,7 +2009,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeProductFromProductSet = stubSimpleCall(
         undefined,
@@ -2067,7 +2067,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2100,7 +2100,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2154,7 +2154,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importProductSets = stubLongRunningCall(
         undefined,
@@ -2185,7 +2185,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importProductSets = stubLongRunningCall(
         undefined,
@@ -2261,7 +2261,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.ProductSet()
@@ -2300,7 +2300,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.ProductSet()
@@ -2355,7 +2355,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProductSets = stubSimpleCall(
         undefined,
@@ -2386,7 +2386,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.ProductSet()
@@ -2446,7 +2446,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProductSets.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2495,7 +2495,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.ProductSet()
@@ -2544,7 +2544,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProductSets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2587,7 +2587,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.Product()
@@ -2626,7 +2626,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.Product()
@@ -2681,7 +2681,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProducts = stubSimpleCall(
         undefined,
@@ -2712,7 +2712,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.Product()
@@ -2772,7 +2772,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProducts.createStream = stubPageStreamingCall(
         undefined,
@@ -2823,7 +2823,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.Product()
@@ -2872,7 +2872,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProducts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2914,7 +2914,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.ReferenceImage()
@@ -2954,7 +2954,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.ReferenceImage()
@@ -3011,7 +3011,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listReferenceImages = stubSimpleCall(
         undefined,
@@ -3042,7 +3042,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.ReferenceImage()
@@ -3103,7 +3103,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReferenceImages.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3153,7 +3153,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.ReferenceImage()
@@ -3203,7 +3203,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReferenceImages.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3246,7 +3246,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.Product()
@@ -3286,7 +3286,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.Product()
@@ -3341,7 +3341,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProductsInProductSet = stubSimpleCall(
         undefined,
@@ -3375,7 +3375,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.Product()
@@ -3441,7 +3441,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProductsInProductSet.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3496,7 +3496,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1p3beta1.Product()
@@ -3549,7 +3549,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProductsInProductSet.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

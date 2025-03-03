@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -503,6 +506,62 @@
                             }
                           ]
                         },
+                        "ExportIssueModel": {
+                          "requestType": "ExportIssueModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/issueModels/*}:export",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "ExportIssueModelResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ExportIssueModelMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/issueModels/*}:export",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExportIssueModelResponse",
+                                "metadata_type": "ExportIssueModelMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ImportIssueModel": {
+                          "requestType": "ImportIssueModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/issueModels:import",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent",
+                            "(google.longrunning.operation_info).response_type": "ImportIssueModelResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ImportIssueModelMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/issueModels:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ImportIssueModelResponse",
+                                "metadata_type": "ImportIssueModelMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "GetIssue": {
                           "requestType": "GetIssueRequest",
                           "responseType": "Issue",
@@ -694,12 +753,16 @@
                           "responseType": "CalculateStatsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{location=projects/*/locations/*}/conversations:calculateStats",
+                            "(google.api.http).additional_bindings.get": "/v1/{location=projects/*/locations/*/authorizedViewSet/*/authorizedView/*}:calculateStats",
                             "(google.api.method_signature)": "location"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{location=projects/*/locations/*}/conversations:calculateStats"
+                                "get": "/v1/{location=projects/*/locations/*}/conversations:calculateStats",
+                                "additional_bindings": {
+                                  "get": "/v1/{location=projects/*/locations/*/authorizedViewSet/*/authorizedView/*}:calculateStats"
+                                }
                               }
                             },
                             {
@@ -742,6 +805,146 @@
                             },
                             {
                               "(google.api.method_signature)": "settings,update_mask"
+                            }
+                          ]
+                        },
+                        "CreateAnalysisRule": {
+                          "requestType": "CreateAnalysisRuleRequest",
+                          "responseType": "AnalysisRule",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/analysisRules",
+                            "(google.api.http).body": "analysis_rule",
+                            "(google.api.method_signature)": "parent,analysis_rule"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/analysisRules",
+                                "body": "analysis_rule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,analysis_rule"
+                            }
+                          ]
+                        },
+                        "GetAnalysisRule": {
+                          "requestType": "GetAnalysisRuleRequest",
+                          "responseType": "AnalysisRule",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/analysisRules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/analysisRules/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListAnalysisRules": {
+                          "requestType": "ListAnalysisRulesRequest",
+                          "responseType": "ListAnalysisRulesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/analysisRules",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/analysisRules"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateAnalysisRule": {
+                          "requestType": "UpdateAnalysisRuleRequest",
+                          "responseType": "AnalysisRule",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{analysis_rule.name=projects/*/locations/*/analysisRules/*}",
+                            "(google.api.http).body": "analysis_rule",
+                            "(google.api.method_signature)": "analysis_rule,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{analysis_rule.name=projects/*/locations/*/analysisRules/*}",
+                                "body": "analysis_rule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "analysis_rule,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteAnalysisRule": {
+                          "requestType": "DeleteAnalysisRuleRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/analysisRules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/analysisRules/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetEncryptionSpec": {
+                          "requestType": "GetEncryptionSpecRequest",
+                          "responseType": "EncryptionSpec",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/encryptionSpec}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/encryptionSpec}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "InitializeEncryptionSpec": {
+                          "requestType": "InitializeEncryptionSpecRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{encryption_spec.name=projects/*/locations/*/encryptionSpec}:initialize",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "encryption_spec",
+                            "(google.longrunning.operation_info).response_type": "InitializeEncryptionSpecResponse",
+                            "(google.longrunning.operation_info).metadata_type": "InitializeEncryptionSpecMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{encryption_spec.name=projects/*/locations/*/encryptionSpec}:initialize",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "encryption_spec"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "InitializeEncryptionSpecResponse",
+                                "metadata_type": "InitializeEncryptionSpecMetadata"
+                              }
                             }
                           ]
                         },
@@ -836,6 +1039,526 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "QueryMetrics": {
+                          "requestType": "QueryMetricsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{location=projects/*/locations/*}:queryMetrics",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{location=projects/*/locations/*/authorizedViewSet/*/authorizedView/*}:queryMetrics",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.longrunning.operation_info).response_type": "QueryMetricsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "QueryMetricsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{location=projects/*/locations/*}:queryMetrics",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{location=projects/*/locations/*/authorizedViewSet/*/authorizedView/*}:queryMetrics",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "QueryMetricsResponse",
+                                "metadata_type": "QueryMetricsMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateQaQuestion": {
+                          "requestType": "CreateQaQuestionRequest",
+                          "responseType": "QaQuestion",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/qaScorecards/*/revisions/*}/qaQuestions",
+                            "(google.api.http).body": "qa_question",
+                            "(google.api.method_signature)": "parent,qa_question, qa_question_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/qaScorecards/*/revisions/*}/qaQuestions",
+                                "body": "qa_question"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,qa_question, qa_question_id"
+                            }
+                          ]
+                        },
+                        "GetQaQuestion": {
+                          "requestType": "GetQaQuestionRequest",
+                          "responseType": "QaQuestion",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/qaScorecards/*/revisions/*/qaQuestions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/qaScorecards/*/revisions/*/qaQuestions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateQaQuestion": {
+                          "requestType": "UpdateQaQuestionRequest",
+                          "responseType": "QaQuestion",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{qa_question.name=projects/*/locations/*/qaScorecards/*/revisions/*/qaQuestions/*}",
+                            "(google.api.http).body": "qa_question",
+                            "(google.api.method_signature)": "qa_question,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{qa_question.name=projects/*/locations/*/qaScorecards/*/revisions/*/qaQuestions/*}",
+                                "body": "qa_question"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "qa_question,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteQaQuestion": {
+                          "requestType": "DeleteQaQuestionRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/qaScorecards/*/revisions/*/qaQuestions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/qaScorecards/*/revisions/*/qaQuestions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListQaQuestions": {
+                          "requestType": "ListQaQuestionsRequest",
+                          "responseType": "ListQaQuestionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/qaScorecards/*/revisions/*}/qaQuestions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/qaScorecards/*/revisions/*}/qaQuestions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateQaScorecard": {
+                          "requestType": "CreateQaScorecardRequest",
+                          "responseType": "QaScorecard",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/qaScorecards",
+                            "(google.api.http).body": "qa_scorecard",
+                            "(google.api.method_signature)": "parent,qa_scorecard,qa_scorecard_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/qaScorecards",
+                                "body": "qa_scorecard"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,qa_scorecard,qa_scorecard_id"
+                            }
+                          ]
+                        },
+                        "GetQaScorecard": {
+                          "requestType": "GetQaScorecardRequest",
+                          "responseType": "QaScorecard",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/qaScorecards/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/qaScorecards/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateQaScorecard": {
+                          "requestType": "UpdateQaScorecardRequest",
+                          "responseType": "QaScorecard",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{qa_scorecard.name=projects/*/locations/*/qaScorecards/*}",
+                            "(google.api.http).body": "qa_scorecard",
+                            "(google.api.method_signature)": "qa_scorecard,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{qa_scorecard.name=projects/*/locations/*/qaScorecards/*}",
+                                "body": "qa_scorecard"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "qa_scorecard,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteQaScorecard": {
+                          "requestType": "DeleteQaScorecardRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/qaScorecards/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/qaScorecards/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListQaScorecards": {
+                          "requestType": "ListQaScorecardsRequest",
+                          "responseType": "ListQaScorecardsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/qaScorecards",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/qaScorecards"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateQaScorecardRevision": {
+                          "requestType": "CreateQaScorecardRevisionRequest",
+                          "responseType": "QaScorecardRevision",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/qaScorecards/*}/revisions",
+                            "(google.api.http).body": "qa_scorecard_revision",
+                            "(google.api.method_signature)": "parent,qa_scorecard_revision,qa_scorecard_revision_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/qaScorecards/*}/revisions",
+                                "body": "qa_scorecard_revision"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,qa_scorecard_revision,qa_scorecard_revision_id"
+                            }
+                          ]
+                        },
+                        "GetQaScorecardRevision": {
+                          "requestType": "GetQaScorecardRevisionRequest",
+                          "responseType": "QaScorecardRevision",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/qaScorecards/*/revisions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/qaScorecards/*/revisions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "TuneQaScorecardRevision": {
+                          "requestType": "TuneQaScorecardRevisionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/qaScorecards/*/revisions/*}:tuneQaScorecardRevision",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,filter,validate_only",
+                            "(google.longrunning.operation_info).response_type": "TuneQaScorecardRevisionResponse",
+                            "(google.longrunning.operation_info).metadata_type": "TuneQaScorecardRevisionMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/qaScorecards/*/revisions/*}:tuneQaScorecardRevision",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter,validate_only"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "TuneQaScorecardRevisionResponse",
+                                "metadata_type": "TuneQaScorecardRevisionMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeployQaScorecardRevision": {
+                          "requestType": "DeployQaScorecardRevisionRequest",
+                          "responseType": "QaScorecardRevision",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/qaScorecards/*/revisions/*}:deploy",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/qaScorecards/*/revisions/*}:deploy",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "UndeployQaScorecardRevision": {
+                          "requestType": "UndeployQaScorecardRevisionRequest",
+                          "responseType": "QaScorecardRevision",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/qaScorecards/*/revisions/*}:undeploy",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/qaScorecards/*/revisions/*}:undeploy",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteQaScorecardRevision": {
+                          "requestType": "DeleteQaScorecardRevisionRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/qaScorecards/*/revisions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/qaScorecards/*/revisions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListQaScorecardRevisions": {
+                          "requestType": "ListQaScorecardRevisionsRequest",
+                          "responseType": "ListQaScorecardRevisionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/qaScorecards/*}/revisions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/qaScorecards/*}/revisions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateFeedbackLabel": {
+                          "requestType": "CreateFeedbackLabelRequest",
+                          "responseType": "FeedbackLabel",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/conversations/*}/feedbackLabels",
+                            "(google.api.http).body": "feedback_label",
+                            "(google.api.method_signature)": "parent,feedback_label,feedback_label_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/conversations/*}/feedbackLabels",
+                                "body": "feedback_label"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,feedback_label,feedback_label_id"
+                            }
+                          ]
+                        },
+                        "ListFeedbackLabels": {
+                          "requestType": "ListFeedbackLabelsRequest",
+                          "responseType": "ListFeedbackLabelsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/conversations/*}/feedbackLabels",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/conversations/*}/feedbackLabels"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetFeedbackLabel": {
+                          "requestType": "GetFeedbackLabelRequest",
+                          "responseType": "FeedbackLabel",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/conversations/*/feedbackLabels/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/conversations/*/feedbackLabels/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateFeedbackLabel": {
+                          "requestType": "UpdateFeedbackLabelRequest",
+                          "responseType": "FeedbackLabel",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{feedback_label.name=projects/*/locations/*/conversations/*/feedbackLabels/*}",
+                            "(google.api.http).body": "feedback_label",
+                            "(google.api.method_signature)": "feedback_label,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{feedback_label.name=projects/*/locations/*/conversations/*/feedbackLabels/*}",
+                                "body": "feedback_label"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "feedback_label,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteFeedbackLabel": {
+                          "requestType": "DeleteFeedbackLabelRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/conversations/*/feedbackLabels/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/conversations/*/feedbackLabels/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListAllFeedbackLabels": {
+                          "requestType": "ListAllFeedbackLabelsRequest",
+                          "responseType": "ListAllFeedbackLabelsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}:listAllFeedbackLabels",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}:listAllFeedbackLabels"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "BulkUploadFeedbackLabels": {
+                          "requestType": "BulkUploadFeedbackLabelsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}:bulkUploadFeedbackLabels",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent",
+                            "(google.longrunning.operation_info).response_type": "BulkUploadFeedbackLabelsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "BulkUploadFeedbackLabelsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}:bulkUploadFeedbackLabels",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BulkUploadFeedbackLabelsResponse",
+                                "metadata_type": "BulkUploadFeedbackLabelsMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "BulkDownloadFeedbackLabels": {
+                          "requestType": "BulkDownloadFeedbackLabelsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}:bulkDownloadFeedbackLabels",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent",
+                            "(google.longrunning.operation_info).response_type": "BulkDownloadFeedbackLabelsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "BulkDownloadFeedbackLabelsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}:bulkDownloadFeedbackLabels",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BulkDownloadFeedbackLabelsResponse",
+                                "metadata_type": "BulkDownloadFeedbackLabelsMetadata"
+                              }
                             }
                           ]
                         }
@@ -1093,6 +1816,13 @@
                           "type": "string",
                           "id": 4
                         },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "view": {
                           "type": "ConversationView",
                           "id": 5
@@ -1170,6 +1900,11 @@
                           "oneof": [
                             "transcriptObjectConfig"
                           ]
+                        },
+                        "_sampleSize": {
+                          "oneof": [
+                            "sampleSize"
+                          ]
                         }
                       },
                       "fields": {
@@ -1206,10 +1941,25 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "sampleSize": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
                         "GcsSource": {
+                          "oneofs": {
+                            "_metadataBucketUri": {
+                              "oneof": [
+                                "metadataBucketUri"
+                              ]
+                            }
+                          },
                           "fields": {
                             "bucketUri": {
                               "type": "string",
@@ -1221,6 +1971,22 @@
                             "bucketObjectType": {
                               "type": "BucketObjectType",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "metadataBucketUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "customMetadataKeys": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 12,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -1251,7 +2017,10 @@
                           "fields": {
                             "agentId": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "agentChannel": {
                               "type": "int32",
@@ -1844,6 +2613,123 @@
                         }
                       }
                     },
+                    "ExportIssueModelRequest": {
+                      "oneofs": {
+                        "Destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/IssueModel"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GcsDestination": {
+                          "fields": {
+                            "objectUri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExportIssueModelResponse": {
+                      "fields": {}
+                    },
+                    "ExportIssueModelMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "request": {
+                          "type": "ExportIssueModelRequest",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ImportIssueModelRequest": {
+                      "oneofs": {
+                        "Source": {
+                          "oneof": [
+                            "gcsSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 2
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "createNewModel": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GcsSource": {
+                          "fields": {
+                            "objectUri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ImportIssueModelResponse": {
+                      "fields": {}
+                    },
+                    "ImportIssueModelMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "request": {
+                          "type": "ImportIssueModelRequest",
+                          "id": 3
+                        }
+                      }
+                    },
                     "GetIssueRequest": {
                       "fields": {
                         "name": {
@@ -2049,6 +2935,162 @@
                         }
                       }
                     },
+                    "CreateAnalysisRuleRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "analysisRule": {
+                          "type": "AnalysisRule",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetAnalysisRuleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/AnalysisRule"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateAnalysisRuleRequest": {
+                      "fields": {
+                        "analysisRule": {
+                          "type": "AnalysisRule",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteAnalysisRuleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/AnalysisRule"
+                          }
+                        }
+                      }
+                    },
+                    "ListAnalysisRulesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListAnalysisRulesResponse": {
+                      "fields": {
+                        "analysisRules": {
+                          "rule": "repeated",
+                          "type": "AnalysisRule",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetEncryptionSpecRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/EncryptionSpec"
+                          }
+                        }
+                      }
+                    },
+                    "InitializeEncryptionSpecRequest": {
+                      "fields": {
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "InitializeEncryptionSpecResponse": {
+                      "fields": {}
+                    },
+                    "InitializeEncryptionSpecMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "request": {
+                          "type": "InitializeEncryptionSpecRequest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "partialErrors": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        }
+                      }
+                    },
                     "CreateViewRequest": {
                       "fields": {
                         "parent": {
@@ -2140,10 +3182,1387 @@
                         }
                       }
                     },
+                    "Dimension": {
+                      "oneofs": {
+                        "dimensionMetadata": {
+                          "oneof": [
+                            "issueDimensionMetadata",
+                            "agentDimensionMetadata",
+                            "qaQuestionDimensionMetadata",
+                            "qaQuestionAnswerDimensionMetadata"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "issueDimensionMetadata": {
+                          "type": "IssueDimensionMetadata",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "agentDimensionMetadata": {
+                          "type": "AgentDimensionMetadata",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "qaQuestionDimensionMetadata": {
+                          "type": "QaQuestionDimensionMetadata",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "qaQuestionAnswerDimensionMetadata": {
+                          "type": "QaQuestionAnswerDimensionMetadata",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dimensionKey": {
+                          "type": "DimensionKey",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "IssueDimensionMetadata": {
+                          "fields": {
+                            "issueId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/Issue"
+                              }
+                            },
+                            "issueDisplayName": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "issueModelId": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/IssueModel"
+                              }
+                            }
+                          }
+                        },
+                        "AgentDimensionMetadata": {
+                          "fields": {
+                            "agentId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "agentDisplayName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "agentTeam": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "QaQuestionDimensionMetadata": {
+                          "fields": {
+                            "qaScorecardId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "qaQuestionId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "questionBody": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "QaQuestionAnswerDimensionMetadata": {
+                          "fields": {
+                            "qaScorecardId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "qaQuestionId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "questionBody": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "answerValue": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "DimensionKey": {
+                          "values": {
+                            "DIMENSION_KEY_UNSPECIFIED": 0,
+                            "ISSUE": 1,
+                            "AGENT": 2,
+                            "AGENT_TEAM": 3,
+                            "QA_QUESTION_ID": 4,
+                            "QA_QUESTION_ANSWER_VALUE": 5,
+                            "CONVERSATION_PROFILE_ID": 6
+                          }
+                        }
+                      }
+                    },
+                    "QueryMetricsRequest": {
+                      "fields": {
+                        "location": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "timeGranularity": {
+                          "type": "TimeGranularity",
+                          "id": 3
+                        },
+                        "dimensions": {
+                          "rule": "repeated",
+                          "type": "Dimension",
+                          "id": 4
+                        },
+                        "measureMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "TimeGranularity": {
+                          "values": {
+                            "TIME_GRANULARITY_UNSPECIFIED": 0,
+                            "NONE": 1,
+                            "DAILY": 2,
+                            "HOURLY": 3,
+                            "PER_MINUTE": 4,
+                            "PER_5_MINUTES": 5,
+                            "MONTHLY": 6
+                          }
+                        }
+                      }
+                    },
+                    "QueryMetricsResponse": {
+                      "oneofs": {
+                        "_macroAverageSlice": {
+                          "oneof": [
+                            "macroAverageSlice"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "location": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "slices": {
+                          "rule": "repeated",
+                          "type": "Slice",
+                          "id": 2
+                        },
+                        "macroAverageSlice": {
+                          "type": "Slice",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Slice": {
+                          "fields": {
+                            "dimensions": {
+                              "rule": "repeated",
+                              "type": "Dimension",
+                              "id": 1
+                            },
+                            "total": {
+                              "type": "DataPoint",
+                              "id": 2
+                            },
+                            "timeSeries": {
+                              "type": "TimeSeries",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "DataPoint": {
+                              "oneofs": {
+                                "measure": {
+                                  "oneof": [
+                                    "conversationMeasure"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "conversationMeasure": {
+                                  "type": "ConversationMeasure",
+                                  "id": 2
+                                },
+                                "interval": {
+                                  "type": "google.type.Interval",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "ConversationMeasure": {
+                                  "oneofs": {
+                                    "_conversationCount": {
+                                      "oneof": [
+                                        "conversationCount"
+                                      ]
+                                    },
+                                    "_averageSilencePercentage": {
+                                      "oneof": [
+                                        "averageSilencePercentage"
+                                      ]
+                                    },
+                                    "_averageDuration": {
+                                      "oneof": [
+                                        "averageDuration"
+                                      ]
+                                    },
+                                    "_averageTurnCount": {
+                                      "oneof": [
+                                        "averageTurnCount"
+                                      ]
+                                    },
+                                    "_averageAgentSentimentScore": {
+                                      "oneof": [
+                                        "averageAgentSentimentScore"
+                                      ]
+                                    },
+                                    "_averageClientSentimentScore": {
+                                      "oneof": [
+                                        "averageClientSentimentScore"
+                                      ]
+                                    },
+                                    "_averageCustomerSatisfactionRating": {
+                                      "oneof": [
+                                        "averageCustomerSatisfactionRating"
+                                      ]
+                                    },
+                                    "_averageQaNormalizedScore": {
+                                      "oneof": [
+                                        "averageQaNormalizedScore"
+                                      ]
+                                    },
+                                    "_averageQaQuestionNormalizedScore": {
+                                      "oneof": [
+                                        "averageQaQuestionNormalizedScore"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "conversationCount": {
+                                      "type": "int32",
+                                      "id": 1,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "averageSilencePercentage": {
+                                      "type": "float",
+                                      "id": 2,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "averageDuration": {
+                                      "type": "google.protobuf.Duration",
+                                      "id": 3,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "averageTurnCount": {
+                                      "type": "float",
+                                      "id": 4,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "averageAgentSentimentScore": {
+                                      "type": "float",
+                                      "id": 5,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "averageClientSentimentScore": {
+                                      "type": "float",
+                                      "id": 6,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "averageCustomerSatisfactionRating": {
+                                      "type": "double",
+                                      "id": 8,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "averageQaNormalizedScore": {
+                                      "type": "double",
+                                      "id": 7,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "qaTagScores": {
+                                      "rule": "repeated",
+                                      "type": "QaTagScore",
+                                      "id": 9
+                                    },
+                                    "averageQaQuestionNormalizedScore": {
+                                      "type": "double",
+                                      "id": 10,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    }
+                                  },
+                                  "nested": {
+                                    "QaTagScore": {
+                                      "fields": {
+                                        "tag": {
+                                          "type": "string",
+                                          "id": 1
+                                        },
+                                        "averageTagNormalizedScore": {
+                                          "type": "double",
+                                          "id": 2
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "TimeSeries": {
+                              "fields": {
+                                "dataPoints": {
+                                  "rule": "repeated",
+                                  "type": "DataPoint",
+                                  "id": 4
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "QueryMetricsMetadata": {
+                      "fields": {}
+                    },
+                    "CreateQaQuestionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaScorecardRevision"
+                          }
+                        },
+                        "qaQuestion": {
+                          "type": "QaQuestion",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "qaQuestionId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetQaQuestionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaQuestion"
+                          }
+                        }
+                      }
+                    },
+                    "ListQaQuestionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaScorecardRevision"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListQaQuestionsResponse": {
+                      "fields": {
+                        "qaQuestions": {
+                          "rule": "repeated",
+                          "type": "QaQuestion",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateQaQuestionRequest": {
+                      "fields": {
+                        "qaQuestion": {
+                          "type": "QaQuestion",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteQaQuestionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaQuestion"
+                          }
+                        }
+                      }
+                    },
+                    "CreateQaScorecardRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "qaScorecard": {
+                          "type": "QaScorecard",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "qaScorecardId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetQaScorecardRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaScorecard"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateQaScorecardRequest": {
+                      "fields": {
+                        "qaScorecard": {
+                          "type": "QaScorecard",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteQaScorecardRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaScorecard"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreateQaScorecardRevisionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaScorecard"
+                          }
+                        },
+                        "qaScorecardRevision": {
+                          "type": "QaScorecardRevision",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "qaScorecardRevisionId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetQaScorecardRevisionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaScorecardRevision"
+                          }
+                        }
+                      }
+                    },
+                    "TuneQaScorecardRevisionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaScorecardRevision"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TuneQaScorecardRevisionResponse": {
+                      "fields": {}
+                    },
+                    "TuneQaScorecardRevisionMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "request": {
+                          "type": "TuneQaScorecardRevisionRequest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "qaQuestionDatasetValidationResults": {
+                          "rule": "repeated",
+                          "type": "QaQuestionDatasetValidationResult",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "qaQuestionDatasetTuningMetrics": {
+                          "rule": "repeated",
+                          "type": "QaQuestionDatasetTuningMetrics",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "tuningCompletionRatio": {
+                          "type": "double",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "QaQuestionDatasetValidationResult": {
+                          "fields": {
+                            "question": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaQuestion"
+                              }
+                            },
+                            "datasetValidationWarnings": {
+                              "rule": "repeated",
+                              "type": "DatasetValidationWarning",
+                              "id": 2
+                            },
+                            "validFeedbackLabelsCount": {
+                              "type": "int32",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "QaQuestionDatasetTuningMetrics": {
+                          "fields": {
+                            "question": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaQuestion"
+                              }
+                            },
+                            "metrics": {
+                              "type": "Metrics",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Metrics": {
+                              "fields": {
+                                "accuracy": {
+                                  "type": "double",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "DeployQaScorecardRevisionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaScorecardRevision"
+                          }
+                        }
+                      }
+                    },
+                    "UndeployQaScorecardRevisionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaScorecardRevision"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteQaScorecardRevisionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaScorecardRevision"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListQaScorecardsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListQaScorecardsResponse": {
+                      "fields": {
+                        "qaScorecards": {
+                          "rule": "repeated",
+                          "type": "QaScorecard",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListQaScorecardRevisionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaScorecard"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListQaScorecardRevisionsResponse": {
+                      "fields": {
+                        "qaScorecardRevisions": {
+                          "rule": "repeated",
+                          "type": "QaScorecardRevision",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateFeedbackLabelRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/Conversation"
+                          }
+                        },
+                        "feedbackLabelId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "feedbackLabel": {
+                          "type": "FeedbackLabel",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListFeedbackLabelsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/Conversation"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListFeedbackLabelsResponse": {
+                      "fields": {
+                        "feedbackLabels": {
+                          "rule": "repeated",
+                          "type": "FeedbackLabel",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetFeedbackLabelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/FeedbackLabel"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateFeedbackLabelRequest": {
+                      "fields": {
+                        "feedbackLabel": {
+                          "type": "FeedbackLabel",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteFeedbackLabelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/FeedbackLabel"
+                          }
+                        }
+                      }
+                    },
+                    "ListAllFeedbackLabelsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListAllFeedbackLabelsResponse": {
+                      "fields": {
+                        "feedbackLabels": {
+                          "rule": "repeated",
+                          "type": "FeedbackLabel",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BulkUploadFeedbackLabelsRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 2
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GcsSource": {
+                          "fields": {
+                            "format": {
+                              "type": "Format",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "objectUri": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Format": {
+                              "values": {
+                                "FORMAT_UNSPECIFIED": 0,
+                                "CSV": 1,
+                                "JSON": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "BulkUploadFeedbackLabelsResponse": {
+                      "fields": {}
+                    },
+                    "BulkUploadFeedbackLabelsMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "request": {
+                          "type": "BulkUploadFeedbackLabelsRequest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "partialErrors": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        },
+                        "uploadStats": {
+                          "type": "UploadStats",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "UploadStats": {
+                          "fields": {
+                            "processedObjectCount": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "failedValidationCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "successfulUploadCount": {
+                              "type": "int32",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "BulkDownloadFeedbackLabelsRequest": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 3
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxDownloadCount": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "feedbackLabelType": {
+                          "type": "FeedbackLabelType",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "conversationFilter": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "templateQaScorecardId": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GcsDestination": {
+                          "fields": {
+                            "format": {
+                              "type": "Format",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "objectUri": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "addWhitespace": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "alwaysPrintEmptyFields": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "recordsPerFileCount": {
+                              "type": "int64",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Format": {
+                              "values": {
+                                "FORMAT_UNSPECIFIED": 0,
+                                "CSV": 1,
+                                "JSON": 2
+                              }
+                            }
+                          }
+                        },
+                        "FeedbackLabelType": {
+                          "values": {
+                            "FEEDBACK_LABEL_TYPE_UNSPECIFIED": 0,
+                            "QUALITY_AI": 1,
+                            "TOPIC_MODELING": 2
+                          }
+                        }
+                      }
+                    },
+                    "BulkDownloadFeedbackLabelsResponse": {
+                      "fields": {}
+                    },
+                    "BulkDownloadFeedbackLabelsMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "request": {
+                          "type": "BulkDownloadFeedbackLabelsRequest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "partialErrors": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        },
+                        "downloadStats": {
+                          "type": "DownloadStats",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DownloadStats": {
+                          "fields": {
+                            "processedObjectCount": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "successfulDownloadCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "totalFilesWritten": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "fileNames": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "DatasetValidationWarning": {
+                      "values": {
+                        "DATASET_VALIDATION_WARNING_UNSPECIFIED": 0,
+                        "TOO_MANY_INVALID_FEEDBACK_LABELS": 1,
+                        "INSUFFICIENT_FEEDBACK_LABELS": 2,
+                        "INSUFFICIENT_FEEDBACK_LABELS_PER_ANSWER": 3,
+                        "ALL_FEEDBACK_LABELS_HAVE_THE_SAME_ANSWER": 4
+                      }
+                    },
                     "Conversation": {
                       "options": {
                         "(google.api.resource).type": "contactcenterinsights.googleapis.com/Conversation",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/conversations/{conversation}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}",
+                        "(google.api.resource).plural": "conversations",
+                        "(google.api.resource).singular": "conversation"
                       },
                       "oneofs": {
                         "metadata": {
@@ -2219,6 +4638,13 @@
                         "qualityMetadata": {
                           "type": "QualityMetadata",
                           "id": 24
+                        },
+                        "metadataJson": {
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
                         },
                         "transcript": {
                           "type": "Transcript",
@@ -2334,6 +4760,10 @@
                                 "dispositionCode": {
                                   "type": "string",
                                   "id": 4
+                                },
+                                "agentType": {
+                                  "type": "ConversationParticipant.Role",
+                                  "id": 5
                                 }
                               }
                             }
@@ -2433,7 +4863,9 @@
                     "Analysis": {
                       "options": {
                         "(google.api.resource).type": "contactcenterinsights.googleapis.com/Analysis",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/conversations/{conversation}/analyses/{analysis}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}/analyses/{analysis}",
+                        "(google.api.resource).plural": "analyses",
+                        "(google.api.resource).singular": "analysis"
                       },
                       "fields": {
                         "name": {
@@ -2556,6 +4988,10 @@
                               "type": "ConversationLevelSentiment",
                               "id": 4
                             },
+                            "silence": {
+                              "type": "ConversationLevelSilence",
+                              "id": 11
+                            },
                             "intents": {
                               "keyType": "string",
                               "type": "Intent",
@@ -2569,6 +5005,11 @@
                             "issueModelResult": {
                               "type": "IssueModelResult",
                               "id": 8
+                            },
+                            "qaScorecardResults": {
+                              "rule": "repeated",
+                              "type": "QaScorecardResult",
+                              "id": 10
                             }
                           }
                         }
@@ -2590,6 +5031,57 @@
                         }
                       }
                     },
+                    "FeedbackLabel": {
+                      "options": {
+                        "(google.api.resource).type": "contactcenterinsights.googleapis.com/FeedbackLabel",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}/feedbackLabels/{feedback_label}",
+                        "(google.api.resource).plural": "feedbackLabels",
+                        "(google.api.resource).singular": "feedbackLabel"
+                      },
+                      "oneofs": {
+                        "labelType": {
+                          "oneof": [
+                            "label",
+                            "qaAnswerLabel"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "label": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "qaAnswerLabel": {
+                          "type": "QaAnswer.AnswerValue",
+                          "id": 7
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "labeledResource": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "ConversationLevelSentiment": {
                       "fields": {
                         "channelTag": {
@@ -2598,6 +5090,18 @@
                         },
                         "sentimentData": {
                           "type": "SentimentData",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ConversationLevelSilence": {
+                      "fields": {
+                        "silenceDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
+                        },
+                        "silencePercentage": {
+                          "type": "float",
                           "id": 2
                         }
                       }
@@ -2985,6 +5489,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "displayDescription": {
+                          "type": "string",
+                          "id": 14
                         }
                       }
                     },
@@ -3242,6 +5750,89 @@
                         }
                       }
                     },
+                    "AnalysisRule": {
+                      "options": {
+                        "(google.api.resource).type": "contactcenterinsights.googleapis.com/AnalysisRule",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/analysisRules/{analysis_rule}",
+                        "(google.api.resource).plural": "analysisRules",
+                        "(google.api.resource).singular": "analysisRule"
+                      },
+                      "oneofs": {
+                        "_displayName": {
+                          "oneof": [
+                            "displayName"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "conversationFilter": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "annotatorSelector": {
+                          "type": "AnnotatorSelector",
+                          "id": 6
+                        },
+                        "analysisPercentage": {
+                          "type": "double",
+                          "id": 7
+                        },
+                        "active": {
+                          "type": "bool",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "EncryptionSpec": {
+                      "options": {
+                        "(google.api.resource).type": "contactcenterinsights.googleapis.com/EncryptionSpec",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/encryptionSpec"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "RedactionConfig": {
                       "fields": {
                         "deidentifyTemplate": {
@@ -3322,6 +5913,37 @@
                         "answerFeedback": {
                           "type": "AnswerFeedback",
                           "id": 5
+                        },
+                        "userInput": {
+                          "type": "UserInput",
+                          "id": 16
+                        }
+                      },
+                      "nested": {
+                        "UserInput": {
+                          "fields": {
+                            "query": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "generatorName": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "querySource": {
+                              "type": "QuerySource",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "QuerySource": {
+                              "values": {
+                                "QUERY_SOURCE_UNSPECIFIED": 0,
+                                "AGENT_QUERY": 1,
+                                "SUGGESTED_QUERY": 2
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -3632,6 +6254,14 @@
                         "summarizationConfig": {
                           "type": "SummarizationConfig",
                           "id": 11
+                        },
+                        "runQaAnnotator": {
+                          "type": "bool",
+                          "id": 12
+                        },
+                        "qaConfig": {
+                          "type": "QaConfig",
+                          "id": 13
                         }
                       },
                       "nested": {
@@ -3661,7 +6291,608 @@
                             "SummarizationModel": {
                               "values": {
                                 "SUMMARIZATION_MODEL_UNSPECIFIED": 0,
-                                "BASELINE_MODEL": 1
+                                "BASELINE_MODEL": 1,
+                                "BASELINE_MODEL_V2_0": 2
+                              }
+                            }
+                          }
+                        },
+                        "QaConfig": {
+                          "oneofs": {
+                            "scorecardSource": {
+                              "oneof": [
+                                "scorecardList"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "scorecardList": {
+                              "type": "ScorecardList",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "ScorecardList": {
+                              "fields": {
+                                "qaScorecardRevisions": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaScorecardRevision"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "QaQuestion": {
+                      "options": {
+                        "(google.api.resource).type": "contactcenterinsights.googleapis.com/QaQuestion",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/qaScorecards/{qa_scorecard}/revisions/{revision}/qaQuestions/{qa_question}",
+                        "(google.api.resource).plural": "qaQuestions",
+                        "(google.api.resource).singular": "qaQuestion"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "abbreviation": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "questionBody": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "answerInstructions": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "answerChoices": {
+                          "rule": "repeated",
+                          "type": "AnswerChoice",
+                          "id": 6
+                        },
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        },
+                        "order": {
+                          "type": "int32",
+                          "id": 8
+                        },
+                        "metrics": {
+                          "type": "Metrics",
+                          "id": 10
+                        },
+                        "tuningMetadata": {
+                          "type": "TuningMetadata",
+                          "id": 11
+                        }
+                      },
+                      "nested": {
+                        "AnswerChoice": {
+                          "oneofs": {
+                            "value": {
+                              "oneof": [
+                                "strValue",
+                                "numValue",
+                                "boolValue",
+                                "naValue"
+                              ]
+                            },
+                            "_score": {
+                              "oneof": [
+                                "score"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "strValue": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "numValue": {
+                              "type": "double",
+                              "id": 3
+                            },
+                            "boolValue": {
+                              "type": "bool",
+                              "id": 4
+                            },
+                            "naValue": {
+                              "type": "bool",
+                              "id": 5
+                            },
+                            "key": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "score": {
+                              "type": "double",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "Metrics": {
+                          "fields": {
+                            "accuracy": {
+                              "type": "double",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "TuningMetadata": {
+                          "fields": {
+                            "totalValidLabelCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "datasetValidationWarnings": {
+                              "rule": "repeated",
+                              "type": "DatasetValidationWarning",
+                              "id": 2
+                            },
+                            "tuningError": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "QaScorecard": {
+                      "options": {
+                        "(google.api.resource).type": "contactcenterinsights.googleapis.com/QaScorecard",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/qaScorecards/{qa_scorecard}",
+                        "(google.api.resource).plural": "qaScorecards",
+                        "(google.api.resource).singular": "qaScorecard"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "QaScorecardRevision": {
+                      "options": {
+                        "(google.api.resource).type": "contactcenterinsights.googleapis.com/QaScorecardRevision",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/qaScorecards/{qa_scorecard}/revisions/{revision}",
+                        "(google.api.resource).plural": "qaScorecardRevisions",
+                        "(google.api.resource).singular": "qaScorecardRevision"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "snapshot": {
+                          "type": "QaScorecard",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "alternateIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "EDITABLE": 12,
+                            "TRAINING": 2,
+                            "TRAINING_FAILED": 9,
+                            "READY": 11,
+                            "DELETING": 7,
+                            "TRAINING_CANCELLED": 14
+                          }
+                        }
+                      }
+                    },
+                    "QaAnswer": {
+                      "fields": {
+                        "qaQuestion": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaQuestion"
+                          }
+                        },
+                        "conversation": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/Conversation"
+                          }
+                        },
+                        "questionBody": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "answerValue": {
+                          "type": "AnswerValue",
+                          "id": 3
+                        },
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "answerSources": {
+                          "rule": "repeated",
+                          "type": "AnswerSource",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "AnswerValue": {
+                          "oneofs": {
+                            "value": {
+                              "oneof": [
+                                "strValue",
+                                "numValue",
+                                "boolValue",
+                                "naValue"
+                              ]
+                            },
+                            "_score": {
+                              "oneof": [
+                                "score"
+                              ]
+                            },
+                            "_potentialScore": {
+                              "oneof": [
+                                "potentialScore"
+                              ]
+                            },
+                            "_normalizedScore": {
+                              "oneof": [
+                                "normalizedScore"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "strValue": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "numValue": {
+                              "type": "double",
+                              "id": 3
+                            },
+                            "boolValue": {
+                              "type": "bool",
+                              "id": 4
+                            },
+                            "naValue": {
+                              "type": "bool",
+                              "id": 5
+                            },
+                            "key": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "score": {
+                              "type": "double",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "potentialScore": {
+                              "type": "double",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "normalizedScore": {
+                              "type": "double",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "AnswerSource": {
+                          "fields": {
+                            "sourceType": {
+                              "type": "SourceType",
+                              "id": 1
+                            },
+                            "answerValue": {
+                              "type": "AnswerValue",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "SourceType": {
+                              "values": {
+                                "SOURCE_TYPE_UNSPECIFIED": 0,
+                                "SYSTEM_GENERATED": 1,
+                                "MANUAL_EDIT": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "QaScorecardResult": {
+                      "options": {
+                        "(google.api.resource).type": "contactcenterinsights.googleapis.com/QaScorecardResult",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/qaScorecardResults/{qa_scorecard_result}",
+                        "(google.api.resource).plural": "qaScorecardResults",
+                        "(google.api.resource).singular": "qaScorecardResult"
+                      },
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        },
+                        "_potentialScore": {
+                          "oneof": [
+                            "potentialScore"
+                          ]
+                        },
+                        "_normalizedScore": {
+                          "oneof": [
+                            "normalizedScore"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "qaScorecardRevision": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/QaScorecardRevision"
+                          }
+                        },
+                        "conversation": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/Conversation"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "agentId": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "qaAnswers": {
+                          "rule": "repeated",
+                          "type": "QaAnswer",
+                          "id": 6
+                        },
+                        "score": {
+                          "type": "double",
+                          "id": 7,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "potentialScore": {
+                          "type": "double",
+                          "id": 8,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "normalizedScore": {
+                          "type": "double",
+                          "id": 9,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "qaTagResults": {
+                          "rule": "repeated",
+                          "type": "QaTagResult",
+                          "id": 10
+                        },
+                        "scoreSources": {
+                          "rule": "repeated",
+                          "type": "ScoreSource",
+                          "id": 11
+                        }
+                      },
+                      "nested": {
+                        "QaTagResult": {
+                          "oneofs": {
+                            "_score": {
+                              "oneof": [
+                                "score"
+                              ]
+                            },
+                            "_potentialScore": {
+                              "oneof": [
+                                "potentialScore"
+                              ]
+                            },
+                            "_normalizedScore": {
+                              "oneof": [
+                                "normalizedScore"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "tag": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "score": {
+                              "type": "double",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "potentialScore": {
+                              "type": "double",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "normalizedScore": {
+                              "type": "double",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ScoreSource": {
+                          "oneofs": {
+                            "_score": {
+                              "oneof": [
+                                "score"
+                              ]
+                            },
+                            "_potentialScore": {
+                              "oneof": [
+                                "potentialScore"
+                              ]
+                            },
+                            "_normalizedScore": {
+                              "oneof": [
+                                "normalizedScore"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "sourceType": {
+                              "type": "SourceType",
+                              "id": 1
+                            },
+                            "score": {
+                              "type": "double",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "potentialScore": {
+                              "type": "double",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "normalizedScore": {
+                              "type": "double",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "qaTagResults": {
+                              "rule": "repeated",
+                              "type": "QaTagResult",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "SourceType": {
+                              "values": {
+                                "SOURCE_TYPE_UNSPECIFIED": 0,
+                                "SYSTEM_GENERATED_ONLY": 1,
+                                "INCLUDES_MANUAL_EDITS": 2
                               }
                             }
                           }
@@ -5729,6 +8960,30 @@
                   "rule": "repeated",
                   "type": "google.protobuf.Any",
                   "id": 3
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/type/interval;interval",
+            "java_multiple_files": true,
+            "java_outer_classname": "IntervalProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Interval": {
+              "fields": {
+                "startTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 1
+                },
+                "endTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 2
                 }
               }
             }

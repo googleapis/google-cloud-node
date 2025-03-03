@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -55,6 +55,7 @@ export {NetworkAttachmentsClient} from './network_attachments_client';
 export {NetworkEdgeSecurityServicesClient} from './network_edge_security_services_client';
 export {NetworkEndpointGroupsClient} from './network_endpoint_groups_client';
 export {NetworkFirewallPoliciesClient} from './network_firewall_policies_client';
+export {NetworkProfilesClient} from './network_profiles_client';
 export {NetworksClient} from './networks_client';
 export {NodeGroupsClient} from './node_groups_client';
 export {NodeTemplatesClient} from './node_templates_client';

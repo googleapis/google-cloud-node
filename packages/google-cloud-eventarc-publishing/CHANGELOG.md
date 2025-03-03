@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/eventarc-publishing-v3.3.0...eventarc-publishing-v3.4.0) (2024-10-30)
+
+
+### Features
+
+* [eventarc-publishing,securitycentermanagement] Add GroundedGenerationService API ([#5778](https://github.com/googleapis/google-cloud-node/issues/5778)) ([fc49da8](https://github.com/googleapis/google-cloud-node/commit/fc49da87f341638232166e80adce38d8108461a9))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/eventarc-publishing-v3.2.0...eventarc-publishing-v3.3.0) (2024-05-21)
 
 

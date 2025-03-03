@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -369,7 +369,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.WorkflowTemplate()
       );
@@ -402,7 +402,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.WorkflowTemplate()
       );
@@ -450,7 +450,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkflowTemplate = stubSimpleCall(
         undefined,
@@ -510,7 +510,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.WorkflowTemplate()
       );
@@ -543,7 +543,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.WorkflowTemplate()
       );
@@ -591,7 +591,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkflowTemplate = stubSimpleCall(
         undefined,
@@ -646,7 +646,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['template', 'name']
       );
       request.template.name = defaultValue1;
-      const expectedHeaderRequestParams = `template.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `template.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.WorkflowTemplate()
       );
@@ -680,7 +680,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['template', 'name']
       );
       request.template.name = defaultValue1;
-      const expectedHeaderRequestParams = `template.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `template.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.WorkflowTemplate()
       );
@@ -729,7 +729,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['template', 'name']
       );
       request.template.name = defaultValue1;
-      const expectedHeaderRequestParams = `template.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `template.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkflowTemplate = stubSimpleCall(
         undefined,
@@ -790,7 +790,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -823,7 +823,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -871,7 +871,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkflowTemplate = stubSimpleCall(
         undefined,
@@ -931,7 +931,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -965,7 +965,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1020,7 +1020,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.instantiateWorkflowTemplate = stubLongRunningCall(
         undefined,
@@ -1055,7 +1055,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.instantiateWorkflowTemplate = stubLongRunningCall(
         undefined,
@@ -1135,7 +1135,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1170,7 +1170,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1225,7 +1225,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.instantiateInlineWorkflowTemplate =
         stubLongRunningCall(undefined, expectedError);
@@ -1258,7 +1258,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.instantiateInlineWorkflowTemplate =
         stubLongRunningCall(undefined, undefined, expectedError);
@@ -1336,7 +1336,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1.WorkflowTemplate()
@@ -1377,7 +1377,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1.WorkflowTemplate()
@@ -1433,7 +1433,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkflowTemplates = stubSimpleCall(
         undefined,
@@ -1468,7 +1468,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1.WorkflowTemplate()
@@ -1536,7 +1536,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkflowTemplates.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1593,7 +1593,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1.WorkflowTemplate()
@@ -1647,7 +1647,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkflowTemplates.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-meet",
-        "version": "0.3.0",
+        "version": "0.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -62,7 +62,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -591,14 +591,14 @@
             "regionTag": "meet_v2_generated_SpacesService_GetSpace_async",
             "title": "ConferenceRecordsService getSpace Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets a space by `space_id` or `meeting_code`.",
+            "description": " Gets details about a meeting space. For an example, see [Get a meeting space](https://developers.google.com/meet/api/guides/meeting-spaces#get-meeting-space).",
             "canonical": true,
             "file": "spaces_service.get_space.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -631,14 +631,14 @@
             "regionTag": "meet_v2_generated_SpacesService_UpdateSpace_async",
             "title": "ConferenceRecordsService updateSpace Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates a space.",
+            "description": " Updates details about a meeting space. For an example, see [Update a meeting space](https://developers.google.com/meet/api/guides/meeting-spaces#update-meeting-space).",
             "canonical": true,
             "file": "spaces_service.update_space.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 62,
                     "type": "FULL"
                 }
             ],
@@ -675,14 +675,14 @@
             "regionTag": "meet_v2_generated_SpacesService_EndActiveConference_async",
             "title": "ConferenceRecordsService endActiveConference Sample",
             "origin": "API_DEFINITION",
-            "description": " Ends an active conference (if there's one).",
+            "description": " Ends an active conference (if there's one). For an example, see [End active conference](https://developers.google.com/meet/api/guides/meeting-spaces#end-active-conference).",
             "canonical": true,
             "file": "spaces_service.end_active_conference.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 58,
                     "type": "FULL"
                 }
             ],

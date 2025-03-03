@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-gkemulticloud",
-        "version": "1.4.0",
+        "version": "1.5.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -74,7 +74,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],

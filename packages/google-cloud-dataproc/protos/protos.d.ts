@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2930,6 +2930,9 @@ export namespace google {
 
                     /** ExecutionConfig stagingBucket */
                     stagingBucket?: (string|null);
+
+                    /** ExecutionConfig authenticationConfig */
+                    authenticationConfig?: (google.cloud.dataproc.v1.IAuthenticationConfig|null);
                 }
 
                 /** Represents an ExecutionConfig. */
@@ -2964,6 +2967,9 @@ export namespace google {
 
                     /** ExecutionConfig stagingBucket. */
                     public stagingBucket: string;
+
+                    /** ExecutionConfig authenticationConfig. */
+                    public authenticationConfig?: (google.cloud.dataproc.v1.IAuthenticationConfig|null);
 
                     /** ExecutionConfig network. */
                     public network?: ("networkUri"|"subnetworkUri");
@@ -4508,6 +4514,113 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an AuthenticationConfig. */
+                interface IAuthenticationConfig {
+
+                    /** AuthenticationConfig userWorkloadAuthenticationType */
+                    userWorkloadAuthenticationType?: (google.cloud.dataproc.v1.AuthenticationConfig.AuthenticationType|keyof typeof google.cloud.dataproc.v1.AuthenticationConfig.AuthenticationType|null);
+                }
+
+                /** Represents an AuthenticationConfig. */
+                class AuthenticationConfig implements IAuthenticationConfig {
+
+                    /**
+                     * Constructs a new AuthenticationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IAuthenticationConfig);
+
+                    /** AuthenticationConfig userWorkloadAuthenticationType. */
+                    public userWorkloadAuthenticationType: (google.cloud.dataproc.v1.AuthenticationConfig.AuthenticationType|keyof typeof google.cloud.dataproc.v1.AuthenticationConfig.AuthenticationType);
+
+                    /**
+                     * Creates a new AuthenticationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AuthenticationConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IAuthenticationConfig): google.cloud.dataproc.v1.AuthenticationConfig;
+
+                    /**
+                     * Encodes the specified AuthenticationConfig message. Does not implicitly {@link google.cloud.dataproc.v1.AuthenticationConfig.verify|verify} messages.
+                     * @param message AuthenticationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IAuthenticationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AuthenticationConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.AuthenticationConfig.verify|verify} messages.
+                     * @param message AuthenticationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IAuthenticationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AuthenticationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AuthenticationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.AuthenticationConfig;
+
+                    /**
+                     * Decodes an AuthenticationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AuthenticationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.AuthenticationConfig;
+
+                    /**
+                     * Verifies an AuthenticationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AuthenticationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AuthenticationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.AuthenticationConfig;
+
+                    /**
+                     * Creates a plain object from an AuthenticationConfig message. Also converts values to other types if specified.
+                     * @param message AuthenticationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.AuthenticationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AuthenticationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AuthenticationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AuthenticationConfig {
+
+                    /** AuthenticationType enum. */
+                    enum AuthenticationType {
+                        AUTHENTICATION_TYPE_UNSPECIFIED = 0,
+                        SERVICE_ACCOUNT = 1,
+                        END_USER_CREDENTIALS = 2
                     }
                 }
 
@@ -6889,6 +7002,9 @@ export namespace google {
                 /** Properties of an InstanceFlexibilityPolicy. */
                 interface IInstanceFlexibilityPolicy {
 
+                    /** InstanceFlexibilityPolicy provisioningModelMix */
+                    provisioningModelMix?: (google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IProvisioningModelMix|null);
+
                     /** InstanceFlexibilityPolicy instanceSelectionList */
                     instanceSelectionList?: (google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection[]|null);
 
@@ -6904,6 +7020,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.dataproc.v1.IInstanceFlexibilityPolicy);
+
+                    /** InstanceFlexibilityPolicy provisioningModelMix. */
+                    public provisioningModelMix?: (google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IProvisioningModelMix|null);
 
                     /** InstanceFlexibilityPolicy instanceSelectionList. */
                     public instanceSelectionList: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection[];
@@ -6990,6 +7109,115 @@ export namespace google {
                 }
 
                 namespace InstanceFlexibilityPolicy {
+
+                    /** Properties of a ProvisioningModelMix. */
+                    interface IProvisioningModelMix {
+
+                        /** ProvisioningModelMix standardCapacityBase */
+                        standardCapacityBase?: (number|null);
+
+                        /** ProvisioningModelMix standardCapacityPercentAboveBase */
+                        standardCapacityPercentAboveBase?: (number|null);
+                    }
+
+                    /** Represents a ProvisioningModelMix. */
+                    class ProvisioningModelMix implements IProvisioningModelMix {
+
+                        /**
+                         * Constructs a new ProvisioningModelMix.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IProvisioningModelMix);
+
+                        /** ProvisioningModelMix standardCapacityBase. */
+                        public standardCapacityBase?: (number|null);
+
+                        /** ProvisioningModelMix standardCapacityPercentAboveBase. */
+                        public standardCapacityPercentAboveBase?: (number|null);
+
+                        /** ProvisioningModelMix _standardCapacityBase. */
+                        public _standardCapacityBase?: "standardCapacityBase";
+
+                        /** ProvisioningModelMix _standardCapacityPercentAboveBase. */
+                        public _standardCapacityPercentAboveBase?: "standardCapacityPercentAboveBase";
+
+                        /**
+                         * Creates a new ProvisioningModelMix instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProvisioningModelMix instance
+                         */
+                        public static create(properties?: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IProvisioningModelMix): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.ProvisioningModelMix;
+
+                        /**
+                         * Encodes the specified ProvisioningModelMix message. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.ProvisioningModelMix.verify|verify} messages.
+                         * @param message ProvisioningModelMix message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IProvisioningModelMix, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProvisioningModelMix message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.ProvisioningModelMix.verify|verify} messages.
+                         * @param message ProvisioningModelMix message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IProvisioningModelMix, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProvisioningModelMix message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProvisioningModelMix
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.ProvisioningModelMix;
+
+                        /**
+                         * Decodes a ProvisioningModelMix message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProvisioningModelMix
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.ProvisioningModelMix;
+
+                        /**
+                         * Verifies a ProvisioningModelMix message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProvisioningModelMix message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProvisioningModelMix
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.ProvisioningModelMix;
+
+                        /**
+                         * Creates a plain object from a ProvisioningModelMix message. Also converts values to other types if specified.
+                         * @param message ProvisioningModelMix
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.ProvisioningModelMix, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProvisioningModelMix to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProvisioningModelMix
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** Properties of an InstanceSelection. */
                     interface IInstanceSelection {
@@ -7321,6 +7549,12 @@ export namespace google {
 
                     /** DiskConfig localSsdInterface */
                     localSsdInterface?: (string|null);
+
+                    /** DiskConfig bootDiskProvisionedIops */
+                    bootDiskProvisionedIops?: (number|Long|string|null);
+
+                    /** DiskConfig bootDiskProvisionedThroughput */
+                    bootDiskProvisionedThroughput?: (number|Long|string|null);
                 }
 
                 /** Represents a DiskConfig. */
@@ -7343,6 +7577,18 @@ export namespace google {
 
                     /** DiskConfig localSsdInterface. */
                     public localSsdInterface: string;
+
+                    /** DiskConfig bootDiskProvisionedIops. */
+                    public bootDiskProvisionedIops?: (number|Long|string|null);
+
+                    /** DiskConfig bootDiskProvisionedThroughput. */
+                    public bootDiskProvisionedThroughput?: (number|Long|string|null);
+
+                    /** DiskConfig _bootDiskProvisionedIops. */
+                    public _bootDiskProvisionedIops?: "bootDiskProvisionedIops";
+
+                    /** DiskConfig _bootDiskProvisionedThroughput. */
+                    public _bootDiskProvisionedThroughput?: "bootDiskProvisionedThroughput";
 
                     /**
                      * Creates a new DiskConfig instance using the specified properties.
@@ -15702,6 +15948,9 @@ export namespace google {
                     /** SessionTemplate jupyterSession */
                     jupyterSession?: (google.cloud.dataproc.v1.IJupyterConfig|null);
 
+                    /** SessionTemplate sparkConnectSession */
+                    sparkConnectSession?: (google.cloud.dataproc.v1.ISparkConnectConfig|null);
+
                     /** SessionTemplate creator */
                     creator?: (string|null);
 
@@ -15742,6 +15991,9 @@ export namespace google {
                     /** SessionTemplate jupyterSession. */
                     public jupyterSession?: (google.cloud.dataproc.v1.IJupyterConfig|null);
 
+                    /** SessionTemplate sparkConnectSession. */
+                    public sparkConnectSession?: (google.cloud.dataproc.v1.ISparkConnectConfig|null);
+
                     /** SessionTemplate creator. */
                     public creator: string;
 
@@ -15761,7 +16013,7 @@ export namespace google {
                     public uuid: string;
 
                     /** SessionTemplate sessionConfig. */
-                    public sessionConfig?: "jupyterSession";
+                    public sessionConfig?: ("jupyterSession"|"sparkConnectSession");
 
                     /**
                      * Creates a new SessionTemplate instance using the specified properties.
@@ -16621,6 +16873,9 @@ export namespace google {
                     /** Session jupyterSession */
                     jupyterSession?: (google.cloud.dataproc.v1.IJupyterConfig|null);
 
+                    /** Session sparkConnectSession */
+                    sparkConnectSession?: (google.cloud.dataproc.v1.ISparkConnectConfig|null);
+
                     /** Session runtimeInfo */
                     runtimeInfo?: (google.cloud.dataproc.v1.IRuntimeInfo|null);
 
@@ -16676,6 +16931,9 @@ export namespace google {
                     /** Session jupyterSession. */
                     public jupyterSession?: (google.cloud.dataproc.v1.IJupyterConfig|null);
 
+                    /** Session sparkConnectSession. */
+                    public sparkConnectSession?: (google.cloud.dataproc.v1.ISparkConnectConfig|null);
+
                     /** Session runtimeInfo. */
                     public runtimeInfo?: (google.cloud.dataproc.v1.IRuntimeInfo|null);
 
@@ -16710,7 +16968,7 @@ export namespace google {
                     public sessionTemplate: string;
 
                     /** Session sessionConfig. */
-                    public sessionConfig?: "jupyterSession";
+                    public sessionConfig?: ("jupyterSession"|"sparkConnectSession");
 
                     /**
                      * Creates a new Session instance using the specified properties.
@@ -17023,6 +17281,97 @@ export namespace google {
                         PYTHON = 1,
                         SCALA = 2
                     }
+                }
+
+                /** Properties of a SparkConnectConfig. */
+                interface ISparkConnectConfig {
+                }
+
+                /** Represents a SparkConnectConfig. */
+                class SparkConnectConfig implements ISparkConnectConfig {
+
+                    /**
+                     * Constructs a new SparkConnectConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.ISparkConnectConfig);
+
+                    /**
+                     * Creates a new SparkConnectConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SparkConnectConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.ISparkConnectConfig): google.cloud.dataproc.v1.SparkConnectConfig;
+
+                    /**
+                     * Encodes the specified SparkConnectConfig message. Does not implicitly {@link google.cloud.dataproc.v1.SparkConnectConfig.verify|verify} messages.
+                     * @param message SparkConnectConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.ISparkConnectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SparkConnectConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.SparkConnectConfig.verify|verify} messages.
+                     * @param message SparkConnectConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.ISparkConnectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SparkConnectConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SparkConnectConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.SparkConnectConfig;
+
+                    /**
+                     * Decodes a SparkConnectConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SparkConnectConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.SparkConnectConfig;
+
+                    /**
+                     * Verifies a SparkConnectConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SparkConnectConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SparkConnectConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.SparkConnectConfig;
+
+                    /**
+                     * Creates a plain object from a SparkConnectConfig message. Also converts values to other types if specified.
+                     * @param message SparkConnectConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.SparkConnectConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SparkConnectConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SparkConnectConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a WorkflowTemplateService */

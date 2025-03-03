@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1697,17 +1697,32 @@ export class StorageTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.filter
    *   Required. A list of query parameters specified as JSON text in the form of:
-   *   `{"projectId":"my_project_id",
-   *    "jobNames":["jobid1","jobid2",...],
-   *    "jobStatuses":["status1","status2",...]}`
    *
-   *   Since `jobNames` and `jobStatuses` support multiple values, their values
-   *   must be specified with array notation. `projectId` is required.
-   *   `jobNames` and `jobStatuses` are optional.  The valid values for
-   *   `jobStatuses` are case-insensitive:
-   *   {@link protos.google.storagetransfer.v1.TransferJob.Status.ENABLED|ENABLED},
-   *   {@link protos.google.storagetransfer.v1.TransferJob.Status.DISABLED|DISABLED}, and
-   *   {@link protos.google.storagetransfer.v1.TransferJob.Status.DELETED|DELETED}.
+   *   ```
+   *   {
+   *     "projectId":"my_project_id",
+   *     "jobNames":["jobid1","jobid2",...],
+   *     "jobStatuses":["status1","status2",...],
+   *     "dataBackend":"QUERY_REPLICATION_CONFIGS",
+   *     "sourceBucket":"source-bucket-name",
+   *     "sinkBucket":"sink-bucket-name",
+   *   }
+   *   ```
+   *
+   *   The JSON formatting in the example is for display only; provide the
+   *   query parameters without spaces or line breaks.
+   *
+   *   * `projectId` is required.
+   *   * Since `jobNames` and `jobStatuses` support multiple values, their values
+   *     must be specified with array notation. `jobNames` and `jobStatuses` are
+   *     optional. Valid values are case-insensitive:
+   *       * {@link protos.google.storagetransfer.v1.TransferJob.Status.ENABLED|ENABLED}
+   *       * {@link protos.google.storagetransfer.v1.TransferJob.Status.DISABLED|DISABLED}
+   *       * {@link protos.google.storagetransfer.v1.TransferJob.Status.DELETED|DELETED}
+   *   * Specify `"dataBackend":"QUERY_REPLICATION_CONFIGS"` to return a list of
+   *     cross-bucket replication jobs.
+   *   * Limit the results to jobs from a particular bucket with `sourceBucket`
+   *     and/or to a particular bucket with `sinkBucket`.
    * @param {number} request.pageSize
    *   The list page size. The max allowed value is 256.
    * @param {string} request.pageToken
@@ -1796,22 +1811,37 @@ export class StorageTransferServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTransferJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.filter
    *   Required. A list of query parameters specified as JSON text in the form of:
-   *   `{"projectId":"my_project_id",
-   *    "jobNames":["jobid1","jobid2",...],
-   *    "jobStatuses":["status1","status2",...]}`
    *
-   *   Since `jobNames` and `jobStatuses` support multiple values, their values
-   *   must be specified with array notation. `projectId` is required.
-   *   `jobNames` and `jobStatuses` are optional.  The valid values for
-   *   `jobStatuses` are case-insensitive:
-   *   {@link protos.google.storagetransfer.v1.TransferJob.Status.ENABLED|ENABLED},
-   *   {@link protos.google.storagetransfer.v1.TransferJob.Status.DISABLED|DISABLED}, and
-   *   {@link protos.google.storagetransfer.v1.TransferJob.Status.DELETED|DELETED}.
+   *   ```
+   *   {
+   *     "projectId":"my_project_id",
+   *     "jobNames":["jobid1","jobid2",...],
+   *     "jobStatuses":["status1","status2",...],
+   *     "dataBackend":"QUERY_REPLICATION_CONFIGS",
+   *     "sourceBucket":"source-bucket-name",
+   *     "sinkBucket":"sink-bucket-name",
+   *   }
+   *   ```
+   *
+   *   The JSON formatting in the example is for display only; provide the
+   *   query parameters without spaces or line breaks.
+   *
+   *   * `projectId` is required.
+   *   * Since `jobNames` and `jobStatuses` support multiple values, their values
+   *     must be specified with array notation. `jobNames` and `jobStatuses` are
+   *     optional. Valid values are case-insensitive:
+   *       * {@link protos.google.storagetransfer.v1.TransferJob.Status.ENABLED|ENABLED}
+   *       * {@link protos.google.storagetransfer.v1.TransferJob.Status.DISABLED|DISABLED}
+   *       * {@link protos.google.storagetransfer.v1.TransferJob.Status.DELETED|DELETED}
+   *   * Specify `"dataBackend":"QUERY_REPLICATION_CONFIGS"` to return a list of
+   *     cross-bucket replication jobs.
+   *   * Limit the results to jobs from a particular bucket with `sourceBucket`
+   *     and/or to a particular bucket with `sinkBucket`.
    * @param {number} request.pageSize
    *   The list page size. The max allowed value is 256.
    * @param {string} request.pageToken
@@ -1853,17 +1883,32 @@ export class StorageTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.filter
    *   Required. A list of query parameters specified as JSON text in the form of:
-   *   `{"projectId":"my_project_id",
-   *    "jobNames":["jobid1","jobid2",...],
-   *    "jobStatuses":["status1","status2",...]}`
    *
-   *   Since `jobNames` and `jobStatuses` support multiple values, their values
-   *   must be specified with array notation. `projectId` is required.
-   *   `jobNames` and `jobStatuses` are optional.  The valid values for
-   *   `jobStatuses` are case-insensitive:
-   *   {@link protos.google.storagetransfer.v1.TransferJob.Status.ENABLED|ENABLED},
-   *   {@link protos.google.storagetransfer.v1.TransferJob.Status.DISABLED|DISABLED}, and
-   *   {@link protos.google.storagetransfer.v1.TransferJob.Status.DELETED|DELETED}.
+   *   ```
+   *   {
+   *     "projectId":"my_project_id",
+   *     "jobNames":["jobid1","jobid2",...],
+   *     "jobStatuses":["status1","status2",...],
+   *     "dataBackend":"QUERY_REPLICATION_CONFIGS",
+   *     "sourceBucket":"source-bucket-name",
+   *     "sinkBucket":"sink-bucket-name",
+   *   }
+   *   ```
+   *
+   *   The JSON formatting in the example is for display only; provide the
+   *   query parameters without spaces or line breaks.
+   *
+   *   * `projectId` is required.
+   *   * Since `jobNames` and `jobStatuses` support multiple values, their values
+   *     must be specified with array notation. `jobNames` and `jobStatuses` are
+   *     optional. Valid values are case-insensitive:
+   *       * {@link protos.google.storagetransfer.v1.TransferJob.Status.ENABLED|ENABLED}
+   *       * {@link protos.google.storagetransfer.v1.TransferJob.Status.DISABLED|DISABLED}
+   *       * {@link protos.google.storagetransfer.v1.TransferJob.Status.DELETED|DELETED}
+   *   * Specify `"dataBackend":"QUERY_REPLICATION_CONFIGS"` to return a list of
+   *     cross-bucket replication jobs.
+   *   * Limit the results to jobs from a particular bucket with `sourceBucket`
+   *     and/or to a particular bucket with `sinkBucket`.
    * @param {number} request.pageSize
    *   The list page size. The max allowed value is 256.
    * @param {string} request.pageToken
@@ -2005,7 +2050,7 @@ export class StorageTransferServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAgentPools`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
@@ -2142,7 +2187,7 @@ export class StorageTransferServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -2155,6 +2200,20 @@ export class StorageTransferServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2191,6 +2250,13 @@ export class StorageTransferServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2226,11 +2292,11 @@ export class StorageTransferServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -2239,6 +2305,20 @@ export class StorageTransferServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2269,7 +2349,7 @@ export class StorageTransferServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -2282,6 +2362,20 @@ export class StorageTransferServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

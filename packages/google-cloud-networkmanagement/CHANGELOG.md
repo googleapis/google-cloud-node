@@ -1,5 +1,52 @@
 # Changelog
 
+## [3.11.1](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.11.0...network-management-v3.11.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6013](https://github.com/googleapis/google-cloud-node/issues/6013)) ([cd3a2d4](https://github.com/googleapis/google-cloud-node/commit/cd3a2d44fc7a9b3798346162ba19df1c748fba58))
+
+## [3.11.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.10.0...network-management-v3.11.0) (2025-01-16)
+
+
+### Features
+
+* [networkmanagement] expose the new v1 vpcflowlogs api proto ([#5947](https://github.com/googleapis/google-cloud-node/issues/5947)) ([79de654](https://github.com/googleapis/google-cloud-node/commit/79de654a6f6ec0e304419cd0fd9411f0864fcbb3))
+
+## [3.10.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.9.0...network-management-v3.10.0) (2024-11-21)
+
+
+### Features
+
+* [networkmanagement] add round-trip mode ([#5814](https://github.com/googleapis/google-cloud-node/issues/5814)) ([9946273](https://github.com/googleapis/google-cloud-node/commit/994627330c440344fc3b2bbbcb6ee466e1cbc45c))
+
+## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.8.0...network-management-v3.9.0) (2024-11-14)
+
+
+### Features
+
+* [networkmanagement] add DNS endpoint of Google Kubernetes Engine cluster control plane ([#5790](https://github.com/googleapis/google-cloud-node/issues/5790)) ([f0be12a](https://github.com/googleapis/google-cloud-node/commit/f0be12aad7540be57ed9f1a87ad62fa309e7a25b))
+* Add more detailed drop causes to corresponding enum ([f0be12a](https://github.com/googleapis/google-cloud-node/commit/f0be12aad7540be57ed9f1a87ad62fa309e7a25b))
+* Add more detailed drop causes to corresponding enum ([f0be12a](https://github.com/googleapis/google-cloud-node/commit/f0be12aad7540be57ed9f1a87ad62fa309e7a25b))
+
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.7.0...network-management-v3.8.0) (2024-10-30)
+
+
+### Features
+
+* [networkmanagement] add messages and fields related to Redis Instances ([#5755](https://github.com/googleapis/google-cloud-node/issues/5755)) ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add fields related to advertised routes to the RouteInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add firewall policy URI to the FirewallInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add load balancer name to the ForwardingRuleInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add messages and fields related to Redis Clusters ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add more detailed abort and drop causes to corresponding enums ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add PSC network attachment URI to the InstanceInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add PSC target fields to the ForwardingRuleInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add region name field to the RouteInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add region name to the ForwardingRuleInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add subnet URI and region name to the NetworkInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+
 ## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.6.0...network-management-v3.7.0) (2024-08-19)
 
 

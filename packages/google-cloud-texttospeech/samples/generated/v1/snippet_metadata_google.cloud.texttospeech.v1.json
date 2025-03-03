@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-texttospeech",
-        "version": "5.4.0",
+        "version": "5.8.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -62,7 +62,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -82,6 +82,10 @@
                     {
                         "name": "audio_config",
                         "type": ".google.cloud.texttospeech.v1.AudioConfig"
+                    },
+                    {
+                        "name": "advanced_voice_options",
+                        "type": ".google.cloud.texttospeech.v1.AdvancedVoiceOptions"
                     }
                 ],
                 "resultType": ".google.cloud.texttospeech.v1.SynthesizeSpeechResponse",

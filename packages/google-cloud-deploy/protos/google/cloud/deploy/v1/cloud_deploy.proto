@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,6 +26,8 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "google/type/date.proto";
+import "google/type/dayofweek.proto";
+import "google/type/timeofday.proto";
 
 option go_package = "cloud.google.com/go/deploy/apiv1/deploypb;deploypb";
 option java_multiple_files = true;
@@ -293,6 +295,65 @@ service CloudDeploy {
     option (google.api.method_signature) = "name";
   }
 
+  // Creates a new DeployPolicy in a given project and location.
+  rpc CreateDeployPolicy(CreateDeployPolicyRequest)
+      returns (google.longrunning.Operation) {
+    option (google.api.http) = {
+      post: "/v1/{parent=projects/*/locations/*}/deployPolicies"
+      body: "deploy_policy"
+    };
+    option (google.api.method_signature) =
+        "parent,deploy_policy,deploy_policy_id";
+    option (google.longrunning.operation_info) = {
+      response_type: "DeployPolicy"
+      metadata_type: "OperationMetadata"
+    };
+  }
+
+  // Updates the parameters of a single DeployPolicy.
+  rpc UpdateDeployPolicy(UpdateDeployPolicyRequest)
+      returns (google.longrunning.Operation) {
+    option (google.api.http) = {
+      patch: "/v1/{deploy_policy.name=projects/*/locations/*/deployPolicies/*}"
+      body: "deploy_policy"
+    };
+    option (google.api.method_signature) = "deploy_policy,update_mask";
+    option (google.longrunning.operation_info) = {
+      response_type: "DeployPolicy"
+      metadata_type: "OperationMetadata"
+    };
+  }
+
+  // Deletes a single DeployPolicy.
+  rpc DeleteDeployPolicy(DeleteDeployPolicyRequest)
+      returns (google.longrunning.Operation) {
+    option (google.api.http) = {
+      delete: "/v1/{name=projects/*/locations/*/deployPolicies/*}"
+    };
+    option (google.api.method_signature) = "name";
+    option (google.longrunning.operation_info) = {
+      response_type: "google.protobuf.Empty"
+      metadata_type: "OperationMetadata"
+    };
+  }
+
+  // Lists DeployPolicies in a given project and location.
+  rpc ListDeployPolicies(ListDeployPoliciesRequest)
+      returns (ListDeployPoliciesResponse) {
+    option (google.api.http) = {
+      get: "/v1/{parent=projects/*/locations/*}/deployPolicies"
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // Gets details of a single DeployPolicy.
+  rpc GetDeployPolicy(GetDeployPolicyRequest) returns (DeployPolicy) {
+    option (google.api.http) = {
+      get: "/v1/{name=projects/*/locations/*/deployPolicies/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
   // Approves a Rollout.
   rpc ApproveRollout(ApproveRolloutRequest) returns (ApproveRolloutResponse) {
     option (google.api.http) = {
@@ -501,21 +562,22 @@ message DeliveryPipeline {
     pattern: "projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}"
   };
 
-  // Optional. Name of the `DeliveryPipeline`. Format is
+  // Identifier. Name of the `DeliveryPipeline`. Format is
   // `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}`.
   // The `deliveryPipeline` component must match
   // `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
-  string name = 1 [(google.api.field_behavior) = OPTIONAL];
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
   // Output only. Unique identifier of the `DeliveryPipeline`.
   string uid = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Description of the `DeliveryPipeline`. Max length is 255 characters.
-  string description = 3;
+  // Optional. Description of the `DeliveryPipeline`. Max length is 255
+  // characters.
+  string description = 3 [(google.api.field_behavior) = OPTIONAL];
 
-  // User annotations. These attributes can only be set and used by the
-  // user, and not by Cloud Deploy.
-  map<string, string> annotations = 4;
+  // Optional. User annotations. These attributes can only be set and used by
+  // the user, and not by Cloud Deploy.
+  map<string, string> annotations = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Labels are attributes that can be set and used by both the
   // user and by Cloud Deploy. Labels must meet the following constraints:
@@ -540,9 +602,9 @@ message DeliveryPipeline {
 
   // The ordering configuration of the `DeliveryPipeline`.
   oneof pipeline {
-    // SerialPipeline defines a sequential set of stages for a
+    // Optional. SerialPipeline defines a sequential set of stages for a
     // `DeliveryPipeline`.
-    SerialPipeline serial_pipeline = 8;
+    SerialPipeline serial_pipeline = 8 [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Output only. Information around the state of the Delivery Pipeline.
@@ -553,31 +615,31 @@ message DeliveryPipeline {
   // client has an up-to-date value before proceeding.
   string etag = 10;
 
-  // When suspended, no new releases or rollouts can be created,
+  // Optional. When suspended, no new releases or rollouts can be created,
   // but in-progress ones will complete.
-  bool suspended = 12;
+  bool suspended = 12 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // SerialPipeline defines a sequential set of stages for a `DeliveryPipeline`.
 message SerialPipeline {
-  // Each stage specifies configuration for a `Target`. The ordering
+  // Optional. Each stage specifies configuration for a `Target`. The ordering
   // of this list defines the promotion flow.
-  repeated Stage stages = 1;
+  repeated Stage stages = 1 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Stage specifies a location to which to deploy.
 message Stage {
-  // The target_id to which this stage points. This field refers exclusively to
-  // the last segment of a target name. For example, this field would just be
-  // `my-target` (rather than
+  // Optional. The target_id to which this stage points. This field refers
+  // exclusively to the last segment of a target name. For example, this field
+  // would just be `my-target` (rather than
   // `projects/project/locations/location/targets/my-target`). The location of
   // the `Target` is inferred to be the same as the location of the
   // `DeliveryPipeline` that contains this `Stage`.
-  string target_id = 1;
+  string target_id = 1 [(google.api.field_behavior) = OPTIONAL];
 
-  // Skaffold profiles to use when rendering the manifest for this stage's
-  // `Target`.
-  repeated string profiles = 2;
+  // Optional. Skaffold profiles to use when rendering the manifest for this
+  // stage's `Target`.
+  repeated string profiles = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The strategy to use for a `Rollout` to this stage.
   Strategy strategy = 5 [(google.api.field_behavior) = OPTIONAL];
@@ -603,13 +665,13 @@ message DeployParameters {
 message Strategy {
   // Deployment strategy details.
   oneof deployment_strategy {
-    // Standard deployment strategy executes a single deploy and allows
-    // verifying the deployment.
-    Standard standard = 1;
+    // Optional. Standard deployment strategy executes a single deploy and
+    // allows verifying the deployment.
+    Standard standard = 1 [(google.api.field_behavior) = OPTIONAL];
 
-    // Canary deployment strategy provides progressive percentage based
-    // deployments to a Target.
-    Canary canary = 2;
+    // Optional. Canary deployment strategy provides progressive percentage
+    // based deployments to a Target.
+    Canary canary = 2 [(google.api.field_behavior) = OPTIONAL];
   }
 }
 
@@ -629,8 +691,8 @@ message Postdeploy {
 
 // Standard represents the standard deployment strategy.
 message Standard {
-  // Whether to verify a deployment.
-  bool verify = 1;
+  // Optional. Whether to verify a deployment.
+  bool verify = 1 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Configuration for the predeploy job. If this is not configured,
   // predeploy job will not be present.
@@ -650,13 +712,15 @@ message Canary {
 
   // The mode to use for the canary deployment strategy.
   oneof mode {
-    // Configures the progressive based deployment for a Target.
-    CanaryDeployment canary_deployment = 2;
+    // Optional. Configures the progressive based deployment for a Target.
+    CanaryDeployment canary_deployment = 2
+        [(google.api.field_behavior) = OPTIONAL];
 
-    // Configures the progressive based deployment for a Target, but allows
-    // customizing at the phase level where a phase represents each of the
-    // percentage deployments.
-    CustomCanaryDeployment custom_canary_deployment = 3;
+    // Optional. Configures the progressive based deployment for a Target, but
+    // allows customizing at the phase level where a phase represents each of
+    // the percentage deployments.
+    CustomCanaryDeployment custom_canary_deployment = 3
+        [(google.api.field_behavior) = OPTIONAL];
   }
 }
 
@@ -669,8 +733,8 @@ message CanaryDeployment {
   // n is 0 <= n <= 100.
   repeated int32 percentages = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // Whether to run verify tests after each percentage deployment.
-  bool verify = 2;
+  // Optional. Whether to run verify tests after each percentage deployment.
+  bool verify = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Configuration for the predeploy job of the first phase. If this
   // is not configured, there will be no predeploy job for this phase.
@@ -697,13 +761,13 @@ message CustomCanaryDeployment {
     // Required. Percentage deployment for the phase.
     int32 percentage = 2 [(google.api.field_behavior) = REQUIRED];
 
-    // Skaffold profiles to use when rendering the manifest for this phase.
-    // These are in addition to the profiles list specified in the
+    // Optional. Skaffold profiles to use when rendering the manifest for this
+    // phase. These are in addition to the profiles list specified in the
     // `DeliveryPipeline` stage.
-    repeated string profiles = 3;
+    repeated string profiles = 3 [(google.api.field_behavior) = OPTIONAL];
 
-    // Whether to run verify tests after the deployment.
-    bool verify = 4;
+    // Optional. Whether to run verify tests after the deployment.
+    bool verify = 4 [(google.api.field_behavior) = OPTIONAL];
 
     // Optional. Configuration for the predeploy job of this phase. If this is
     // not configured, there will be no predeploy job for this phase.
@@ -724,6 +788,23 @@ message CustomCanaryDeployment {
 message KubernetesConfig {
   // Information about the Kubernetes Gateway API service mesh configuration.
   message GatewayServiceMesh {
+    // Information about route destinations for the Gateway API service mesh.
+    message RouteDestinations {
+      // Required. The clusters where the Gateway API HTTPRoute resource will be
+      // deployed to. Valid entries include the associated entities IDs
+      // configured in the Target resource and "@self" to include the Target
+      // cluster.
+      repeated string destination_ids = 1
+          [(google.api.field_behavior) = REQUIRED];
+
+      // Optional. Whether to propagate the Kubernetes Service to the route
+      // destination clusters. The Service will always be deployed to the Target
+      // cluster even if the HTTPRoute is not. This option may be used to
+      // facilitiate successful DNS lookup in the route destination clusters.
+      // Can only be set to true if destinations are specified.
+      bool propagate_service = 2 [(google.api.field_behavior) = OPTIONAL];
+    }
+
     // Required. Name of the Gateway API HTTPRoute.
     string http_route = 1 [(google.api.field_behavior) = REQUIRED];
 
@@ -750,6 +831,14 @@ message KubernetesConfig {
     // Optional. The label to use when selecting Pods for the Deployment and
     // Service resources. This label must already be present in both resources.
     string pod_selector_label = 6 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Route destinations allow configuring the Gateway API HTTPRoute
+    // to be deployed to additional clusters. This option is available for
+    // multi-cluster service mesh set ups that require the route to exist in the
+    // clusters that call the service. If unspecified, the HTTPRoute will only
+    // be deployed to the Target cluster.
+    RouteDestinations route_destinations = 8
+        [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Information about the Kubernetes Service networking configuration.
@@ -775,21 +864,23 @@ message KubernetesConfig {
 
   // The service definition configuration.
   oneof service_definition {
-    // Kubernetes Gateway API service mesh configuration.
-    GatewayServiceMesh gateway_service_mesh = 1;
+    // Optional. Kubernetes Gateway API service mesh configuration.
+    GatewayServiceMesh gateway_service_mesh = 1
+        [(google.api.field_behavior) = OPTIONAL];
 
-    // Kubernetes Service networking configuration.
-    ServiceNetworking service_networking = 2;
+    // Optional. Kubernetes Service networking configuration.
+    ServiceNetworking service_networking = 2
+        [(google.api.field_behavior) = OPTIONAL];
   }
 }
 
 // CloudRunConfig contains the Cloud Run runtime configuration.
 message CloudRunConfig {
-  // Whether Cloud Deploy should update the traffic stanza in a Cloud Run
-  // Service on the user's behalf to facilitate traffic splitting. This is
+  // Optional. Whether Cloud Deploy should update the traffic stanza in a Cloud
+  // Run Service on the user's behalf to facilitate traffic splitting. This is
   // required to be true for CanaryDeployments, but optional for
   // CustomCanaryDeployments.
-  bool automatic_traffic_control = 1;
+  bool automatic_traffic_control = 1 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. A list of tags that are added to the canary revision while the
   // canary phase is in progress.
@@ -812,11 +903,11 @@ message CloudRunConfig {
 message RuntimeConfig {
   // The runtime configuration details.
   oneof runtime_config {
-    // Kubernetes runtime configuration.
-    KubernetesConfig kubernetes = 1;
+    // Optional. Kubernetes runtime configuration.
+    KubernetesConfig kubernetes = 1 [(google.api.field_behavior) = OPTIONAL];
 
-    // Cloud Run runtime configuration.
-    CloudRunConfig cloud_run = 2;
+    // Optional. Cloud Run runtime configuration.
+    CloudRunConfig cloud_run = 2 [(google.api.field_behavior) = OPTIONAL];
   }
 }
 
@@ -1096,6 +1187,15 @@ message RollbackTargetRequest {
   // Optional. If set to true, the request is validated and the user is provided
   // with a `RollbackTargetResponse`.
   bool validate_only = 7 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Deploy policies to override. Format is
+  // `projects/{project}/locations/{location}/deployPolicies/{deploy_policy}`.
+  repeated string override_deploy_policy = 9 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "clouddeploy.googleapis.com/DeployPolicy"
+    }
+  ];
 }
 
 // The response object from `RollbackTarget`.
@@ -1114,10 +1214,10 @@ message Target {
     pattern: "projects/{project}/locations/{location}/targets/{target}"
   };
 
-  // Optional. Name of the `Target`. Format is
+  // Identifier. Name of the `Target`. Format is
   // `projects/{project}/locations/{location}/targets/{target}`.
   // The `target` component must match `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
-  string name = 1 [(google.api.field_behavior) = OPTIONAL];
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
   // Output only. Resource id of the `Target`.
   string target_id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
@@ -1177,19 +1277,31 @@ message Target {
     CustomTarget custom_target = 21 [(google.api.field_behavior) = OPTIONAL];
   }
 
+  // Optional. Map of entity IDs to their associated entities. Associated
+  // entities allows specifying places other than the deployment target for
+  // specific features. For example, the Gateway API canary can be configured to
+  // deploy the HTTPRoute to a different cluster(s) than the deployment cluster
+  // using associated entities. An entity ID must consist of lower-case letters,
+  // numbers, and hyphens, start with a letter and end with a letter or a
+  // number, and have a max length of 63 characters. In other words, it must
+  // match the following regex: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
+  map<string, AssociatedEntities> associated_entities = 23
+      [(google.api.field_behavior) = OPTIONAL];
+
   // Optional. This checksum is computed by the server based on the value of
   // other fields, and may be sent on update and delete requests to ensure the
   // client has an up-to-date value before proceeding.
   string etag = 12 [(google.api.field_behavior) = OPTIONAL];
 
-  // Configurations for all execution that relates to this `Target`.
+  // Optional. Configurations for all execution that relates to this `Target`.
   // Each `ExecutionEnvironmentUsage` value may only be used in a single
   // configuration; using the same value multiple times is an error.
   // When one or more configurations are specified, they must include the
   // `RENDER` and `DEPLOY` `ExecutionEnvironmentUsage` values.
   // When no configurations are specified, execution will use the default
   // specified in `DefaultPool`.
-  repeated ExecutionConfig execution_configs = 16;
+  repeated ExecutionConfig execution_configs = 16
+      [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The deploy parameters to use for this target.
   map<string, string> deploy_parameters = 20
@@ -1321,12 +1433,17 @@ message GkeCluster {
   //
   // Only specify this option when `cluster` is a [private GKE
   // cluster](https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept).
+  // Note that `internal_ip` and `dns_endpoint` cannot both be set to true.
   bool internal_ip = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. If set, used to configure a
   // [proxy](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#proxy)
   // to the Kubernetes server.
   string proxy_url = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If set, the cluster will be accessed using the DNS endpoint. Note
+  // that both `dns_endpoint` and `internal_ip` cannot be set to true.
+  bool dns_endpoint = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Information specifying an Anthos Cluster.
@@ -1370,6 +1487,16 @@ message CustomTarget {
       type: "clouddeploy.googleapis.com/CustomTargetType"
     }
   ];
+}
+
+// Information about entities associated with a `Target`.
+message AssociatedEntities {
+  // Optional. Information specifying GKE clusters as associated entities.
+  repeated GkeCluster gke_clusters = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Information specifying Anthos clusters as associated entities.
+  repeated AnthosCluster anthos_clusters = 3
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // The request object for `ListTargets`.
@@ -1556,11 +1683,11 @@ message CustomTargetType {
     pattern: "projects/{project}/locations/{location}/customTargetTypes/{custom_target_type}"
   };
 
-  // Optional. Name of the `CustomTargetType`. Format is
+  // Identifier. Name of the `CustomTargetType`. Format is
   // `projects/{project}/locations/{location}/customTargetTypes/{customTargetType}`.
   // The `customTargetType` component must match
   // `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
-  string name = 1 [(google.api.field_behavior) = OPTIONAL];
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
   // Output only. Resource id of the `CustomTargetType`.
   string custom_target_type_id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
@@ -1606,9 +1733,10 @@ message CustomTargetType {
 
   // Defines the `CustomTargetType` renderer and deployer.
   oneof definition {
-    // Configures render and deploy for the `CustomTargetType` using Skaffold
-    // custom actions.
-    CustomTargetSkaffoldActions custom_actions = 10;
+    // Optional. Configures render and deploy for the `CustomTargetType` using
+    // Skaffold custom actions.
+    CustomTargetSkaffoldActions custom_actions = 10
+        [(google.api.field_behavior) = OPTIONAL];
   }
 }
 
@@ -1679,14 +1807,17 @@ message SkaffoldModules {
 
   // The source that contains the Skaffold Config modules.
   oneof source {
-    // Remote git repository containing the Skaffold Config modules.
-    SkaffoldGitSource git = 2;
+    // Optional. Remote git repository containing the Skaffold Config modules.
+    SkaffoldGitSource git = 2 [(google.api.field_behavior) = OPTIONAL];
 
-    // Cloud Storage bucket containing the Skaffold Config modules.
-    SkaffoldGCSSource google_cloud_storage = 3;
+    // Optional. Cloud Storage bucket containing the Skaffold Config modules.
+    SkaffoldGCSSource google_cloud_storage = 3
+        [(google.api.field_behavior) = OPTIONAL];
 
-    // Cloud Build V2 repository containing the Skaffold Config modules.
-    SkaffoldGCBRepoSource google_cloud_build_repo = 4;
+    // Optional. Cloud Build V2 repository containing the Skaffold Config
+    // modules.
+    SkaffoldGCBRepoSource google_cloud_build_repo = 4
+        [(google.api.field_behavior) = OPTIONAL];
   }
 }
 
@@ -1864,17 +1995,275 @@ message DeleteCustomTargetTypeRequest {
   string etag = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Contains criteria for selecting Targets.
+// A `DeployPolicy` resource in the Cloud Deploy API.
+//
+// A `DeployPolicy` inhibits manual or automation-driven actions within a
+// Delivery Pipeline or Target.
+message DeployPolicy {
+  option (google.api.resource) = {
+    type: "clouddeploy.googleapis.com/DeployPolicy"
+    pattern: "projects/{project}/locations/{location}/deployPolicies/{deploy_policy}"
+    style: DECLARATIVE_FRIENDLY
+  };
+
+  // What invoked the action. Filters enforcing the policy depending on what
+  // invoked the action.
+  enum Invoker {
+    // Unspecified.
+    INVOKER_UNSPECIFIED = 0;
+
+    // The action is user-driven. For example, creating a rollout manually via a
+    // gcloud create command.
+    USER = 1;
+
+    // Automated action by Cloud Deploy.
+    DEPLOY_AUTOMATION = 2;
+  }
+
+  // Output only. Name of the `DeployPolicy`. Format is
+  // `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+  // The `deployPolicy` component must match `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
+  string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Unique identifier of the `DeployPolicy`.
+  string uid = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. Description of the `DeployPolicy`. Max length is 255 characters.
+  string description = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. User annotations. These attributes can only be set and used by
+  // the user, and not by Cloud Deploy. Annotations must meet the following
+  // constraints:
+  //
+  // * Annotations are key/value pairs.
+  // * Valid annotation keys have two segments: an optional prefix and name,
+  // separated by a slash (`/`).
+  // * The name segment is required and must be 63 characters or less,
+  // beginning and ending with an alphanumeric character (`[a-z0-9A-Z]`) with
+  // dashes (`-`), underscores (`_`), dots (`.`), and alphanumerics between.
+  // * The prefix is optional. If specified, the prefix must be a DNS subdomain:
+  // a series of DNS labels separated by dots(`.`), not longer than 253
+  // characters in total, followed by a slash (`/`).
+  //
+  // See
+  // https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set
+  // for more details.
+  map<string, string> annotations = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Labels are attributes that can be set and used by both the
+  // user and by Cloud Deploy. Labels must meet the following constraints:
+  //
+  // * Keys and values can contain only lowercase letters, numeric characters,
+  // underscores, and dashes.
+  // * All characters must use UTF-8 encoding, and international characters are
+  // allowed.
+  // * Keys must start with a lowercase letter or international character.
+  // * Each resource is limited to a maximum of 64 labels.
+  //
+  // Both keys and values are additionally constrained to be <= 128 bytes.
+  map<string, string> labels = 5;
+
+  // Output only. Time at which the deploy policy was created.
+  google.protobuf.Timestamp create_time = 6
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Most recent time at which the deploy policy was updated.
+  google.protobuf.Timestamp update_time = 7
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. When suspended, the policy will not prevent actions from
+  // occurring, even if the action violates the policy.
+  bool suspended = 8 [(google.api.field_behavior) = OPTIONAL];
+
+  // Required. Selected resources to which the policy will be applied. At least
+  // one selector is required. If one selector matches the resource the policy
+  // applies. For example, if there are two selectors and the action being
+  // attempted matches one of them, the policy will apply to that action.
+  repeated DeployPolicyResourceSelector selectors = 12
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Required. Rules to apply. At least one rule must be present.
+  repeated PolicyRule rules = 10 [(google.api.field_behavior) = REQUIRED];
+
+  // The weak etag of the `Automation` resource.
+  // This checksum is computed by the server based on the value of other
+  // fields, and may be sent on update and delete requests to ensure the
+  // client has an up-to-date value before proceeding.
+  string etag = 11;
+}
+
+// Contains information on the resources to select for a deploy policy.
+// Attributes provided must all match the resource in order for policy
+// restrictions to apply. For example, if delivery pipelines attributes given
+// are an id "prod" and labels "foo: bar", a delivery pipeline resource must
+// match both that id and have that label in order to be subject to the policy.
+message DeployPolicyResourceSelector {
+  // Optional. Contains attributes about a delivery pipeline.
+  DeliveryPipelineAttribute delivery_pipeline = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Contains attributes about a target.
+  TargetAttribute target = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Contains criteria for selecting DeliveryPipelines.
+message DeliveryPipelineAttribute {
+  // Optional. ID of the `DeliveryPipeline`. The value of this field could be
+  // one of the following:
+  //
+  // * The last segment of a pipeline name
+  // * "*", all delivery pipelines in a location
+  string id = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // DeliveryPipeline labels.
+  map<string, string> labels = 2;
+}
+
+// Contains criteria for selecting Targets. This could be used to select targets
+// for a Deploy Policy or for an Automation.
 message TargetAttribute {
-  // ID of the `Target`. The value of this field could be one of the
+  // Optional. ID of the `Target`. The value of this field could be one of the
   // following:
   //
   // * The last segment of a target name
   // * "*", all targets in a location
-  string id = 1;
+  string id = 1 [(google.api.field_behavior) = OPTIONAL];
 
   // Target labels.
   map<string, string> labels = 2;
+}
+
+// Deploy Policy rule.
+message PolicyRule {
+  oneof rule {
+    // Optional. Rollout restrictions.
+    RolloutRestriction rollout_restriction = 2
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+}
+
+// Rollout restrictions.
+message RolloutRestriction {
+  // Rollout actions to be restricted as part of the policy.
+  enum RolloutActions {
+    // Unspecified.
+    ROLLOUT_ACTIONS_UNSPECIFIED = 0;
+
+    // Advance the rollout to the next phase.
+    ADVANCE = 1;
+
+    // Approve the rollout.
+    APPROVE = 2;
+
+    // Cancel the rollout.
+    CANCEL = 3;
+
+    // Create a rollout.
+    CREATE = 4;
+
+    // Ignore a job result on the rollout.
+    IGNORE_JOB = 5;
+
+    // Retry a job for a rollout.
+    RETRY_JOB = 6;
+
+    // Rollback a rollout.
+    ROLLBACK = 7;
+
+    // Terminate a jobrun.
+    TERMINATE_JOBRUN = 8;
+  }
+
+  // Required. Restriction rule ID. Required and must be unique within a
+  // DeployPolicy. The format is `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
+  string id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. What invoked the action. If left empty, all invoker types will be
+  // restricted.
+  repeated DeployPolicy.Invoker invokers = 2
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Rollout actions to be restricted as part of the policy. If left
+  // empty, all actions will be restricted.
+  repeated RolloutActions actions = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Required. Time window within which actions are restricted.
+  TimeWindows time_windows = 4 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Time windows within which actions are restricted. See the
+// [documentation](https://cloud.google.com/deploy/docs/deploy-policy#dates_times)
+// for more information on how to configure dates/times.
+message TimeWindows {
+  // Required. The time zone in IANA format [IANA Time Zone
+  // Database](https://www.iana.org/time-zones) (e.g. America/New_York).
+  string time_zone = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. One-time windows within which actions are restricted.
+  repeated OneTimeWindow one_time_windows = 2
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Recurring weekly windows within which actions are restricted.
+  repeated WeeklyWindow weekly_windows = 3
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
+// One-time window within which actions are restricted. For example, blocking
+// actions over New Year's Eve from December 31st at 5pm to January 1st at 9am.
+message OneTimeWindow {
+  // Required. Start date.
+  google.type.Date start_date = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. Start time (inclusive). Use 00:00 for the beginning of the day.
+  google.type.TimeOfDay start_time = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. End date.
+  google.type.Date end_date = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. End time (exclusive). You may use 24:00 for the end of the day.
+  google.type.TimeOfDay end_time = 4 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Weekly windows. For example, blocking actions every Saturday and Sunday.
+// Another example would be blocking actions every weekday from 5pm to midnight.
+message WeeklyWindow {
+  // Optional. Days of week. If left empty, all days of the week will be
+  // included.
+  repeated google.type.DayOfWeek days_of_week = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Start time (inclusive). Use 00:00 for the beginning of the day.
+  // If you specify start_time you must also specify end_time. If left empty,
+  // this will block for the entire day for the days specified in days_of_week.
+  google.type.TimeOfDay start_time = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. End time (exclusive). Use 24:00 to indicate midnight. If you
+  // specify end_time you must also specify start_time. If left empty, this will
+  // block for the entire day for the days specified in days_of_week.
+  google.type.TimeOfDay end_time = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Returned from an action if one or more policies were
+// violated, and therefore the action was prevented. Contains information about
+// what policies were violated and why.
+message PolicyViolation {
+  // Policy violation details.
+  repeated PolicyViolationDetails policy_violation_details = 1;
+}
+
+// Policy violation details.
+message PolicyViolationDetails {
+  // Name of the policy that was violated.
+  // Policy resource will be in the format of
+  // `projects/{project}/locations/{location}/policies/{policy}`.
+  string policy = 1;
+
+  // Id of the rule that triggered the policy violation.
+  string rule_id = 2;
+
+  // User readable message about why the request violated a policy. This is not
+  // intended for machine parsing.
+  string failure_message = 3;
 }
 
 // A `Release` resource in the Cloud Deploy API.
@@ -2020,21 +2409,22 @@ message Release {
     SkaffoldSupportedCondition skaffold_supported_condition = 2;
   }
 
-  // Optional. Name of the `Release`. Format is
+  // Identifier. Name of the `Release`. Format is
   // `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}`.
   // The `release` component must match `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
-  string name = 1 [(google.api.field_behavior) = OPTIONAL];
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
   // Output only. Unique identifier of the `Release`.
   string uid = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Description of the `Release`. Max length is 255 characters.
-  string description = 3;
+  // Optional. Description of the `Release`. Max length is 255 characters.
+  string description = 3 [(google.api.field_behavior) = OPTIONAL];
 
-  // User annotations. These attributes can only be set and used by the
-  // user, and not by Cloud Deploy. See https://google.aip.dev/128#annotations
-  // for more details such as format and size limitations.
-  map<string, string> annotations = 4;
+  // Optional. User annotations. These attributes can only be set and used by
+  // the user, and not by Cloud Deploy. See
+  // https://google.aip.dev/128#annotations for more details such as format and
+  // size limitations.
+  map<string, string> annotations = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Labels are attributes that can be set and used by both the
   // user and by Cloud Deploy. Labels must meet the following constraints:
@@ -2064,14 +2454,16 @@ message Release {
   google.protobuf.Timestamp render_end_time = 8
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Cloud Storage URI of tar.gz archive containing Skaffold configuration.
-  string skaffold_config_uri = 17;
+  // Optional. Cloud Storage URI of tar.gz archive containing Skaffold
+  // configuration.
+  string skaffold_config_uri = 17 [(google.api.field_behavior) = OPTIONAL];
 
-  // Filepath of the Skaffold config inside of the config URI.
-  string skaffold_config_path = 9;
+  // Optional. Filepath of the Skaffold config inside of the config URI.
+  string skaffold_config_path = 9 [(google.api.field_behavior) = OPTIONAL];
 
-  // List of artifacts to pass through to Skaffold command.
-  repeated BuildArtifact build_artifacts = 10;
+  // Optional. List of artifacts to pass through to Skaffold command.
+  repeated BuildArtifact build_artifacts = 10
+      [(google.api.field_behavior) = OPTIONAL];
 
   // Output only. Snapshot of the parent pipeline taken at release creation
   // time.
@@ -2095,12 +2487,12 @@ message Release {
   // client has an up-to-date value before proceeding.
   string etag = 16;
 
-  // The Skaffold version to use when operating on this release, such as
-  // "1.20.0". Not all versions are valid; Cloud Deploy supports a specific set
-  // of versions.
+  // Optional. The Skaffold version to use when operating on this release, such
+  // as "1.20.0". Not all versions are valid; Cloud Deploy supports a specific
+  // set of versions.
   //
   // If unset, the most recent supported Skaffold version will be used.
-  string skaffold_version = 19;
+  string skaffold_version = 19 [(google.api.field_behavior) = OPTIONAL];
 
   // Output only. Map from target ID to the target artifacts created
   // during the render operation.
@@ -2120,15 +2512,186 @@ message Release {
       [(google.api.field_behavior) = OPTIONAL];
 }
 
+// The request object for `CreateDeployPolicy`.
+message CreateDeployPolicyRequest {
+  // Required. The parent collection in which the `DeployPolicy` must be
+  // created. The format is `projects/{project_id}/locations/{location_name}`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "clouddeploy.googleapis.com/DeployPolicy"
+    }
+  ];
+
+  // Required. ID of the `DeployPolicy`.
+  string deploy_policy_id = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The `DeployPolicy` to create.
+  DeployPolicy deploy_policy = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. A request ID to identify requests. Specify a unique request ID
+  // so that if you must retry your request, the server knows to ignore the
+  // request if it has already been completed. The server guarantees that for
+  // at least 60 minutes after the first request.
+  //
+  // For example, consider a situation where you make an initial request and the
+  // request times out. If you make the request again with the same request ID,
+  // the server can check if original operation with the same request ID was
+  // received, and if so, will ignore the second request. This prevents clients
+  // from accidentally creating duplicate commitments.
+  //
+  // The request ID must be a valid UUID with the exception that zero UUID is
+  // not supported (00000000-0000-0000-0000-000000000000).
+  string request_id = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If set to true, the request is validated and the user is provided
+  // with an expected result, but no actual change is made.
+  bool validate_only = 5 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// The request object for `UpdateDeployPolicy`.
+message UpdateDeployPolicyRequest {
+  // Required. Field mask is used to specify the fields to be overwritten by the
+  // update in the `DeployPolicy` resource. The fields specified in the
+  // update_mask are relative to the resource, not the full request. A field
+  // will be overwritten if it's in the mask. If the user doesn't provide a mask
+  // then all fields are overwritten.
+  google.protobuf.FieldMask update_mask = 1
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The `DeployPolicy` to update.
+  DeployPolicy deploy_policy = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. A request ID to identify requests. Specify a unique request ID
+  // so that if you must retry your request, the server knows to ignore the
+  // request if it has already been completed. The server guarantees that for
+  // at least 60 minutes after the first request.
+  //
+  // For example, consider a situation where you make an initial request and the
+  // request times out. If you make the request again with the same request ID,
+  // the server can check if original operation with the same request ID was
+  // received, and if so, will ignore the second request. This prevents clients
+  // from accidentally creating duplicate commitments.
+  //
+  // The request ID must be a valid UUID with the exception that zero UUID is
+  // not supported (00000000-0000-0000-0000-000000000000).
+  string request_id = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If set to true, updating a `DeployPolicy` that does not exist
+  // will result in the creation of a new `DeployPolicy`.
+  bool allow_missing = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If set to true, the request is validated and the user is provided
+  // with an expected result, but no actual change is made.
+  bool validate_only = 5 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// The request object for `DeleteDeployPolicy`.
+message DeleteDeployPolicyRequest {
+  // Required. The name of the `DeployPolicy` to delete. The format is
+  // `projects/{project_id}/locations/{location_name}/deployPolicies/{deploy_policy_name}`.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "clouddeploy.googleapis.com/DeployPolicy"
+    }
+  ];
+
+  // Optional. A request ID to identify requests. Specify a unique request ID
+  // so that if you must retry your request, the server knows to ignore the
+  // request if it has already been completed. The server guarantees that for
+  // at least 60 minutes after the first request.
+  //
+  // For example, consider a situation where you make an initial request and the
+  // request times out. If you make the request again with the same request ID,
+  // the server can check if original operation with the same request ID was
+  // received, and if so, will ignore the second request. This prevents clients
+  // from accidentally creating duplicate commitments.
+  //
+  // The request ID must be a valid UUID with the exception that zero UUID is
+  // not supported (00000000-0000-0000-0000-000000000000).
+  string request_id = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If set to true, then deleting an already deleted or non-existing
+  // `DeployPolicy` will succeed.
+  bool allow_missing = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If set, validate the request and preview the review, but do not
+  // actually post it.
+  bool validate_only = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. This checksum is computed by the server based on the value of
+  // other fields, and may be sent on update and delete requests to ensure the
+  // client has an up-to-date value before proceeding.
+  string etag = 5 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// The request object for `ListDeployPolicies`.
+message ListDeployPoliciesRequest {
+  // Required. The parent, which owns this collection of deploy policies. Format
+  // must be `projects/{project_id}/locations/{location_name}`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "clouddeploy.googleapis.com/DeployPolicy"
+    }
+  ];
+
+  // The maximum number of deploy policies to return. The service may return
+  // fewer than this value. If unspecified, at most 50 deploy policies will
+  // be returned. The maximum value is 1000; values above 1000 will be set
+  // to 1000.
+  int32 page_size = 2;
+
+  // A page token, received from a previous `ListDeployPolicies` call.
+  // Provide this to retrieve the subsequent page.
+  //
+  // When paginating, all other provided parameters match
+  // the call that provided the page token.
+  string page_token = 3;
+
+  // Filter deploy policies to be returned. See https://google.aip.dev/160 for
+  // more details. All fields can be used in the filter.
+  string filter = 4;
+
+  // Field to sort by. See https://google.aip.dev/132#ordering for more details.
+  string order_by = 5;
+}
+
+// The response object from `ListDeployPolicies`.
+message ListDeployPoliciesResponse {
+  // The `DeployPolicy` objects.
+  repeated DeployPolicy deploy_policies = 1;
+
+  // A token, which can be sent as `page_token` to retrieve the next page.
+  // If this field is omitted, there are no subsequent pages.
+  string next_page_token = 2;
+
+  // Locations that could not be reached.
+  repeated string unreachable = 3;
+}
+
+// The request object for `GetDeployPolicy`
+message GetDeployPolicyRequest {
+  // Required. Name of the `DeployPolicy`. Format must be
+  // `projects/{project_id}/locations/{location_name}/deployPolicies/{deploy_policy_name}`.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "clouddeploy.googleapis.com/DeployPolicy"
+    }
+  ];
+}
+
 // Description of an a image to use during Skaffold rendering.
 message BuildArtifact {
-  // Image name in Skaffold configuration.
-  string image = 3;
+  // Optional. Image name in Skaffold configuration.
+  string image = 3 [(google.api.field_behavior) = OPTIONAL];
 
-  // Image tag to use. This will generally be the full path to an image, such
-  // as "gcr.io/my-project/busybox:1.2.3" or
+  // Optional. Image tag to use. This will generally be the full path to an
+  // image, such as "gcr.io/my-project/busybox:1.2.3" or
   // "gcr.io/my-project/busybox@sha256:abc123".
-  string tag = 2;
+  string tag = 2 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // The artifacts produced by a target render operation.
@@ -2293,6 +2856,15 @@ message CreateReleaseRequest {
   // Optional. If set to true, the request is validated and the user is provided
   // with an expected result, but no actual change is made.
   bool validate_only = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Deploy policies to override. Format is
+  // `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+  repeated string override_deploy_policy = 6 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "clouddeploy.googleapis.com/DeployPolicy"
+    }
+  ];
 }
 
 // A `Rollout` resource in the Cloud Deploy API.
@@ -2393,22 +2965,23 @@ message Rollout {
     OPERATION_FEATURE_NOT_SUPPORTED = 8;
   }
 
-  // Optional. Name of the `Rollout`. Format is
+  // Identifier. Name of the `Rollout`. Format is
   // `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
   // The `rollout` component must match `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
-  string name = 1 [(google.api.field_behavior) = OPTIONAL];
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
   // Output only. Unique identifier of the `Rollout`.
   string uid = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Description of the `Rollout` for user purposes. Max length is 255
+  // Optional. Description of the `Rollout` for user purposes. Max length is 255
   // characters.
-  string description = 3;
+  string description = 3 [(google.api.field_behavior) = OPTIONAL];
 
-  // User annotations. These attributes can only be set and used by the
-  // user, and not by Cloud Deploy. See https://google.aip.dev/128#annotations
-  // for more details such as format and size limitations.
-  map<string, string> annotations = 4;
+  // Optional. User annotations. These attributes can only be set and used by
+  // the user, and not by Cloud Deploy. See
+  // https://google.aip.dev/128#annotations for more details such as format and
+  // size limitations.
+  map<string, string> annotations = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Labels are attributes that can be set and used by both the
   // user and by Cloud Deploy. Labels must meet the following constraints:
@@ -2492,6 +3065,10 @@ message Rollout {
 
   // Output only. Names of `Rollouts` that rolled back this `Rollout`.
   repeated string rolled_back_by_rollouts = 27
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The AutomationRun actively repairing the rollout.
+  string active_repair_automation_run = 28
       [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
@@ -2634,14 +3211,14 @@ message Phase {
 
 // Deployment job composition.
 message DeploymentJobs {
+  // Output only. The predeploy Job, which is the first job on the phase.
+  Job predeploy_job = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+
   // Output only. The deploy Job. This is the deploy job in the phase.
   Job deploy_job = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The verify Job. Runs after a deploy if the deploy succeeds.
   Job verify_job = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
-
-  // Output only. The predeploy Job, which is the first job on the phase.
-  Job predeploy_job = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The postdeploy Job, which is the last job on the phase.
   Job postdeploy_job = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
@@ -2852,6 +3429,15 @@ message CreateRolloutRequest {
   // with an expected result, but no actual change is made.
   bool validate_only = 5 [(google.api.field_behavior) = OPTIONAL];
 
+  // Optional. Deploy policies to override. Format is
+  // `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+  repeated string override_deploy_policy = 6 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "clouddeploy.googleapis.com/DeployPolicy"
+    }
+  ];
+
   // Optional. The starting phase ID for the `Rollout`. If empty the `Rollout`
   // will start at the first phase.
   string starting_phase_id = 7 [(google.api.field_behavior) = OPTIONAL];
@@ -2878,9 +3464,10 @@ message OperationMetadata {
 
   // Output only. Identifies whether the user has requested cancellation
   // of the operation. Operations that have successfully been cancelled
-  // have [Operation.error][] value with a
-  // [google.rpc.Status.code][google.rpc.Status.code] of 1, corresponding to
-  // `Code.CANCELLED`.
+  // have
+  // [google.longrunning.Operation.error][google.longrunning.Operation.error]
+  // value with a [google.rpc.Status.code][google.rpc.Status.code] of 1,
+  // corresponding to `Code.CANCELLED`.
   bool requested_cancellation = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. API version used to start the operation.
@@ -2900,6 +3487,15 @@ message ApproveRolloutRequest {
 
   // Required. True = approve; false = reject
   bool approved = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Deploy policies to override. Format is
+  // `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+  repeated string override_deploy_policy = 3 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "clouddeploy.googleapis.com/DeployPolicy"
+    }
+  ];
 }
 
 // The response object from `ApproveRollout`.
@@ -2918,6 +3514,15 @@ message AdvanceRolloutRequest {
 
   // Required. The phase ID to advance the `Rollout` to.
   string phase_id = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Deploy policies to override. Format is
+  // `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+  repeated string override_deploy_policy = 3 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "clouddeploy.googleapis.com/DeployPolicy"
+    }
+  ];
 }
 
 // The response object from `AdvanceRollout`.
@@ -2931,6 +3536,15 @@ message CancelRolloutRequest {
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
       type: "clouddeploy.googleapis.com/Rollout"
+    }
+  ];
+
+  // Optional. Deploy policies to override. Format is
+  // `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+  repeated string override_deploy_policy = 2 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "clouddeploy.googleapis.com/DeployPolicy"
     }
   ];
 }
@@ -2954,6 +3568,15 @@ message IgnoreJobRequest {
 
   // Required. The job ID for the Job to ignore.
   string job_id = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Deploy policies to override. Format is
+  // `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+  repeated string override_deploy_policy = 4 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "clouddeploy.googleapis.com/DeployPolicy"
+    }
+  ];
 }
 
 // The response object from `IgnoreJob`.
@@ -2975,6 +3598,15 @@ message RetryJobRequest {
 
   // Required. The job ID for the Job to retry.
   string job_id = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Deploy policies to override. Format is
+  // `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+  repeated string override_deploy_policy = 4 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "clouddeploy.googleapis.com/DeployPolicy"
+    }
+  ];
 }
 
 // The response object from 'RetryJob'.
@@ -3025,9 +3657,9 @@ message JobRun {
     TERMINATED = 5;
   }
 
-  // Optional. Name of the `JobRun`. Format is
+  // Output only. Name of the `JobRun`. Format is
   // `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{releases}/rollouts/{rollouts}/jobRuns/{uuid}`.
-  string name = 1 [(google.api.field_behavior) = OPTIONAL];
+  string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Unique identifier of the `JobRun`.
   string uid = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
@@ -3368,6 +4000,15 @@ message TerminateJobRunRequest {
       type: "clouddeploy.googleapis.com/JobRun"
     }
   ];
+
+  // Optional. Deploy policies to override. Format is
+  // `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+  repeated string override_deploy_policy = 2 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "clouddeploy.googleapis.com/DeployPolicy"
+    }
+  ];
 }
 
 // The response object from `TerminateJobRun`.
@@ -3508,8 +4149,8 @@ message Automation {
 // AutomationResourceSelector contains the information to select the resources
 // to which an Automation is going to be applied.
 message AutomationResourceSelector {
-  // Contains attributes about a target.
-  repeated TargetAttribute targets = 1;
+  // Optional. Contains attributes about a target.
+  repeated TargetAttribute targets = 1 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // `AutomationRule` defines the automation activities.
@@ -3530,7 +4171,46 @@ message AutomationRule {
     // rollout.
     RepairRolloutRule repair_rollout_rule = 3
         [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The `TimedPromoteReleaseRule` will automatically promote a
+    // release from the current target(s) to the specified target(s) on a
+    // configured schedule.
+    TimedPromoteReleaseRule timed_promote_release_rule = 4
+        [(google.api.field_behavior) = OPTIONAL];
   }
+}
+
+// The `TimedPromoteReleaseRule` will automatically promote a release from the
+// current target(s) to the specified target(s) on a configured schedule.
+message TimedPromoteReleaseRule {
+  // Required. ID of the rule. This ID must be unique in the `Automation`
+  // resource to which this rule belongs. The format is
+  // `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
+  string id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The ID of the stage in the pipeline to which this `Release` is
+  // deploying. If unspecified, default it to the next stage in the promotion
+  // flow. The value of this field could be one of the following:
+  //
+  // * The last segment of a target name
+  // * "@next", the next target in the promotion sequence
+  string destination_target_id = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Required. Schedule in crontab format. e.g. "0 9 * * 1" for every Monday at
+  // 9am.
+  string schedule = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The time zone in IANA format [IANA Time Zone
+  // Database](https://www.iana.org/time-zones) (e.g. America/New_York).
+  string time_zone = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // Output only. Information around the state of the Automation rule.
+  AutomationRuleCondition condition = 5
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. The starting phase of the rollout created by this rule. Default
+  // to the first phase.
+  string destination_phase = 6 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // The `PromoteRelease` rule will automatically promote a release from the
@@ -3593,6 +4273,14 @@ message RepairRolloutRule {
   // `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
   string id = 1 [(google.api.field_behavior) = REQUIRED];
 
+  // Optional. Phases within which jobs are subject to automatic repair actions
+  // on failure. Proceeds only after phase name matched any one in the list, or
+  // for all phases if unspecified. This value must consist of lower-case
+  // letters, numbers, and hyphens, start with a letter and end with a letter or
+  // a number, and have a max length of 63 characters. In other words, it must
+  // match the following regex: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
+  repeated string phases = 7 [(google.api.field_behavior) = OPTIONAL];
+
   // Optional. Jobs to repair. Proceeds only after job name matched any one in
   // the list, or for all jobs if unspecified or empty. The phase that includes
   // the job must match the phase ID specified in `source_phase`. This value
@@ -3605,6 +4293,49 @@ message RepairRolloutRule {
   // Output only. Information around the state of the 'Automation' rule.
   AutomationRuleCondition condition = 6
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Required. Defines the types of automatic repair phases for failed jobs.
+  repeated RepairPhaseConfig repair_phases = 8
+      [(google.api.field_behavior) = REQUIRED];
+}
+
+// Configuration of the repair phase.
+message RepairPhaseConfig {
+  // The repair phase to perform.
+  oneof repair_phase {
+    // Optional. Retries a failed job.
+    Retry retry = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Rolls back a `Rollout`.
+    Rollback rollback = 2 [(google.api.field_behavior) = OPTIONAL];
+  }
+}
+
+// Retries the failed job.
+message Retry {
+  // Required. Total number of retries. Retry is skipped if set to 0; The
+  // minimum value is 1, and the maximum value is 10.
+  int64 attempts = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. How long to wait for the first retry. Default is 0, and the
+  // maximum value is 14d.
+  google.protobuf.Duration wait = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The pattern of how wait time will be increased. Default is
+  // linear. Backoff mode will be ignored if `wait` is 0.
+  BackoffMode backoff_mode = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Rolls back a `Rollout`.
+message Rollback {
+  // Optional. The starting phase ID for the `Rollout`. If unspecified, the
+  // `Rollout` will start in the stable phase.
+  string destination_phase = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If pending rollout exists on the target, the rollback operation
+  // will be aborted.
+  bool disable_rollback_if_rollout_pending = 2
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // `AutomationRuleCondition` contains conditions relevant to an
@@ -3613,6 +4344,34 @@ message AutomationRuleCondition {
   // Optional. Details around targets enumerated in the rule.
   TargetsPresentCondition targets_present_condition = 1
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Details specific to the automation rule type.
+  oneof rule_type_condition {
+    // Optional. TimedPromoteReleaseCondition contains rule conditions specific
+    // to a an Automation with a timed promote release rule defined.
+    TimedPromoteReleaseCondition timed_promote_release_condition = 2
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+}
+
+// `TimedPromoteReleaseCondition` contains conditions specific to an Automation
+// with a Timed Promote Release rule defined.
+message TimedPromoteReleaseCondition {
+  // The targets involved in a single timed promotion.
+  message Targets {
+    // Optional. The source target ID.
+    string source_target_id = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The destination target ID.
+    string destination_target_id = 2 [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // Output only. When the next scheduled promotion(s) will occur.
+  google.protobuf.Timestamp next_promotion_time = 1
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. A list of targets involved in the upcoming timed promotion(s).
+  repeated Targets targets_list = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // The request object for `CreateAutomation`.
@@ -3850,9 +4609,9 @@ message AutomationRun {
   Automation automation_snapshot = 6
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Output only. The ID of the target that represents the promotion stage that
-  // initiates the `AutomationRun`. The value of this field is the last segment
-  // of a target name.
+  // Output only. The ID of the source target that initiates the
+  // `AutomationRun`. The value of this field is the last segment of a target
+  // name.
   string target_id = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Current state of the `AutomationRun`.
@@ -3861,6 +4620,11 @@ message AutomationRun {
   // Output only. Explains the current state of the `AutomationRun`. Present
   // only when an explanation is needed.
   string state_description = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Contains information about what policies prevented the
+  // `AutomationRun` from proceeding.
+  PolicyViolation policy_violation = 10
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Time the `AutomationRun` expires. An `AutomationRun` expires
   // after 14 days from its creation date.
@@ -3885,6 +4649,11 @@ message AutomationRun {
 
     // Output only. Repairs a failed 'Rollout'.
     RepairRolloutOperation repair_rollout_operation = 17
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Promotes a release to a specified 'Target' as defined in a
+    // Timed Promote Release rule.
+    TimedPromoteReleaseOperation timed_promote_release_operation = 19
         [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
@@ -3931,6 +4700,10 @@ message RepairRolloutOperation {
   // Output only. The name of the rollout that initiates the `AutomationRun`.
   string rollout = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
+  // Output only. The index of the current repair action in the repair sequence.
+  int64 current_repair_phase_index = 6
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
   // Output only. Records of the repair attempts. Each repair phase may have
   // multiple retry attempts or single rollback attempt.
   repeated RepairPhase repair_phases = 3
@@ -3942,6 +4715,20 @@ message RepairRolloutOperation {
 
   // Output only. The job ID for the Job to repair.
   string job_id = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Contains the information of an automated timed promote-release operation.
+message TimedPromoteReleaseOperation {
+  // Output only. The ID of the target that represents the promotion stage to
+  // which the release will be promoted. The value of this field is the last
+  // segment of a target name.
+  string target_id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The name of the release to be promoted.
+  string release = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The starting phase of the rollout created by this operation.
+  string phase = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // RepairPhase tracks the repair attempts that have been made for
@@ -4000,6 +4787,10 @@ message RollbackAttempt {
 
   // Output only. Description of the state of the Rollback.
   string state_desc = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. If active rollout exists on the target, abort this rollback.
+  bool disable_rollback_if_rollout_pending = 5
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // The request object for `ListAutomationRuns`.

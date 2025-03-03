@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,1456 @@ export namespace google {
 
                     /** Namespace v1. */
                     namespace v1 {
+
+                        /** Represents a LicenseManagementService */
+                        class LicenseManagementService extends $protobuf.rpc.Service {
+
+                            /**
+                             * Constructs a new LicenseManagementService service.
+                             * @param rpcImpl RPC implementation
+                             * @param [requestDelimited=false] Whether requests are length-delimited
+                             * @param [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                            /**
+                             * Creates new LicenseManagementService service using the specified rpc implementation.
+                             * @param rpcImpl RPC implementation
+                             * @param [requestDelimited=false] Whether requests are length-delimited
+                             * @param [responseDelimited=false] Whether responses are length-delimited
+                             * @returns RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): LicenseManagementService;
+
+                            /**
+                             * Calls GetLicensePool.
+                             * @param request GetLicensePoolRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and LicensePool
+                             */
+                            public getLicensePool(request: google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest, callback: google.cloud.commerce.consumer.procurement.v1.LicenseManagementService.GetLicensePoolCallback): void;
+
+                            /**
+                             * Calls GetLicensePool.
+                             * @param request GetLicensePoolRequest message or plain object
+                             * @returns Promise
+                             */
+                            public getLicensePool(request: google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest): Promise<google.cloud.commerce.consumer.procurement.v1.LicensePool>;
+
+                            /**
+                             * Calls UpdateLicensePool.
+                             * @param request UpdateLicensePoolRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and LicensePool
+                             */
+                            public updateLicensePool(request: google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest, callback: google.cloud.commerce.consumer.procurement.v1.LicenseManagementService.UpdateLicensePoolCallback): void;
+
+                            /**
+                             * Calls UpdateLicensePool.
+                             * @param request UpdateLicensePoolRequest message or plain object
+                             * @returns Promise
+                             */
+                            public updateLicensePool(request: google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest): Promise<google.cloud.commerce.consumer.procurement.v1.LicensePool>;
+
+                            /**
+                             * Calls Assign.
+                             * @param request AssignRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and AssignResponse
+                             */
+                            public assign(request: google.cloud.commerce.consumer.procurement.v1.IAssignRequest, callback: google.cloud.commerce.consumer.procurement.v1.LicenseManagementService.AssignCallback): void;
+
+                            /**
+                             * Calls Assign.
+                             * @param request AssignRequest message or plain object
+                             * @returns Promise
+                             */
+                            public assign(request: google.cloud.commerce.consumer.procurement.v1.IAssignRequest): Promise<google.cloud.commerce.consumer.procurement.v1.AssignResponse>;
+
+                            /**
+                             * Calls Unassign.
+                             * @param request UnassignRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and UnassignResponse
+                             */
+                            public unassign(request: google.cloud.commerce.consumer.procurement.v1.IUnassignRequest, callback: google.cloud.commerce.consumer.procurement.v1.LicenseManagementService.UnassignCallback): void;
+
+                            /**
+                             * Calls Unassign.
+                             * @param request UnassignRequest message or plain object
+                             * @returns Promise
+                             */
+                            public unassign(request: google.cloud.commerce.consumer.procurement.v1.IUnassignRequest): Promise<google.cloud.commerce.consumer.procurement.v1.UnassignResponse>;
+
+                            /**
+                             * Calls EnumerateLicensedUsers.
+                             * @param request EnumerateLicensedUsersRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and EnumerateLicensedUsersResponse
+                             */
+                            public enumerateLicensedUsers(request: google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest, callback: google.cloud.commerce.consumer.procurement.v1.LicenseManagementService.EnumerateLicensedUsersCallback): void;
+
+                            /**
+                             * Calls EnumerateLicensedUsers.
+                             * @param request EnumerateLicensedUsersRequest message or plain object
+                             * @returns Promise
+                             */
+                            public enumerateLicensedUsers(request: google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest): Promise<google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersResponse>;
+                        }
+
+                        namespace LicenseManagementService {
+
+                            /**
+                             * Callback as used by {@link google.cloud.commerce.consumer.procurement.v1.LicenseManagementService|getLicensePool}.
+                             * @param error Error, if any
+                             * @param [response] LicensePool
+                             */
+                            type GetLicensePoolCallback = (error: (Error|null), response?: google.cloud.commerce.consumer.procurement.v1.LicensePool) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.commerce.consumer.procurement.v1.LicenseManagementService|updateLicensePool}.
+                             * @param error Error, if any
+                             * @param [response] LicensePool
+                             */
+                            type UpdateLicensePoolCallback = (error: (Error|null), response?: google.cloud.commerce.consumer.procurement.v1.LicensePool) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.commerce.consumer.procurement.v1.LicenseManagementService|assign}.
+                             * @param error Error, if any
+                             * @param [response] AssignResponse
+                             */
+                            type AssignCallback = (error: (Error|null), response?: google.cloud.commerce.consumer.procurement.v1.AssignResponse) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.commerce.consumer.procurement.v1.LicenseManagementService|unassign}.
+                             * @param error Error, if any
+                             * @param [response] UnassignResponse
+                             */
+                            type UnassignCallback = (error: (Error|null), response?: google.cloud.commerce.consumer.procurement.v1.UnassignResponse) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.commerce.consumer.procurement.v1.LicenseManagementService|enumerateLicensedUsers}.
+                             * @param error Error, if any
+                             * @param [response] EnumerateLicensedUsersResponse
+                             */
+                            type EnumerateLicensedUsersCallback = (error: (Error|null), response?: google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersResponse) => void;
+                        }
+
+                        /** Properties of an AssignmentProtocol. */
+                        interface IAssignmentProtocol {
+
+                            /** AssignmentProtocol manualAssignmentType */
+                            manualAssignmentType?: (google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.IManualAssignmentType|null);
+
+                            /** AssignmentProtocol autoAssignmentType */
+                            autoAssignmentType?: (google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.IAutoAssignmentType|null);
+                        }
+
+                        /** Represents an AssignmentProtocol. */
+                        class AssignmentProtocol implements IAssignmentProtocol {
+
+                            /**
+                             * Constructs a new AssignmentProtocol.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.IAssignmentProtocol);
+
+                            /** AssignmentProtocol manualAssignmentType. */
+                            public manualAssignmentType?: (google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.IManualAssignmentType|null);
+
+                            /** AssignmentProtocol autoAssignmentType. */
+                            public autoAssignmentType?: (google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.IAutoAssignmentType|null);
+
+                            /** AssignmentProtocol assignmentType. */
+                            public assignmentType?: ("manualAssignmentType"|"autoAssignmentType");
+
+                            /**
+                             * Creates a new AssignmentProtocol instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AssignmentProtocol instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.IAssignmentProtocol): google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol;
+
+                            /**
+                             * Encodes the specified AssignmentProtocol message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.verify|verify} messages.
+                             * @param message AssignmentProtocol message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.IAssignmentProtocol, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AssignmentProtocol message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.verify|verify} messages.
+                             * @param message AssignmentProtocol message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.IAssignmentProtocol, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AssignmentProtocol message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AssignmentProtocol
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol;
+
+                            /**
+                             * Decodes an AssignmentProtocol message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AssignmentProtocol
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol;
+
+                            /**
+                             * Verifies an AssignmentProtocol message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AssignmentProtocol message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AssignmentProtocol
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol;
+
+                            /**
+                             * Creates a plain object from an AssignmentProtocol message. Also converts values to other types if specified.
+                             * @param message AssignmentProtocol
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AssignmentProtocol to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AssignmentProtocol
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace AssignmentProtocol {
+
+                            /** Properties of a ManualAssignmentType. */
+                            interface IManualAssignmentType {
+                            }
+
+                            /** Represents a ManualAssignmentType. */
+                            class ManualAssignmentType implements IManualAssignmentType {
+
+                                /**
+                                 * Constructs a new ManualAssignmentType.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.IManualAssignmentType);
+
+                                /**
+                                 * Creates a new ManualAssignmentType instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ManualAssignmentType instance
+                                 */
+                                public static create(properties?: google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.IManualAssignmentType): google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.ManualAssignmentType;
+
+                                /**
+                                 * Encodes the specified ManualAssignmentType message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.ManualAssignmentType.verify|verify} messages.
+                                 * @param message ManualAssignmentType message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.IManualAssignmentType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ManualAssignmentType message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.ManualAssignmentType.verify|verify} messages.
+                                 * @param message ManualAssignmentType message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.IManualAssignmentType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ManualAssignmentType message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ManualAssignmentType
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.ManualAssignmentType;
+
+                                /**
+                                 * Decodes a ManualAssignmentType message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ManualAssignmentType
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.ManualAssignmentType;
+
+                                /**
+                                 * Verifies a ManualAssignmentType message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ManualAssignmentType message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ManualAssignmentType
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.ManualAssignmentType;
+
+                                /**
+                                 * Creates a plain object from a ManualAssignmentType message. Also converts values to other types if specified.
+                                 * @param message ManualAssignmentType
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.ManualAssignmentType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ManualAssignmentType to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ManualAssignmentType
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of an AutoAssignmentType. */
+                            interface IAutoAssignmentType {
+
+                                /** AutoAssignmentType inactiveLicenseTtl */
+                                inactiveLicenseTtl?: (google.protobuf.IDuration|null);
+                            }
+
+                            /** Represents an AutoAssignmentType. */
+                            class AutoAssignmentType implements IAutoAssignmentType {
+
+                                /**
+                                 * Constructs a new AutoAssignmentType.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.IAutoAssignmentType);
+
+                                /** AutoAssignmentType inactiveLicenseTtl. */
+                                public inactiveLicenseTtl?: (google.protobuf.IDuration|null);
+
+                                /**
+                                 * Creates a new AutoAssignmentType instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns AutoAssignmentType instance
+                                 */
+                                public static create(properties?: google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.IAutoAssignmentType): google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.AutoAssignmentType;
+
+                                /**
+                                 * Encodes the specified AutoAssignmentType message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.AutoAssignmentType.verify|verify} messages.
+                                 * @param message AutoAssignmentType message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.IAutoAssignmentType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified AutoAssignmentType message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.AutoAssignmentType.verify|verify} messages.
+                                 * @param message AutoAssignmentType message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.IAutoAssignmentType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an AutoAssignmentType message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns AutoAssignmentType
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.AutoAssignmentType;
+
+                                /**
+                                 * Decodes an AutoAssignmentType message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns AutoAssignmentType
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.AutoAssignmentType;
+
+                                /**
+                                 * Verifies an AutoAssignmentType message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an AutoAssignmentType message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns AutoAssignmentType
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.AutoAssignmentType;
+
+                                /**
+                                 * Creates a plain object from an AutoAssignmentType message. Also converts values to other types if specified.
+                                 * @param message AutoAssignmentType
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.AutoAssignmentType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this AutoAssignmentType to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for AutoAssignmentType
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a LicensePool. */
+                        interface ILicensePool {
+
+                            /** LicensePool name */
+                            name?: (string|null);
+
+                            /** LicensePool licenseAssignmentProtocol */
+                            licenseAssignmentProtocol?: (google.cloud.commerce.consumer.procurement.v1.IAssignmentProtocol|null);
+
+                            /** LicensePool availableLicenseCount */
+                            availableLicenseCount?: (number|null);
+
+                            /** LicensePool totalLicenseCount */
+                            totalLicenseCount?: (number|null);
+                        }
+
+                        /** Represents a LicensePool. */
+                        class LicensePool implements ILicensePool {
+
+                            /**
+                             * Constructs a new LicensePool.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.ILicensePool);
+
+                            /** LicensePool name. */
+                            public name: string;
+
+                            /** LicensePool licenseAssignmentProtocol. */
+                            public licenseAssignmentProtocol?: (google.cloud.commerce.consumer.procurement.v1.IAssignmentProtocol|null);
+
+                            /** LicensePool availableLicenseCount. */
+                            public availableLicenseCount: number;
+
+                            /** LicensePool totalLicenseCount. */
+                            public totalLicenseCount: number;
+
+                            /**
+                             * Creates a new LicensePool instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LicensePool instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.ILicensePool): google.cloud.commerce.consumer.procurement.v1.LicensePool;
+
+                            /**
+                             * Encodes the specified LicensePool message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.LicensePool.verify|verify} messages.
+                             * @param message LicensePool message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.ILicensePool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LicensePool message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.LicensePool.verify|verify} messages.
+                             * @param message LicensePool message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.ILicensePool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LicensePool message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LicensePool
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.LicensePool;
+
+                            /**
+                             * Decodes a LicensePool message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LicensePool
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.LicensePool;
+
+                            /**
+                             * Verifies a LicensePool message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LicensePool message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LicensePool
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.LicensePool;
+
+                            /**
+                             * Creates a plain object from a LicensePool message. Also converts values to other types if specified.
+                             * @param message LicensePool
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.LicensePool, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LicensePool to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for LicensePool
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a GetLicensePoolRequest. */
+                        interface IGetLicensePoolRequest {
+
+                            /** GetLicensePoolRequest name */
+                            name?: (string|null);
+                        }
+
+                        /** Represents a GetLicensePoolRequest. */
+                        class GetLicensePoolRequest implements IGetLicensePoolRequest {
+
+                            /**
+                             * Constructs a new GetLicensePoolRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest);
+
+                            /** GetLicensePoolRequest name. */
+                            public name: string;
+
+                            /**
+                             * Creates a new GetLicensePoolRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GetLicensePoolRequest instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest): google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest;
+
+                            /**
+                             * Encodes the specified GetLicensePoolRequest message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest.verify|verify} messages.
+                             * @param message GetLicensePoolRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GetLicensePoolRequest message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest.verify|verify} messages.
+                             * @param message GetLicensePoolRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GetLicensePoolRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GetLicensePoolRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest;
+
+                            /**
+                             * Decodes a GetLicensePoolRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GetLicensePoolRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest;
+
+                            /**
+                             * Verifies a GetLicensePoolRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GetLicensePoolRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GetLicensePoolRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest;
+
+                            /**
+                             * Creates a plain object from a GetLicensePoolRequest message. Also converts values to other types if specified.
+                             * @param message GetLicensePoolRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GetLicensePoolRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GetLicensePoolRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an UpdateLicensePoolRequest. */
+                        interface IUpdateLicensePoolRequest {
+
+                            /** UpdateLicensePoolRequest licensePool */
+                            licensePool?: (google.cloud.commerce.consumer.procurement.v1.ILicensePool|null);
+
+                            /** UpdateLicensePoolRequest updateMask */
+                            updateMask?: (google.protobuf.IFieldMask|null);
+                        }
+
+                        /** Represents an UpdateLicensePoolRequest. */
+                        class UpdateLicensePoolRequest implements IUpdateLicensePoolRequest {
+
+                            /**
+                             * Constructs a new UpdateLicensePoolRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest);
+
+                            /** UpdateLicensePoolRequest licensePool. */
+                            public licensePool?: (google.cloud.commerce.consumer.procurement.v1.ILicensePool|null);
+
+                            /** UpdateLicensePoolRequest updateMask. */
+                            public updateMask?: (google.protobuf.IFieldMask|null);
+
+                            /**
+                             * Creates a new UpdateLicensePoolRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UpdateLicensePoolRequest instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest): google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest;
+
+                            /**
+                             * Encodes the specified UpdateLicensePoolRequest message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest.verify|verify} messages.
+                             * @param message UpdateLicensePoolRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UpdateLicensePoolRequest message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest.verify|verify} messages.
+                             * @param message UpdateLicensePoolRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an UpdateLicensePoolRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UpdateLicensePoolRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest;
+
+                            /**
+                             * Decodes an UpdateLicensePoolRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UpdateLicensePoolRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest;
+
+                            /**
+                             * Verifies an UpdateLicensePoolRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an UpdateLicensePoolRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UpdateLicensePoolRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest;
+
+                            /**
+                             * Creates a plain object from an UpdateLicensePoolRequest message. Also converts values to other types if specified.
+                             * @param message UpdateLicensePoolRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UpdateLicensePoolRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UpdateLicensePoolRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an AssignRequest. */
+                        interface IAssignRequest {
+
+                            /** AssignRequest parent */
+                            parent?: (string|null);
+
+                            /** AssignRequest usernames */
+                            usernames?: (string[]|null);
+                        }
+
+                        /** Represents an AssignRequest. */
+                        class AssignRequest implements IAssignRequest {
+
+                            /**
+                             * Constructs a new AssignRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.IAssignRequest);
+
+                            /** AssignRequest parent. */
+                            public parent: string;
+
+                            /** AssignRequest usernames. */
+                            public usernames: string[];
+
+                            /**
+                             * Creates a new AssignRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AssignRequest instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.IAssignRequest): google.cloud.commerce.consumer.procurement.v1.AssignRequest;
+
+                            /**
+                             * Encodes the specified AssignRequest message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.AssignRequest.verify|verify} messages.
+                             * @param message AssignRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.IAssignRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AssignRequest message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.AssignRequest.verify|verify} messages.
+                             * @param message AssignRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.IAssignRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AssignRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AssignRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.AssignRequest;
+
+                            /**
+                             * Decodes an AssignRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AssignRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.AssignRequest;
+
+                            /**
+                             * Verifies an AssignRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AssignRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AssignRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.AssignRequest;
+
+                            /**
+                             * Creates a plain object from an AssignRequest message. Also converts values to other types if specified.
+                             * @param message AssignRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.AssignRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AssignRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AssignRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an AssignResponse. */
+                        interface IAssignResponse {
+                        }
+
+                        /** Represents an AssignResponse. */
+                        class AssignResponse implements IAssignResponse {
+
+                            /**
+                             * Constructs a new AssignResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.IAssignResponse);
+
+                            /**
+                             * Creates a new AssignResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AssignResponse instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.IAssignResponse): google.cloud.commerce.consumer.procurement.v1.AssignResponse;
+
+                            /**
+                             * Encodes the specified AssignResponse message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.AssignResponse.verify|verify} messages.
+                             * @param message AssignResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.IAssignResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AssignResponse message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.AssignResponse.verify|verify} messages.
+                             * @param message AssignResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.IAssignResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AssignResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AssignResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.AssignResponse;
+
+                            /**
+                             * Decodes an AssignResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AssignResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.AssignResponse;
+
+                            /**
+                             * Verifies an AssignResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AssignResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AssignResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.AssignResponse;
+
+                            /**
+                             * Creates a plain object from an AssignResponse message. Also converts values to other types if specified.
+                             * @param message AssignResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.AssignResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AssignResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AssignResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an UnassignRequest. */
+                        interface IUnassignRequest {
+
+                            /** UnassignRequest parent */
+                            parent?: (string|null);
+
+                            /** UnassignRequest usernames */
+                            usernames?: (string[]|null);
+                        }
+
+                        /** Represents an UnassignRequest. */
+                        class UnassignRequest implements IUnassignRequest {
+
+                            /**
+                             * Constructs a new UnassignRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.IUnassignRequest);
+
+                            /** UnassignRequest parent. */
+                            public parent: string;
+
+                            /** UnassignRequest usernames. */
+                            public usernames: string[];
+
+                            /**
+                             * Creates a new UnassignRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UnassignRequest instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.IUnassignRequest): google.cloud.commerce.consumer.procurement.v1.UnassignRequest;
+
+                            /**
+                             * Encodes the specified UnassignRequest message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.UnassignRequest.verify|verify} messages.
+                             * @param message UnassignRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.IUnassignRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UnassignRequest message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.UnassignRequest.verify|verify} messages.
+                             * @param message UnassignRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.IUnassignRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an UnassignRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UnassignRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.UnassignRequest;
+
+                            /**
+                             * Decodes an UnassignRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UnassignRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.UnassignRequest;
+
+                            /**
+                             * Verifies an UnassignRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an UnassignRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UnassignRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.UnassignRequest;
+
+                            /**
+                             * Creates a plain object from an UnassignRequest message. Also converts values to other types if specified.
+                             * @param message UnassignRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.UnassignRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UnassignRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UnassignRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an UnassignResponse. */
+                        interface IUnassignResponse {
+                        }
+
+                        /** Represents an UnassignResponse. */
+                        class UnassignResponse implements IUnassignResponse {
+
+                            /**
+                             * Constructs a new UnassignResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.IUnassignResponse);
+
+                            /**
+                             * Creates a new UnassignResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UnassignResponse instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.IUnassignResponse): google.cloud.commerce.consumer.procurement.v1.UnassignResponse;
+
+                            /**
+                             * Encodes the specified UnassignResponse message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.UnassignResponse.verify|verify} messages.
+                             * @param message UnassignResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.IUnassignResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UnassignResponse message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.UnassignResponse.verify|verify} messages.
+                             * @param message UnassignResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.IUnassignResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an UnassignResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UnassignResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.UnassignResponse;
+
+                            /**
+                             * Decodes an UnassignResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UnassignResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.UnassignResponse;
+
+                            /**
+                             * Verifies an UnassignResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an UnassignResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UnassignResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.UnassignResponse;
+
+                            /**
+                             * Creates a plain object from an UnassignResponse message. Also converts values to other types if specified.
+                             * @param message UnassignResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.UnassignResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UnassignResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UnassignResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an EnumerateLicensedUsersRequest. */
+                        interface IEnumerateLicensedUsersRequest {
+
+                            /** EnumerateLicensedUsersRequest parent */
+                            parent?: (string|null);
+
+                            /** EnumerateLicensedUsersRequest pageSize */
+                            pageSize?: (number|null);
+
+                            /** EnumerateLicensedUsersRequest pageToken */
+                            pageToken?: (string|null);
+                        }
+
+                        /** Represents an EnumerateLicensedUsersRequest. */
+                        class EnumerateLicensedUsersRequest implements IEnumerateLicensedUsersRequest {
+
+                            /**
+                             * Constructs a new EnumerateLicensedUsersRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest);
+
+                            /** EnumerateLicensedUsersRequest parent. */
+                            public parent: string;
+
+                            /** EnumerateLicensedUsersRequest pageSize. */
+                            public pageSize: number;
+
+                            /** EnumerateLicensedUsersRequest pageToken. */
+                            public pageToken: string;
+
+                            /**
+                             * Creates a new EnumerateLicensedUsersRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns EnumerateLicensedUsersRequest instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest): google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest;
+
+                            /**
+                             * Encodes the specified EnumerateLicensedUsersRequest message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest.verify|verify} messages.
+                             * @param message EnumerateLicensedUsersRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified EnumerateLicensedUsersRequest message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest.verify|verify} messages.
+                             * @param message EnumerateLicensedUsersRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an EnumerateLicensedUsersRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns EnumerateLicensedUsersRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest;
+
+                            /**
+                             * Decodes an EnumerateLicensedUsersRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns EnumerateLicensedUsersRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest;
+
+                            /**
+                             * Verifies an EnumerateLicensedUsersRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an EnumerateLicensedUsersRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns EnumerateLicensedUsersRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest;
+
+                            /**
+                             * Creates a plain object from an EnumerateLicensedUsersRequest message. Also converts values to other types if specified.
+                             * @param message EnumerateLicensedUsersRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this EnumerateLicensedUsersRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for EnumerateLicensedUsersRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a LicensedUser. */
+                        interface ILicensedUser {
+
+                            /** LicensedUser username */
+                            username?: (string|null);
+
+                            /** LicensedUser assignTime */
+                            assignTime?: (google.protobuf.ITimestamp|null);
+
+                            /** LicensedUser recentUsageTime */
+                            recentUsageTime?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents a LicensedUser. */
+                        class LicensedUser implements ILicensedUser {
+
+                            /**
+                             * Constructs a new LicensedUser.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.ILicensedUser);
+
+                            /** LicensedUser username. */
+                            public username: string;
+
+                            /** LicensedUser assignTime. */
+                            public assignTime?: (google.protobuf.ITimestamp|null);
+
+                            /** LicensedUser recentUsageTime. */
+                            public recentUsageTime?: (google.protobuf.ITimestamp|null);
+
+                            /**
+                             * Creates a new LicensedUser instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LicensedUser instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.ILicensedUser): google.cloud.commerce.consumer.procurement.v1.LicensedUser;
+
+                            /**
+                             * Encodes the specified LicensedUser message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.LicensedUser.verify|verify} messages.
+                             * @param message LicensedUser message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.ILicensedUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LicensedUser message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.LicensedUser.verify|verify} messages.
+                             * @param message LicensedUser message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.ILicensedUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LicensedUser message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LicensedUser
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.LicensedUser;
+
+                            /**
+                             * Decodes a LicensedUser message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LicensedUser
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.LicensedUser;
+
+                            /**
+                             * Verifies a LicensedUser message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LicensedUser message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LicensedUser
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.LicensedUser;
+
+                            /**
+                             * Creates a plain object from a LicensedUser message. Also converts values to other types if specified.
+                             * @param message LicensedUser
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.LicensedUser, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LicensedUser to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for LicensedUser
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an EnumerateLicensedUsersResponse. */
+                        interface IEnumerateLicensedUsersResponse {
+
+                            /** EnumerateLicensedUsersResponse licensedUsers */
+                            licensedUsers?: (google.cloud.commerce.consumer.procurement.v1.ILicensedUser[]|null);
+
+                            /** EnumerateLicensedUsersResponse nextPageToken */
+                            nextPageToken?: (string|null);
+                        }
+
+                        /** Represents an EnumerateLicensedUsersResponse. */
+                        class EnumerateLicensedUsersResponse implements IEnumerateLicensedUsersResponse {
+
+                            /**
+                             * Constructs a new EnumerateLicensedUsersResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse);
+
+                            /** EnumerateLicensedUsersResponse licensedUsers. */
+                            public licensedUsers: google.cloud.commerce.consumer.procurement.v1.ILicensedUser[];
+
+                            /** EnumerateLicensedUsersResponse nextPageToken. */
+                            public nextPageToken: string;
+
+                            /**
+                             * Creates a new EnumerateLicensedUsersResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns EnumerateLicensedUsersResponse instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse): google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersResponse;
+
+                            /**
+                             * Encodes the specified EnumerateLicensedUsersResponse message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersResponse.verify|verify} messages.
+                             * @param message EnumerateLicensedUsersResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified EnumerateLicensedUsersResponse message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersResponse.verify|verify} messages.
+                             * @param message EnumerateLicensedUsersResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an EnumerateLicensedUsersResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns EnumerateLicensedUsersResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersResponse;
+
+                            /**
+                             * Decodes an EnumerateLicensedUsersResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns EnumerateLicensedUsersResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersResponse;
+
+                            /**
+                             * Verifies an EnumerateLicensedUsersResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an EnumerateLicensedUsersResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns EnumerateLicensedUsersResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersResponse;
+
+                            /**
+                             * Creates a plain object from an EnumerateLicensedUsersResponse message. Also converts values to other types if specified.
+                             * @param message EnumerateLicensedUsersResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this EnumerateLicensedUsersResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for EnumerateLicensedUsersResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
 
                         /** LineItemChangeType enum. */
                         enum LineItemChangeType {
@@ -956,6 +2406,34 @@ export namespace google {
                              * @returns Promise
                              */
                             public listOrders(request: google.cloud.commerce.consumer.procurement.v1.IListOrdersRequest): Promise<google.cloud.commerce.consumer.procurement.v1.ListOrdersResponse>;
+
+                            /**
+                             * Calls ModifyOrder.
+                             * @param request ModifyOrderRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and Operation
+                             */
+                            public modifyOrder(request: google.cloud.commerce.consumer.procurement.v1.IModifyOrderRequest, callback: google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService.ModifyOrderCallback): void;
+
+                            /**
+                             * Calls ModifyOrder.
+                             * @param request ModifyOrderRequest message or plain object
+                             * @returns Promise
+                             */
+                            public modifyOrder(request: google.cloud.commerce.consumer.procurement.v1.IModifyOrderRequest): Promise<google.longrunning.Operation>;
+
+                            /**
+                             * Calls CancelOrder.
+                             * @param request CancelOrderRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and Operation
+                             */
+                            public cancelOrder(request: google.cloud.commerce.consumer.procurement.v1.ICancelOrderRequest, callback: google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService.CancelOrderCallback): void;
+
+                            /**
+                             * Calls CancelOrder.
+                             * @param request CancelOrderRequest message or plain object
+                             * @returns Promise
+                             */
+                            public cancelOrder(request: google.cloud.commerce.consumer.procurement.v1.ICancelOrderRequest): Promise<google.longrunning.Operation>;
                         }
 
                         namespace ConsumerProcurementService {
@@ -980,6 +2458,27 @@ export namespace google {
                              * @param [response] ListOrdersResponse
                              */
                             type ListOrdersCallback = (error: (Error|null), response?: google.cloud.commerce.consumer.procurement.v1.ListOrdersResponse) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService|modifyOrder}.
+                             * @param error Error, if any
+                             * @param [response] Operation
+                             */
+                            type ModifyOrderCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService|cancelOrder}.
+                             * @param error Error, if any
+                             * @param [response] Operation
+                             */
+                            type CancelOrderCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                        }
+
+                        /** AutoRenewalBehavior enum. */
+                        enum AutoRenewalBehavior {
+                            AUTO_RENEWAL_BEHAVIOR_UNSPECIFIED = 0,
+                            AUTO_RENEWAL_BEHAVIOR_ENABLE = 1,
+                            AUTO_RENEWAL_BEHAVIOR_DISABLE = 2
                         }
 
                         /** Properties of a PlaceOrderRequest. */
@@ -1497,6 +2996,540 @@ export namespace google {
 
                             /**
                              * Gets the default type url for ListOrdersResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ModifyOrderRequest. */
+                        interface IModifyOrderRequest {
+
+                            /** ModifyOrderRequest name */
+                            name?: (string|null);
+
+                            /** ModifyOrderRequest modifications */
+                            modifications?: (google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.IModification[]|null);
+
+                            /** ModifyOrderRequest displayName */
+                            displayName?: (string|null);
+
+                            /** ModifyOrderRequest etag */
+                            etag?: (string|null);
+                        }
+
+                        /** Represents a ModifyOrderRequest. */
+                        class ModifyOrderRequest implements IModifyOrderRequest {
+
+                            /**
+                             * Constructs a new ModifyOrderRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.IModifyOrderRequest);
+
+                            /** ModifyOrderRequest name. */
+                            public name: string;
+
+                            /** ModifyOrderRequest modifications. */
+                            public modifications: google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.IModification[];
+
+                            /** ModifyOrderRequest displayName. */
+                            public displayName: string;
+
+                            /** ModifyOrderRequest etag. */
+                            public etag: string;
+
+                            /**
+                             * Creates a new ModifyOrderRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ModifyOrderRequest instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.IModifyOrderRequest): google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest;
+
+                            /**
+                             * Encodes the specified ModifyOrderRequest message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.verify|verify} messages.
+                             * @param message ModifyOrderRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.IModifyOrderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ModifyOrderRequest message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.verify|verify} messages.
+                             * @param message ModifyOrderRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.IModifyOrderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ModifyOrderRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ModifyOrderRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest;
+
+                            /**
+                             * Decodes a ModifyOrderRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ModifyOrderRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest;
+
+                            /**
+                             * Verifies a ModifyOrderRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ModifyOrderRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ModifyOrderRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest;
+
+                            /**
+                             * Creates a plain object from a ModifyOrderRequest message. Also converts values to other types if specified.
+                             * @param message ModifyOrderRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ModifyOrderRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ModifyOrderRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ModifyOrderRequest {
+
+                            /** Properties of a Modification. */
+                            interface IModification {
+
+                                /** Modification lineItemId */
+                                lineItemId?: (string|null);
+
+                                /** Modification changeType */
+                                changeType?: (google.cloud.commerce.consumer.procurement.v1.LineItemChangeType|keyof typeof google.cloud.commerce.consumer.procurement.v1.LineItemChangeType|null);
+
+                                /** Modification newLineItemInfo */
+                                newLineItemInfo?: (google.cloud.commerce.consumer.procurement.v1.ILineItemInfo|null);
+
+                                /** Modification autoRenewalBehavior */
+                                autoRenewalBehavior?: (google.cloud.commerce.consumer.procurement.v1.AutoRenewalBehavior|keyof typeof google.cloud.commerce.consumer.procurement.v1.AutoRenewalBehavior|null);
+                            }
+
+                            /** Represents a Modification. */
+                            class Modification implements IModification {
+
+                                /**
+                                 * Constructs a new Modification.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.IModification);
+
+                                /** Modification lineItemId. */
+                                public lineItemId: string;
+
+                                /** Modification changeType. */
+                                public changeType: (google.cloud.commerce.consumer.procurement.v1.LineItemChangeType|keyof typeof google.cloud.commerce.consumer.procurement.v1.LineItemChangeType);
+
+                                /** Modification newLineItemInfo. */
+                                public newLineItemInfo?: (google.cloud.commerce.consumer.procurement.v1.ILineItemInfo|null);
+
+                                /** Modification autoRenewalBehavior. */
+                                public autoRenewalBehavior: (google.cloud.commerce.consumer.procurement.v1.AutoRenewalBehavior|keyof typeof google.cloud.commerce.consumer.procurement.v1.AutoRenewalBehavior);
+
+                                /**
+                                 * Creates a new Modification instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Modification instance
+                                 */
+                                public static create(properties?: google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.IModification): google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.Modification;
+
+                                /**
+                                 * Encodes the specified Modification message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.Modification.verify|verify} messages.
+                                 * @param message Modification message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.IModification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Modification message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.Modification.verify|verify} messages.
+                                 * @param message Modification message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.IModification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Modification message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Modification
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.Modification;
+
+                                /**
+                                 * Decodes a Modification message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Modification
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.Modification;
+
+                                /**
+                                 * Verifies a Modification message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Modification message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Modification
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.Modification;
+
+                                /**
+                                 * Creates a plain object from a Modification message. Also converts values to other types if specified.
+                                 * @param message Modification
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.Modification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Modification to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Modification
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a ModifyOrderMetadata. */
+                        interface IModifyOrderMetadata {
+                        }
+
+                        /** Represents a ModifyOrderMetadata. */
+                        class ModifyOrderMetadata implements IModifyOrderMetadata {
+
+                            /**
+                             * Constructs a new ModifyOrderMetadata.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.IModifyOrderMetadata);
+
+                            /**
+                             * Creates a new ModifyOrderMetadata instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ModifyOrderMetadata instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.IModifyOrderMetadata): google.cloud.commerce.consumer.procurement.v1.ModifyOrderMetadata;
+
+                            /**
+                             * Encodes the specified ModifyOrderMetadata message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.ModifyOrderMetadata.verify|verify} messages.
+                             * @param message ModifyOrderMetadata message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.IModifyOrderMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ModifyOrderMetadata message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.ModifyOrderMetadata.verify|verify} messages.
+                             * @param message ModifyOrderMetadata message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.IModifyOrderMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ModifyOrderMetadata message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ModifyOrderMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.ModifyOrderMetadata;
+
+                            /**
+                             * Decodes a ModifyOrderMetadata message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ModifyOrderMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.ModifyOrderMetadata;
+
+                            /**
+                             * Verifies a ModifyOrderMetadata message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ModifyOrderMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ModifyOrderMetadata
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.ModifyOrderMetadata;
+
+                            /**
+                             * Creates a plain object from a ModifyOrderMetadata message. Also converts values to other types if specified.
+                             * @param message ModifyOrderMetadata
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.ModifyOrderMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ModifyOrderMetadata to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ModifyOrderMetadata
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a CancelOrderRequest. */
+                        interface ICancelOrderRequest {
+
+                            /** CancelOrderRequest name */
+                            name?: (string|null);
+
+                            /** CancelOrderRequest etag */
+                            etag?: (string|null);
+
+                            /** CancelOrderRequest cancellationPolicy */
+                            cancellationPolicy?: (google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest.CancellationPolicy|keyof typeof google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest.CancellationPolicy|null);
+                        }
+
+                        /** Represents a CancelOrderRequest. */
+                        class CancelOrderRequest implements ICancelOrderRequest {
+
+                            /**
+                             * Constructs a new CancelOrderRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.ICancelOrderRequest);
+
+                            /** CancelOrderRequest name. */
+                            public name: string;
+
+                            /** CancelOrderRequest etag. */
+                            public etag: string;
+
+                            /** CancelOrderRequest cancellationPolicy. */
+                            public cancellationPolicy: (google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest.CancellationPolicy|keyof typeof google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest.CancellationPolicy);
+
+                            /**
+                             * Creates a new CancelOrderRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CancelOrderRequest instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.ICancelOrderRequest): google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest;
+
+                            /**
+                             * Encodes the specified CancelOrderRequest message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest.verify|verify} messages.
+                             * @param message CancelOrderRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.ICancelOrderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CancelOrderRequest message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest.verify|verify} messages.
+                             * @param message CancelOrderRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.ICancelOrderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CancelOrderRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CancelOrderRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest;
+
+                            /**
+                             * Decodes a CancelOrderRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CancelOrderRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest;
+
+                            /**
+                             * Verifies a CancelOrderRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CancelOrderRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CancelOrderRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest;
+
+                            /**
+                             * Creates a plain object from a CancelOrderRequest message. Also converts values to other types if specified.
+                             * @param message CancelOrderRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CancelOrderRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CancelOrderRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace CancelOrderRequest {
+
+                            /** CancellationPolicy enum. */
+                            enum CancellationPolicy {
+                                CANCELLATION_POLICY_UNSPECIFIED = 0,
+                                CANCELLATION_POLICY_CANCEL_IMMEDIATELY = 1,
+                                CANCELLATION_POLICY_CANCEL_AT_TERM_END = 2
+                            }
+                        }
+
+                        /** Properties of a CancelOrderMetadata. */
+                        interface ICancelOrderMetadata {
+                        }
+
+                        /** Represents a CancelOrderMetadata. */
+                        class CancelOrderMetadata implements ICancelOrderMetadata {
+
+                            /**
+                             * Constructs a new CancelOrderMetadata.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerce.consumer.procurement.v1.ICancelOrderMetadata);
+
+                            /**
+                             * Creates a new CancelOrderMetadata instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CancelOrderMetadata instance
+                             */
+                            public static create(properties?: google.cloud.commerce.consumer.procurement.v1.ICancelOrderMetadata): google.cloud.commerce.consumer.procurement.v1.CancelOrderMetadata;
+
+                            /**
+                             * Encodes the specified CancelOrderMetadata message. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.CancelOrderMetadata.verify|verify} messages.
+                             * @param message CancelOrderMetadata message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerce.consumer.procurement.v1.ICancelOrderMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CancelOrderMetadata message, length delimited. Does not implicitly {@link google.cloud.commerce.consumer.procurement.v1.CancelOrderMetadata.verify|verify} messages.
+                             * @param message CancelOrderMetadata message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerce.consumer.procurement.v1.ICancelOrderMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CancelOrderMetadata message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CancelOrderMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerce.consumer.procurement.v1.CancelOrderMetadata;
+
+                            /**
+                             * Decodes a CancelOrderMetadata message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CancelOrderMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerce.consumer.procurement.v1.CancelOrderMetadata;
+
+                            /**
+                             * Verifies a CancelOrderMetadata message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CancelOrderMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CancelOrderMetadata
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerce.consumer.procurement.v1.CancelOrderMetadata;
+
+                            /**
+                             * Creates a plain object from a CancelOrderMetadata message. Also converts values to other types if specified.
+                             * @param message CancelOrderMetadata
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerce.consumer.procurement.v1.CancelOrderMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CancelOrderMetadata to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CancelOrderMetadata
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -2985,271 +5018,6 @@ export namespace google {
 
     /** Namespace api. */
     namespace api {
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7,
-            IDENTIFIER = 8
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-
-            /** ResourceDescriptor style */
-            style?: (google.api.ResourceDescriptor.Style[]|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /** ResourceDescriptor style. */
-            public style: google.api.ResourceDescriptor.Style[];
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceDescriptor
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-
-            /** Style enum. */
-            enum Style {
-                STYLE_UNSPECIFIED = 0,
-                DECLARATIVE_FRIENDLY = 1
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceReference
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
 
         /** Properties of a Http. */
         interface IHttp {
@@ -5096,6 +6864,271 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -9207,109 +11240,6 @@ export namespace google {
             }
         }
 
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Timestamp
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a Duration. */
         interface IDuration {
 
@@ -9407,6 +11337,206 @@ export namespace google {
 
             /**
              * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

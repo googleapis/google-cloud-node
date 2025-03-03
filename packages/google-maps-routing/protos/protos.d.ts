@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1319,212 +1319,6 @@ export namespace google {
 
             /**
              * Gets the default type url for ListValue
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a Duration. */
-        interface IDuration {
-
-            /** Duration seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Duration nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Duration. */
-        class Duration implements IDuration {
-
-            /**
-             * Constructs a new Duration.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IDuration);
-
-            /** Duration seconds. */
-            public seconds: (number|Long|string);
-
-            /** Duration nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Duration instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Duration instance
-             */
-            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
-
-            /**
-             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
-
-            /**
-             * Verifies a Duration message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Duration
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
-
-            /**
-             * Creates a plain object from a Duration message. Also converts values to other types if specified.
-             * @param message Duration
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Duration to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Duration
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Timestamp
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -5623,6 +5417,212 @@ export namespace google {
                 }
             }
         }
+
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
     }
 
     /** Namespace geo. */
@@ -6868,6 +6868,434 @@ export namespace google {
                     GEO_JSON_LINESTRING = 2
                 }
 
+                /** Properties of a PolylineDetails. */
+                interface IPolylineDetails {
+
+                    /** PolylineDetails flyoverInfo */
+                    flyoverInfo?: (google.maps.routing.v2.PolylineDetails.IFlyoverInfo[]|null);
+
+                    /** PolylineDetails narrowRoadInfo */
+                    narrowRoadInfo?: (google.maps.routing.v2.PolylineDetails.INarrowRoadInfo[]|null);
+                }
+
+                /** Represents a PolylineDetails. */
+                class PolylineDetails implements IPolylineDetails {
+
+                    /**
+                     * Constructs a new PolylineDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.routing.v2.IPolylineDetails);
+
+                    /** PolylineDetails flyoverInfo. */
+                    public flyoverInfo: google.maps.routing.v2.PolylineDetails.IFlyoverInfo[];
+
+                    /** PolylineDetails narrowRoadInfo. */
+                    public narrowRoadInfo: google.maps.routing.v2.PolylineDetails.INarrowRoadInfo[];
+
+                    /**
+                     * Creates a new PolylineDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PolylineDetails instance
+                     */
+                    public static create(properties?: google.maps.routing.v2.IPolylineDetails): google.maps.routing.v2.PolylineDetails;
+
+                    /**
+                     * Encodes the specified PolylineDetails message. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.verify|verify} messages.
+                     * @param message PolylineDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.routing.v2.IPolylineDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PolylineDetails message, length delimited. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.verify|verify} messages.
+                     * @param message PolylineDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.routing.v2.IPolylineDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PolylineDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PolylineDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routing.v2.PolylineDetails;
+
+                    /**
+                     * Decodes a PolylineDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PolylineDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routing.v2.PolylineDetails;
+
+                    /**
+                     * Verifies a PolylineDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PolylineDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PolylineDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.routing.v2.PolylineDetails;
+
+                    /**
+                     * Creates a plain object from a PolylineDetails message. Also converts values to other types if specified.
+                     * @param message PolylineDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.routing.v2.PolylineDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PolylineDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PolylineDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PolylineDetails {
+
+                    /** Properties of a PolylinePointIndex. */
+                    interface IPolylinePointIndex {
+
+                        /** PolylinePointIndex startIndex */
+                        startIndex?: (number|null);
+
+                        /** PolylinePointIndex endIndex */
+                        endIndex?: (number|null);
+                    }
+
+                    /** Represents a PolylinePointIndex. */
+                    class PolylinePointIndex implements IPolylinePointIndex {
+
+                        /**
+                         * Constructs a new PolylinePointIndex.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.routing.v2.PolylineDetails.IPolylinePointIndex);
+
+                        /** PolylinePointIndex startIndex. */
+                        public startIndex?: (number|null);
+
+                        /** PolylinePointIndex endIndex. */
+                        public endIndex?: (number|null);
+
+                        /** PolylinePointIndex _startIndex. */
+                        public _startIndex?: "startIndex";
+
+                        /** PolylinePointIndex _endIndex. */
+                        public _endIndex?: "endIndex";
+
+                        /**
+                         * Creates a new PolylinePointIndex instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PolylinePointIndex instance
+                         */
+                        public static create(properties?: google.maps.routing.v2.PolylineDetails.IPolylinePointIndex): google.maps.routing.v2.PolylineDetails.PolylinePointIndex;
+
+                        /**
+                         * Encodes the specified PolylinePointIndex message. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.PolylinePointIndex.verify|verify} messages.
+                         * @param message PolylinePointIndex message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.routing.v2.PolylineDetails.IPolylinePointIndex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PolylinePointIndex message, length delimited. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.PolylinePointIndex.verify|verify} messages.
+                         * @param message PolylinePointIndex message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.routing.v2.PolylineDetails.IPolylinePointIndex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PolylinePointIndex message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PolylinePointIndex
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routing.v2.PolylineDetails.PolylinePointIndex;
+
+                        /**
+                         * Decodes a PolylinePointIndex message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PolylinePointIndex
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routing.v2.PolylineDetails.PolylinePointIndex;
+
+                        /**
+                         * Verifies a PolylinePointIndex message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PolylinePointIndex message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PolylinePointIndex
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.routing.v2.PolylineDetails.PolylinePointIndex;
+
+                        /**
+                         * Creates a plain object from a PolylinePointIndex message. Also converts values to other types if specified.
+                         * @param message PolylinePointIndex
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.routing.v2.PolylineDetails.PolylinePointIndex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PolylinePointIndex to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PolylinePointIndex
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** RoadFeatureState enum. */
+                    enum RoadFeatureState {
+                        ROAD_FEATURE_STATE_UNSPECIFIED = 0,
+                        EXISTS = 1,
+                        DOES_NOT_EXIST = 2
+                    }
+
+                    /** Properties of a FlyoverInfo. */
+                    interface IFlyoverInfo {
+
+                        /** FlyoverInfo flyoverPresence */
+                        flyoverPresence?: (google.maps.routing.v2.PolylineDetails.RoadFeatureState|keyof typeof google.maps.routing.v2.PolylineDetails.RoadFeatureState|null);
+
+                        /** FlyoverInfo polylinePointIndex */
+                        polylinePointIndex?: (google.maps.routing.v2.PolylineDetails.IPolylinePointIndex|null);
+                    }
+
+                    /** Represents a FlyoverInfo. */
+                    class FlyoverInfo implements IFlyoverInfo {
+
+                        /**
+                         * Constructs a new FlyoverInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.routing.v2.PolylineDetails.IFlyoverInfo);
+
+                        /** FlyoverInfo flyoverPresence. */
+                        public flyoverPresence: (google.maps.routing.v2.PolylineDetails.RoadFeatureState|keyof typeof google.maps.routing.v2.PolylineDetails.RoadFeatureState);
+
+                        /** FlyoverInfo polylinePointIndex. */
+                        public polylinePointIndex?: (google.maps.routing.v2.PolylineDetails.IPolylinePointIndex|null);
+
+                        /**
+                         * Creates a new FlyoverInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FlyoverInfo instance
+                         */
+                        public static create(properties?: google.maps.routing.v2.PolylineDetails.IFlyoverInfo): google.maps.routing.v2.PolylineDetails.FlyoverInfo;
+
+                        /**
+                         * Encodes the specified FlyoverInfo message. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.FlyoverInfo.verify|verify} messages.
+                         * @param message FlyoverInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.routing.v2.PolylineDetails.IFlyoverInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FlyoverInfo message, length delimited. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.FlyoverInfo.verify|verify} messages.
+                         * @param message FlyoverInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.routing.v2.PolylineDetails.IFlyoverInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FlyoverInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FlyoverInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routing.v2.PolylineDetails.FlyoverInfo;
+
+                        /**
+                         * Decodes a FlyoverInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FlyoverInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routing.v2.PolylineDetails.FlyoverInfo;
+
+                        /**
+                         * Verifies a FlyoverInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FlyoverInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FlyoverInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.routing.v2.PolylineDetails.FlyoverInfo;
+
+                        /**
+                         * Creates a plain object from a FlyoverInfo message. Also converts values to other types if specified.
+                         * @param message FlyoverInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.routing.v2.PolylineDetails.FlyoverInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FlyoverInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FlyoverInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a NarrowRoadInfo. */
+                    interface INarrowRoadInfo {
+
+                        /** NarrowRoadInfo narrowRoadPresence */
+                        narrowRoadPresence?: (google.maps.routing.v2.PolylineDetails.RoadFeatureState|keyof typeof google.maps.routing.v2.PolylineDetails.RoadFeatureState|null);
+
+                        /** NarrowRoadInfo polylinePointIndex */
+                        polylinePointIndex?: (google.maps.routing.v2.PolylineDetails.IPolylinePointIndex|null);
+                    }
+
+                    /** Represents a NarrowRoadInfo. */
+                    class NarrowRoadInfo implements INarrowRoadInfo {
+
+                        /**
+                         * Constructs a new NarrowRoadInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.routing.v2.PolylineDetails.INarrowRoadInfo);
+
+                        /** NarrowRoadInfo narrowRoadPresence. */
+                        public narrowRoadPresence: (google.maps.routing.v2.PolylineDetails.RoadFeatureState|keyof typeof google.maps.routing.v2.PolylineDetails.RoadFeatureState);
+
+                        /** NarrowRoadInfo polylinePointIndex. */
+                        public polylinePointIndex?: (google.maps.routing.v2.PolylineDetails.IPolylinePointIndex|null);
+
+                        /**
+                         * Creates a new NarrowRoadInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NarrowRoadInfo instance
+                         */
+                        public static create(properties?: google.maps.routing.v2.PolylineDetails.INarrowRoadInfo): google.maps.routing.v2.PolylineDetails.NarrowRoadInfo;
+
+                        /**
+                         * Encodes the specified NarrowRoadInfo message. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.NarrowRoadInfo.verify|verify} messages.
+                         * @param message NarrowRoadInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.routing.v2.PolylineDetails.INarrowRoadInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NarrowRoadInfo message, length delimited. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.NarrowRoadInfo.verify|verify} messages.
+                         * @param message NarrowRoadInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.routing.v2.PolylineDetails.INarrowRoadInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NarrowRoadInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NarrowRoadInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routing.v2.PolylineDetails.NarrowRoadInfo;
+
+                        /**
+                         * Decodes a NarrowRoadInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NarrowRoadInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routing.v2.PolylineDetails.NarrowRoadInfo;
+
+                        /**
+                         * Verifies a NarrowRoadInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NarrowRoadInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NarrowRoadInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.routing.v2.PolylineDetails.NarrowRoadInfo;
+
+                        /**
+                         * Creates a plain object from a NarrowRoadInfo message. Also converts values to other types if specified.
+                         * @param message NarrowRoadInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.routing.v2.PolylineDetails.NarrowRoadInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NarrowRoadInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NarrowRoadInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of a Route. */
                 interface IRoute {
 
@@ -6909,6 +7337,9 @@ export namespace google {
 
                     /** Route routeToken */
                     routeToken?: (string|null);
+
+                    /** Route polylineDetails */
+                    polylineDetails?: (google.maps.routing.v2.IPolylineDetails|null);
                 }
 
                 /** Represents a Route. */
@@ -6958,6 +7389,9 @@ export namespace google {
 
                     /** Route routeToken. */
                     public routeToken: string;
+
+                    /** Route polylineDetails. */
+                    public polylineDetails?: (google.maps.routing.v2.IPolylineDetails|null);
 
                     /**
                      * Creates a new Route instance using the specified properties.
@@ -8576,7 +9010,8 @@ export namespace google {
                     ROUTE_LABEL_UNSPECIFIED = 0,
                     DEFAULT_ROUTE = 1,
                     DEFAULT_ROUTE_ALTERNATE = 2,
-                    FUEL_EFFICIENT = 3
+                    FUEL_EFFICIENT = 3,
+                    SHORTER_DISTANCE = 4
                 }
 
                 /** RouteTravelMode enum. */
@@ -9919,7 +10354,8 @@ export namespace google {
                     /** ReferenceRoute enum. */
                     enum ReferenceRoute {
                         REFERENCE_ROUTE_UNSPECIFIED = 0,
-                        FUEL_EFFICIENT = 1
+                        FUEL_EFFICIENT = 1,
+                        SHORTER_DISTANCE = 2
                     }
 
                     /** ExtraComputation enum. */
@@ -9928,7 +10364,9 @@ export namespace google {
                         TOLLS = 1,
                         FUEL_CONSUMPTION = 2,
                         TRAFFIC_ON_POLYLINE = 3,
-                        HTML_FORMATTED_NAVIGATION_INSTRUCTIONS = 4
+                        HTML_FORMATTED_NAVIGATION_INSTRUCTIONS = 4,
+                        FLYOVER_INFO_ON_POLYLINE = 7,
+                        NARROW_ROAD_INFO_ON_POLYLINE = 8
                     }
                 }
 
@@ -11089,6 +11527,19 @@ export namespace google {
 
     /** Namespace api. */
     namespace api {
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
+        }
 
         /** Properties of a Http. */
         interface IHttp {
@@ -12935,19 +13386,6 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
-        }
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7,
-            IDENTIFIER = 8
         }
     }
 }

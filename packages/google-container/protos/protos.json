@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -13,8 +16,8 @@
                 "java_package": "com.google.container.v1",
                 "php_namespace": "Google\\Cloud\\Container\\V1",
                 "ruby_package": "Google::Cloud::Container::V1",
-                "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
-                "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
+                "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKeyVersion",
+                "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
               },
               "nested": {
                 "ClusterManager": {
@@ -1010,6 +1013,11 @@
                       "oneof": [
                         "secondaryBootDiskUpdateStrategy"
                       ]
+                    },
+                    "_localSsdEncryptionMode": {
+                      "oneof": [
+                        "localSsdEncryptionMode"
+                      ]
                     }
                   },
                   "fields": {
@@ -1179,11 +1187,46 @@
                       "type": "SecondaryBootDisk",
                       "id": 48
                     },
+                    "storagePools": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 49
+                    },
                     "secondaryBootDiskUpdateStrategy": {
                       "type": "SecondaryBootDiskUpdateStrategy",
                       "id": 50,
                       "options": {
                         "proto3_optional": true
+                      }
+                    },
+                    "localSsdEncryptionMode": {
+                      "type": "LocalSsdEncryptionMode",
+                      "id": 54,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "effectiveCgroupMode": {
+                      "type": "EffectiveCgroupMode",
+                      "id": 55,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "LocalSsdEncryptionMode": {
+                      "values": {
+                        "LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED": 0,
+                        "STANDARD_ENCRYPTION": 1,
+                        "EPHEMERAL_KEY_ENCRYPTION": 2
+                      }
+                    },
+                    "EffectiveCgroupMode": {
+                      "values": {
+                        "EFFECTIVE_CGROUP_MODE_UNSPECIFIED": 0,
+                        "EFFECTIVE_CGROUP_MODE_V1": 1,
+                        "EFFECTIVE_CGROUP_MODE_V2": 2
                       }
                     }
                   }
@@ -1674,6 +1717,10 @@
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
                     },
+                    "parallelstoreCsiDriverConfig": {
+                      "type": "ParallelstoreCsiDriverConfig",
+                      "id": 19
+                    },
                     "rayOperatorConfig": {
                       "type": "RayOperatorConfig",
                       "id": 21,
@@ -1735,11 +1782,17 @@
                   "fields": {
                     "enablePrivateNodes": {
                       "type": "bool",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "enablePrivateEndpoint": {
                       "type": "bool",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "masterIpv4CidrBlock": {
                       "type": "string",
@@ -1749,6 +1802,7 @@
                       "type": "string",
                       "id": 4,
                       "options": {
+                        "deprecated": true,
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
@@ -1756,6 +1810,7 @@
                       "type": "string",
                       "id": 5,
                       "options": {
+                        "deprecated": true,
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
@@ -1768,11 +1823,17 @@
                     },
                     "masterGlobalAccessConfig": {
                       "type": "PrivateClusterMasterGlobalAccessConfig",
-                      "id": 8
+                      "id": 8,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "privateEndpointSubnetwork": {
                       "type": "string",
-                      "id": 10
+                      "id": 10,
+                      "options": {
+                        "deprecated": true
+                      }
                     }
                   }
                 },
@@ -1841,6 +1902,14 @@
                     }
                   }
                 },
+                "ParallelstoreCsiDriverConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
                 "RayOperatorConfig": {
                   "fields": {
                     "enabled": {
@@ -1885,6 +1954,11 @@
                       "oneof": [
                         "gcpPublicCidrsAccessEnabled"
                       ]
+                    },
+                    "_privateEndpointEnforcementEnabled": {
+                      "oneof": [
+                        "privateEndpointEnforcementEnabled"
+                      ]
                     }
                   },
                   "fields": {
@@ -1900,6 +1974,13 @@
                     "gcpPublicCidrsAccessEnabled": {
                       "type": "bool",
                       "id": 3,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "privateEndpointEnforcementEnabled": {
+                      "type": "bool",
+                      "id": 5,
                       "options": {
                         "proto3_optional": true
                       }
@@ -2101,6 +2182,16 @@
                       "oneof": [
                         "satisfiesPzi"
                       ]
+                    },
+                    "_userManagedKeysConfig": {
+                      "oneof": [
+                        "userManagedKeysConfig"
+                      ]
+                    },
+                    "_rbacBindingConfig": {
+                      "oneof": [
+                        "rbacBindingConfig"
+                      ]
                     }
                   },
                   "fields": {
@@ -2191,7 +2282,10 @@
                     },
                     "masterAuthorizedNetworksConfig": {
                       "type": "MasterAuthorizedNetworksConfig",
-                      "id": 22
+                      "id": 22,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "maintenancePolicy": {
                       "type": "MaintenancePolicy",
@@ -2431,6 +2525,10 @@
                       "type": "SecurityPostureConfig",
                       "id": 145
                     },
+                    "controlPlaneEndpointsConfig": {
+                      "type": "ControlPlaneEndpointsConfig",
+                      "id": 146
+                    },
                     "enableK8sBetaApis": {
                       "type": "K8sBetaAPIConfig",
                       "id": 143
@@ -2438,6 +2536,14 @@
                     "enterpriseConfig": {
                       "type": "EnterpriseConfig",
                       "id": 149
+                    },
+                    "secretManagerConfig": {
+                      "type": "SecretManagerConfig",
+                      "id": 150
+                    },
+                    "compliancePostureConfig": {
+                      "type": "CompliancePostureConfig",
+                      "id": 151
                     },
                     "satisfiesPzs": {
                       "type": "bool",
@@ -2454,6 +2560,20 @@
                         "(google.api.field_behavior)": "OUTPUT_ONLY",
                         "proto3_optional": true
                       }
+                    },
+                    "userManagedKeysConfig": {
+                      "type": "UserManagedKeysConfig",
+                      "id": 154,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "rbacBindingConfig": {
+                      "type": "RBACBindingConfig",
+                      "id": 156,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   },
                   "nested": {
@@ -2466,6 +2586,148 @@
                         "STOPPING": 4,
                         "ERROR": 5,
                         "DEGRADED": 6
+                      }
+                    }
+                  }
+                },
+                "RBACBindingConfig": {
+                  "oneofs": {
+                    "_enableInsecureBindingSystemUnauthenticated": {
+                      "oneof": [
+                        "enableInsecureBindingSystemUnauthenticated"
+                      ]
+                    },
+                    "_enableInsecureBindingSystemAuthenticated": {
+                      "oneof": [
+                        "enableInsecureBindingSystemAuthenticated"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "enableInsecureBindingSystemUnauthenticated": {
+                      "type": "bool",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "enableInsecureBindingSystemAuthenticated": {
+                      "type": "bool",
+                      "id": 2,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  }
+                },
+                "UserManagedKeysConfig": {
+                  "fields": {
+                    "clusterCa": {
+                      "type": "string",
+                      "id": 10,
+                      "options": {
+                        "(google.api.resource_reference).type": "privateca.googleapis.com/CaPool"
+                      }
+                    },
+                    "etcdApiCa": {
+                      "type": "string",
+                      "id": 11,
+                      "options": {
+                        "(google.api.resource_reference).type": "privateca.googleapis.com/CaPool"
+                      }
+                    },
+                    "etcdPeerCa": {
+                      "type": "string",
+                      "id": 12,
+                      "options": {
+                        "(google.api.resource_reference).type": "privateca.googleapis.com/CaPool"
+                      }
+                    },
+                    "serviceAccountSigningKeys": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 13,
+                      "options": {
+                        "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                      }
+                    },
+                    "serviceAccountVerificationKeys": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 14,
+                      "options": {
+                        "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                      }
+                    },
+                    "aggregationCa": {
+                      "type": "string",
+                      "id": 15,
+                      "options": {
+                        "(google.api.resource_reference).type": "privateca.googleapis.com/CaPool"
+                      }
+                    },
+                    "controlPlaneDiskEncryptionKey": {
+                      "type": "string",
+                      "id": 16,
+                      "options": {
+                        "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                      }
+                    },
+                    "gkeopsEtcdBackupEncryptionKey": {
+                      "type": "string",
+                      "id": 17,
+                      "options": {
+                        "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                      }
+                    }
+                  }
+                },
+                "CompliancePostureConfig": {
+                  "oneofs": {
+                    "_mode": {
+                      "oneof": [
+                        "mode"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "mode": {
+                      "type": "Mode",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "complianceStandards": {
+                      "rule": "repeated",
+                      "type": "ComplianceStandard",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "Mode": {
+                      "values": {
+                        "MODE_UNSPECIFIED": 0,
+                        "DISABLED": 1,
+                        "ENABLED": 2
+                      }
+                    },
+                    "ComplianceStandard": {
+                      "oneofs": {
+                        "_standard": {
+                          "oneof": [
+                            "standard"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "standard": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
                       }
                     }
                   }
@@ -2540,6 +2802,13 @@
                     "nodeKubeletConfig": {
                       "type": "NodeKubeletConfig",
                       "id": 3
+                    },
+                    "linuxNodeConfig": {
+                      "type": "LinuxNodeConfig",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -2578,6 +2847,11 @@
                         "desiredEnablePrivateEndpoint"
                       ]
                     },
+                    "_desiredDefaultEnablePrivateNodes": {
+                      "oneof": [
+                        "desiredDefaultEnablePrivateNodes"
+                      ]
+                    },
                     "_desiredEnableFqdnNetworkPolicy": {
                       "oneof": [
                         "desiredEnableFqdnNetworkPolicy"
@@ -2596,6 +2870,21 @@
                     "_desiredEnableCiliumClusterwideNetworkPolicy": {
                       "oneof": [
                         "desiredEnableCiliumClusterwideNetworkPolicy"
+                      ]
+                    },
+                    "_desiredSecretManagerConfig": {
+                      "oneof": [
+                        "desiredSecretManagerConfig"
+                      ]
+                    },
+                    "_desiredCompliancePostureConfig": {
+                      "oneof": [
+                        "desiredCompliancePostureConfig"
+                      ]
+                    },
+                    "_desiredRbacBindingConfig": {
+                      "oneof": [
+                        "desiredRbacBindingConfig"
                       ]
                     }
                   },
@@ -2655,7 +2944,10 @@
                     },
                     "desiredMasterAuthorizedNetworksConfig": {
                       "type": "MasterAuthorizedNetworksConfig",
-                      "id": 12
+                      "id": 12,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "desiredClusterAutoscaling": {
                       "type": "ClusterAutoscaling",
@@ -2679,7 +2971,10 @@
                     },
                     "desiredPrivateClusterConfig": {
                       "type": "PrivateClusterConfig",
-                      "id": 25
+                      "id": 25,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "desiredIntraNodeVisibilityConfig": {
                       "type": "IntraNodeVisibilityConfig",
@@ -2733,8 +3028,20 @@
                       "type": "bool",
                       "id": 71,
                       "options": {
+                        "deprecated": true,
                         "proto3_optional": true
                       }
+                    },
+                    "desiredDefaultEnablePrivateNodes": {
+                      "type": "bool",
+                      "id": 72,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "desiredControlPlaneEndpointsConfig": {
+                      "type": "ControlPlaneEndpointsConfig",
+                      "id": 73
                     },
                     "desiredMasterVersion": {
                       "type": "string",
@@ -2832,6 +3139,20 @@
                         "proto3_optional": true
                       }
                     },
+                    "desiredSecretManagerConfig": {
+                      "type": "SecretManagerConfig",
+                      "id": 139,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "desiredCompliancePostureConfig": {
+                      "type": "CompliancePostureConfig",
+                      "id": 140,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
                     "desiredNodeKubeletConfig": {
                       "type": "NodeKubeletConfig",
                       "id": 141
@@ -2839,6 +3160,25 @@
                     "desiredNodePoolAutoConfigKubeletConfig": {
                       "type": "NodeKubeletConfig",
                       "id": 142
+                    },
+                    "userManagedKeysConfig": {
+                      "type": "UserManagedKeysConfig",
+                      "id": 143
+                    },
+                    "desiredRbacBindingConfig": {
+                      "type": "RBACBindingConfig",
+                      "id": 144,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "desiredEnterpriseConfig": {
+                      "type": "DesiredEnterpriseConfig",
+                      "id": 147
+                    },
+                    "desiredNodePoolAutoConfigLinuxNodeConfig": {
+                      "type": "LinuxNodeConfig",
+                      "id": 150
                     }
                   }
                 },
@@ -2874,6 +3214,14 @@
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
+                    }
+                  }
+                },
+                "DesiredEnterpriseConfig": {
+                  "fields": {
+                    "desiredTier": {
+                      "type": "EnterpriseConfig.ClusterTier",
+                      "id": 1
                     }
                   }
                 },
@@ -3342,6 +3690,11 @@
                     "queuedProvisioning": {
                       "type": "NodePool.QueuedProvisioning",
                       "id": 42
+                    },
+                    "storagePools": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 43
                     }
                   }
                 },
@@ -3849,6 +4202,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 4
+                        },
+                        "upgradeTargetVersion": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     }
@@ -5125,6 +5482,11 @@
                       "oneof": [
                         "enableCiliumClusterwideNetworkPolicy"
                       ]
+                    },
+                    "_defaultEnablePrivateNodes": {
+                      "oneof": [
+                        "defaultEnablePrivateNodes"
+                      ]
                     }
                   },
                   "fields": {
@@ -5199,6 +5561,13 @@
                     "enableCiliumClusterwideNetworkPolicy": {
                       "type": "bool",
                       "id": 21,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "defaultEnablePrivateNodes": {
+                      "type": "bool",
+                      "id": 22,
                       "options": {
                         "proto3_optional": true
                       }
@@ -5876,6 +6245,60 @@
                     }
                   }
                 },
+                "UpgradeInfoEvent": {
+                  "fields": {
+                    "resourceType": {
+                      "type": "UpgradeResourceType",
+                      "id": 1
+                    },
+                    "operation": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "startTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 3
+                    },
+                    "endTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 4
+                    },
+                    "currentVersion": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "targetVersion": {
+                      "type": "string",
+                      "id": 6
+                    },
+                    "resource": {
+                      "type": "string",
+                      "id": 7
+                    },
+                    "state": {
+                      "type": "State",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 11
+                    }
+                  },
+                  "nested": {
+                    "State": {
+                      "values": {
+                        "STATE_UNSPECIFIED": 0,
+                        "STARTED": 3,
+                        "SUCCEEDED": 4,
+                        "FAILED": 5,
+                        "CANCELED": 6
+                      }
+                    }
+                  }
+                },
                 "UpgradeAvailableEvent": {
                   "fields": {
                     "version": {
@@ -5997,7 +6420,9 @@
                         "WORKLOADS": 2,
                         "APISERVER": 3,
                         "SCHEDULER": 4,
-                        "CONTROLLER_MANAGER": 5
+                        "CONTROLLER_MANAGER": 5,
+                        "KCP_SSHD": 7,
+                        "KCP_CONNECTION": 8
                       }
                     }
                   }
@@ -6175,6 +6600,109 @@
                     "IPV4_IPV6": 2
                   }
                 },
+                "ControlPlaneEndpointsConfig": {
+                  "fields": {
+                    "dnsEndpointConfig": {
+                      "type": "DNSEndpointConfig",
+                      "id": 1
+                    },
+                    "ipEndpointsConfig": {
+                      "type": "IPEndpointsConfig",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "DNSEndpointConfig": {
+                      "oneofs": {
+                        "_allowExternalTraffic": {
+                          "oneof": [
+                            "allowExternalTraffic"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "allowExternalTraffic": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "IPEndpointsConfig": {
+                      "oneofs": {
+                        "_enabled": {
+                          "oneof": [
+                            "enabled"
+                          ]
+                        },
+                        "_enablePublicEndpoint": {
+                          "oneof": [
+                            "enablePublicEndpoint"
+                          ]
+                        },
+                        "_globalAccess": {
+                          "oneof": [
+                            "globalAccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enablePublicEndpoint": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "globalAccess": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "authorizedNetworksConfig": {
+                          "type": "MasterAuthorizedNetworksConfig",
+                          "id": 4
+                        },
+                        "publicEndpoint": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "privateEndpoint": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "privateEndpointSubnetwork": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    }
+                  }
+                },
                 "IPv6AccessType": {
                   "values": {
                     "IPV6_ACCESS_TYPE_UNSPECIFIED": 0,
@@ -6215,6 +6743,10 @@
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
+                    },
+                    "desiredTier": {
+                      "type": "ClusterTier",
+                      "id": 2
                     }
                   },
                   "nested": {
@@ -6223,6 +6755,24 @@
                         "CLUSTER_TIER_UNSPECIFIED": 0,
                         "STANDARD": 1,
                         "ENTERPRISE": 2
+                      }
+                    }
+                  }
+                },
+                "SecretManagerConfig": {
+                  "oneofs": {
+                    "_enabled": {
+                      "oneof": [
+                        "enabled"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
                       }
                     }
                   }

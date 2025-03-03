@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -386,7 +386,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusResponse()
       );
@@ -419,7 +419,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusResponse()
       );
@@ -467,7 +467,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.checkOnboardingStatus = stubSimpleCall(
         undefined,
@@ -527,7 +527,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
       );
@@ -559,7 +559,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
       );
@@ -607,7 +607,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEntitlement = stubSimpleCall(
         undefined,
@@ -661,7 +661,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.Grant()
       );
@@ -693,7 +693,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.Grant()
       );
@@ -741,7 +741,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGrant = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getGrant(request), expectedError);
@@ -792,7 +792,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.Grant()
       );
@@ -824,7 +824,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.Grant()
       );
@@ -872,7 +872,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGrant = stubSimpleCall(
         undefined,
@@ -926,7 +926,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.Grant()
       );
@@ -958,7 +958,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.Grant()
       );
@@ -1006,7 +1006,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.approveGrant = stubSimpleCall(
         undefined,
@@ -1060,7 +1060,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.Grant()
       );
@@ -1092,7 +1092,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.Grant()
       );
@@ -1140,7 +1140,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.denyGrant = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.denyGrant(request), expectedError);
@@ -1191,7 +1191,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1225,7 +1225,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1280,7 +1280,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEntitlement = stubLongRunningCall(
         undefined,
@@ -1312,7 +1312,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEntitlement = stubLongRunningCall(
         undefined,
@@ -1391,7 +1391,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1425,7 +1425,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1480,7 +1480,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEntitlement = stubLongRunningCall(
         undefined,
@@ -1512,7 +1512,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEntitlement = stubLongRunningCall(
         undefined,
@@ -1592,7 +1592,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['entitlement', 'name']
       );
       request.entitlement.name = defaultValue1;
-      const expectedHeaderRequestParams = `entitlement.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entitlement.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1627,7 +1627,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['entitlement', 'name']
       );
       request.entitlement.name = defaultValue1;
-      const expectedHeaderRequestParams = `entitlement.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entitlement.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1683,7 +1683,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['entitlement', 'name']
       );
       request.entitlement.name = defaultValue1;
-      const expectedHeaderRequestParams = `entitlement.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entitlement.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEntitlement = stubLongRunningCall(
         undefined,
@@ -1716,7 +1716,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['entitlement', 'name']
       );
       request.entitlement.name = defaultValue1;
-      const expectedHeaderRequestParams = `entitlement.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entitlement.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEntitlement = stubLongRunningCall(
         undefined,
@@ -1795,7 +1795,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1828,7 +1828,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1883,7 +1883,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.revokeGrant = stubLongRunningCall(
         undefined,
@@ -1915,7 +1915,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.revokeGrant = stubLongRunningCall(
         undefined,
@@ -1991,7 +1991,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
@@ -2031,7 +2031,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
@@ -2089,7 +2089,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEntitlements = stubSimpleCall(
         undefined,
@@ -2121,7 +2121,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
@@ -2185,7 +2185,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntitlements.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2238,7 +2238,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
@@ -2289,7 +2289,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntitlements.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2333,7 +2333,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
@@ -2374,7 +2374,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
@@ -2432,7 +2432,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchEntitlements = stubSimpleCall(
         undefined,
@@ -2464,7 +2464,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
@@ -2528,7 +2528,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchEntitlements.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2581,7 +2581,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
@@ -2632,7 +2632,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchEntitlements.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2676,7 +2676,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Grant()
@@ -2716,7 +2716,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Grant()
@@ -2774,7 +2774,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGrants = stubSimpleCall(
         undefined,
@@ -2806,7 +2806,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Grant()
@@ -2868,7 +2868,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGrants.createStream = stubPageStreamingCall(
         undefined,
@@ -2921,7 +2921,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Grant()
@@ -2972,7 +2972,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGrants.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3018,7 +3018,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Grant()
@@ -3058,7 +3058,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Grant()
@@ -3116,7 +3116,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchGrants = stubSimpleCall(
         undefined,
@@ -3148,7 +3148,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Grant()
@@ -3210,7 +3210,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchGrants.createStream = stubPageStreamingCall(
         undefined,
@@ -3263,7 +3263,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privilegedaccessmanager.v1.Grant()
@@ -3314,7 +3314,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchGrants.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -4505,6 +4505,18 @@ export namespace google {
 
                     /** SpaceConfig entryPointAccess */
                     entryPointAccess?: (google.apps.meet.v2beta.SpaceConfig.EntryPointAccess|keyof typeof google.apps.meet.v2beta.SpaceConfig.EntryPointAccess|null);
+
+                    /** SpaceConfig moderation */
+                    moderation?: (google.apps.meet.v2beta.SpaceConfig.Moderation|keyof typeof google.apps.meet.v2beta.SpaceConfig.Moderation|null);
+
+                    /** SpaceConfig moderationRestrictions */
+                    moderationRestrictions?: (google.apps.meet.v2beta.SpaceConfig.IModerationRestrictions|null);
+
+                    /** SpaceConfig attendanceReportGenerationType */
+                    attendanceReportGenerationType?: (google.apps.meet.v2beta.SpaceConfig.AttendanceReportGenerationType|keyof typeof google.apps.meet.v2beta.SpaceConfig.AttendanceReportGenerationType|null);
+
+                    /** SpaceConfig artifactConfig */
+                    artifactConfig?: (google.apps.meet.v2beta.SpaceConfig.IArtifactConfig|null);
                 }
 
                 /** Represents a SpaceConfig. */
@@ -4521,6 +4533,18 @@ export namespace google {
 
                     /** SpaceConfig entryPointAccess. */
                     public entryPointAccess: (google.apps.meet.v2beta.SpaceConfig.EntryPointAccess|keyof typeof google.apps.meet.v2beta.SpaceConfig.EntryPointAccess);
+
+                    /** SpaceConfig moderation. */
+                    public moderation: (google.apps.meet.v2beta.SpaceConfig.Moderation|keyof typeof google.apps.meet.v2beta.SpaceConfig.Moderation);
+
+                    /** SpaceConfig moderationRestrictions. */
+                    public moderationRestrictions?: (google.apps.meet.v2beta.SpaceConfig.IModerationRestrictions|null);
+
+                    /** SpaceConfig attendanceReportGenerationType. */
+                    public attendanceReportGenerationType: (google.apps.meet.v2beta.SpaceConfig.AttendanceReportGenerationType|keyof typeof google.apps.meet.v2beta.SpaceConfig.AttendanceReportGenerationType);
+
+                    /** SpaceConfig artifactConfig. */
+                    public artifactConfig?: (google.apps.meet.v2beta.SpaceConfig.IArtifactConfig|null);
 
                     /**
                      * Creates a new SpaceConfig instance using the specified properties.
@@ -4602,6 +4626,548 @@ export namespace google {
 
                 namespace SpaceConfig {
 
+                    /** Properties of a ModerationRestrictions. */
+                    interface IModerationRestrictions {
+
+                        /** ModerationRestrictions chatRestriction */
+                        chatRestriction?: (google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.RestrictionType|keyof typeof google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.RestrictionType|null);
+
+                        /** ModerationRestrictions reactionRestriction */
+                        reactionRestriction?: (google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.RestrictionType|keyof typeof google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.RestrictionType|null);
+
+                        /** ModerationRestrictions presentRestriction */
+                        presentRestriction?: (google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.RestrictionType|keyof typeof google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.RestrictionType|null);
+
+                        /** ModerationRestrictions defaultJoinAsViewerType */
+                        defaultJoinAsViewerType?: (google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.DefaultJoinAsViewerType|keyof typeof google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.DefaultJoinAsViewerType|null);
+                    }
+
+                    /** Represents a ModerationRestrictions. */
+                    class ModerationRestrictions implements IModerationRestrictions {
+
+                        /**
+                         * Constructs a new ModerationRestrictions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.apps.meet.v2beta.SpaceConfig.IModerationRestrictions);
+
+                        /** ModerationRestrictions chatRestriction. */
+                        public chatRestriction: (google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.RestrictionType|keyof typeof google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.RestrictionType);
+
+                        /** ModerationRestrictions reactionRestriction. */
+                        public reactionRestriction: (google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.RestrictionType|keyof typeof google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.RestrictionType);
+
+                        /** ModerationRestrictions presentRestriction. */
+                        public presentRestriction: (google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.RestrictionType|keyof typeof google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.RestrictionType);
+
+                        /** ModerationRestrictions defaultJoinAsViewerType. */
+                        public defaultJoinAsViewerType: (google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.DefaultJoinAsViewerType|keyof typeof google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.DefaultJoinAsViewerType);
+
+                        /**
+                         * Creates a new ModerationRestrictions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ModerationRestrictions instance
+                         */
+                        public static create(properties?: google.apps.meet.v2beta.SpaceConfig.IModerationRestrictions): google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions;
+
+                        /**
+                         * Encodes the specified ModerationRestrictions message. Does not implicitly {@link google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.verify|verify} messages.
+                         * @param message ModerationRestrictions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.apps.meet.v2beta.SpaceConfig.IModerationRestrictions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ModerationRestrictions message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions.verify|verify} messages.
+                         * @param message ModerationRestrictions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.apps.meet.v2beta.SpaceConfig.IModerationRestrictions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ModerationRestrictions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ModerationRestrictions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions;
+
+                        /**
+                         * Decodes a ModerationRestrictions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ModerationRestrictions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions;
+
+                        /**
+                         * Verifies a ModerationRestrictions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ModerationRestrictions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ModerationRestrictions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions;
+
+                        /**
+                         * Creates a plain object from a ModerationRestrictions message. Also converts values to other types if specified.
+                         * @param message ModerationRestrictions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.apps.meet.v2beta.SpaceConfig.ModerationRestrictions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ModerationRestrictions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ModerationRestrictions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ModerationRestrictions {
+
+                        /** RestrictionType enum. */
+                        enum RestrictionType {
+                            RESTRICTION_TYPE_UNSPECIFIED = 0,
+                            HOSTS_ONLY = 1,
+                            NO_RESTRICTION = 2
+                        }
+
+                        /** DefaultJoinAsViewerType enum. */
+                        enum DefaultJoinAsViewerType {
+                            DEFAULT_JOIN_AS_VIEWER_TYPE_UNSPECIFIED = 0,
+                            ON = 1,
+                            OFF = 2
+                        }
+                    }
+
+                    /** Properties of an ArtifactConfig. */
+                    interface IArtifactConfig {
+
+                        /** ArtifactConfig recordingConfig */
+                        recordingConfig?: (google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.IRecordingConfig|null);
+
+                        /** ArtifactConfig transcriptionConfig */
+                        transcriptionConfig?: (google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.ITranscriptionConfig|null);
+
+                        /** ArtifactConfig smartNotesConfig */
+                        smartNotesConfig?: (google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.ISmartNotesConfig|null);
+                    }
+
+                    /** Represents an ArtifactConfig. */
+                    class ArtifactConfig implements IArtifactConfig {
+
+                        /**
+                         * Constructs a new ArtifactConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.apps.meet.v2beta.SpaceConfig.IArtifactConfig);
+
+                        /** ArtifactConfig recordingConfig. */
+                        public recordingConfig?: (google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.IRecordingConfig|null);
+
+                        /** ArtifactConfig transcriptionConfig. */
+                        public transcriptionConfig?: (google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.ITranscriptionConfig|null);
+
+                        /** ArtifactConfig smartNotesConfig. */
+                        public smartNotesConfig?: (google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.ISmartNotesConfig|null);
+
+                        /**
+                         * Creates a new ArtifactConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ArtifactConfig instance
+                         */
+                        public static create(properties?: google.apps.meet.v2beta.SpaceConfig.IArtifactConfig): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig;
+
+                        /**
+                         * Encodes the specified ArtifactConfig message. Does not implicitly {@link google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.verify|verify} messages.
+                         * @param message ArtifactConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.apps.meet.v2beta.SpaceConfig.IArtifactConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ArtifactConfig message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.verify|verify} messages.
+                         * @param message ArtifactConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.apps.meet.v2beta.SpaceConfig.IArtifactConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ArtifactConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ArtifactConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig;
+
+                        /**
+                         * Decodes an ArtifactConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ArtifactConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig;
+
+                        /**
+                         * Verifies an ArtifactConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ArtifactConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ArtifactConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig;
+
+                        /**
+                         * Creates a plain object from an ArtifactConfig message. Also converts values to other types if specified.
+                         * @param message ArtifactConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ArtifactConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ArtifactConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ArtifactConfig {
+
+                        /** Properties of a RecordingConfig. */
+                        interface IRecordingConfig {
+
+                            /** RecordingConfig autoRecordingGeneration */
+                            autoRecordingGeneration?: (google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.AutoGenerationType|keyof typeof google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.AutoGenerationType|null);
+                        }
+
+                        /** Represents a RecordingConfig. */
+                        class RecordingConfig implements IRecordingConfig {
+
+                            /**
+                             * Constructs a new RecordingConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.IRecordingConfig);
+
+                            /** RecordingConfig autoRecordingGeneration. */
+                            public autoRecordingGeneration: (google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.AutoGenerationType|keyof typeof google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.AutoGenerationType);
+
+                            /**
+                             * Creates a new RecordingConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RecordingConfig instance
+                             */
+                            public static create(properties?: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.IRecordingConfig): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.RecordingConfig;
+
+                            /**
+                             * Encodes the specified RecordingConfig message. Does not implicitly {@link google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.RecordingConfig.verify|verify} messages.
+                             * @param message RecordingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.IRecordingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RecordingConfig message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.RecordingConfig.verify|verify} messages.
+                             * @param message RecordingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.IRecordingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RecordingConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RecordingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.RecordingConfig;
+
+                            /**
+                             * Decodes a RecordingConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RecordingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.RecordingConfig;
+
+                            /**
+                             * Verifies a RecordingConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RecordingConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RecordingConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.RecordingConfig;
+
+                            /**
+                             * Creates a plain object from a RecordingConfig message. Also converts values to other types if specified.
+                             * @param message RecordingConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.RecordingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RecordingConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RecordingConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a TranscriptionConfig. */
+                        interface ITranscriptionConfig {
+
+                            /** TranscriptionConfig autoTranscriptionGeneration */
+                            autoTranscriptionGeneration?: (google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.AutoGenerationType|keyof typeof google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.AutoGenerationType|null);
+                        }
+
+                        /** Represents a TranscriptionConfig. */
+                        class TranscriptionConfig implements ITranscriptionConfig {
+
+                            /**
+                             * Constructs a new TranscriptionConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.ITranscriptionConfig);
+
+                            /** TranscriptionConfig autoTranscriptionGeneration. */
+                            public autoTranscriptionGeneration: (google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.AutoGenerationType|keyof typeof google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.AutoGenerationType);
+
+                            /**
+                             * Creates a new TranscriptionConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TranscriptionConfig instance
+                             */
+                            public static create(properties?: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.ITranscriptionConfig): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.TranscriptionConfig;
+
+                            /**
+                             * Encodes the specified TranscriptionConfig message. Does not implicitly {@link google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.TranscriptionConfig.verify|verify} messages.
+                             * @param message TranscriptionConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.ITranscriptionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TranscriptionConfig message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.TranscriptionConfig.verify|verify} messages.
+                             * @param message TranscriptionConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.ITranscriptionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TranscriptionConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TranscriptionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.TranscriptionConfig;
+
+                            /**
+                             * Decodes a TranscriptionConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TranscriptionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.TranscriptionConfig;
+
+                            /**
+                             * Verifies a TranscriptionConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TranscriptionConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TranscriptionConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.TranscriptionConfig;
+
+                            /**
+                             * Creates a plain object from a TranscriptionConfig message. Also converts values to other types if specified.
+                             * @param message TranscriptionConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.TranscriptionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TranscriptionConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TranscriptionConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a SmartNotesConfig. */
+                        interface ISmartNotesConfig {
+
+                            /** SmartNotesConfig autoSmartNotesGeneration */
+                            autoSmartNotesGeneration?: (google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.AutoGenerationType|keyof typeof google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.AutoGenerationType|null);
+                        }
+
+                        /** Represents a SmartNotesConfig. */
+                        class SmartNotesConfig implements ISmartNotesConfig {
+
+                            /**
+                             * Constructs a new SmartNotesConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.ISmartNotesConfig);
+
+                            /** SmartNotesConfig autoSmartNotesGeneration. */
+                            public autoSmartNotesGeneration: (google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.AutoGenerationType|keyof typeof google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.AutoGenerationType);
+
+                            /**
+                             * Creates a new SmartNotesConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SmartNotesConfig instance
+                             */
+                            public static create(properties?: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.ISmartNotesConfig): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.SmartNotesConfig;
+
+                            /**
+                             * Encodes the specified SmartNotesConfig message. Does not implicitly {@link google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.SmartNotesConfig.verify|verify} messages.
+                             * @param message SmartNotesConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.ISmartNotesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SmartNotesConfig message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.SmartNotesConfig.verify|verify} messages.
+                             * @param message SmartNotesConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.ISmartNotesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SmartNotesConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SmartNotesConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.SmartNotesConfig;
+
+                            /**
+                             * Decodes a SmartNotesConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SmartNotesConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.SmartNotesConfig;
+
+                            /**
+                             * Verifies a SmartNotesConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SmartNotesConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SmartNotesConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.SmartNotesConfig;
+
+                            /**
+                             * Creates a plain object from a SmartNotesConfig message. Also converts values to other types if specified.
+                             * @param message SmartNotesConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.apps.meet.v2beta.SpaceConfig.ArtifactConfig.SmartNotesConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SmartNotesConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SmartNotesConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** AutoGenerationType enum. */
+                        enum AutoGenerationType {
+                            AUTO_GENERATION_TYPE_UNSPECIFIED = 0,
+                            ON = 1,
+                            OFF = 2
+                        }
+                    }
+
                     /** AccessType enum. */
                     enum AccessType {
                         ACCESS_TYPE_UNSPECIFIED = 0,
@@ -4615,6 +5181,144 @@ export namespace google {
                         ENTRY_POINT_ACCESS_UNSPECIFIED = 0,
                         ALL = 1,
                         CREATOR_APP_ONLY = 2
+                    }
+
+                    /** Moderation enum. */
+                    enum Moderation {
+                        MODERATION_UNSPECIFIED = 0,
+                        OFF = 1,
+                        ON = 2
+                    }
+
+                    /** AttendanceReportGenerationType enum. */
+                    enum AttendanceReportGenerationType {
+                        ATTENDANCE_REPORT_GENERATION_TYPE_UNSPECIFIED = 0,
+                        GENERATE_REPORT = 1,
+                        DO_NOT_GENERATE = 2
+                    }
+                }
+
+                /** Properties of a Member. */
+                interface IMember {
+
+                    /** Member name */
+                    name?: (string|null);
+
+                    /** Member email */
+                    email?: (string|null);
+
+                    /** Member role */
+                    role?: (google.apps.meet.v2beta.Member.Role|keyof typeof google.apps.meet.v2beta.Member.Role|null);
+
+                    /** Member user */
+                    user?: (string|null);
+                }
+
+                /** Represents a Member. */
+                class Member implements IMember {
+
+                    /**
+                     * Constructs a new Member.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.meet.v2beta.IMember);
+
+                    /** Member name. */
+                    public name: string;
+
+                    /** Member email. */
+                    public email: string;
+
+                    /** Member role. */
+                    public role: (google.apps.meet.v2beta.Member.Role|keyof typeof google.apps.meet.v2beta.Member.Role);
+
+                    /** Member user. */
+                    public user: string;
+
+                    /**
+                     * Creates a new Member instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Member instance
+                     */
+                    public static create(properties?: google.apps.meet.v2beta.IMember): google.apps.meet.v2beta.Member;
+
+                    /**
+                     * Encodes the specified Member message. Does not implicitly {@link google.apps.meet.v2beta.Member.verify|verify} messages.
+                     * @param message Member message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.meet.v2beta.IMember, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Member message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.Member.verify|verify} messages.
+                     * @param message Member message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.meet.v2beta.IMember, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Member message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Member
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.Member;
+
+                    /**
+                     * Decodes a Member message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Member
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.Member;
+
+                    /**
+                     * Verifies a Member message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Member message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Member
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.Member;
+
+                    /**
+                     * Creates a plain object from a Member message. Also converts values to other types if specified.
+                     * @param message Member
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.meet.v2beta.Member, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Member to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Member
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Member {
+
+                    /** Role enum. */
+                    enum Role {
+                        ROLE_UNSPECIFIED = 0,
+                        COHOST = 1
                     }
                 }
 
@@ -5941,6 +6645,20 @@ export namespace google {
                     public updateSpace(request: google.apps.meet.v2beta.IUpdateSpaceRequest): Promise<google.apps.meet.v2beta.Space>;
 
                     /**
+                     * Calls ConnectActiveConference.
+                     * @param request ConnectActiveConferenceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ConnectActiveConferenceResponse
+                     */
+                    public connectActiveConference(request: google.apps.meet.v2beta.IConnectActiveConferenceRequest, callback: google.apps.meet.v2beta.SpacesService.ConnectActiveConferenceCallback): void;
+
+                    /**
+                     * Calls ConnectActiveConference.
+                     * @param request ConnectActiveConferenceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public connectActiveConference(request: google.apps.meet.v2beta.IConnectActiveConferenceRequest): Promise<google.apps.meet.v2beta.ConnectActiveConferenceResponse>;
+
+                    /**
                      * Calls EndActiveConference.
                      * @param request EndActiveConferenceRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Empty
@@ -5953,6 +6671,62 @@ export namespace google {
                      * @returns Promise
                      */
                     public endActiveConference(request: google.apps.meet.v2beta.IEndActiveConferenceRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateMember.
+                     * @param request CreateMemberRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Member
+                     */
+                    public createMember(request: google.apps.meet.v2beta.ICreateMemberRequest, callback: google.apps.meet.v2beta.SpacesService.CreateMemberCallback): void;
+
+                    /**
+                     * Calls CreateMember.
+                     * @param request CreateMemberRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createMember(request: google.apps.meet.v2beta.ICreateMemberRequest): Promise<google.apps.meet.v2beta.Member>;
+
+                    /**
+                     * Calls GetMember.
+                     * @param request GetMemberRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Member
+                     */
+                    public getMember(request: google.apps.meet.v2beta.IGetMemberRequest, callback: google.apps.meet.v2beta.SpacesService.GetMemberCallback): void;
+
+                    /**
+                     * Calls GetMember.
+                     * @param request GetMemberRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMember(request: google.apps.meet.v2beta.IGetMemberRequest): Promise<google.apps.meet.v2beta.Member>;
+
+                    /**
+                     * Calls ListMembers.
+                     * @param request ListMembersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMembersResponse
+                     */
+                    public listMembers(request: google.apps.meet.v2beta.IListMembersRequest, callback: google.apps.meet.v2beta.SpacesService.ListMembersCallback): void;
+
+                    /**
+                     * Calls ListMembers.
+                     * @param request ListMembersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMembers(request: google.apps.meet.v2beta.IListMembersRequest): Promise<google.apps.meet.v2beta.ListMembersResponse>;
+
+                    /**
+                     * Calls DeleteMember.
+                     * @param request DeleteMemberRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteMember(request: google.apps.meet.v2beta.IDeleteMemberRequest, callback: google.apps.meet.v2beta.SpacesService.DeleteMemberCallback): void;
+
+                    /**
+                     * Calls DeleteMember.
+                     * @param request DeleteMemberRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteMember(request: google.apps.meet.v2beta.IDeleteMemberRequest): Promise<google.protobuf.Empty>;
                 }
 
                 namespace SpacesService {
@@ -5979,11 +6753,46 @@ export namespace google {
                     type UpdateSpaceCallback = (error: (Error|null), response?: google.apps.meet.v2beta.Space) => void;
 
                     /**
+                     * Callback as used by {@link google.apps.meet.v2beta.SpacesService|connectActiveConference}.
+                     * @param error Error, if any
+                     * @param [response] ConnectActiveConferenceResponse
+                     */
+                    type ConnectActiveConferenceCallback = (error: (Error|null), response?: google.apps.meet.v2beta.ConnectActiveConferenceResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.apps.meet.v2beta.SpacesService|endActiveConference}.
                      * @param error Error, if any
                      * @param [response] Empty
                      */
                     type EndActiveConferenceCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.apps.meet.v2beta.SpacesService|createMember}.
+                     * @param error Error, if any
+                     * @param [response] Member
+                     */
+                    type CreateMemberCallback = (error: (Error|null), response?: google.apps.meet.v2beta.Member) => void;
+
+                    /**
+                     * Callback as used by {@link google.apps.meet.v2beta.SpacesService|getMember}.
+                     * @param error Error, if any
+                     * @param [response] Member
+                     */
+                    type GetMemberCallback = (error: (Error|null), response?: google.apps.meet.v2beta.Member) => void;
+
+                    /**
+                     * Callback as used by {@link google.apps.meet.v2beta.SpacesService|listMembers}.
+                     * @param error Error, if any
+                     * @param [response] ListMembersResponse
+                     */
+                    type ListMembersCallback = (error: (Error|null), response?: google.apps.meet.v2beta.ListMembersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.apps.meet.v2beta.SpacesService|deleteMember}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteMemberCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Represents a ConferenceRecordsService */
@@ -6559,6 +7368,212 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ConnectActiveConferenceRequest. */
+                interface IConnectActiveConferenceRequest {
+
+                    /** ConnectActiveConferenceRequest name */
+                    name?: (string|null);
+
+                    /** ConnectActiveConferenceRequest offer */
+                    offer?: (string|null);
+                }
+
+                /** Represents a ConnectActiveConferenceRequest. */
+                class ConnectActiveConferenceRequest implements IConnectActiveConferenceRequest {
+
+                    /**
+                     * Constructs a new ConnectActiveConferenceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.meet.v2beta.IConnectActiveConferenceRequest);
+
+                    /** ConnectActiveConferenceRequest name. */
+                    public name: string;
+
+                    /** ConnectActiveConferenceRequest offer. */
+                    public offer: string;
+
+                    /**
+                     * Creates a new ConnectActiveConferenceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConnectActiveConferenceRequest instance
+                     */
+                    public static create(properties?: google.apps.meet.v2beta.IConnectActiveConferenceRequest): google.apps.meet.v2beta.ConnectActiveConferenceRequest;
+
+                    /**
+                     * Encodes the specified ConnectActiveConferenceRequest message. Does not implicitly {@link google.apps.meet.v2beta.ConnectActiveConferenceRequest.verify|verify} messages.
+                     * @param message ConnectActiveConferenceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.meet.v2beta.IConnectActiveConferenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConnectActiveConferenceRequest message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.ConnectActiveConferenceRequest.verify|verify} messages.
+                     * @param message ConnectActiveConferenceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.meet.v2beta.IConnectActiveConferenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConnectActiveConferenceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConnectActiveConferenceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.ConnectActiveConferenceRequest;
+
+                    /**
+                     * Decodes a ConnectActiveConferenceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConnectActiveConferenceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.ConnectActiveConferenceRequest;
+
+                    /**
+                     * Verifies a ConnectActiveConferenceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConnectActiveConferenceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConnectActiveConferenceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.ConnectActiveConferenceRequest;
+
+                    /**
+                     * Creates a plain object from a ConnectActiveConferenceRequest message. Also converts values to other types if specified.
+                     * @param message ConnectActiveConferenceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.meet.v2beta.ConnectActiveConferenceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConnectActiveConferenceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConnectActiveConferenceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConnectActiveConferenceResponse. */
+                interface IConnectActiveConferenceResponse {
+
+                    /** ConnectActiveConferenceResponse answer */
+                    answer?: (string|null);
+
+                    /** ConnectActiveConferenceResponse traceId */
+                    traceId?: (string|null);
+                }
+
+                /** Represents a ConnectActiveConferenceResponse. */
+                class ConnectActiveConferenceResponse implements IConnectActiveConferenceResponse {
+
+                    /**
+                     * Constructs a new ConnectActiveConferenceResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.meet.v2beta.IConnectActiveConferenceResponse);
+
+                    /** ConnectActiveConferenceResponse answer. */
+                    public answer: string;
+
+                    /** ConnectActiveConferenceResponse traceId. */
+                    public traceId: string;
+
+                    /**
+                     * Creates a new ConnectActiveConferenceResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConnectActiveConferenceResponse instance
+                     */
+                    public static create(properties?: google.apps.meet.v2beta.IConnectActiveConferenceResponse): google.apps.meet.v2beta.ConnectActiveConferenceResponse;
+
+                    /**
+                     * Encodes the specified ConnectActiveConferenceResponse message. Does not implicitly {@link google.apps.meet.v2beta.ConnectActiveConferenceResponse.verify|verify} messages.
+                     * @param message ConnectActiveConferenceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.meet.v2beta.IConnectActiveConferenceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConnectActiveConferenceResponse message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.ConnectActiveConferenceResponse.verify|verify} messages.
+                     * @param message ConnectActiveConferenceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.meet.v2beta.IConnectActiveConferenceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConnectActiveConferenceResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConnectActiveConferenceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.ConnectActiveConferenceResponse;
+
+                    /**
+                     * Decodes a ConnectActiveConferenceResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConnectActiveConferenceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.ConnectActiveConferenceResponse;
+
+                    /**
+                     * Verifies a ConnectActiveConferenceResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConnectActiveConferenceResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConnectActiveConferenceResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.ConnectActiveConferenceResponse;
+
+                    /**
+                     * Creates a plain object from a ConnectActiveConferenceResponse message. Also converts values to other types if specified.
+                     * @param message ConnectActiveConferenceResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.meet.v2beta.ConnectActiveConferenceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConnectActiveConferenceResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConnectActiveConferenceResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an EndActiveConferenceRequest. */
                 interface IEndActiveConferenceRequest {
 
@@ -6650,6 +7665,515 @@ export namespace google {
 
                     /**
                      * Gets the default type url for EndActiveConferenceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateMemberRequest. */
+                interface ICreateMemberRequest {
+
+                    /** CreateMemberRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateMemberRequest member */
+                    member?: (google.apps.meet.v2beta.IMember|null);
+                }
+
+                /** Represents a CreateMemberRequest. */
+                class CreateMemberRequest implements ICreateMemberRequest {
+
+                    /**
+                     * Constructs a new CreateMemberRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.meet.v2beta.ICreateMemberRequest);
+
+                    /** CreateMemberRequest parent. */
+                    public parent: string;
+
+                    /** CreateMemberRequest member. */
+                    public member?: (google.apps.meet.v2beta.IMember|null);
+
+                    /**
+                     * Creates a new CreateMemberRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateMemberRequest instance
+                     */
+                    public static create(properties?: google.apps.meet.v2beta.ICreateMemberRequest): google.apps.meet.v2beta.CreateMemberRequest;
+
+                    /**
+                     * Encodes the specified CreateMemberRequest message. Does not implicitly {@link google.apps.meet.v2beta.CreateMemberRequest.verify|verify} messages.
+                     * @param message CreateMemberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.meet.v2beta.ICreateMemberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateMemberRequest message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.CreateMemberRequest.verify|verify} messages.
+                     * @param message CreateMemberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.meet.v2beta.ICreateMemberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateMemberRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateMemberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.CreateMemberRequest;
+
+                    /**
+                     * Decodes a CreateMemberRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateMemberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.CreateMemberRequest;
+
+                    /**
+                     * Verifies a CreateMemberRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateMemberRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateMemberRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.CreateMemberRequest;
+
+                    /**
+                     * Creates a plain object from a CreateMemberRequest message. Also converts values to other types if specified.
+                     * @param message CreateMemberRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.meet.v2beta.CreateMemberRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateMemberRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateMemberRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetMemberRequest. */
+                interface IGetMemberRequest {
+
+                    /** GetMemberRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMemberRequest. */
+                class GetMemberRequest implements IGetMemberRequest {
+
+                    /**
+                     * Constructs a new GetMemberRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.meet.v2beta.IGetMemberRequest);
+
+                    /** GetMemberRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMemberRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMemberRequest instance
+                     */
+                    public static create(properties?: google.apps.meet.v2beta.IGetMemberRequest): google.apps.meet.v2beta.GetMemberRequest;
+
+                    /**
+                     * Encodes the specified GetMemberRequest message. Does not implicitly {@link google.apps.meet.v2beta.GetMemberRequest.verify|verify} messages.
+                     * @param message GetMemberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.meet.v2beta.IGetMemberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMemberRequest message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.GetMemberRequest.verify|verify} messages.
+                     * @param message GetMemberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.meet.v2beta.IGetMemberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMemberRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMemberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.GetMemberRequest;
+
+                    /**
+                     * Decodes a GetMemberRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMemberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.GetMemberRequest;
+
+                    /**
+                     * Verifies a GetMemberRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMemberRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMemberRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.GetMemberRequest;
+
+                    /**
+                     * Creates a plain object from a GetMemberRequest message. Also converts values to other types if specified.
+                     * @param message GetMemberRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.meet.v2beta.GetMemberRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMemberRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetMemberRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMembersRequest. */
+                interface IListMembersRequest {
+
+                    /** ListMembersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMembersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMembersRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListMembersRequest. */
+                class ListMembersRequest implements IListMembersRequest {
+
+                    /**
+                     * Constructs a new ListMembersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.meet.v2beta.IListMembersRequest);
+
+                    /** ListMembersRequest parent. */
+                    public parent: string;
+
+                    /** ListMembersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMembersRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListMembersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMembersRequest instance
+                     */
+                    public static create(properties?: google.apps.meet.v2beta.IListMembersRequest): google.apps.meet.v2beta.ListMembersRequest;
+
+                    /**
+                     * Encodes the specified ListMembersRequest message. Does not implicitly {@link google.apps.meet.v2beta.ListMembersRequest.verify|verify} messages.
+                     * @param message ListMembersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.meet.v2beta.IListMembersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMembersRequest message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.ListMembersRequest.verify|verify} messages.
+                     * @param message ListMembersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.meet.v2beta.IListMembersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMembersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMembersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.ListMembersRequest;
+
+                    /**
+                     * Decodes a ListMembersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMembersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.ListMembersRequest;
+
+                    /**
+                     * Verifies a ListMembersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMembersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMembersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.ListMembersRequest;
+
+                    /**
+                     * Creates a plain object from a ListMembersRequest message. Also converts values to other types if specified.
+                     * @param message ListMembersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.meet.v2beta.ListMembersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMembersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMembersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMembersResponse. */
+                interface IListMembersResponse {
+
+                    /** ListMembersResponse members */
+                    members?: (google.apps.meet.v2beta.IMember[]|null);
+
+                    /** ListMembersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListMembersResponse. */
+                class ListMembersResponse implements IListMembersResponse {
+
+                    /**
+                     * Constructs a new ListMembersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.meet.v2beta.IListMembersResponse);
+
+                    /** ListMembersResponse members. */
+                    public members: google.apps.meet.v2beta.IMember[];
+
+                    /** ListMembersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListMembersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMembersResponse instance
+                     */
+                    public static create(properties?: google.apps.meet.v2beta.IListMembersResponse): google.apps.meet.v2beta.ListMembersResponse;
+
+                    /**
+                     * Encodes the specified ListMembersResponse message. Does not implicitly {@link google.apps.meet.v2beta.ListMembersResponse.verify|verify} messages.
+                     * @param message ListMembersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.meet.v2beta.IListMembersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMembersResponse message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.ListMembersResponse.verify|verify} messages.
+                     * @param message ListMembersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.meet.v2beta.IListMembersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMembersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMembersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.ListMembersResponse;
+
+                    /**
+                     * Decodes a ListMembersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMembersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.ListMembersResponse;
+
+                    /**
+                     * Verifies a ListMembersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMembersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMembersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.ListMembersResponse;
+
+                    /**
+                     * Creates a plain object from a ListMembersResponse message. Also converts values to other types if specified.
+                     * @param message ListMembersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.meet.v2beta.ListMembersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMembersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMembersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteMemberRequest. */
+                interface IDeleteMemberRequest {
+
+                    /** DeleteMemberRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteMemberRequest. */
+                class DeleteMemberRequest implements IDeleteMemberRequest {
+
+                    /**
+                     * Constructs a new DeleteMemberRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.meet.v2beta.IDeleteMemberRequest);
+
+                    /** DeleteMemberRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteMemberRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteMemberRequest instance
+                     */
+                    public static create(properties?: google.apps.meet.v2beta.IDeleteMemberRequest): google.apps.meet.v2beta.DeleteMemberRequest;
+
+                    /**
+                     * Encodes the specified DeleteMemberRequest message. Does not implicitly {@link google.apps.meet.v2beta.DeleteMemberRequest.verify|verify} messages.
+                     * @param message DeleteMemberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.meet.v2beta.IDeleteMemberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteMemberRequest message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.DeleteMemberRequest.verify|verify} messages.
+                     * @param message DeleteMemberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.meet.v2beta.IDeleteMemberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteMemberRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteMemberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.DeleteMemberRequest;
+
+                    /**
+                     * Decodes a DeleteMemberRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteMemberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.DeleteMemberRequest;
+
+                    /**
+                     * Verifies a DeleteMemberRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteMemberRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteMemberRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.DeleteMemberRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteMemberRequest message. Also converts values to other types if specified.
+                     * @param message DeleteMemberRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.meet.v2beta.DeleteMemberRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteMemberRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteMemberRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

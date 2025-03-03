@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,8 +34,8 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of messages returned. The service might return fewer
-   *  messages than this value.
+   *  Optional. The maximum number of messages returned. The service might return
+   *  fewer messages than this value.
    *  If unspecified, at most 25 are returned.
    *  The maximum value is 1000. If you use a value more than 1000, it's
    *  automatically changed to 1000.
@@ -43,16 +43,15 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  Optional, if resuming from a previous query.
-   *  A page token received from a previous list messages call. Provide this
-   *  parameter to retrieve the subsequent page.
+   *  Optional. A page token received from a previous list messages call. Provide
+   *  this parameter to retrieve the subsequent page.
    *  When paginating, all other parameters provided should match the call that
    *  provided the page token. Passing different values to the other parameters
    *  might lead to unexpected results.
    */
   // const pageToken = 'abc123'
   /**
-   *  A query filter.
+   *  Optional. A query filter.
    *  You can filter messages by date (`create_time`) and thread (`thread.name`).
    *  To filter messages by the date they were created, specify the `create_time`
    *  with a timestamp in RFC-3339 (https://www.rfc-editor.org/rfc/rfc3339)
@@ -81,17 +80,17 @@ function main(parent) {
    */
   // const filter = 'abc123'
   /**
-   *  Optional, if resuming from a previous query.
-   *  How the list of messages is ordered. Specify a value to order by an
-   *  ordering operation. Valid ordering operation values are as follows:
+   *  Optional. How the list of messages is ordered. Specify a value to order by
+   *  an ordering operation. Valid ordering operation values are as follows:
    *  - `ASC` for ascending.
    *  - `DESC` for descending.
    *  The default ordering is `create_time ASC`.
    */
   // const orderBy = 'abc123'
   /**
-   *  Whether to include deleted messages. Deleted messages include deleted time
-   *  and metadata about their deletion, but message content is unavailable.
+   *  Optional. Whether to include deleted messages. Deleted messages include
+   *  deleted time and metadata about their deletion, but message content is
+   *  unavailable.
    */
   // const showDeleted = true
 

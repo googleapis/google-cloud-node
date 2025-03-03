@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -45,7 +45,8 @@ enum BranchView {
   BRANCH_VIEW_FULL = 2;
 }
 
-// A data branch that stores [Product][google.cloud.retail.v2alpha.Product]s.
+// A data branch that stores all instances of
+// [Product][google.cloud.retail.v2alpha.Product]s.
 message Branch {
   option (google.api.resource) = {
     type: "retail.googleapis.com/Branch"

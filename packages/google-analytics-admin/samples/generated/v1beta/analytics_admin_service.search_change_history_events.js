@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -66,9 +66,13 @@ function main(account) {
   // const latestChangeTime = {}
   /**
    *  Optional. The maximum number of ChangeHistoryEvent items to return.
-   *  The service may return fewer than this value, even if there are additional
-   *  pages. If unspecified, at most 50 items will be returned.
-   *  The maximum value is 200 (higher values will be coerced to the maximum).
+   *  If unspecified, at most 50 items will be returned. The maximum value is 200
+   *  (higher values will be coerced to the maximum).
+   *  Note that the service may return a page with fewer items than this value
+   *  specifies (potentially even zero), and that there still may be additional
+   *  pages. If you want a particular number of items, you'll need to continue
+   *  requesting additional pages using `page_token` until you get the needed
+   *  number.
    */
   // const pageSize = 1234
   /**

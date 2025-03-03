@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -504,6 +504,9 @@ export class ConfidentialComputingClient {
    * @param {google.cloud.confidentialcomputing.v1.TokenOptions} [request.tokenOptions]
    *   Optional. A collection of optional, workload-specified claims that modify
    *   the token output.
+   * @param {string} [request.attester]
+   *   Optional. An optional indicator of the attester, only applies to certain
+   *   products.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

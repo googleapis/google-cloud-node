@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1168,7 +1168,7 @@
                              * @property {string|null} [condition] Attributes condition
                              * @property {string|null} [gender] Attributes gender
                              * @property {string|null} [googleProductCategory] Attributes googleProductCategory
-                             * @property {string|null} [gtin] Attributes gtin
+                             * @property {Array.<string>|null} [gtin] Attributes gtin
                              * @property {string|null} [itemGroupId] Attributes itemGroupId
                              * @property {string|null} [material] Attributes material
                              * @property {string|null} [mpn] Attributes mpn
@@ -1252,6 +1252,7 @@
                              */
                             function Attributes(properties) {
                                 this.additionalImageLinks = [];
+                                this.gtin = [];
                                 this.loyaltyPrograms = [];
                                 this.productTypes = [];
                                 this.shipping = [];
@@ -1437,11 +1438,11 @@
     
                             /**
                              * Attributes gtin.
-                             * @member {string|null|undefined} gtin
+                             * @member {Array.<string>} gtin
                              * @memberof google.shopping.merchant.products.v1beta.Attributes
                              * @instance
                              */
-                            Attributes.prototype.gtin = null;
+                            Attributes.prototype.gtin = $util.emptyArray;
     
                             /**
                              * Attributes itemGroupId.
@@ -2191,17 +2192,6 @@
                             });
     
                             /**
-                             * Attributes _gtin.
-                             * @member {"gtin"|undefined} _gtin
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
-                            Object.defineProperty(Attributes.prototype, "_gtin", {
-                                get: $util.oneOfGetter($oneOfFields = ["gtin"]),
-                                set: $util.oneOfSetter($oneOfFields)
-                            });
-    
-                            /**
                              * Attributes _itemGroupId.
                              * @member {"itemGroupId"|undefined} _itemGroupId
                              * @memberof google.shopping.merchant.products.v1beta.Attributes
@@ -2667,8 +2657,9 @@
                                     writer.uint32(/* id 24, wireType 2 =*/194).string(message.gender);
                                 if (message.googleProductCategory != null && Object.hasOwnProperty.call(message, "googleProductCategory"))
                                     writer.uint32(/* id 25, wireType 2 =*/202).string(message.googleProductCategory);
-                                if (message.gtin != null && Object.hasOwnProperty.call(message, "gtin"))
-                                    writer.uint32(/* id 26, wireType 2 =*/210).string(message.gtin);
+                                if (message.gtin != null && message.gtin.length)
+                                    for (var i = 0; i < message.gtin.length; ++i)
+                                        writer.uint32(/* id 26, wireType 2 =*/210).string(message.gtin[i]);
                                 if (message.itemGroupId != null && Object.hasOwnProperty.call(message, "itemGroupId"))
                                     writer.uint32(/* id 27, wireType 2 =*/218).string(message.itemGroupId);
                                 if (message.material != null && Object.hasOwnProperty.call(message, "material"))
@@ -2940,7 +2931,9 @@
                                             break;
                                         }
                                     case 26: {
-                                            message.gtin = reader.string();
+                                            if (!(message.gtin && message.gtin.length))
+                                                message.gtin = [];
+                                            message.gtin.push(reader.string());
                                             break;
                                         }
                                     case 27: {
@@ -3400,9 +3393,11 @@
                                         return "googleProductCategory: string expected";
                                 }
                                 if (message.gtin != null && message.hasOwnProperty("gtin")) {
-                                    properties._gtin = 1;
-                                    if (!$util.isString(message.gtin))
-                                        return "gtin: string expected";
+                                    if (!Array.isArray(message.gtin))
+                                        return "gtin: array expected";
+                                    for (var i = 0; i < message.gtin.length; ++i)
+                                        if (!$util.isString(message.gtin[i]))
+                                            return "gtin: string[] expected";
                                 }
                                 if (message.itemGroupId != null && message.hasOwnProperty("itemGroupId")) {
                                     properties._itemGroupId = 1;
@@ -3882,8 +3877,13 @@
                                     message.gender = String(object.gender);
                                 if (object.googleProductCategory != null)
                                     message.googleProductCategory = String(object.googleProductCategory);
-                                if (object.gtin != null)
-                                    message.gtin = String(object.gtin);
+                                if (object.gtin) {
+                                    if (!Array.isArray(object.gtin))
+                                        throw TypeError(".google.shopping.merchant.products.v1beta.Attributes.gtin: array expected");
+                                    message.gtin = [];
+                                    for (var i = 0; i < object.gtin.length; ++i)
+                                        message.gtin[i] = String(object.gtin[i]);
+                                }
                                 if (object.itemGroupId != null)
                                     message.itemGroupId = String(object.itemGroupId);
                                 if (object.material != null)
@@ -4239,6 +4239,7 @@
                                 if (options.arrays || options.defaults) {
                                     object.additionalImageLinks = [];
                                     object.lifestyleImageLinks = [];
+                                    object.gtin = [];
                                     object.productTypes = [];
                                     object.shipping = [];
                                     object.sizeTypes = [];
@@ -4383,10 +4384,10 @@
                                     if (options.oneofs)
                                         object._googleProductCategory = "googleProductCategory";
                                 }
-                                if (message.gtin != null && message.hasOwnProperty("gtin")) {
-                                    object.gtin = message.gtin;
-                                    if (options.oneofs)
-                                        object._gtin = "gtin";
+                                if (message.gtin && message.gtin.length) {
+                                    object.gtin = [];
+                                    for (var j = 0; j < message.gtin.length; ++j)
+                                        object.gtin[j] = message.gtin[j];
                                 }
                                 if (message.itemGroupId != null && message.hasOwnProperty("itemGroupId")) {
                                     object.itemGroupId = message.itemGroupId;
@@ -6875,6 +6876,8 @@
                              * @property {google.shopping.type.IPrice|null} [price] LoyaltyProgram price
                              * @property {google.shopping.type.IPrice|null} [cashbackForFutureUse] LoyaltyProgram cashbackForFutureUse
                              * @property {number|Long|null} [loyaltyPoints] LoyaltyProgram loyaltyPoints
+                             * @property {google.type.IInterval|null} [memberPriceEffectiveDate] LoyaltyProgram memberPriceEffectiveDate
+                             * @property {string|null} [shippingLabel] LoyaltyProgram shippingLabel
                              */
     
                             /**
@@ -6931,6 +6934,22 @@
                              * @instance
                              */
                             LoyaltyProgram.prototype.loyaltyPoints = null;
+    
+                            /**
+                             * LoyaltyProgram memberPriceEffectiveDate.
+                             * @member {google.type.IInterval|null|undefined} memberPriceEffectiveDate
+                             * @memberof google.shopping.merchant.products.v1beta.LoyaltyProgram
+                             * @instance
+                             */
+                            LoyaltyProgram.prototype.memberPriceEffectiveDate = null;
+    
+                            /**
+                             * LoyaltyProgram shippingLabel.
+                             * @member {string|null|undefined} shippingLabel
+                             * @memberof google.shopping.merchant.products.v1beta.LoyaltyProgram
+                             * @instance
+                             */
+                            LoyaltyProgram.prototype.shippingLabel = null;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -6991,6 +7010,28 @@
                             });
     
                             /**
+                             * LoyaltyProgram _memberPriceEffectiveDate.
+                             * @member {"memberPriceEffectiveDate"|undefined} _memberPriceEffectiveDate
+                             * @memberof google.shopping.merchant.products.v1beta.LoyaltyProgram
+                             * @instance
+                             */
+                            Object.defineProperty(LoyaltyProgram.prototype, "_memberPriceEffectiveDate", {
+                                get: $util.oneOfGetter($oneOfFields = ["memberPriceEffectiveDate"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * LoyaltyProgram _shippingLabel.
+                             * @member {"shippingLabel"|undefined} _shippingLabel
+                             * @memberof google.shopping.merchant.products.v1beta.LoyaltyProgram
+                             * @instance
+                             */
+                            Object.defineProperty(LoyaltyProgram.prototype, "_shippingLabel", {
+                                get: $util.oneOfGetter($oneOfFields = ["shippingLabel"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
                              * Creates a new LoyaltyProgram instance using the specified properties.
                              * @function create
                              * @memberof google.shopping.merchant.products.v1beta.LoyaltyProgram
@@ -7024,6 +7065,10 @@
                                     $root.google.shopping.type.Price.encode(message.cashbackForFutureUse, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 if (message.loyaltyPoints != null && Object.hasOwnProperty.call(message, "loyaltyPoints"))
                                     writer.uint32(/* id 5, wireType 0 =*/40).int64(message.loyaltyPoints);
+                                if (message.memberPriceEffectiveDate != null && Object.hasOwnProperty.call(message, "memberPriceEffectiveDate"))
+                                    $root.google.type.Interval.encode(message.memberPriceEffectiveDate, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.shippingLabel != null && Object.hasOwnProperty.call(message, "shippingLabel"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.shippingLabel);
                                 return writer;
                             };
     
@@ -7076,6 +7121,14 @@
                                         }
                                     case 5: {
                                             message.loyaltyPoints = reader.int64();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.memberPriceEffectiveDate = $root.google.type.Interval.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.shippingLabel = reader.string();
                                             break;
                                         }
                                     default:
@@ -7145,6 +7198,19 @@
                                     if (!$util.isInteger(message.loyaltyPoints) && !(message.loyaltyPoints && $util.isInteger(message.loyaltyPoints.low) && $util.isInteger(message.loyaltyPoints.high)))
                                         return "loyaltyPoints: integer|Long expected";
                                 }
+                                if (message.memberPriceEffectiveDate != null && message.hasOwnProperty("memberPriceEffectiveDate")) {
+                                    properties._memberPriceEffectiveDate = 1;
+                                    {
+                                        var error = $root.google.type.Interval.verify(message.memberPriceEffectiveDate);
+                                        if (error)
+                                            return "memberPriceEffectiveDate." + error;
+                                    }
+                                }
+                                if (message.shippingLabel != null && message.hasOwnProperty("shippingLabel")) {
+                                    properties._shippingLabel = 1;
+                                    if (!$util.isString(message.shippingLabel))
+                                        return "shippingLabel: string expected";
+                                }
                                 return null;
                             };
     
@@ -7183,6 +7249,13 @@
                                         message.loyaltyPoints = object.loyaltyPoints;
                                     else if (typeof object.loyaltyPoints === "object")
                                         message.loyaltyPoints = new $util.LongBits(object.loyaltyPoints.low >>> 0, object.loyaltyPoints.high >>> 0).toNumber();
+                                if (object.memberPriceEffectiveDate != null) {
+                                    if (typeof object.memberPriceEffectiveDate !== "object")
+                                        throw TypeError(".google.shopping.merchant.products.v1beta.LoyaltyProgram.memberPriceEffectiveDate: object expected");
+                                    message.memberPriceEffectiveDate = $root.google.type.Interval.fromObject(object.memberPriceEffectiveDate);
+                                }
+                                if (object.shippingLabel != null)
+                                    message.shippingLabel = String(object.shippingLabel);
                                 return message;
                             };
     
@@ -7226,6 +7299,16 @@
                                         object.loyaltyPoints = options.longs === String ? $util.Long.prototype.toString.call(message.loyaltyPoints) : options.longs === Number ? new $util.LongBits(message.loyaltyPoints.low >>> 0, message.loyaltyPoints.high >>> 0).toNumber() : message.loyaltyPoints;
                                     if (options.oneofs)
                                         object._loyaltyPoints = "loyaltyPoints";
+                                }
+                                if (message.memberPriceEffectiveDate != null && message.hasOwnProperty("memberPriceEffectiveDate")) {
+                                    object.memberPriceEffectiveDate = $root.google.type.Interval.toObject(message.memberPriceEffectiveDate, options);
+                                    if (options.oneofs)
+                                        object._memberPriceEffectiveDate = "memberPriceEffectiveDate";
+                                }
+                                if (message.shippingLabel != null && message.hasOwnProperty("shippingLabel")) {
+                                    object.shippingLabel = message.shippingLabel;
+                                    if (options.oneofs)
+                                        object._shippingLabel = "shippingLabel";
                                 }
                                 return object;
                             };

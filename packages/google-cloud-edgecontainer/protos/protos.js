@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -82,6 +82,22 @@
                         return values;
                     })();
     
+                    /**
+                     * ResourceState enum.
+                     * @name google.cloud.edgecontainer.v1.ResourceState
+                     * @enum {number}
+                     * @property {number} RESOURCE_STATE_UNSPECIFIED=0 RESOURCE_STATE_UNSPECIFIED value
+                     * @property {number} RESOURCE_STATE_LOCK_DOWN=1 RESOURCE_STATE_LOCK_DOWN value
+                     * @property {number} RESOURCE_STATE_LOCK_DOWN_PENDING=2 RESOURCE_STATE_LOCK_DOWN_PENDING value
+                     */
+                    v1.ResourceState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "RESOURCE_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "RESOURCE_STATE_LOCK_DOWN"] = 1;
+                        values[valuesById[2] = "RESOURCE_STATE_LOCK_DOWN_PENDING"] = 2;
+                        return values;
+                    })();
+    
                     v1.Cluster = (function() {
     
                         /**
@@ -112,6 +128,7 @@
                          * @property {google.cloud.edgecontainer.v1.Cluster.ReleaseChannel|null} [releaseChannel] Cluster releaseChannel
                          * @property {google.cloud.edgecontainer.v1.Cluster.ISurvivabilityConfig|null} [survivabilityConfig] Cluster survivabilityConfig
                          * @property {Array.<string>|null} [externalLoadBalancerIpv6AddressPools] Cluster externalLoadBalancerIpv6AddressPools
+                         * @property {google.cloud.edgecontainer.v1.Cluster.IConnectionState|null} [connectionState] Cluster connectionState
                          */
     
                         /**
@@ -326,6 +343,14 @@
                         Cluster.prototype.externalLoadBalancerIpv6AddressPools = $util.emptyArray;
     
                         /**
+                         * Cluster connectionState.
+                         * @member {google.cloud.edgecontainer.v1.Cluster.IConnectionState|null|undefined} connectionState
+                         * @memberof google.cloud.edgecontainer.v1.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.connectionState = null;
+    
+                        /**
                          * Creates a new Cluster instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.edgecontainer.v1.Cluster
@@ -401,6 +426,8 @@
                             if (message.externalLoadBalancerIpv6AddressPools != null && message.externalLoadBalancerIpv6AddressPools.length)
                                 for (var i = 0; i < message.externalLoadBalancerIpv6AddressPools.length; ++i)
                                     writer.uint32(/* id 25, wireType 2 =*/202).string(message.externalLoadBalancerIpv6AddressPools[i]);
+                            if (message.connectionState != null && Object.hasOwnProperty.call(message, "connectionState"))
+                                $root.google.cloud.edgecontainer.v1.Cluster.ConnectionState.encode(message.connectionState, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                             return writer;
                         };
     
@@ -554,6 +581,10 @@
                                         if (!(message.externalLoadBalancerIpv6AddressPools && message.externalLoadBalancerIpv6AddressPools.length))
                                             message.externalLoadBalancerIpv6AddressPools = [];
                                         message.externalLoadBalancerIpv6AddressPools.push(reader.string());
+                                        break;
+                                    }
+                                case 27: {
+                                        message.connectionState = $root.google.cloud.edgecontainer.v1.Cluster.ConnectionState.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -716,6 +747,11 @@
                                 for (var i = 0; i < message.externalLoadBalancerIpv6AddressPools.length; ++i)
                                     if (!$util.isString(message.externalLoadBalancerIpv6AddressPools[i]))
                                         return "externalLoadBalancerIpv6AddressPools: string[] expected";
+                            }
+                            if (message.connectionState != null && message.hasOwnProperty("connectionState")) {
+                                var error = $root.google.cloud.edgecontainer.v1.Cluster.ConnectionState.verify(message.connectionState);
+                                if (error)
+                                    return "connectionState." + error;
                             }
                             return null;
                         };
@@ -881,6 +917,11 @@
                                 for (var i = 0; i < object.externalLoadBalancerIpv6AddressPools.length; ++i)
                                     message.externalLoadBalancerIpv6AddressPools[i] = String(object.externalLoadBalancerIpv6AddressPools[i]);
                             }
+                            if (object.connectionState != null) {
+                                if (typeof object.connectionState !== "object")
+                                    throw TypeError(".google.cloud.edgecontainer.v1.Cluster.connectionState: object expected");
+                                message.connectionState = $root.google.cloud.edgecontainer.v1.Cluster.ConnectionState.fromObject(object.connectionState);
+                            }
                             return message;
                         };
     
@@ -925,6 +966,7 @@
                                 object.targetVersion = "";
                                 object.releaseChannel = options.enums === String ? "RELEASE_CHANNEL_UNSPECIFIED" : 0;
                                 object.survivabilityConfig = null;
+                                object.connectionState = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -987,6 +1029,8 @@
                                 for (var j = 0; j < message.externalLoadBalancerIpv6AddressPools.length; ++j)
                                     object.externalLoadBalancerIpv6AddressPools[j] = message.externalLoadBalancerIpv6AddressPools[j];
                             }
+                            if (message.connectionState != null && message.hasOwnProperty("connectionState"))
+                                object.connectionState = $root.google.cloud.edgecontainer.v1.Cluster.ConnectionState.toObject(message.connectionState, options);
                             return object;
                         };
     
@@ -1460,6 +1504,7 @@
                                  * @property {number|null} [nodeCount] Local nodeCount
                                  * @property {string|null} [machineFilter] Local machineFilter
                                  * @property {google.cloud.edgecontainer.v1.Cluster.ControlPlane.SharedDeploymentPolicy|null} [sharedDeploymentPolicy] Local sharedDeploymentPolicy
+                                 * @property {string|null} [controlPlaneNodeStorageSchema] Local controlPlaneNodeStorageSchema
                                  */
     
                                 /**
@@ -1510,6 +1555,14 @@
                                 Local.prototype.sharedDeploymentPolicy = 0;
     
                                 /**
+                                 * Local controlPlaneNodeStorageSchema.
+                                 * @member {string} controlPlaneNodeStorageSchema
+                                 * @memberof google.cloud.edgecontainer.v1.Cluster.ControlPlane.Local
+                                 * @instance
+                                 */
+                                Local.prototype.controlPlaneNodeStorageSchema = "";
+    
+                                /**
                                  * Creates a new Local instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.edgecontainer.v1.Cluster.ControlPlane.Local
@@ -1541,6 +1594,8 @@
                                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.machineFilter);
                                     if (message.sharedDeploymentPolicy != null && Object.hasOwnProperty.call(message, "sharedDeploymentPolicy"))
                                         writer.uint32(/* id 4, wireType 0 =*/32).int32(message.sharedDeploymentPolicy);
+                                    if (message.controlPlaneNodeStorageSchema != null && Object.hasOwnProperty.call(message, "controlPlaneNodeStorageSchema"))
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.controlPlaneNodeStorageSchema);
                                     return writer;
                                 };
     
@@ -1589,6 +1644,10 @@
                                             }
                                         case 4: {
                                                 message.sharedDeploymentPolicy = reader.int32();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.controlPlaneNodeStorageSchema = reader.string();
                                                 break;
                                             }
                                         default:
@@ -1644,6 +1703,9 @@
                                         case 2:
                                             break;
                                         }
+                                    if (message.controlPlaneNodeStorageSchema != null && message.hasOwnProperty("controlPlaneNodeStorageSchema"))
+                                        if (!$util.isString(message.controlPlaneNodeStorageSchema))
+                                            return "controlPlaneNodeStorageSchema: string expected";
                                     return null;
                                 };
     
@@ -1685,6 +1747,8 @@
                                         message.sharedDeploymentPolicy = 2;
                                         break;
                                     }
+                                    if (object.controlPlaneNodeStorageSchema != null)
+                                        message.controlPlaneNodeStorageSchema = String(object.controlPlaneNodeStorageSchema);
                                     return message;
                                 };
     
@@ -1706,6 +1770,7 @@
                                         object.nodeCount = 0;
                                         object.machineFilter = "";
                                         object.sharedDeploymentPolicy = options.enums === String ? "SHARED_DEPLOYMENT_POLICY_UNSPECIFIED" : 0;
+                                        object.controlPlaneNodeStorageSchema = "";
                                     }
                                     if (message.nodeLocation != null && message.hasOwnProperty("nodeLocation"))
                                         object.nodeLocation = message.nodeLocation;
@@ -1715,6 +1780,8 @@
                                         object.machineFilter = message.machineFilter;
                                     if (message.sharedDeploymentPolicy != null && message.hasOwnProperty("sharedDeploymentPolicy"))
                                         object.sharedDeploymentPolicy = options.enums === String ? $root.google.cloud.edgecontainer.v1.Cluster.ControlPlane.SharedDeploymentPolicy[message.sharedDeploymentPolicy] === undefined ? message.sharedDeploymentPolicy : $root.google.cloud.edgecontainer.v1.Cluster.ControlPlane.SharedDeploymentPolicy[message.sharedDeploymentPolicy] : message.sharedDeploymentPolicy;
+                                    if (message.controlPlaneNodeStorageSchema != null && message.hasOwnProperty("controlPlaneNodeStorageSchema"))
+                                        object.controlPlaneNodeStorageSchema = message.controlPlaneNodeStorageSchema;
                                     return object;
                                 };
     
@@ -1773,6 +1840,7 @@
                              * @memberof google.cloud.edgecontainer.v1.Cluster
                              * @interface ISystemAddonsConfig
                              * @property {google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IIngress|null} [ingress] SystemAddonsConfig ingress
+                             * @property {google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IVMServiceConfig|null} [vmServiceConfig] SystemAddonsConfig vmServiceConfig
                              */
     
                             /**
@@ -1797,6 +1865,14 @@
                              * @instance
                              */
                             SystemAddonsConfig.prototype.ingress = null;
+    
+                            /**
+                             * SystemAddonsConfig vmServiceConfig.
+                             * @member {google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IVMServiceConfig|null|undefined} vmServiceConfig
+                             * @memberof google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig
+                             * @instance
+                             */
+                            SystemAddonsConfig.prototype.vmServiceConfig = null;
     
                             /**
                              * Creates a new SystemAddonsConfig instance using the specified properties.
@@ -1824,6 +1900,8 @@
                                     writer = $Writer.create();
                                 if (message.ingress != null && Object.hasOwnProperty.call(message, "ingress"))
                                     $root.google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.Ingress.encode(message.ingress, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.vmServiceConfig != null && Object.hasOwnProperty.call(message, "vmServiceConfig"))
+                                    $root.google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig.encode(message.vmServiceConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1860,6 +1938,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.ingress = $root.google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.Ingress.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.vmServiceConfig = $root.google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -1902,6 +1984,11 @@
                                     if (error)
                                         return "ingress." + error;
                                 }
+                                if (message.vmServiceConfig != null && message.hasOwnProperty("vmServiceConfig")) {
+                                    var error = $root.google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig.verify(message.vmServiceConfig);
+                                    if (error)
+                                        return "vmServiceConfig." + error;
+                                }
                                 return null;
                             };
     
@@ -1922,6 +2009,11 @@
                                         throw TypeError(".google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.ingress: object expected");
                                     message.ingress = $root.google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.Ingress.fromObject(object.ingress);
                                 }
+                                if (object.vmServiceConfig != null) {
+                                    if (typeof object.vmServiceConfig !== "object")
+                                        throw TypeError(".google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.vmServiceConfig: object expected");
+                                    message.vmServiceConfig = $root.google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig.fromObject(object.vmServiceConfig);
+                                }
                                 return message;
                             };
     
@@ -1938,10 +2030,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.ingress = null;
+                                    object.vmServiceConfig = null;
+                                }
                                 if (message.ingress != null && message.hasOwnProperty("ingress"))
                                     object.ingress = $root.google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.Ingress.toObject(message.ingress, options);
+                                if (message.vmServiceConfig != null && message.hasOwnProperty("vmServiceConfig"))
+                                    object.vmServiceConfig = $root.google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig.toObject(message.vmServiceConfig, options);
                                 return object;
                             };
     
@@ -2198,6 +2294,209 @@
                                 return Ingress;
                             })();
     
+                            SystemAddonsConfig.VMServiceConfig = (function() {
+    
+                                /**
+                                 * Properties of a VMServiceConfig.
+                                 * @memberof google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig
+                                 * @interface IVMServiceConfig
+                                 * @property {boolean|null} [vmmEnabled] VMServiceConfig vmmEnabled
+                                 */
+    
+                                /**
+                                 * Constructs a new VMServiceConfig.
+                                 * @memberof google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig
+                                 * @classdesc Represents a VMServiceConfig.
+                                 * @implements IVMServiceConfig
+                                 * @constructor
+                                 * @param {google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IVMServiceConfig=} [properties] Properties to set
+                                 */
+                                function VMServiceConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * VMServiceConfig vmmEnabled.
+                                 * @member {boolean} vmmEnabled
+                                 * @memberof google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig
+                                 * @instance
+                                 */
+                                VMServiceConfig.prototype.vmmEnabled = false;
+    
+                                /**
+                                 * Creates a new VMServiceConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig
+                                 * @static
+                                 * @param {google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IVMServiceConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig} VMServiceConfig instance
+                                 */
+                                VMServiceConfig.create = function create(properties) {
+                                    return new VMServiceConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified VMServiceConfig message. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig
+                                 * @static
+                                 * @param {google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IVMServiceConfig} message VMServiceConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                VMServiceConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.vmmEnabled != null && Object.hasOwnProperty.call(message, "vmmEnabled"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.vmmEnabled);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified VMServiceConfig message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig
+                                 * @static
+                                 * @param {google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IVMServiceConfig} message VMServiceConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                VMServiceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a VMServiceConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig} VMServiceConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                VMServiceConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.vmmEnabled = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a VMServiceConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig} VMServiceConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                VMServiceConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a VMServiceConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                VMServiceConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.vmmEnabled != null && message.hasOwnProperty("vmmEnabled"))
+                                        if (typeof message.vmmEnabled !== "boolean")
+                                            return "vmmEnabled: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a VMServiceConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig} VMServiceConfig
+                                 */
+                                VMServiceConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig();
+                                    if (object.vmmEnabled != null)
+                                        message.vmmEnabled = Boolean(object.vmmEnabled);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a VMServiceConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig
+                                 * @static
+                                 * @param {google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig} message VMServiceConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                VMServiceConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.vmmEnabled = false;
+                                    if (message.vmmEnabled != null && message.hasOwnProperty("vmmEnabled"))
+                                        object.vmmEnabled = message.vmmEnabled;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this VMServiceConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                VMServiceConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for VMServiceConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                VMServiceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig";
+                                };
+    
+                                return VMServiceConfig;
+                            })();
+    
                             return SystemAddonsConfig;
                         })();
     
@@ -2211,6 +2510,7 @@
                              * @property {string|null} [kmsKeyActiveVersion] ControlPlaneEncryption kmsKeyActiveVersion
                              * @property {google.cloud.edgecontainer.v1.KmsKeyState|null} [kmsKeyState] ControlPlaneEncryption kmsKeyState
                              * @property {google.rpc.IStatus|null} [kmsStatus] ControlPlaneEncryption kmsStatus
+                             * @property {google.cloud.edgecontainer.v1.ResourceState|null} [resourceState] ControlPlaneEncryption resourceState
                              */
     
                             /**
@@ -2261,6 +2561,14 @@
                             ControlPlaneEncryption.prototype.kmsStatus = null;
     
                             /**
+                             * ControlPlaneEncryption resourceState.
+                             * @member {google.cloud.edgecontainer.v1.ResourceState} resourceState
+                             * @memberof google.cloud.edgecontainer.v1.Cluster.ControlPlaneEncryption
+                             * @instance
+                             */
+                            ControlPlaneEncryption.prototype.resourceState = 0;
+    
+                            /**
                              * Creates a new ControlPlaneEncryption instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.edgecontainer.v1.Cluster.ControlPlaneEncryption
@@ -2292,6 +2600,8 @@
                                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.kmsKeyState);
                                 if (message.kmsStatus != null && Object.hasOwnProperty.call(message, "kmsStatus"))
                                     $root.google.rpc.Status.encode(message.kmsStatus, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.resourceState != null && Object.hasOwnProperty.call(message, "resourceState"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.resourceState);
                                 return writer;
                             };
     
@@ -2340,6 +2650,10 @@
                                         }
                                     case 4: {
                                             message.kmsStatus = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.resourceState = reader.int32();
                                             break;
                                         }
                                     default:
@@ -2397,6 +2711,15 @@
                                     if (error)
                                         return "kmsStatus." + error;
                                 }
+                                if (message.resourceState != null && message.hasOwnProperty("resourceState"))
+                                    switch (message.resourceState) {
+                                    default:
+                                        return "resourceState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -2441,6 +2764,26 @@
                                         throw TypeError(".google.cloud.edgecontainer.v1.Cluster.ControlPlaneEncryption.kmsStatus: object expected");
                                     message.kmsStatus = $root.google.rpc.Status.fromObject(object.kmsStatus);
                                 }
+                                switch (object.resourceState) {
+                                default:
+                                    if (typeof object.resourceState === "number") {
+                                        message.resourceState = object.resourceState;
+                                        break;
+                                    }
+                                    break;
+                                case "RESOURCE_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.resourceState = 0;
+                                    break;
+                                case "RESOURCE_STATE_LOCK_DOWN":
+                                case 1:
+                                    message.resourceState = 1;
+                                    break;
+                                case "RESOURCE_STATE_LOCK_DOWN_PENDING":
+                                case 2:
+                                    message.resourceState = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -2462,6 +2805,7 @@
                                     object.kmsKeyActiveVersion = "";
                                     object.kmsKeyState = options.enums === String ? "KMS_KEY_STATE_UNSPECIFIED" : 0;
                                     object.kmsStatus = null;
+                                    object.resourceState = options.enums === String ? "RESOURCE_STATE_UNSPECIFIED" : 0;
                                 }
                                 if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
                                     object.kmsKey = message.kmsKey;
@@ -2471,6 +2815,8 @@
                                     object.kmsKeyState = options.enums === String ? $root.google.cloud.edgecontainer.v1.KmsKeyState[message.kmsKeyState] === undefined ? message.kmsKeyState : $root.google.cloud.edgecontainer.v1.KmsKeyState[message.kmsKeyState] : message.kmsKeyState;
                                 if (message.kmsStatus != null && message.hasOwnProperty("kmsStatus"))
                                     object.kmsStatus = $root.google.rpc.Status.toObject(message.kmsStatus, options);
+                                if (message.resourceState != null && message.hasOwnProperty("resourceState"))
+                                    object.resourceState = options.enums === String ? $root.google.cloud.edgecontainer.v1.ResourceState[message.resourceState] === undefined ? message.resourceState : $root.google.cloud.edgecontainer.v1.ResourceState[message.resourceState] : message.resourceState;
                                 return object;
                             };
     
@@ -3260,6 +3606,285 @@
                             };
     
                             return SurvivabilityConfig;
+                        })();
+    
+                        Cluster.ConnectionState = (function() {
+    
+                            /**
+                             * Properties of a ConnectionState.
+                             * @memberof google.cloud.edgecontainer.v1.Cluster
+                             * @interface IConnectionState
+                             * @property {google.cloud.edgecontainer.v1.Cluster.ConnectionState.State|null} [state] ConnectionState state
+                             * @property {google.protobuf.ITimestamp|null} [updateTime] ConnectionState updateTime
+                             */
+    
+                            /**
+                             * Constructs a new ConnectionState.
+                             * @memberof google.cloud.edgecontainer.v1.Cluster
+                             * @classdesc Represents a ConnectionState.
+                             * @implements IConnectionState
+                             * @constructor
+                             * @param {google.cloud.edgecontainer.v1.Cluster.IConnectionState=} [properties] Properties to set
+                             */
+                            function ConnectionState(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConnectionState state.
+                             * @member {google.cloud.edgecontainer.v1.Cluster.ConnectionState.State} state
+                             * @memberof google.cloud.edgecontainer.v1.Cluster.ConnectionState
+                             * @instance
+                             */
+                            ConnectionState.prototype.state = 0;
+    
+                            /**
+                             * ConnectionState updateTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                             * @memberof google.cloud.edgecontainer.v1.Cluster.ConnectionState
+                             * @instance
+                             */
+                            ConnectionState.prototype.updateTime = null;
+    
+                            /**
+                             * Creates a new ConnectionState instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.edgecontainer.v1.Cluster.ConnectionState
+                             * @static
+                             * @param {google.cloud.edgecontainer.v1.Cluster.IConnectionState=} [properties] Properties to set
+                             * @returns {google.cloud.edgecontainer.v1.Cluster.ConnectionState} ConnectionState instance
+                             */
+                            ConnectionState.create = function create(properties) {
+                                return new ConnectionState(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConnectionState message. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.ConnectionState.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.edgecontainer.v1.Cluster.ConnectionState
+                             * @static
+                             * @param {google.cloud.edgecontainer.v1.Cluster.IConnectionState} message ConnectionState message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConnectionState.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                                if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConnectionState message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.ConnectionState.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.edgecontainer.v1.Cluster.ConnectionState
+                             * @static
+                             * @param {google.cloud.edgecontainer.v1.Cluster.IConnectionState} message ConnectionState message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConnectionState.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConnectionState message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.edgecontainer.v1.Cluster.ConnectionState
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.edgecontainer.v1.Cluster.ConnectionState} ConnectionState
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConnectionState.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.edgecontainer.v1.Cluster.ConnectionState();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConnectionState message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.edgecontainer.v1.Cluster.ConnectionState
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.edgecontainer.v1.Cluster.ConnectionState} ConnectionState
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConnectionState.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConnectionState message.
+                             * @function verify
+                             * @memberof google.cloud.edgecontainer.v1.Cluster.ConnectionState
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConnectionState.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                    if (error)
+                                        return "updateTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConnectionState message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.edgecontainer.v1.Cluster.ConnectionState
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.edgecontainer.v1.Cluster.ConnectionState} ConnectionState
+                             */
+                            ConnectionState.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.edgecontainer.v1.Cluster.ConnectionState)
+                                    return object;
+                                var message = new $root.google.cloud.edgecontainer.v1.Cluster.ConnectionState();
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "DISCONNECTED":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "CONNECTED":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "CONNECTED_AND_SYNCING":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                }
+                                if (object.updateTime != null) {
+                                    if (typeof object.updateTime !== "object")
+                                        throw TypeError(".google.cloud.edgecontainer.v1.Cluster.ConnectionState.updateTime: object expected");
+                                    message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConnectionState message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.edgecontainer.v1.Cluster.ConnectionState
+                             * @static
+                             * @param {google.cloud.edgecontainer.v1.Cluster.ConnectionState} message ConnectionState
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConnectionState.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    object.updateTime = null;
+                                }
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.cloud.edgecontainer.v1.Cluster.ConnectionState.State[message.state] === undefined ? message.state : $root.google.cloud.edgecontainer.v1.Cluster.ConnectionState.State[message.state] : message.state;
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                    object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConnectionState to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.edgecontainer.v1.Cluster.ConnectionState
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConnectionState.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConnectionState
+                             * @function getTypeUrl
+                             * @memberof google.cloud.edgecontainer.v1.Cluster.ConnectionState
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConnectionState.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.edgecontainer.v1.Cluster.ConnectionState";
+                            };
+    
+                            /**
+                             * State enum.
+                             * @name google.cloud.edgecontainer.v1.Cluster.ConnectionState.State
+                             * @enum {number}
+                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                             * @property {number} DISCONNECTED=1 DISCONNECTED value
+                             * @property {number} CONNECTED=2 CONNECTED value
+                             * @property {number} CONNECTED_AND_SYNCING=3 CONNECTED_AND_SYNCING value
+                             */
+                            ConnectionState.State = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DISCONNECTED"] = 1;
+                                values[valuesById[2] = "CONNECTED"] = 2;
+                                values[valuesById[3] = "CONNECTED_AND_SYNCING"] = 3;
+                                return values;
+                            })();
+    
+                            return ConnectionState;
                         })();
     
                         /**
@@ -4674,6 +5299,7 @@
                              * @property {string|null} [kmsKeyActiveVersion] LocalDiskEncryption kmsKeyActiveVersion
                              * @property {google.cloud.edgecontainer.v1.KmsKeyState|null} [kmsKeyState] LocalDiskEncryption kmsKeyState
                              * @property {google.rpc.IStatus|null} [kmsStatus] LocalDiskEncryption kmsStatus
+                             * @property {google.cloud.edgecontainer.v1.ResourceState|null} [resourceState] LocalDiskEncryption resourceState
                              */
     
                             /**
@@ -4724,6 +5350,14 @@
                             LocalDiskEncryption.prototype.kmsStatus = null;
     
                             /**
+                             * LocalDiskEncryption resourceState.
+                             * @member {google.cloud.edgecontainer.v1.ResourceState} resourceState
+                             * @memberof google.cloud.edgecontainer.v1.NodePool.LocalDiskEncryption
+                             * @instance
+                             */
+                            LocalDiskEncryption.prototype.resourceState = 0;
+    
+                            /**
                              * Creates a new LocalDiskEncryption instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.edgecontainer.v1.NodePool.LocalDiskEncryption
@@ -4755,6 +5389,8 @@
                                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.kmsKeyState);
                                 if (message.kmsStatus != null && Object.hasOwnProperty.call(message, "kmsStatus"))
                                     $root.google.rpc.Status.encode(message.kmsStatus, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.resourceState != null && Object.hasOwnProperty.call(message, "resourceState"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.resourceState);
                                 return writer;
                             };
     
@@ -4803,6 +5439,10 @@
                                         }
                                     case 4: {
                                             message.kmsStatus = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.resourceState = reader.int32();
                                             break;
                                         }
                                     default:
@@ -4860,6 +5500,15 @@
                                     if (error)
                                         return "kmsStatus." + error;
                                 }
+                                if (message.resourceState != null && message.hasOwnProperty("resourceState"))
+                                    switch (message.resourceState) {
+                                    default:
+                                        return "resourceState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -4904,6 +5553,26 @@
                                         throw TypeError(".google.cloud.edgecontainer.v1.NodePool.LocalDiskEncryption.kmsStatus: object expected");
                                     message.kmsStatus = $root.google.rpc.Status.fromObject(object.kmsStatus);
                                 }
+                                switch (object.resourceState) {
+                                default:
+                                    if (typeof object.resourceState === "number") {
+                                        message.resourceState = object.resourceState;
+                                        break;
+                                    }
+                                    break;
+                                case "RESOURCE_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.resourceState = 0;
+                                    break;
+                                case "RESOURCE_STATE_LOCK_DOWN":
+                                case 1:
+                                    message.resourceState = 1;
+                                    break;
+                                case "RESOURCE_STATE_LOCK_DOWN_PENDING":
+                                case 2:
+                                    message.resourceState = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -4925,6 +5594,7 @@
                                     object.kmsKeyActiveVersion = "";
                                     object.kmsKeyState = options.enums === String ? "KMS_KEY_STATE_UNSPECIFIED" : 0;
                                     object.kmsStatus = null;
+                                    object.resourceState = options.enums === String ? "RESOURCE_STATE_UNSPECIFIED" : 0;
                                 }
                                 if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
                                     object.kmsKey = message.kmsKey;
@@ -4934,6 +5604,8 @@
                                     object.kmsKeyState = options.enums === String ? $root.google.cloud.edgecontainer.v1.KmsKeyState[message.kmsKeyState] === undefined ? message.kmsKeyState : $root.google.cloud.edgecontainer.v1.KmsKeyState[message.kmsKeyState] : message.kmsKeyState;
                                 if (message.kmsStatus != null && message.hasOwnProperty("kmsStatus"))
                                     object.kmsStatus = $root.google.rpc.Status.toObject(message.kmsStatus, options);
+                                if (message.resourceState != null && message.hasOwnProperty("resourceState"))
+                                    object.resourceState = options.enums === String ? $root.google.cloud.edgecontainer.v1.ResourceState[message.resourceState] === undefined ? message.resourceState : $root.google.cloud.edgecontainer.v1.ResourceState[message.resourceState] : message.resourceState;
                                 return object;
                             };
     
@@ -4973,6 +5645,7 @@
                              * @memberof google.cloud.edgecontainer.v1.NodePool
                              * @interface INodeConfig
                              * @property {Object.<string,string>|null} [labels] NodeConfig labels
+                             * @property {string|null} [nodeStorageSchema] NodeConfig nodeStorageSchema
                              */
     
                             /**
@@ -4998,6 +5671,14 @@
                              * @instance
                              */
                             NodeConfig.prototype.labels = $util.emptyObject;
+    
+                            /**
+                             * NodeConfig nodeStorageSchema.
+                             * @member {string} nodeStorageSchema
+                             * @memberof google.cloud.edgecontainer.v1.NodePool.NodeConfig
+                             * @instance
+                             */
+                            NodeConfig.prototype.nodeStorageSchema = "";
     
                             /**
                              * Creates a new NodeConfig instance using the specified properties.
@@ -5026,6 +5707,8 @@
                                 if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                     for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                         writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                                if (message.nodeStorageSchema != null && Object.hasOwnProperty.call(message, "nodeStorageSchema"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nodeStorageSchema);
                                 return writer;
                             };
     
@@ -5083,6 +5766,10 @@
                                             message.labels[key] = value;
                                             break;
                                         }
+                                    case 2: {
+                                            message.nodeStorageSchema = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -5126,6 +5813,9 @@
                                         if (!$util.isString(message.labels[key[i]]))
                                             return "labels: string{k:string} expected";
                                 }
+                                if (message.nodeStorageSchema != null && message.hasOwnProperty("nodeStorageSchema"))
+                                    if (!$util.isString(message.nodeStorageSchema))
+                                        return "nodeStorageSchema: string expected";
                                 return null;
                             };
     
@@ -5148,6 +5838,8 @@
                                     for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                         message.labels[keys[i]] = String(object.labels[keys[i]]);
                                 }
+                                if (object.nodeStorageSchema != null)
+                                    message.nodeStorageSchema = String(object.nodeStorageSchema);
                                 return message;
                             };
     
@@ -5166,12 +5858,16 @@
                                 var object = {};
                                 if (options.objects || options.defaults)
                                     object.labels = {};
+                                if (options.defaults)
+                                    object.nodeStorageSchema = "";
                                 var keys2;
                                 if (message.labels && (keys2 = Object.keys(message.labels)).length) {
                                     object.labels = {};
                                     for (var j = 0; j < keys2.length; ++j)
                                         object.labels[keys2[j]] = message.labels[keys2[j]];
                                 }
+                                if (message.nodeStorageSchema != null && message.hasOwnProperty("nodeStorageSchema"))
+                                    object.nodeStorageSchema = message.nodeStorageSchema;
                                 return object;
                             };
     
@@ -7404,6 +8100,7 @@
                          * @interface IZoneMetadata
                          * @property {Array.<google.cloud.edgecontainer.v1.IQuota>|null} [quota] ZoneMetadata quota
                          * @property {Object.<string,google.cloud.edgecontainer.v1.ZoneMetadata.RackType>|null} [rackTypes] ZoneMetadata rackTypes
+                         * @property {google.cloud.edgecontainer.v1.IConfigData|null} [configData] ZoneMetadata configData
                          */
     
                         /**
@@ -7440,6 +8137,14 @@
                         ZoneMetadata.prototype.rackTypes = $util.emptyObject;
     
                         /**
+                         * ZoneMetadata configData.
+                         * @member {google.cloud.edgecontainer.v1.IConfigData|null|undefined} configData
+                         * @memberof google.cloud.edgecontainer.v1.ZoneMetadata
+                         * @instance
+                         */
+                        ZoneMetadata.prototype.configData = null;
+    
+                        /**
                          * Creates a new ZoneMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.edgecontainer.v1.ZoneMetadata
@@ -7469,6 +8174,8 @@
                             if (message.rackTypes != null && Object.hasOwnProperty.call(message, "rackTypes"))
                                 for (var keys = Object.keys(message.rackTypes), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 0 =*/16).int32(message.rackTypes[keys[i]]).ldelim();
+                            if (message.configData != null && Object.hasOwnProperty.call(message, "configData"))
+                                $root.google.cloud.edgecontainer.v1.ConfigData.encode(message.configData, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -7532,6 +8239,10 @@
                                         message.rackTypes[key] = value;
                                         break;
                                     }
+                                case 3: {
+                                        message.configData = $root.google.cloud.edgecontainer.v1.ConfigData.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7590,6 +8301,11 @@
                                         break;
                                     }
                             }
+                            if (message.configData != null && message.hasOwnProperty("configData")) {
+                                var error = $root.google.cloud.edgecontainer.v1.ConfigData.verify(message.configData);
+                                if (error)
+                                    return "configData." + error;
+                            }
                             return null;
                         };
     
@@ -7641,6 +8357,11 @@
                                         break;
                                     }
                             }
+                            if (object.configData != null) {
+                                if (typeof object.configData !== "object")
+                                    throw TypeError(".google.cloud.edgecontainer.v1.ZoneMetadata.configData: object expected");
+                                message.configData = $root.google.cloud.edgecontainer.v1.ConfigData.fromObject(object.configData);
+                            }
                             return message;
                         };
     
@@ -7661,6 +8382,8 @@
                                 object.quota = [];
                             if (options.objects || options.defaults)
                                 object.rackTypes = {};
+                            if (options.defaults)
+                                object.configData = null;
                             if (message.quota && message.quota.length) {
                                 object.quota = [];
                                 for (var j = 0; j < message.quota.length; ++j)
@@ -7672,6 +8395,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.rackTypes[keys2[j]] = options.enums === String ? $root.google.cloud.edgecontainer.v1.ZoneMetadata.RackType[message.rackTypes[keys2[j]]] === undefined ? message.rackTypes[keys2[j]] : $root.google.cloud.edgecontainer.v1.ZoneMetadata.RackType[message.rackTypes[keys2[j]]] : message.rackTypes[keys2[j]];
                             }
+                            if (message.configData != null && message.hasOwnProperty("configData"))
+                                object.configData = $root.google.cloud.edgecontainer.v1.ConfigData.toObject(message.configData, options);
                             return object;
                         };
     
@@ -7718,6 +8443,265 @@
                         })();
     
                         return ZoneMetadata;
+                    })();
+    
+                    v1.ConfigData = (function() {
+    
+                        /**
+                         * Properties of a ConfigData.
+                         * @memberof google.cloud.edgecontainer.v1
+                         * @interface IConfigData
+                         * @property {Array.<string>|null} [availableExternalLbPoolsIpv4] ConfigData availableExternalLbPoolsIpv4
+                         * @property {Array.<string>|null} [availableExternalLbPoolsIpv6] ConfigData availableExternalLbPoolsIpv6
+                         */
+    
+                        /**
+                         * Constructs a new ConfigData.
+                         * @memberof google.cloud.edgecontainer.v1
+                         * @classdesc Represents a ConfigData.
+                         * @implements IConfigData
+                         * @constructor
+                         * @param {google.cloud.edgecontainer.v1.IConfigData=} [properties] Properties to set
+                         */
+                        function ConfigData(properties) {
+                            this.availableExternalLbPoolsIpv4 = [];
+                            this.availableExternalLbPoolsIpv6 = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConfigData availableExternalLbPoolsIpv4.
+                         * @member {Array.<string>} availableExternalLbPoolsIpv4
+                         * @memberof google.cloud.edgecontainer.v1.ConfigData
+                         * @instance
+                         */
+                        ConfigData.prototype.availableExternalLbPoolsIpv4 = $util.emptyArray;
+    
+                        /**
+                         * ConfigData availableExternalLbPoolsIpv6.
+                         * @member {Array.<string>} availableExternalLbPoolsIpv6
+                         * @memberof google.cloud.edgecontainer.v1.ConfigData
+                         * @instance
+                         */
+                        ConfigData.prototype.availableExternalLbPoolsIpv6 = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ConfigData instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.edgecontainer.v1.ConfigData
+                         * @static
+                         * @param {google.cloud.edgecontainer.v1.IConfigData=} [properties] Properties to set
+                         * @returns {google.cloud.edgecontainer.v1.ConfigData} ConfigData instance
+                         */
+                        ConfigData.create = function create(properties) {
+                            return new ConfigData(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConfigData message. Does not implicitly {@link google.cloud.edgecontainer.v1.ConfigData.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.edgecontainer.v1.ConfigData
+                         * @static
+                         * @param {google.cloud.edgecontainer.v1.IConfigData} message ConfigData message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConfigData.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.availableExternalLbPoolsIpv4 != null && message.availableExternalLbPoolsIpv4.length)
+                                for (var i = 0; i < message.availableExternalLbPoolsIpv4.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.availableExternalLbPoolsIpv4[i]);
+                            if (message.availableExternalLbPoolsIpv6 != null && message.availableExternalLbPoolsIpv6.length)
+                                for (var i = 0; i < message.availableExternalLbPoolsIpv6.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.availableExternalLbPoolsIpv6[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConfigData message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.ConfigData.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.edgecontainer.v1.ConfigData
+                         * @static
+                         * @param {google.cloud.edgecontainer.v1.IConfigData} message ConfigData message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConfigData.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConfigData message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.edgecontainer.v1.ConfigData
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.edgecontainer.v1.ConfigData} ConfigData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConfigData.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.edgecontainer.v1.ConfigData();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.availableExternalLbPoolsIpv4 && message.availableExternalLbPoolsIpv4.length))
+                                            message.availableExternalLbPoolsIpv4 = [];
+                                        message.availableExternalLbPoolsIpv4.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.availableExternalLbPoolsIpv6 && message.availableExternalLbPoolsIpv6.length))
+                                            message.availableExternalLbPoolsIpv6 = [];
+                                        message.availableExternalLbPoolsIpv6.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConfigData message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.edgecontainer.v1.ConfigData
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.edgecontainer.v1.ConfigData} ConfigData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConfigData.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConfigData message.
+                         * @function verify
+                         * @memberof google.cloud.edgecontainer.v1.ConfigData
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConfigData.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.availableExternalLbPoolsIpv4 != null && message.hasOwnProperty("availableExternalLbPoolsIpv4")) {
+                                if (!Array.isArray(message.availableExternalLbPoolsIpv4))
+                                    return "availableExternalLbPoolsIpv4: array expected";
+                                for (var i = 0; i < message.availableExternalLbPoolsIpv4.length; ++i)
+                                    if (!$util.isString(message.availableExternalLbPoolsIpv4[i]))
+                                        return "availableExternalLbPoolsIpv4: string[] expected";
+                            }
+                            if (message.availableExternalLbPoolsIpv6 != null && message.hasOwnProperty("availableExternalLbPoolsIpv6")) {
+                                if (!Array.isArray(message.availableExternalLbPoolsIpv6))
+                                    return "availableExternalLbPoolsIpv6: array expected";
+                                for (var i = 0; i < message.availableExternalLbPoolsIpv6.length; ++i)
+                                    if (!$util.isString(message.availableExternalLbPoolsIpv6[i]))
+                                        return "availableExternalLbPoolsIpv6: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConfigData message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.edgecontainer.v1.ConfigData
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.edgecontainer.v1.ConfigData} ConfigData
+                         */
+                        ConfigData.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.edgecontainer.v1.ConfigData)
+                                return object;
+                            var message = new $root.google.cloud.edgecontainer.v1.ConfigData();
+                            if (object.availableExternalLbPoolsIpv4) {
+                                if (!Array.isArray(object.availableExternalLbPoolsIpv4))
+                                    throw TypeError(".google.cloud.edgecontainer.v1.ConfigData.availableExternalLbPoolsIpv4: array expected");
+                                message.availableExternalLbPoolsIpv4 = [];
+                                for (var i = 0; i < object.availableExternalLbPoolsIpv4.length; ++i)
+                                    message.availableExternalLbPoolsIpv4[i] = String(object.availableExternalLbPoolsIpv4[i]);
+                            }
+                            if (object.availableExternalLbPoolsIpv6) {
+                                if (!Array.isArray(object.availableExternalLbPoolsIpv6))
+                                    throw TypeError(".google.cloud.edgecontainer.v1.ConfigData.availableExternalLbPoolsIpv6: array expected");
+                                message.availableExternalLbPoolsIpv6 = [];
+                                for (var i = 0; i < object.availableExternalLbPoolsIpv6.length; ++i)
+                                    message.availableExternalLbPoolsIpv6[i] = String(object.availableExternalLbPoolsIpv6[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConfigData message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.edgecontainer.v1.ConfigData
+                         * @static
+                         * @param {google.cloud.edgecontainer.v1.ConfigData} message ConfigData
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConfigData.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.availableExternalLbPoolsIpv4 = [];
+                                object.availableExternalLbPoolsIpv6 = [];
+                            }
+                            if (message.availableExternalLbPoolsIpv4 && message.availableExternalLbPoolsIpv4.length) {
+                                object.availableExternalLbPoolsIpv4 = [];
+                                for (var j = 0; j < message.availableExternalLbPoolsIpv4.length; ++j)
+                                    object.availableExternalLbPoolsIpv4[j] = message.availableExternalLbPoolsIpv4[j];
+                            }
+                            if (message.availableExternalLbPoolsIpv6 && message.availableExternalLbPoolsIpv6.length) {
+                                object.availableExternalLbPoolsIpv6 = [];
+                                for (var j = 0; j < message.availableExternalLbPoolsIpv6.length; ++j)
+                                    object.availableExternalLbPoolsIpv6[j] = message.availableExternalLbPoolsIpv6[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConfigData to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.edgecontainer.v1.ConfigData
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConfigData.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConfigData
+                         * @function getTypeUrl
+                         * @memberof google.cloud.edgecontainer.v1.ConfigData
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConfigData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.edgecontainer.v1.ConfigData";
+                        };
+    
+                        return ConfigData;
                     })();
     
                     v1.Quota = (function() {
@@ -7977,6 +8961,7 @@
                          * @memberof google.cloud.edgecontainer.v1
                          * @interface IMaintenancePolicy
                          * @property {google.cloud.edgecontainer.v1.IMaintenanceWindow|null} [window] MaintenancePolicy window
+                         * @property {Array.<google.cloud.edgecontainer.v1.IMaintenanceExclusionWindow>|null} [maintenanceExclusions] MaintenancePolicy maintenanceExclusions
                          */
     
                         /**
@@ -7988,6 +8973,7 @@
                          * @param {google.cloud.edgecontainer.v1.IMaintenancePolicy=} [properties] Properties to set
                          */
                         function MaintenancePolicy(properties) {
+                            this.maintenanceExclusions = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -8001,6 +8987,14 @@
                          * @instance
                          */
                         MaintenancePolicy.prototype.window = null;
+    
+                        /**
+                         * MaintenancePolicy maintenanceExclusions.
+                         * @member {Array.<google.cloud.edgecontainer.v1.IMaintenanceExclusionWindow>} maintenanceExclusions
+                         * @memberof google.cloud.edgecontainer.v1.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.maintenanceExclusions = $util.emptyArray;
     
                         /**
                          * Creates a new MaintenancePolicy instance using the specified properties.
@@ -8028,6 +9022,9 @@
                                 writer = $Writer.create();
                             if (message.window != null && Object.hasOwnProperty.call(message, "window"))
                                 $root.google.cloud.edgecontainer.v1.MaintenanceWindow.encode(message.window, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.maintenanceExclusions != null && message.maintenanceExclusions.length)
+                                for (var i = 0; i < message.maintenanceExclusions.length; ++i)
+                                    $root.google.cloud.edgecontainer.v1.MaintenanceExclusionWindow.encode(message.maintenanceExclusions[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -8064,6 +9061,12 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.window = $root.google.cloud.edgecontainer.v1.MaintenanceWindow.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.maintenanceExclusions && message.maintenanceExclusions.length))
+                                            message.maintenanceExclusions = [];
+                                        message.maintenanceExclusions.push($root.google.cloud.edgecontainer.v1.MaintenanceExclusionWindow.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -8106,6 +9109,15 @@
                                 if (error)
                                     return "window." + error;
                             }
+                            if (message.maintenanceExclusions != null && message.hasOwnProperty("maintenanceExclusions")) {
+                                if (!Array.isArray(message.maintenanceExclusions))
+                                    return "maintenanceExclusions: array expected";
+                                for (var i = 0; i < message.maintenanceExclusions.length; ++i) {
+                                    var error = $root.google.cloud.edgecontainer.v1.MaintenanceExclusionWindow.verify(message.maintenanceExclusions[i]);
+                                    if (error)
+                                        return "maintenanceExclusions." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -8126,6 +9138,16 @@
                                     throw TypeError(".google.cloud.edgecontainer.v1.MaintenancePolicy.window: object expected");
                                 message.window = $root.google.cloud.edgecontainer.v1.MaintenanceWindow.fromObject(object.window);
                             }
+                            if (object.maintenanceExclusions) {
+                                if (!Array.isArray(object.maintenanceExclusions))
+                                    throw TypeError(".google.cloud.edgecontainer.v1.MaintenancePolicy.maintenanceExclusions: array expected");
+                                message.maintenanceExclusions = [];
+                                for (var i = 0; i < object.maintenanceExclusions.length; ++i) {
+                                    if (typeof object.maintenanceExclusions[i] !== "object")
+                                        throw TypeError(".google.cloud.edgecontainer.v1.MaintenancePolicy.maintenanceExclusions: object expected");
+                                    message.maintenanceExclusions[i] = $root.google.cloud.edgecontainer.v1.MaintenanceExclusionWindow.fromObject(object.maintenanceExclusions[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -8142,10 +9164,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.maintenanceExclusions = [];
                             if (options.defaults)
                                 object.window = null;
                             if (message.window != null && message.hasOwnProperty("window"))
                                 object.window = $root.google.cloud.edgecontainer.v1.MaintenanceWindow.toObject(message.window, options);
+                            if (message.maintenanceExclusions && message.maintenanceExclusions.length) {
+                                object.maintenanceExclusions = [];
+                                for (var j = 0; j < message.maintenanceExclusions.length; ++j)
+                                    object.maintenanceExclusions[j] = $root.google.cloud.edgecontainer.v1.MaintenanceExclusionWindow.toObject(message.maintenanceExclusions[j], options);
+                            }
                             return object;
                         };
     
@@ -8616,6 +9645,238 @@
                         };
     
                         return RecurringTimeWindow;
+                    })();
+    
+                    v1.MaintenanceExclusionWindow = (function() {
+    
+                        /**
+                         * Properties of a MaintenanceExclusionWindow.
+                         * @memberof google.cloud.edgecontainer.v1
+                         * @interface IMaintenanceExclusionWindow
+                         * @property {google.cloud.edgecontainer.v1.ITimeWindow|null} [window] MaintenanceExclusionWindow window
+                         * @property {string|null} [id] MaintenanceExclusionWindow id
+                         */
+    
+                        /**
+                         * Constructs a new MaintenanceExclusionWindow.
+                         * @memberof google.cloud.edgecontainer.v1
+                         * @classdesc Represents a MaintenanceExclusionWindow.
+                         * @implements IMaintenanceExclusionWindow
+                         * @constructor
+                         * @param {google.cloud.edgecontainer.v1.IMaintenanceExclusionWindow=} [properties] Properties to set
+                         */
+                        function MaintenanceExclusionWindow(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaintenanceExclusionWindow window.
+                         * @member {google.cloud.edgecontainer.v1.ITimeWindow|null|undefined} window
+                         * @memberof google.cloud.edgecontainer.v1.MaintenanceExclusionWindow
+                         * @instance
+                         */
+                        MaintenanceExclusionWindow.prototype.window = null;
+    
+                        /**
+                         * MaintenanceExclusionWindow id.
+                         * @member {string} id
+                         * @memberof google.cloud.edgecontainer.v1.MaintenanceExclusionWindow
+                         * @instance
+                         */
+                        MaintenanceExclusionWindow.prototype.id = "";
+    
+                        /**
+                         * Creates a new MaintenanceExclusionWindow instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.edgecontainer.v1.MaintenanceExclusionWindow
+                         * @static
+                         * @param {google.cloud.edgecontainer.v1.IMaintenanceExclusionWindow=} [properties] Properties to set
+                         * @returns {google.cloud.edgecontainer.v1.MaintenanceExclusionWindow} MaintenanceExclusionWindow instance
+                         */
+                        MaintenanceExclusionWindow.create = function create(properties) {
+                            return new MaintenanceExclusionWindow(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenanceExclusionWindow message. Does not implicitly {@link google.cloud.edgecontainer.v1.MaintenanceExclusionWindow.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.edgecontainer.v1.MaintenanceExclusionWindow
+                         * @static
+                         * @param {google.cloud.edgecontainer.v1.IMaintenanceExclusionWindow} message MaintenanceExclusionWindow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenanceExclusionWindow.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.window != null && Object.hasOwnProperty.call(message, "window"))
+                                $root.google.cloud.edgecontainer.v1.TimeWindow.encode(message.window, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.id);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenanceExclusionWindow message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.MaintenanceExclusionWindow.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.edgecontainer.v1.MaintenanceExclusionWindow
+                         * @static
+                         * @param {google.cloud.edgecontainer.v1.IMaintenanceExclusionWindow} message MaintenanceExclusionWindow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenanceExclusionWindow.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaintenanceExclusionWindow message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.edgecontainer.v1.MaintenanceExclusionWindow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.edgecontainer.v1.MaintenanceExclusionWindow} MaintenanceExclusionWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenanceExclusionWindow.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.edgecontainer.v1.MaintenanceExclusionWindow();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.window = $root.google.cloud.edgecontainer.v1.TimeWindow.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaintenanceExclusionWindow message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.edgecontainer.v1.MaintenanceExclusionWindow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.edgecontainer.v1.MaintenanceExclusionWindow} MaintenanceExclusionWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenanceExclusionWindow.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaintenanceExclusionWindow message.
+                         * @function verify
+                         * @memberof google.cloud.edgecontainer.v1.MaintenanceExclusionWindow
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaintenanceExclusionWindow.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.window != null && message.hasOwnProperty("window")) {
+                                var error = $root.google.cloud.edgecontainer.v1.TimeWindow.verify(message.window);
+                                if (error)
+                                    return "window." + error;
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaintenanceExclusionWindow message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.edgecontainer.v1.MaintenanceExclusionWindow
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.edgecontainer.v1.MaintenanceExclusionWindow} MaintenanceExclusionWindow
+                         */
+                        MaintenanceExclusionWindow.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.edgecontainer.v1.MaintenanceExclusionWindow)
+                                return object;
+                            var message = new $root.google.cloud.edgecontainer.v1.MaintenanceExclusionWindow();
+                            if (object.window != null) {
+                                if (typeof object.window !== "object")
+                                    throw TypeError(".google.cloud.edgecontainer.v1.MaintenanceExclusionWindow.window: object expected");
+                                message.window = $root.google.cloud.edgecontainer.v1.TimeWindow.fromObject(object.window);
+                            }
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaintenanceExclusionWindow message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.edgecontainer.v1.MaintenanceExclusionWindow
+                         * @static
+                         * @param {google.cloud.edgecontainer.v1.MaintenanceExclusionWindow} message MaintenanceExclusionWindow
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaintenanceExclusionWindow.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.window = null;
+                                object.id = "";
+                            }
+                            if (message.window != null && message.hasOwnProperty("window"))
+                                object.window = $root.google.cloud.edgecontainer.v1.TimeWindow.toObject(message.window, options);
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaintenanceExclusionWindow to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.edgecontainer.v1.MaintenanceExclusionWindow
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaintenanceExclusionWindow.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MaintenanceExclusionWindow
+                         * @function getTypeUrl
+                         * @memberof google.cloud.edgecontainer.v1.MaintenanceExclusionWindow
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaintenanceExclusionWindow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.edgecontainer.v1.MaintenanceExclusionWindow";
+                        };
+    
+                        return MaintenanceExclusionWindow;
                     })();
     
                     v1.TimeWindow = (function() {
@@ -10284,6 +11545,7 @@
                          * @property {boolean|null} [requestedCancellation] OperationMetadata requestedCancellation
                          * @property {string|null} [apiVersion] OperationMetadata apiVersion
                          * @property {Array.<string>|null} [warnings] OperationMetadata warnings
+                         * @property {google.cloud.edgecontainer.v1.OperationMetadata.StatusReason|null} [statusReason] OperationMetadata statusReason
                          */
     
                         /**
@@ -10367,6 +11629,14 @@
                         OperationMetadata.prototype.warnings = $util.emptyArray;
     
                         /**
+                         * OperationMetadata statusReason.
+                         * @member {google.cloud.edgecontainer.v1.OperationMetadata.StatusReason} statusReason
+                         * @memberof google.cloud.edgecontainer.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.statusReason = 0;
+    
+                        /**
                          * Creates a new OperationMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.edgecontainer.v1.OperationMetadata
@@ -10407,6 +11677,8 @@
                             if (message.warnings != null && message.warnings.length)
                                 for (var i = 0; i < message.warnings.length; ++i)
                                     writer.uint32(/* id 8, wireType 2 =*/66).string(message.warnings[i]);
+                            if (message.statusReason != null && Object.hasOwnProperty.call(message, "statusReason"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.statusReason);
                             return writer;
                         };
     
@@ -10473,6 +11745,10 @@
                                         if (!(message.warnings && message.warnings.length))
                                             message.warnings = [];
                                         message.warnings.push(reader.string());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.statusReason = reader.int32();
                                         break;
                                     }
                                 default:
@@ -10542,6 +11818,14 @@
                                     if (!$util.isString(message.warnings[i]))
                                         return "warnings: string[] expected";
                             }
+                            if (message.statusReason != null && message.hasOwnProperty("statusReason"))
+                                switch (message.statusReason) {
+                                default:
+                                    return "statusReason: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -10584,6 +11868,22 @@
                                 for (var i = 0; i < object.warnings.length; ++i)
                                     message.warnings[i] = String(object.warnings[i]);
                             }
+                            switch (object.statusReason) {
+                            default:
+                                if (typeof object.statusReason === "number") {
+                                    message.statusReason = object.statusReason;
+                                    break;
+                                }
+                                break;
+                            case "STATUS_REASON_UNSPECIFIED":
+                            case 0:
+                                message.statusReason = 0;
+                                break;
+                            case "UPGRADE_PAUSED":
+                            case 1:
+                                message.statusReason = 1;
+                                break;
+                            }
                             return message;
                         };
     
@@ -10610,6 +11910,7 @@
                                 object.statusMessage = "";
                                 object.requestedCancellation = false;
                                 object.apiVersion = "";
+                                object.statusReason = options.enums === String ? "STATUS_REASON_UNSPECIFIED" : 0;
                             }
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
@@ -10630,6 +11931,8 @@
                                 for (var j = 0; j < message.warnings.length; ++j)
                                     object.warnings[j] = message.warnings[j];
                             }
+                            if (message.statusReason != null && message.hasOwnProperty("statusReason"))
+                                object.statusReason = options.enums === String ? $root.google.cloud.edgecontainer.v1.OperationMetadata.StatusReason[message.statusReason] === undefined ? message.statusReason : $root.google.cloud.edgecontainer.v1.OperationMetadata.StatusReason[message.statusReason] : message.statusReason;
                             return object;
                         };
     
@@ -10658,6 +11961,20 @@
                             }
                             return typeUrlPrefix + "/google.cloud.edgecontainer.v1.OperationMetadata";
                         };
+    
+                        /**
+                         * StatusReason enum.
+                         * @name google.cloud.edgecontainer.v1.OperationMetadata.StatusReason
+                         * @enum {number}
+                         * @property {number} STATUS_REASON_UNSPECIFIED=0 STATUS_REASON_UNSPECIFIED value
+                         * @property {number} UPGRADE_PAUSED=1 UPGRADE_PAUSED value
+                         */
+                        OperationMetadata.StatusReason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATUS_REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "UPGRADE_PAUSED"] = 1;
+                            return values;
+                        })();
     
                         return OperationMetadata;
                     })();

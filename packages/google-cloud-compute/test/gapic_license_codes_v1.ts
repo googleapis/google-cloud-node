@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -275,7 +275,7 @@ describe('v1.LicenseCodesClient', () => {
         ['licenseCode']
       );
       request.licenseCode = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&license_code=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&license_code=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.LicenseCode()
       );
@@ -310,7 +310,7 @@ describe('v1.LicenseCodesClient', () => {
         ['licenseCode']
       );
       request.licenseCode = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&license_code=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&license_code=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.LicenseCode()
       );
@@ -360,7 +360,7 @@ describe('v1.LicenseCodesClient', () => {
         ['licenseCode']
       );
       request.licenseCode = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&license_code=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&license_code=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -418,7 +418,7 @@ describe('v1.LicenseCodesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -455,7 +455,7 @@ describe('v1.LicenseCodesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -507,7 +507,7 @@ describe('v1.LicenseCodesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,

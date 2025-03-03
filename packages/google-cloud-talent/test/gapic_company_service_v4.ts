@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -320,7 +320,7 @@ describe('v4.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.Company()
       );
@@ -351,7 +351,7 @@ describe('v4.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.Company()
       );
@@ -398,7 +398,7 @@ describe('v4.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCompany = stubSimpleCall(
         undefined,
@@ -450,7 +450,7 @@ describe('v4.CompanyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.Company()
       );
@@ -481,7 +481,7 @@ describe('v4.CompanyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.Company()
       );
@@ -528,7 +528,7 @@ describe('v4.CompanyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCompany = stubSimpleCall(
         undefined,
@@ -581,7 +581,7 @@ describe('v4.CompanyServiceClient', () => {
         ['company', 'name']
       );
       request.company.name = defaultValue1;
-      const expectedHeaderRequestParams = `company.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `company.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.Company()
       );
@@ -613,7 +613,7 @@ describe('v4.CompanyServiceClient', () => {
         ['company', 'name']
       );
       request.company.name = defaultValue1;
-      const expectedHeaderRequestParams = `company.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `company.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.Company()
       );
@@ -661,7 +661,7 @@ describe('v4.CompanyServiceClient', () => {
         ['company', 'name']
       );
       request.company.name = defaultValue1;
-      const expectedHeaderRequestParams = `company.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `company.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCompany = stubSimpleCall(
         undefined,
@@ -714,7 +714,7 @@ describe('v4.CompanyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -745,7 +745,7 @@ describe('v4.CompanyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -792,7 +792,7 @@ describe('v4.CompanyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCompany = stubSimpleCall(
         undefined,
@@ -844,7 +844,7 @@ describe('v4.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.talent.v4.Company()),
         generateSampleMessage(new protos.google.cloud.talent.v4.Company()),
@@ -877,7 +877,7 @@ describe('v4.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.talent.v4.Company()),
         generateSampleMessage(new protos.google.cloud.talent.v4.Company()),
@@ -926,7 +926,7 @@ describe('v4.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCompanies = stubSimpleCall(
         undefined,
@@ -957,7 +957,7 @@ describe('v4.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.talent.v4.Company()),
         generateSampleMessage(new protos.google.cloud.talent.v4.Company()),
@@ -1008,7 +1008,7 @@ describe('v4.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCompanies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1054,7 +1054,7 @@ describe('v4.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.talent.v4.Company()),
         generateSampleMessage(new protos.google.cloud.talent.v4.Company()),
@@ -1097,7 +1097,7 @@ describe('v4.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCompanies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,20 +30,21 @@ function main(queryInput) {
    */
   /**
    *  The name of the session this query is sent to.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
-   *  ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/sessions/<SessionID>`
+   *  or
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/sessions/<SessionID>`.
    *  If `Environment ID` is not specified, we assume default 'draft'
-   *  environment.
-   *  It's up to the API caller to choose an appropriate `Session ID`. It can be
-   *  a random number or some type of session identifiers (preferably hashed).
-   *  The length of the `Session ID` must not exceed 36 characters.
-   *  Note: session must be set in the first request.
-   *  For more information, see the sessions
-   *  guide (https://cloud.google.com/dialogflow/cx/docs/concept/session).
-   *  Note: Always use agent versions for production traffic.
-   *  See Versions and
-   *  environments (https://cloud.google.com/dialogflow/cx/docs/concept/version).
+   *   environment.
+   *   It's up to the API caller to choose an appropriate `Session ID`. It can be
+   *   a random number or some type of session identifiers (preferably hashed).
+   *   The length of the `Session ID` must not exceed 36 characters.
+   *   Note: session must be set in the first request.
+   *   For more information, see the sessions
+   *   guide (https://cloud.google.com/dialogflow/cx/docs/concept/session).
+   *   Note: Always use agent versions for production traffic.
+   *   See Versions and
+   *   environments (https://cloud.google.com/dialogflow/cx/docs/concept/version).
    */
   // const session = 'abc123'
   /**

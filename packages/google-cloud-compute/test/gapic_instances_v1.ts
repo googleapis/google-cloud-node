@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -341,7 +341,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -382,7 +382,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -439,7 +439,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addAccessConfig = stubSimpleCall(
         undefined,
@@ -511,7 +511,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -553,7 +553,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -610,7 +610,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addResourcePolicies = stubSimpleCall(
         undefined,
@@ -682,7 +682,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -723,7 +723,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -780,7 +780,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.attachDisk = stubSimpleCall(
         undefined,
@@ -847,7 +847,7 @@ describe('v1.InstancesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -883,7 +883,7 @@ describe('v1.InstancesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -935,7 +935,7 @@ describe('v1.InstancesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkInsert = stubSimpleCall(
         undefined,
@@ -1002,7 +1002,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1043,7 +1043,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1100,7 +1100,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
@@ -1169,7 +1169,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1211,7 +1211,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1268,7 +1268,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAccessConfig = stubSimpleCall(
         undefined,
@@ -1340,7 +1340,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1381,7 +1381,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1438,7 +1438,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.detachDisk = stubSimpleCall(
         undefined,
@@ -1510,7 +1510,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Instance()
       );
@@ -1550,7 +1550,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Instance()
       );
@@ -1605,7 +1605,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -1673,7 +1673,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.InstancesGetEffectiveFirewallsResponse()
       );
@@ -1715,7 +1715,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.InstancesGetEffectiveFirewallsResponse()
       );
@@ -1772,7 +1772,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEffectiveFirewalls = stubSimpleCall(
         undefined,
@@ -1850,7 +1850,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.GuestAttributes()
       );
@@ -1892,7 +1892,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.GuestAttributes()
       );
@@ -1949,7 +1949,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGuestAttributes = stubSimpleCall(
         undefined,
@@ -2021,7 +2021,7 @@ describe('v1.InstancesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -2062,7 +2062,7 @@ describe('v1.InstancesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -2119,7 +2119,7 @@ describe('v1.InstancesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -2191,7 +2191,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Screenshot()
       );
@@ -2232,7 +2232,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Screenshot()
       );
@@ -2289,7 +2289,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getScreenshot = stubSimpleCall(
         undefined,
@@ -2361,7 +2361,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SerialPortOutput()
       );
@@ -2403,7 +2403,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SerialPortOutput()
       );
@@ -2460,7 +2460,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSerialPortOutput = stubSimpleCall(
         undefined,
@@ -2532,7 +2532,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.ShieldedInstanceIdentity()
       );
@@ -2574,7 +2574,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.ShieldedInstanceIdentity()
       );
@@ -2631,7 +2631,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getShieldedInstanceIdentity = stubSimpleCall(
         undefined,
@@ -2704,7 +2704,7 @@ describe('v1.InstancesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2740,7 +2740,7 @@ describe('v1.InstancesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2792,7 +2792,7 @@ describe('v1.InstancesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -2856,7 +2856,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2898,7 +2898,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2955,7 +2955,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.performMaintenance = stubSimpleCall(
         undefined,
@@ -3027,7 +3027,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3069,7 +3069,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3126,7 +3126,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeResourcePolicies = stubSimpleCall(
         undefined,
@@ -3204,7 +3204,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3244,7 +3244,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3299,7 +3299,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reset = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.reset(request), expectedError);
@@ -3367,7 +3367,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3408,7 +3408,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3465,7 +3465,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resume = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.resume(request), expectedError);
@@ -3534,7 +3534,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceResponse()
       );
@@ -3576,7 +3576,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceResponse()
       );
@@ -3633,7 +3633,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.sendDiagnosticInterrupt = stubSimpleCall(
         undefined,
@@ -3711,7 +3711,7 @@ describe('v1.InstancesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3753,7 +3753,7 @@ describe('v1.InstancesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3810,7 +3810,7 @@ describe('v1.InstancesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setDeletionProtection = stubSimpleCall(
         undefined,
@@ -3888,7 +3888,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3929,7 +3929,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3986,7 +3986,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setDiskAutoDelete = stubSimpleCall(
         undefined,
@@ -4058,7 +4058,7 @@ describe('v1.InstancesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -4099,7 +4099,7 @@ describe('v1.InstancesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -4156,7 +4156,7 @@ describe('v1.InstancesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -4228,7 +4228,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4269,7 +4269,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4326,7 +4326,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setLabels = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.setLabels(request), expectedError);
@@ -4395,7 +4395,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4437,7 +4437,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4494,7 +4494,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setMachineResources = stubSimpleCall(
         undefined,
@@ -4566,7 +4566,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4607,7 +4607,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4664,7 +4664,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setMachineType = stubSimpleCall(
         undefined,
@@ -4736,7 +4736,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4777,7 +4777,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4834,7 +4834,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setMetadata = stubSimpleCall(
         undefined,
@@ -4906,7 +4906,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4947,7 +4947,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5004,7 +5004,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setMinCpuPlatform = stubSimpleCall(
         undefined,
@@ -5076,7 +5076,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5117,7 +5117,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5174,7 +5174,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setName = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.setName(request), expectedError);
@@ -5243,7 +5243,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5284,7 +5284,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5341,7 +5341,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setScheduling = stubSimpleCall(
         undefined,
@@ -5413,7 +5413,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5454,7 +5454,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5511,7 +5511,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setSecurityPolicy = stubSimpleCall(
         undefined,
@@ -5583,7 +5583,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5624,7 +5624,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5681,7 +5681,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setServiceAccount = stubSimpleCall(
         undefined,
@@ -5753,7 +5753,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5796,7 +5796,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5853,7 +5853,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setShieldedInstanceIntegrityPolicy = stubSimpleCall(
         undefined,
@@ -5931,7 +5931,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5972,7 +5972,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -6029,7 +6029,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setTags = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.setTags(request), expectedError);
@@ -6098,7 +6098,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -6140,7 +6140,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -6197,7 +6197,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.simulateMaintenanceEvent = stubSimpleCall(
         undefined,
@@ -6275,7 +6275,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -6315,7 +6315,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -6370,7 +6370,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.start = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.start(request), expectedError);
@@ -6438,7 +6438,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -6480,7 +6480,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -6537,7 +6537,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startWithEncryptionKey = stubSimpleCall(
         undefined,
@@ -6615,7 +6615,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -6655,7 +6655,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -6710,7 +6710,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stop = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.stop(request), expectedError);
@@ -6778,7 +6778,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -6819,7 +6819,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -6876,7 +6876,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.suspend = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.suspend(request), expectedError);
@@ -6945,7 +6945,7 @@ describe('v1.InstancesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -6987,7 +6987,7 @@ describe('v1.InstancesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -7044,7 +7044,7 @@ describe('v1.InstancesClient', () => {
         ['resource']
       );
       request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -7116,7 +7116,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -7157,7 +7157,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -7214,7 +7214,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.update = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.update(request), expectedError);
@@ -7283,7 +7283,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -7325,7 +7325,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -7382,7 +7382,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAccessConfig = stubSimpleCall(
         undefined,
@@ -7454,7 +7454,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -7496,7 +7496,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -7553,7 +7553,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDisplayDevice = stubSimpleCall(
         undefined,
@@ -7625,7 +7625,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -7667,7 +7667,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -7724,7 +7724,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNetworkInterface = stubSimpleCall(
         undefined,
@@ -7802,7 +7802,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -7844,7 +7844,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -7901,7 +7901,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateShieldedInstanceConfig = stubSimpleCall(
         undefined,
@@ -7969,7 +7969,7 @@ describe('v1.InstancesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         [
           'tuple_key_1',
@@ -8029,7 +8029,7 @@ describe('v1.InstancesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.aggregatedList.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8078,7 +8078,7 @@ describe('v1.InstancesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
@@ -8115,7 +8115,7 @@ describe('v1.InstancesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
@@ -8167,7 +8167,7 @@ describe('v1.InstancesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -8199,7 +8199,7 @@ describe('v1.InstancesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
@@ -8258,7 +8258,7 @@ describe('v1.InstancesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -8314,7 +8314,7 @@ describe('v1.InstancesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
@@ -8361,7 +8361,7 @@ describe('v1.InstancesClient', () => {
         ['zone']
       );
       request.zone = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -8414,7 +8414,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
@@ -8457,7 +8457,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
@@ -8516,7 +8516,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listReferrers = stubSimpleCall(
         undefined,
@@ -8557,7 +8557,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
@@ -8621,7 +8621,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReferrers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8680,7 +8680,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
@@ -8733,7 +8733,7 @@ describe('v1.InstancesClient', () => {
         ['instance']
       );
       request.instance = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReferrers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

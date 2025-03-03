@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -320,7 +320,7 @@ describe('v2alpha.SearchServiceClient', () => {
         ['placement']
       );
       request.placement = defaultValue1;
-      const expectedHeaderRequestParams = `placement=${defaultValue1}`;
+      const expectedHeaderRequestParams = `placement=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.retail.v2alpha.SearchResponse.SearchResult()
@@ -359,7 +359,7 @@ describe('v2alpha.SearchServiceClient', () => {
         ['placement']
       );
       request.placement = defaultValue1;
-      const expectedHeaderRequestParams = `placement=${defaultValue1}`;
+      const expectedHeaderRequestParams = `placement=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.retail.v2alpha.SearchResponse.SearchResult()
@@ -416,7 +416,7 @@ describe('v2alpha.SearchServiceClient', () => {
         ['placement']
       );
       request.placement = defaultValue1;
-      const expectedHeaderRequestParams = `placement=${defaultValue1}`;
+      const expectedHeaderRequestParams = `placement=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.search = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.search(request), expectedError);
@@ -444,7 +444,7 @@ describe('v2alpha.SearchServiceClient', () => {
         ['placement']
       );
       request.placement = defaultValue1;
-      const expectedHeaderRequestParams = `placement=${defaultValue1}`;
+      const expectedHeaderRequestParams = `placement=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.retail.v2alpha.SearchResponse.SearchResult()
@@ -507,7 +507,7 @@ describe('v2alpha.SearchServiceClient', () => {
         ['placement']
       );
       request.placement = defaultValue1;
-      const expectedHeaderRequestParams = `placement=${defaultValue1}`;
+      const expectedHeaderRequestParams = `placement=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.search.createStream = stubPageStreamingCall(
         undefined,
@@ -561,7 +561,7 @@ describe('v2alpha.SearchServiceClient', () => {
         ['placement']
       );
       request.placement = defaultValue1;
-      const expectedHeaderRequestParams = `placement=${defaultValue1}`;
+      const expectedHeaderRequestParams = `placement=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.retail.v2alpha.SearchResponse.SearchResult()
@@ -610,7 +610,7 @@ describe('v2alpha.SearchServiceClient', () => {
         ['placement']
       );
       request.placement = defaultValue1;
-      const expectedHeaderRequestParams = `placement=${defaultValue1}`;
+      const expectedHeaderRequestParams = `placement=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.search.asyncIterate = stubAsyncIterationCall(
         undefined,

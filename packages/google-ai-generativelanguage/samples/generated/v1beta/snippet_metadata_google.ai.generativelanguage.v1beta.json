@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-generativelanguage",
-        "version": "2.6.0",
+        "version": "2.9.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1062,7 +1062,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 58,
+                    "end": 57,
                     "type": "FULL"
                 }
             ],
@@ -1391,6 +1391,54 @@
                     "service": {
                         "shortName": "PermissionService",
                         "fullName": "google.ai.generativelanguage.v1beta.PermissionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "generativelanguage_v1beta_generated_PredictionService_Predict_async",
+            "title": "CacheService predict Sample",
+            "origin": "API_DEFINITION",
+            "description": " Performs a prediction request.",
+            "canonical": true,
+            "file": "prediction_service.predict.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Predict",
+                "fullName": "google.ai.generativelanguage.v1beta.PredictionService.Predict",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "model",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "instances",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "parameters",
+                        "type": ".google.protobuf.Value"
+                    }
+                ],
+                "resultType": ".google.ai.generativelanguage.v1beta.PredictResponse",
+                "client": {
+                    "shortName": "PredictionServiceClient",
+                    "fullName": "google.ai.generativelanguage.v1beta.PredictionServiceClient"
+                },
+                "method": {
+                    "shortName": "Predict",
+                    "fullName": "google.ai.generativelanguage.v1beta.PredictionService.Predict",
+                    "service": {
+                        "shortName": "PredictionService",
+                        "fullName": "google.ai.generativelanguage.v1beta.PredictionService"
                     }
                 }
             }

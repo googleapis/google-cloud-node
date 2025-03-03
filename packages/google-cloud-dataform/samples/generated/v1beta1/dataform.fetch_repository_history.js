@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,8 +41,9 @@ function main(name) {
   /**
    *  Optional. Page token received from a previous `FetchRepositoryHistory`
    *  call. Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `FetchRepositoryHistory`
-   *  must match the call that provided the page token.
+   *  When paginating, all other parameters provided to `FetchRepositoryHistory`,
+   *  with the exception of `page_size`, must match the call that provided the
+   *  page token.
    */
   // const pageToken = 'abc123'
 

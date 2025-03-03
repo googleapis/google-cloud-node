@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -593,8 +593,7 @@ export class EnvironmentsClient {
    * @param {string} request.name
    *   Required. The name of the
    *   {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}. Format:
-   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -687,8 +686,7 @@ export class EnvironmentsClient {
    * @param {string} request.name
    *   Required. The name of the
    *   {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment} to delete. Format:
-   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -796,7 +794,7 @@ export class EnvironmentsClient {
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent} to create an
    *   {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment} for. Format:
-   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {google.cloud.dialogflow.cx.v3.Environment} request.environment
    *   Required. The environment to create.
    * @param {object} [options]
@@ -1091,8 +1089,8 @@ export class EnvironmentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.environment
-   *   Required. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/environments/<Environment ID>`.
+   *   Required. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1239,12 +1237,12 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.environment
    *   Required. The environment to deploy the flow to.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *   environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {string} request.flowVersion
    *   Required. The flow version to deploy.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *   flows/<Flow ID>/versions/<Version ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1382,8 +1380,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
-   *   environments for. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>`.
+   *   environments for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1477,13 +1475,13 @@ export class EnvironmentsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEnvironments`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
-   *   environments for. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>`.
+   *   environments for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1530,8 +1528,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
-   *   environments for. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>`.
+   *   environments for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1578,8 +1576,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the environment to look up the history for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1677,13 +1675,13 @@ export class EnvironmentsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `lookupEnvironmentHistory`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the environment to look up the history for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1730,8 +1728,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the environment to look up the history for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1777,8 +1775,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The environment to list results for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *   environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1876,13 +1874,13 @@ export class EnvironmentsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listContinuousTestResults`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The environment to list results for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *   environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1929,8 +1927,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The environment to list results for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *   environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -2079,7 +2077,7 @@ export class EnvironmentsClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -2092,6 +2090,20 @@ export class EnvironmentsClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2128,6 +2140,13 @@ export class EnvironmentsClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2163,11 +2182,11 @@ export class EnvironmentsClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -2176,6 +2195,20 @@ export class EnvironmentsClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2206,7 +2239,7 @@ export class EnvironmentsClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -2219,6 +2252,20 @@ export class EnvironmentsClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

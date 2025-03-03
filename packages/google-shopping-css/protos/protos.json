@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -979,6 +982,14 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "headlineOfferInstallment": {
+                          "type": "HeadlineOfferInstallment",
+                          "id": 51
+                        },
+                        "headlineOfferSubscriptionCost": {
+                          "type": "HeadlineOfferSubscriptionCost",
+                          "id": 52
                         }
                       }
                     },
@@ -1142,6 +1153,45 @@
                         }
                       }
                     },
+                    "HeadlineOfferSubscriptionCost": {
+                      "fields": {
+                        "period": {
+                          "type": "SubscriptionPeriod",
+                          "id": 1
+                        },
+                        "periodLength": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "amount": {
+                          "type": "google.shopping.type.Price",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "HeadlineOfferInstallment": {
+                      "fields": {
+                        "months": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "amount": {
+                          "type": "google.shopping.type.Price",
+                          "id": 2
+                        },
+                        "downpayment": {
+                          "type": "google.shopping.type.Price",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "SubscriptionPeriod": {
+                      "values": {
+                        "SUBSCRIPTION_PERIOD_UNSPECIFIED": 0,
+                        "MONTH": 1,
+                        "YEAR": 2
+                      }
+                    },
                     "CssProductInputsService": {
                       "options": {
                         "(google.api.default_host)": "css.googleapis.com",
@@ -1161,6 +1211,26 @@
                                 "post": "/v1/{parent=accounts/*}/cssProductInputs:insert",
                                 "body": "css_product_input"
                               }
+                            }
+                          ]
+                        },
+                        "UpdateCssProductInput": {
+                          "requestType": "UpdateCssProductInputRequest",
+                          "responseType": "CssProductInput",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{css_product_input.name=accounts/*/cssProductInputs/*}",
+                            "(google.api.http).body": "css_product_input",
+                            "(google.api.method_signature)": "css_product_input,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{css_product_input.name=accounts/*/cssProductInputs/*}",
+                                "body": "css_product_input"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "css_product_input,update_mask"
                             }
                           ]
                         },
@@ -1224,7 +1294,10 @@
                         },
                         "freshnessTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "attributes": {
                           "type": "Attributes",
@@ -1258,8 +1331,24 @@
                           "type": "int64",
                           "id": 3,
                           "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateCssProductInputRequest": {
+                      "fields": {
+                        "cssProductInput": {
+                          "type": "CssProductInput",
+                          "id": 1,
+                          "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
                         }
                       }
                     },
@@ -3394,6 +3483,15 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
                 }
               }
             }

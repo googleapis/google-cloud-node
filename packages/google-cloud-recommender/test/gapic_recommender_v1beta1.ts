@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -320,7 +320,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.Insight()
       );
@@ -351,7 +351,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.Insight()
       );
@@ -398,7 +398,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getInsight = stubSimpleCall(
         undefined,
@@ -450,7 +450,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.Insight()
       );
@@ -482,7 +482,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.Insight()
       );
@@ -529,7 +529,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.markInsightAccepted = stubSimpleCall(
         undefined,
@@ -581,7 +581,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
@@ -612,7 +612,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
@@ -659,7 +659,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRecommendation = stubSimpleCall(
         undefined,
@@ -711,7 +711,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
@@ -743,7 +743,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
@@ -790,7 +790,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.markRecommendationClaimed = stubSimpleCall(
         undefined,
@@ -848,7 +848,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
@@ -880,7 +880,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
@@ -927,7 +927,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.markRecommendationSucceeded = stubSimpleCall(
         undefined,
@@ -985,7 +985,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
@@ -1017,7 +1017,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
@@ -1064,7 +1064,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.markRecommendationFailed = stubSimpleCall(
         undefined,
@@ -1122,7 +1122,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
       );
@@ -1154,7 +1154,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
       );
@@ -1201,7 +1201,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRecommenderConfig = stubSimpleCall(
         undefined,
@@ -1254,7 +1254,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['recommenderConfig', 'name']
       );
       request.recommenderConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
       );
@@ -1287,7 +1287,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['recommenderConfig', 'name']
       );
       request.recommenderConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
       );
@@ -1335,7 +1335,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['recommenderConfig', 'name']
       );
       request.recommenderConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRecommenderConfig = stubSimpleCall(
         undefined,
@@ -1394,7 +1394,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
       );
@@ -1426,7 +1426,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
       );
@@ -1473,7 +1473,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getInsightTypeConfig = stubSimpleCall(
         undefined,
@@ -1526,7 +1526,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['insightTypeConfig', 'name']
       );
       request.insightTypeConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
       );
@@ -1559,7 +1559,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['insightTypeConfig', 'name']
       );
       request.insightTypeConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
       );
@@ -1607,7 +1607,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['insightTypeConfig', 'name']
       );
       request.insightTypeConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateInsightTypeConfig = stubSimpleCall(
         undefined,
@@ -1666,7 +1666,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recommender.v1beta1.Insight()
@@ -1705,7 +1705,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recommender.v1beta1.Insight()
@@ -1760,7 +1760,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listInsights = stubSimpleCall(
         undefined,
@@ -1791,7 +1791,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recommender.v1beta1.Insight()
@@ -1851,7 +1851,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInsights.createStream = stubPageStreamingCall(
         undefined,
@@ -1902,7 +1902,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recommender.v1beta1.Insight()
@@ -1951,7 +1951,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInsights.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1994,7 +1994,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recommender.v1beta1.Recommendation()
@@ -2034,7 +2034,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recommender.v1beta1.Recommendation()
@@ -2091,7 +2091,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRecommendations = stubSimpleCall(
         undefined,
@@ -2122,7 +2122,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recommender.v1beta1.Recommendation()
@@ -2185,7 +2185,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRecommendations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2237,7 +2237,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recommender.v1beta1.Recommendation()
@@ -2287,7 +2287,7 @@ describe('v1beta1.RecommenderClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRecommendations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -186,7 +186,7 @@ function main(parent) {
    */
   // const populatePolylines = true
   /**
-   *  If true, polylines will be populated in response
+   *  If true, polylines and route tokens will be populated in response
    *  ShipmentRoute.transitions google.maps.routeoptimization.v1.ShipmentRoute.transitions.
    */
   // const populateTransitionPolylines = true

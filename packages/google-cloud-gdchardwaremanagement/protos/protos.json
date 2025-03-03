@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -22,6 +25,14 @@
                         "POWER_SUPPLY_UNSPECIFIED": 0,
                         "POWER_SUPPLY_AC": 1,
                         "POWER_SUPPLY_DC": 2
+                      }
+                    },
+                    "Entity": {
+                      "values": {
+                        "ENTITY_UNSPECIFIED": 0,
+                        "GOOGLE": 1,
+                        "CUSTOMER": 2,
+                        "VENDOR": 3
                       }
                     },
                     "Order": {
@@ -154,6 +165,7 @@
                             "STATE_UNSPECIFIED": 0,
                             "DRAFT": 1,
                             "SUBMITTED": 2,
+                            "INFO_COMPLETE": 12,
                             "ACCEPTED": 3,
                             "ADDITIONAL_INFO_NEEDED": 4,
                             "BUILDING": 5,
@@ -236,7 +248,7 @@
                           "type": "string",
                           "id": 6,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "accessTimes": {
@@ -250,6 +262,13 @@
                         "notes": {
                           "type": "string",
                           "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "customerSiteId": {
+                          "type": "string",
+                          "id": 28,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -484,9 +503,133 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "machineInfos": {
+                          "rule": "repeated",
+                          "type": "MachineInfo",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
+                        "MacAddress": {
+                          "fields": {
+                            "address": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "type": {
+                              "type": "AddressType",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "ipv4Address": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_info).format": "IPV4",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "AddressType": {
+                              "values": {
+                                "ADDRESS_TYPE_UNSPECIFIED": 0,
+                                "NIC": 1,
+                                "BMC": 2,
+                                "VIRTUAL": 3
+                              }
+                            }
+                          }
+                        },
+                        "DiskInfo": {
+                          "fields": {
+                            "manufacturer": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "slot": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "serialNumber": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "psid": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "partNumber": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "modelNumber": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "MachineInfo": {
+                          "fields": {
+                            "serviceTag": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "macAddresses": {
+                              "rule": "repeated",
+                              "type": "MacAddress",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "diskInfos": {
+                              "rule": "repeated",
+                              "type": "DiskInfo",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "State": {
                           "values": {
                             "STATE_UNSPECIFIED": 0,
@@ -542,6 +685,20 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "customerViewedTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "authorEntity": {
+                          "type": "Entity",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -761,6 +918,21 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "subscriptionConfigs": {
+                          "rule": "repeated",
+                          "type": "SubscriptionConfig",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "provisioningState": {
+                          "type": "ProvisioningState",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -774,6 +946,14 @@
                             "CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED": 7,
                             "ACTIVE": 3,
                             "CANCELLED": 4
+                          }
+                        },
+                        "ProvisioningState": {
+                          "values": {
+                            "PROVISIONING_STATE_UNSPECIFIED": 0,
+                            "PROVISIONING_REQUIRED": 1,
+                            "PROVISIONING_IN_PROGRESS": 2,
+                            "PROVISIONING_COMPLETE": 3
                           }
                         }
                       }
@@ -995,7 +1175,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "powerDistanceMeters": {
@@ -1080,6 +1260,22 @@
                         "kubernetesIpv4Subnet": {
                           "type": "Subnet",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dnsIpv4Addresses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "kubernetesPrimaryVlanId": {
+                          "type": "int32",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1198,6 +1394,43 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SubscriptionConfig": {
+                      "fields": {
+                        "subscriptionId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "billingId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "SubscriptionState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SubscriptionState": {
+                          "values": {
+                            "SUBSCRIPTION_STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "INACTIVE": 2,
+                            "ERROR": 3,
+                            "FAILED_TO_RETRIEVE": 4,
+                            "COMPLETED": 5
                           }
                         }
                       }
@@ -1441,6 +1674,32 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Site",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteSite": {
+                          "requestType": "DeleteSiteRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=projects/*/locations/*/sites/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=projects/*/locations/*/sites/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
                                 "metadata_type": "OperationMetadata"
                               }
                             }
@@ -1743,6 +2002,26 @@
                                 "response_type": "Comment",
                                 "metadata_type": "OperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "RecordActionOnComment": {
+                          "requestType": "RecordActionOnCommentRequest",
+                          "responseType": "Comment",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=projects/*/locations/*/orders/*/comments/*}:recordAction",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,action_type"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=projects/*/locations/*/orders/*/comments/*}:recordAction",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,action_type"
                             }
                           ]
                         },
@@ -2136,6 +2415,22 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "INFO_PENDING": 1,
+                            "INFO_COMPLETE": 2
+                          }
                         }
                       }
                     },
@@ -2262,6 +2557,26 @@
                           "type": "string",
                           "id": 3,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteSiteRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gdchardwaremanagement.googleapis.com/Site"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -2658,6 +2973,34 @@
                         }
                       }
                     },
+                    "RecordActionOnCommentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gdchardwaremanagement.googleapis.com/Comment"
+                          }
+                        },
+                        "actionType": {
+                          "type": "ActionType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ActionType": {
+                          "values": {
+                            "ACTION_TYPE_UNSPECIFIED": 0,
+                            "READ": 1,
+                            "UNREAD": 2
+                          }
+                        }
+                      }
+                    },
                     "ListChangeLogEntriesRequest": {
                       "fields": {
                         "parent": {
@@ -2970,16 +3313,39 @@
                           "type": "StateSignal",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "provisioningStateSignal": {
+                          "type": "ProvisioningStateSignal",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
                       "nested": {
                         "StateSignal": {
+                          "options": {
+                            "allow_alias": true
+                          },
+                          "valuesOptions": {
+                            "READY_FOR_SITE_TURNUP": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "STATE_SIGNAL_UNSPECIFIED": 0,
+                            "FACTORY_TURNUP_CHECKS_PASSED": 1,
                             "READY_FOR_SITE_TURNUP": 1,
                             "FACTORY_TURNUP_CHECKS_FAILED": 2
+                          }
+                        },
+                        "ProvisioningStateSignal": {
+                          "values": {
+                            "PROVISIONING_STATE_SIGNAL_UNSPECIFIED": 0,
+                            "PROVISIONING_IN_PROGRESS": 1,
+                            "PROVISIONING_COMPLETE": 2
                           }
                         }
                       }

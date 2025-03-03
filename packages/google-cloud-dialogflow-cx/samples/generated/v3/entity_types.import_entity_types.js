@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ function main(parent, mergeOption) {
    */
   /**
    *  Required. The agent to import the entity types into.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const parent = 'abc123'
   /**
@@ -54,8 +54,8 @@ function main(parent, mergeOption) {
   // const mergeOption = {}
   /**
    *  Optional. The target entity type to import into.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/entity_types/<EntityType ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entity_types/<EntityTypeID>`.
    *  If set, there should be only one entity type included in
    *  entity_types google.cloud.dialogflow.cx.v3.ImportEntityTypesRequest.entity_types,
    *  of which the type should match the type of the target entity type. All

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -331,6 +331,12 @@ export class AlloyDBAdminClient {
     const updateClusterMetadata = protoFilesRoot.lookup(
       '.google.cloud.alloydb.v1beta.OperationMetadata'
     ) as gax.protobuf.Type;
+    const upgradeClusterResponse = protoFilesRoot.lookup(
+      '.google.cloud.alloydb.v1beta.UpgradeClusterResponse'
+    ) as gax.protobuf.Type;
+    const upgradeClusterMetadata = protoFilesRoot.lookup(
+      '.google.cloud.alloydb.v1beta.OperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteClusterResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -341,6 +347,12 @@ export class AlloyDBAdminClient {
       '.google.cloud.alloydb.v1beta.Cluster'
     ) as gax.protobuf.Type;
     const promoteClusterMetadata = protoFilesRoot.lookup(
+      '.google.cloud.alloydb.v1beta.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const switchoverClusterResponse = protoFilesRoot.lookup(
+      '.google.cloud.alloydb.v1beta.Cluster'
+    ) as gax.protobuf.Type;
+    const switchoverClusterMetadata = protoFilesRoot.lookup(
       '.google.cloud.alloydb.v1beta.OperationMetadata'
     ) as gax.protobuf.Type;
     const restoreClusterResponse = protoFilesRoot.lookup(
@@ -433,6 +445,11 @@ export class AlloyDBAdminClient {
         updateClusterResponse.decode.bind(updateClusterResponse),
         updateClusterMetadata.decode.bind(updateClusterMetadata)
       ),
+      upgradeCluster: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        upgradeClusterResponse.decode.bind(upgradeClusterResponse),
+        upgradeClusterMetadata.decode.bind(upgradeClusterMetadata)
+      ),
       deleteCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteClusterResponse.decode.bind(deleteClusterResponse),
@@ -442,6 +459,11 @@ export class AlloyDBAdminClient {
         this.operationsClient,
         promoteClusterResponse.decode.bind(promoteClusterResponse),
         promoteClusterMetadata.decode.bind(promoteClusterMetadata)
+      ),
+      switchoverCluster: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        switchoverClusterResponse.decode.bind(switchoverClusterResponse),
+        switchoverClusterMetadata.decode.bind(switchoverClusterMetadata)
       ),
       restoreCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -572,8 +594,10 @@ export class AlloyDBAdminClient {
       'getCluster',
       'createCluster',
       'updateCluster',
+      'upgradeCluster',
       'deleteCluster',
       'promoteCluster',
+      'switchoverCluster',
       'restoreCluster',
       'createSecondaryCluster',
       'listInstances',
@@ -586,6 +610,7 @@ export class AlloyDBAdminClient {
       'failoverInstance',
       'injectFault',
       'restartInstance',
+      'executeSql',
       'listBackups',
       'getBackup',
       'createBackup',
@@ -893,6 +918,104 @@ export class AlloyDBAdminClient {
     return this.innerApiCalls.getInstance(request, options, callback);
   }
   /**
+   * Executes a SQL statement in a database inside an AlloyDB instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} [request.password]
+   *   Optional. The database native user’s password.
+   * @param {string} request.instance
+   *   Required. The instance where the SQL will be executed. For the required
+   *   format, see the comment on the Instance.name field.
+   * @param {string} request.database
+   *   Required. Name of the database where the query will be executed.
+   *   Note - Value provided should be the same as expected from `SELECT
+   *   current_database();` and NOT as a resource reference.
+   * @param {string} request.user
+   *   Required. Database user to be used for executing the SQL.
+   *   Note - Value provided should be the same as expected from
+   *   `SELECT current_user;` and NOT as a resource reference.
+   * @param {string} request.sqlStatement
+   *   Required. SQL statement to execute on database. Any valid statement is
+   *   permitted, including DDL, DML, DQL statements.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.alloydb.v1beta.ExecuteSqlResponse|ExecuteSqlResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/alloy_d_b_admin.execute_sql.js</caption>
+   * region_tag:alloydb_v1beta_generated_AlloyDBAdmin_ExecuteSql_async
+   */
+  executeSql(
+    request?: protos.google.cloud.alloydb.v1beta.IExecuteSqlRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.alloydb.v1beta.IExecuteSqlResponse,
+      protos.google.cloud.alloydb.v1beta.IExecuteSqlRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  executeSql(
+    request: protos.google.cloud.alloydb.v1beta.IExecuteSqlRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.alloydb.v1beta.IExecuteSqlResponse,
+      protos.google.cloud.alloydb.v1beta.IExecuteSqlRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  executeSql(
+    request: protos.google.cloud.alloydb.v1beta.IExecuteSqlRequest,
+    callback: Callback<
+      protos.google.cloud.alloydb.v1beta.IExecuteSqlResponse,
+      protos.google.cloud.alloydb.v1beta.IExecuteSqlRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  executeSql(
+    request?: protos.google.cloud.alloydb.v1beta.IExecuteSqlRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.alloydb.v1beta.IExecuteSqlResponse,
+          | protos.google.cloud.alloydb.v1beta.IExecuteSqlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.alloydb.v1beta.IExecuteSqlResponse,
+      protos.google.cloud.alloydb.v1beta.IExecuteSqlRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.alloydb.v1beta.IExecuteSqlResponse,
+      protos.google.cloud.alloydb.v1beta.IExecuteSqlRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        instance: request.instance ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.executeSql(request, options, callback);
+  }
+  /**
    * Gets details of a single Backup.
    *
    * @param {Object} request
@@ -990,14 +1113,14 @@ export class AlloyDBAdminClient {
    *    * projects/{project}/locations/{location}/clusters/{cluster}
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -1120,14 +1243,14 @@ export class AlloyDBAdminClient {
    *   projects/{project}/locations/{location}/clusters/{cluster}/instances/{instance}
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -1311,14 +1434,14 @@ export class AlloyDBAdminClient {
    *   Required. The resource being created
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -1418,14 +1541,14 @@ export class AlloyDBAdminClient {
    *   Required. The resource being updated
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -1522,14 +1645,14 @@ export class AlloyDBAdminClient {
    *   comment on the User.name field.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -1629,22 +1752,22 @@ export class AlloyDBAdminClient {
    *   Required. The resource being created
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, performs request validation (e.g. permission checks and
-   *   any other type of validation), but do not actually execute the create
-   *   request.
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1789,22 +1912,22 @@ export class AlloyDBAdminClient {
    *   Required. The resource being updated
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, performs request validation (e.g. permission checks and
-   *   any other type of validation), but do not actually execute the update
-   *   request.
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
    * @param {boolean} [request.allowMissing]
    *   Optional. If set to true, update succeeds even if cluster is not found. In
    *   that case, a new cluster is created and `update_mask` is ignored.
@@ -1938,6 +2061,167 @@ export class AlloyDBAdminClient {
     >;
   }
   /**
+   * Upgrades a single Cluster.
+   * Imperative only.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the cluster.
+   * @param {google.cloud.alloydb.v1beta.DatabaseVersion} request.version
+   *   Required. The version the cluster is going to be upgraded to.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the Cluster.
+   *   If an etag is provided and does not match the current etag of the Cluster,
+   *   upgrade will be blocked and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/alloy_d_b_admin.upgrade_cluster.js</caption>
+   * region_tag:alloydb_v1beta_generated_AlloyDBAdmin_UpgradeCluster_async
+   */
+  upgradeCluster(
+    request?: protos.google.cloud.alloydb.v1beta.IUpgradeClusterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.IUpgradeClusterResponse,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  upgradeCluster(
+    request: protos.google.cloud.alloydb.v1beta.IUpgradeClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.IUpgradeClusterResponse,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  upgradeCluster(
+    request: protos.google.cloud.alloydb.v1beta.IUpgradeClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.IUpgradeClusterResponse,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  upgradeCluster(
+    request?: protos.google.cloud.alloydb.v1beta.IUpgradeClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IUpgradeClusterResponse,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.IUpgradeClusterResponse,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.IUpgradeClusterResponse,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.upgradeCluster(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `upgradeCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/alloy_d_b_admin.upgrade_cluster.js</caption>
+   * region_tag:alloydb_v1beta_generated_AlloyDBAdmin_UpgradeCluster_async
+   */
+  async checkUpgradeClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.alloydb.v1beta.UpgradeClusterResponse,
+      protos.google.cloud.alloydb.v1beta.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.upgradeCluster,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.alloydb.v1beta.UpgradeClusterResponse,
+      protos.google.cloud.alloydb.v1beta.OperationMetadata
+    >;
+  }
+  /**
    * Deletes a single Cluster.
    *
    * @param {Object} request
@@ -1947,14 +2231,14 @@ export class AlloyDBAdminClient {
    *   comment on the Cluster.name field.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -1964,8 +2248,9 @@ export class AlloyDBAdminClient {
    *   If an etag is provided and does not match the current etag of the Cluster,
    *   deletion will be blocked and an ABORTED error will be returned.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, performs request validation (e.g. permission checks and
-   *   any other type of validation), but do not actually execute the delete.
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
    * @param {boolean} [request.force]
    *   Optional. Whether to cascade delete child instances for given cluster.
    * @param {object} [options]
@@ -2110,9 +2395,9 @@ export class AlloyDBAdminClient {
    *   comment on the Cluster.name field
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
@@ -2127,8 +2412,9 @@ export class AlloyDBAdminClient {
    *   If an etag is provided and does not match the current etag of the Cluster,
    *   deletion will be blocked and an ABORTED error will be returned.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, performs request validation (e.g. permission checks and
-   *   any other type of validation), but do not actually execute the delete.
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2259,6 +2545,163 @@ export class AlloyDBAdminClient {
     >;
   }
   /**
+   * Switches the roles of PRIMARY and SECONDARY clusters without any data loss.
+   * This promotes the SECONDARY cluster to PRIMARY and sets up the original
+   * PRIMARY cluster to replicate from this newly promoted cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the resource. For the required format, see the
+   *   comment on the Cluster.name field
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/alloy_d_b_admin.switchover_cluster.js</caption>
+   * region_tag:alloydb_v1beta_generated_AlloyDBAdmin_SwitchoverCluster_async
+   */
+  switchoverCluster(
+    request?: protos.google.cloud.alloydb.v1beta.ISwitchoverClusterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.ICluster,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  switchoverCluster(
+    request: protos.google.cloud.alloydb.v1beta.ISwitchoverClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.ICluster,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  switchoverCluster(
+    request: protos.google.cloud.alloydb.v1beta.ISwitchoverClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.ICluster,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  switchoverCluster(
+    request?: protos.google.cloud.alloydb.v1beta.ISwitchoverClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.ICluster,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.ICluster,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.ICluster,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.switchoverCluster(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `switchoverCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/alloy_d_b_admin.switchover_cluster.js</caption>
+   * region_tag:alloydb_v1beta_generated_AlloyDBAdmin_SwitchoverCluster_async
+   */
+  async checkSwitchoverClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.alloydb.v1beta.Cluster,
+      protos.google.cloud.alloydb.v1beta.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.switchoverCluster,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.alloydb.v1beta.Cluster,
+      protos.google.cloud.alloydb.v1beta.OperationMetadata
+    >;
+  }
+  /**
    * Creates a new Cluster in a given project and location, with a volume
    * restored from the provided source, either a backup ID or a point-in-time
    * and a source cluster.
@@ -2279,22 +2722,22 @@ export class AlloyDBAdminClient {
    *   Required. The resource being created
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, performs request validation (e.g. permission checks and
-   *   any other type of validation), but do not actually execute the import
-   *   request.
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2439,22 +2882,22 @@ export class AlloyDBAdminClient {
    *   Required. Configuration of the requesting object (the secondary cluster).
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, performs request validation (e.g. permission checks and
-   *   any other type of validation), but do not actually execute the create
-   *   request.
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2602,22 +3045,22 @@ export class AlloyDBAdminClient {
    *   Required. The resource being created
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, performs request validation (e.g. permission checks and
-   *   any other type of validation), but do not actually execute the create
-   *   request.
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2761,22 +3204,22 @@ export class AlloyDBAdminClient {
    *   Required. The resource being created
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, performs request validation (e.g. permission checks and
-   *   any other type of validation), but do not actually execute the create
-   *   request.
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2930,14 +3373,14 @@ export class AlloyDBAdminClient {
    *   Required. Resources being created.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -3086,22 +3529,22 @@ export class AlloyDBAdminClient {
    *   Required. The resource being updated
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, performs request validation (e.g. permission checks and
-   *   any other type of validation), but do not actually execute the update
-   *   request.
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
    * @param {boolean} [request.allowMissing]
    *   Optional. If set to true, update succeeds even if instance is not found. In
    *   that case, a new instance is created and `update_mask` is ignored.
@@ -3244,14 +3687,14 @@ export class AlloyDBAdminClient {
    *   comment on the Instance.name field.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -3261,8 +3704,9 @@ export class AlloyDBAdminClient {
    *   If an etag is provided and does not match the current etag of the Instance,
    *   deletion will be blocked and an ABORTED error will be returned.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, performs request validation (e.g. permission checks and
-   *   any other type of validation), but do not actually execute the delete.
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3404,21 +3848,22 @@ export class AlloyDBAdminClient {
    *   comment on the Instance.name field.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, performs request validation (e.g. permission checks and
-   *   any other type of validation), but do not actually execute the failover.
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3561,22 +4006,22 @@ export class AlloyDBAdminClient {
    *   comment on the Instance.name field.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, performs request validation (e.g. permission checks and
-   *   any other type of validation), but do not actually execute the fault
-   *   injection.
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3717,21 +4162,25 @@ export class AlloyDBAdminClient {
    *   comment on the Instance.name field.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, performs request validation (e.g. permission checks and
-   *   any other type of validation), but do not actually execute the restart.
+   *   Optional. If set, performs request validation, for example, permission
+   *   checks and any other type of validation, but does not actually execute the
+   *   create request.
+   * @param {string[]} [request.nodeIds]
+   *   Optional. Full name of the nodes as obtained from INSTANCE_VIEW_FULL to
+   *   restart upon. Applicable only to read instances.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3874,14 +4323,14 @@ export class AlloyDBAdminClient {
    *   Required. The resource being created
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -4033,14 +4482,14 @@ export class AlloyDBAdminClient {
    *   Required. The resource being updated
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -4190,14 +4639,14 @@ export class AlloyDBAdminClient {
    *   the Backup.name field.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
+   *   request ID so that if you must retry your request, the server ignores the
+   *   request if it has already been completed. The server guarantees that for at
+   *   least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, ignores the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -4445,7 +4894,7 @@ export class AlloyDBAdminClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listClusters`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4657,7 +5106,7 @@ export class AlloyDBAdminClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listInstances`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4868,7 +5317,7 @@ export class AlloyDBAdminClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listBackups`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5075,7 +5524,7 @@ export class AlloyDBAdminClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSupportedDatabaseFlags`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5274,7 +5723,7 @@ export class AlloyDBAdminClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listUsers`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5380,9 +5829,9 @@ export class AlloyDBAdminClient {
    *   Required. Parent value for ListDatabasesRequest.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of databases to return. The service may return
-   *   fewer than this value. If unspecified, an appropriate number of databases
-   *   will be returned. The max value will be 2000, values above max will be
-   *   coerced to max.
+   *   fewer than this value. If unspecified, 2000 is the default page_size. The
+   *   max value of page_size will be 4000, values above max will be coerced to
+   *   max.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListDatabases` call.
    *   This should be provided to retrieve the subsequent page.
@@ -5478,16 +5927,16 @@ export class AlloyDBAdminClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDatabases`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent value for ListDatabasesRequest.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of databases to return. The service may return
-   *   fewer than this value. If unspecified, an appropriate number of databases
-   *   will be returned. The max value will be 2000, values above max will be
-   *   coerced to max.
+   *   fewer than this value. If unspecified, 2000 is the default page_size. The
+   *   max value of page_size will be 4000, values above max will be coerced to
+   *   max.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListDatabases` call.
    *   This should be provided to retrieve the subsequent page.
@@ -5538,9 +5987,9 @@ export class AlloyDBAdminClient {
    *   Required. Parent value for ListDatabasesRequest.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of databases to return. The service may return
-   *   fewer than this value. If unspecified, an appropriate number of databases
-   *   will be returned. The max value will be 2000, values above max will be
-   *   coerced to max.
+   *   fewer than this value. If unspecified, 2000 is the default page_size. The
+   *   max value of page_size will be 4000, values above max will be coerced to
+   *   max.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListDatabases` call.
    *   This should be provided to retrieve the subsequent page.
@@ -5829,7 +6278,7 @@ export class AlloyDBAdminClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -5842,6 +6291,20 @@ export class AlloyDBAdminClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5878,6 +6341,13 @@ export class AlloyDBAdminClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5913,11 +6383,11 @@ export class AlloyDBAdminClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -5926,6 +6396,20 @@ export class AlloyDBAdminClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5956,7 +6440,7 @@ export class AlloyDBAdminClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -5969,6 +6453,20 @@ export class AlloyDBAdminClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

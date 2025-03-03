@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,32 +35,37 @@ function main(entry) {
   /**
    *  Optional. Mask of fields to update. To update Aspects, the update_mask must
    *  contain the value "aspects".
-   *  If the update_mask is empty, all modifiable fields present in the request
-   *  will be updated.
+   *  If the update_mask is empty, the service will update all modifiable fields
+   *  present in the request.
    */
   // const updateMask = {}
   /**
-   *  Optional. If set to true and the entry does not exist, it will be created.
+   *  Optional. If set to true and the entry doesn't exist, the service will
+   *  create it.
    */
   // const allowMissing = true
   /**
-   *  Optional. If set to true and the aspect_keys specify aspect ranges, any
-   *  existing aspects from that range not provided in the request will be
-   *  deleted.
+   *  Optional. If set to true and the aspect_keys specify aspect ranges, the
+   *  service deletes any existing aspects from that range that weren't provided
+   *  in the request.
    */
   // const deleteMissingAspects = true
   /**
-   *  Optional. The map keys of the Aspects which should be modified. Supports
-   *  the following syntaxes:
-   *  * <aspect_type_reference> - matches aspect on given type and empty path
-   *  * <aspect_type_reference>@path - matches aspect on given type and specified
-   *  path
-   *  * <aspect_type_reference>* - matches aspects on given type for all paths
-   *  * *@path - matches aspects of all types on the given path
-   *  Existing aspects matching the syntax will not be removed unless
+   *  Optional. The map keys of the Aspects which the service should modify. It
+   *  supports the following syntaxes:
+   *  * `<aspect_type_reference>` - matches an aspect of the given type and empty
+   *  path.
+   *  * `<aspect_type_reference>@path` - matches an aspect of the given type and
+   *  specified path. For example, to attach an aspect to a field that is
+   *  specified by the `schema` aspect, the path should have the format
+   *  `Schema.<field_name>`.
+   *  * `<aspect_type_reference>@*` - matches aspects of the given type for all
+   *  paths.
+   *  * `*@path` - matches aspects of all types on the given path.
+   *  The service will not remove existing aspects matching the syntax unless
    *  `delete_missing_aspects` is set to true.
-   *  If this field is left empty, it will be treated as specifying exactly those
-   *  Aspects present in the request.
+   *  If this field is left empty, the service treats it as specifying
+   *  exactly those Aspects present in the request.
    */
   // const aspectKeys = ['abc','def']
 

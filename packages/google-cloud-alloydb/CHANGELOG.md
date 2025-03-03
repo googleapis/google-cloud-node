@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.10.2](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.10.1...alloydb-v1.10.2) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6011](https://github.com/googleapis/google-cloud-node/issues/6011)) ([ee865ff](https://github.com/googleapis/google-cloud-node/commit/ee865ff34a696fbd657e4cfb6cc4be2f6651f77a))
+
+## [1.10.1](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.10.0...alloydb-v1.10.1) (2024-11-14)
+
+
+### Bug Fixes
+
+* [alloydb] deprecated various PSC instance configuration fields ([#5793](https://github.com/googleapis/google-cloud-node/issues/5793)) ([e884556](https://github.com/googleapis/google-cloud-node/commit/e8845566dcf841c5fb2946b5903b63d6298fd901))
+
+## [1.10.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.9.0...alloydb-v1.10.0) (2024-10-30)
+
+
+### Features
+
+* [alloydb] add new PSC instance configuration setting and output the PSC DNS name ([#5764](https://github.com/googleapis/google-cloud-node/issues/5764)) ([619e469](https://github.com/googleapis/google-cloud-node/commit/619e469914af5506e47d26ff01887dbfeef99131))
+
 ## [1.9.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.8.0...alloydb-v1.9.0) (2024-08-29)
 
 

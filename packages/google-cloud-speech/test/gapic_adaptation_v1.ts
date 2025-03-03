@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -318,7 +318,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.PhraseSet()
       );
@@ -349,7 +349,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.PhraseSet()
       );
@@ -396,7 +396,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPhraseSet = stubSimpleCall(
         undefined,
@@ -448,7 +448,7 @@ describe('v1.AdaptationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.PhraseSet()
       );
@@ -479,7 +479,7 @@ describe('v1.AdaptationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.PhraseSet()
       );
@@ -526,7 +526,7 @@ describe('v1.AdaptationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPhraseSet = stubSimpleCall(
         undefined,
@@ -579,7 +579,7 @@ describe('v1.AdaptationClient', () => {
         ['phraseSet', 'name']
       );
       request.phraseSet.name = defaultValue1;
-      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.PhraseSet()
       );
@@ -611,7 +611,7 @@ describe('v1.AdaptationClient', () => {
         ['phraseSet', 'name']
       );
       request.phraseSet.name = defaultValue1;
-      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.PhraseSet()
       );
@@ -659,7 +659,7 @@ describe('v1.AdaptationClient', () => {
         ['phraseSet', 'name']
       );
       request.phraseSet.name = defaultValue1;
-      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePhraseSet = stubSimpleCall(
         undefined,
@@ -712,7 +712,7 @@ describe('v1.AdaptationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -743,7 +743,7 @@ describe('v1.AdaptationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -790,7 +790,7 @@ describe('v1.AdaptationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePhraseSet = stubSimpleCall(
         undefined,
@@ -842,7 +842,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.CustomClass()
       );
@@ -873,7 +873,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.CustomClass()
       );
@@ -920,7 +920,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCustomClass = stubSimpleCall(
         undefined,
@@ -972,7 +972,7 @@ describe('v1.AdaptationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.CustomClass()
       );
@@ -1003,7 +1003,7 @@ describe('v1.AdaptationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.CustomClass()
       );
@@ -1050,7 +1050,7 @@ describe('v1.AdaptationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCustomClass = stubSimpleCall(
         undefined,
@@ -1103,7 +1103,7 @@ describe('v1.AdaptationClient', () => {
         ['customClass', 'name']
       );
       request.customClass.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.CustomClass()
       );
@@ -1135,7 +1135,7 @@ describe('v1.AdaptationClient', () => {
         ['customClass', 'name']
       );
       request.customClass.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.CustomClass()
       );
@@ -1183,7 +1183,7 @@ describe('v1.AdaptationClient', () => {
         ['customClass', 'name']
       );
       request.customClass.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCustomClass = stubSimpleCall(
         undefined,
@@ -1236,7 +1236,7 @@ describe('v1.AdaptationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1267,7 +1267,7 @@ describe('v1.AdaptationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1314,7 +1314,7 @@ describe('v1.AdaptationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCustomClass = stubSimpleCall(
         undefined,
@@ -1366,7 +1366,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
@@ -1399,7 +1399,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
@@ -1448,7 +1448,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPhraseSet = stubSimpleCall(
         undefined,
@@ -1479,7 +1479,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
@@ -1533,7 +1533,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPhraseSet.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1582,7 +1582,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
@@ -1625,7 +1625,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPhraseSet.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1667,7 +1667,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
@@ -1700,7 +1700,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
@@ -1749,7 +1749,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCustomClasses = stubSimpleCall(
         undefined,
@@ -1780,7 +1780,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
@@ -1834,7 +1834,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomClasses.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1883,7 +1883,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
@@ -1926,7 +1926,7 @@ describe('v1.AdaptationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomClasses.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

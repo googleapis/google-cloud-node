@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -570,6 +570,9 @@
                          * @memberof google.cloud.developerconnect.v1
                          * @interface IConnection
                          * @property {google.cloud.developerconnect.v1.IGitHubConfig|null} [githubConfig] Connection githubConfig
+                         * @property {google.cloud.developerconnect.v1.IGitHubEnterpriseConfig|null} [githubEnterpriseConfig] Connection githubEnterpriseConfig
+                         * @property {google.cloud.developerconnect.v1.IGitLabConfig|null} [gitlabConfig] Connection gitlabConfig
+                         * @property {google.cloud.developerconnect.v1.IGitLabEnterpriseConfig|null} [gitlabEnterpriseConfig] Connection gitlabEnterpriseConfig
                          * @property {string|null} [name] Connection name
                          * @property {google.protobuf.ITimestamp|null} [createTime] Connection createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Connection updateTime
@@ -581,6 +584,7 @@
                          * @property {Object.<string,string>|null} [annotations] Connection annotations
                          * @property {string|null} [etag] Connection etag
                          * @property {string|null} [uid] Connection uid
+                         * @property {google.cloud.developerconnect.v1.ICryptoKeyConfig|null} [cryptoKeyConfig] Connection cryptoKeyConfig
                          */
     
                         /**
@@ -607,6 +611,30 @@
                          * @instance
                          */
                         Connection.prototype.githubConfig = null;
+    
+                        /**
+                         * Connection githubEnterpriseConfig.
+                         * @member {google.cloud.developerconnect.v1.IGitHubEnterpriseConfig|null|undefined} githubEnterpriseConfig
+                         * @memberof google.cloud.developerconnect.v1.Connection
+                         * @instance
+                         */
+                        Connection.prototype.githubEnterpriseConfig = null;
+    
+                        /**
+                         * Connection gitlabConfig.
+                         * @member {google.cloud.developerconnect.v1.IGitLabConfig|null|undefined} gitlabConfig
+                         * @memberof google.cloud.developerconnect.v1.Connection
+                         * @instance
+                         */
+                        Connection.prototype.gitlabConfig = null;
+    
+                        /**
+                         * Connection gitlabEnterpriseConfig.
+                         * @member {google.cloud.developerconnect.v1.IGitLabEnterpriseConfig|null|undefined} gitlabEnterpriseConfig
+                         * @memberof google.cloud.developerconnect.v1.Connection
+                         * @instance
+                         */
+                        Connection.prototype.gitlabEnterpriseConfig = null;
     
                         /**
                          * Connection name.
@@ -696,17 +724,25 @@
                          */
                         Connection.prototype.uid = "";
     
+                        /**
+                         * Connection cryptoKeyConfig.
+                         * @member {google.cloud.developerconnect.v1.ICryptoKeyConfig|null|undefined} cryptoKeyConfig
+                         * @memberof google.cloud.developerconnect.v1.Connection
+                         * @instance
+                         */
+                        Connection.prototype.cryptoKeyConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Connection connectionConfig.
-                         * @member {"githubConfig"|undefined} connectionConfig
+                         * @member {"githubConfig"|"githubEnterpriseConfig"|"gitlabConfig"|"gitlabEnterpriseConfig"|undefined} connectionConfig
                          * @memberof google.cloud.developerconnect.v1.Connection
                          * @instance
                          */
                         Object.defineProperty(Connection.prototype, "connectionConfig", {
-                            get: $util.oneOfGetter($oneOfFields = ["githubConfig"]),
+                            get: $util.oneOfGetter($oneOfFields = ["githubConfig", "githubEnterpriseConfig", "gitlabConfig", "gitlabEnterpriseConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -760,6 +796,14 @@
                                 $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.uid);
+                            if (message.githubEnterpriseConfig != null && Object.hasOwnProperty.call(message, "githubEnterpriseConfig"))
+                                $root.google.cloud.developerconnect.v1.GitHubEnterpriseConfig.encode(message.githubEnterpriseConfig, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.gitlabConfig != null && Object.hasOwnProperty.call(message, "gitlabConfig"))
+                                $root.google.cloud.developerconnect.v1.GitLabConfig.encode(message.gitlabConfig, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.cryptoKeyConfig != null && Object.hasOwnProperty.call(message, "cryptoKeyConfig"))
+                                $root.google.cloud.developerconnect.v1.CryptoKeyConfig.encode(message.cryptoKeyConfig, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.gitlabEnterpriseConfig != null && Object.hasOwnProperty.call(message, "gitlabEnterpriseConfig"))
+                                $root.google.cloud.developerconnect.v1.GitLabEnterpriseConfig.encode(message.gitlabEnterpriseConfig, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             return writer;
                         };
     
@@ -796,6 +840,18 @@
                                 switch (tag >>> 3) {
                                 case 5: {
                                         message.githubConfig = $root.google.cloud.developerconnect.v1.GitHubConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.githubEnterpriseConfig = $root.google.cloud.developerconnect.v1.GitHubEnterpriseConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.gitlabConfig = $root.google.cloud.developerconnect.v1.GitLabConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.gitlabEnterpriseConfig = $root.google.cloud.developerconnect.v1.GitLabEnterpriseConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -880,6 +936,10 @@
                                         message.uid = reader.string();
                                         break;
                                     }
+                                case 15: {
+                                        message.cryptoKeyConfig = $root.google.cloud.developerconnect.v1.CryptoKeyConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -922,6 +982,36 @@
                                     var error = $root.google.cloud.developerconnect.v1.GitHubConfig.verify(message.githubConfig);
                                     if (error)
                                         return "githubConfig." + error;
+                                }
+                            }
+                            if (message.githubEnterpriseConfig != null && message.hasOwnProperty("githubEnterpriseConfig")) {
+                                if (properties.connectionConfig === 1)
+                                    return "connectionConfig: multiple values";
+                                properties.connectionConfig = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.GitHubEnterpriseConfig.verify(message.githubEnterpriseConfig);
+                                    if (error)
+                                        return "githubEnterpriseConfig." + error;
+                                }
+                            }
+                            if (message.gitlabConfig != null && message.hasOwnProperty("gitlabConfig")) {
+                                if (properties.connectionConfig === 1)
+                                    return "connectionConfig: multiple values";
+                                properties.connectionConfig = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.GitLabConfig.verify(message.gitlabConfig);
+                                    if (error)
+                                        return "gitlabConfig." + error;
+                                }
+                            }
+                            if (message.gitlabEnterpriseConfig != null && message.hasOwnProperty("gitlabEnterpriseConfig")) {
+                                if (properties.connectionConfig === 1)
+                                    return "connectionConfig: multiple values";
+                                properties.connectionConfig = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.GitLabEnterpriseConfig.verify(message.gitlabEnterpriseConfig);
+                                    if (error)
+                                        return "gitlabEnterpriseConfig." + error;
                                 }
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -975,6 +1065,11 @@
                             if (message.uid != null && message.hasOwnProperty("uid"))
                                 if (!$util.isString(message.uid))
                                     return "uid: string expected";
+                            if (message.cryptoKeyConfig != null && message.hasOwnProperty("cryptoKeyConfig")) {
+                                var error = $root.google.cloud.developerconnect.v1.CryptoKeyConfig.verify(message.cryptoKeyConfig);
+                                if (error)
+                                    return "cryptoKeyConfig." + error;
+                            }
                             return null;
                         };
     
@@ -994,6 +1089,21 @@
                                 if (typeof object.githubConfig !== "object")
                                     throw TypeError(".google.cloud.developerconnect.v1.Connection.githubConfig: object expected");
                                 message.githubConfig = $root.google.cloud.developerconnect.v1.GitHubConfig.fromObject(object.githubConfig);
+                            }
+                            if (object.githubEnterpriseConfig != null) {
+                                if (typeof object.githubEnterpriseConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.Connection.githubEnterpriseConfig: object expected");
+                                message.githubEnterpriseConfig = $root.google.cloud.developerconnect.v1.GitHubEnterpriseConfig.fromObject(object.githubEnterpriseConfig);
+                            }
+                            if (object.gitlabConfig != null) {
+                                if (typeof object.gitlabConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.Connection.gitlabConfig: object expected");
+                                message.gitlabConfig = $root.google.cloud.developerconnect.v1.GitLabConfig.fromObject(object.gitlabConfig);
+                            }
+                            if (object.gitlabEnterpriseConfig != null) {
+                                if (typeof object.gitlabEnterpriseConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.Connection.gitlabEnterpriseConfig: object expected");
+                                message.gitlabEnterpriseConfig = $root.google.cloud.developerconnect.v1.GitLabEnterpriseConfig.fromObject(object.gitlabEnterpriseConfig);
                             }
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -1039,6 +1149,11 @@
                                 message.etag = String(object.etag);
                             if (object.uid != null)
                                 message.uid = String(object.uid);
+                            if (object.cryptoKeyConfig != null) {
+                                if (typeof object.cryptoKeyConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.Connection.cryptoKeyConfig: object expected");
+                                message.cryptoKeyConfig = $root.google.cloud.developerconnect.v1.CryptoKeyConfig.fromObject(object.cryptoKeyConfig);
+                            }
                             return message;
                         };
     
@@ -1069,6 +1184,7 @@
                                 object.etag = "";
                                 object.deleteTime = null;
                                 object.uid = "";
+                                object.cryptoKeyConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1104,6 +1220,23 @@
                                 object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
                             if (message.uid != null && message.hasOwnProperty("uid"))
                                 object.uid = message.uid;
+                            if (message.githubEnterpriseConfig != null && message.hasOwnProperty("githubEnterpriseConfig")) {
+                                object.githubEnterpriseConfig = $root.google.cloud.developerconnect.v1.GitHubEnterpriseConfig.toObject(message.githubEnterpriseConfig, options);
+                                if (options.oneofs)
+                                    object.connectionConfig = "githubEnterpriseConfig";
+                            }
+                            if (message.gitlabConfig != null && message.hasOwnProperty("gitlabConfig")) {
+                                object.gitlabConfig = $root.google.cloud.developerconnect.v1.GitLabConfig.toObject(message.gitlabConfig, options);
+                                if (options.oneofs)
+                                    object.connectionConfig = "gitlabConfig";
+                            }
+                            if (message.cryptoKeyConfig != null && message.hasOwnProperty("cryptoKeyConfig"))
+                                object.cryptoKeyConfig = $root.google.cloud.developerconnect.v1.CryptoKeyConfig.toObject(message.cryptoKeyConfig, options);
+                            if (message.gitlabEnterpriseConfig != null && message.hasOwnProperty("gitlabEnterpriseConfig")) {
+                                object.gitlabEnterpriseConfig = $root.google.cloud.developerconnect.v1.GitLabEnterpriseConfig.toObject(message.gitlabEnterpriseConfig, options);
+                                if (options.oneofs)
+                                    object.connectionConfig = "gitlabEnterpriseConfig";
+                            }
                             return object;
                         };
     
@@ -1134,6 +1267,209 @@
                         };
     
                         return Connection;
+                    })();
+    
+                    v1.CryptoKeyConfig = (function() {
+    
+                        /**
+                         * Properties of a CryptoKeyConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface ICryptoKeyConfig
+                         * @property {string|null} [keyReference] CryptoKeyConfig keyReference
+                         */
+    
+                        /**
+                         * Constructs a new CryptoKeyConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a CryptoKeyConfig.
+                         * @implements ICryptoKeyConfig
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.ICryptoKeyConfig=} [properties] Properties to set
+                         */
+                        function CryptoKeyConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CryptoKeyConfig keyReference.
+                         * @member {string} keyReference
+                         * @memberof google.cloud.developerconnect.v1.CryptoKeyConfig
+                         * @instance
+                         */
+                        CryptoKeyConfig.prototype.keyReference = "";
+    
+                        /**
+                         * Creates a new CryptoKeyConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.CryptoKeyConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ICryptoKeyConfig=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.CryptoKeyConfig} CryptoKeyConfig instance
+                         */
+                        CryptoKeyConfig.create = function create(properties) {
+                            return new CryptoKeyConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CryptoKeyConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.CryptoKeyConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.CryptoKeyConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ICryptoKeyConfig} message CryptoKeyConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CryptoKeyConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.keyReference != null && Object.hasOwnProperty.call(message, "keyReference"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.keyReference);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CryptoKeyConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.CryptoKeyConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.CryptoKeyConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ICryptoKeyConfig} message CryptoKeyConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CryptoKeyConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CryptoKeyConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.CryptoKeyConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.CryptoKeyConfig} CryptoKeyConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CryptoKeyConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.CryptoKeyConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.keyReference = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CryptoKeyConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.CryptoKeyConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.CryptoKeyConfig} CryptoKeyConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CryptoKeyConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CryptoKeyConfig message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.CryptoKeyConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CryptoKeyConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.keyReference != null && message.hasOwnProperty("keyReference"))
+                                if (!$util.isString(message.keyReference))
+                                    return "keyReference: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CryptoKeyConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.CryptoKeyConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.CryptoKeyConfig} CryptoKeyConfig
+                         */
+                        CryptoKeyConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.CryptoKeyConfig)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.CryptoKeyConfig();
+                            if (object.keyReference != null)
+                                message.keyReference = String(object.keyReference);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CryptoKeyConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.CryptoKeyConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.CryptoKeyConfig} message CryptoKeyConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CryptoKeyConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.keyReference = "";
+                            if (message.keyReference != null && message.hasOwnProperty("keyReference"))
+                                object.keyReference = message.keyReference;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CryptoKeyConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.CryptoKeyConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CryptoKeyConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CryptoKeyConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.CryptoKeyConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CryptoKeyConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.CryptoKeyConfig";
+                        };
+    
+                        return CryptoKeyConfig;
                     })();
     
                     v1.InstallationState = (function() {
@@ -1772,6 +2108,653 @@
                         return GitHubConfig;
                     })();
     
+                    v1.GitHubEnterpriseConfig = (function() {
+    
+                        /**
+                         * Properties of a GitHubEnterpriseConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IGitHubEnterpriseConfig
+                         * @property {string|null} [hostUri] GitHubEnterpriseConfig hostUri
+                         * @property {number|Long|null} [appId] GitHubEnterpriseConfig appId
+                         * @property {string|null} [appSlug] GitHubEnterpriseConfig appSlug
+                         * @property {string|null} [privateKeySecretVersion] GitHubEnterpriseConfig privateKeySecretVersion
+                         * @property {string|null} [webhookSecretSecretVersion] GitHubEnterpriseConfig webhookSecretSecretVersion
+                         * @property {number|Long|null} [appInstallationId] GitHubEnterpriseConfig appInstallationId
+                         * @property {string|null} [installationUri] GitHubEnterpriseConfig installationUri
+                         * @property {google.cloud.developerconnect.v1.IServiceDirectoryConfig|null} [serviceDirectoryConfig] GitHubEnterpriseConfig serviceDirectoryConfig
+                         * @property {string|null} [serverVersion] GitHubEnterpriseConfig serverVersion
+                         * @property {string|null} [sslCaCertificate] GitHubEnterpriseConfig sslCaCertificate
+                         */
+    
+                        /**
+                         * Constructs a new GitHubEnterpriseConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a GitHubEnterpriseConfig.
+                         * @implements IGitHubEnterpriseConfig
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IGitHubEnterpriseConfig=} [properties] Properties to set
+                         */
+                        function GitHubEnterpriseConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GitHubEnterpriseConfig hostUri.
+                         * @member {string} hostUri
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @instance
+                         */
+                        GitHubEnterpriseConfig.prototype.hostUri = "";
+    
+                        /**
+                         * GitHubEnterpriseConfig appId.
+                         * @member {number|Long} appId
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @instance
+                         */
+                        GitHubEnterpriseConfig.prototype.appId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * GitHubEnterpriseConfig appSlug.
+                         * @member {string} appSlug
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @instance
+                         */
+                        GitHubEnterpriseConfig.prototype.appSlug = "";
+    
+                        /**
+                         * GitHubEnterpriseConfig privateKeySecretVersion.
+                         * @member {string} privateKeySecretVersion
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @instance
+                         */
+                        GitHubEnterpriseConfig.prototype.privateKeySecretVersion = "";
+    
+                        /**
+                         * GitHubEnterpriseConfig webhookSecretSecretVersion.
+                         * @member {string} webhookSecretSecretVersion
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @instance
+                         */
+                        GitHubEnterpriseConfig.prototype.webhookSecretSecretVersion = "";
+    
+                        /**
+                         * GitHubEnterpriseConfig appInstallationId.
+                         * @member {number|Long} appInstallationId
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @instance
+                         */
+                        GitHubEnterpriseConfig.prototype.appInstallationId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * GitHubEnterpriseConfig installationUri.
+                         * @member {string} installationUri
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @instance
+                         */
+                        GitHubEnterpriseConfig.prototype.installationUri = "";
+    
+                        /**
+                         * GitHubEnterpriseConfig serviceDirectoryConfig.
+                         * @member {google.cloud.developerconnect.v1.IServiceDirectoryConfig|null|undefined} serviceDirectoryConfig
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @instance
+                         */
+                        GitHubEnterpriseConfig.prototype.serviceDirectoryConfig = null;
+    
+                        /**
+                         * GitHubEnterpriseConfig serverVersion.
+                         * @member {string} serverVersion
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @instance
+                         */
+                        GitHubEnterpriseConfig.prototype.serverVersion = "";
+    
+                        /**
+                         * GitHubEnterpriseConfig sslCaCertificate.
+                         * @member {string} sslCaCertificate
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @instance
+                         */
+                        GitHubEnterpriseConfig.prototype.sslCaCertificate = "";
+    
+                        /**
+                         * Creates a new GitHubEnterpriseConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGitHubEnterpriseConfig=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.GitHubEnterpriseConfig} GitHubEnterpriseConfig instance
+                         */
+                        GitHubEnterpriseConfig.create = function create(properties) {
+                            return new GitHubEnterpriseConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GitHubEnterpriseConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.GitHubEnterpriseConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGitHubEnterpriseConfig} message GitHubEnterpriseConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitHubEnterpriseConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hostUri != null && Object.hasOwnProperty.call(message, "hostUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.hostUri);
+                            if (message.appId != null && Object.hasOwnProperty.call(message, "appId"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.appId);
+                            if (message.appSlug != null && Object.hasOwnProperty.call(message, "appSlug"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.appSlug);
+                            if (message.privateKeySecretVersion != null && Object.hasOwnProperty.call(message, "privateKeySecretVersion"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.privateKeySecretVersion);
+                            if (message.webhookSecretSecretVersion != null && Object.hasOwnProperty.call(message, "webhookSecretSecretVersion"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.webhookSecretSecretVersion);
+                            if (message.appInstallationId != null && Object.hasOwnProperty.call(message, "appInstallationId"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.appInstallationId);
+                            if (message.installationUri != null && Object.hasOwnProperty.call(message, "installationUri"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.installationUri);
+                            if (message.serviceDirectoryConfig != null && Object.hasOwnProperty.call(message, "serviceDirectoryConfig"))
+                                $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.encode(message.serviceDirectoryConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.serverVersion != null && Object.hasOwnProperty.call(message, "serverVersion"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.serverVersion);
+                            if (message.sslCaCertificate != null && Object.hasOwnProperty.call(message, "sslCaCertificate"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.sslCaCertificate);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GitHubEnterpriseConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GitHubEnterpriseConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGitHubEnterpriseConfig} message GitHubEnterpriseConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitHubEnterpriseConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GitHubEnterpriseConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.GitHubEnterpriseConfig} GitHubEnterpriseConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitHubEnterpriseConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GitHubEnterpriseConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.hostUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.appId = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.appSlug = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.privateKeySecretVersion = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.webhookSecretSecretVersion = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.appInstallationId = reader.int64();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.installationUri = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.serviceDirectoryConfig = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.serverVersion = reader.string();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.sslCaCertificate = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GitHubEnterpriseConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.GitHubEnterpriseConfig} GitHubEnterpriseConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitHubEnterpriseConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GitHubEnterpriseConfig message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GitHubEnterpriseConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.hostUri != null && message.hasOwnProperty("hostUri"))
+                                if (!$util.isString(message.hostUri))
+                                    return "hostUri: string expected";
+                            if (message.appId != null && message.hasOwnProperty("appId"))
+                                if (!$util.isInteger(message.appId) && !(message.appId && $util.isInteger(message.appId.low) && $util.isInteger(message.appId.high)))
+                                    return "appId: integer|Long expected";
+                            if (message.appSlug != null && message.hasOwnProperty("appSlug"))
+                                if (!$util.isString(message.appSlug))
+                                    return "appSlug: string expected";
+                            if (message.privateKeySecretVersion != null && message.hasOwnProperty("privateKeySecretVersion"))
+                                if (!$util.isString(message.privateKeySecretVersion))
+                                    return "privateKeySecretVersion: string expected";
+                            if (message.webhookSecretSecretVersion != null && message.hasOwnProperty("webhookSecretSecretVersion"))
+                                if (!$util.isString(message.webhookSecretSecretVersion))
+                                    return "webhookSecretSecretVersion: string expected";
+                            if (message.appInstallationId != null && message.hasOwnProperty("appInstallationId"))
+                                if (!$util.isInteger(message.appInstallationId) && !(message.appInstallationId && $util.isInteger(message.appInstallationId.low) && $util.isInteger(message.appInstallationId.high)))
+                                    return "appInstallationId: integer|Long expected";
+                            if (message.installationUri != null && message.hasOwnProperty("installationUri"))
+                                if (!$util.isString(message.installationUri))
+                                    return "installationUri: string expected";
+                            if (message.serviceDirectoryConfig != null && message.hasOwnProperty("serviceDirectoryConfig")) {
+                                var error = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.verify(message.serviceDirectoryConfig);
+                                if (error)
+                                    return "serviceDirectoryConfig." + error;
+                            }
+                            if (message.serverVersion != null && message.hasOwnProperty("serverVersion"))
+                                if (!$util.isString(message.serverVersion))
+                                    return "serverVersion: string expected";
+                            if (message.sslCaCertificate != null && message.hasOwnProperty("sslCaCertificate"))
+                                if (!$util.isString(message.sslCaCertificate))
+                                    return "sslCaCertificate: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GitHubEnterpriseConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.GitHubEnterpriseConfig} GitHubEnterpriseConfig
+                         */
+                        GitHubEnterpriseConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.GitHubEnterpriseConfig)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.GitHubEnterpriseConfig();
+                            if (object.hostUri != null)
+                                message.hostUri = String(object.hostUri);
+                            if (object.appId != null)
+                                if ($util.Long)
+                                    (message.appId = $util.Long.fromValue(object.appId)).unsigned = false;
+                                else if (typeof object.appId === "string")
+                                    message.appId = parseInt(object.appId, 10);
+                                else if (typeof object.appId === "number")
+                                    message.appId = object.appId;
+                                else if (typeof object.appId === "object")
+                                    message.appId = new $util.LongBits(object.appId.low >>> 0, object.appId.high >>> 0).toNumber();
+                            if (object.appSlug != null)
+                                message.appSlug = String(object.appSlug);
+                            if (object.privateKeySecretVersion != null)
+                                message.privateKeySecretVersion = String(object.privateKeySecretVersion);
+                            if (object.webhookSecretSecretVersion != null)
+                                message.webhookSecretSecretVersion = String(object.webhookSecretSecretVersion);
+                            if (object.appInstallationId != null)
+                                if ($util.Long)
+                                    (message.appInstallationId = $util.Long.fromValue(object.appInstallationId)).unsigned = false;
+                                else if (typeof object.appInstallationId === "string")
+                                    message.appInstallationId = parseInt(object.appInstallationId, 10);
+                                else if (typeof object.appInstallationId === "number")
+                                    message.appInstallationId = object.appInstallationId;
+                                else if (typeof object.appInstallationId === "object")
+                                    message.appInstallationId = new $util.LongBits(object.appInstallationId.low >>> 0, object.appInstallationId.high >>> 0).toNumber();
+                            if (object.installationUri != null)
+                                message.installationUri = String(object.installationUri);
+                            if (object.serviceDirectoryConfig != null) {
+                                if (typeof object.serviceDirectoryConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.GitHubEnterpriseConfig.serviceDirectoryConfig: object expected");
+                                message.serviceDirectoryConfig = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.fromObject(object.serviceDirectoryConfig);
+                            }
+                            if (object.serverVersion != null)
+                                message.serverVersion = String(object.serverVersion);
+                            if (object.sslCaCertificate != null)
+                                message.sslCaCertificate = String(object.sslCaCertificate);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GitHubEnterpriseConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.GitHubEnterpriseConfig} message GitHubEnterpriseConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GitHubEnterpriseConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.hostUri = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.appId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.appId = options.longs === String ? "0" : 0;
+                                object.appSlug = "";
+                                object.privateKeySecretVersion = "";
+                                object.webhookSecretSecretVersion = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.appInstallationId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.appInstallationId = options.longs === String ? "0" : 0;
+                                object.installationUri = "";
+                                object.serviceDirectoryConfig = null;
+                                object.serverVersion = "";
+                                object.sslCaCertificate = "";
+                            }
+                            if (message.hostUri != null && message.hasOwnProperty("hostUri"))
+                                object.hostUri = message.hostUri;
+                            if (message.appId != null && message.hasOwnProperty("appId"))
+                                if (typeof message.appId === "number")
+                                    object.appId = options.longs === String ? String(message.appId) : message.appId;
+                                else
+                                    object.appId = options.longs === String ? $util.Long.prototype.toString.call(message.appId) : options.longs === Number ? new $util.LongBits(message.appId.low >>> 0, message.appId.high >>> 0).toNumber() : message.appId;
+                            if (message.appSlug != null && message.hasOwnProperty("appSlug"))
+                                object.appSlug = message.appSlug;
+                            if (message.privateKeySecretVersion != null && message.hasOwnProperty("privateKeySecretVersion"))
+                                object.privateKeySecretVersion = message.privateKeySecretVersion;
+                            if (message.webhookSecretSecretVersion != null && message.hasOwnProperty("webhookSecretSecretVersion"))
+                                object.webhookSecretSecretVersion = message.webhookSecretSecretVersion;
+                            if (message.appInstallationId != null && message.hasOwnProperty("appInstallationId"))
+                                if (typeof message.appInstallationId === "number")
+                                    object.appInstallationId = options.longs === String ? String(message.appInstallationId) : message.appInstallationId;
+                                else
+                                    object.appInstallationId = options.longs === String ? $util.Long.prototype.toString.call(message.appInstallationId) : options.longs === Number ? new $util.LongBits(message.appInstallationId.low >>> 0, message.appInstallationId.high >>> 0).toNumber() : message.appInstallationId;
+                            if (message.installationUri != null && message.hasOwnProperty("installationUri"))
+                                object.installationUri = message.installationUri;
+                            if (message.serviceDirectoryConfig != null && message.hasOwnProperty("serviceDirectoryConfig"))
+                                object.serviceDirectoryConfig = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.toObject(message.serviceDirectoryConfig, options);
+                            if (message.serverVersion != null && message.hasOwnProperty("serverVersion"))
+                                object.serverVersion = message.serverVersion;
+                            if (message.sslCaCertificate != null && message.hasOwnProperty("sslCaCertificate"))
+                                object.sslCaCertificate = message.sslCaCertificate;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GitHubEnterpriseConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GitHubEnterpriseConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GitHubEnterpriseConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GitHubEnterpriseConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.GitHubEnterpriseConfig";
+                        };
+    
+                        return GitHubEnterpriseConfig;
+                    })();
+    
+                    v1.ServiceDirectoryConfig = (function() {
+    
+                        /**
+                         * Properties of a ServiceDirectoryConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IServiceDirectoryConfig
+                         * @property {string|null} [service] ServiceDirectoryConfig service
+                         */
+    
+                        /**
+                         * Constructs a new ServiceDirectoryConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a ServiceDirectoryConfig.
+                         * @implements IServiceDirectoryConfig
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IServiceDirectoryConfig=} [properties] Properties to set
+                         */
+                        function ServiceDirectoryConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ServiceDirectoryConfig service.
+                         * @member {string} service
+                         * @memberof google.cloud.developerconnect.v1.ServiceDirectoryConfig
+                         * @instance
+                         */
+                        ServiceDirectoryConfig.prototype.service = "";
+    
+                        /**
+                         * Creates a new ServiceDirectoryConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.ServiceDirectoryConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IServiceDirectoryConfig=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.ServiceDirectoryConfig} ServiceDirectoryConfig instance
+                         */
+                        ServiceDirectoryConfig.create = function create(properties) {
+                            return new ServiceDirectoryConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ServiceDirectoryConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.ServiceDirectoryConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.ServiceDirectoryConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IServiceDirectoryConfig} message ServiceDirectoryConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServiceDirectoryConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.service);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ServiceDirectoryConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ServiceDirectoryConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ServiceDirectoryConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IServiceDirectoryConfig} message ServiceDirectoryConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServiceDirectoryConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ServiceDirectoryConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.ServiceDirectoryConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.ServiceDirectoryConfig} ServiceDirectoryConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServiceDirectoryConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.service = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ServiceDirectoryConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ServiceDirectoryConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.ServiceDirectoryConfig} ServiceDirectoryConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServiceDirectoryConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ServiceDirectoryConfig message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.ServiceDirectoryConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ServiceDirectoryConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ServiceDirectoryConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.ServiceDirectoryConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.ServiceDirectoryConfig} ServiceDirectoryConfig
+                         */
+                        ServiceDirectoryConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig();
+                            if (object.service != null)
+                                message.service = String(object.service);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ServiceDirectoryConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.ServiceDirectoryConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ServiceDirectoryConfig} message ServiceDirectoryConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ServiceDirectoryConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.service = "";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ServiceDirectoryConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.ServiceDirectoryConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ServiceDirectoryConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ServiceDirectoryConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.ServiceDirectoryConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ServiceDirectoryConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.ServiceDirectoryConfig";
+                        };
+    
+                        return ServiceDirectoryConfig;
+                    })();
+    
                     v1.OAuthCredential = (function() {
     
                         /**
@@ -1997,6 +2980,850 @@
                         };
     
                         return OAuthCredential;
+                    })();
+    
+                    v1.GitLabConfig = (function() {
+    
+                        /**
+                         * Properties of a GitLabConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IGitLabConfig
+                         * @property {string|null} [webhookSecretSecretVersion] GitLabConfig webhookSecretSecretVersion
+                         * @property {google.cloud.developerconnect.v1.IUserCredential|null} [readAuthorizerCredential] GitLabConfig readAuthorizerCredential
+                         * @property {google.cloud.developerconnect.v1.IUserCredential|null} [authorizerCredential] GitLabConfig authorizerCredential
+                         */
+    
+                        /**
+                         * Constructs a new GitLabConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a GitLabConfig.
+                         * @implements IGitLabConfig
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IGitLabConfig=} [properties] Properties to set
+                         */
+                        function GitLabConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GitLabConfig webhookSecretSecretVersion.
+                         * @member {string} webhookSecretSecretVersion
+                         * @memberof google.cloud.developerconnect.v1.GitLabConfig
+                         * @instance
+                         */
+                        GitLabConfig.prototype.webhookSecretSecretVersion = "";
+    
+                        /**
+                         * GitLabConfig readAuthorizerCredential.
+                         * @member {google.cloud.developerconnect.v1.IUserCredential|null|undefined} readAuthorizerCredential
+                         * @memberof google.cloud.developerconnect.v1.GitLabConfig
+                         * @instance
+                         */
+                        GitLabConfig.prototype.readAuthorizerCredential = null;
+    
+                        /**
+                         * GitLabConfig authorizerCredential.
+                         * @member {google.cloud.developerconnect.v1.IUserCredential|null|undefined} authorizerCredential
+                         * @memberof google.cloud.developerconnect.v1.GitLabConfig
+                         * @instance
+                         */
+                        GitLabConfig.prototype.authorizerCredential = null;
+    
+                        /**
+                         * Creates a new GitLabConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.GitLabConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGitLabConfig=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.GitLabConfig} GitLabConfig instance
+                         */
+                        GitLabConfig.create = function create(properties) {
+                            return new GitLabConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GitLabConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.GitLabConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.GitLabConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGitLabConfig} message GitLabConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitLabConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.webhookSecretSecretVersion != null && Object.hasOwnProperty.call(message, "webhookSecretSecretVersion"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.webhookSecretSecretVersion);
+                            if (message.readAuthorizerCredential != null && Object.hasOwnProperty.call(message, "readAuthorizerCredential"))
+                                $root.google.cloud.developerconnect.v1.UserCredential.encode(message.readAuthorizerCredential, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.authorizerCredential != null && Object.hasOwnProperty.call(message, "authorizerCredential"))
+                                $root.google.cloud.developerconnect.v1.UserCredential.encode(message.authorizerCredential, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GitLabConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GitLabConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GitLabConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGitLabConfig} message GitLabConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitLabConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GitLabConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.GitLabConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.GitLabConfig} GitLabConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitLabConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GitLabConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.webhookSecretSecretVersion = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.readAuthorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.authorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GitLabConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GitLabConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.GitLabConfig} GitLabConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitLabConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GitLabConfig message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.GitLabConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GitLabConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.webhookSecretSecretVersion != null && message.hasOwnProperty("webhookSecretSecretVersion"))
+                                if (!$util.isString(message.webhookSecretSecretVersion))
+                                    return "webhookSecretSecretVersion: string expected";
+                            if (message.readAuthorizerCredential != null && message.hasOwnProperty("readAuthorizerCredential")) {
+                                var error = $root.google.cloud.developerconnect.v1.UserCredential.verify(message.readAuthorizerCredential);
+                                if (error)
+                                    return "readAuthorizerCredential." + error;
+                            }
+                            if (message.authorizerCredential != null && message.hasOwnProperty("authorizerCredential")) {
+                                var error = $root.google.cloud.developerconnect.v1.UserCredential.verify(message.authorizerCredential);
+                                if (error)
+                                    return "authorizerCredential." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GitLabConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.GitLabConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.GitLabConfig} GitLabConfig
+                         */
+                        GitLabConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.GitLabConfig)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.GitLabConfig();
+                            if (object.webhookSecretSecretVersion != null)
+                                message.webhookSecretSecretVersion = String(object.webhookSecretSecretVersion);
+                            if (object.readAuthorizerCredential != null) {
+                                if (typeof object.readAuthorizerCredential !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.GitLabConfig.readAuthorizerCredential: object expected");
+                                message.readAuthorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.fromObject(object.readAuthorizerCredential);
+                            }
+                            if (object.authorizerCredential != null) {
+                                if (typeof object.authorizerCredential !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.GitLabConfig.authorizerCredential: object expected");
+                                message.authorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.fromObject(object.authorizerCredential);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GitLabConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.GitLabConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.GitLabConfig} message GitLabConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GitLabConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.webhookSecretSecretVersion = "";
+                                object.readAuthorizerCredential = null;
+                                object.authorizerCredential = null;
+                            }
+                            if (message.webhookSecretSecretVersion != null && message.hasOwnProperty("webhookSecretSecretVersion"))
+                                object.webhookSecretSecretVersion = message.webhookSecretSecretVersion;
+                            if (message.readAuthorizerCredential != null && message.hasOwnProperty("readAuthorizerCredential"))
+                                object.readAuthorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.toObject(message.readAuthorizerCredential, options);
+                            if (message.authorizerCredential != null && message.hasOwnProperty("authorizerCredential"))
+                                object.authorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.toObject(message.authorizerCredential, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GitLabConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.GitLabConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GitLabConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GitLabConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.GitLabConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GitLabConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.GitLabConfig";
+                        };
+    
+                        return GitLabConfig;
+                    })();
+    
+                    v1.UserCredential = (function() {
+    
+                        /**
+                         * Properties of a UserCredential.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IUserCredential
+                         * @property {string|null} [userTokenSecretVersion] UserCredential userTokenSecretVersion
+                         * @property {string|null} [username] UserCredential username
+                         */
+    
+                        /**
+                         * Constructs a new UserCredential.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a UserCredential.
+                         * @implements IUserCredential
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IUserCredential=} [properties] Properties to set
+                         */
+                        function UserCredential(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UserCredential userTokenSecretVersion.
+                         * @member {string} userTokenSecretVersion
+                         * @memberof google.cloud.developerconnect.v1.UserCredential
+                         * @instance
+                         */
+                        UserCredential.prototype.userTokenSecretVersion = "";
+    
+                        /**
+                         * UserCredential username.
+                         * @member {string} username
+                         * @memberof google.cloud.developerconnect.v1.UserCredential
+                         * @instance
+                         */
+                        UserCredential.prototype.username = "";
+    
+                        /**
+                         * Creates a new UserCredential instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.UserCredential
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IUserCredential=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.UserCredential} UserCredential instance
+                         */
+                        UserCredential.create = function create(properties) {
+                            return new UserCredential(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UserCredential message. Does not implicitly {@link google.cloud.developerconnect.v1.UserCredential.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.UserCredential
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IUserCredential} message UserCredential message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserCredential.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.userTokenSecretVersion != null && Object.hasOwnProperty.call(message, "userTokenSecretVersion"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.userTokenSecretVersion);
+                            if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.username);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UserCredential message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.UserCredential.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.UserCredential
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IUserCredential} message UserCredential message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserCredential.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a UserCredential message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.UserCredential
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.UserCredential} UserCredential
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserCredential.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.UserCredential();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.userTokenSecretVersion = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.username = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a UserCredential message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.UserCredential
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.UserCredential} UserCredential
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserCredential.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a UserCredential message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.UserCredential
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UserCredential.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.userTokenSecretVersion != null && message.hasOwnProperty("userTokenSecretVersion"))
+                                if (!$util.isString(message.userTokenSecretVersion))
+                                    return "userTokenSecretVersion: string expected";
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                if (!$util.isString(message.username))
+                                    return "username: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a UserCredential message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.UserCredential
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.UserCredential} UserCredential
+                         */
+                        UserCredential.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.UserCredential)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.UserCredential();
+                            if (object.userTokenSecretVersion != null)
+                                message.userTokenSecretVersion = String(object.userTokenSecretVersion);
+                            if (object.username != null)
+                                message.username = String(object.username);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a UserCredential message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.UserCredential
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.UserCredential} message UserCredential
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UserCredential.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.userTokenSecretVersion = "";
+                                object.username = "";
+                            }
+                            if (message.userTokenSecretVersion != null && message.hasOwnProperty("userTokenSecretVersion"))
+                                object.userTokenSecretVersion = message.userTokenSecretVersion;
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                object.username = message.username;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UserCredential to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.UserCredential
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UserCredential.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UserCredential
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.UserCredential
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UserCredential.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.UserCredential";
+                        };
+    
+                        return UserCredential;
+                    })();
+    
+                    v1.GitLabEnterpriseConfig = (function() {
+    
+                        /**
+                         * Properties of a GitLabEnterpriseConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IGitLabEnterpriseConfig
+                         * @property {string|null} [hostUri] GitLabEnterpriseConfig hostUri
+                         * @property {string|null} [webhookSecretSecretVersion] GitLabEnterpriseConfig webhookSecretSecretVersion
+                         * @property {google.cloud.developerconnect.v1.IUserCredential|null} [readAuthorizerCredential] GitLabEnterpriseConfig readAuthorizerCredential
+                         * @property {google.cloud.developerconnect.v1.IUserCredential|null} [authorizerCredential] GitLabEnterpriseConfig authorizerCredential
+                         * @property {google.cloud.developerconnect.v1.IServiceDirectoryConfig|null} [serviceDirectoryConfig] GitLabEnterpriseConfig serviceDirectoryConfig
+                         * @property {string|null} [sslCaCertificate] GitLabEnterpriseConfig sslCaCertificate
+                         * @property {string|null} [serverVersion] GitLabEnterpriseConfig serverVersion
+                         */
+    
+                        /**
+                         * Constructs a new GitLabEnterpriseConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a GitLabEnterpriseConfig.
+                         * @implements IGitLabEnterpriseConfig
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IGitLabEnterpriseConfig=} [properties] Properties to set
+                         */
+                        function GitLabEnterpriseConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GitLabEnterpriseConfig hostUri.
+                         * @member {string} hostUri
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @instance
+                         */
+                        GitLabEnterpriseConfig.prototype.hostUri = "";
+    
+                        /**
+                         * GitLabEnterpriseConfig webhookSecretSecretVersion.
+                         * @member {string} webhookSecretSecretVersion
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @instance
+                         */
+                        GitLabEnterpriseConfig.prototype.webhookSecretSecretVersion = "";
+    
+                        /**
+                         * GitLabEnterpriseConfig readAuthorizerCredential.
+                         * @member {google.cloud.developerconnect.v1.IUserCredential|null|undefined} readAuthorizerCredential
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @instance
+                         */
+                        GitLabEnterpriseConfig.prototype.readAuthorizerCredential = null;
+    
+                        /**
+                         * GitLabEnterpriseConfig authorizerCredential.
+                         * @member {google.cloud.developerconnect.v1.IUserCredential|null|undefined} authorizerCredential
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @instance
+                         */
+                        GitLabEnterpriseConfig.prototype.authorizerCredential = null;
+    
+                        /**
+                         * GitLabEnterpriseConfig serviceDirectoryConfig.
+                         * @member {google.cloud.developerconnect.v1.IServiceDirectoryConfig|null|undefined} serviceDirectoryConfig
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @instance
+                         */
+                        GitLabEnterpriseConfig.prototype.serviceDirectoryConfig = null;
+    
+                        /**
+                         * GitLabEnterpriseConfig sslCaCertificate.
+                         * @member {string} sslCaCertificate
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @instance
+                         */
+                        GitLabEnterpriseConfig.prototype.sslCaCertificate = "";
+    
+                        /**
+                         * GitLabEnterpriseConfig serverVersion.
+                         * @member {string} serverVersion
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @instance
+                         */
+                        GitLabEnterpriseConfig.prototype.serverVersion = "";
+    
+                        /**
+                         * Creates a new GitLabEnterpriseConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGitLabEnterpriseConfig=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.GitLabEnterpriseConfig} GitLabEnterpriseConfig instance
+                         */
+                        GitLabEnterpriseConfig.create = function create(properties) {
+                            return new GitLabEnterpriseConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GitLabEnterpriseConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.GitLabEnterpriseConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGitLabEnterpriseConfig} message GitLabEnterpriseConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitLabEnterpriseConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hostUri != null && Object.hasOwnProperty.call(message, "hostUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.hostUri);
+                            if (message.webhookSecretSecretVersion != null && Object.hasOwnProperty.call(message, "webhookSecretSecretVersion"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.webhookSecretSecretVersion);
+                            if (message.readAuthorizerCredential != null && Object.hasOwnProperty.call(message, "readAuthorizerCredential"))
+                                $root.google.cloud.developerconnect.v1.UserCredential.encode(message.readAuthorizerCredential, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.authorizerCredential != null && Object.hasOwnProperty.call(message, "authorizerCredential"))
+                                $root.google.cloud.developerconnect.v1.UserCredential.encode(message.authorizerCredential, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.serviceDirectoryConfig != null && Object.hasOwnProperty.call(message, "serviceDirectoryConfig"))
+                                $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.encode(message.serviceDirectoryConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.sslCaCertificate != null && Object.hasOwnProperty.call(message, "sslCaCertificate"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.sslCaCertificate);
+                            if (message.serverVersion != null && Object.hasOwnProperty.call(message, "serverVersion"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.serverVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GitLabEnterpriseConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GitLabEnterpriseConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGitLabEnterpriseConfig} message GitLabEnterpriseConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitLabEnterpriseConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GitLabEnterpriseConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.GitLabEnterpriseConfig} GitLabEnterpriseConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitLabEnterpriseConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GitLabEnterpriseConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.hostUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.webhookSecretSecretVersion = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.readAuthorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.authorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.serviceDirectoryConfig = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.sslCaCertificate = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.serverVersion = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GitLabEnterpriseConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.GitLabEnterpriseConfig} GitLabEnterpriseConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitLabEnterpriseConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GitLabEnterpriseConfig message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GitLabEnterpriseConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.hostUri != null && message.hasOwnProperty("hostUri"))
+                                if (!$util.isString(message.hostUri))
+                                    return "hostUri: string expected";
+                            if (message.webhookSecretSecretVersion != null && message.hasOwnProperty("webhookSecretSecretVersion"))
+                                if (!$util.isString(message.webhookSecretSecretVersion))
+                                    return "webhookSecretSecretVersion: string expected";
+                            if (message.readAuthorizerCredential != null && message.hasOwnProperty("readAuthorizerCredential")) {
+                                var error = $root.google.cloud.developerconnect.v1.UserCredential.verify(message.readAuthorizerCredential);
+                                if (error)
+                                    return "readAuthorizerCredential." + error;
+                            }
+                            if (message.authorizerCredential != null && message.hasOwnProperty("authorizerCredential")) {
+                                var error = $root.google.cloud.developerconnect.v1.UserCredential.verify(message.authorizerCredential);
+                                if (error)
+                                    return "authorizerCredential." + error;
+                            }
+                            if (message.serviceDirectoryConfig != null && message.hasOwnProperty("serviceDirectoryConfig")) {
+                                var error = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.verify(message.serviceDirectoryConfig);
+                                if (error)
+                                    return "serviceDirectoryConfig." + error;
+                            }
+                            if (message.sslCaCertificate != null && message.hasOwnProperty("sslCaCertificate"))
+                                if (!$util.isString(message.sslCaCertificate))
+                                    return "sslCaCertificate: string expected";
+                            if (message.serverVersion != null && message.hasOwnProperty("serverVersion"))
+                                if (!$util.isString(message.serverVersion))
+                                    return "serverVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GitLabEnterpriseConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.GitLabEnterpriseConfig} GitLabEnterpriseConfig
+                         */
+                        GitLabEnterpriseConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.GitLabEnterpriseConfig)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.GitLabEnterpriseConfig();
+                            if (object.hostUri != null)
+                                message.hostUri = String(object.hostUri);
+                            if (object.webhookSecretSecretVersion != null)
+                                message.webhookSecretSecretVersion = String(object.webhookSecretSecretVersion);
+                            if (object.readAuthorizerCredential != null) {
+                                if (typeof object.readAuthorizerCredential !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.GitLabEnterpriseConfig.readAuthorizerCredential: object expected");
+                                message.readAuthorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.fromObject(object.readAuthorizerCredential);
+                            }
+                            if (object.authorizerCredential != null) {
+                                if (typeof object.authorizerCredential !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.GitLabEnterpriseConfig.authorizerCredential: object expected");
+                                message.authorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.fromObject(object.authorizerCredential);
+                            }
+                            if (object.serviceDirectoryConfig != null) {
+                                if (typeof object.serviceDirectoryConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.GitLabEnterpriseConfig.serviceDirectoryConfig: object expected");
+                                message.serviceDirectoryConfig = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.fromObject(object.serviceDirectoryConfig);
+                            }
+                            if (object.sslCaCertificate != null)
+                                message.sslCaCertificate = String(object.sslCaCertificate);
+                            if (object.serverVersion != null)
+                                message.serverVersion = String(object.serverVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GitLabEnterpriseConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.GitLabEnterpriseConfig} message GitLabEnterpriseConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GitLabEnterpriseConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.hostUri = "";
+                                object.webhookSecretSecretVersion = "";
+                                object.readAuthorizerCredential = null;
+                                object.authorizerCredential = null;
+                                object.serviceDirectoryConfig = null;
+                                object.sslCaCertificate = "";
+                                object.serverVersion = "";
+                            }
+                            if (message.hostUri != null && message.hasOwnProperty("hostUri"))
+                                object.hostUri = message.hostUri;
+                            if (message.webhookSecretSecretVersion != null && message.hasOwnProperty("webhookSecretSecretVersion"))
+                                object.webhookSecretSecretVersion = message.webhookSecretSecretVersion;
+                            if (message.readAuthorizerCredential != null && message.hasOwnProperty("readAuthorizerCredential"))
+                                object.readAuthorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.toObject(message.readAuthorizerCredential, options);
+                            if (message.authorizerCredential != null && message.hasOwnProperty("authorizerCredential"))
+                                object.authorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.toObject(message.authorizerCredential, options);
+                            if (message.serviceDirectoryConfig != null && message.hasOwnProperty("serviceDirectoryConfig"))
+                                object.serviceDirectoryConfig = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.toObject(message.serviceDirectoryConfig, options);
+                            if (message.sslCaCertificate != null && message.hasOwnProperty("sslCaCertificate"))
+                                object.sslCaCertificate = message.sslCaCertificate;
+                            if (message.serverVersion != null && message.hasOwnProperty("serverVersion"))
+                                object.serverVersion = message.serverVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GitLabEnterpriseConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GitLabEnterpriseConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GitLabEnterpriseConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.GitLabEnterpriseConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GitLabEnterpriseConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.GitLabEnterpriseConfig";
+                        };
+    
+                        return GitLabEnterpriseConfig;
                     })();
     
                     v1.ListConnectionsRequest = (function() {
@@ -4034,6 +5861,7 @@
                          * @property {boolean|null} [reconciling] GitRepositoryLink reconciling
                          * @property {Object.<string,string>|null} [annotations] GitRepositoryLink annotations
                          * @property {string|null} [uid] GitRepositoryLink uid
+                         * @property {string|null} [webhookId] GitRepositoryLink webhookId
                          */
     
                         /**
@@ -4134,6 +5962,14 @@
                         GitRepositoryLink.prototype.uid = "";
     
                         /**
+                         * GitRepositoryLink webhookId.
+                         * @member {string} webhookId
+                         * @memberof google.cloud.developerconnect.v1.GitRepositoryLink
+                         * @instance
+                         */
+                        GitRepositoryLink.prototype.webhookId = "";
+    
+                        /**
                          * Creates a new GitRepositoryLink instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.developerconnect.v1.GitRepositoryLink
@@ -4179,6 +6015,8 @@
                                     writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
                             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.uid);
+                            if (message.webhookId != null && Object.hasOwnProperty.call(message, "webhookId"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.webhookId);
                             return writer;
                         };
     
@@ -4291,6 +6129,10 @@
                                         message.uid = reader.string();
                                         break;
                                     }
+                                case 11: {
+                                        message.webhookId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4372,6 +6214,9 @@
                             if (message.uid != null && message.hasOwnProperty("uid"))
                                 if (!$util.isString(message.uid))
                                     return "uid: string expected";
+                            if (message.webhookId != null && message.hasOwnProperty("webhookId"))
+                                if (!$util.isString(message.webhookId))
+                                    return "webhookId: string expected";
                             return null;
                         };
     
@@ -4426,6 +6271,8 @@
                             }
                             if (object.uid != null)
                                 message.uid = String(object.uid);
+                            if (object.webhookId != null)
+                                message.webhookId = String(object.webhookId);
                             return message;
                         };
     
@@ -4455,6 +6302,7 @@
                                 object.etag = "";
                                 object.reconciling = false;
                                 object.uid = "";
+                                object.webhookId = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4483,6 +6331,8 @@
                             }
                             if (message.uid != null && message.hasOwnProperty("uid"))
                                 object.uid = message.uid;
+                            if (message.webhookId != null && message.hasOwnProperty("webhookId"))
+                                object.webhookId = message.webhookId;
                             return object;
                         };
     

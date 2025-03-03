@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -464,6 +464,110 @@ describe('v1.TripServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close();
             await assert.rejects(client.getTrip(request), expectedError);
+        });
+    });
+
+    describe('deleteTrip', () => {
+        it('invokes deleteTrip without error', async () => {
+            const client = new tripserviceModule.v1.TripServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.v1.DeleteTripRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedHeaderRequestParams = 'provider_id=providers%2Fvalue';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteTrip = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteTrip(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTrip as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTrip as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTrip without error using callback', async () => {
+            const client = new tripserviceModule.v1.TripServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.v1.DeleteTripRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedHeaderRequestParams = 'provider_id=providers%2Fvalue';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteTrip = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteTrip(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTrip as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTrip as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTrip with error', async () => {
+            const client = new tripserviceModule.v1.TripServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.v1.DeleteTripRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedHeaderRequestParams = 'provider_id=providers%2Fvalue';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteTrip = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteTrip(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteTrip as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTrip as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTrip with closed client', async () => {
+            const client = new tripserviceModule.v1.TripServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.maps.fleetengine.v1.DeleteTripRequest()
+            );
+            // path template: {provider_id=providers/*}
+            request.name = 'providers/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close();
+            await assert.rejects(client.deleteTrip(request), expectedError);
         });
     });
 

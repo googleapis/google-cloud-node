@@ -24,7 +24,15 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "AddPacketMirroringRule": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "AddRule": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "AggregatedList": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -48,6 +56,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "GetPacketMirroringRule": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetRule": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -64,11 +76,19 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "PatchPacketMirroringRule": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "PatchRule": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "RemoveAssociation": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RemovePacketMirroringRule": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

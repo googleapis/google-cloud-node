@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -233,7 +233,7 @@ export class TripServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const tripServiceStubMethods =
-        ['createTrip', 'getTrip', 'reportBillableTrip', 'searchTrips', 'updateTrip'];
+        ['createTrip', 'getTrip', 'deleteTrip', 'reportBillableTrip', 'searchTrips', 'updateTrip'];
     for (const methodName of tripServiceStubMethods) {
       const callPromise = this.tripServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -585,6 +585,95 @@ export class TripServiceClient {
     return this.innerApiCalls.getTrip(request, options, callback);
   }
 /**
+ * Deletes a single Trip.
+ *
+ * Returns FAILED_PRECONDITION if the Trip is active and assigned to a
+ * vehicle.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {maps.fleetengine.v1.RequestHeader} [request.header]
+ *   Optional. The standard Fleet Engine request header.
+ * @param {string} request.name
+ *   Required. Must be in the format `providers/{provider}/trips/{trip}`.
+ *   The provider must be the Project ID (for example, `sample-cloud-project`)
+ *   of the Google Cloud Project of which the service account making
+ *   this call is a member.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/trip_service.delete_trip.js</caption>
+ * region_tag:fleetengine_v1_generated_TripService_DeleteTrip_async
+ */
+  deleteTrip(
+      request?: protos.maps.fleetengine.v1.IDeleteTripRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.maps.fleetengine.v1.IDeleteTripRequest|undefined, {}|undefined
+      ]>;
+  deleteTrip(
+      request: protos.maps.fleetengine.v1.IDeleteTripRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.maps.fleetengine.v1.IDeleteTripRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteTrip(
+      request: protos.maps.fleetengine.v1.IDeleteTripRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.maps.fleetengine.v1.IDeleteTripRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteTrip(
+      request?: protos.maps.fleetengine.v1.IDeleteTripRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.maps.fleetengine.v1.IDeleteTripRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.maps.fleetengine.v1.IDeleteTripRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.maps.fleetengine.v1.IDeleteTripRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    let routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
+          Object.assign(routingParameter, { provider_id: parameterValue });
+        }
+      }
+    }
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams(
+      routingParameter
+    );
+    this.initialize();
+    return this.innerApiCalls.deleteTrip(request, options, callback);
+  }
+/**
  * Report billable trip usage.
  *
  * @param {Object} request
@@ -926,7 +1015,7 @@ export class TripServiceClient {
   }
 
 /**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * Equivalent to `searchTrips`, but returns a NodeJS Stream object.
  * @param {Object} request
  *   The request object that will be sent.
  * @param {maps.fleetengine.v1.RequestHeader} request.header

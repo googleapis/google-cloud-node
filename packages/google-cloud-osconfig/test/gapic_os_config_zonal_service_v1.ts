@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -367,7 +367,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
       );
@@ -400,7 +400,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
       );
@@ -448,7 +448,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getOsPolicyAssignment = stubSimpleCall(
         undefined,
@@ -508,7 +508,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
       );
@@ -541,7 +541,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
       );
@@ -589,7 +589,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getOsPolicyAssignmentReport = stubSimpleCall(
         undefined,
@@ -649,7 +649,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.Inventory()
       );
@@ -681,7 +681,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.Inventory()
       );
@@ -729,7 +729,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getInventory = stubSimpleCall(
         undefined,
@@ -783,7 +783,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.VulnerabilityReport()
       );
@@ -816,7 +816,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.VulnerabilityReport()
       );
@@ -864,7 +864,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getVulnerabilityReport = stubSimpleCall(
         undefined,
@@ -924,7 +924,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -958,7 +958,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1013,7 +1013,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createOsPolicyAssignment = stubLongRunningCall(
         undefined,
@@ -1048,7 +1048,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createOsPolicyAssignment = stubLongRunningCall(
         undefined,
@@ -1129,7 +1129,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['osPolicyAssignment', 'name']
       );
       request.osPolicyAssignment.name = defaultValue1;
-      const expectedHeaderRequestParams = `os_policy_assignment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `os_policy_assignment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1164,7 +1164,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['osPolicyAssignment', 'name']
       );
       request.osPolicyAssignment.name = defaultValue1;
-      const expectedHeaderRequestParams = `os_policy_assignment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `os_policy_assignment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1220,7 +1220,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['osPolicyAssignment', 'name']
       );
       request.osPolicyAssignment.name = defaultValue1;
-      const expectedHeaderRequestParams = `os_policy_assignment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `os_policy_assignment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateOsPolicyAssignment = stubLongRunningCall(
         undefined,
@@ -1256,7 +1256,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['osPolicyAssignment', 'name']
       );
       request.osPolicyAssignment.name = defaultValue1;
-      const expectedHeaderRequestParams = `os_policy_assignment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `os_policy_assignment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateOsPolicyAssignment = stubLongRunningCall(
         undefined,
@@ -1336,7 +1336,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1370,7 +1370,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1425,7 +1425,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteOsPolicyAssignment = stubLongRunningCall(
         undefined,
@@ -1460,7 +1460,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteOsPolicyAssignment = stubLongRunningCall(
         undefined,
@@ -1540,7 +1540,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
@@ -1581,7 +1581,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
@@ -1639,7 +1639,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listOsPolicyAssignments = stubSimpleCall(
         undefined,
@@ -1674,7 +1674,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
@@ -1742,7 +1742,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOSPolicyAssignments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1799,7 +1799,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
@@ -1854,7 +1854,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOSPolicyAssignments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1902,7 +1902,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
@@ -1943,7 +1943,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
@@ -2001,7 +2001,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listOsPolicyAssignmentRevisions = stubSimpleCall(
         undefined,
@@ -2036,7 +2036,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
@@ -2107,7 +2107,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOSPolicyAssignmentRevisions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2167,7 +2167,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
@@ -2222,7 +2222,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOSPolicyAssignmentRevisions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2270,7 +2270,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
@@ -2311,7 +2311,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
@@ -2369,7 +2369,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listOsPolicyAssignmentReports = stubSimpleCall(
         undefined,
@@ -2404,7 +2404,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
@@ -2477,7 +2477,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOSPolicyAssignmentReports.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2539,7 +2539,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
@@ -2594,7 +2594,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOSPolicyAssignmentReports.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2642,7 +2642,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.osconfig.v1.Inventory()),
         generateSampleMessage(new protos.google.cloud.osconfig.v1.Inventory()),
@@ -2676,7 +2676,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.osconfig.v1.Inventory()),
         generateSampleMessage(new protos.google.cloud.osconfig.v1.Inventory()),
@@ -2726,7 +2726,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listInventories = stubSimpleCall(
         undefined,
@@ -2758,7 +2758,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.osconfig.v1.Inventory()),
         generateSampleMessage(new protos.google.cloud.osconfig.v1.Inventory()),
@@ -2813,7 +2813,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInventories.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2863,7 +2863,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.osconfig.v1.Inventory()),
         generateSampleMessage(new protos.google.cloud.osconfig.v1.Inventory()),
@@ -2907,7 +2907,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInventories.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2950,7 +2950,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.VulnerabilityReport()
@@ -2991,7 +2991,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.VulnerabilityReport()
@@ -3049,7 +3049,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listVulnerabilityReports = stubSimpleCall(
         undefined,
@@ -3084,7 +3084,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.VulnerabilityReport()
@@ -3152,7 +3152,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVulnerabilityReports.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3209,7 +3209,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.VulnerabilityReport()
@@ -3264,7 +3264,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVulnerabilityReports.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
