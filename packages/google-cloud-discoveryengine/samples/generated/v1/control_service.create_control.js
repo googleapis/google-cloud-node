@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,9 +30,9 @@ function main(parent, control, controlId) {
    */
   /**
    *  Required. Full resource name of parent data store. Format:
-   *  `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+   *  `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`
    *  or
-   *  `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
+   *  `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
    */
   // const parent = 'abc123'
   /**

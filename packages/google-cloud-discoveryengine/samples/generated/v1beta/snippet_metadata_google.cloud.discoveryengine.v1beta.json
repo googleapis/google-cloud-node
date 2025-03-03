@@ -68,6 +68,74 @@
             }
         },
         {
+            "regionTag": "discoveryengine_v1beta_generated_CompletionService_AdvancedCompleteQuery_async",
+            "title": "CompletionService advancedCompleteQuery Sample",
+            "origin": "API_DEFINITION",
+            "description": " Completes the user input with advanced keyword suggestions.",
+            "canonical": true,
+            "file": "completion_service.advanced_complete_query.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 122,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AdvancedCompleteQuery",
+                "fullName": "google.cloud.discoveryengine.v1beta.CompletionService.AdvancedCompleteQuery",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "completion_config",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query_model",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "user_pseudo_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "user_info",
+                        "type": ".google.cloud.discoveryengine.v1beta.UserInfo"
+                    },
+                    {
+                        "name": "include_tail_suggestions",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "boost_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryRequest.BoostSpec"
+                    },
+                    {
+                        "name": "suggestion_types",
+                        "type": "TYPE_ENUM[]"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryResponse",
+                "client": {
+                    "shortName": "CompletionServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1beta.CompletionServiceClient"
+                },
+                "method": {
+                    "shortName": "AdvancedCompleteQuery",
+                    "fullName": "google.cloud.discoveryengine.v1beta.CompletionService.AdvancedCompleteQuery",
+                    "service": {
+                        "shortName": "CompletionService",
+                        "fullName": "google.cloud.discoveryengine.v1beta.CompletionService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "discoveryengine_v1beta_generated_CompletionService_ImportSuggestionDenyListEntries_async",
             "title": "CompletionService importSuggestionDenyListEntries Sample",
             "origin": "API_DEFINITION",
@@ -782,7 +850,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 129,
+                    "end": 122,
                     "type": "FULL"
                 }
             ],
@@ -810,6 +878,10 @@
                     {
                         "name": "related_questions_spec",
                         "type": ".google.cloud.discoveryengine.v1beta.AnswerQueryRequest.RelatedQuestionsSpec"
+                    },
+                    {
+                        "name": "grounding_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.AnswerQueryRequest.GroundingSpec"
                     },
                     {
                         "name": "answer_generation_spec",
@@ -2296,6 +2368,126 @@
             }
         },
         {
+            "regionTag": "discoveryengine_v1beta_generated_GroundedGenerationService_StreamGenerateGroundedContent_async",
+            "title": "CompletionService streamGenerateGroundedContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generates grounded content in a streaming fashion.",
+            "canonical": true,
+            "file": "grounded_generation_service.stream_generate_grounded_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 97,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamGenerateGroundedContent",
+                "fullName": "google.cloud.discoveryengine.v1beta.GroundedGenerationService.StreamGenerateGroundedContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "location",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "system_instruction",
+                        "type": ".google.cloud.discoveryengine.v1beta.GroundedGenerationContent"
+                    },
+                    {
+                        "name": "contents",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "generation_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.GenerateGroundedContentRequest.GenerationSpec"
+                    },
+                    {
+                        "name": "grounding_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.GenerateGroundedContentRequest.GroundingSpec"
+                    },
+                    {
+                        "name": "user_labels",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1beta.GenerateGroundedContentResponse",
+                "client": {
+                    "shortName": "GroundedGenerationServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1beta.GroundedGenerationServiceClient"
+                },
+                "method": {
+                    "shortName": "StreamGenerateGroundedContent",
+                    "fullName": "google.cloud.discoveryengine.v1beta.GroundedGenerationService.StreamGenerateGroundedContent",
+                    "service": {
+                        "shortName": "GroundedGenerationService",
+                        "fullName": "google.cloud.discoveryengine.v1beta.GroundedGenerationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1beta_generated_GroundedGenerationService_GenerateGroundedContent_async",
+            "title": "CompletionService generateGroundedContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generates grounded content.",
+            "canonical": true,
+            "file": "grounded_generation_service.generate_grounded_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 93,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GenerateGroundedContent",
+                "fullName": "google.cloud.discoveryengine.v1beta.GroundedGenerationService.GenerateGroundedContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "location",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "system_instruction",
+                        "type": ".google.cloud.discoveryengine.v1beta.GroundedGenerationContent"
+                    },
+                    {
+                        "name": "contents",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "generation_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.GenerateGroundedContentRequest.GenerationSpec"
+                    },
+                    {
+                        "name": "grounding_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.GenerateGroundedContentRequest.GroundingSpec"
+                    },
+                    {
+                        "name": "user_labels",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1beta.GenerateGroundedContentResponse",
+                "client": {
+                    "shortName": "GroundedGenerationServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1beta.GroundedGenerationServiceClient"
+                },
+                "method": {
+                    "shortName": "GenerateGroundedContent",
+                    "fullName": "google.cloud.discoveryengine.v1beta.GroundedGenerationService.GenerateGroundedContent",
+                    "service": {
+                        "shortName": "GroundedGenerationService",
+                        "fullName": "google.cloud.discoveryengine.v1beta.GroundedGenerationService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "discoveryengine_v1beta_generated_GroundedGenerationService_CheckGrounding_async",
             "title": "CompletionService checkGrounding Sample",
             "origin": "API_DEFINITION",
@@ -3254,7 +3446,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 334,
+                    "end": 352,
                     "type": "FULL"
                 }
             ],
@@ -3289,6 +3481,10 @@
                     },
                     {
                         "name": "offset",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "one_box_page_size",
                         "type": "TYPE_INT32"
                     },
                     {
@@ -3382,6 +3578,10 @@
                     {
                         "name": "relevance_threshold",
                         "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold"
+                    },
+                    {
+                        "name": "personalization_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.PersonalizationSpec"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1beta.SearchResponse",
@@ -3392,6 +3592,170 @@
                 "method": {
                     "shortName": "Search",
                     "fullName": "google.cloud.discoveryengine.v1beta.SearchService.Search",
+                    "service": {
+                        "shortName": "SearchService",
+                        "fullName": "google.cloud.discoveryengine.v1beta.SearchService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1beta_generated_SearchService_SearchLite_async",
+            "title": "CompletionService searchLite Sample",
+            "origin": "API_DEFINITION",
+            "description": " Performs a search. Similar to the [SearchService.Search][google.cloud.discoveryengine.v1beta.SearchService.Search] method, but a lite version that allows API key for authentication, where OAuth and IAM checks are not required. Only public website search is supported by this method. If data stores and engines not associated with public website search are specified, a `FAILED_PRECONDITION` error is returned. This method can be used for easy onboarding without having to implement an authentication backend. However, it is strongly recommended to use [SearchService.Search][google.cloud.discoveryengine.v1beta.SearchService.Search] instead with required OAuth and IAM checks to provide better data security.",
+            "canonical": true,
+            "file": "search_service.search_lite.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 352,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SearchLite",
+                "fullName": "google.cloud.discoveryengine.v1beta.SearchService.SearchLite",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "serving_config",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "branch",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "image_query",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.ImageQuery"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "offset",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "one_box_page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "data_store_specs",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "canonical_filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "user_info",
+                        "type": ".google.cloud.discoveryengine.v1beta.UserInfo"
+                    },
+                    {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "facet_specs",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "boost_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec"
+                    },
+                    {
+                        "name": "params",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "query_expansion_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec"
+                    },
+                    {
+                        "name": "spell_correction_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec"
+                    },
+                    {
+                        "name": "user_pseudo_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "content_search_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec"
+                    },
+                    {
+                        "name": "embedding_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec"
+                    },
+                    {
+                        "name": "ranking_expression",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "safe_search",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "user_labels",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "natural_language_query_understanding_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec"
+                    },
+                    {
+                        "name": "search_as_you_type_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.SearchAsYouTypeSpec"
+                    },
+                    {
+                        "name": "session",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "session_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec"
+                    },
+                    {
+                        "name": "relevance_threshold",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold"
+                    },
+                    {
+                        "name": "personalization_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.PersonalizationSpec"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1beta.SearchResponse",
+                "client": {
+                    "shortName": "SearchServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1beta.SearchServiceClient"
+                },
+                "method": {
+                    "shortName": "SearchLite",
+                    "fullName": "google.cloud.discoveryengine.v1beta.SearchService.SearchLite",
                     "service": {
                         "shortName": "SearchService",
                         "fullName": "google.cloud.discoveryengine.v1beta.SearchService"
@@ -3924,6 +4288,134 @@
             }
         },
         {
+            "regionTag": "discoveryengine_v1beta_generated_SiteSearchEngineService_CreateSitemap_async",
+            "title": "CompletionService createSitemap Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a [Sitemap][google.cloud.discoveryengine.v1beta.Sitemap].",
+            "canonical": true,
+            "file": "site_search_engine_service.create_sitemap.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateSitemap",
+                "fullName": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.CreateSitemap",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "sitemap",
+                        "type": ".google.cloud.discoveryengine.v1beta.Sitemap"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1beta.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateSitemap",
+                    "fullName": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.CreateSitemap",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1beta_generated_SiteSearchEngineService_DeleteSitemap_async",
+            "title": "CompletionService deleteSitemap Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a [Sitemap][google.cloud.discoveryengine.v1beta.Sitemap].",
+            "canonical": true,
+            "file": "site_search_engine_service.delete_sitemap.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteSitemap",
+                "fullName": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.DeleteSitemap",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1beta.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteSitemap",
+                    "fullName": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.DeleteSitemap",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1beta_generated_SiteSearchEngineService_FetchSitemaps_async",
+            "title": "CompletionService fetchSitemaps Sample",
+            "origin": "API_DEFINITION",
+            "description": " Fetch [Sitemap][google.cloud.discoveryengine.v1beta.Sitemap]s in a [DataStore][google.cloud.discoveryengine.v1beta.DataStore].",
+            "canonical": true,
+            "file": "site_search_engine_service.fetch_sitemaps.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "FetchSitemaps",
+                "fullName": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.FetchSitemaps",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "matcher",
+                        "type": ".google.cloud.discoveryengine.v1beta.FetchSitemapsRequest.Matcher"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1beta.FetchSitemapsResponse",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1beta.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "FetchSitemaps",
+                    "fullName": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.FetchSitemaps",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "discoveryengine_v1beta_generated_SiteSearchEngineService_EnableAdvancedSiteSearch_async",
             "title": "CompletionService enableAdvancedSiteSearch Sample",
             "origin": "API_DEFINITION",
@@ -4014,7 +4506,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -4030,6 +4522,10 @@
                     {
                         "name": "uris",
                         "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "site_credential",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

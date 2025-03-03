@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -391,7 +391,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1alpha.SiteSearchEngine()
       );
@@ -426,7 +426,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1alpha.SiteSearchEngine()
       );
@@ -476,7 +476,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSiteSearchEngine = stubSimpleCall(
         undefined,
@@ -534,7 +534,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
       );
@@ -568,7 +568,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
       );
@@ -618,7 +618,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTargetSite = stubSimpleCall(
         undefined,
@@ -676,7 +676,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1alpha.GetUriPatternDocumentDataResponse()
       );
@@ -711,7 +711,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1alpha.GetUriPatternDocumentDataResponse()
       );
@@ -761,7 +761,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getUriPatternDocumentData = stubSimpleCall(
         undefined,
@@ -825,7 +825,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -861,7 +861,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -918,7 +918,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTargetSite = stubLongRunningCall(
         undefined,
@@ -952,7 +952,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTargetSite = stubLongRunningCall(
         undefined,
@@ -1037,7 +1037,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1073,7 +1073,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1130,7 +1130,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCreateTargetSites = stubLongRunningCall(
         undefined,
@@ -1167,7 +1167,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCreateTargetSites = stubLongRunningCall(
         undefined,
@@ -1253,7 +1253,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['targetSite', 'name']
       );
       request.targetSite.name = defaultValue1;
-      const expectedHeaderRequestParams = `target_site.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `target_site.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1290,7 +1290,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['targetSite', 'name']
       );
       request.targetSite.name = defaultValue1;
-      const expectedHeaderRequestParams = `target_site.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `target_site.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1348,7 +1348,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['targetSite', 'name']
       );
       request.targetSite.name = defaultValue1;
-      const expectedHeaderRequestParams = `target_site.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `target_site.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTargetSite = stubLongRunningCall(
         undefined,
@@ -1383,7 +1383,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['targetSite', 'name']
       );
       request.targetSite.name = defaultValue1;
-      const expectedHeaderRequestParams = `target_site.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `target_site.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTargetSite = stubLongRunningCall(
         undefined,
@@ -1468,7 +1468,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1504,7 +1504,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1561,7 +1561,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTargetSite = stubLongRunningCall(
         undefined,
@@ -1595,7 +1595,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTargetSite = stubLongRunningCall(
         undefined,
@@ -1680,7 +1680,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1716,7 +1716,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1773,7 +1773,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enableAdvancedSiteSearch = stubLongRunningCall(
         undefined,
@@ -1810,7 +1810,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enableAdvancedSiteSearch = stubLongRunningCall(
         undefined,
@@ -1896,7 +1896,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1932,7 +1932,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1989,7 +1989,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.disableAdvancedSiteSearch = stubLongRunningCall(
         undefined,
@@ -2026,7 +2026,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.disableAdvancedSiteSearch = stubLongRunningCall(
         undefined,
@@ -2112,7 +2112,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2147,7 +2147,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2204,7 +2204,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.recrawlUris = stubLongRunningCall(
         undefined,
@@ -2238,7 +2238,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.recrawlUris = stubLongRunningCall(
         undefined,
@@ -2320,7 +2320,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2356,7 +2356,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2413,7 +2413,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchVerifyTargetSites = stubLongRunningCall(
         undefined,
@@ -2450,7 +2450,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchVerifyTargetSites = stubLongRunningCall(
         undefined,
@@ -2535,7 +2535,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2571,7 +2571,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2628,7 +2628,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setUriPatternDocumentData = stubLongRunningCall(
         undefined,
@@ -2665,7 +2665,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setUriPatternDocumentData = stubLongRunningCall(
         undefined,
@@ -2751,7 +2751,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
@@ -2793,7 +2793,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
@@ -2853,7 +2853,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTargetSites = stubSimpleCall(
         undefined,
@@ -2887,7 +2887,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
@@ -2953,7 +2953,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTargetSites.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3008,7 +3008,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
@@ -3061,7 +3061,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTargetSites.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3107,7 +3107,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
@@ -3150,7 +3150,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
@@ -3210,7 +3210,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchDomainVerificationStatus = stubSimpleCall(
         undefined,
@@ -3247,7 +3247,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
@@ -3322,7 +3322,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchDomainVerificationStatus.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3386,7 +3386,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
@@ -3443,7 +3443,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         ['siteSearchEngine']
       );
       request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchDomainVerificationStatus.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

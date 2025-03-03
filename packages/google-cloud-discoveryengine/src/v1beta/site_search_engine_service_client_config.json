@@ -48,6 +48,18 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "CreateSitemap": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteSitemap": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "FetchSitemaps": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "EnableAdvancedSiteSearch": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

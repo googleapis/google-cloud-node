@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -360,7 +360,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1alpha.Schema()
       );
@@ -391,7 +391,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1alpha.Schema()
       );
@@ -438,7 +438,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSchema = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSchema(request), expectedError);
@@ -487,7 +487,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -519,7 +519,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -573,7 +573,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSchema = stubLongRunningCall(
         undefined,
@@ -604,7 +604,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSchema = stubLongRunningCall(
         undefined,
@@ -678,7 +678,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['schema', 'name']
       );
       request.schema.name = defaultValue1;
-      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `schema.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -711,7 +711,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['schema', 'name']
       );
       request.schema.name = defaultValue1;
-      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `schema.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -766,7 +766,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['schema', 'name']
       );
       request.schema.name = defaultValue1;
-      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `schema.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSchema = stubLongRunningCall(
         undefined,
@@ -798,7 +798,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['schema', 'name']
       );
       request.schema.name = defaultValue1;
-      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `schema.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSchema = stubLongRunningCall(
         undefined,
@@ -871,7 +871,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -903,7 +903,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -957,7 +957,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSchema = stubLongRunningCall(
         undefined,
@@ -988,7 +988,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSchema = stubLongRunningCall(
         undefined,
@@ -1061,7 +1061,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.Schema()
@@ -1100,7 +1100,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.Schema()
@@ -1157,7 +1157,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSchemas = stubSimpleCall(
         undefined,
@@ -1188,7 +1188,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.Schema()
@@ -1249,7 +1249,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSchemas.createStream = stubPageStreamingCall(
         undefined,
@@ -1301,7 +1301,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.Schema()
@@ -1351,7 +1351,7 @@ describe('v1alpha.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSchemas.asyncIterate = stubAsyncIterationCall(
         undefined,

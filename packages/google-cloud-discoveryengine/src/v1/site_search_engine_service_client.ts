@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -412,7 +412,7 @@ export class SiteSearchEngineServiceClient {
               get: '/v1/{name=projects/*/locations/*/dataStores/*/operations/*}',
             },
             {
-              get: '/v1/{name=projects/*/locations/*/identity_mapping_stores/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/identityMappingStores/*/operations/*}',
             },
             {get: '/v1/{name=projects/*/locations/*/operations/*}'},
             {get: '/v1/{name=projects/*/operations/*}'},
@@ -455,7 +455,7 @@ export class SiteSearchEngineServiceClient {
             },
             {get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations'},
             {
-              get: '/v1/{name=projects/*/locations/*/identity_mapping_stores/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/identityMappingStores/*}/operations',
             },
             {get: '/v1/{name=projects/*/locations/*}/operations'},
             {get: '/v1/{name=projects/*}/operations'},
@@ -1833,6 +1833,10 @@ export class SiteSearchEngineServiceClient {
    *   an INVALID_ARGUMENT error is thrown. Each URI should match at least one
    *   {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite} in
    *   `site_search_engine`.
+   * @param {string} [request.siteCredential]
+   *   Optional. Full resource name of the {@link protos.|SiteCredential}, such as
+   *   `projects/* /locations/* /collections/* /dataStores/* /siteSearchEngine/siteCredentials/*`.
+   *   Only set to crawl private URIs.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2218,7 +2222,7 @@ export class SiteSearchEngineServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTargetSites`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2449,7 +2453,7 @@ export class SiteSearchEngineServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `fetchDomainVerificationStatus`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.siteSearchEngine
@@ -2668,7 +2672,7 @@ export class SiteSearchEngineServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -2681,6 +2685,20 @@ export class SiteSearchEngineServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2717,6 +2735,13 @@ export class SiteSearchEngineServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2752,11 +2777,11 @@ export class SiteSearchEngineServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -2765,6 +2790,20 @@ export class SiteSearchEngineServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2795,7 +2834,7 @@ export class SiteSearchEngineServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -2808,6 +2847,20 @@ export class SiteSearchEngineServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

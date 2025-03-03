@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. Full resource name of the parent resource. Format:
-   *  `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}`
+   *  `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
    */
   // const parent = 'abc123'
   /**
