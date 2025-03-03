@@ -321,7 +321,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Account()
       );
@@ -352,7 +352,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Account()
       );
@@ -399,7 +399,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAccount = stubSimpleCall(
         undefined,
@@ -541,7 +541,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -572,7 +572,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -619,7 +619,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAccount = stubSimpleCall(
         undefined,
@@ -672,7 +672,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['account', 'name']
       );
       request.account.name = defaultValue1;
-      const expectedHeaderRequestParams = `account.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Account()
       );
@@ -704,7 +704,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['account', 'name']
       );
       request.account.name = defaultValue1;
-      const expectedHeaderRequestParams = `account.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Account()
       );
@@ -752,7 +752,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['account', 'name']
       );
       request.account.name = defaultValue1;
-      const expectedHeaderRequestParams = `account.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAccount = stubSimpleCall(
         undefined,
@@ -1048,7 +1048,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['provider']
       );
       request.provider = defaultValue1;
-      const expectedHeaderRequestParams = `provider=${defaultValue1}`;
+      const expectedHeaderRequestParams = `provider=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.Account()
@@ -1087,7 +1087,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['provider']
       );
       request.provider = defaultValue1;
-      const expectedHeaderRequestParams = `provider=${defaultValue1}`;
+      const expectedHeaderRequestParams = `provider=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.Account()
@@ -1144,7 +1144,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['provider']
       );
       request.provider = defaultValue1;
-      const expectedHeaderRequestParams = `provider=${defaultValue1}`;
+      const expectedHeaderRequestParams = `provider=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSubAccounts = stubSimpleCall(
         undefined,
@@ -1175,7 +1175,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['provider']
       );
       request.provider = defaultValue1;
-      const expectedHeaderRequestParams = `provider=${defaultValue1}`;
+      const expectedHeaderRequestParams = `provider=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.Account()
@@ -1238,7 +1238,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['provider']
       );
       request.provider = defaultValue1;
-      const expectedHeaderRequestParams = `provider=${defaultValue1}`;
+      const expectedHeaderRequestParams = `provider=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSubAccounts.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1290,7 +1290,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['provider']
       );
       request.provider = defaultValue1;
-      const expectedHeaderRequestParams = `provider=${defaultValue1}`;
+      const expectedHeaderRequestParams = `provider=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.Account()
@@ -1340,7 +1340,7 @@ describe('v1beta.AccountsServiceClient', () => {
         ['provider']
       );
       request.provider = defaultValue1;
-      const expectedHeaderRequestParams = `provider=${defaultValue1}`;
+      const expectedHeaderRequestParams = `provider=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSubAccounts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

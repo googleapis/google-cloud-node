@@ -351,7 +351,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ConversionSource()
       );
@@ -386,7 +386,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ConversionSource()
       );
@@ -436,7 +436,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConversionSource = stubSimpleCall(
         undefined,
@@ -501,7 +501,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['conversionSource', 'name']
       );
       request.conversionSource.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_source.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ConversionSource()
       );
@@ -537,7 +537,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['conversionSource', 'name']
       );
       request.conversionSource.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_source.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ConversionSource()
       );
@@ -588,7 +588,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['conversionSource', 'name']
       );
       request.conversionSource.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_source.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConversionSource = stubSimpleCall(
         undefined,
@@ -653,7 +653,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -688,7 +688,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -738,7 +738,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConversionSource = stubSimpleCall(
         undefined,
@@ -802,7 +802,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ConversionSource()
       );
@@ -837,7 +837,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ConversionSource()
       );
@@ -887,7 +887,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteConversionSource = stubSimpleCall(
         undefined,
@@ -951,7 +951,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ConversionSource()
       );
@@ -986,7 +986,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ConversionSource()
       );
@@ -1036,7 +1036,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConversionSource = stubSimpleCall(
         undefined,
@@ -1094,7 +1094,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.conversions.v1beta.ConversionSource()
@@ -1137,7 +1137,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.conversions.v1beta.ConversionSource()
@@ -1197,7 +1197,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConversionSources = stubSimpleCall(
         undefined,
@@ -1234,7 +1234,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.conversions.v1beta.ConversionSource()
@@ -1306,7 +1306,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversionSources.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1367,7 +1367,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.conversions.v1beta.ConversionSource()
@@ -1424,7 +1424,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversionSources.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

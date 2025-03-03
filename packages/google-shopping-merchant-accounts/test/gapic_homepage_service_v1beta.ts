@@ -258,7 +258,7 @@ describe('v1beta.HomepageServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Homepage()
       );
@@ -289,7 +289,7 @@ describe('v1beta.HomepageServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Homepage()
       );
@@ -336,7 +336,7 @@ describe('v1beta.HomepageServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getHomepage = stubSimpleCall(
         undefined,
@@ -389,7 +389,7 @@ describe('v1beta.HomepageServiceClient', () => {
         ['homepage', 'name']
       );
       request.homepage.name = defaultValue1;
-      const expectedHeaderRequestParams = `homepage.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `homepage.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Homepage()
       );
@@ -421,7 +421,7 @@ describe('v1beta.HomepageServiceClient', () => {
         ['homepage', 'name']
       );
       request.homepage.name = defaultValue1;
-      const expectedHeaderRequestParams = `homepage.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `homepage.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Homepage()
       );
@@ -469,7 +469,7 @@ describe('v1beta.HomepageServiceClient', () => {
         ['homepage', 'name']
       );
       request.homepage.name = defaultValue1;
-      const expectedHeaderRequestParams = `homepage.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `homepage.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateHomepage = stubSimpleCall(
         undefined,
@@ -522,7 +522,7 @@ describe('v1beta.HomepageServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Homepage()
       );
@@ -553,7 +553,7 @@ describe('v1beta.HomepageServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Homepage()
       );
@@ -600,7 +600,7 @@ describe('v1beta.HomepageServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.claimHomepage = stubSimpleCall(
         undefined,
@@ -652,7 +652,7 @@ describe('v1beta.HomepageServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Homepage()
       );
@@ -683,7 +683,7 @@ describe('v1beta.HomepageServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Homepage()
       );
@@ -730,7 +730,7 @@ describe('v1beta.HomepageServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.unclaimHomepage = stubSimpleCall(
         undefined,

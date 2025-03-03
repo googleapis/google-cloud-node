@@ -339,7 +339,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
       );
@@ -372,7 +372,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
       );
@@ -421,7 +421,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAccountTax = stubSimpleCall(
         undefined,
@@ -478,7 +478,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
         ['accountTax', 'name']
       );
       request.accountTax.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_tax.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account_tax.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
       );
@@ -512,7 +512,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
         ['accountTax', 'name']
       );
       request.accountTax.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_tax.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account_tax.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
       );
@@ -562,7 +562,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
         ['accountTax', 'name']
       );
       request.accountTax.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_tax.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account_tax.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAccountTax = stubSimpleCall(
         undefined,
@@ -619,7 +619,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
@@ -660,7 +660,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
@@ -719,7 +719,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAccountTax = stubSimpleCall(
         undefined,
@@ -752,7 +752,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
@@ -817,7 +817,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAccountTax.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -871,7 +871,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
@@ -923,7 +923,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAccountTax.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -320,7 +320,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Region()
       );
@@ -351,7 +351,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Region()
       );
@@ -398,7 +398,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRegion = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getRegion(request), expectedError);
@@ -447,7 +447,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Region()
       );
@@ -478,7 +478,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Region()
       );
@@ -525,7 +525,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRegion = stubSimpleCall(
         undefined,
@@ -578,7 +578,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['region', 'name']
       );
       request.region.name = defaultValue1;
-      const expectedHeaderRequestParams = `region.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `region.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Region()
       );
@@ -610,7 +610,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['region', 'name']
       );
       request.region.name = defaultValue1;
-      const expectedHeaderRequestParams = `region.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `region.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.Region()
       );
@@ -658,7 +658,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['region', 'name']
       );
       request.region.name = defaultValue1;
-      const expectedHeaderRequestParams = `region.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `region.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRegion = stubSimpleCall(
         undefined,
@@ -711,7 +711,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -742,7 +742,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -789,7 +789,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRegion = stubSimpleCall(
         undefined,
@@ -841,7 +841,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.Region()
@@ -880,7 +880,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.Region()
@@ -937,7 +937,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRegions = stubSimpleCall(
         undefined,
@@ -968,7 +968,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.Region()
@@ -1031,7 +1031,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRegions.createStream = stubPageStreamingCall(
         undefined,
@@ -1085,7 +1085,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.Region()
@@ -1135,7 +1135,7 @@ describe('v1beta.RegionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRegions.asyncIterate = stubAsyncIterationCall(
         undefined,
