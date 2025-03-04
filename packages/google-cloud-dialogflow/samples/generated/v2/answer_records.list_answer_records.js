@@ -35,8 +35,15 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Filters to restrict results to specific answer records.
-   *  Marked deprecated as it hasn't been, and isn't currently, supported.
+   *  Optional. Filters to restrict results to specific answer records. The
+   *  expression has the following syntax:
+   *      <field> <operator> <value> AND <field> <operator> <value>  ...
+   *  The following fields and operators are supported:
+   *  * conversation_id with equals(=) operator
+   *  Examples:
+   *  * `conversation_id=bar` matches answer records in the
+   *    `projects/foo/locations/global/conversations/bar` conversation
+   *    (assuming the parent is `projects/foo/locations/global`).
    *  For more information about filtering, see
    *  API Filtering (https://aip.dev/160).
    */

@@ -105,10 +105,10 @@ function main(participant) {
    */
   // const enableExtendedStreaming = true
   /**
-   *  Enable partial virtual agent responses. If this flag is not enabled,
-   *  response stream still contains only one final response even if some
-   *  `Fulfillment`s in Dialogflow virtual agent have been configured to return
-   *  partial responses.
+   *  Optional. Enable partial responses from Dialogflow CX agent. If this flag
+   *  is not enabled, response stream still contains only one final response even
+   *  if some `Fulfillment`s in Dialogflow CX agent have been configured to
+   *  return partial responses.
    */
   // const enablePartialAutomatedAgentReply = true
   /**

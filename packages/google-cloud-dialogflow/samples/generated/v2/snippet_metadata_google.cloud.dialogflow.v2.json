@@ -418,7 +418,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 77,
+                    "end": 84,
                     "type": "FULL"
                 }
             ],
@@ -4414,7 +4414,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 97,
+                    "end": 101,
                     "type": "FULL"
                 }
             ],
@@ -4430,6 +4430,10 @@
                     {
                         "name": "text_input",
                         "type": ".google.cloud.dialogflow.v2.TextInput"
+                    },
+                    {
+                        "name": "audio_input",
+                        "type": ".google.cloud.dialogflow.v2.AudioInput"
                     },
                     {
                         "name": "event_input",

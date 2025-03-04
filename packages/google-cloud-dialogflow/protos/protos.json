@@ -17,7 +17,6 @@
                     "java_outer_classname": "WebhookProto",
                     "java_package": "com.google.cloud.dialogflow.v2",
                     "objc_class_prefix": "DF",
-                    "cc_enable_arenas": true,
                     "(google.api.resource_definition).type": "dialogflow.googleapis.com/CXSecuritySettings",
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/securitySettings/{security_settings}"
                   },
@@ -737,7 +736,6 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
@@ -1096,7 +1094,7 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2/{participant=projects/*/locations/*/conversations/*/participants/*}:analyzeContent",
                             "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "participant,event_input"
+                            "(google.api.method_signature)": "participant,audio_input"
                           },
                           "parsedOptions": [
                             {
@@ -1114,6 +1112,9 @@
                             },
                             {
                               "(google.api.method_signature)": "participant,event_input"
+                            },
+                            {
+                              "(google.api.method_signature)": "participant,audio_input"
                             }
                           ]
                         },
@@ -1443,6 +1444,7 @@
                         "input": {
                           "oneof": [
                             "textInput",
+                            "audioInput",
                             "eventInput",
                             "suggestionInput"
                           ]
@@ -1460,6 +1462,10 @@
                         "textInput": {
                           "type": "TextInput",
                           "id": 6
+                        },
+                        "audioInput": {
+                          "type": "AudioInput",
+                          "id": 7
                         },
                         "eventInput": {
                           "type": "EventInput",
@@ -1603,7 +1609,10 @@
                         },
                         "enablePartialAutomatedAgentReply": {
                           "type": "bool",
-                          "id": 12
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "enableDebuggingInfo": {
                           "type": "bool",
@@ -1650,6 +1659,10 @@
                         "debuggingInfo": {
                           "type": "CloudConversationDebuggingInfo",
                           "id": 11
+                        },
+                        "speechModel": {
+                          "type": "string",
+                          "id": 13
                         }
                       }
                     },
@@ -1796,6 +1809,24 @@
                         "contextSize": {
                           "type": "int32",
                           "id": 3
+                        }
+                      }
+                    },
+                    "AudioInput": {
+                      "fields": {
+                        "config": {
+                          "type": "InputAudioConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "audio": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -6129,6 +6160,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "telephonyConnectionInfo": {
+                          "type": "TelephonyConnectionInfo",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -6144,6 +6182,78 @@
                             "CONVERSATION_STAGE_UNSPECIFIED": 0,
                             "VIRTUAL_AGENT_STAGE": 1,
                             "HUMAN_ASSIST_STAGE": 2
+                          }
+                        },
+                        "TelephonyConnectionInfo": {
+                          "fields": {
+                            "dialedNumber": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "sdp": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "sipHeaders": {
+                              "rule": "repeated",
+                              "type": "SipHeader",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "extraMimeContents": {
+                              "rule": "repeated",
+                              "type": "MimeContent",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SipHeader": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "MimeContent": {
+                              "fields": {
+                                "mimeType": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "content": {
+                                  "type": "bytes",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -6292,6 +6402,13 @@
                     },
                     "ConversationPhoneNumber": {
                       "fields": {
+                        "countryCode": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "phoneNumber": {
                           "type": "string",
                           "id": 3,
@@ -6736,7 +6853,22 @@
                                               }
                                             },
                                             "ControlPoint": {
-                                              "fields": {}
+                                              "fields": {
+                                                "attributeValue": {
+                                                  "type": "string",
+                                                  "id": 1,
+                                                  "options": {
+                                                    "(google.api.field_behavior)": "OPTIONAL"
+                                                  }
+                                                },
+                                                "boostAmount": {
+                                                  "type": "float",
+                                                  "id": 2,
+                                                  "options": {
+                                                    "(google.api.field_behavior)": "OPTIONAL"
+                                                  }
+                                                }
+                                              }
                                             }
                                           }
                                         }
@@ -6799,7 +6931,10 @@
                         },
                         "answerRecord": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/AnswerRecord"
+                          }
                         }
                       },
                       "nested": {
@@ -7645,6 +7780,7 @@
                             "ARTICLE_SUGGESTION": 1,
                             "FAQ": 2,
                             "SMART_REPLY": 3,
+                            "CONVERSATION_SUMMARIZATION": 8,
                             "KNOWLEDGE_SEARCH": 14,
                             "KNOWLEDGE_ASSIST": 15
                           }

@@ -39,6 +39,10 @@ function main(participant) {
    */
   // const textInput = {}
   /**
+   *  The natural language speech audio to be processed.
+   */
+  // const audioInput = {}
+  /**
    *  An input event to send to Dialogflow.
    */
   // const eventInput = {}
