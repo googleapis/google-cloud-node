@@ -87,7 +87,7 @@ describe('paginator', () => {
       assert.notStrictEqual(originalMethod, FakeClass.prototype.methodToExtend);
       assert.notStrictEqual(
         anotherMethod,
-        FakeClass.prototype.anotherMethodToExtend
+        FakeClass.prototype.anotherMethodToExtend,
       );
     });
 
@@ -394,7 +394,7 @@ describe('paginator', () => {
               results_: {},
               query: {},
               fakeRes: {},
-              anotherArg: number
+              anotherArg: number,
             ) {
               assert.deepStrictEqual(results_, results);
               assert.deepStrictEqual(query, undefined);
@@ -465,7 +465,7 @@ describe('paginator', () => {
           paginator
             .run_(parsedArguments, util.noop)
             .then(([results_]: [1]) =>
-              assert.deepStrictEqual(results_, results)
+              assert.deepStrictEqual(results_, results),
             );
         });
 
@@ -538,7 +538,7 @@ describe('paginator', () => {
         const fakeFn = sandbox.spy();
         const stream = p.paginator.runAsStream_(
           fakeArgs,
-          fakeFn
+          fakeFn,
         ) as unknown as FakeResourceStream;
 
         assert(stream instanceof FakeResourceStream);
