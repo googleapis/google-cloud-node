@@ -6620,6 +6620,9 @@ export namespace google {
                         /** OnlineReturnPolicy policy */
                         policy?: (google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.IPolicy|null);
 
+                        /** OnlineReturnPolicy seasonalOverrides */
+                        seasonalOverrides?: (google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ISeasonalOverride[]|null);
+
                         /** OnlineReturnPolicy restockingFee */
                         restockingFee?: (google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.IRestockingFee|null);
 
@@ -6668,6 +6671,9 @@ export namespace google {
 
                         /** OnlineReturnPolicy policy. */
                         public policy?: (google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.IPolicy|null);
+
+                        /** OnlineReturnPolicy seasonalOverrides. */
+                        public seasonalOverrides: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ISeasonalOverride[];
 
                         /** OnlineReturnPolicy restockingFee. */
                         public restockingFee?: (google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.IRestockingFee|null);
@@ -7113,6 +7119,130 @@ export namespace google {
                                 NO_RETURNS = 2,
                                 LIFETIME_RETURNS = 3
                             }
+                        }
+
+                        /** Properties of a SeasonalOverride. */
+                        interface ISeasonalOverride {
+
+                            /** SeasonalOverride returnDays */
+                            returnDays?: (number|null);
+
+                            /** SeasonalOverride returnUntilDate */
+                            returnUntilDate?: (google.type.IDate|null);
+
+                            /** SeasonalOverride label */
+                            label?: (string|null);
+
+                            /** SeasonalOverride startDate */
+                            startDate?: (google.type.IDate|null);
+
+                            /** SeasonalOverride endDate */
+                            endDate?: (google.type.IDate|null);
+                        }
+
+                        /** Represents a SeasonalOverride. */
+                        class SeasonalOverride implements ISeasonalOverride {
+
+                            /**
+                             * Constructs a new SeasonalOverride.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ISeasonalOverride);
+
+                            /** SeasonalOverride returnDays. */
+                            public returnDays?: (number|null);
+
+                            /** SeasonalOverride returnUntilDate. */
+                            public returnUntilDate?: (google.type.IDate|null);
+
+                            /** SeasonalOverride label. */
+                            public label: string;
+
+                            /** SeasonalOverride startDate. */
+                            public startDate?: (google.type.IDate|null);
+
+                            /** SeasonalOverride endDate. */
+                            public endDate?: (google.type.IDate|null);
+
+                            /** SeasonalOverride returnWindow. */
+                            public returnWindow?: ("returnDays"|"returnUntilDate");
+
+                            /**
+                             * Creates a new SeasonalOverride instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SeasonalOverride instance
+                             */
+                            public static create(properties?: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ISeasonalOverride): google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride;
+
+                            /**
+                             * Encodes the specified SeasonalOverride message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride.verify|verify} messages.
+                             * @param message SeasonalOverride message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ISeasonalOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SeasonalOverride message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride.verify|verify} messages.
+                             * @param message SeasonalOverride message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ISeasonalOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SeasonalOverride message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SeasonalOverride
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride;
+
+                            /**
+                             * Decodes a SeasonalOverride message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SeasonalOverride
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride;
+
+                            /**
+                             * Verifies a SeasonalOverride message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SeasonalOverride message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SeasonalOverride
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride;
+
+                            /**
+                             * Creates a plain object from a SeasonalOverride message. Also converts values to other types if specified.
+                             * @param message SeasonalOverride
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SeasonalOverride to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SeasonalOverride
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** ReturnMethod enum. */
