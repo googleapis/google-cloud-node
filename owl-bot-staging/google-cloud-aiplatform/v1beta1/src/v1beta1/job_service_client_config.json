@@ -1,0 +1,194 @@
+{
+  "interfaces": {
+    "google.cloud.aiplatform.v1beta1.JobService": {
+      "retry_codes": {
+        "non_idempotent": [],
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ]
+      },
+      "retry_params": {
+        "default": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        }
+      },
+      "methods": {
+        "CreateCustomJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetCustomJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListCustomJobs": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteCustomJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CancelCustomJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateDataLabelingJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetDataLabelingJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListDataLabelingJobs": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteDataLabelingJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CancelDataLabelingJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateHyperparameterTuningJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetHyperparameterTuningJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListHyperparameterTuningJobs": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteHyperparameterTuningJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CancelHyperparameterTuningJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateNasJob": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetNasJob": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListNasJobs": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteNasJob": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CancelNasJob": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetNasTrialDetail": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListNasTrialDetails": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateBatchPredictionJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetBatchPredictionJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListBatchPredictionJobs": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteBatchPredictionJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CancelBatchPredictionJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateModelDeploymentMonitoringJob": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "SearchModelDeploymentMonitoringStatsAnomalies": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetModelDeploymentMonitoringJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListModelDeploymentMonitoringJobs": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateModelDeploymentMonitoringJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteModelDeploymentMonitoringJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "PauseModelDeploymentMonitoringJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ResumeModelDeploymentMonitoringJob": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        }
+      }
+    }
+  }
+}
