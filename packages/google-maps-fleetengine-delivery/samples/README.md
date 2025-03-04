@@ -15,6 +15,8 @@
   * [Delivery_service.batch_create_tasks](#delivery_service.batch_create_tasks)
   * [Delivery_service.create_delivery_vehicle](#delivery_service.create_delivery_vehicle)
   * [Delivery_service.create_task](#delivery_service.create_task)
+  * [Delivery_service.delete_delivery_vehicle](#delivery_service.delete_delivery_vehicle)
+  * [Delivery_service.delete_task](#delivery_service.delete_task)
   * [Delivery_service.get_delivery_vehicle](#delivery_service.get_delivery_vehicle)
   * [Delivery_service.get_task](#delivery_service.get_task)
   * [Delivery_service.get_task_tracking_info](#delivery_service.get_task_tracking_info)
@@ -84,6 +86,40 @@ __Usage:__
 
 
 `node packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.create_task.js`
+
+
+-----
+
+
+
+
+### Delivery_service.delete_delivery_vehicle
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.delete_delivery_vehicle.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.delete_delivery_vehicle.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.delete_delivery_vehicle.js`
+
+
+-----
+
+
+
+
+### Delivery_service.delete_task
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.delete_task.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.delete_task.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.delete_task.js`
 
 
 -----

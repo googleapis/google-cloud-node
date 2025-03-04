@@ -358,7 +358,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.LicensePool()
       );
@@ -390,7 +390,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.LicensePool()
       );
@@ -438,7 +438,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getLicensePool = stubSimpleCall(
         undefined,
@@ -493,7 +493,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['licensePool', 'name']
       );
       request.licensePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `license_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `license_pool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.LicensePool()
       );
@@ -526,7 +526,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['licensePool', 'name']
       );
       request.licensePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `license_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `license_pool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.LicensePool()
       );
@@ -575,7 +575,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['licensePool', 'name']
       );
       request.licensePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `license_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `license_pool.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateLicensePool = stubSimpleCall(
         undefined,
@@ -630,7 +630,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.AssignResponse()
       );
@@ -662,7 +662,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.AssignResponse()
       );
@@ -710,7 +710,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.assign = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.assign(request), expectedError);
@@ -761,7 +761,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UnassignResponse()
       );
@@ -793,7 +793,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UnassignResponse()
       );
@@ -841,7 +841,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.unassign = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.unassign(request), expectedError);
@@ -892,7 +892,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.commerce.consumer.procurement.v1.LicensedUser()
@@ -933,7 +933,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.commerce.consumer.procurement.v1.LicensedUser()
@@ -991,7 +991,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enumerateLicensedUsers = stubSimpleCall(
         undefined,
@@ -1026,7 +1026,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.commerce.consumer.procurement.v1.LicensedUser()
@@ -1096,7 +1096,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.enumerateLicensedUsers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1155,7 +1155,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.commerce.consumer.procurement.v1.LicensedUser()
@@ -1210,7 +1210,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.enumerateLicensedUsers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

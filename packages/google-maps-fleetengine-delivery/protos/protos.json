@@ -333,6 +333,34 @@
                             }
                           ]
                         },
+                        "DeleteDeliveryVehicle": {
+                          "requestType": "DeleteDeliveryVehicleRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=providers/*/deliveryVehicles/*}",
+                            "(google.api.routing).routing_parameters.field": "name",
+                            "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=providers/*/deliveryVehicles/*}"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "name",
+                                  "path_template": "{provider_id=providers/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "UpdateDeliveryVehicle": {
                           "requestType": "UpdateDeliveryVehicleRequest",
                           "responseType": "DeliveryVehicle",
@@ -432,6 +460,34 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{name=providers/*/tasks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "name",
+                                  "path_template": "{provider_id=providers/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "DeleteTask": {
+                          "requestType": "DeleteTaskRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=providers/*/tasks/*}",
+                            "(google.api.routing).routing_parameters.field": "name",
+                            "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=providers/*/tasks/*}"
                               }
                             },
                             {
@@ -614,6 +670,25 @@
                         }
                       }
                     },
+                    "DeleteDeliveryVehicleRequest": {
+                      "fields": {
+                        "header": {
+                          "type": "DeliveryRequestHeader",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "fleetengine.googleapis.com/DeliveryVehicle"
+                          }
+                        }
+                      }
+                    },
                     "ListDeliveryVehiclesRequest": {
                       "fields": {
                         "header": {
@@ -783,6 +858,25 @@
                         "name": {
                           "type": "string",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "fleetengine.googleapis.com/Task"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteTaskRequest": {
+                      "fields": {
+                        "header": {
+                          "type": "DeliveryRequestHeader",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "fleetengine.googleapis.com/Task"
@@ -3346,6 +3440,9 @@
                   "id": 2
                 }
               }
+            },
+            "Empty": {
+              "fields": {}
             },
             "FieldMask": {
               "fields": {

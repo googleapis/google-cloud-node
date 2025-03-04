@@ -43,8 +43,8 @@ function main(name) {
    *  `QueryWorkflowInvocationActions` call. Provide this to retrieve the
    *  subsequent page.
    *  When paginating, all other parameters provided to
-   *  `QueryWorkflowInvocationActions` must match the call that provided the page
-   *  token.
+   *  `QueryWorkflowInvocationActions`, with the exception of `page_size`, must
+   *  match the call that provided the page token.
    */
   // const pageToken = 'abc123'
 

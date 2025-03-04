@@ -13,11 +13,13 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Trip_service.create_trip](#trip_service.create_trip)
+  * [Trip_service.delete_trip](#trip_service.delete_trip)
   * [Trip_service.get_trip](#trip_service.get_trip)
   * [Trip_service.report_billable_trip](#trip_service.report_billable_trip)
   * [Trip_service.search_trips](#trip_service.search_trips)
   * [Trip_service.update_trip](#trip_service.update_trip)
   * [Vehicle_service.create_vehicle](#vehicle_service.create_vehicle)
+  * [Vehicle_service.delete_vehicle](#vehicle_service.delete_vehicle)
   * [Vehicle_service.get_vehicle](#vehicle_service.get_vehicle)
   * [Vehicle_service.list_vehicles](#vehicle_service.list_vehicles)
   * [Vehicle_service.search_fuzzed_vehicles](#vehicle_service.search_fuzzed_vehicles)
@@ -52,6 +54,23 @@ __Usage:__
 
 
 `node packages/google-maps-fleetengine/samples/generated/v1/trip_service.create_trip.js`
+
+
+-----
+
+
+
+
+### Trip_service.delete_trip
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/trip_service.delete_trip.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/trip_service.delete_trip.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-maps-fleetengine/samples/generated/v1/trip_service.delete_trip.js`
 
 
 -----
@@ -137,6 +156,23 @@ __Usage:__
 
 
 `node packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.create_vehicle.js`
+
+
+-----
+
+
+
+
+### Vehicle_service.delete_vehicle
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.delete_vehicle.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.delete_vehicle.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.delete_vehicle.js`
 
 
 -----
