@@ -17,6 +17,8 @@
     "system-test/*.ts",
     "src/enhanced-types.json",
     "src/**/*.json",
+    "protos/protos.json",
+    "src/**/*.json",
     "protos/protos.json"
   ]
 }

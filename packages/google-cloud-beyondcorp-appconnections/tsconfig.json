@@ -18,6 +18,8 @@
     "src/**/*.json",
     "protos/protos.json",
     "src/**/*.json",
+    "protos/protos.json",
+    "src/**/*.json",
     "protos/protos.json"
   ]
 }
