@@ -12,9 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Bucket, File, Notification, Storage, HmacKey, Policy} from '../src';
+import {
+  Bucket,
+  File,
+  Notification,
+  Storage,
+  HmacKey,
+  Policy,
+  GaxiosError,
+} from '../src';
 import * as path from 'path';
-import {ApiError} from '../src/nodejs-common';
 import {
   createTestBuffer,
   createTestFileFromBuffer,
@@ -22,6 +29,7 @@ import {
 } from './testBenchUtil';
 import * as uuid from 'uuid';
 import {getDirName} from '../src/util.js';
+import {StorageTransport} from '../src/storage-transport';
 
 const FILE_SIZE_BYTES = 9 * 1024 * 1024;
 const CHUNK_SIZE_BYTES = 2 * 1024 * 1024;
@@ -33,6 +41,7 @@ export interface ConformanceTestOptions {
   storage?: Storage;
   hmacKey?: HmacKey;
   preconditionRequired?: boolean;
+  storageTransport?: StorageTransport;
 }
 
 /////////////////////////////////////////////////
@@ -227,7 +236,7 @@ export async function getFilesStream(options: ConformanceTestOptions) {
       .bucket!.getFilesStream()
       .on('data', () => {})
       .on('end', () => resolve(undefined))
-      .on('error', (err: ApiError) => reject(err));
+      .on('error', (err: GaxiosError) => reject(err));
   });
 }
 
@@ -496,7 +505,7 @@ export async function createReadStream(options: ConformanceTestOptions) {
       .file!.createReadStream()
       .on('data', () => {})
       .on('end', () => resolve(undefined))
-      .on('error', (err: ApiError) => reject(err));
+      .on('error', (err: GaxiosError) => reject(err));
   });
 }
 

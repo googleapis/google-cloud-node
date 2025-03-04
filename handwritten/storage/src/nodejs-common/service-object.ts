@@ -15,45 +15,32 @@
  */
 import {promisifyAll} from '@google-cloud/promisify';
 import {EventEmitter} from 'events';
-import * as r from 'teeny-request';
-
-import {StreamRequestOptions} from './service.js';
+import {util} from './util.js';
+import {Bucket} from '../bucket.js';
+import {StorageRequestOptions, StorageTransport} from '../storage-transport.js';
 import {
-  ApiError,
-  BodyResponseCallback,
-  DecorateRequestOptions,
-  ResponseBody,
-  util,
-} from './util.js';
-
-export type RequestResponse = [unknown, r.Response];
-
-export interface ServiceObjectParent {
-  interceptors: Interceptor[];
-  getRequestInterceptors(): Function[];
-  requestStream(reqOpts: DecorateRequestOptions): r.Request;
-  request(
-    reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback,
-  ): void;
-}
-
-export interface Interceptor {
-  request(opts: r.Options): DecorateRequestOptions;
-}
+  GaxiosError,
+  GaxiosInterceptor,
+  GaxiosOptions,
+  GaxiosResponse,
+} from 'gaxios';
 
 export type GetMetadataOptions = object;
 
-export type MetadataResponse<K> = [K, r.Response];
+export type MetadataResponse<K> = [K, GaxiosResponse];
 export type MetadataCallback<K> = (
-  err: Error | null,
+  err: GaxiosError | null,
   metadata?: K,
-  apiResponse?: r.Response,
+  apiResponse?: GaxiosResponse,
 ) => void;
 
 export type ExistsOptions = object;
 export interface ExistsCallback {
   (err: Error | null, exists?: boolean): void;
+}
+export interface ServiceObjectParent {
+  baseUrl?: string;
+  name?: string;
 }
 
 export interface ServiceObjectConfig {
@@ -90,14 +77,23 @@ export interface ServiceObjectConfig {
    * granted permission.
    */
   projectId?: string;
+
+  /**
+   * The storage transport instance with which to make requests.
+   */
+  storageTransport: StorageTransport;
 }
 
 export interface Methods {
-  [methodName: string]: {reqOpts?: r.CoreOptions} | boolean;
+  [methodName: string]: {reqOpts?: StorageRequestOptions} | boolean;
 }
 
 export interface InstanceResponseCallback<T> {
-  (err: ApiError | null, instance?: T | null, apiResponse?: r.Response): void;
+  (
+    err: GaxiosError | null,
+    instance?: T | null,
+    apiResponse?: GaxiosResponse,
+  ): void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -106,9 +102,8 @@ export interface CreateOptions {}
 export type CreateResponse<T> = any[];
 export interface CreateCallback<T> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (err: ApiError | null, instance?: T | null, ...args: any[]): void;
+  (err: GaxiosError | null, instance?: T | null, ...args: any[]): void;
 }
-
 export type DeleteOptions = {
   ignoreNotFound?: boolean;
   ifGenerationMatch?: number | string;
@@ -117,7 +112,7 @@ export type DeleteOptions = {
   ifMetagenerationNotMatch?: number | string;
 } & object;
 export interface DeleteCallback {
-  (err: Error | null, apiResponse?: r.Response): void;
+  (err: Error | null, apiResponse?: GaxiosResponse): void;
 }
 
 export interface GetConfig {
@@ -127,10 +122,10 @@ export interface GetConfig {
   autoCreate?: boolean;
 }
 export type GetOrCreateOptions = GetConfig & CreateOptions;
-export type GetResponse<T> = [T, r.Response];
+export type GetResponse<T> = [T, GaxiosResponse];
 
 export interface ResponseCallback {
-  (err?: Error | null, apiResponse?: r.Response): void;
+  (err?: Error | null, apiResponse?: GaxiosResponse): void;
 }
 
 export type SetMetadataResponse<K> = [K];
@@ -155,15 +150,16 @@ export interface BaseMetadata {
  * shared behaviors. Note that any method can be overridden when the service
  * object requires specific behavior.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
   metadata: K;
   baseUrl?: string;
+  storageTransport: StorageTransport;
   parent: ServiceObjectParent;
   id?: string;
+  name?: string;
   private createMethod?: Function;
   protected methods: Methods;
-  interceptors: Interceptor[];
+  interceptors: GaxiosInterceptor<GaxiosOptions>[];
   projectId?: string;
 
   /*
@@ -194,6 +190,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
     this.methods = config.methods || {};
     this.interceptors = [];
     this.projectId = config.projectId;
+    this.storageTransport = config.storageTransport;
 
     if (config.methods) {
       // This filters the ServiceObject instance (e.g. a "File") to only have
@@ -254,7 +251,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
     // Wrap the callback to return *this* instance of the object, not the
     // newly-created one.
     // tslint: disable-next-line no-any
-    function onCreate(...args: [Error, ServiceObject<T, K>]) {
+    function onCreate(...args: [GaxiosError, ServiceObject<T, K>]) {
       const [err, instance] = args;
       if (!err) {
         self.metadata = instance.metadata;
@@ -263,7 +260,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
         }
         args[1] = self; // replace the created `instance` with this one.
       }
-      callback!(...(args as {} as [Error, T]));
+      callback!(...(args as {} as [GaxiosError, T]));
     }
     args.push(onCreate);
     // eslint-disable-next-line prefer-spread
@@ -277,13 +274,13 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
    * @param {?error} callback.err - An error returned while making this request.
    * @param {object} callback.apiResponse - The full API response.
    */
-  delete(options?: DeleteOptions): Promise<[r.Response]>;
+  delete(options?: DeleteOptions): Promise<[GaxiosResponse]>;
   delete(options: DeleteOptions, callback: DeleteCallback): void;
   delete(callback: DeleteCallback): void;
   delete(
     optionsOrCallback?: DeleteOptions | DeleteCallback,
     cb?: DeleteCallback,
-  ): Promise<[r.Response]> | void {
+  ): Promise<[GaxiosResponse]> | void {
     const [options, callback] = util.maybeOptionsOrCallback<
       DeleteOptions,
       DeleteCallback
@@ -295,30 +292,30 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
     const methodConfig =
       (typeof this.methods.delete === 'object' && this.methods.delete) || {};
 
-    const reqOpts = {
-      method: 'DELETE',
-      uri: '',
-      ...methodConfig.reqOpts,
-      qs: {
-        ...methodConfig.reqOpts?.qs,
-        ...options,
-      },
-    };
+    let url = `${this.baseUrl}/${this.id}`;
+    if (this.parent instanceof Bucket) {
+      url = `${this.parent.baseUrl}/${this.parent.id}/${url}`;
+    }
 
-    // The `request` method may have been overridden to hold any special
-    // behavior. Ensure we call the original `request` method.
-    ServiceObject.prototype.request.call(
-      this,
-      reqOpts,
-      (err: ApiError | null, body?: ResponseBody, res?: r.Response) => {
+    this.storageTransport
+      .makeRequest({
+        method: 'DELETE',
+        responseType: 'json',
+        url,
+        ...methodConfig.reqOpts,
+        queryParameters: {
+          ...methodConfig.reqOpts?.queryParameters,
+          ...options,
+        },
+      })
+      .catch(({err, resp}) => {
         if (err) {
-          if (err.code === 404 && ignoreNotFound) {
+          if (err.status === 404 && ignoreNotFound) {
             err = null;
           }
         }
-        callback(err, res);
-      },
-    );
+        callback(err, resp);
+      });
   }
 
   /**
@@ -342,7 +339,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
 
     this.get(options, err => {
       if (err) {
-        if (err.code === 404) {
+        if (err.status === 404) {
           callback!(null, false);
         } else {
           callback!(err);
@@ -384,25 +381,21 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
     const autoCreate = options.autoCreate && typeof this.create === 'function';
     delete options.autoCreate;
 
-    function onCreate(
-      err: ApiError | null,
-      instance: T,
-      apiResponse: r.Response,
-    ) {
+    function onCreate(err: GaxiosError | null, instance: T) {
       if (err) {
-        if (err.code === 409) {
+        if (err.status === 409) {
           self.get(options, callback!);
           return;
         }
-        callback!(err, null, apiResponse);
+        callback!(err);
         return;
       }
-      callback!(null, instance, apiResponse);
+      callback!(null, instance);
     }
 
-    this.getMetadata(options, async (err: ApiError | null, metadata) => {
+    this.getMetadata(options, async err => {
       if (err) {
-        if (err.code === 404 && autoCreate) {
+        if (err.status === 404 && autoCreate) {
           const args: Array<Function | GetOrCreateOptions> = [];
           if (Object.keys(options).length > 0) {
             args.push(options);
@@ -411,10 +404,10 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
           await self.create(...args);
           return;
         }
-        callback!(err, null, metadata as unknown as r.Response);
+        callback!(err as GaxiosError);
         return;
       }
-      callback!(null, self as {} as T, metadata as unknown as r.Response);
+      callback!(null, self as {} as T);
     });
   }
 
@@ -442,36 +435,30 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       (typeof this.methods.getMetadata === 'object' &&
         this.methods.getMetadata) ||
       {};
-    const reqOpts = {
-      uri: '',
-      ...methodConfig.reqOpts,
-      qs: {
-        ...methodConfig.reqOpts?.qs,
-        ...options,
-      },
-    };
 
-    // The `request` method may have been overridden to hold any special
-    // behavior. Ensure we call the original `request` method.
-    ServiceObject.prototype.request.call(
-      this,
-      reqOpts,
-      (err: Error | null, body?: ResponseBody, res?: r.Response) => {
-        this.metadata = body;
-        callback!(err, this.metadata, res);
-      },
-    );
-  }
+    let url = `${this.baseUrl}/${this.id}`;
+    if (this.parent instanceof Bucket) {
+      url = `${this.parent.baseUrl}/${this.parent.id}/${url}`;
+    }
 
-  /**
-   * Return the user's custom request interceptors.
-   */
-  getRequestInterceptors(): Function[] {
-    // Interceptors should be returned in the order they were assigned.
-    const localInterceptors = this.interceptors
-      .filter(interceptor => typeof interceptor.request === 'function')
-      .map(interceptor => interceptor.request);
-    return this.parent.getRequestInterceptors().concat(localInterceptors);
+    this.storageTransport
+      .makeRequest<K>(
+        {
+          method: 'GET',
+          responseType: 'json',
+          url,
+          ...methodConfig.reqOpts,
+          queryParameters: {
+            ...methodConfig.reqOpts?.queryParameters,
+            ...options,
+          },
+        },
+        (err, data, resp) => {
+          this.metadata = data!;
+          callback(err, data!, resp);
+        },
+      )
+      .catch(err => callback!(err));
   }
 
   /**
@@ -507,112 +494,33 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
         this.methods.setMetadata) ||
       {};
 
-    const reqOpts = {
-      method: 'PATCH',
-      uri: '',
-      ...methodConfig.reqOpts,
-      json: {
-        ...methodConfig.reqOpts?.json,
-        ...metadata,
-      },
-      qs: {
-        ...methodConfig.reqOpts?.qs,
-        ...options,
-      },
-    };
-
-    // The `request` method may have been overridden to hold any special
-    // behavior. Ensure we call the original `request` method.
-    ServiceObject.prototype.request.call(
-      this,
-      reqOpts,
-      (err: Error | null, body?: ResponseBody, res?: r.Response) => {
-        this.metadata = body;
-        callback!(err, this.metadata, res);
-      },
-    );
-  }
-
-  /**
-   * Make an authenticated API request.
-   *
-   * @private
-   *
-   * @param {object} reqOpts - Request options that are passed to `request`.
-   * @param {string} reqOpts.uri - A URI relative to the baseUrl.
-   * @param {function} callback - The callback function passed to `request`.
-   */
-  private request_(reqOpts: StreamRequestOptions): r.Request;
-  private request_(
-    reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback,
-  ): void;
-  private request_(
-    reqOpts: DecorateRequestOptions | StreamRequestOptions,
-    callback?: BodyResponseCallback,
-  ): void | r.Request {
-    reqOpts = {...reqOpts};
-
-    if (this.projectId) {
-      reqOpts.projectId = this.projectId;
+    let url = `${this.baseUrl}/${this.name}`;
+    if (this.parent instanceof Bucket) {
+      url = `${this.parent.baseUrl}/${this.parent.name}/${url}`;
     }
 
-    const isAbsoluteUrl = reqOpts.uri.indexOf('http') === 0;
-    const uriComponents = [this.baseUrl, this.id || '', reqOpts.uri];
-
-    if (isAbsoluteUrl) {
-      uriComponents.splice(0, uriComponents.indexOf(reqOpts.uri));
-    }
-
-    reqOpts.uri = uriComponents
-      .filter(x => x!.trim()) // Limit to non-empty strings.
-      .map(uriComponent => {
-        const trimSlashesRegex = /^\/*|\/*$/g;
-        return uriComponent!.replace(trimSlashesRegex, '');
-      })
-      .join('/');
-
-    const childInterceptors = Array.isArray(reqOpts.interceptors_)
-      ? reqOpts.interceptors_
-      : [];
-    const localInterceptors = [].slice.call(this.interceptors);
-
-    reqOpts.interceptors_ = childInterceptors.concat(localInterceptors);
-
-    if (reqOpts.shouldReturnStream) {
-      return this.parent.requestStream(reqOpts);
-    }
-    this.parent.request(reqOpts, callback!);
-  }
-
-  /**
-   * Make an authenticated API request.
-   *
-   * @param {object} reqOpts - Request options that are passed to `request`.
-   * @param {string} reqOpts.uri - A URI relative to the baseUrl.
-   * @param {function} callback - The callback function passed to `request`.
-   */
-  request(reqOpts: DecorateRequestOptions): Promise<RequestResponse>;
-  request(
-    reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback,
-  ): void;
-  request(
-    reqOpts: DecorateRequestOptions,
-    callback?: BodyResponseCallback,
-  ): void | Promise<RequestResponse> {
-    this.request_(reqOpts, callback!);
-  }
-
-  /**
-   * Make an authenticated API request.
-   *
-   * @param {object} reqOpts - Request options that are passed to `request`.
-   * @param {string} reqOpts.uri - A URI relative to the baseUrl.
-   */
-  requestStream(reqOpts: DecorateRequestOptions): r.Request {
-    const opts = {...reqOpts, shouldReturnStream: true};
-    return this.request_(opts as StreamRequestOptions);
+    this.storageTransport
+      .makeRequest<K>(
+        {
+          method: 'PATCH',
+          responseType: 'json',
+          url,
+          ...methodConfig.reqOpts,
+          body: {
+            ...methodConfig.reqOpts?.body,
+            ...metadata,
+          },
+          queryParameters: {
+            ...methodConfig.reqOpts?.queryParameters,
+            ...options,
+          },
+        },
+        (err, data, resp) => {
+          this.metadata = data!;
+          callback(err, this.metadata, resp);
+        },
+      )
+      .catch(err => callback(err));
   }
 }
 

@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import {GaxiosError, GaxiosResponse} from 'gaxios';
 import {BaseMetadata, ServiceObject, util} from './nodejs-common/index.js';
+import {Storage} from './storage.js';
 import {promisifyAll} from '@google-cloud/promisify';
 
-import {Storage} from './storage.js';
-
 export interface StopCallback {
-  (err: Error | null, apiResponse?: unknown): void;
+  (err: GaxiosError | null, apiResponse?: GaxiosResponse): void;
 }
 
 /**
@@ -42,16 +42,10 @@ class Channel extends ServiceObject<Channel, BaseMetadata> {
   constructor(storage: Storage, id: string, resourceId: string) {
     const config = {
       parent: storage,
+      storageTransport: storage.storageTransport,
       baseUrl: '/channels',
-
-      // An ID shouldn't be included in the API requests.
-      // RE:
-      // https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1145
       id: '',
-
-      methods: {
-        // Only need `request`.
-      },
+      methods: {},
     };
 
     super(config);
@@ -63,19 +57,10 @@ class Channel extends ServiceObject<Channel, BaseMetadata> {
   stop(): Promise<unknown>;
   stop(callback: StopCallback): void;
   /**
-   * @typedef {array} StopResponse
-   * @property {object} 0 The full API response.
-   */
-  /**
-   * @callback StopCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} apiResponse The full API response.
-   */
-  /**
    * Stop this channel.
    *
-   * @param {StopCallback} [callback] Callback function.
-   * @returns {Promise<StopResponse>}
+   * @param {StorageCallback} [callback] Callback function.
+   * @returns {Promise<{}>} A promise that resolves to an empty object when successful
    *
    * @example
    * ```
@@ -98,16 +83,21 @@ class Channel extends ServiceObject<Channel, BaseMetadata> {
    */
   stop(callback?: StopCallback): Promise<unknown> | void {
     callback = callback || util.noop;
-    this.request(
-      {
-        method: 'POST',
-        uri: '/stop',
-        json: this.metadata,
-      },
-      (err, apiResponse) => {
-        callback!(err, apiResponse);
-      },
-    );
+    this.storageTransport
+      .makeRequest(
+        {
+          method: 'POST',
+          url: `${this.baseUrl}/stop`,
+          body: this.metadata,
+          responseType: 'json',
+        },
+        (err, data, resp) => {
+          callback!(err, resp);
+        },
+      )
+      .catch(err => {
+        callback!(err);
+      });
   }
 }
 

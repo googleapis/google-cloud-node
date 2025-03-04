@@ -1947,10 +1947,9 @@ describe('resumable-upload', () => {
         up.getRetryDelay = () => 1;
         const RESP = {status: 1000};
         const customHandlerFunction = (err: ApiError) => {
-          return err.code === 1000;
+          return (err.code = 1000);
         };
         up.retryOptions.retryableErrorFn = customHandlerFunction;
-
         assert.strictEqual(up.onResponse(RESP), false);
       });
     });

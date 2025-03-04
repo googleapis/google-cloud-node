@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,14 +13,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {
-  BodyResponseCallback,
-  DecorateRequestOptions,
-} from './nodejs-common/index.js';
 import {promisifyAll} from '@google-cloud/promisify';
-
 import {Bucket} from './bucket.js';
 import {normalize} from './util.js';
+import {StorageQueryParameters, StorageTransport} from './storage-transport.js';
 
 export interface GetPolicyOptions {
   userProject?: string;
@@ -111,6 +108,9 @@ export interface TestIamPermissionsCallback {
 export interface TestIamPermissionsOptions {
   userProject?: string;
 }
+interface TestPermissionsResponse {
+  permissions?: string[];
+}
 
 interface GetPolicyRequest {
   userProject?: string;
@@ -141,15 +141,12 @@ export enum IAMExceptionMessages {
  * ```
  */
 class Iam {
-  private request_: (
-    reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback,
-  ) => void;
   private resourceId_: string;
+  private storageTransport: StorageTransport;
 
   constructor(bucket: Bucket) {
-    this.request_ = bucket.request.bind(bucket);
     this.resourceId_ = 'buckets/' + bucket.getId();
+    this.storageTransport = bucket.storageTransport;
   }
 
   getPolicy(options?: GetPolicyOptions): Promise<GetPolicyResponse>;
@@ -261,13 +258,23 @@ class Iam {
       qs.optionsRequestedPolicyVersion = options.requestedPolicyVersion;
     }
 
-    this.request_(
-      {
-        uri: '/iam',
-        qs,
-      },
-      cb!,
-    );
+    this.storageTransport
+      .makeRequest(
+        {
+          url: '/iam',
+          queryParameters: qs as unknown as StorageQueryParameters,
+        },
+        (err, data, resp) => {
+          if (err) {
+            cb(err);
+            return;
+          }
+          cb(null, data as Policy, resp);
+        },
+      )
+      .catch(err => {
+        callback!(err);
+      });
   }
 
   setPolicy(
@@ -347,21 +354,29 @@ class Iam {
       maxRetries = 0;
     }
 
-    this.request_(
-      {
-        method: 'PUT',
-        uri: '/iam',
-        maxRetries,
-        json: Object.assign(
-          {
-            resourceId: this.resourceId_,
-          },
-          policy,
-        ),
-        qs: options,
-      },
-      cb,
-    );
+    this.storageTransport
+      .makeRequest(
+        {
+          method: 'PUT',
+          url: '/iam',
+          maxRetries,
+          body: Object.assign(
+            {
+              resourceId: this.resourceId_,
+            },
+            policy,
+          ),
+          queryParameters: options as unknown as StorageQueryParameters,
+        },
+        (err, data, resp) => {
+          if (err) {
+            cb(err);
+            return;
+          }
+          cb(null, data as Policy, resp);
+        },
+      )
+      .catch(err => cb(err));
   }
 
   testPermissions(
@@ -457,33 +472,33 @@ class Iam {
       options,
     );
 
-    this.request_(
-      {
-        uri: '/iam/testPermissions',
-        qs: req,
-        useQuerystring: true,
-      },
-      (err, resp) => {
-        if (err) {
-          cb!(err, null, resp);
-          return;
-        }
+    this.storageTransport
+      .makeRequest<TestPermissionsResponse>(
+        {
+          url: '/iam/testPermissions',
+          queryParameters: req as unknown as StorageQueryParameters,
+        },
+        (err, data, resp) => {
+          if (err) {
+            cb!(err, null, resp);
+            return;
+          }
+          const availablePermissions = Array.isArray(data?.permissions)
+            ? data?.permissions
+            : [];
 
-        const availablePermissions = Array.isArray(resp.permissions)
-          ? resp.permissions
-          : [];
+          const permissionsHash = permissionsArray.reduce(
+            (acc: {[index: string]: boolean}, permission) => {
+              acc[permission] = availablePermissions.indexOf(permission) > -1;
+              return acc;
+            },
+            {},
+          );
 
-        const permissionsHash = permissionsArray.reduce(
-          (acc: {[index: string]: boolean}, permission) => {
-            acc[permission] = availablePermissions.indexOf(permission) > -1;
-            return acc;
-          },
-          {},
-        );
-
-        cb!(null, permissionsHash, resp);
-      },
-    );
+          cb!(null, permissionsHash, resp);
+        },
+      )
+      .catch(err => cb!(err));
   }
 }
 

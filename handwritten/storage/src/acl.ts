@@ -12,19 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {
-  BodyResponseCallback,
-  DecorateRequestOptions,
-  BaseMetadata,
-} from './nodejs-common/index.js';
+import {BaseMetadata} from './nodejs-common/index.js';
 import {promisifyAll} from '@google-cloud/promisify';
+import {StorageQueryParameters, StorageTransport} from './storage-transport.js';
+import {ServiceObjectParent} from './nodejs-common/service-object.js';
+import {Bucket} from './bucket.js';
+import {File} from './file.js';
+import {GaxiosError} from 'gaxios';
 
 export interface AclOptions {
   pathPrefix: string;
-  request: (
-    reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback,
-  ) => void;
+  storageTransport: StorageTransport;
+  parent: ServiceObjectParent;
 }
 
 export type GetAclResponse = [
@@ -68,7 +67,7 @@ export interface AddAclOptions {
 export type AddAclResponse = [AccessControlObject, AclMetadata];
 export interface AddAclCallback {
   (
-    err: Error | null,
+    err: GaxiosError | null,
     acl?: AccessControlObject | null,
     apiResponse?: AclMetadata,
   ): void;
@@ -91,7 +90,13 @@ interface AclQuery {
 export interface AccessControlObject {
   entity: string;
   role: string;
-  projectTeam: string;
+  projectTeam?: {
+    projectNumber?: string;
+    team?: 'editors' | 'owners' | 'viewers' | string;
+  };
+}
+interface AccessControlList {
+  items: AccessControlObject[];
 }
 
 export interface AclMetadata extends BaseMetadata {
@@ -103,7 +108,7 @@ export interface AclMetadata extends BaseMetadata {
   object?: string;
   projectTeam?: {
     projectNumber?: string;
-    team?: 'editors' | 'owners' | 'viewers';
+    team?: 'editors' | 'owners' | 'viewers' | string;
   };
   role?: 'OWNER' | 'READER' | 'WRITER' | 'FULL_CONTROL';
   [key: string]: unknown;
@@ -418,15 +423,14 @@ class AclRoleAccessorMethods {
 class Acl extends AclRoleAccessorMethods {
   default!: Acl;
   pathPrefix: string;
-  request_: (
-    reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback,
-  ) => void;
+  storageTransport: StorageTransport;
+  parent: ServiceObjectParent;
 
   constructor(options: AclOptions) {
     super();
     this.pathPrefix = options.pathPrefix;
-    this.request_ = options.request;
+    this.storageTransport = options.storageTransport;
+    this.parent = options.parent;
   }
 
   add(options: AddAclOptions): Promise<AddAclResponse>;
@@ -520,26 +524,46 @@ class Acl extends AclRoleAccessorMethods {
       query.userProject = options.userProject;
     }
 
-    this.request(
-      {
-        method: 'POST',
-        uri: '',
-        qs: query,
-        maxRetries: 0, //explicitly set this value since this is a non-idempotent function
-        json: {
-          entity: options.entity,
-          role: options.role.toUpperCase(),
-        },
-      },
-      (err, resp) => {
-        if (err) {
-          callback!(err, null, resp);
-          return;
-        }
+    let url = this.pathPrefix;
+    if (this.parent instanceof File) {
+      const file = this.parent as File;
+      const bucket = file.parent;
+      url = `${bucket.baseUrl}/${bucket.name}/${file.baseUrl}/${file.name}${url}`;
+    } else if (this.parent instanceof Bucket) {
+      const bucket = this.parent as Bucket;
+      url = `${bucket.baseUrl}/${bucket.name}${url}`;
+    }
 
-        callback!(null, this.makeAclObject_(resp), resp);
-      },
-    );
+    this.storageTransport
+      .makeRequest(
+        {
+          method: 'POST',
+          url,
+          queryParameters: query as unknown as StorageQueryParameters,
+          retry: false,
+          body: {
+            entity: options.entity,
+            role: options.role.toUpperCase(),
+          },
+        },
+        (err, data, resp) => {
+          if (err) {
+            callback!(
+              err,
+              data as AccessControlObject,
+              resp as unknown as AclMetadata,
+            );
+            return;
+          }
+
+          callback!(
+            null,
+            this.makeAclObject_(data as AccessControlObject),
+            data as AclMetadata,
+          );
+        },
+      )
+      .catch(err => callback!(err));
   }
 
   delete(options: RemoveAclOptions): Promise<RemoveAclResponse>;
@@ -620,16 +644,28 @@ class Acl extends AclRoleAccessorMethods {
       query.userProject = options.userProject;
     }
 
-    this.request(
-      {
-        method: 'DELETE',
-        uri: '/' + encodeURIComponent(options.entity),
-        qs: query,
-      },
-      (err, resp) => {
-        callback!(err, resp);
-      },
-    );
+    let url = `${this.pathPrefix}/${options.entity}`;
+    if (this.parent instanceof File) {
+      const file = this.parent as File;
+      const bucket = file.parent;
+      url = `${bucket.baseUrl}/${bucket.name}/${file.baseUrl}/${file.name}${url}`;
+    } else if (this.parent instanceof Bucket) {
+      const bucket = this.parent as Bucket;
+      url = `${bucket.baseUrl}/${bucket.name}${url}`;
+    }
+
+    this.storageTransport
+      .makeRequest(
+        {
+          method: 'DELETE',
+          url,
+          queryParameters: query as unknown as StorageQueryParameters,
+        },
+        (err, data) => {
+          callback!(err, data as AclMetadata);
+        },
+      )
+      .catch(err => callback!(err));
   }
 
   get(options?: GetAclOptions): Promise<GetAclResponse>;
@@ -728,12 +764,11 @@ class Acl extends AclRoleAccessorMethods {
       typeof optionsOrCallback === 'object' ? optionsOrCallback : null;
     const callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb;
-    let path = '';
     const query = {} as AclQuery;
 
+    let url = `${this.pathPrefix}`;
     if (options) {
-      path = '/' + encodeURIComponent(options.entity);
-
+      url = `${url}/${options.entity}`;
       if (options.generation) {
         query.generation = options.generation;
       }
@@ -743,28 +778,39 @@ class Acl extends AclRoleAccessorMethods {
       }
     }
 
-    this.request(
-      {
-        uri: path,
-        qs: query,
-      },
-      (err, resp) => {
-        if (err) {
-          callback!(err, null, resp);
-          return;
-        }
+    if (this.parent instanceof File) {
+      const file = this.parent as File;
+      const bucket = file.parent;
+      url = `${bucket.baseUrl}/${bucket.name}/${file.baseUrl}/${file.name}${url}`;
+    } else if (this.parent instanceof Bucket) {
+      const bucket = this.parent as Bucket;
+      url = `${bucket.baseUrl}/${bucket.name}${url}`;
+    }
 
-        let results;
+    this.storageTransport
+      .makeRequest<AccessControlList & AccessControlObject>(
+        {
+          method: 'GET',
+          url,
+          queryParameters: query as unknown as StorageQueryParameters,
+        },
+        (err, data, resp) => {
+          if (err) {
+            callback!(err, null, resp as unknown as AclMetadata);
+            return;
+          }
+          let results;
 
-        if (resp.items) {
-          results = resp.items.map(this.makeAclObject_);
-        } else {
-          results = this.makeAclObject_(resp);
-        }
+          if (data?.items) {
+            results = data?.items.map(this.makeAclObject_);
+          } else {
+            results = this.makeAclObject_(data as AccessControlObject);
+          }
 
-        callback!(null, results, resp);
-      },
-    );
+          callback!(null, results, resp as unknown as AclMetadata);
+        },
+      )
+      .catch(err => callback!(err));
   }
 
   update(options: UpdateAclOptions): Promise<UpdateAclResponse>;
@@ -842,24 +888,39 @@ class Acl extends AclRoleAccessorMethods {
       query.userProject = options.userProject;
     }
 
-    this.request(
-      {
-        method: 'PUT',
-        uri: '/' + encodeURIComponent(options.entity),
-        qs: query,
-        json: {
-          role: options.role.toUpperCase(),
-        },
-      },
-      (err, resp) => {
-        if (err) {
-          callback!(err, null, resp);
-          return;
-        }
+    let url = `${this.pathPrefix}/${options.entity}`;
+    if (this.parent instanceof File) {
+      const file = this.parent as File;
+      const bucket = file.parent;
+      url = `${bucket.baseUrl}/${bucket.name}/${file.baseUrl}/${file.name}${url}`;
+    } else if (this.parent instanceof Bucket) {
+      const bucket = this.parent as Bucket;
+      url = `${bucket.baseUrl}/${bucket.name}${url}`;
+    }
 
-        callback!(null, this.makeAclObject_(resp), resp);
-      },
-    );
+    this.storageTransport
+      .makeRequest(
+        {
+          method: 'PUT',
+          url,
+          queryParameters: query as unknown as StorageQueryParameters,
+          body: {
+            role: options.role.toUpperCase(),
+          },
+        },
+        (err, data, resp) => {
+          if (err) {
+            callback!(err, null, resp as unknown as AclMetadata);
+            return;
+          }
+          callback!(
+            null,
+            this.makeAclObject_(data as AccessControlObject),
+            data as AclMetadata,
+          );
+        },
+      )
+      .catch(err => callback!(err));
   }
 
   /**
@@ -880,25 +941,6 @@ class Acl extends AclRoleAccessorMethods {
     }
 
     return obj;
-  }
-
-  /**
-   * Patch requests up to the bucket's request object.
-   *
-   * @private
-   *
-   * @param {string} method Action.
-   * @param {string} path Request path.
-   * @param {*} query Request query object.
-   * @param {*} body Request body contents.
-   * @param {function} callback Callback function.
-   */
-  request(
-    reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback,
-  ): void {
-    reqOpts.uri = this.pathPrefix + reqOpts.uri;
-    this.request_(reqOpts, callback);
   }
 }
 

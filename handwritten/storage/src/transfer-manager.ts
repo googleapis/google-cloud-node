@@ -29,8 +29,7 @@ import {CRC32C} from './crc32c.js';
 import {GoogleAuth} from 'google-auth-library';
 import {XMLParser, XMLBuilder} from 'fast-xml-parser';
 import AsyncRetry from 'async-retry';
-import {ApiError} from './nodejs-common/index.js';
-import {GaxiosResponse, Headers} from 'gaxios';
+import {GaxiosError, GaxiosResponse, Headers} from 'gaxios';
 import {createHash} from 'crypto';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
 import {getRuntimeTrackingString, getUserAgentString} from './util.js';
@@ -200,7 +199,8 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     uploadId?: string,
     partsMap?: Map<number, string>,
   ) {
-    this.authClient = bucket.storage.authClient || new GoogleAuth();
+    this.authClient =
+      bucket.storage.storageTransport.authClient || new GoogleAuth();
     this.uploadId = uploadId || '';
     this.bucket = bucket;
     this.fileName = fileName;
@@ -373,7 +373,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
           throw res.data.error;
         }
       } catch (e) {
-        this.#handleErrorResponse(e as Error, bail);
+        this.#handleErrorResponse(e as GaxiosError, bail);
         return;
       }
     }, this.retryOptions);
@@ -388,7 +388,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
   #handleErrorResponse(err: Error, bail: Function) {
     if (
       this.bucket.storage.retryOptions.autoRetry &&
-      this.bucket.storage.retryOptions.retryableErrorFn!(err as ApiError)
+      this.bucket.storage.retryOptions.retryableErrorFn!(err as GaxiosError)
     ) {
       throw err;
     } else {
