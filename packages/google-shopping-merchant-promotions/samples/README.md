@@ -34,7 +34,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Promotions_service.get_promotion
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-promotions/samples/generated/v1beta/promotions_service.get_promotion.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-promotions/samples/generated/v1beta/promotions_service.get_promotion.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-promotions/samples/generated/v1beta/promotions_service.get_promotion.js,samples/README.md)
 
@@ -51,7 +51,7 @@ __Usage:__
 
 ### Promotions_service.insert_promotion
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-promotions/samples/generated/v1beta/promotions_service.insert_promotion.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-promotions/samples/generated/v1beta/promotions_service.insert_promotion.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-promotions/samples/generated/v1beta/promotions_service.insert_promotion.js,samples/README.md)
 
@@ -68,7 +68,7 @@ __Usage:__
 
 ### Promotions_service.list_promotions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-promotions/samples/generated/v1beta/promotions_service.list_promotions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-promotions/samples/generated/v1beta/promotions_service.list_promotions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-promotions/samples/generated/v1beta/promotions_service.list_promotions.js,samples/README.md)
 
@@ -85,7 +85,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-promotions/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-promotions/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-promotions/samples/quickstart.js,samples/README.md)
 

@@ -45,7 +45,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Managed_kafka.create_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.create_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.create_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.create_cluster.js,samples/README.md)
 
@@ -62,7 +62,7 @@ __Usage:__
 
 ### Managed_kafka.create_topic
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.create_topic.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.create_topic.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.create_topic.js,samples/README.md)
 
@@ -79,7 +79,7 @@ __Usage:__
 
 ### Managed_kafka.delete_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.delete_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.delete_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.delete_cluster.js,samples/README.md)
 
@@ -96,7 +96,7 @@ __Usage:__
 
 ### Managed_kafka.delete_consumer_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.delete_consumer_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.delete_consumer_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.delete_consumer_group.js,samples/README.md)
 
@@ -113,7 +113,7 @@ __Usage:__
 
 ### Managed_kafka.delete_topic
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.delete_topic.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.delete_topic.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.delete_topic.js,samples/README.md)
 
@@ -130,7 +130,7 @@ __Usage:__
 
 ### Managed_kafka.get_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.get_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.get_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.get_cluster.js,samples/README.md)
 
@@ -147,7 +147,7 @@ __Usage:__
 
 ### Managed_kafka.get_consumer_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.get_consumer_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.get_consumer_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.get_consumer_group.js,samples/README.md)
 
@@ -164,7 +164,7 @@ __Usage:__
 
 ### Managed_kafka.get_topic
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.get_topic.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.get_topic.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.get_topic.js,samples/README.md)
 
@@ -181,7 +181,7 @@ __Usage:__
 
 ### Managed_kafka.list_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.list_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.list_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.list_clusters.js,samples/README.md)
 
@@ -198,7 +198,7 @@ __Usage:__
 
 ### Managed_kafka.list_consumer_groups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.list_consumer_groups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.list_consumer_groups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.list_consumer_groups.js,samples/README.md)
 
@@ -215,7 +215,7 @@ __Usage:__
 
 ### Managed_kafka.list_topics
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.list_topics.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.list_topics.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.list_topics.js,samples/README.md)
 
@@ -232,7 +232,7 @@ __Usage:__
 
 ### Managed_kafka.update_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.update_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.update_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.update_cluster.js,samples/README.md)
 
@@ -249,7 +249,7 @@ __Usage:__
 
 ### Managed_kafka.update_consumer_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.update_consumer_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.update_consumer_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.update_consumer_group.js,samples/README.md)
 
@@ -266,7 +266,7 @@ __Usage:__
 
 ### Managed_kafka.update_topic
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.update_topic.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.update_topic.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.update_topic.js,samples/README.md)
 
@@ -283,7 +283,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-managedkafka/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/quickstart.js,samples/README.md)
 

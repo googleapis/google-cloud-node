@@ -44,7 +44,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Consumer_procurement_service.cancel_order
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.cancel_order.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.cancel_order.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.cancel_order.js,samples/README.md)
 
@@ -61,7 +61,7 @@ __Usage:__
 
 ### Consumer_procurement_service.get_order
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.get_order.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.get_order.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.get_order.js,samples/README.md)
 
@@ -78,7 +78,7 @@ __Usage:__
 
 ### Consumer_procurement_service.list_orders
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.list_orders.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.list_orders.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.list_orders.js,samples/README.md)
 
@@ -95,7 +95,7 @@ __Usage:__
 
 ### Consumer_procurement_service.modify_order
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.modify_order.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.modify_order.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.modify_order.js,samples/README.md)
 
@@ -112,7 +112,7 @@ __Usage:__
 
 ### Consumer_procurement_service.place_order
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.place_order.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.place_order.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.place_order.js,samples/README.md)
 
@@ -129,7 +129,7 @@ __Usage:__
 
 ### License_management_service.assign
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.assign.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.assign.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.assign.js,samples/README.md)
 
@@ -146,7 +146,7 @@ __Usage:__
 
 ### License_management_service.enumerate_licensed_users
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.enumerate_licensed_users.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.enumerate_licensed_users.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.enumerate_licensed_users.js,samples/README.md)
 
@@ -163,7 +163,7 @@ __Usage:__
 
 ### License_management_service.get_license_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.get_license_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.get_license_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.get_license_pool.js,samples/README.md)
 
@@ -180,7 +180,7 @@ __Usage:__
 
 ### License_management_service.unassign
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.unassign.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.unassign.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.unassign.js,samples/README.md)
 
@@ -197,7 +197,7 @@ __Usage:__
 
 ### License_management_service.update_license_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.update_license_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.update_license_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.update_license_pool.js,samples/README.md)
 
@@ -214,7 +214,7 @@ __Usage:__
 
 ### Consumer_procurement_service.get_order
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1alpha1/consumer_procurement_service.get_order.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1alpha1/consumer_procurement_service.get_order.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1alpha1/consumer_procurement_service.get_order.js,samples/README.md)
 
@@ -231,7 +231,7 @@ __Usage:__
 
 ### Consumer_procurement_service.list_orders
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1alpha1/consumer_procurement_service.list_orders.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1alpha1/consumer_procurement_service.list_orders.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1alpha1/consumer_procurement_service.list_orders.js,samples/README.md)
 
@@ -248,7 +248,7 @@ __Usage:__
 
 ### Consumer_procurement_service.place_order
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1alpha1/consumer_procurement_service.place_order.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1alpha1/consumer_procurement_service.place_order.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1alpha1/consumer_procurement_service.place_order.js,samples/README.md)
 
@@ -265,7 +265,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-commerce-consumer-procurement/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/quickstart.js,samples/README.md)
 

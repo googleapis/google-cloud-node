@@ -37,7 +37,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Local_inventory_service.delete_local_inventory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.delete_local_inventory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.delete_local_inventory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.delete_local_inventory.js,samples/README.md)
 
@@ -54,7 +54,7 @@ __Usage:__
 
 ### Local_inventory_service.insert_local_inventory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.insert_local_inventory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.insert_local_inventory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.insert_local_inventory.js,samples/README.md)
 
@@ -71,7 +71,7 @@ __Usage:__
 
 ### Local_inventory_service.list_local_inventories
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.list_local_inventories.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.list_local_inventories.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.list_local_inventories.js,samples/README.md)
 
@@ -88,7 +88,7 @@ __Usage:__
 
 ### Regional_inventory_service.delete_regional_inventory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.delete_regional_inventory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.delete_regional_inventory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.delete_regional_inventory.js,samples/README.md)
 
@@ -105,7 +105,7 @@ __Usage:__
 
 ### Regional_inventory_service.insert_regional_inventory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.insert_regional_inventory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.insert_regional_inventory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.insert_regional_inventory.js,samples/README.md)
 
@@ -122,7 +122,7 @@ __Usage:__
 
 ### Regional_inventory_service.list_regional_inventories
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.list_regional_inventories.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.list_regional_inventories.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.list_regional_inventories.js,samples/README.md)
 
@@ -139,7 +139,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-inventories/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-inventories/samples/quickstart.js,samples/README.md)
 

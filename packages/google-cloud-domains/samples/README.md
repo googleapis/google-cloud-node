@@ -76,7 +76,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Domains.configure_contact_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.configure_contact_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.configure_contact_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.configure_contact_settings.js,samples/README.md)
 
@@ -93,7 +93,7 @@ __Usage:__
 
 ### Domains.configure_dns_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.configure_dns_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.configure_dns_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.configure_dns_settings.js,samples/README.md)
 
@@ -110,7 +110,7 @@ __Usage:__
 
 ### Domains.configure_management_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.configure_management_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.configure_management_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.configure_management_settings.js,samples/README.md)
 
@@ -127,7 +127,7 @@ __Usage:__
 
 ### Domains.delete_registration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.delete_registration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.delete_registration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.delete_registration.js,samples/README.md)
 
@@ -144,7 +144,7 @@ __Usage:__
 
 ### Domains.export_registration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.export_registration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.export_registration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.export_registration.js,samples/README.md)
 
@@ -161,7 +161,7 @@ __Usage:__
 
 ### Domains.get_registration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.get_registration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.get_registration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.get_registration.js,samples/README.md)
 
@@ -178,7 +178,7 @@ __Usage:__
 
 ### Domains.list_registrations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.list_registrations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.list_registrations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.list_registrations.js,samples/README.md)
 
@@ -195,7 +195,7 @@ __Usage:__
 
 ### Domains.register_domain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.register_domain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.register_domain.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.register_domain.js,samples/README.md)
 
@@ -212,7 +212,7 @@ __Usage:__
 
 ### Domains.reset_authorization_code
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.reset_authorization_code.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.reset_authorization_code.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.reset_authorization_code.js,samples/README.md)
 
@@ -229,7 +229,7 @@ __Usage:__
 
 ### Domains.retrieve_authorization_code
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.retrieve_authorization_code.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.retrieve_authorization_code.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.retrieve_authorization_code.js,samples/README.md)
 
@@ -246,7 +246,7 @@ __Usage:__
 
 ### Domains.retrieve_register_parameters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.retrieve_register_parameters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.retrieve_register_parameters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.retrieve_register_parameters.js,samples/README.md)
 
@@ -263,7 +263,7 @@ __Usage:__
 
 ### Domains.retrieve_transfer_parameters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.retrieve_transfer_parameters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.retrieve_transfer_parameters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.retrieve_transfer_parameters.js,samples/README.md)
 
@@ -280,7 +280,7 @@ __Usage:__
 
 ### Domains.search_domains
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.search_domains.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.search_domains.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.search_domains.js,samples/README.md)
 
@@ -297,7 +297,7 @@ __Usage:__
 
 ### Domains.transfer_domain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.transfer_domain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.transfer_domain.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.transfer_domain.js,samples/README.md)
 
@@ -314,7 +314,7 @@ __Usage:__
 
 ### Domains.update_registration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1/domains.update_registration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1/domains.update_registration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1/domains.update_registration.js,samples/README.md)
 
@@ -331,7 +331,7 @@ __Usage:__
 
 ### Domains.configure_contact_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.configure_contact_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.configure_contact_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.configure_contact_settings.js,samples/README.md)
 
@@ -348,7 +348,7 @@ __Usage:__
 
 ### Domains.configure_dns_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.configure_dns_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.configure_dns_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.configure_dns_settings.js,samples/README.md)
 
@@ -365,7 +365,7 @@ __Usage:__
 
 ### Domains.configure_management_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.configure_management_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.configure_management_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.configure_management_settings.js,samples/README.md)
 
@@ -382,7 +382,7 @@ __Usage:__
 
 ### Domains.delete_registration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.delete_registration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.delete_registration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.delete_registration.js,samples/README.md)
 
@@ -399,7 +399,7 @@ __Usage:__
 
 ### Domains.export_registration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.export_registration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.export_registration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.export_registration.js,samples/README.md)
 
@@ -416,7 +416,7 @@ __Usage:__
 
 ### Domains.get_registration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.get_registration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.get_registration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.get_registration.js,samples/README.md)
 
@@ -433,7 +433,7 @@ __Usage:__
 
 ### Domains.list_registrations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.list_registrations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.list_registrations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.list_registrations.js,samples/README.md)
 
@@ -450,7 +450,7 @@ __Usage:__
 
 ### Domains.register_domain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.register_domain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.register_domain.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.register_domain.js,samples/README.md)
 
@@ -467,7 +467,7 @@ __Usage:__
 
 ### Domains.reset_authorization_code
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.reset_authorization_code.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.reset_authorization_code.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.reset_authorization_code.js,samples/README.md)
 
@@ -484,7 +484,7 @@ __Usage:__
 
 ### Domains.retrieve_authorization_code
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.retrieve_authorization_code.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.retrieve_authorization_code.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.retrieve_authorization_code.js,samples/README.md)
 
@@ -501,7 +501,7 @@ __Usage:__
 
 ### Domains.retrieve_register_parameters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.retrieve_register_parameters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.retrieve_register_parameters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.retrieve_register_parameters.js,samples/README.md)
 
@@ -518,7 +518,7 @@ __Usage:__
 
 ### Domains.retrieve_transfer_parameters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.retrieve_transfer_parameters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.retrieve_transfer_parameters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.retrieve_transfer_parameters.js,samples/README.md)
 
@@ -535,7 +535,7 @@ __Usage:__
 
 ### Domains.search_domains
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.search_domains.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.search_domains.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.search_domains.js,samples/README.md)
 
@@ -552,7 +552,7 @@ __Usage:__
 
 ### Domains.transfer_domain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.transfer_domain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.transfer_domain.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.transfer_domain.js,samples/README.md)
 
@@ -569,7 +569,7 @@ __Usage:__
 
 ### Domains.update_registration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1alpha2/domains.update_registration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1alpha2/domains.update_registration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1alpha2/domains.update_registration.js,samples/README.md)
 
@@ -586,7 +586,7 @@ __Usage:__
 
 ### Domains.configure_contact_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.configure_contact_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.configure_contact_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.configure_contact_settings.js,samples/README.md)
 
@@ -603,7 +603,7 @@ __Usage:__
 
 ### Domains.configure_dns_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.configure_dns_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.configure_dns_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.configure_dns_settings.js,samples/README.md)
 
@@ -620,7 +620,7 @@ __Usage:__
 
 ### Domains.configure_management_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.configure_management_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.configure_management_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.configure_management_settings.js,samples/README.md)
 
@@ -637,7 +637,7 @@ __Usage:__
 
 ### Domains.delete_registration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.delete_registration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.delete_registration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.delete_registration.js,samples/README.md)
 
@@ -654,7 +654,7 @@ __Usage:__
 
 ### Domains.export_registration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.export_registration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.export_registration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.export_registration.js,samples/README.md)
 
@@ -671,7 +671,7 @@ __Usage:__
 
 ### Domains.get_registration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.get_registration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.get_registration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.get_registration.js,samples/README.md)
 
@@ -688,7 +688,7 @@ __Usage:__
 
 ### Domains.list_registrations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.list_registrations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.list_registrations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.list_registrations.js,samples/README.md)
 
@@ -705,7 +705,7 @@ __Usage:__
 
 ### Domains.register_domain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.register_domain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.register_domain.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.register_domain.js,samples/README.md)
 
@@ -722,7 +722,7 @@ __Usage:__
 
 ### Domains.reset_authorization_code
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.reset_authorization_code.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.reset_authorization_code.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.reset_authorization_code.js,samples/README.md)
 
@@ -739,7 +739,7 @@ __Usage:__
 
 ### Domains.retrieve_authorization_code
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.retrieve_authorization_code.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.retrieve_authorization_code.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.retrieve_authorization_code.js,samples/README.md)
 
@@ -756,7 +756,7 @@ __Usage:__
 
 ### Domains.retrieve_register_parameters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.retrieve_register_parameters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.retrieve_register_parameters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.retrieve_register_parameters.js,samples/README.md)
 
@@ -773,7 +773,7 @@ __Usage:__
 
 ### Domains.retrieve_transfer_parameters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.retrieve_transfer_parameters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.retrieve_transfer_parameters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.retrieve_transfer_parameters.js,samples/README.md)
 
@@ -790,7 +790,7 @@ __Usage:__
 
 ### Domains.search_domains
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.search_domains.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.search_domains.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.search_domains.js,samples/README.md)
 
@@ -807,7 +807,7 @@ __Usage:__
 
 ### Domains.transfer_domain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.transfer_domain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.transfer_domain.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.transfer_domain.js,samples/README.md)
 
@@ -824,7 +824,7 @@ __Usage:__
 
 ### Domains.update_registration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/generated/v1beta1/domains.update_registration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/generated/v1beta1/domains.update_registration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/generated/v1beta1/domains.update_registration.js,samples/README.md)
 
@@ -841,7 +841,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-domains/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-domains/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-domains/samples/quickstart.js,samples/README.md)
 

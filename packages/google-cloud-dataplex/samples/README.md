@@ -131,7 +131,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Catalog_service.cancel_metadata_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.cancel_metadata_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.cancel_metadata_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.cancel_metadata_job.js,samples/README.md)
 
@@ -148,7 +148,7 @@ __Usage:__
 
 ### Catalog_service.create_aspect_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_aspect_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_aspect_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_aspect_type.js,samples/README.md)
 
@@ -165,7 +165,7 @@ __Usage:__
 
 ### Catalog_service.create_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_entry.js,samples/README.md)
 
@@ -182,7 +182,7 @@ __Usage:__
 
 ### Catalog_service.create_entry_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_entry_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_entry_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_entry_group.js,samples/README.md)
 
@@ -199,7 +199,7 @@ __Usage:__
 
 ### Catalog_service.create_entry_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_entry_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_entry_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_entry_type.js,samples/README.md)
 
@@ -216,7 +216,7 @@ __Usage:__
 
 ### Catalog_service.create_metadata_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_metadata_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_metadata_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_metadata_job.js,samples/README.md)
 
@@ -233,7 +233,7 @@ __Usage:__
 
 ### Catalog_service.delete_aspect_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_aspect_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_aspect_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_aspect_type.js,samples/README.md)
 
@@ -250,7 +250,7 @@ __Usage:__
 
 ### Catalog_service.delete_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_entry.js,samples/README.md)
 
@@ -267,7 +267,7 @@ __Usage:__
 
 ### Catalog_service.delete_entry_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_entry_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_entry_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_entry_group.js,samples/README.md)
 
@@ -284,7 +284,7 @@ __Usage:__
 
 ### Catalog_service.delete_entry_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_entry_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_entry_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_entry_type.js,samples/README.md)
 
@@ -301,7 +301,7 @@ __Usage:__
 
 ### Catalog_service.get_aspect_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_aspect_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_aspect_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_aspect_type.js,samples/README.md)
 
@@ -318,7 +318,7 @@ __Usage:__
 
 ### Catalog_service.get_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_entry.js,samples/README.md)
 
@@ -335,7 +335,7 @@ __Usage:__
 
 ### Catalog_service.get_entry_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_entry_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_entry_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_entry_group.js,samples/README.md)
 
@@ -352,7 +352,7 @@ __Usage:__
 
 ### Catalog_service.get_entry_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_entry_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_entry_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_entry_type.js,samples/README.md)
 
@@ -369,7 +369,7 @@ __Usage:__
 
 ### Catalog_service.get_metadata_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_metadata_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_metadata_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_metadata_job.js,samples/README.md)
 
@@ -386,7 +386,7 @@ __Usage:__
 
 ### Catalog_service.list_aspect_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_aspect_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_aspect_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_aspect_types.js,samples/README.md)
 
@@ -403,7 +403,7 @@ __Usage:__
 
 ### Catalog_service.list_entries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_entries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_entries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_entries.js,samples/README.md)
 
@@ -420,7 +420,7 @@ __Usage:__
 
 ### Catalog_service.list_entry_groups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_entry_groups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_entry_groups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_entry_groups.js,samples/README.md)
 
@@ -437,7 +437,7 @@ __Usage:__
 
 ### Catalog_service.list_entry_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_entry_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_entry_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_entry_types.js,samples/README.md)
 
@@ -454,7 +454,7 @@ __Usage:__
 
 ### Catalog_service.list_metadata_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_metadata_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_metadata_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.list_metadata_jobs.js,samples/README.md)
 
@@ -471,7 +471,7 @@ __Usage:__
 
 ### Catalog_service.lookup_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.lookup_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.lookup_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.lookup_entry.js,samples/README.md)
 
@@ -488,7 +488,7 @@ __Usage:__
 
 ### Catalog_service.search_entries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.search_entries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.search_entries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.search_entries.js,samples/README.md)
 
@@ -505,7 +505,7 @@ __Usage:__
 
 ### Catalog_service.update_aspect_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.update_aspect_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.update_aspect_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.update_aspect_type.js,samples/README.md)
 
@@ -522,7 +522,7 @@ __Usage:__
 
 ### Catalog_service.update_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.update_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.update_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.update_entry.js,samples/README.md)
 
@@ -539,7 +539,7 @@ __Usage:__
 
 ### Catalog_service.update_entry_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.update_entry_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.update_entry_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.update_entry_group.js,samples/README.md)
 
@@ -556,7 +556,7 @@ __Usage:__
 
 ### Catalog_service.update_entry_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.update_entry_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.update_entry_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.update_entry_type.js,samples/README.md)
 
@@ -573,7 +573,7 @@ __Usage:__
 
 ### Content_service.create_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/content_service.create_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/content_service.create_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/content_service.create_content.js,samples/README.md)
 
@@ -590,7 +590,7 @@ __Usage:__
 
 ### Content_service.delete_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/content_service.delete_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/content_service.delete_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/content_service.delete_content.js,samples/README.md)
 
@@ -607,7 +607,7 @@ __Usage:__
 
 ### Content_service.get_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/content_service.get_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/content_service.get_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/content_service.get_content.js,samples/README.md)
 
@@ -624,7 +624,7 @@ __Usage:__
 
 ### Content_service.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/content_service.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/content_service.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/content_service.get_iam_policy.js,samples/README.md)
 
@@ -641,7 +641,7 @@ __Usage:__
 
 ### Content_service.list_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/content_service.list_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/content_service.list_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/content_service.list_content.js,samples/README.md)
 
@@ -658,7 +658,7 @@ __Usage:__
 
 ### Content_service.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/content_service.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/content_service.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/content_service.set_iam_policy.js,samples/README.md)
 
@@ -675,7 +675,7 @@ __Usage:__
 
 ### Content_service.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/content_service.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/content_service.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/content_service.test_iam_permissions.js,samples/README.md)
 
@@ -692,7 +692,7 @@ __Usage:__
 
 ### Content_service.update_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/content_service.update_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/content_service.update_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/content_service.update_content.js,samples/README.md)
 
@@ -709,7 +709,7 @@ __Usage:__
 
 ### Data_scan_service.create_data_scan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.create_data_scan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.create_data_scan.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.create_data_scan.js,samples/README.md)
 
@@ -726,7 +726,7 @@ __Usage:__
 
 ### Data_scan_service.delete_data_scan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.delete_data_scan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.delete_data_scan.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.delete_data_scan.js,samples/README.md)
 
@@ -743,7 +743,7 @@ __Usage:__
 
 ### Data_scan_service.generate_data_quality_rules
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.generate_data_quality_rules.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.generate_data_quality_rules.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.generate_data_quality_rules.js,samples/README.md)
 
@@ -760,7 +760,7 @@ __Usage:__
 
 ### Data_scan_service.get_data_scan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.get_data_scan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.get_data_scan.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.get_data_scan.js,samples/README.md)
 
@@ -777,7 +777,7 @@ __Usage:__
 
 ### Data_scan_service.get_data_scan_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.get_data_scan_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.get_data_scan_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.get_data_scan_job.js,samples/README.md)
 
@@ -794,7 +794,7 @@ __Usage:__
 
 ### Data_scan_service.list_data_scan_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.list_data_scan_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.list_data_scan_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.list_data_scan_jobs.js,samples/README.md)
 
@@ -811,7 +811,7 @@ __Usage:__
 
 ### Data_scan_service.list_data_scans
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.list_data_scans.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.list_data_scans.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.list_data_scans.js,samples/README.md)
 
@@ -828,7 +828,7 @@ __Usage:__
 
 ### Data_scan_service.run_data_scan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.run_data_scan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.run_data_scan.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.run_data_scan.js,samples/README.md)
 
@@ -845,7 +845,7 @@ __Usage:__
 
 ### Data_scan_service.update_data_scan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.update_data_scan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.update_data_scan.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.update_data_scan.js,samples/README.md)
 
@@ -862,7 +862,7 @@ __Usage:__
 
 ### Data_taxonomy_service.create_data_attribute
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_attribute.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_attribute.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_attribute.js,samples/README.md)
 
@@ -879,7 +879,7 @@ __Usage:__
 
 ### Data_taxonomy_service.create_data_attribute_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_attribute_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_attribute_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_attribute_binding.js,samples/README.md)
 
@@ -896,7 +896,7 @@ __Usage:__
 
 ### Data_taxonomy_service.create_data_taxonomy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_taxonomy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_taxonomy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_taxonomy.js,samples/README.md)
 
@@ -913,7 +913,7 @@ __Usage:__
 
 ### Data_taxonomy_service.delete_data_attribute
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_attribute.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_attribute.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_attribute.js,samples/README.md)
 
@@ -930,7 +930,7 @@ __Usage:__
 
 ### Data_taxonomy_service.delete_data_attribute_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_attribute_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_attribute_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_attribute_binding.js,samples/README.md)
 
@@ -947,7 +947,7 @@ __Usage:__
 
 ### Data_taxonomy_service.delete_data_taxonomy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_taxonomy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_taxonomy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_taxonomy.js,samples/README.md)
 
@@ -964,7 +964,7 @@ __Usage:__
 
 ### Data_taxonomy_service.get_data_attribute
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_attribute.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_attribute.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_attribute.js,samples/README.md)
 
@@ -981,7 +981,7 @@ __Usage:__
 
 ### Data_taxonomy_service.get_data_attribute_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_attribute_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_attribute_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_attribute_binding.js,samples/README.md)
 
@@ -998,7 +998,7 @@ __Usage:__
 
 ### Data_taxonomy_service.get_data_taxonomy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_taxonomy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_taxonomy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_taxonomy.js,samples/README.md)
 
@@ -1015,7 +1015,7 @@ __Usage:__
 
 ### Data_taxonomy_service.list_data_attribute_bindings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_attribute_bindings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_attribute_bindings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_attribute_bindings.js,samples/README.md)
 
@@ -1032,7 +1032,7 @@ __Usage:__
 
 ### Data_taxonomy_service.list_data_attributes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_attributes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_attributes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_attributes.js,samples/README.md)
 
@@ -1049,7 +1049,7 @@ __Usage:__
 
 ### Data_taxonomy_service.list_data_taxonomies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_taxonomies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_taxonomies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_taxonomies.js,samples/README.md)
 
@@ -1066,7 +1066,7 @@ __Usage:__
 
 ### Data_taxonomy_service.update_data_attribute
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_attribute.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_attribute.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_attribute.js,samples/README.md)
 
@@ -1083,7 +1083,7 @@ __Usage:__
 
 ### Data_taxonomy_service.update_data_attribute_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_attribute_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_attribute_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_attribute_binding.js,samples/README.md)
 
@@ -1100,7 +1100,7 @@ __Usage:__
 
 ### Data_taxonomy_service.update_data_taxonomy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_taxonomy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_taxonomy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_taxonomy.js,samples/README.md)
 
@@ -1117,7 +1117,7 @@ __Usage:__
 
 ### Dataplex_service.cancel_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.cancel_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.cancel_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.cancel_job.js,samples/README.md)
 
@@ -1134,7 +1134,7 @@ __Usage:__
 
 ### Dataplex_service.create_asset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_asset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_asset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_asset.js,samples/README.md)
 
@@ -1151,7 +1151,7 @@ __Usage:__
 
 ### Dataplex_service.create_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_environment.js,samples/README.md)
 
@@ -1168,7 +1168,7 @@ __Usage:__
 
 ### Dataplex_service.create_lake
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_lake.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_lake.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_lake.js,samples/README.md)
 
@@ -1185,7 +1185,7 @@ __Usage:__
 
 ### Dataplex_service.create_task
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_task.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_task.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_task.js,samples/README.md)
 
@@ -1202,7 +1202,7 @@ __Usage:__
 
 ### Dataplex_service.create_zone
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_zone.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_zone.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.create_zone.js,samples/README.md)
 
@@ -1219,7 +1219,7 @@ __Usage:__
 
 ### Dataplex_service.delete_asset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_asset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_asset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_asset.js,samples/README.md)
 
@@ -1236,7 +1236,7 @@ __Usage:__
 
 ### Dataplex_service.delete_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_environment.js,samples/README.md)
 
@@ -1253,7 +1253,7 @@ __Usage:__
 
 ### Dataplex_service.delete_lake
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_lake.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_lake.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_lake.js,samples/README.md)
 
@@ -1270,7 +1270,7 @@ __Usage:__
 
 ### Dataplex_service.delete_task
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_task.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_task.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_task.js,samples/README.md)
 
@@ -1287,7 +1287,7 @@ __Usage:__
 
 ### Dataplex_service.delete_zone
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_zone.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_zone.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.delete_zone.js,samples/README.md)
 
@@ -1304,7 +1304,7 @@ __Usage:__
 
 ### Dataplex_service.get_asset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_asset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_asset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_asset.js,samples/README.md)
 
@@ -1321,7 +1321,7 @@ __Usage:__
 
 ### Dataplex_service.get_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_environment.js,samples/README.md)
 
@@ -1338,7 +1338,7 @@ __Usage:__
 
 ### Dataplex_service.get_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_job.js,samples/README.md)
 
@@ -1355,7 +1355,7 @@ __Usage:__
 
 ### Dataplex_service.get_lake
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_lake.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_lake.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_lake.js,samples/README.md)
 
@@ -1372,7 +1372,7 @@ __Usage:__
 
 ### Dataplex_service.get_task
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_task.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_task.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_task.js,samples/README.md)
 
@@ -1389,7 +1389,7 @@ __Usage:__
 
 ### Dataplex_service.get_zone
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_zone.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_zone.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.get_zone.js,samples/README.md)
 
@@ -1406,7 +1406,7 @@ __Usage:__
 
 ### Dataplex_service.list_asset_actions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_asset_actions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_asset_actions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_asset_actions.js,samples/README.md)
 
@@ -1423,7 +1423,7 @@ __Usage:__
 
 ### Dataplex_service.list_assets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_assets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_assets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_assets.js,samples/README.md)
 
@@ -1440,7 +1440,7 @@ __Usage:__
 
 ### Dataplex_service.list_environments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_environments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_environments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_environments.js,samples/README.md)
 
@@ -1457,7 +1457,7 @@ __Usage:__
 
 ### Dataplex_service.list_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_jobs.js,samples/README.md)
 
@@ -1474,7 +1474,7 @@ __Usage:__
 
 ### Dataplex_service.list_lake_actions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_lake_actions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_lake_actions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_lake_actions.js,samples/README.md)
 
@@ -1491,7 +1491,7 @@ __Usage:__
 
 ### Dataplex_service.list_lakes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_lakes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_lakes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_lakes.js,samples/README.md)
 
@@ -1508,7 +1508,7 @@ __Usage:__
 
 ### Dataplex_service.list_sessions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_sessions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_sessions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_sessions.js,samples/README.md)
 
@@ -1525,7 +1525,7 @@ __Usage:__
 
 ### Dataplex_service.list_tasks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_tasks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_tasks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_tasks.js,samples/README.md)
 
@@ -1542,7 +1542,7 @@ __Usage:__
 
 ### Dataplex_service.list_zone_actions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_zone_actions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_zone_actions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_zone_actions.js,samples/README.md)
 
@@ -1559,7 +1559,7 @@ __Usage:__
 
 ### Dataplex_service.list_zones
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_zones.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_zones.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_zones.js,samples/README.md)
 
@@ -1576,7 +1576,7 @@ __Usage:__
 
 ### Dataplex_service.run_task
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.run_task.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.run_task.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.run_task.js,samples/README.md)
 
@@ -1593,7 +1593,7 @@ __Usage:__
 
 ### Dataplex_service.update_asset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_asset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_asset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_asset.js,samples/README.md)
 
@@ -1610,7 +1610,7 @@ __Usage:__
 
 ### Dataplex_service.update_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_environment.js,samples/README.md)
 
@@ -1627,7 +1627,7 @@ __Usage:__
 
 ### Dataplex_service.update_lake
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_lake.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_lake.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_lake.js,samples/README.md)
 
@@ -1644,7 +1644,7 @@ __Usage:__
 
 ### Dataplex_service.update_task
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_task.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_task.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_task.js,samples/README.md)
 
@@ -1661,7 +1661,7 @@ __Usage:__
 
 ### Dataplex_service.update_zone
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_zone.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_zone.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.update_zone.js,samples/README.md)
 
@@ -1678,7 +1678,7 @@ __Usage:__
 
 ### Metadata_service.create_entity
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.create_entity.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.create_entity.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/metadata_service.create_entity.js,samples/README.md)
 
@@ -1695,7 +1695,7 @@ __Usage:__
 
 ### Metadata_service.create_partition
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.create_partition.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.create_partition.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/metadata_service.create_partition.js,samples/README.md)
 
@@ -1712,7 +1712,7 @@ __Usage:__
 
 ### Metadata_service.delete_entity
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.delete_entity.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.delete_entity.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/metadata_service.delete_entity.js,samples/README.md)
 
@@ -1729,7 +1729,7 @@ __Usage:__
 
 ### Metadata_service.delete_partition
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.delete_partition.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.delete_partition.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/metadata_service.delete_partition.js,samples/README.md)
 
@@ -1746,7 +1746,7 @@ __Usage:__
 
 ### Metadata_service.get_entity
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.get_entity.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.get_entity.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/metadata_service.get_entity.js,samples/README.md)
 
@@ -1763,7 +1763,7 @@ __Usage:__
 
 ### Metadata_service.get_partition
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.get_partition.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.get_partition.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/metadata_service.get_partition.js,samples/README.md)
 
@@ -1780,7 +1780,7 @@ __Usage:__
 
 ### Metadata_service.list_entities
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.list_entities.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.list_entities.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/metadata_service.list_entities.js,samples/README.md)
 
@@ -1797,7 +1797,7 @@ __Usage:__
 
 ### Metadata_service.list_partitions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.list_partitions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.list_partitions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/metadata_service.list_partitions.js,samples/README.md)
 
@@ -1814,7 +1814,7 @@ __Usage:__
 
 ### Metadata_service.update_entity
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.update_entity.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/generated/v1/metadata_service.update_entity.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/metadata_service.update_entity.js,samples/README.md)
 
@@ -1831,7 +1831,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataplex/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/quickstart.js,samples/README.md)
 

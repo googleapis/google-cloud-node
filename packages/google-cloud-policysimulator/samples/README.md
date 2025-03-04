@@ -34,7 +34,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Simulator.create_replay
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policysimulator/samples/generated/v1/simulator.create_replay.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-policysimulator/samples/generated/v1/simulator.create_replay.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policysimulator/samples/generated/v1/simulator.create_replay.js,samples/README.md)
 
@@ -51,7 +51,7 @@ __Usage:__
 
 ### Simulator.get_replay
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policysimulator/samples/generated/v1/simulator.get_replay.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-policysimulator/samples/generated/v1/simulator.get_replay.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policysimulator/samples/generated/v1/simulator.get_replay.js,samples/README.md)
 
@@ -68,7 +68,7 @@ __Usage:__
 
 ### Simulator.list_replay_results
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policysimulator/samples/generated/v1/simulator.list_replay_results.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-policysimulator/samples/generated/v1/simulator.list_replay_results.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policysimulator/samples/generated/v1/simulator.list_replay_results.js,samples/README.md)
 
@@ -85,7 +85,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policysimulator/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-policysimulator/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policysimulator/samples/quickstart.js,samples/README.md)
 

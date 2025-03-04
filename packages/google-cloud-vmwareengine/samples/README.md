@@ -105,7 +105,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Vmware_engine.create_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_cluster.js,samples/README.md)
 
@@ -122,7 +122,7 @@ __Usage:__
 
 ### Vmware_engine.create_external_access_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_external_access_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_external_access_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_external_access_rule.js,samples/README.md)
 
@@ -139,7 +139,7 @@ __Usage:__
 
 ### Vmware_engine.create_external_address
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_external_address.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_external_address.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_external_address.js,samples/README.md)
 
@@ -156,7 +156,7 @@ __Usage:__
 
 ### Vmware_engine.create_hcx_activation_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_hcx_activation_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_hcx_activation_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_hcx_activation_key.js,samples/README.md)
 
@@ -173,7 +173,7 @@ __Usage:__
 
 ### Vmware_engine.create_logging_server
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_logging_server.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_logging_server.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_logging_server.js,samples/README.md)
 
@@ -190,7 +190,7 @@ __Usage:__
 
 ### Vmware_engine.create_management_dns_zone_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_management_dns_zone_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_management_dns_zone_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_management_dns_zone_binding.js,samples/README.md)
 
@@ -207,7 +207,7 @@ __Usage:__
 
 ### Vmware_engine.create_network_peering
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_network_peering.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_network_peering.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_network_peering.js,samples/README.md)
 
@@ -224,7 +224,7 @@ __Usage:__
 
 ### Vmware_engine.create_network_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_network_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_network_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_network_policy.js,samples/README.md)
 
@@ -241,7 +241,7 @@ __Usage:__
 
 ### Vmware_engine.create_private_cloud
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_private_cloud.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_private_cloud.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_private_cloud.js,samples/README.md)
 
@@ -258,7 +258,7 @@ __Usage:__
 
 ### Vmware_engine.create_private_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_private_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_private_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_private_connection.js,samples/README.md)
 
@@ -275,7 +275,7 @@ __Usage:__
 
 ### Vmware_engine.create_vmware_engine_network
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_vmware_engine_network.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_vmware_engine_network.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_vmware_engine_network.js,samples/README.md)
 
@@ -292,7 +292,7 @@ __Usage:__
 
 ### Vmware_engine.delete_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_cluster.js,samples/README.md)
 
@@ -309,7 +309,7 @@ __Usage:__
 
 ### Vmware_engine.delete_external_access_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_external_access_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_external_access_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_external_access_rule.js,samples/README.md)
 
@@ -326,7 +326,7 @@ __Usage:__
 
 ### Vmware_engine.delete_external_address
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_external_address.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_external_address.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_external_address.js,samples/README.md)
 
@@ -343,7 +343,7 @@ __Usage:__
 
 ### Vmware_engine.delete_logging_server
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_logging_server.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_logging_server.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_logging_server.js,samples/README.md)
 
@@ -360,7 +360,7 @@ __Usage:__
 
 ### Vmware_engine.delete_management_dns_zone_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_management_dns_zone_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_management_dns_zone_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_management_dns_zone_binding.js,samples/README.md)
 
@@ -377,7 +377,7 @@ __Usage:__
 
 ### Vmware_engine.delete_network_peering
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_network_peering.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_network_peering.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_network_peering.js,samples/README.md)
 
@@ -394,7 +394,7 @@ __Usage:__
 
 ### Vmware_engine.delete_network_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_network_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_network_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_network_policy.js,samples/README.md)
 
@@ -411,7 +411,7 @@ __Usage:__
 
 ### Vmware_engine.delete_private_cloud
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_private_cloud.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_private_cloud.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_private_cloud.js,samples/README.md)
 
@@ -428,7 +428,7 @@ __Usage:__
 
 ### Vmware_engine.delete_private_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_private_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_private_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_private_connection.js,samples/README.md)
 
@@ -445,7 +445,7 @@ __Usage:__
 
 ### Vmware_engine.delete_vmware_engine_network
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_vmware_engine_network.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_vmware_engine_network.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_vmware_engine_network.js,samples/README.md)
 
@@ -462,7 +462,7 @@ __Usage:__
 
 ### Vmware_engine.fetch_network_policy_external_addresses
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.fetch_network_policy_external_addresses.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.fetch_network_policy_external_addresses.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.fetch_network_policy_external_addresses.js,samples/README.md)
 
@@ -479,7 +479,7 @@ __Usage:__
 
 ### Vmware_engine.get_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_cluster.js,samples/README.md)
 
@@ -496,7 +496,7 @@ __Usage:__
 
 ### Vmware_engine.get_dns_bind_permission
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_dns_bind_permission.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_dns_bind_permission.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_dns_bind_permission.js,samples/README.md)
 
@@ -513,7 +513,7 @@ __Usage:__
 
 ### Vmware_engine.get_dns_forwarding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_dns_forwarding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_dns_forwarding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_dns_forwarding.js,samples/README.md)
 
@@ -530,7 +530,7 @@ __Usage:__
 
 ### Vmware_engine.get_external_access_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_external_access_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_external_access_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_external_access_rule.js,samples/README.md)
 
@@ -547,7 +547,7 @@ __Usage:__
 
 ### Vmware_engine.get_external_address
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_external_address.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_external_address.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_external_address.js,samples/README.md)
 
@@ -564,7 +564,7 @@ __Usage:__
 
 ### Vmware_engine.get_hcx_activation_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_hcx_activation_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_hcx_activation_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_hcx_activation_key.js,samples/README.md)
 
@@ -581,7 +581,7 @@ __Usage:__
 
 ### Vmware_engine.get_logging_server
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_logging_server.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_logging_server.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_logging_server.js,samples/README.md)
 
@@ -598,7 +598,7 @@ __Usage:__
 
 ### Vmware_engine.get_management_dns_zone_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_management_dns_zone_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_management_dns_zone_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_management_dns_zone_binding.js,samples/README.md)
 
@@ -615,7 +615,7 @@ __Usage:__
 
 ### Vmware_engine.get_network_peering
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_network_peering.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_network_peering.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_network_peering.js,samples/README.md)
 
@@ -632,7 +632,7 @@ __Usage:__
 
 ### Vmware_engine.get_network_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_network_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_network_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_network_policy.js,samples/README.md)
 
@@ -649,7 +649,7 @@ __Usage:__
 
 ### Vmware_engine.get_node
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_node.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_node.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_node.js,samples/README.md)
 
@@ -666,7 +666,7 @@ __Usage:__
 
 ### Vmware_engine.get_node_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_node_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_node_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_node_type.js,samples/README.md)
 
@@ -683,7 +683,7 @@ __Usage:__
 
 ### Vmware_engine.get_private_cloud
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_private_cloud.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_private_cloud.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_private_cloud.js,samples/README.md)
 
@@ -700,7 +700,7 @@ __Usage:__
 
 ### Vmware_engine.get_private_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_private_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_private_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_private_connection.js,samples/README.md)
 
@@ -717,7 +717,7 @@ __Usage:__
 
 ### Vmware_engine.get_subnet
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_subnet.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_subnet.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_subnet.js,samples/README.md)
 
@@ -734,7 +734,7 @@ __Usage:__
 
 ### Vmware_engine.get_vmware_engine_network
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_vmware_engine_network.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_vmware_engine_network.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_vmware_engine_network.js,samples/README.md)
 
@@ -751,7 +751,7 @@ __Usage:__
 
 ### Vmware_engine.grant_dns_bind_permission
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.grant_dns_bind_permission.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.grant_dns_bind_permission.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.grant_dns_bind_permission.js,samples/README.md)
 
@@ -768,7 +768,7 @@ __Usage:__
 
 ### Vmware_engine.list_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_clusters.js,samples/README.md)
 
@@ -785,7 +785,7 @@ __Usage:__
 
 ### Vmware_engine.list_external_access_rules
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_external_access_rules.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_external_access_rules.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_external_access_rules.js,samples/README.md)
 
@@ -802,7 +802,7 @@ __Usage:__
 
 ### Vmware_engine.list_external_addresses
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_external_addresses.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_external_addresses.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_external_addresses.js,samples/README.md)
 
@@ -819,7 +819,7 @@ __Usage:__
 
 ### Vmware_engine.list_hcx_activation_keys
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_hcx_activation_keys.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_hcx_activation_keys.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_hcx_activation_keys.js,samples/README.md)
 
@@ -836,7 +836,7 @@ __Usage:__
 
 ### Vmware_engine.list_logging_servers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_logging_servers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_logging_servers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_logging_servers.js,samples/README.md)
 
@@ -853,7 +853,7 @@ __Usage:__
 
 ### Vmware_engine.list_management_dns_zone_bindings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_management_dns_zone_bindings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_management_dns_zone_bindings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_management_dns_zone_bindings.js,samples/README.md)
 
@@ -870,7 +870,7 @@ __Usage:__
 
 ### Vmware_engine.list_network_peerings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_network_peerings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_network_peerings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_network_peerings.js,samples/README.md)
 
@@ -887,7 +887,7 @@ __Usage:__
 
 ### Vmware_engine.list_network_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_network_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_network_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_network_policies.js,samples/README.md)
 
@@ -904,7 +904,7 @@ __Usage:__
 
 ### Vmware_engine.list_node_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_node_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_node_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_node_types.js,samples/README.md)
 
@@ -921,7 +921,7 @@ __Usage:__
 
 ### Vmware_engine.list_nodes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_nodes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_nodes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_nodes.js,samples/README.md)
 
@@ -938,7 +938,7 @@ __Usage:__
 
 ### Vmware_engine.list_peering_routes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_peering_routes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_peering_routes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_peering_routes.js,samples/README.md)
 
@@ -955,7 +955,7 @@ __Usage:__
 
 ### Vmware_engine.list_private_clouds
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_clouds.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_clouds.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_clouds.js,samples/README.md)
 
@@ -972,7 +972,7 @@ __Usage:__
 
 ### Vmware_engine.list_private_connection_peering_routes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_connection_peering_routes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_connection_peering_routes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_connection_peering_routes.js,samples/README.md)
 
@@ -989,7 +989,7 @@ __Usage:__
 
 ### Vmware_engine.list_private_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_connections.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_connections.js,samples/README.md)
 
@@ -1006,7 +1006,7 @@ __Usage:__
 
 ### Vmware_engine.list_subnets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_subnets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_subnets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_subnets.js,samples/README.md)
 
@@ -1023,7 +1023,7 @@ __Usage:__
 
 ### Vmware_engine.list_vmware_engine_networks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_vmware_engine_networks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_vmware_engine_networks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_vmware_engine_networks.js,samples/README.md)
 
@@ -1040,7 +1040,7 @@ __Usage:__
 
 ### Vmware_engine.repair_management_dns_zone_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.repair_management_dns_zone_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.repair_management_dns_zone_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.repair_management_dns_zone_binding.js,samples/README.md)
 
@@ -1057,7 +1057,7 @@ __Usage:__
 
 ### Vmware_engine.reset_nsx_credentials
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.reset_nsx_credentials.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.reset_nsx_credentials.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.reset_nsx_credentials.js,samples/README.md)
 
@@ -1074,7 +1074,7 @@ __Usage:__
 
 ### Vmware_engine.reset_vcenter_credentials
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.reset_vcenter_credentials.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.reset_vcenter_credentials.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.reset_vcenter_credentials.js,samples/README.md)
 
@@ -1091,7 +1091,7 @@ __Usage:__
 
 ### Vmware_engine.revoke_dns_bind_permission
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.revoke_dns_bind_permission.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.revoke_dns_bind_permission.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.revoke_dns_bind_permission.js,samples/README.md)
 
@@ -1108,7 +1108,7 @@ __Usage:__
 
 ### Vmware_engine.show_nsx_credentials
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.show_nsx_credentials.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.show_nsx_credentials.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.show_nsx_credentials.js,samples/README.md)
 
@@ -1125,7 +1125,7 @@ __Usage:__
 
 ### Vmware_engine.show_vcenter_credentials
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.show_vcenter_credentials.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.show_vcenter_credentials.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.show_vcenter_credentials.js,samples/README.md)
 
@@ -1142,7 +1142,7 @@ __Usage:__
 
 ### Vmware_engine.undelete_private_cloud
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.undelete_private_cloud.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.undelete_private_cloud.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.undelete_private_cloud.js,samples/README.md)
 
@@ -1159,7 +1159,7 @@ __Usage:__
 
 ### Vmware_engine.update_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_cluster.js,samples/README.md)
 
@@ -1176,7 +1176,7 @@ __Usage:__
 
 ### Vmware_engine.update_dns_forwarding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_dns_forwarding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_dns_forwarding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_dns_forwarding.js,samples/README.md)
 
@@ -1193,7 +1193,7 @@ __Usage:__
 
 ### Vmware_engine.update_external_access_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_external_access_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_external_access_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_external_access_rule.js,samples/README.md)
 
@@ -1210,7 +1210,7 @@ __Usage:__
 
 ### Vmware_engine.update_external_address
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_external_address.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_external_address.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_external_address.js,samples/README.md)
 
@@ -1227,7 +1227,7 @@ __Usage:__
 
 ### Vmware_engine.update_logging_server
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_logging_server.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_logging_server.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_logging_server.js,samples/README.md)
 
@@ -1244,7 +1244,7 @@ __Usage:__
 
 ### Vmware_engine.update_management_dns_zone_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_management_dns_zone_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_management_dns_zone_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_management_dns_zone_binding.js,samples/README.md)
 
@@ -1261,7 +1261,7 @@ __Usage:__
 
 ### Vmware_engine.update_network_peering
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_network_peering.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_network_peering.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_network_peering.js,samples/README.md)
 
@@ -1278,7 +1278,7 @@ __Usage:__
 
 ### Vmware_engine.update_network_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_network_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_network_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_network_policy.js,samples/README.md)
 
@@ -1295,7 +1295,7 @@ __Usage:__
 
 ### Vmware_engine.update_private_cloud
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_private_cloud.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_private_cloud.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_private_cloud.js,samples/README.md)
 
@@ -1312,7 +1312,7 @@ __Usage:__
 
 ### Vmware_engine.update_private_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_private_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_private_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_private_connection.js,samples/README.md)
 
@@ -1329,7 +1329,7 @@ __Usage:__
 
 ### Vmware_engine.update_subnet
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_subnet.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_subnet.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_subnet.js,samples/README.md)
 
@@ -1346,7 +1346,7 @@ __Usage:__
 
 ### Vmware_engine.update_vmware_engine_network
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_vmware_engine_network.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_vmware_engine_network.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_vmware_engine_network.js,samples/README.md)
 
@@ -1363,7 +1363,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmwareengine/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/quickstart.js,samples/README.md)
 

@@ -128,11 +128,11 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Advisory_notifications_service.get_notification | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.get_notification.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.get_notification.js,packages/google-cloud-advisorynotifications/samples/README.md) |
-| Advisory_notifications_service.get_settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.get_settings.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.get_settings.js,packages/google-cloud-advisorynotifications/samples/README.md) |
-| Advisory_notifications_service.list_notifications | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.list_notifications.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.list_notifications.js,packages/google-cloud-advisorynotifications/samples/README.md) |
-| Advisory_notifications_service.update_settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.update_settings.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.update_settings.js,packages/google-cloud-advisorynotifications/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-advisorynotifications/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-advisorynotifications/samples/quickstart.js,packages/google-cloud-advisorynotifications/samples/README.md) |
+| Advisory_notifications_service.get_notification | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.get_notification.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.get_notification.js,packages/google-cloud-advisorynotifications/samples/README.md) |
+| Advisory_notifications_service.get_settings | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.get_settings.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.get_settings.js,packages/google-cloud-advisorynotifications/samples/README.md) |
+| Advisory_notifications_service.list_notifications | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.list_notifications.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.list_notifications.js,packages/google-cloud-advisorynotifications/samples/README.md) |
+| Advisory_notifications_service.update_settings | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.update_settings.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-advisorynotifications/samples/generated/v1/advisory_notifications_service.update_settings.js,packages/google-cloud-advisorynotifications/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-advisorynotifications/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-advisorynotifications/samples/quickstart.js,packages/google-cloud-advisorynotifications/samples/README.md) |
 
 
 
@@ -182,7 +182,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/master/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -194,7 +194,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/advisorynotifications/latest
 [product-docs]: https://cloud.google.com/advisory-notifications/docs/overview

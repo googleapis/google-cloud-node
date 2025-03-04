@@ -58,7 +58,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Builds.submit_build
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/builds.submit_build.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/builds.submit_build.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/builds.submit_build.js,samples/README.md)
 
@@ -75,7 +75,7 @@ __Usage:__
 
 ### Executions.cancel_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/executions.cancel_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/executions.cancel_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/executions.cancel_execution.js,samples/README.md)
 
@@ -92,7 +92,7 @@ __Usage:__
 
 ### Executions.delete_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/executions.delete_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/executions.delete_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/executions.delete_execution.js,samples/README.md)
 
@@ -109,7 +109,7 @@ __Usage:__
 
 ### Executions.get_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/executions.get_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/executions.get_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/executions.get_execution.js,samples/README.md)
 
@@ -126,7 +126,7 @@ __Usage:__
 
 ### Executions.list_executions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/executions.list_executions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/executions.list_executions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/executions.list_executions.js,samples/README.md)
 
@@ -143,7 +143,7 @@ __Usage:__
 
 ### Jobs.create_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/jobs.create_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/jobs.create_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/jobs.create_job.js,samples/README.md)
 
@@ -160,7 +160,7 @@ __Usage:__
 
 ### Jobs.delete_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/jobs.delete_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/jobs.delete_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/jobs.delete_job.js,samples/README.md)
 
@@ -177,7 +177,7 @@ __Usage:__
 
 ### Jobs.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/jobs.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/jobs.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/jobs.get_iam_policy.js,samples/README.md)
 
@@ -194,7 +194,7 @@ __Usage:__
 
 ### Jobs.get_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/jobs.get_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/jobs.get_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/jobs.get_job.js,samples/README.md)
 
@@ -211,7 +211,7 @@ __Usage:__
 
 ### Jobs.list_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/jobs.list_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/jobs.list_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/jobs.list_jobs.js,samples/README.md)
 
@@ -228,7 +228,7 @@ __Usage:__
 
 ### Jobs.run_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/jobs.run_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/jobs.run_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/jobs.run_job.js,samples/README.md)
 
@@ -245,7 +245,7 @@ __Usage:__
 
 ### Jobs.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/jobs.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/jobs.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/jobs.set_iam_policy.js,samples/README.md)
 
@@ -262,7 +262,7 @@ __Usage:__
 
 ### Jobs.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/jobs.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/jobs.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/jobs.test_iam_permissions.js,samples/README.md)
 
@@ -279,7 +279,7 @@ __Usage:__
 
 ### Jobs.update_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/jobs.update_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/jobs.update_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/jobs.update_job.js,samples/README.md)
 
@@ -296,7 +296,7 @@ __Usage:__
 
 ### Revisions.delete_revision
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/revisions.delete_revision.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/revisions.delete_revision.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/revisions.delete_revision.js,samples/README.md)
 
@@ -313,7 +313,7 @@ __Usage:__
 
 ### Revisions.get_revision
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/revisions.get_revision.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/revisions.get_revision.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/revisions.get_revision.js,samples/README.md)
 
@@ -330,7 +330,7 @@ __Usage:__
 
 ### Revisions.list_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/revisions.list_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/revisions.list_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/revisions.list_revisions.js,samples/README.md)
 
@@ -347,7 +347,7 @@ __Usage:__
 
 ### Services.create_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/services.create_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/services.create_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/services.create_service.js,samples/README.md)
 
@@ -364,7 +364,7 @@ __Usage:__
 
 ### Services.delete_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/services.delete_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/services.delete_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/services.delete_service.js,samples/README.md)
 
@@ -381,7 +381,7 @@ __Usage:__
 
 ### Services.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/services.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/services.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/services.get_iam_policy.js,samples/README.md)
 
@@ -398,7 +398,7 @@ __Usage:__
 
 ### Services.get_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/services.get_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/services.get_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/services.get_service.js,samples/README.md)
 
@@ -415,7 +415,7 @@ __Usage:__
 
 ### Services.list_services
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/services.list_services.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/services.list_services.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/services.list_services.js,samples/README.md)
 
@@ -432,7 +432,7 @@ __Usage:__
 
 ### Services.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/services.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/services.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/services.set_iam_policy.js,samples/README.md)
 
@@ -449,7 +449,7 @@ __Usage:__
 
 ### Services.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/services.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/services.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/services.test_iam_permissions.js,samples/README.md)
 
@@ -466,7 +466,7 @@ __Usage:__
 
 ### Services.update_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/services.update_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/services.update_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/services.update_service.js,samples/README.md)
 
@@ -483,7 +483,7 @@ __Usage:__
 
 ### Tasks.get_task
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/tasks.get_task.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/tasks.get_task.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/tasks.get_task.js,samples/README.md)
 
@@ -500,7 +500,7 @@ __Usage:__
 
 ### Tasks.list_tasks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/tasks.list_tasks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/generated/v2/tasks.list_tasks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/tasks.list_tasks.js,samples/README.md)
 
@@ -517,7 +517,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-run/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/quickstart.js,samples/README.md)
 

@@ -65,7 +65,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Data_labeling_service.create_annotation_spec_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.create_annotation_spec_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.create_annotation_spec_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.create_annotation_spec_set.js,samples/README.md)
 
@@ -82,7 +82,7 @@ __Usage:__
 
 ### Data_labeling_service.create_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.create_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.create_dataset.js,samples/README.md)
 
@@ -99,7 +99,7 @@ __Usage:__
 
 ### Data_labeling_service.create_evaluation_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.create_evaluation_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.create_evaluation_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.create_evaluation_job.js,samples/README.md)
 
@@ -116,7 +116,7 @@ __Usage:__
 
 ### Data_labeling_service.create_instruction
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.create_instruction.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.create_instruction.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.create_instruction.js,samples/README.md)
 
@@ -133,7 +133,7 @@ __Usage:__
 
 ### Data_labeling_service.delete_annotated_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_annotated_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_annotated_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_annotated_dataset.js,samples/README.md)
 
@@ -150,7 +150,7 @@ __Usage:__
 
 ### Data_labeling_service.delete_annotation_spec_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_annotation_spec_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_annotation_spec_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_annotation_spec_set.js,samples/README.md)
 
@@ -167,7 +167,7 @@ __Usage:__
 
 ### Data_labeling_service.delete_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_dataset.js,samples/README.md)
 
@@ -184,7 +184,7 @@ __Usage:__
 
 ### Data_labeling_service.delete_evaluation_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_evaluation_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_evaluation_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_evaluation_job.js,samples/README.md)
 
@@ -201,7 +201,7 @@ __Usage:__
 
 ### Data_labeling_service.delete_instruction
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_instruction.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_instruction.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.delete_instruction.js,samples/README.md)
 
@@ -218,7 +218,7 @@ __Usage:__
 
 ### Data_labeling_service.export_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.export_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.export_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.export_data.js,samples/README.md)
 
@@ -235,7 +235,7 @@ __Usage:__
 
 ### Data_labeling_service.get_annotated_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_annotated_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_annotated_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_annotated_dataset.js,samples/README.md)
 
@@ -252,7 +252,7 @@ __Usage:__
 
 ### Data_labeling_service.get_annotation_spec_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_annotation_spec_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_annotation_spec_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_annotation_spec_set.js,samples/README.md)
 
@@ -269,7 +269,7 @@ __Usage:__
 
 ### Data_labeling_service.get_data_item
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_data_item.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_data_item.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_data_item.js,samples/README.md)
 
@@ -286,7 +286,7 @@ __Usage:__
 
 ### Data_labeling_service.get_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_dataset.js,samples/README.md)
 
@@ -303,7 +303,7 @@ __Usage:__
 
 ### Data_labeling_service.get_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_evaluation.js,samples/README.md)
 
@@ -320,7 +320,7 @@ __Usage:__
 
 ### Data_labeling_service.get_evaluation_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_evaluation_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_evaluation_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_evaluation_job.js,samples/README.md)
 
@@ -337,7 +337,7 @@ __Usage:__
 
 ### Data_labeling_service.get_example
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_example.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_example.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_example.js,samples/README.md)
 
@@ -354,7 +354,7 @@ __Usage:__
 
 ### Data_labeling_service.get_instruction
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_instruction.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_instruction.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.get_instruction.js,samples/README.md)
 
@@ -371,7 +371,7 @@ __Usage:__
 
 ### Data_labeling_service.import_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.import_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.import_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.import_data.js,samples/README.md)
 
@@ -388,7 +388,7 @@ __Usage:__
 
 ### Data_labeling_service.label_image
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.label_image.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.label_image.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.label_image.js,samples/README.md)
 
@@ -405,7 +405,7 @@ __Usage:__
 
 ### Data_labeling_service.label_text
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.label_text.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.label_text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.label_text.js,samples/README.md)
 
@@ -422,7 +422,7 @@ __Usage:__
 
 ### Data_labeling_service.label_video
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.label_video.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.label_video.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.label_video.js,samples/README.md)
 
@@ -439,7 +439,7 @@ __Usage:__
 
 ### Data_labeling_service.list_annotated_datasets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_annotated_datasets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_annotated_datasets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_annotated_datasets.js,samples/README.md)
 
@@ -456,7 +456,7 @@ __Usage:__
 
 ### Data_labeling_service.list_annotation_spec_sets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_annotation_spec_sets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_annotation_spec_sets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_annotation_spec_sets.js,samples/README.md)
 
@@ -473,7 +473,7 @@ __Usage:__
 
 ### Data_labeling_service.list_data_items
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_data_items.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_data_items.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_data_items.js,samples/README.md)
 
@@ -490,7 +490,7 @@ __Usage:__
 
 ### Data_labeling_service.list_datasets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_datasets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_datasets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_datasets.js,samples/README.md)
 
@@ -507,7 +507,7 @@ __Usage:__
 
 ### Data_labeling_service.list_evaluation_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_evaluation_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_evaluation_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_evaluation_jobs.js,samples/README.md)
 
@@ -524,7 +524,7 @@ __Usage:__
 
 ### Data_labeling_service.list_examples
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_examples.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_examples.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_examples.js,samples/README.md)
 
@@ -541,7 +541,7 @@ __Usage:__
 
 ### Data_labeling_service.list_instructions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_instructions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_instructions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.list_instructions.js,samples/README.md)
 
@@ -558,7 +558,7 @@ __Usage:__
 
 ### Data_labeling_service.pause_evaluation_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.pause_evaluation_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.pause_evaluation_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.pause_evaluation_job.js,samples/README.md)
 
@@ -575,7 +575,7 @@ __Usage:__
 
 ### Data_labeling_service.resume_evaluation_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.resume_evaluation_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.resume_evaluation_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.resume_evaluation_job.js,samples/README.md)
 
@@ -592,7 +592,7 @@ __Usage:__
 
 ### Data_labeling_service.search_evaluations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.search_evaluations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.search_evaluations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.search_evaluations.js,samples/README.md)
 
@@ -609,7 +609,7 @@ __Usage:__
 
 ### Data_labeling_service.search_example_comparisons
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.search_example_comparisons.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.search_example_comparisons.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.search_example_comparisons.js,samples/README.md)
 
@@ -626,7 +626,7 @@ __Usage:__
 
 ### Data_labeling_service.update_evaluation_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.update_evaluation_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.update_evaluation_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.update_evaluation_job.js,samples/README.md)
 
@@ -645,7 +645,7 @@ __Usage:__
 
 Gets all available Datasets.
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datalabeling/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/quickstart.js,samples/README.md)
 

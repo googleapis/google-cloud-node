@@ -71,7 +71,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Workstations.create_workstation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.create_workstation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.create_workstation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.create_workstation.js,samples/README.md)
 
@@ -88,7 +88,7 @@ __Usage:__
 
 ### Workstations.create_workstation_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.create_workstation_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.create_workstation_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.create_workstation_cluster.js,samples/README.md)
 
@@ -105,7 +105,7 @@ __Usage:__
 
 ### Workstations.create_workstation_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.create_workstation_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.create_workstation_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.create_workstation_config.js,samples/README.md)
 
@@ -122,7 +122,7 @@ __Usage:__
 
 ### Workstations.delete_workstation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.delete_workstation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.delete_workstation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.delete_workstation.js,samples/README.md)
 
@@ -139,7 +139,7 @@ __Usage:__
 
 ### Workstations.delete_workstation_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.delete_workstation_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.delete_workstation_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.delete_workstation_cluster.js,samples/README.md)
 
@@ -156,7 +156,7 @@ __Usage:__
 
 ### Workstations.delete_workstation_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.delete_workstation_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.delete_workstation_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.delete_workstation_config.js,samples/README.md)
 
@@ -173,7 +173,7 @@ __Usage:__
 
 ### Workstations.generate_access_token
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.generate_access_token.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.generate_access_token.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.generate_access_token.js,samples/README.md)
 
@@ -190,7 +190,7 @@ __Usage:__
 
 ### Workstations.get_workstation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.get_workstation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.get_workstation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.get_workstation.js,samples/README.md)
 
@@ -207,7 +207,7 @@ __Usage:__
 
 ### Workstations.get_workstation_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.get_workstation_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.get_workstation_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.get_workstation_cluster.js,samples/README.md)
 
@@ -224,7 +224,7 @@ __Usage:__
 
 ### Workstations.get_workstation_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.get_workstation_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.get_workstation_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.get_workstation_config.js,samples/README.md)
 
@@ -241,7 +241,7 @@ __Usage:__
 
 ### Workstations.list_usable_workstation_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.list_usable_workstation_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.list_usable_workstation_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.list_usable_workstation_configs.js,samples/README.md)
 
@@ -258,7 +258,7 @@ __Usage:__
 
 ### Workstations.list_usable_workstations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.list_usable_workstations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.list_usable_workstations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.list_usable_workstations.js,samples/README.md)
 
@@ -275,7 +275,7 @@ __Usage:__
 
 ### Workstations.list_workstation_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.list_workstation_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.list_workstation_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.list_workstation_clusters.js,samples/README.md)
 
@@ -292,7 +292,7 @@ __Usage:__
 
 ### Workstations.list_workstation_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.list_workstation_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.list_workstation_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.list_workstation_configs.js,samples/README.md)
 
@@ -309,7 +309,7 @@ __Usage:__
 
 ### Workstations.list_workstations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.list_workstations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.list_workstations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.list_workstations.js,samples/README.md)
 
@@ -326,7 +326,7 @@ __Usage:__
 
 ### Workstations.start_workstation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.start_workstation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.start_workstation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.start_workstation.js,samples/README.md)
 
@@ -343,7 +343,7 @@ __Usage:__
 
 ### Workstations.stop_workstation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.stop_workstation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.stop_workstation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.stop_workstation.js,samples/README.md)
 
@@ -360,7 +360,7 @@ __Usage:__
 
 ### Workstations.update_workstation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.update_workstation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.update_workstation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.update_workstation.js,samples/README.md)
 
@@ -377,7 +377,7 @@ __Usage:__
 
 ### Workstations.update_workstation_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.update_workstation_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.update_workstation_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.update_workstation_cluster.js,samples/README.md)
 
@@ -394,7 +394,7 @@ __Usage:__
 
 ### Workstations.update_workstation_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.update_workstation_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1/workstations.update_workstation_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1/workstations.update_workstation_config.js,samples/README.md)
 
@@ -411,7 +411,7 @@ __Usage:__
 
 ### Workstations.create_workstation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.create_workstation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.create_workstation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.create_workstation.js,samples/README.md)
 
@@ -428,7 +428,7 @@ __Usage:__
 
 ### Workstations.create_workstation_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.create_workstation_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.create_workstation_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.create_workstation_cluster.js,samples/README.md)
 
@@ -445,7 +445,7 @@ __Usage:__
 
 ### Workstations.create_workstation_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.create_workstation_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.create_workstation_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.create_workstation_config.js,samples/README.md)
 
@@ -462,7 +462,7 @@ __Usage:__
 
 ### Workstations.delete_workstation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.delete_workstation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.delete_workstation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.delete_workstation.js,samples/README.md)
 
@@ -479,7 +479,7 @@ __Usage:__
 
 ### Workstations.delete_workstation_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.delete_workstation_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.delete_workstation_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.delete_workstation_cluster.js,samples/README.md)
 
@@ -496,7 +496,7 @@ __Usage:__
 
 ### Workstations.delete_workstation_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.delete_workstation_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.delete_workstation_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.delete_workstation_config.js,samples/README.md)
 
@@ -513,7 +513,7 @@ __Usage:__
 
 ### Workstations.generate_access_token
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.generate_access_token.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.generate_access_token.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.generate_access_token.js,samples/README.md)
 
@@ -530,7 +530,7 @@ __Usage:__
 
 ### Workstations.get_workstation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.get_workstation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.get_workstation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.get_workstation.js,samples/README.md)
 
@@ -547,7 +547,7 @@ __Usage:__
 
 ### Workstations.get_workstation_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.get_workstation_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.get_workstation_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.get_workstation_cluster.js,samples/README.md)
 
@@ -564,7 +564,7 @@ __Usage:__
 
 ### Workstations.get_workstation_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.get_workstation_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.get_workstation_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.get_workstation_config.js,samples/README.md)
 
@@ -581,7 +581,7 @@ __Usage:__
 
 ### Workstations.list_usable_workstation_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_usable_workstation_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_usable_workstation_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_usable_workstation_configs.js,samples/README.md)
 
@@ -598,7 +598,7 @@ __Usage:__
 
 ### Workstations.list_usable_workstations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_usable_workstations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_usable_workstations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_usable_workstations.js,samples/README.md)
 
@@ -615,7 +615,7 @@ __Usage:__
 
 ### Workstations.list_workstation_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_workstation_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_workstation_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_workstation_clusters.js,samples/README.md)
 
@@ -632,7 +632,7 @@ __Usage:__
 
 ### Workstations.list_workstation_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_workstation_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_workstation_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_workstation_configs.js,samples/README.md)
 
@@ -649,7 +649,7 @@ __Usage:__
 
 ### Workstations.list_workstations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_workstations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_workstations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_workstations.js,samples/README.md)
 
@@ -666,7 +666,7 @@ __Usage:__
 
 ### Workstations.start_workstation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.start_workstation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.start_workstation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.start_workstation.js,samples/README.md)
 
@@ -683,7 +683,7 @@ __Usage:__
 
 ### Workstations.stop_workstation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.stop_workstation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.stop_workstation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.stop_workstation.js,samples/README.md)
 
@@ -700,7 +700,7 @@ __Usage:__
 
 ### Workstations.update_workstation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.update_workstation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.update_workstation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.update_workstation.js,samples/README.md)
 
@@ -717,7 +717,7 @@ __Usage:__
 
 ### Workstations.update_workstation_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.update_workstation_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.update_workstation_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.update_workstation_cluster.js,samples/README.md)
 
@@ -734,7 +734,7 @@ __Usage:__
 
 ### Workstations.update_workstation_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.update_workstation_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/generated/v1beta/workstations.update_workstation_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/generated/v1beta/workstations.update_workstation_config.js,samples/README.md)
 
@@ -751,7 +751,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workstations/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workstations/samples/quickstart.js,samples/README.md)
 

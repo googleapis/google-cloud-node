@@ -42,7 +42,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Delivery_service.batch_create_tasks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.batch_create_tasks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.batch_create_tasks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.batch_create_tasks.js,samples/README.md)
 
@@ -59,7 +59,7 @@ __Usage:__
 
 ### Delivery_service.create_delivery_vehicle
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.create_delivery_vehicle.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.create_delivery_vehicle.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.create_delivery_vehicle.js,samples/README.md)
 
@@ -76,7 +76,7 @@ __Usage:__
 
 ### Delivery_service.create_task
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.create_task.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.create_task.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.create_task.js,samples/README.md)
 
@@ -93,7 +93,7 @@ __Usage:__
 
 ### Delivery_service.get_delivery_vehicle
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.get_delivery_vehicle.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.get_delivery_vehicle.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.get_delivery_vehicle.js,samples/README.md)
 
@@ -110,7 +110,7 @@ __Usage:__
 
 ### Delivery_service.get_task
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.get_task.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.get_task.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.get_task.js,samples/README.md)
 
@@ -127,7 +127,7 @@ __Usage:__
 
 ### Delivery_service.get_task_tracking_info
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.get_task_tracking_info.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.get_task_tracking_info.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.get_task_tracking_info.js,samples/README.md)
 
@@ -144,7 +144,7 @@ __Usage:__
 
 ### Delivery_service.list_delivery_vehicles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.list_delivery_vehicles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.list_delivery_vehicles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.list_delivery_vehicles.js,samples/README.md)
 
@@ -161,7 +161,7 @@ __Usage:__
 
 ### Delivery_service.list_tasks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.list_tasks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.list_tasks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.list_tasks.js,samples/README.md)
 
@@ -178,7 +178,7 @@ __Usage:__
 
 ### Delivery_service.search_tasks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.search_tasks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.search_tasks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.search_tasks.js,samples/README.md)
 
@@ -195,7 +195,7 @@ __Usage:__
 
 ### Delivery_service.update_delivery_vehicle
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.update_delivery_vehicle.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.update_delivery_vehicle.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.update_delivery_vehicle.js,samples/README.md)
 
@@ -212,7 +212,7 @@ __Usage:__
 
 ### Delivery_service.update_task
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.update_task.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.update_task.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.update_task.js,samples/README.md)
 
@@ -229,7 +229,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine-delivery/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine-delivery/samples/quickstart.js,samples/README.md)
 

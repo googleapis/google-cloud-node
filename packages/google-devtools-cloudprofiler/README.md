@@ -107,11 +107,11 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Export_service.list_profiles | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/generated/v2/export_service.list_profiles.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/generated/v2/export_service.list_profiles.js,packages/google-devtools-cloudprofiler/samples/README.md) |
-| Profiler_service.create_offline_profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_offline_profile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_offline_profile.js,packages/google-devtools-cloudprofiler/samples/README.md) |
-| Profiler_service.create_profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_profile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_profile.js,packages/google-devtools-cloudprofiler/samples/README.md) |
-| Profiler_service.update_profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.update_profile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.update_profile.js,packages/google-devtools-cloudprofiler/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/quickstart.js,packages/google-devtools-cloudprofiler/samples/README.md) |
+| Export_service.list_profiles | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudprofiler/samples/generated/v2/export_service.list_profiles.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/generated/v2/export_service.list_profiles.js,packages/google-devtools-cloudprofiler/samples/README.md) |
+| Profiler_service.create_offline_profile | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_offline_profile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_offline_profile.js,packages/google-devtools-cloudprofiler/samples/README.md) |
+| Profiler_service.create_profile | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_profile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_profile.js,packages/google-devtools-cloudprofiler/samples/README.md) |
+| Profiler_service.update_profile | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.update_profile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.update_profile.js,packages/google-devtools-cloudprofiler/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudprofiler/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/quickstart.js,packages/google-devtools-cloudprofiler/samples/README.md) |
 
 
 
@@ -160,7 +160,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/master/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -172,7 +172,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/cloudprofiler/latest
 [product-docs]: cloud.google.com/profiler/

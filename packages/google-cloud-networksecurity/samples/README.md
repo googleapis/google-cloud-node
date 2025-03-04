@@ -61,7 +61,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Network_security.create_authorization_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.create_authorization_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.create_authorization_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.create_authorization_policy.js,samples/README.md)
 
@@ -78,7 +78,7 @@ __Usage:__
 
 ### Network_security.create_client_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.create_client_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.create_client_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.create_client_tls_policy.js,samples/README.md)
 
@@ -95,7 +95,7 @@ __Usage:__
 
 ### Network_security.create_server_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.create_server_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.create_server_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.create_server_tls_policy.js,samples/README.md)
 
@@ -112,7 +112,7 @@ __Usage:__
 
 ### Network_security.delete_authorization_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.delete_authorization_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.delete_authorization_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.delete_authorization_policy.js,samples/README.md)
 
@@ -129,7 +129,7 @@ __Usage:__
 
 ### Network_security.delete_client_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.delete_client_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.delete_client_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.delete_client_tls_policy.js,samples/README.md)
 
@@ -146,7 +146,7 @@ __Usage:__
 
 ### Network_security.delete_server_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.delete_server_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.delete_server_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.delete_server_tls_policy.js,samples/README.md)
 
@@ -163,7 +163,7 @@ __Usage:__
 
 ### Network_security.get_authorization_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.get_authorization_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.get_authorization_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.get_authorization_policy.js,samples/README.md)
 
@@ -180,7 +180,7 @@ __Usage:__
 
 ### Network_security.get_client_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.get_client_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.get_client_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.get_client_tls_policy.js,samples/README.md)
 
@@ -197,7 +197,7 @@ __Usage:__
 
 ### Network_security.get_server_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.get_server_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.get_server_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.get_server_tls_policy.js,samples/README.md)
 
@@ -214,7 +214,7 @@ __Usage:__
 
 ### Network_security.list_authorization_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.list_authorization_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.list_authorization_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.list_authorization_policies.js,samples/README.md)
 
@@ -231,7 +231,7 @@ __Usage:__
 
 ### Network_security.list_client_tls_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.list_client_tls_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.list_client_tls_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.list_client_tls_policies.js,samples/README.md)
 
@@ -248,7 +248,7 @@ __Usage:__
 
 ### Network_security.list_server_tls_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.list_server_tls_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.list_server_tls_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.list_server_tls_policies.js,samples/README.md)
 
@@ -265,7 +265,7 @@ __Usage:__
 
 ### Network_security.update_authorization_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.update_authorization_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.update_authorization_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.update_authorization_policy.js,samples/README.md)
 
@@ -282,7 +282,7 @@ __Usage:__
 
 ### Network_security.update_client_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.update_client_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.update_client_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.update_client_tls_policy.js,samples/README.md)
 
@@ -299,7 +299,7 @@ __Usage:__
 
 ### Network_security.update_server_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/network_security.update_server_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1/network_security.update_server_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/network_security.update_server_tls_policy.js,samples/README.md)
 
@@ -316,7 +316,7 @@ __Usage:__
 
 ### Network_security.create_authorization_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.create_authorization_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.create_authorization_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.create_authorization_policy.js,samples/README.md)
 
@@ -333,7 +333,7 @@ __Usage:__
 
 ### Network_security.create_client_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.create_client_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.create_client_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.create_client_tls_policy.js,samples/README.md)
 
@@ -350,7 +350,7 @@ __Usage:__
 
 ### Network_security.create_server_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.create_server_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.create_server_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.create_server_tls_policy.js,samples/README.md)
 
@@ -367,7 +367,7 @@ __Usage:__
 
 ### Network_security.delete_authorization_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.delete_authorization_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.delete_authorization_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.delete_authorization_policy.js,samples/README.md)
 
@@ -384,7 +384,7 @@ __Usage:__
 
 ### Network_security.delete_client_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.delete_client_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.delete_client_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.delete_client_tls_policy.js,samples/README.md)
 
@@ -401,7 +401,7 @@ __Usage:__
 
 ### Network_security.delete_server_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.delete_server_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.delete_server_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.delete_server_tls_policy.js,samples/README.md)
 
@@ -418,7 +418,7 @@ __Usage:__
 
 ### Network_security.get_authorization_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.get_authorization_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.get_authorization_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.get_authorization_policy.js,samples/README.md)
 
@@ -435,7 +435,7 @@ __Usage:__
 
 ### Network_security.get_client_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.get_client_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.get_client_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.get_client_tls_policy.js,samples/README.md)
 
@@ -452,7 +452,7 @@ __Usage:__
 
 ### Network_security.get_server_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.get_server_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.get_server_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.get_server_tls_policy.js,samples/README.md)
 
@@ -469,7 +469,7 @@ __Usage:__
 
 ### Network_security.list_authorization_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.list_authorization_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.list_authorization_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.list_authorization_policies.js,samples/README.md)
 
@@ -486,7 +486,7 @@ __Usage:__
 
 ### Network_security.list_client_tls_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.list_client_tls_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.list_client_tls_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.list_client_tls_policies.js,samples/README.md)
 
@@ -503,7 +503,7 @@ __Usage:__
 
 ### Network_security.list_server_tls_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.list_server_tls_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.list_server_tls_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.list_server_tls_policies.js,samples/README.md)
 
@@ -520,7 +520,7 @@ __Usage:__
 
 ### Network_security.update_authorization_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.update_authorization_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.update_authorization_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.update_authorization_policy.js,samples/README.md)
 
@@ -537,7 +537,7 @@ __Usage:__
 
 ### Network_security.update_client_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.update_client_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.update_client_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.update_client_tls_policy.js,samples/README.md)
 
@@ -554,7 +554,7 @@ __Usage:__
 
 ### Network_security.update_server_tls_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.update_server_tls_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.update_server_tls_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.update_server_tls_policy.js,samples/README.md)
 
@@ -571,7 +571,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networksecurity/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/quickstart.js,samples/README.md)
 

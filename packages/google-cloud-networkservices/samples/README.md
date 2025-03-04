@@ -95,7 +95,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Dep_service.create_lb_route_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_lb_route_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_lb_route_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_lb_route_extension.js,samples/README.md)
 
@@ -112,7 +112,7 @@ __Usage:__
 
 ### Dep_service.create_lb_traffic_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_lb_traffic_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_lb_traffic_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_lb_traffic_extension.js,samples/README.md)
 
@@ -129,7 +129,7 @@ __Usage:__
 
 ### Dep_service.delete_lb_route_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_lb_route_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_lb_route_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_lb_route_extension.js,samples/README.md)
 
@@ -146,7 +146,7 @@ __Usage:__
 
 ### Dep_service.delete_lb_traffic_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_lb_traffic_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_lb_traffic_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_lb_traffic_extension.js,samples/README.md)
 
@@ -163,7 +163,7 @@ __Usage:__
 
 ### Dep_service.get_lb_route_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_lb_route_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_lb_route_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_lb_route_extension.js,samples/README.md)
 
@@ -180,7 +180,7 @@ __Usage:__
 
 ### Dep_service.get_lb_traffic_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_lb_traffic_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_lb_traffic_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_lb_traffic_extension.js,samples/README.md)
 
@@ -197,7 +197,7 @@ __Usage:__
 
 ### Dep_service.list_lb_route_extensions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_lb_route_extensions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_lb_route_extensions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_lb_route_extensions.js,samples/README.md)
 
@@ -214,7 +214,7 @@ __Usage:__
 
 ### Dep_service.list_lb_traffic_extensions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_lb_traffic_extensions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_lb_traffic_extensions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_lb_traffic_extensions.js,samples/README.md)
 
@@ -231,7 +231,7 @@ __Usage:__
 
 ### Dep_service.update_lb_route_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_route_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_route_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_route_extension.js,samples/README.md)
 
@@ -248,7 +248,7 @@ __Usage:__
 
 ### Dep_service.update_lb_traffic_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_traffic_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_traffic_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_traffic_extension.js,samples/README.md)
 
@@ -265,7 +265,7 @@ __Usage:__
 
 ### Network_services.create_endpoint_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_endpoint_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_endpoint_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.create_endpoint_policy.js,samples/README.md)
 
@@ -282,7 +282,7 @@ __Usage:__
 
 ### Network_services.create_gateway
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_gateway.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_gateway.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.create_gateway.js,samples/README.md)
 
@@ -299,7 +299,7 @@ __Usage:__
 
 ### Network_services.create_grpc_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_grpc_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_grpc_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.create_grpc_route.js,samples/README.md)
 
@@ -316,7 +316,7 @@ __Usage:__
 
 ### Network_services.create_http_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_http_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_http_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.create_http_route.js,samples/README.md)
 
@@ -333,7 +333,7 @@ __Usage:__
 
 ### Network_services.create_mesh
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_mesh.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_mesh.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.create_mesh.js,samples/README.md)
 
@@ -350,7 +350,7 @@ __Usage:__
 
 ### Network_services.create_service_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_service_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_service_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.create_service_binding.js,samples/README.md)
 
@@ -367,7 +367,7 @@ __Usage:__
 
 ### Network_services.create_tcp_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_tcp_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_tcp_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.create_tcp_route.js,samples/README.md)
 
@@ -384,7 +384,7 @@ __Usage:__
 
 ### Network_services.create_tls_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_tls_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_tls_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.create_tls_route.js,samples/README.md)
 
@@ -401,7 +401,7 @@ __Usage:__
 
 ### Network_services.delete_endpoint_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_endpoint_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_endpoint_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_endpoint_policy.js,samples/README.md)
 
@@ -418,7 +418,7 @@ __Usage:__
 
 ### Network_services.delete_gateway
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_gateway.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_gateway.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_gateway.js,samples/README.md)
 
@@ -435,7 +435,7 @@ __Usage:__
 
 ### Network_services.delete_grpc_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_grpc_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_grpc_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_grpc_route.js,samples/README.md)
 
@@ -452,7 +452,7 @@ __Usage:__
 
 ### Network_services.delete_http_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_http_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_http_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_http_route.js,samples/README.md)
 
@@ -469,7 +469,7 @@ __Usage:__
 
 ### Network_services.delete_mesh
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_mesh.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_mesh.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_mesh.js,samples/README.md)
 
@@ -486,7 +486,7 @@ __Usage:__
 
 ### Network_services.delete_service_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_service_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_service_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_service_binding.js,samples/README.md)
 
@@ -503,7 +503,7 @@ __Usage:__
 
 ### Network_services.delete_tcp_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_tcp_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_tcp_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_tcp_route.js,samples/README.md)
 
@@ -520,7 +520,7 @@ __Usage:__
 
 ### Network_services.delete_tls_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_tls_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_tls_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_tls_route.js,samples/README.md)
 
@@ -537,7 +537,7 @@ __Usage:__
 
 ### Network_services.get_endpoint_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_endpoint_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_endpoint_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.get_endpoint_policy.js,samples/README.md)
 
@@ -554,7 +554,7 @@ __Usage:__
 
 ### Network_services.get_gateway
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_gateway.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_gateway.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.get_gateway.js,samples/README.md)
 
@@ -571,7 +571,7 @@ __Usage:__
 
 ### Network_services.get_grpc_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_grpc_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_grpc_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.get_grpc_route.js,samples/README.md)
 
@@ -588,7 +588,7 @@ __Usage:__
 
 ### Network_services.get_http_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_http_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_http_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.get_http_route.js,samples/README.md)
 
@@ -605,7 +605,7 @@ __Usage:__
 
 ### Network_services.get_mesh
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_mesh.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_mesh.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.get_mesh.js,samples/README.md)
 
@@ -622,7 +622,7 @@ __Usage:__
 
 ### Network_services.get_service_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_service_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_service_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.get_service_binding.js,samples/README.md)
 
@@ -639,7 +639,7 @@ __Usage:__
 
 ### Network_services.get_tcp_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_tcp_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_tcp_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.get_tcp_route.js,samples/README.md)
 
@@ -656,7 +656,7 @@ __Usage:__
 
 ### Network_services.get_tls_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_tls_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_tls_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.get_tls_route.js,samples/README.md)
 
@@ -673,7 +673,7 @@ __Usage:__
 
 ### Network_services.list_endpoint_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_endpoint_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_endpoint_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.list_endpoint_policies.js,samples/README.md)
 
@@ -690,7 +690,7 @@ __Usage:__
 
 ### Network_services.list_gateways
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_gateways.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_gateways.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.list_gateways.js,samples/README.md)
 
@@ -707,7 +707,7 @@ __Usage:__
 
 ### Network_services.list_grpc_routes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_grpc_routes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_grpc_routes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.list_grpc_routes.js,samples/README.md)
 
@@ -724,7 +724,7 @@ __Usage:__
 
 ### Network_services.list_http_routes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_http_routes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_http_routes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.list_http_routes.js,samples/README.md)
 
@@ -741,7 +741,7 @@ __Usage:__
 
 ### Network_services.list_meshes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_meshes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_meshes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.list_meshes.js,samples/README.md)
 
@@ -758,7 +758,7 @@ __Usage:__
 
 ### Network_services.list_service_bindings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_service_bindings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_service_bindings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.list_service_bindings.js,samples/README.md)
 
@@ -775,7 +775,7 @@ __Usage:__
 
 ### Network_services.list_tcp_routes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_tcp_routes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_tcp_routes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.list_tcp_routes.js,samples/README.md)
 
@@ -792,7 +792,7 @@ __Usage:__
 
 ### Network_services.list_tls_routes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_tls_routes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_tls_routes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.list_tls_routes.js,samples/README.md)
 
@@ -809,7 +809,7 @@ __Usage:__
 
 ### Network_services.update_endpoint_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_endpoint_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_endpoint_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.update_endpoint_policy.js,samples/README.md)
 
@@ -826,7 +826,7 @@ __Usage:__
 
 ### Network_services.update_gateway
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_gateway.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_gateway.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.update_gateway.js,samples/README.md)
 
@@ -843,7 +843,7 @@ __Usage:__
 
 ### Network_services.update_grpc_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_grpc_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_grpc_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.update_grpc_route.js,samples/README.md)
 
@@ -860,7 +860,7 @@ __Usage:__
 
 ### Network_services.update_http_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_http_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_http_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.update_http_route.js,samples/README.md)
 
@@ -877,7 +877,7 @@ __Usage:__
 
 ### Network_services.update_mesh
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_mesh.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_mesh.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.update_mesh.js,samples/README.md)
 
@@ -894,7 +894,7 @@ __Usage:__
 
 ### Network_services.update_tcp_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_tcp_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_tcp_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.update_tcp_route.js,samples/README.md)
 
@@ -911,7 +911,7 @@ __Usage:__
 
 ### Network_services.update_tls_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_tls_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_tls_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.update_tls_route.js,samples/README.md)
 
@@ -928,7 +928,7 @@ __Usage:__
 
 ### Dep_service.create_lb_route_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.create_lb_route_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.create_lb_route_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.create_lb_route_extension.js,samples/README.md)
 
@@ -945,7 +945,7 @@ __Usage:__
 
 ### Dep_service.create_lb_traffic_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.create_lb_traffic_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.create_lb_traffic_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.create_lb_traffic_extension.js,samples/README.md)
 
@@ -962,7 +962,7 @@ __Usage:__
 
 ### Dep_service.delete_lb_route_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.delete_lb_route_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.delete_lb_route_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.delete_lb_route_extension.js,samples/README.md)
 
@@ -979,7 +979,7 @@ __Usage:__
 
 ### Dep_service.delete_lb_traffic_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.delete_lb_traffic_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.delete_lb_traffic_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.delete_lb_traffic_extension.js,samples/README.md)
 
@@ -996,7 +996,7 @@ __Usage:__
 
 ### Dep_service.get_lb_route_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.get_lb_route_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.get_lb_route_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.get_lb_route_extension.js,samples/README.md)
 
@@ -1013,7 +1013,7 @@ __Usage:__
 
 ### Dep_service.get_lb_traffic_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.get_lb_traffic_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.get_lb_traffic_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.get_lb_traffic_extension.js,samples/README.md)
 
@@ -1030,7 +1030,7 @@ __Usage:__
 
 ### Dep_service.list_lb_route_extensions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.list_lb_route_extensions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.list_lb_route_extensions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.list_lb_route_extensions.js,samples/README.md)
 
@@ -1047,7 +1047,7 @@ __Usage:__
 
 ### Dep_service.list_lb_traffic_extensions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.list_lb_traffic_extensions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.list_lb_traffic_extensions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.list_lb_traffic_extensions.js,samples/README.md)
 
@@ -1064,7 +1064,7 @@ __Usage:__
 
 ### Dep_service.update_lb_route_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.update_lb_route_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.update_lb_route_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.update_lb_route_extension.js,samples/README.md)
 
@@ -1081,7 +1081,7 @@ __Usage:__
 
 ### Dep_service.update_lb_traffic_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.update_lb_traffic_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.update_lb_traffic_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.update_lb_traffic_extension.js,samples/README.md)
 
@@ -1098,7 +1098,7 @@ __Usage:__
 
 ### Network_services.create_endpoint_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.create_endpoint_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.create_endpoint_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.create_endpoint_policy.js,samples/README.md)
 
@@ -1115,7 +1115,7 @@ __Usage:__
 
 ### Network_services.delete_endpoint_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.delete_endpoint_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.delete_endpoint_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.delete_endpoint_policy.js,samples/README.md)
 
@@ -1132,7 +1132,7 @@ __Usage:__
 
 ### Network_services.get_endpoint_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.get_endpoint_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.get_endpoint_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.get_endpoint_policy.js,samples/README.md)
 
@@ -1149,7 +1149,7 @@ __Usage:__
 
 ### Network_services.list_endpoint_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.list_endpoint_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.list_endpoint_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.list_endpoint_policies.js,samples/README.md)
 
@@ -1166,7 +1166,7 @@ __Usage:__
 
 ### Network_services.update_endpoint_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.update_endpoint_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.update_endpoint_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.update_endpoint_policy.js,samples/README.md)
 
@@ -1183,7 +1183,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-networkservices/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/quickstart.js,samples/README.md)
 

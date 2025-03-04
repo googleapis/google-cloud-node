@@ -62,8 +62,8 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Report_service.search | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1beta/report_service.search.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-reports/samples/generated/v1beta/report_service.search.js,packages/google-shopping-merchant-reports/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-reports/samples/quickstart.js,packages/google-shopping-merchant-reports/samples/README.md) |
+| Report_service.search | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-reports/samples/generated/v1beta/report_service.search.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-reports/samples/generated/v1beta/report_service.search.js,packages/google-shopping-merchant-reports/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-reports/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-reports/samples/quickstart.js,packages/google-shopping-merchant-reports/samples/README.md) |
 
 
 
@@ -112,7 +112,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/master/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -124,7 +124,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
 [product-docs]: https://developers.google.com/merchant/api

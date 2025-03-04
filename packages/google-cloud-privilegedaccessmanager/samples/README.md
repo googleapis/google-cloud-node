@@ -45,7 +45,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Privileged_access_manager.approve_grant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.approve_grant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.approve_grant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.approve_grant.js,samples/README.md)
 
@@ -62,7 +62,7 @@ __Usage:__
 
 ### Privileged_access_manager.check_onboarding_status
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.check_onboarding_status.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.check_onboarding_status.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.check_onboarding_status.js,samples/README.md)
 
@@ -79,7 +79,7 @@ __Usage:__
 
 ### Privileged_access_manager.create_entitlement
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.create_entitlement.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.create_entitlement.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.create_entitlement.js,samples/README.md)
 
@@ -96,7 +96,7 @@ __Usage:__
 
 ### Privileged_access_manager.create_grant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.create_grant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.create_grant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.create_grant.js,samples/README.md)
 
@@ -113,7 +113,7 @@ __Usage:__
 
 ### Privileged_access_manager.delete_entitlement
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.delete_entitlement.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.delete_entitlement.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.delete_entitlement.js,samples/README.md)
 
@@ -130,7 +130,7 @@ __Usage:__
 
 ### Privileged_access_manager.deny_grant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.deny_grant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.deny_grant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.deny_grant.js,samples/README.md)
 
@@ -147,7 +147,7 @@ __Usage:__
 
 ### Privileged_access_manager.get_entitlement
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.get_entitlement.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.get_entitlement.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.get_entitlement.js,samples/README.md)
 
@@ -164,7 +164,7 @@ __Usage:__
 
 ### Privileged_access_manager.get_grant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.get_grant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.get_grant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.get_grant.js,samples/README.md)
 
@@ -181,7 +181,7 @@ __Usage:__
 
 ### Privileged_access_manager.list_entitlements
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.list_entitlements.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.list_entitlements.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.list_entitlements.js,samples/README.md)
 
@@ -198,7 +198,7 @@ __Usage:__
 
 ### Privileged_access_manager.list_grants
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.list_grants.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.list_grants.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.list_grants.js,samples/README.md)
 
@@ -215,7 +215,7 @@ __Usage:__
 
 ### Privileged_access_manager.revoke_grant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.revoke_grant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.revoke_grant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.revoke_grant.js,samples/README.md)
 
@@ -232,7 +232,7 @@ __Usage:__
 
 ### Privileged_access_manager.search_entitlements
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.search_entitlements.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.search_entitlements.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.search_entitlements.js,samples/README.md)
 
@@ -249,7 +249,7 @@ __Usage:__
 
 ### Privileged_access_manager.search_grants
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.search_grants.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.search_grants.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.search_grants.js,samples/README.md)
 
@@ -266,7 +266,7 @@ __Usage:__
 
 ### Privileged_access_manager.update_entitlement
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.update_entitlement.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.update_entitlement.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.update_entitlement.js,samples/README.md)
 
@@ -283,7 +283,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privilegedaccessmanager/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privilegedaccessmanager/samples/quickstart.js,samples/README.md)
 

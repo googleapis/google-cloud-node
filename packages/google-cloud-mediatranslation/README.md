@@ -139,8 +139,8 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Speech_translation_service.streaming_translate_speech | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-mediatranslation/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-mediatranslation/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js,packages/media-translatation/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-mediatranslation/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-mediatranslation/samples/quickstart.js,packages/media-translatation/samples/README.md) |
+| Speech_translation_service.streaming_translate_speech | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-mediatranslation/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-mediatranslation/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js,packages/media-translatation/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-mediatranslation/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-mediatranslation/samples/quickstart.js,packages/media-translatation/samples/README.md) |
 
 
 
@@ -190,7 +190,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/master/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -202,7 +202,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/media-translation/latest
 [product-docs]: https://cloud.google.com/translate/media/docs/

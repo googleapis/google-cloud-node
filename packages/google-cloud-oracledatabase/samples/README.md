@@ -53,7 +53,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Oracle_database.create_autonomous_database
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_autonomous_database.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_autonomous_database.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_autonomous_database.js,samples/README.md)
 
@@ -70,7 +70,7 @@ __Usage:__
 
 ### Oracle_database.create_cloud_exadata_infrastructure
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_cloud_exadata_infrastructure.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_cloud_exadata_infrastructure.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_cloud_exadata_infrastructure.js,samples/README.md)
 
@@ -87,7 +87,7 @@ __Usage:__
 
 ### Oracle_database.create_cloud_vm_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_cloud_vm_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_cloud_vm_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_cloud_vm_cluster.js,samples/README.md)
 
@@ -104,7 +104,7 @@ __Usage:__
 
 ### Oracle_database.delete_autonomous_database
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_autonomous_database.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_autonomous_database.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_autonomous_database.js,samples/README.md)
 
@@ -121,7 +121,7 @@ __Usage:__
 
 ### Oracle_database.delete_cloud_exadata_infrastructure
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_cloud_exadata_infrastructure.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_cloud_exadata_infrastructure.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_cloud_exadata_infrastructure.js,samples/README.md)
 
@@ -138,7 +138,7 @@ __Usage:__
 
 ### Oracle_database.delete_cloud_vm_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_cloud_vm_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_cloud_vm_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_cloud_vm_cluster.js,samples/README.md)
 
@@ -155,7 +155,7 @@ __Usage:__
 
 ### Oracle_database.generate_autonomous_database_wallet
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.generate_autonomous_database_wallet.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.generate_autonomous_database_wallet.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.generate_autonomous_database_wallet.js,samples/README.md)
 
@@ -172,7 +172,7 @@ __Usage:__
 
 ### Oracle_database.get_autonomous_database
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_autonomous_database.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_autonomous_database.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_autonomous_database.js,samples/README.md)
 
@@ -189,7 +189,7 @@ __Usage:__
 
 ### Oracle_database.get_cloud_exadata_infrastructure
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_cloud_exadata_infrastructure.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_cloud_exadata_infrastructure.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_cloud_exadata_infrastructure.js,samples/README.md)
 
@@ -206,7 +206,7 @@ __Usage:__
 
 ### Oracle_database.get_cloud_vm_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_cloud_vm_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_cloud_vm_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_cloud_vm_cluster.js,samples/README.md)
 
@@ -223,7 +223,7 @@ __Usage:__
 
 ### Oracle_database.list_autonomous_database_backups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_database_backups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_database_backups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_database_backups.js,samples/README.md)
 
@@ -240,7 +240,7 @@ __Usage:__
 
 ### Oracle_database.list_autonomous_database_character_sets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_database_character_sets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_database_character_sets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_database_character_sets.js,samples/README.md)
 
@@ -257,7 +257,7 @@ __Usage:__
 
 ### Oracle_database.list_autonomous_databases
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_databases.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_databases.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_databases.js,samples/README.md)
 
@@ -274,7 +274,7 @@ __Usage:__
 
 ### Oracle_database.list_autonomous_db_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_db_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_db_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_db_versions.js,samples/README.md)
 
@@ -291,7 +291,7 @@ __Usage:__
 
 ### Oracle_database.list_cloud_exadata_infrastructures
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_cloud_exadata_infrastructures.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_cloud_exadata_infrastructures.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_cloud_exadata_infrastructures.js,samples/README.md)
 
@@ -308,7 +308,7 @@ __Usage:__
 
 ### Oracle_database.list_cloud_vm_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_cloud_vm_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_cloud_vm_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_cloud_vm_clusters.js,samples/README.md)
 
@@ -325,7 +325,7 @@ __Usage:__
 
 ### Oracle_database.list_db_nodes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_nodes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_nodes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_nodes.js,samples/README.md)
 
@@ -342,7 +342,7 @@ __Usage:__
 
 ### Oracle_database.list_db_servers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_servers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_servers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_servers.js,samples/README.md)
 
@@ -359,7 +359,7 @@ __Usage:__
 
 ### Oracle_database.list_db_system_shapes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_system_shapes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_system_shapes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_system_shapes.js,samples/README.md)
 
@@ -376,7 +376,7 @@ __Usage:__
 
 ### Oracle_database.list_entitlements
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_entitlements.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_entitlements.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_entitlements.js,samples/README.md)
 
@@ -393,7 +393,7 @@ __Usage:__
 
 ### Oracle_database.list_gi_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_gi_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_gi_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_gi_versions.js,samples/README.md)
 
@@ -410,7 +410,7 @@ __Usage:__
 
 ### Oracle_database.restore_autonomous_database
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.restore_autonomous_database.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.restore_autonomous_database.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.restore_autonomous_database.js,samples/README.md)
 
@@ -427,7 +427,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-oracledatabase/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/quickstart.js,samples/README.md)
 

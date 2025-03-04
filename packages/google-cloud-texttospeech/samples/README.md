@@ -39,7 +39,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Text_to_speech.list_voices
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.list_voices.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.list_voices.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.list_voices.js,samples/README.md)
 
@@ -56,7 +56,7 @@ __Usage:__
 
 ### Text_to_speech.streaming_synthesize
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.streaming_synthesize.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.streaming_synthesize.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.streaming_synthesize.js,samples/README.md)
 
@@ -73,7 +73,7 @@ __Usage:__
 
 ### Text_to_speech.synthesize_speech
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.synthesize_speech.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.synthesize_speech.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.synthesize_speech.js,samples/README.md)
 
@@ -90,7 +90,7 @@ __Usage:__
 
 ### Text_to_speech_long_audio_synthesize.synthesize_long_audio
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js,samples/README.md)
 
@@ -107,7 +107,7 @@ __Usage:__
 
 ### Text_to_speech.list_voices
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.list_voices.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.list_voices.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.list_voices.js,samples/README.md)
 
@@ -124,7 +124,7 @@ __Usage:__
 
 ### Text_to_speech.streaming_synthesize
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.streaming_synthesize.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.streaming_synthesize.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.streaming_synthesize.js,samples/README.md)
 
@@ -141,7 +141,7 @@ __Usage:__
 
 ### Text_to_speech.synthesize_speech
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.synthesize_speech.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.synthesize_speech.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.synthesize_speech.js,samples/README.md)
 
@@ -158,7 +158,7 @@ __Usage:__
 
 ### Text_to_speech_long_audio_synthesize.synthesize_long_audio
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js,samples/README.md)
 
@@ -175,7 +175,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-texttospeech/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-texttospeech/samples/quickstart.js,samples/README.md)
 

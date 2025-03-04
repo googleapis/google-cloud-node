@@ -54,7 +54,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Config.create_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.create_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.create_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.create_deployment.js,samples/README.md)
 
@@ -71,7 +71,7 @@ __Usage:__
 
 ### Config.create_preview
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.create_preview.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.create_preview.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.create_preview.js,samples/README.md)
 
@@ -88,7 +88,7 @@ __Usage:__
 
 ### Config.delete_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.delete_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.delete_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.delete_deployment.js,samples/README.md)
 
@@ -105,7 +105,7 @@ __Usage:__
 
 ### Config.delete_preview
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.delete_preview.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.delete_preview.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.delete_preview.js,samples/README.md)
 
@@ -122,7 +122,7 @@ __Usage:__
 
 ### Config.delete_statefile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.delete_statefile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.delete_statefile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.delete_statefile.js,samples/README.md)
 
@@ -139,7 +139,7 @@ __Usage:__
 
 ### Config.export_deployment_statefile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.export_deployment_statefile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.export_deployment_statefile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.export_deployment_statefile.js,samples/README.md)
 
@@ -156,7 +156,7 @@ __Usage:__
 
 ### Config.export_lock_info
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.export_lock_info.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.export_lock_info.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.export_lock_info.js,samples/README.md)
 
@@ -173,7 +173,7 @@ __Usage:__
 
 ### Config.export_preview_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.export_preview_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.export_preview_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.export_preview_result.js,samples/README.md)
 
@@ -190,7 +190,7 @@ __Usage:__
 
 ### Config.export_revision_statefile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.export_revision_statefile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.export_revision_statefile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.export_revision_statefile.js,samples/README.md)
 
@@ -207,7 +207,7 @@ __Usage:__
 
 ### Config.get_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.get_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_deployment.js,samples/README.md)
 
@@ -224,7 +224,7 @@ __Usage:__
 
 ### Config.get_preview
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_preview.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.get_preview.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_preview.js,samples/README.md)
 
@@ -241,7 +241,7 @@ __Usage:__
 
 ### Config.get_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.get_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_resource.js,samples/README.md)
 
@@ -258,7 +258,7 @@ __Usage:__
 
 ### Config.get_revision
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_revision.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.get_revision.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_revision.js,samples/README.md)
 
@@ -275,7 +275,7 @@ __Usage:__
 
 ### Config.get_terraform_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_terraform_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.get_terraform_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_terraform_version.js,samples/README.md)
 
@@ -292,7 +292,7 @@ __Usage:__
 
 ### Config.import_statefile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.import_statefile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.import_statefile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.import_statefile.js,samples/README.md)
 
@@ -309,7 +309,7 @@ __Usage:__
 
 ### Config.list_deployments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_deployments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.list_deployments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_deployments.js,samples/README.md)
 
@@ -326,7 +326,7 @@ __Usage:__
 
 ### Config.list_previews
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_previews.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.list_previews.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_previews.js,samples/README.md)
 
@@ -343,7 +343,7 @@ __Usage:__
 
 ### Config.list_resources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_resources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.list_resources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_resources.js,samples/README.md)
 
@@ -360,7 +360,7 @@ __Usage:__
 
 ### Config.list_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.list_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_revisions.js,samples/README.md)
 
@@ -377,7 +377,7 @@ __Usage:__
 
 ### Config.list_terraform_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_terraform_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.list_terraform_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_terraform_versions.js,samples/README.md)
 
@@ -394,7 +394,7 @@ __Usage:__
 
 ### Config.lock_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.lock_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.lock_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.lock_deployment.js,samples/README.md)
 
@@ -411,7 +411,7 @@ __Usage:__
 
 ### Config.unlock_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.unlock_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.unlock_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.unlock_deployment.js,samples/README.md)
 
@@ -428,7 +428,7 @@ __Usage:__
 
 ### Config.update_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.update_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/generated/v1/config.update_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.update_deployment.js,samples/README.md)
 
@@ -445,7 +445,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-config/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/quickstart.js,samples/README.md)
 

@@ -48,7 +48,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Lineage.batch_search_link_processes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.batch_search_link_processes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.batch_search_link_processes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.batch_search_link_processes.js,samples/README.md)
 
@@ -65,7 +65,7 @@ __Usage:__
 
 ### Lineage.create_lineage_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.create_lineage_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.create_lineage_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.create_lineage_event.js,samples/README.md)
 
@@ -82,7 +82,7 @@ __Usage:__
 
 ### Lineage.create_process
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.create_process.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.create_process.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.create_process.js,samples/README.md)
 
@@ -99,7 +99,7 @@ __Usage:__
 
 ### Lineage.create_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.create_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.create_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.create_run.js,samples/README.md)
 
@@ -116,7 +116,7 @@ __Usage:__
 
 ### Lineage.delete_lineage_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.delete_lineage_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.delete_lineage_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.delete_lineage_event.js,samples/README.md)
 
@@ -133,7 +133,7 @@ __Usage:__
 
 ### Lineage.delete_process
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.delete_process.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.delete_process.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.delete_process.js,samples/README.md)
 
@@ -150,7 +150,7 @@ __Usage:__
 
 ### Lineage.delete_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.delete_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.delete_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.delete_run.js,samples/README.md)
 
@@ -167,7 +167,7 @@ __Usage:__
 
 ### Lineage.get_lineage_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.get_lineage_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.get_lineage_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.get_lineage_event.js,samples/README.md)
 
@@ -184,7 +184,7 @@ __Usage:__
 
 ### Lineage.get_process
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.get_process.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.get_process.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.get_process.js,samples/README.md)
 
@@ -201,7 +201,7 @@ __Usage:__
 
 ### Lineage.get_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.get_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.get_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.get_run.js,samples/README.md)
 
@@ -218,7 +218,7 @@ __Usage:__
 
 ### Lineage.list_lineage_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.list_lineage_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.list_lineage_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.list_lineage_events.js,samples/README.md)
 
@@ -235,7 +235,7 @@ __Usage:__
 
 ### Lineage.list_processes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.list_processes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.list_processes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.list_processes.js,samples/README.md)
 
@@ -252,7 +252,7 @@ __Usage:__
 
 ### Lineage.list_runs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.list_runs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.list_runs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.list_runs.js,samples/README.md)
 
@@ -269,7 +269,7 @@ __Usage:__
 
 ### Lineage.process_open_lineage_run_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.process_open_lineage_run_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.process_open_lineage_run_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.process_open_lineage_run_event.js,samples/README.md)
 
@@ -286,7 +286,7 @@ __Usage:__
 
 ### Lineage.search_links
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.search_links.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.search_links.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.search_links.js,samples/README.md)
 
@@ -303,7 +303,7 @@ __Usage:__
 
 ### Lineage.update_process
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.update_process.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.update_process.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.update_process.js,samples/README.md)
 
@@ -320,7 +320,7 @@ __Usage:__
 
 ### Lineage.update_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.update_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.update_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.update_run.js,samples/README.md)
 
@@ -337,7 +337,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog-lineage/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/quickstart.js,samples/README.md)
 

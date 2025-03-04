@@ -37,7 +37,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Service_health.get_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicehealth/samples/generated/v1/service_health.get_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-servicehealth/samples/generated/v1/service_health.get_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-servicehealth/samples/generated/v1/service_health.get_event.js,samples/README.md)
 
@@ -54,7 +54,7 @@ __Usage:__
 
 ### Service_health.get_organization_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicehealth/samples/generated/v1/service_health.get_organization_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-servicehealth/samples/generated/v1/service_health.get_organization_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-servicehealth/samples/generated/v1/service_health.get_organization_event.js,samples/README.md)
 
@@ -71,7 +71,7 @@ __Usage:__
 
 ### Service_health.get_organization_impact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicehealth/samples/generated/v1/service_health.get_organization_impact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-servicehealth/samples/generated/v1/service_health.get_organization_impact.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-servicehealth/samples/generated/v1/service_health.get_organization_impact.js,samples/README.md)
 
@@ -88,7 +88,7 @@ __Usage:__
 
 ### Service_health.list_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicehealth/samples/generated/v1/service_health.list_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-servicehealth/samples/generated/v1/service_health.list_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-servicehealth/samples/generated/v1/service_health.list_events.js,samples/README.md)
 
@@ -105,7 +105,7 @@ __Usage:__
 
 ### Service_health.list_organization_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicehealth/samples/generated/v1/service_health.list_organization_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-servicehealth/samples/generated/v1/service_health.list_organization_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-servicehealth/samples/generated/v1/service_health.list_organization_events.js,samples/README.md)
 
@@ -122,7 +122,7 @@ __Usage:__
 
 ### Service_health.list_organization_impacts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicehealth/samples/generated/v1/service_health.list_organization_impacts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-servicehealth/samples/generated/v1/service_health.list_organization_impacts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-servicehealth/samples/generated/v1/service_health.list_organization_impacts.js,samples/README.md)
 
@@ -139,7 +139,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicehealth/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-servicehealth/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-servicehealth/samples/quickstart.js,samples/README.md)
 

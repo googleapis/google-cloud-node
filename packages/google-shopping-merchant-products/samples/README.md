@@ -35,7 +35,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Product_inputs_service.delete_product_input
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.delete_product_input.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.delete_product_input.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.delete_product_input.js,samples/README.md)
 
@@ -52,7 +52,7 @@ __Usage:__
 
 ### Product_inputs_service.insert_product_input
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.insert_product_input.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.insert_product_input.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.insert_product_input.js,samples/README.md)
 
@@ -69,7 +69,7 @@ __Usage:__
 
 ### Products_service.get_product
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1beta/products_service.get_product.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-products/samples/generated/v1beta/products_service.get_product.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/generated/v1beta/products_service.get_product.js,samples/README.md)
 
@@ -86,7 +86,7 @@ __Usage:__
 
 ### Products_service.list_products
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1beta/products_service.list_products.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-products/samples/generated/v1beta/products_service.list_products.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/generated/v1beta/products_service.list_products.js,samples/README.md)
 
@@ -103,7 +103,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-products/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/quickstart.js,samples/README.md)
 

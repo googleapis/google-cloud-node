@@ -52,7 +52,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Identity_aware_proxy_admin_service.create_tunnel_dest_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.create_tunnel_dest_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.create_tunnel_dest_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.create_tunnel_dest_group.js,samples/README.md)
 
@@ -69,7 +69,7 @@ __Usage:__
 
 ### Identity_aware_proxy_admin_service.delete_tunnel_dest_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.delete_tunnel_dest_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.delete_tunnel_dest_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.delete_tunnel_dest_group.js,samples/README.md)
 
@@ -86,7 +86,7 @@ __Usage:__
 
 ### Identity_aware_proxy_admin_service.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.get_iam_policy.js,samples/README.md)
 
@@ -103,7 +103,7 @@ __Usage:__
 
 ### Identity_aware_proxy_admin_service.get_iap_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.get_iap_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.get_iap_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.get_iap_settings.js,samples/README.md)
 
@@ -120,7 +120,7 @@ __Usage:__
 
 ### Identity_aware_proxy_admin_service.get_tunnel_dest_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.get_tunnel_dest_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.get_tunnel_dest_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.get_tunnel_dest_group.js,samples/README.md)
 
@@ -137,7 +137,7 @@ __Usage:__
 
 ### Identity_aware_proxy_admin_service.list_tunnel_dest_groups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.list_tunnel_dest_groups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.list_tunnel_dest_groups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.list_tunnel_dest_groups.js,samples/README.md)
 
@@ -154,7 +154,7 @@ __Usage:__
 
 ### Identity_aware_proxy_admin_service.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.set_iam_policy.js,samples/README.md)
 
@@ -171,7 +171,7 @@ __Usage:__
 
 ### Identity_aware_proxy_admin_service.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.test_iam_permissions.js,samples/README.md)
 
@@ -188,7 +188,7 @@ __Usage:__
 
 ### Identity_aware_proxy_admin_service.update_iap_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.update_iap_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.update_iap_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.update_iap_settings.js,samples/README.md)
 
@@ -205,7 +205,7 @@ __Usage:__
 
 ### Identity_aware_proxy_admin_service.update_tunnel_dest_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.update_tunnel_dest_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.update_tunnel_dest_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.update_tunnel_dest_group.js,samples/README.md)
 
@@ -222,7 +222,7 @@ __Usage:__
 
 ### Identity_aware_proxy_o_auth_service.create_brand
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.create_brand.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.create_brand.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.create_brand.js,samples/README.md)
 
@@ -239,7 +239,7 @@ __Usage:__
 
 ### Identity_aware_proxy_o_auth_service.create_identity_aware_proxy_client
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.create_identity_aware_proxy_client.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.create_identity_aware_proxy_client.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.create_identity_aware_proxy_client.js,samples/README.md)
 
@@ -256,7 +256,7 @@ __Usage:__
 
 ### Identity_aware_proxy_o_auth_service.delete_identity_aware_proxy_client
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.delete_identity_aware_proxy_client.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.delete_identity_aware_proxy_client.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.delete_identity_aware_proxy_client.js,samples/README.md)
 
@@ -273,7 +273,7 @@ __Usage:__
 
 ### Identity_aware_proxy_o_auth_service.get_brand
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.get_brand.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.get_brand.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.get_brand.js,samples/README.md)
 
@@ -290,7 +290,7 @@ __Usage:__
 
 ### Identity_aware_proxy_o_auth_service.get_identity_aware_proxy_client
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.get_identity_aware_proxy_client.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.get_identity_aware_proxy_client.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.get_identity_aware_proxy_client.js,samples/README.md)
 
@@ -307,7 +307,7 @@ __Usage:__
 
 ### Identity_aware_proxy_o_auth_service.list_brands
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.list_brands.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.list_brands.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.list_brands.js,samples/README.md)
 
@@ -324,7 +324,7 @@ __Usage:__
 
 ### Identity_aware_proxy_o_auth_service.list_identity_aware_proxy_clients
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.list_identity_aware_proxy_clients.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.list_identity_aware_proxy_clients.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.list_identity_aware_proxy_clients.js,samples/README.md)
 
@@ -341,7 +341,7 @@ __Usage:__
 
 ### Identity_aware_proxy_o_auth_service.reset_identity_aware_proxy_client_secret
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.reset_identity_aware_proxy_client_secret.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.reset_identity_aware_proxy_client_secret.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.reset_identity_aware_proxy_client_secret.js,samples/README.md)
 
@@ -358,7 +358,7 @@ __Usage:__
 
 ### Identity_aware_proxy_admin_v1_beta1.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.get_iam_policy.js,samples/README.md)
 
@@ -375,7 +375,7 @@ __Usage:__
 
 ### Identity_aware_proxy_admin_v1_beta1.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.set_iam_policy.js,samples/README.md)
 
@@ -392,7 +392,7 @@ __Usage:__
 
 ### Identity_aware_proxy_admin_v1_beta1.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.test_iam_permissions.js,samples/README.md)
 
@@ -409,7 +409,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iap/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/quickstart.js,samples/README.md)
 

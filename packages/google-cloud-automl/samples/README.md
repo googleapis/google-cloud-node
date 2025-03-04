@@ -77,7 +77,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Auto_ml.create_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.create_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.create_dataset.js,samples/README.md)
 
@@ -94,7 +94,7 @@ __Usage:__
 
 ### Auto_ml.create_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.create_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.create_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.create_model.js,samples/README.md)
 
@@ -111,7 +111,7 @@ __Usage:__
 
 ### Auto_ml.delete_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.delete_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.delete_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.delete_dataset.js,samples/README.md)
 
@@ -128,7 +128,7 @@ __Usage:__
 
 ### Auto_ml.delete_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.delete_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.delete_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.delete_model.js,samples/README.md)
 
@@ -145,7 +145,7 @@ __Usage:__
 
 ### Auto_ml.deploy_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.deploy_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.deploy_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.deploy_model.js,samples/README.md)
 
@@ -162,7 +162,7 @@ __Usage:__
 
 ### Auto_ml.export_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.export_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.export_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.export_data.js,samples/README.md)
 
@@ -179,7 +179,7 @@ __Usage:__
 
 ### Auto_ml.export_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.export_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.export_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.export_model.js,samples/README.md)
 
@@ -196,7 +196,7 @@ __Usage:__
 
 ### Auto_ml.get_annotation_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.get_annotation_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.get_annotation_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.get_annotation_spec.js,samples/README.md)
 
@@ -213,7 +213,7 @@ __Usage:__
 
 ### Auto_ml.get_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.get_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.get_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.get_dataset.js,samples/README.md)
 
@@ -230,7 +230,7 @@ __Usage:__
 
 ### Auto_ml.get_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.get_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.get_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.get_model.js,samples/README.md)
 
@@ -247,7 +247,7 @@ __Usage:__
 
 ### Auto_ml.get_model_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.get_model_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.get_model_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.get_model_evaluation.js,samples/README.md)
 
@@ -264,7 +264,7 @@ __Usage:__
 
 ### Auto_ml.import_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.import_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.import_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.import_data.js,samples/README.md)
 
@@ -281,7 +281,7 @@ __Usage:__
 
 ### Auto_ml.list_datasets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.list_datasets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.list_datasets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.list_datasets.js,samples/README.md)
 
@@ -298,7 +298,7 @@ __Usage:__
 
 ### Auto_ml.list_model_evaluations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.list_model_evaluations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.list_model_evaluations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.list_model_evaluations.js,samples/README.md)
 
@@ -315,7 +315,7 @@ __Usage:__
 
 ### Auto_ml.list_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.list_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.list_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.list_models.js,samples/README.md)
 
@@ -332,7 +332,7 @@ __Usage:__
 
 ### Auto_ml.undeploy_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.undeploy_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.undeploy_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.undeploy_model.js,samples/README.md)
 
@@ -349,7 +349,7 @@ __Usage:__
 
 ### Auto_ml.update_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.update_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.update_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.update_dataset.js,samples/README.md)
 
@@ -366,7 +366,7 @@ __Usage:__
 
 ### Auto_ml.update_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.update_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/auto_ml.update_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/auto_ml.update_model.js,samples/README.md)
 
@@ -383,7 +383,7 @@ __Usage:__
 
 ### Prediction_service.batch_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/prediction_service.batch_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/prediction_service.batch_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/prediction_service.batch_predict.js,samples/README.md)
 
@@ -400,7 +400,7 @@ __Usage:__
 
 ### Prediction_service.predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/prediction_service.predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1/prediction_service.predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1/prediction_service.predict.js,samples/README.md)
 
@@ -417,7 +417,7 @@ __Usage:__
 
 ### Auto_ml.create_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.create_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.create_dataset.js,samples/README.md)
 
@@ -434,7 +434,7 @@ __Usage:__
 
 ### Auto_ml.create_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.create_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.create_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.create_model.js,samples/README.md)
 
@@ -451,7 +451,7 @@ __Usage:__
 
 ### Auto_ml.delete_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.delete_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.delete_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.delete_dataset.js,samples/README.md)
 
@@ -468,7 +468,7 @@ __Usage:__
 
 ### Auto_ml.delete_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.delete_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.delete_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.delete_model.js,samples/README.md)
 
@@ -485,7 +485,7 @@ __Usage:__
 
 ### Auto_ml.deploy_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.deploy_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.deploy_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.deploy_model.js,samples/README.md)
 
@@ -502,7 +502,7 @@ __Usage:__
 
 ### Auto_ml.export_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.export_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.export_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.export_data.js,samples/README.md)
 
@@ -519,7 +519,7 @@ __Usage:__
 
 ### Auto_ml.export_evaluated_examples
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.export_evaluated_examples.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.export_evaluated_examples.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.export_evaluated_examples.js,samples/README.md)
 
@@ -536,7 +536,7 @@ __Usage:__
 
 ### Auto_ml.export_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.export_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.export_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.export_model.js,samples/README.md)
 
@@ -553,7 +553,7 @@ __Usage:__
 
 ### Auto_ml.get_annotation_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_annotation_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_annotation_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_annotation_spec.js,samples/README.md)
 
@@ -570,7 +570,7 @@ __Usage:__
 
 ### Auto_ml.get_column_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_column_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_column_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_column_spec.js,samples/README.md)
 
@@ -587,7 +587,7 @@ __Usage:__
 
 ### Auto_ml.get_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_dataset.js,samples/README.md)
 
@@ -604,7 +604,7 @@ __Usage:__
 
 ### Auto_ml.get_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_model.js,samples/README.md)
 
@@ -621,7 +621,7 @@ __Usage:__
 
 ### Auto_ml.get_model_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_model_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_model_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_model_evaluation.js,samples/README.md)
 
@@ -638,7 +638,7 @@ __Usage:__
 
 ### Auto_ml.get_table_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_table_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_table_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.get_table_spec.js,samples/README.md)
 
@@ -655,7 +655,7 @@ __Usage:__
 
 ### Auto_ml.import_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.import_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.import_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.import_data.js,samples/README.md)
 
@@ -672,7 +672,7 @@ __Usage:__
 
 ### Auto_ml.list_column_specs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_column_specs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_column_specs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_column_specs.js,samples/README.md)
 
@@ -689,7 +689,7 @@ __Usage:__
 
 ### Auto_ml.list_datasets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_datasets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_datasets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_datasets.js,samples/README.md)
 
@@ -706,7 +706,7 @@ __Usage:__
 
 ### Auto_ml.list_model_evaluations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_model_evaluations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_model_evaluations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_model_evaluations.js,samples/README.md)
 
@@ -723,7 +723,7 @@ __Usage:__
 
 ### Auto_ml.list_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_models.js,samples/README.md)
 
@@ -740,7 +740,7 @@ __Usage:__
 
 ### Auto_ml.list_table_specs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_table_specs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_table_specs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.list_table_specs.js,samples/README.md)
 
@@ -757,7 +757,7 @@ __Usage:__
 
 ### Auto_ml.undeploy_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.undeploy_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.undeploy_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.undeploy_model.js,samples/README.md)
 
@@ -774,7 +774,7 @@ __Usage:__
 
 ### Auto_ml.update_column_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.update_column_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.update_column_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.update_column_spec.js,samples/README.md)
 
@@ -791,7 +791,7 @@ __Usage:__
 
 ### Auto_ml.update_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.update_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.update_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.update_dataset.js,samples/README.md)
 
@@ -808,7 +808,7 @@ __Usage:__
 
 ### Auto_ml.update_table_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.update_table_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.update_table_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.update_table_spec.js,samples/README.md)
 
@@ -825,7 +825,7 @@ __Usage:__
 
 ### Prediction_service.batch_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/prediction_service.batch_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/prediction_service.batch_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/prediction_service.batch_predict.js,samples/README.md)
 
@@ -842,7 +842,7 @@ __Usage:__
 
 ### Prediction_service.predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/prediction_service.predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/generated/v1beta1/prediction_service.predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/generated/v1beta1/prediction_service.predict.js,samples/README.md)
 
@@ -859,7 +859,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-automl/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-automl/samples/quickstart.js,samples/README.md)
 

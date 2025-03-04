@@ -48,7 +48,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Connectors.create_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.create_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.create_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.create_connection.js,samples/README.md)
 
@@ -65,7 +65,7 @@ __Usage:__
 
 ### Connectors.delete_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.delete_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.delete_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.delete_connection.js,samples/README.md)
 
@@ -82,7 +82,7 @@ __Usage:__
 
 ### Connectors.get_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.get_connection.js,samples/README.md)
 
@@ -99,7 +99,7 @@ __Usage:__
 
 ### Connectors.get_connection_schema_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connection_schema_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connection_schema_metadata.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.get_connection_schema_metadata.js,samples/README.md)
 
@@ -116,7 +116,7 @@ __Usage:__
 
 ### Connectors.get_connector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.get_connector.js,samples/README.md)
 
@@ -133,7 +133,7 @@ __Usage:__
 
 ### Connectors.get_connector_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connector_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connector_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.get_connector_version.js,samples/README.md)
 
@@ -150,7 +150,7 @@ __Usage:__
 
 ### Connectors.get_global_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_global_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.get_global_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.get_global_settings.js,samples/README.md)
 
@@ -167,7 +167,7 @@ __Usage:__
 
 ### Connectors.get_provider
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_provider.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.get_provider.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.get_provider.js,samples/README.md)
 
@@ -184,7 +184,7 @@ __Usage:__
 
 ### Connectors.get_runtime_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_runtime_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.get_runtime_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.get_runtime_config.js,samples/README.md)
 
@@ -201,7 +201,7 @@ __Usage:__
 
 ### Connectors.list_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.list_connections.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.list_connections.js,samples/README.md)
 
@@ -218,7 +218,7 @@ __Usage:__
 
 ### Connectors.list_connector_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_connector_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.list_connector_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.list_connector_versions.js,samples/README.md)
 
@@ -235,7 +235,7 @@ __Usage:__
 
 ### Connectors.list_connectors
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_connectors.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.list_connectors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.list_connectors.js,samples/README.md)
 
@@ -252,7 +252,7 @@ __Usage:__
 
 ### Connectors.list_providers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_providers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.list_providers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.list_providers.js,samples/README.md)
 
@@ -269,7 +269,7 @@ __Usage:__
 
 ### Connectors.list_runtime_action_schemas
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_runtime_action_schemas.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.list_runtime_action_schemas.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.list_runtime_action_schemas.js,samples/README.md)
 
@@ -286,7 +286,7 @@ __Usage:__
 
 ### Connectors.list_runtime_entity_schemas
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_runtime_entity_schemas.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.list_runtime_entity_schemas.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.list_runtime_entity_schemas.js,samples/README.md)
 
@@ -303,7 +303,7 @@ __Usage:__
 
 ### Connectors.refresh_connection_schema_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.refresh_connection_schema_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.refresh_connection_schema_metadata.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.refresh_connection_schema_metadata.js,samples/README.md)
 
@@ -320,7 +320,7 @@ __Usage:__
 
 ### Connectors.update_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.update_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/generated/v1/connectors.update_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.update_connection.js,samples/README.md)
 
@@ -337,7 +337,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-connectors/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/quickstart.js,samples/README.md)
 
