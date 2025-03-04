@@ -9446,7 +9446,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 78,
                     "type": "FULL"
                 }
             ],
@@ -9474,6 +9474,10 @@
                     {
                         "name": "hugging_face_token",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "include_equivalent_model_garden_model_deployment_configs",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.aiplatform.v1beta1.PublisherModel",
@@ -9630,7 +9634,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 89,
+                    "end": 91,
                     "type": "FULL"
                 }
             ],

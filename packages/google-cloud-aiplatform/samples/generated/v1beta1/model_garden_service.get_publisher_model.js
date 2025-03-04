@@ -52,6 +52,11 @@ function main(name) {
    *  Optional. Token used to access Hugging Face gated models.
    */
   // const huggingFaceToken = 'abc123'
+  /**
+   *  Optional. Whether to cnclude the deployment configs from the equivalent
+   *  Model Garden model if the requested model is a Hugging Face model.
+   */
+  // const includeEquivalentModelGardenModelDeploymentConfigs = true
 
   // Imports the Aiplatform library
   const {ModelGardenServiceClient} = require('@google-cloud/aiplatform').v1beta1;

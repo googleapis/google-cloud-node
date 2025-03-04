@@ -694,6 +694,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployPublisherModelRequest()
@@ -711,6 +712,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.deployPublisherModel(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deployPublisherModel as SinonStub
@@ -728,6 +730,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployPublisherModelRequest()
@@ -766,6 +769,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
         protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelOperationMetadata
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deployPublisherModel as SinonStub
@@ -783,6 +787,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployPublisherModelRequest()
@@ -799,6 +804,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.deployPublisherModel(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.deployPublisherModel as SinonStub
       ).getCall(0).args[0];
@@ -815,6 +821,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployPublisherModelRequest()
@@ -833,6 +840,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
       );
       const [operation] = await client.deployPublisherModel(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.deployPublisherModel as SinonStub
       ).getCall(0).args[0];
@@ -849,6 +857,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -861,6 +870,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
       const decodedOperation = await client.checkDeployPublisherModelProgress(
         expectedResponse.name
       );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -872,6 +882,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -883,6 +894,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
         client.checkDeployPublisherModelProgress(''),
         expectedError
       );
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });

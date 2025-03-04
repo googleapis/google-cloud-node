@@ -3876,9 +3876,23 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "googleSearch": {
+                          "type": "GoogleSearch",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "googleSearchRetrieval": {
                           "type": "GoogleSearchRetrieval",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enterpriseWebSearch": {
+                          "type": "EnterpriseWebSearch",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3892,6 +3906,9 @@
                         }
                       },
                       "nested": {
+                        "GoogleSearch": {
+                          "fields": {}
+                        },
                         "CodeExecution": {
                           "fields": {}
                         }
@@ -4136,6 +4153,9 @@
                           "id": 2
                         }
                       }
+                    },
+                    "EnterpriseWebSearch": {
+                      "fields": {}
                     },
                     "DynamicRetrievalConfig": {
                       "oneofs": {
@@ -40546,6 +40566,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "enterpriseWebSearch": {
+                          "type": "EnterpriseWebSearch",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "codeExecution": {
                           "type": "CodeExecution",
                           "id": 4,
@@ -40878,6 +40905,9 @@
                           "id": 2
                         }
                       }
+                    },
+                    "EnterpriseWebSearch": {
+                      "fields": {}
                     },
                     "DynamicRetrievalConfig": {
                       "oneofs": {
@@ -63098,15 +63128,19 @@
                           "requestType": "DeployPublisherModelRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
-                            "(google.api.http).post": "/v1beta1/{destination=projects/*/locations/*}:deploy",
+                            "deprecated": true,
+                            "(google.api.http).post": "/v1beta1/{destination=projects/*/locations/*}:deployPublisherModel",
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "DeployPublisherModelResponse",
                             "(google.longrunning.operation_info).metadata_type": "DeployPublisherModelOperationMetadata"
                           },
                           "parsedOptions": [
                             {
+                              "deprecated": true
+                            },
+                            {
                               "(google.api.http)": {
-                                "post": "/v1beta1/{destination=projects/*/locations/*}:deploy",
+                                "post": "/v1beta1/{destination=projects/*/locations/*}:deployPublisherModel",
                                 "body": "*"
                               }
                             },
@@ -63162,6 +63196,13 @@
                         "huggingFaceToken": {
                           "type": "string",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includeEquivalentModelGardenModelDeploymentConfigs": {
+                          "type": "bool",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -63371,6 +63412,9 @@
                       }
                     },
                     "DeployPublisherModelRequest": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "model": {
                           "type": "string",
@@ -63453,6 +63497,9 @@
                       }
                     },
                     "DeployPublisherModelResponse": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "publisherModel": {
                           "type": "string",
@@ -63512,6 +63559,9 @@
                       }
                     },
                     "DeployPublisherModelOperationMetadata": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
