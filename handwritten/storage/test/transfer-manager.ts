@@ -15,7 +15,6 @@
  */
 
 import {
-  ApiError,
   Bucket,
   File,
   CRC32C,
@@ -33,7 +32,7 @@ import {
 } from '../src/index.js';
 import assert from 'assert';
 import * as path from 'path';
-import {GaxiosOptions, GaxiosResponse} from 'gaxios';
+import {GaxiosError, GaxiosOptions, GaxiosResponse} from 'gaxios';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
 import {AuthClient, GoogleAuth} from 'google-auth-library';
 import {tmpdir} from 'os';
@@ -52,8 +51,8 @@ describe('Transfer Manager', () => {
         retryDelayMultiplier: 2,
         totalTimeout: 600,
         maxRetryDelay: 60,
-        retryableErrorFn: (err: ApiError) => {
-          return err.code === 500;
+        retryableErrorFn: (err: GaxiosError) => {
+          return err.status === 500;
         },
         idempotencyStrategy: IdempotencyStrategy.RetryConditional,
       },
@@ -684,9 +683,10 @@ describe('Transfer Manager', () => {
         }
       }
 
-      transferManager.bucket.storage.authClient = new GoogleAuth({
-        authClient: new TestAuthClient(),
-      });
+      transferManager.bucket.storage.storageTransport.authClient =
+        new GoogleAuth({
+          authClient: new TestAuthClient(),
+        });
 
       await transferManager.uploadFileInChunks(filePath);
 
@@ -722,9 +722,10 @@ describe('Transfer Manager', () => {
         }
       }
 
-      transferManager.bucket.storage.authClient = new GoogleAuth({
-        authClient: new TestAuthClient(),
-      });
+      transferManager.bucket.storage.storageTransport.authClient =
+        new GoogleAuth({
+          authClient: new TestAuthClient(),
+        });
 
       await transferManager.uploadFileInChunks(filePath);
 

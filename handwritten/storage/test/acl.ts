@@ -12,439 +12,490 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {DecorateRequestOptions, util} from '../src/nodejs-common/index.js';
 import assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
-import proxyquire from 'proxyquire';
 import {Storage} from '../src/storage.js';
+import {AccessControlObject, Acl, AclRoleAccessorMethods} from '../src/acl.js';
+import {StorageTransport} from '../src/storage-transport.js';
+import * as sinon from 'sinon';
+import {Bucket} from '../src/bucket.js';
+import {GaxiosError, GaxiosResponse} from 'gaxios';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let Acl: any;
-let AclRoleAccessorMethods: Function;
 describe('storage/acl', () => {
-  let promisified = false;
-  const fakePromisify = {
-    // tslint:disable-next-line:variable-name
-    promisifyAll(Class: Function) {
-      if (Class.name === 'Acl') {
-        promisified = true;
-      }
-    },
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let acl: any;
+  let acl: Acl;
+  let storageTransport: StorageTransport;
+  let bucket: Bucket;
+  let sandbox: sinon.SinonSandbox;
 
   const ERROR = new Error('Error.');
-  const MAKE_REQ = util.noop;
   const PATH_PREFIX = '/acl';
   const ROLE = Storage.acl.OWNER_ROLE;
+  const PROJECT_TEAM = {
+    projectNumber: '1234',
+    team: 'editors',
+  };
   const ENTITY = 'user-user@example.com';
 
   before(() => {
-    const aclModule = proxyquire('../src/acl.js', {
-      '@google-cloud/promisify': fakePromisify,
-    });
-    Acl = aclModule.Acl;
-    AclRoleAccessorMethods = aclModule.AclRoleAccessorMethods;
+    sandbox = sinon.createSandbox();
+    storageTransport = sandbox.createStubInstance(StorageTransport);
+    bucket = sandbox.createStubInstance(Bucket);
+    bucket.baseUrl = '';
+    bucket.name = 'bucket';
   });
 
   beforeEach(() => {
-    acl = new Acl({request: MAKE_REQ, pathPrefix: PATH_PREFIX});
+    acl = new Acl({pathPrefix: PATH_PREFIX, storageTransport, parent: bucket});
+  });
+
+  afterEach(() => {
+    sandbox.restore();
   });
 
   describe('initialization', () => {
-    it('should promisify all the things', () => {
-      assert(promisified);
-    });
-
     it('should assign makeReq and pathPrefix', () => {
       assert.strictEqual(acl.pathPrefix, PATH_PREFIX);
-      assert.strictEqual(acl.request_, MAKE_REQ);
     });
   });
 
   describe('add', () => {
-    it('should make the correct api request', done => {
-      acl.request = (reqOpts: DecorateRequestOptions) => {
+    it('should make the correct api request', () => {
+      acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
         assert.strictEqual(reqOpts.method, 'POST');
-        assert.strictEqual(reqOpts.uri, '');
-        assert.deepStrictEqual(reqOpts.json, {entity: ENTITY, role: ROLE});
-        done();
-      };
+        assert.strictEqual(reqOpts.url, '/bucket/acl');
+        assert.deepStrictEqual(reqOpts.body, {entity: ENTITY, role: ROLE});
+        return Promise.resolve();
+      });
 
       acl.add({entity: ENTITY, role: ROLE}, assert.ifError);
     });
 
-    it('should set the generation', done => {
+    it('should set the generation', () => {
       const options = {
         entity: ENTITY,
         role: ROLE,
         generation: 8,
       };
 
-      acl.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs.generation, options.generation);
-        done();
-      };
+      acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        assert.strictEqual(
+          reqOpts.queryParameters!.generation,
+          options.generation,
+        );
+        return Promise.resolve();
+      });
 
       acl.add(options, assert.ifError);
     });
 
-    it('should set the userProject', done => {
+    it('should set the userProject', () => {
       const options = {
         entity: ENTITY,
         role: ROLE,
         userProject: 'grape-spaceship-123',
       };
 
-      acl.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs.userProject, options.userProject);
-        done();
-      };
+      acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        assert.strictEqual(
+          reqOpts.queryParameters!.userProject,
+          options.userProject,
+        );
+        return Promise.resolve();
+      });
 
       acl.add(options, assert.ifError);
     });
 
-    it('should execute the callback with an ACL object', done => {
-      const apiResponse = {entity: ENTITY, role: ROLE};
-      const expectedAclObject = {entity: ENTITY, role: ROLE};
+    it('should execute the callback with an ACL object', () => {
+      const apiResponse = {
+        entity: ENTITY,
+        role: ROLE,
+        projectTeam: PROJECT_TEAM,
+      };
+      const expectedAclObject: AccessControlObject = {
+        entity: ENTITY,
+        role: ROLE,
+        projectTeam: PROJECT_TEAM,
+      };
 
-      acl.makeAclObject_ = (obj: {}) => {
+      acl.makeAclObject_ = obj => {
         assert.deepStrictEqual(obj, apiResponse);
         return expectedAclObject;
       };
 
-      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        callback(null, apiResponse);
-      };
+      acl.storageTransport.makeRequest = sandbox.stub().resolves(apiResponse);
 
-      acl.add({entity: ENTITY, role: ROLE}, (err: Error, aclObject: {}) => {
+      acl.add({entity: ENTITY, role: ROLE}, (err, aclObject) => {
         assert.ifError(err);
         assert.deepStrictEqual(aclObject, expectedAclObject);
-        done();
       });
     });
 
-    it('should execute the callback with an error', done => {
-      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        callback(ERROR);
-      };
+    it('should execute the callback with an error', () => {
+      acl.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((reqOpts, callback) => {
+          callback(ERROR as GaxiosError);
+          return Promise.resolve();
+        });
 
-      acl.add({entity: ENTITY, role: ROLE}, (err: Error) => {
+      acl.add({entity: ENTITY, role: ROLE}, err => {
         assert.deepStrictEqual(err, ERROR);
-        done();
       });
     });
 
-    it('should execute the callback with apiResponse', done => {
+    it('should execute the callback with apiResponse', () => {
       const resp = {success: true};
+      acl.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((resOpts, callback) => {
+          callback(null, resp);
+          return Promise.resolve();
+        });
 
-      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        callback(null, resp);
-      };
-
-      acl.add(
-        {entity: ENTITY, role: ROLE},
-        (err: Error, acls: {}, apiResponse: unknown) => {
-          assert.deepStrictEqual(resp, apiResponse);
-          done();
-        },
-      );
+      acl.add({entity: ENTITY, role: ROLE}, (err, acls, apiResponse) => {
+        assert.deepStrictEqual(resp, apiResponse);
+      });
     });
   });
 
   describe('delete', () => {
-    it('should make the correct api request', done => {
-      acl.request = (reqOpts: DecorateRequestOptions) => {
+    it('should make the correct api request', () => {
+      acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
         assert.strictEqual(reqOpts.method, 'DELETE');
-        assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
-
-        done();
-      };
+        assert.strictEqual(reqOpts.url, `/bucket/acl/${ENTITY}`);
+        return Promise.resolve();
+      });
 
       acl.delete({entity: ENTITY}, assert.ifError);
     });
 
-    it('should set the generation', done => {
+    it('should set the generation', () => {
       const options = {
         entity: ENTITY,
         generation: 8,
       };
-
-      acl.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs.generation, options.generation);
-        done();
-      };
+      acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        assert.strictEqual(
+          reqOpts.queryParameters!.generation,
+          options.generation,
+        );
+        return Promise.resolve();
+      });
 
       acl.delete(options, assert.ifError);
     });
 
-    it('should set the userProject', done => {
+    it('should set the userProject', () => {
       const options = {
         entity: ENTITY,
         role: ROLE,
         userProject: 'grape-spaceship-123',
       };
 
-      acl.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs.userProject, options.userProject);
-        done();
-      };
+      acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        assert.strictEqual(
+          reqOpts.queryParameters!.userProject,
+          options.userProject,
+        );
+        return Promise.resolve();
+      });
 
       acl.delete(options, assert.ifError);
     });
 
-    it('should execute the callback with an error', done => {
-      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        callback(ERROR);
-      };
+    it('should execute the callback with an error', () => {
+      acl.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((reqOpts, callback) => {
+          callback(ERROR as GaxiosError);
+          return Promise.resolve();
+        });
 
-      acl.delete({entity: ENTITY}, (err: Error) => {
+      acl.delete({entity: ENTITY}, err => {
         assert.deepStrictEqual(err, ERROR);
-        done();
       });
     });
 
-    it('should execute the callback with apiResponse', done => {
+    it('should execute the callback with apiResponse', () => {
       const resp = {success: true};
 
-      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        callback(null, resp);
-      };
+      acl.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((reqOpts, callback) => {
+          callback(null, resp);
+          return Promise.resolve();
+        });
 
-      acl.delete({entity: ENTITY}, (err: Error, apiResponse: unknown) => {
+      acl.delete({entity: ENTITY}, (err, apiResponse) => {
         assert.deepStrictEqual(resp, apiResponse);
-        done();
       });
     });
   });
 
   describe('get', () => {
     describe('all ACL objects', () => {
-      it('should make the correct API request', done => {
-        acl.request = (reqOpts: DecorateRequestOptions) => {
-          assert.strictEqual(reqOpts.uri, '');
+      it('should make the correct API request', () => {
+        acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+          assert.strictEqual(reqOpts.url, '/bucket/acl');
 
-          done();
-        };
-
+          return Promise.resolve();
+        });
         acl.get(assert.ifError);
       });
 
-      it('should accept a configuration object', done => {
+      it('should accept a configuration object', () => {
         const generation = 1;
 
-        acl.request = (reqOpts: DecorateRequestOptions) => {
-          assert.strictEqual(reqOpts.qs.generation, generation);
+        acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+          assert.strictEqual(reqOpts.queryParameters!.generation, generation);
+          return Promise.resolve();
+        });
 
-          done();
-        };
-
-        acl.get({generation}, assert.ifError);
+        acl.get({generation, entity: ENTITY}, assert.ifError);
       });
 
-      it('should pass an array of acl objects to the callback', done => {
+      it('should pass an array of acl objects to the callback', () => {
         const apiResponse = {
           items: [
-            {entity: ENTITY, role: ROLE},
-            {entity: ENTITY, role: ROLE},
-            {entity: ENTITY, role: ROLE},
+            {entity: ENTITY, role: ROLE, projectTeam: PROJECT_TEAM},
+            {entity: ENTITY, role: ROLE, projectTeam: PROJECT_TEAM},
+            {entity: ENTITY, role: ROLE, projectTeam: PROJECT_TEAM},
           ],
         };
 
         const expectedAclObjects = [
-          {entity: ENTITY, role: ROLE},
-          {entity: ENTITY, role: ROLE},
-          {entity: ENTITY, role: ROLE},
+          {entity: ENTITY, role: ROLE, projectTeam: PROJECT_TEAM},
+          {entity: ENTITY, role: ROLE, projectTeam: PROJECT_TEAM},
+          {entity: ENTITY, role: ROLE, projectTeam: PROJECT_TEAM},
         ];
 
-        acl.makeAclObject_ = (obj: {}, index: number) => {
-          return expectedAclObjects[index];
+        let index = 0;
+        acl.makeAclObject_ = () => {
+          return expectedAclObjects[index++];
         };
 
-        acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-          callback(null, apiResponse);
-        };
+        acl.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((reqOpts, callback) => {
+            callback(null, apiResponse);
+            return Promise.resolve();
+          });
 
-        acl.get((err: Error, aclObjects: Array<{}>) => {
+        acl.get((err, aclObjects) => {
           assert.ifError(err);
           assert.deepStrictEqual(aclObjects, expectedAclObjects);
-          done();
         });
       });
     });
 
     describe('ACL object for an entity', () => {
-      it('should get a specific ACL object', done => {
-        acl.request = (reqOpts: DecorateRequestOptions) => {
-          assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
-
-          done();
-        };
+      it('should get a specific ACL object', () => {
+        acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+          assert.strictEqual(reqOpts.url, `/bucket/acl/${ENTITY}`);
+          return Promise.resolve();
+        });
 
         acl.get({entity: ENTITY}, assert.ifError);
       });
 
-      it('should accept a configuration object', done => {
+      it('should accept a configuration object', () => {
         const generation = 1;
 
-        acl.request = (reqOpts: DecorateRequestOptions) => {
-          assert.strictEqual(reqOpts.qs.generation, generation);
-
-          done();
-        };
+        acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+          assert.strictEqual(reqOpts.queryParameters!.generation, generation);
+          return Promise.resolve();
+        });
 
         acl.get({entity: ENTITY, generation}, assert.ifError);
       });
 
-      it('should set the userProject', done => {
+      it('should set the userProject', () => {
         const options = {
           entity: ENTITY,
           userProject: 'grape-spaceship-123',
         };
 
-        acl.request = (reqOpts: DecorateRequestOptions) => {
-          assert.strictEqual(reqOpts.qs.userProject, options.userProject);
-          done();
-        };
+        acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+          assert.strictEqual(
+            reqOpts.queryParameters!.userProject,
+            options.userProject,
+          );
+          return Promise.resolve();
+        });
 
         acl.get(options, assert.ifError);
       });
 
-      it('should pass an acl object to the callback', done => {
-        const apiResponse = {entity: ENTITY, role: ROLE};
-        const expectedAclObject = {entity: ENTITY, role: ROLE};
+      it('should pass an acl object to the callback', () => {
+        const apiResponse = {entity: ENTITY, role: ROLE, projectTeam: ROLE};
+        const expectedAclObject = {
+          entity: ENTITY,
+          role: ROLE,
+          projectTeam: PROJECT_TEAM,
+        };
 
         acl.makeAclObject_ = () => {
           return expectedAclObject;
         };
 
-        acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-          callback(null, apiResponse);
-        };
+        acl.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((reqOpts, callback) => {
+            callback(null, apiResponse);
+            return Promise.resolve();
+          });
 
-        acl.get({entity: ENTITY}, (err: Error, aclObject: {}) => {
+        acl.get({entity: ENTITY}, (err, aclObject) => {
           assert.ifError(err);
           assert.deepStrictEqual(aclObject, expectedAclObject);
-          done();
         });
       });
     });
 
-    it('should execute the callback with an error', done => {
-      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        callback(ERROR);
-      };
+    it('should execute the callback with an error', () => {
+      acl.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((reqOpts, callback) => {
+          callback(ERROR as GaxiosError);
+          return Promise.resolve();
+        });
 
-      acl.get((err: Error) => {
+      acl.get(err => {
         assert.deepStrictEqual(err, ERROR);
-        done();
       });
     });
 
-    it('should execute the callback with apiResponse', done => {
+    it('should execute the callback with apiResponse', () => {
       const resp = {success: true};
-
-      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        callback(null, resp);
+      const gaxiosResponse: GaxiosResponse = {
+        config: {},
+        data: resp,
+        status: 0,
+        statusText: '',
+        headers: [],
+        request: {
+          responseURL: '',
+        },
       };
 
-      acl.get((err: Error, acls: Array<{}>, apiResponse: unknown) => {
-        assert.deepStrictEqual(resp, apiResponse);
-        done();
+      acl.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((reqOpts, callback) => {
+          callback(null, resp, gaxiosResponse);
+          return Promise.resolve();
+        });
+
+      acl.get((err, acls, apiResponse) => {
+        assert.deepStrictEqual(resp, apiResponse!.data);
       });
     });
   });
 
   describe('update', () => {
-    it('should make the correct API request', done => {
-      acl.request = (reqOpts: DecorateRequestOptions) => {
+    it('should make the correct API request', () => {
+      acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
         assert.strictEqual(reqOpts.method, 'PUT');
-        assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
-        assert.deepStrictEqual(reqOpts.json, {role: ROLE});
-
-        done();
-      };
+        assert.strictEqual(reqOpts.url, `/bucket/acl/${ENTITY}`);
+        assert.deepStrictEqual(reqOpts.body, {role: ROLE});
+        return Promise.resolve();
+      });
 
       acl.update({entity: ENTITY, role: ROLE}, assert.ifError);
     });
 
-    it('should set the generation', done => {
+    it('should set the generation', () => {
       const options = {
         entity: ENTITY,
         role: ROLE,
         generation: 8,
       };
 
-      acl.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs.generation, options.generation);
-        done();
-      };
+      acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        assert.strictEqual(
+          reqOpts.queryParameters!.generation,
+          options.generation,
+        );
+        return Promise.resolve();
+      });
 
       acl.update(options, assert.ifError);
     });
 
-    it('should set the userProject', done => {
+    it('should set the userProject', () => {
       const options = {
         entity: ENTITY,
         role: ROLE,
         userProject: 'grape-spaceship-123',
       };
 
-      acl.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs.userProject, options.userProject);
-        done();
-      };
+      acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        assert.strictEqual(
+          reqOpts.queryParameters!.userProject,
+          options.userProject,
+        );
+        return Promise.resolve();
+      });
 
       acl.update(options, assert.ifError);
     });
 
-    it('should pass an acl object to the callback', done => {
-      const apiResponse = {entity: ENTITY, role: ROLE};
-      const expectedAclObject = {entity: ENTITY, role: ROLE};
+    it('should pass with an acl object to the callback', () => {
+      const apiResponse = {
+        entity: ENTITY,
+        role: ROLE,
+        projectTeam: PROJECT_TEAM,
+      };
+      const expectedAclObject = {
+        entity: ENTITY,
+        role: ROLE,
+        projectTeam: PROJECT_TEAM,
+      };
 
       acl.makeAclObject_ = () => {
         return expectedAclObject;
       };
 
-      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        callback(null, apiResponse);
-      };
+      acl.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((reqOpts, callback) => {
+          callback(null, apiResponse);
+          return Promise.resolve();
+        });
 
-      acl.update({entity: ENTITY, role: ROLE}, (err: Error, aclObject: {}) => {
+      acl.update({entity: ENTITY, role: ROLE}, (err, aclObject) => {
         assert.ifError(err);
         assert.deepStrictEqual(aclObject, expectedAclObject);
-        done();
       });
     });
 
-    it('should execute the callback with an error', done => {
-      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        callback(ERROR);
-      };
+    it('should execute the callback with an error', () => {
+      acl.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((reqOpts, callback) => {
+          callback(ERROR as GaxiosError);
+          return Promise.resolve();
+        });
 
-      acl.update({entity: ENTITY, role: ROLE}, (err: Error) => {
+      acl.update({entity: ENTITY, role: ROLE}, err => {
         assert.deepStrictEqual(err, ERROR);
-        done();
       });
     });
 
-    it('should execute the callback with apiResponse', done => {
+    it('should execute the callback with apiResponse', () => {
       const resp = {success: true};
 
-      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        callback(null, resp);
-      };
+      acl.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((reqOpts, callback) => {
+          callback(null, resp);
+          return Promise.resolve();
+        });
 
       const config = {entity: ENTITY, role: ROLE};
-      acl.update(
-        config,
-        (err: Error, acls: Array<{}>, apiResponse: unknown) => {
-          assert.deepStrictEqual(resp, apiResponse);
-          done();
-        },
-      );
+      acl.update(config, (err, acls, apiResponse) => {
+        assert.deepStrictEqual(resp, apiResponse);
+      });
     });
   });
 
@@ -468,24 +519,6 @@ describe('storage/acl', () => {
         role: ROLE,
         projectTeam,
       });
-    });
-  });
-
-  describe('request', () => {
-    it('should make the correct request', done => {
-      const uri = '/uri';
-
-      const reqOpts = {
-        uri,
-      };
-
-      acl.request_ = (reqOpts_: DecorateRequestOptions, callback: Function) => {
-        assert.strictEqual(reqOpts_, reqOpts);
-        assert.strictEqual(reqOpts_.uri, PATH_PREFIX + uri);
-        callback(); // done()
-      };
-
-      acl.request(reqOpts, done);
     });
   });
 });

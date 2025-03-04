@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {BaseMetadata, ServiceObject} from './nodejs-common/index.js';
+import {BaseMetadata, Methods, ServiceObject} from './nodejs-common/index.js';
 import {ResponseBody} from './nodejs-common/util.js';
 import {promisifyAll} from '@google-cloud/promisify';
 
@@ -135,7 +135,7 @@ class Notification extends ServiceObject<Notification, NotificationMetadata> {
       ifMetagenerationNotMatch?: number;
     } = {};
 
-    const methods = {
+    const methods: Methods = {
       /**
        * Creates a notification subscription for the bucket.
        *
@@ -218,7 +218,7 @@ class Notification extends ServiceObject<Notification, NotificationMetadata> {
        */
       delete: {
         reqOpts: {
-          qs: requestQueryObject,
+          queryParameters: requestQueryObject,
         },
       },
 
@@ -258,7 +258,7 @@ class Notification extends ServiceObject<Notification, NotificationMetadata> {
        */
       get: {
         reqOpts: {
-          qs: requestQueryObject,
+          queryParameters: requestQueryObject,
         },
       },
 
@@ -297,7 +297,7 @@ class Notification extends ServiceObject<Notification, NotificationMetadata> {
        */
       getMetadata: {
         reqOpts: {
-          qs: requestQueryObject,
+          queryParameters: requestQueryObject,
         },
       },
 
@@ -338,8 +338,9 @@ class Notification extends ServiceObject<Notification, NotificationMetadata> {
     };
 
     super({
+      storageTransport: bucket.storage.storageTransport,
       parent: bucket,
-      baseUrl: '/notificationConfigs',
+      baseUrl: 'notificationConfigs',
       id: id.toString(),
       createMethod: bucket.createNotification.bind(bucket),
       methods,

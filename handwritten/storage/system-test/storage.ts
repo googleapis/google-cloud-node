@@ -19,17 +19,16 @@ import * as fs from 'fs';
 import fetch from 'node-fetch';
 import FormData from 'form-data';
 import pLimit from 'p-limit';
-import {promisify} from 'util';
 import * as path from 'path';
 import * as tmp from 'tmp';
 import * as uuid from 'uuid';
-import {ApiError} from '../src/nodejs-common/index.js';
 import {
   AccessControlObject,
   Bucket,
   CRC32C,
   DeleteBucketCallback,
   File,
+  GaxiosError,
   IdempotencyStrategy,
   LifecycleRule,
   Notification,
@@ -327,8 +326,8 @@ describe('storage', function () {
           );
           await bucket.makePrivate();
           await assert.rejects(bucket.acl.get({entity: 'allUsers'}), err => {
-            assert.strictEqual((err as ApiError).code, 404);
-            assert.strictEqual((err as ApiError).errors![0].reason, 'notFound');
+            assert.strictEqual((err as GaxiosError).status, 404);
+            assert.strictEqual((err as GaxiosError).message, 'notFound');
           });
         } catch (err) {
           assert.ifError(err);
@@ -415,9 +414,9 @@ describe('storage', function () {
       });
 
       it('should make a file private', async () => {
-        const validateMakeFilePrivateRejects = (err: ApiError) => {
-          assert.strictEqual(err.code, 404);
-          assert.strictEqual(err!.errors![0].reason, 'notFound');
+        const validateMakeFilePrivateRejects = (err: GaxiosError) => {
+          assert.strictEqual(err.status, 404);
+          assert.strictEqual(err!.message, 'notFound');
           return true;
         };
         await assert.doesNotReject(file.makePublic());
@@ -478,9 +477,9 @@ describe('storage', function () {
       });
 
       it('should make a file private from a resumable upload', async () => {
-        const validateMakeFilePrivateRejects = (err: ApiError) => {
-          assert.strictEqual((err as ApiError)!.code, 404);
-          assert.strictEqual((err as ApiError).errors![0].reason, 'notFound');
+        const validateMakeFilePrivateRejects = (err: GaxiosError) => {
+          assert.strictEqual((err as GaxiosError)!.status, 404);
+          assert.strictEqual((err as GaxiosError).message, 'notFound');
           return true;
         };
         await assert.doesNotReject(
@@ -501,7 +500,7 @@ describe('storage', function () {
     let PROJECT_ID: string;
 
     before(async () => {
-      PROJECT_ID = await storage.authClient.getProjectId();
+      PROJECT_ID = await storage.storageTransport.authClient.getProjectId();
     });
 
     describe('buckets', () => {
@@ -556,8 +555,9 @@ describe('storage', function () {
 
         const [policy] = await bucket.iam.getPolicy();
 
-        const serviceAccount = (await storage.authClient.getCredentials())
-          .client_email;
+        const serviceAccount = (
+          await storage.storageTransport.authClient.getCredentials()
+        ).client_email;
         const conditionalBinding = {
           role: 'roles/storage.objectViewer',
           members: [`serviceAccount:${serviceAccount}`],
@@ -616,14 +616,14 @@ describe('storage', function () {
     };
 
     const validateUnexpectedPublicAccessPreventionValueError = (
-      err: ApiError,
+      err: GaxiosError,
     ) => {
       assert.strictEqual(err.code, 400);
       return true;
     };
 
     const validateConfiguringPublicAccessWhenPAPEnforcedError = (
-      err: ApiError,
+      err: GaxiosError,
     ) => {
       assert.strictEqual(err.code, 412);
       return true;
@@ -791,149 +791,211 @@ describe('storage', function () {
   });
 
   describe('soft-delete', () => {
-    let bucket: Bucket;
-    let hnsBucket: Bucket;
-    const SOFT_DELETE_RETENTION_SECONDS = 7 * 24 * 60 * 60; //7 days in seconds;
+    describe('buckets', () => {
+      let bucket: Bucket;
+      const SOFT_DELETE_RETENTION_SECONDS = 7 * 24 * 60 * 60; //7 days in seconds;
+      let generation: string;
 
-    beforeEach(async () => {
-      bucket = storage.bucket(generateName());
-      await bucket.create();
-      await bucket.setMetadata({
-        softDeletePolicy: {
-          retentionDurationSeconds: SOFT_DELETE_RETENTION_SECONDS,
-        },
-      });
-
-      hnsBucket = storage.bucket(generateName());
-      await storage.createBucket(hnsBucket.name, {
-        hierarchicalNamespace: {enabled: true},
-        iamConfiguration: {
-          uniformBucketLevelAccess: {
-            enabled: true,
+      before(async () => {
+        bucket = storage.bucket(generateName());
+        await bucket.create();
+        await bucket.setMetadata({
+          softDeletePolicy: {
+            retentionDurationSeconds: SOFT_DELETE_RETENTION_SECONDS,
           },
-        },
-        softDeletePolicy: {
-          retentionDurationSeconds: SOFT_DELETE_RETENTION_SECONDS,
-        },
+        });
+
+        const [metadata] = await bucket.getMetadata();
+        generation = metadata!.generation!;
+        await bucket.delete();
+      });
+
+      after(async () => {
+        await bucket.delete();
+      });
+
+      it('should be listing soft-deleted buckets', async () => {
+        const [buckets] = await storage.getBuckets({softDeleted: true});
+        assert(buckets.length > 0);
+
+        buckets.forEach(bucket => {
+          assert(bucket.name);
+          assert(bucket.metadata.generation);
+          assert(bucket.metadata.softDeleteTime);
+          assert(bucket.metadata.hardDeleteTime);
+        });
+      });
+
+      it('should GET a soft-deleted bucket', async () => {
+        const [softDeletedBucket] = await storage
+          .bucket(bucket.name)
+          .getMetadata({
+            softDeleted: true,
+            generation: generation,
+          });
+        assert(softDeletedBucket);
+        assert.strictEqual(softDeletedBucket.generation, generation);
+        assert(softDeletedBucket.softDeleteTime);
+        assert(softDeletedBucket.hardDeleteTime);
+      });
+
+      it('should restore a soft-deleted bucket', async () => {
+        const restoredBucket = await storage.bucket(bucket.name).restore({
+          generation: generation,
+        });
+        assert(restoredBucket);
+        const [metadata] = await bucket.getMetadata();
+        assert(metadata);
       });
     });
 
-    afterEach(async () => {
-      await bucket.deleteFiles({force: true, versions: true});
-      await bucket.delete();
-      await hnsBucket.deleteFiles({force: true, versions: true});
-      await hnsBucket.delete();
-    });
+    describe('files', () => {
+      let bucket: Bucket;
+      let hnsBucket: Bucket;
+      const SOFT_DELETE_RETENTION_SECONDS = 7 * 24 * 60 * 60; //7 days in seconds;
 
-    it('should set softDeletePolicy correctly', async () => {
-      const metadata = await bucket.getMetadata();
-      assert(metadata[0].softDeletePolicy);
-      assert(metadata[0].softDeletePolicy.effectiveTime);
-      assert.deepStrictEqual(
-        metadata[0].softDeletePolicy.retentionDurationSeconds,
-        SOFT_DELETE_RETENTION_SECONDS.toString(),
-      );
-    });
+      beforeEach(async () => {
+        bucket = storage.bucket(generateName());
+        await bucket.create();
+        await bucket.setMetadata({
+          softDeletePolicy: {
+            retentionDurationSeconds: SOFT_DELETE_RETENTION_SECONDS,
+          },
+        });
 
-    it('should LIST soft-deleted files', async () => {
-      const f1 = bucket.file('file1');
-      const f2 = bucket.file('file2');
-      await f1.save('file1');
-      await f2.save('file2');
-      await f1.delete();
-      await f2.delete();
-      const [notSoftDeletedFiles] = await bucket.getFiles();
-      assert.strictEqual(notSoftDeletedFiles.length, 0);
-      const [softDeletedFiles] = await bucket.getFiles({softDeleted: true});
-      assert.strictEqual(softDeletedFiles.length, 2);
-    });
-
-    it('should GET a soft-deleted file', async () => {
-      const f1 = bucket.file('file3');
-      await f1.save('file3');
-      const [metadata] = await f1.getMetadata();
-      await f1.delete();
-      const [softDeletedFile] = await f1.get({
-        softDeleted: true,
-        generation: parseInt(metadata.generation?.toString() || '0'),
+        hnsBucket = storage.bucket(generateName());
+        await storage.createBucket(hnsBucket.name, {
+          hierarchicalNamespace: {enabled: true},
+          iamConfiguration: {
+            uniformBucketLevelAccess: {
+              enabled: true,
+            },
+          },
+          softDeletePolicy: {
+            retentionDurationSeconds: SOFT_DELETE_RETENTION_SECONDS,
+          },
+        });
       });
-      assert(softDeletedFile);
-      assert.strictEqual(
-        softDeletedFile.metadata.generation,
-        metadata.generation,
-      );
-    });
 
-    it('should restore a soft-deleted file', async () => {
-      const f1 = bucket.file('file4');
-      await f1.save('file4');
-      const [metadata] = await f1.getMetadata();
-      await f1.delete();
-      let [files] = await bucket.getFiles();
-      assert.strictEqual(files.length, 0);
-      const restoredFile = await f1.restore({
-        generation: parseInt(metadata.generation?.toString() || '0'),
+      afterEach(async () => {
+        await bucket.deleteFiles({force: true, versions: true});
+        await bucket.delete();
+        await hnsBucket.deleteFiles({force: true, versions: true});
+        await hnsBucket.delete();
       });
-      assert(restoredFile);
-      [files] = await bucket.getFiles();
-      assert.strictEqual(files.length, 1);
-    });
 
-    it('should LIST soft-deleted files with restore token', async () => {
-      const f1 = hnsBucket.file('file5a');
-      const f2 = hnsBucket.file('file5b');
-      await f1.save('file5a');
-      await f2.save('file5b');
-      await f1.delete();
-      await f2.delete();
-      const [notSoftDeletedFiles] = await hnsBucket.getFiles();
-      assert.strictEqual(notSoftDeletedFiles.length, 0);
-      const [softDeletedFiles] = await hnsBucket.getFiles({softDeleted: true});
-      assert.strictEqual(softDeletedFiles.length, 2);
-      assert.notStrictEqual(
-        softDeletedFiles![0].metadata.restoreToken,
-        undefined,
-      );
-    });
+      it('should set softDeletePolicy correctly', async () => {
+        const metadata = await bucket.getMetadata();
+        assert(metadata[0].softDeletePolicy);
+        assert(metadata[0].softDeletePolicy.effectiveTime);
+        assert.deepStrictEqual(
+          metadata[0].softDeletePolicy.retentionDurationSeconds,
+          SOFT_DELETE_RETENTION_SECONDS.toString(),
+        );
+      });
 
-    it('should GET a soft-deleted file with restore token', async () => {
-      const f1 = hnsBucket.file('file6');
-      await f1.save('file6');
-      const [metadata] = await f1.getMetadata();
-      await f1.delete();
-      const [softDeletedFile] = await f1.get({
-        softDeleted: true,
-        generation: parseInt(metadata.generation?.toString() || '0'),
+      it('should LIST soft-deleted files', async () => {
+        const f1 = bucket.file('file1');
+        const f2 = bucket.file('file2');
+        await f1.save('file1');
+        await f2.save('file2');
+        await f1.delete();
+        await f2.delete();
+        const [notSoftDeletedFiles] = await bucket.getFiles();
+        assert.strictEqual(notSoftDeletedFiles.length, 0);
+        const [softDeletedFiles] = await bucket.getFiles({softDeleted: true});
+        assert.strictEqual(softDeletedFiles.length, 2);
       });
-      assert(softDeletedFile);
-      assert.strictEqual(
-        softDeletedFile.metadata.generation,
-        metadata.generation,
-      );
-      assert.notStrictEqual(softDeletedFile.metadata.restoreToken, undefined);
-    });
 
-    it('should restore a soft-deleted file using restoreToken', async () => {
-      const f1 = hnsBucket.file('file7');
-      await f1.save('file7');
-      const [metadata] = await f1.getMetadata();
-      await f1.delete();
-      let [files] = await hnsBucket.getFiles();
-      assert.strictEqual(files.length, 0);
-      const [softDeletedFile] = await f1.get({
-        softDeleted: true,
-        generation: parseInt(metadata.generation?.toString() || '0'),
+      it('should GET a soft-deleted file', async () => {
+        const f1 = bucket.file('file3');
+        await f1.save('file3');
+        const [metadata] = await f1.getMetadata();
+        await f1.delete();
+        const [softDeletedFile] = await f1.get({
+          softDeleted: true,
+          generation: parseInt(metadata.generation?.toString() || '0'),
+        });
+        assert(softDeletedFile);
+        assert.strictEqual(
+          softDeletedFile.metadata.generation,
+          metadata.generation,
+        );
       });
-      assert(softDeletedFile);
-      const restoredFile = await f1.restore({
-        generation: parseInt(
-          softDeletedFile.metadata.generation?.toString() || '0',
-        ),
-        restoreToken: softDeletedFile.metadata.restoreToken,
+
+      it('should restore a soft-deleted file', async () => {
+        const f1 = bucket.file('file4');
+        await f1.save('file4');
+        const [metadata] = await f1.getMetadata();
+        await f1.delete();
+        let [files] = await bucket.getFiles();
+        assert.strictEqual(files.length, 0);
+        const restoredFile = await f1.restore({
+          generation: parseInt(metadata.generation?.toString() || '0'),
+        });
+        assert(restoredFile);
+        [files] = await bucket.getFiles();
+        assert.strictEqual(files.length, 1);
       });
-      assert(restoredFile);
-      [files] = await hnsBucket.getFiles();
-      assert.strictEqual(files.length, 1);
+
+      it('should LIST soft-deleted files with restore token', async () => {
+        const f1 = hnsBucket.file('file5a');
+        const f2 = hnsBucket.file('file5b');
+        await f1.save('file5a');
+        await f2.save('file5b');
+        await f1.delete();
+        await f2.delete();
+        const [notSoftDeletedFiles] = await hnsBucket.getFiles();
+        assert.strictEqual(notSoftDeletedFiles.length, 0);
+        const [softDeletedFiles] = await hnsBucket.getFiles({
+          softDeleted: true,
+        });
+        assert.strictEqual(softDeletedFiles.length, 2);
+        assert.notStrictEqual(
+          softDeletedFiles![0].metadata.restoreToken,
+          undefined,
+        );
+      });
+
+      it('should GET a soft-deleted file with restore token', async () => {
+        const f1 = hnsBucket.file('file6');
+        await f1.save('file6');
+        const [metadata] = await f1.getMetadata();
+        await f1.delete();
+        const [softDeletedFile] = await f1.get({
+          softDeleted: true,
+          generation: parseInt(metadata.generation?.toString() || '0'),
+        });
+        assert(softDeletedFile);
+        assert.strictEqual(
+          softDeletedFile.metadata.generation,
+          metadata.generation,
+        );
+        assert.notStrictEqual(softDeletedFile.metadata.restoreToken, undefined);
+      });
+
+      it('should restore a soft-deleted file using restoreToken', async () => {
+        const f1 = hnsBucket.file('file7');
+        await f1.save('file7');
+        const [metadata] = await f1.getMetadata();
+        await f1.delete();
+        let [files] = await hnsBucket.getFiles();
+        assert.strictEqual(files.length, 0);
+        const [softDeletedFile] = await f1.get({
+          softDeleted: true,
+          generation: parseInt(metadata.generation?.toString() || '0'),
+        });
+        assert(softDeletedFile);
+        const restoredFile = await f1.restore({
+          generation: parseInt(
+            softDeletedFile.metadata.generation?.toString() || '0',
+          ),
+          restoreToken: softDeletedFile.metadata.restoreToken,
+        });
+        assert(restoredFile);
+        [files] = await hnsBucket.getFiles();
+        assert.strictEqual(files.length, 1);
+      });
     });
   });
 
@@ -1011,7 +1073,9 @@ describe('storage', function () {
     describe('disables file ACL', () => {
       let file: File;
 
-      const validateUniformBucketLevelAccessEnabledError = (err: ApiError) => {
+      const validateUniformBucketLevelAccessEnabledError = (
+        err: GaxiosError,
+      ) => {
         assert.strictEqual(err.code, 400);
         return true;
       };
@@ -1032,7 +1096,7 @@ describe('storage', function () {
             await new Promise(res => setTimeout(res, UNIFORM_ACCESS_WAIT_TIME));
           } catch (err) {
             assert(
-              validateUniformBucketLevelAccessEnabledError(err as ApiError),
+              validateUniformBucketLevelAccessEnabledError(err as GaxiosError),
             );
             break;
           }
@@ -1047,7 +1111,7 @@ describe('storage', function () {
             await new Promise(res => setTimeout(res, UNIFORM_ACCESS_WAIT_TIME));
           } catch (err) {
             assert(
-              validateUniformBucketLevelAccessEnabledError(err as ApiError),
+              validateUniformBucketLevelAccessEnabledError(err as GaxiosError),
             );
             break;
           }
@@ -1669,8 +1733,8 @@ describe('storage', function () {
         await bucket.lock(bucket.metadata!.metageneration!.toString());
         await assert.rejects(
           bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS / 2),
-          (err: ApiError) => {
-            return err.code === 403;
+          (err: GaxiosError) => {
+            return err.status === 403;
           },
         );
       });
@@ -1767,14 +1831,14 @@ describe('storage', function () {
 
       it('should block an overwrite request', async () => {
         const file = await createFile();
-        await assert.rejects(file.save('new data'), (err: ApiError) => {
+        await assert.rejects(file.save('new data'), (err: GaxiosError) => {
           assert.strictEqual(err.code, 403);
         });
       });
 
       it('should block a delete request', async () => {
         const file = await createFile();
-        await assert.rejects(file.delete(), (err: ApiError) => {
+        await assert.rejects(file.delete(), (err: GaxiosError) => {
           assert.strictEqual(err.code, 403);
         });
       });
@@ -2343,7 +2407,7 @@ describe('storage', function () {
         })
         .on('error', err => {
           assert.strictEqual(dataEmitted, false);
-          assert.strictEqual((err as ApiError).code, 404);
+          assert.strictEqual((err as GaxiosError).code, 404);
           done();
         });
     });
@@ -2446,8 +2510,8 @@ describe('storage', function () {
 
     it('should handle non-network errors', async () => {
       const file = bucket.file('hi.jpg');
-      await assert.rejects(file.download(), (err: ApiError) => {
-        assert.strictEqual((err as ApiError).code, 404);
+      await assert.rejects(file.download(), (err: GaxiosError) => {
+        assert.strictEqual((err as GaxiosError).code, 404);
       });
     });
 
@@ -2504,7 +2568,7 @@ describe('storage', function () {
 
       const file = bucket.file(filename);
 
-      await new Promise((resolve, reject) => {
+      await new Promise<void>((resolve, reject) => {
         file
           .createReadStream()
           .on('error', reject)
@@ -2516,7 +2580,7 @@ describe('storage', function () {
           })
           .pipe(fs.createWriteStream(tmpFilePath))
           .on('error', reject)
-          .on('finish', resolve);
+          .on('finish', () => resolve());
       });
 
       await file.delete();
@@ -2621,7 +2685,7 @@ describe('storage', function () {
               .pipe(fs.createWriteStream(tmpFilePath))
               .on('error', done)
               .on('finish', async () => {
-                await file.delete((err: ApiError | null) => {
+                await file.delete((err: GaxiosError | null) => {
                   assert.ifError(err);
 
                   fs.readFile(tmpFilePath, (err, data) => {
@@ -2658,7 +2722,7 @@ describe('storage', function () {
       });
 
       it('should not download from the unencrypted file', async () => {
-        await assert.rejects(unencryptedFile.download(), (err: ApiError) => {
+        await assert.rejects(unencryptedFile.download(), (err: GaxiosError) => {
           assert(
             err!.message.indexOf(
               [
@@ -2693,7 +2757,9 @@ describe('storage', function () {
       const keyRingId = generateName();
       const cryptoKeyId = generateName();
 
-      const request = promisify(storage.request).bind(storage);
+      //const request = promisify(storage.request).bind(storage);
+      // eslint-disable-next-line no-empty-pattern
+      const request = ({}) => {};
 
       let bucket: Bucket;
       let kmsKeyName: string;
@@ -2743,7 +2809,7 @@ describe('storage', function () {
       before(async () => {
         bucket = storage.bucket(generateName());
 
-        setProjectId(await storage.authClient.getProjectId());
+        setProjectId(await storage.storageTransport.authClient.getProjectId());
         await bucket.create({location: BUCKET_LOCATION});
 
         // create keyRing
@@ -3103,8 +3169,8 @@ describe('storage', function () {
       // We can't actually create a channel. But we can test to see that we're
       // reaching the right endpoint with the API request.
       const channel = storage.channel('id', 'resource-id');
-      await assert.rejects(channel.stop(), (err: ApiError) => {
-        assert.strictEqual((err as ApiError).code, 404);
+      await assert.rejects(channel.stop(), (err: GaxiosError) => {
+        assert.strictEqual((err as GaxiosError).code, 404);
         assert.strictEqual(err!.message.indexOf("Channel 'id' not found"), 0);
       });
     });
@@ -3502,9 +3568,9 @@ describe('storage', function () {
         .save('hello1', {resumable: false});
       await assert.rejects(
         bucketWithVersioning.file(fileName, {generation: 0}).save('hello2'),
-        (err: ApiError) => {
-          assert.strictEqual(err.code, 412);
-          assert.strictEqual(err.errors![0].reason, 'conditionNotMet');
+        (err: GaxiosError) => {
+          assert.strictEqual(err.status, 412);
+          assert.strictEqual(err.message, 'conditionNotMet');
           return true;
         },
       );
@@ -3567,7 +3633,7 @@ describe('storage', function () {
       await fetch(signedDeleteUrl, {method: 'DELETE'});
       await assert.rejects(
         () => file.getMetadata(),
-        (err: ApiError) => err.code === 404,
+        (err: GaxiosError) => err.status === 404,
       );
     });
   });

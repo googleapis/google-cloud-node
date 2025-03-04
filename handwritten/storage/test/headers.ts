@@ -13,68 +13,85 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import {GoogleAuth} from 'google-auth-library';
 import {describe, it} from 'mocha';
-import proxyquire from 'proxyquire';
+import * as sinon from 'sinon';
+import {StorageTransport} from '../src/storage-transport.js';
+import {Storage} from '../src/storage.js';
+import {GaxiosResponse} from 'gaxios';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import {getPackageJSON} from '../src/package-json-helper.cjs';
 
 const error = Error('not implemented');
 
-interface Request {
-  headers: {
-    [key: string]: string;
-  };
-}
-
 describe('headers', () => {
-  const requests: Request[] = [];
-  const {Storage} = proxyquire('../src', {
-    'google-auth-library': {
-      GoogleAuth: class {
-        async getProjectId() {
-          return 'foo-project';
-        }
-        async getClient() {
-          return class {
-            async request() {
-              return {};
-            }
-          };
-        }
-        getCredentials() {
-          return {};
-        }
-        async authorizeRequest(req: Request) {
-          requests.push(req);
-          throw error;
-        }
+  let authClient: GoogleAuth;
+  let sandbox: sinon.SinonSandbox;
+  let storage: Storage;
+  let storageTransport: StorageTransport;
+  let gaxiosResponse: GaxiosResponse;
+
+  before(() => {
+    sandbox = sinon.createSandbox();
+    storage = new Storage();
+    authClient = sandbox.createStubInstance(GoogleAuth);
+    gaxiosResponse = {
+      config: {},
+      data: {},
+      status: 200,
+      statusText: 'OK',
+      headers: [],
+      request: {
+        responseURL: '',
       },
-      '@global': true,
-    },
+    };
+    storageTransport = new StorageTransport({
+      authClient,
+      apiEndpoint: 'test',
+      baseUrl: 'https://base-url.com',
+      scopes: 'scope',
+      retryOptions: {},
+      packageJson: getPackageJSON(),
+    });
+    storage.storageTransport = storageTransport;
   });
 
   afterEach(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     globalThis.Deno = undefined;
+    sandbox.restore();
   });
 
   it('populates x-goog-api-client header (node)', async () => {
-    const storage = new Storage();
     const bucket = storage.bucket('foo-bucket');
+    authClient.request = opts => {
+      assert.ok(
+        /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
+          opts.headers!['x-goog-api-client'],
+        ),
+      );
+      return Promise.resolve(gaxiosResponse);
+    };
+
     try {
       await bucket.create();
     } catch (err) {
       if (err !== error) throw err;
     }
-    assert.ok(
-      /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
-        requests[0].headers['x-goog-api-client'],
-      ),
-    );
   });
 
   it('populates x-goog-api-client header (deno)', async () => {
-    const storage = new Storage();
     const bucket = storage.bucket('foo-bucket');
+    authClient.request = opts => {
+      assert.ok(
+        /^gl-deno\/0.00.0 gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
+          opts.headers!['x-goog-api-client'],
+        ),
+      );
+      return Promise.resolve(gaxiosResponse);
+    };
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     globalThis.Deno = {
@@ -87,10 +104,5 @@ describe('headers', () => {
     } catch (err) {
       if (err !== error) throw err;
     }
-    assert.ok(
-      /^gl-deno\/0.00.0 gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
-        requests[1].headers['x-goog-api-client'],
-      ),
-    );
   });
 });

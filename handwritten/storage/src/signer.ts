@@ -333,7 +333,6 @@ export class URLSigner {
         ...(config.queryParams || {}),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const canonicalQueryParams = this.getCanonicalQueryParams(queryParams);
 
       const canonicalRequest = this.getCanonicalRequest(

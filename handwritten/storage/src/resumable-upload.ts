@@ -752,19 +752,9 @@ export class Upload extends Writable {
           return res.headers.location;
         } catch (err) {
           const e = err as GaxiosError;
-          const apiError = {
-            code: e.response?.status,
-            name: e.response?.statusText,
-            message: e.response?.statusText,
-            errors: [
-              {
-                reason: e.code as string,
-              },
-            ],
-          };
           if (
             this.retryOptions.maxRetries! > 0 &&
-            this.retryOptions.retryableErrorFn!(apiError as ApiError)
+            this.retryOptions.retryableErrorFn!(e)
           ) {
             throw e;
           } else {
@@ -953,17 +943,15 @@ export class Upload extends Writable {
         await this.responseHandler(resp);
       }
     } catch (e) {
-      const err = e as ApiError;
-
-      if (this.retryOptions.retryableErrorFn!(err)) {
+      if (this.retryOptions.retryableErrorFn!(e as GaxiosError)) {
         await this.attemptDelayedRetry({
           status: NaN,
-          data: err,
+          data: e,
         });
         return;
       }
 
-      this.destroy(err);
+      this.destroy(e as Error);
     }
   }
 
@@ -1086,7 +1074,7 @@ export class Upload extends Writable {
       if (
         config.retry === false ||
         !(e instanceof Error) ||
-        !this.retryOptions.retryableErrorFn!(e)
+        !this.retryOptions.retryableErrorFn!(e as GaxiosError)
       ) {
         throw e;
       }
@@ -1116,17 +1104,15 @@ export class Upload extends Writable {
       }
       this.offset = 0;
     } catch (e) {
-      const err = e as ApiError;
-
-      if (this.retryOptions.retryableErrorFn!(err)) {
+      if (this.retryOptions.retryableErrorFn!(e as GaxiosError)) {
         await this.attemptDelayedRetry({
           status: NaN,
-          data: err,
+          data: e,
         });
         return;
       }
 
-      this.destroy(err);
+      this.destroy(e as Error);
     }
   }
 
@@ -1203,10 +1189,10 @@ export class Upload extends Writable {
     if (
       resp.status !== 200 &&
       this.retryOptions.retryableErrorFn!({
-        code: resp.status,
+        code: resp.status.toString(),
         message: resp.statusText,
         name: resp.statusText,
-      })
+      } as GaxiosError)
     ) {
       void this.attemptDelayedRetry(resp);
       return false;

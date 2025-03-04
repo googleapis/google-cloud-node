@@ -524,6 +524,40 @@ describe('CRC32C', () => {
           assert.equal(crc32c.toString(), expected);
         }
       });
+
+      it('should handle string data correctly when reading the file', async () => {
+        const stringData = 'test string data';
+        await fs.promises.writeFile(tempFilePath, stringData);
+
+        const crc32c = await CRC32C.fromFile(tempFilePath);
+
+        const expectedCrc32c = new CRC32C();
+        expectedCrc32c.update(Buffer.from(stringData));
+
+        assert.equal(crc32c.toString(), expectedCrc32c.toString());
+      });
+
+      it('should handle buffer data correctly when reading the file', async () => {
+        const bufferData = Buffer.from('test buffer data');
+        await fs.promises.writeFile(tempFilePath, bufferData);
+
+        const crc32c = await CRC32C.fromFile(tempFilePath);
+
+        const expectedCrc32c = new CRC32C();
+        expectedCrc32c.update(bufferData);
+
+        assert.equal(crc32c.toString(), expectedCrc32c.toString());
+      });
+
+      it('should handle empty file correctly', async () => {
+        await fs.promises.writeFile(tempFilePath, '');
+
+        const crc32c = await CRC32C.fromFile(tempFilePath);
+
+        const expectedCrc32c = new CRC32C();
+
+        assert.equal(crc32c.toString(), expectedCrc32c.toString());
+      });
     });
   });
 });
