@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/nodejs-promisify/compare/v4.0.0...v4.1.0) (2025-03-05)
+
+
+### Features
+
+* Introduce Node 18 ([#360](https://github.com/googleapis/nodejs-promisify/issues/360)) ([a41ceac](https://github.com/googleapis/nodejs-promisify/commit/a41ceac378a8bda5d9cd054c9280153a8a1e3055))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-promisify/compare/v3.0.1...v4.0.0) (2023-08-08)
 
 
