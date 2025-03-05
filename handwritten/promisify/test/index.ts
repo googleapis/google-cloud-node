@@ -185,7 +185,7 @@ describe('promisify', () => {
       },
       (err: Error) => {
         assert.strictEqual(err, error);
-      }
+      },
     );
   });
 
@@ -204,7 +204,7 @@ describe('promisify', () => {
       },
       {
         singular: true,
-      }
+      },
     );
 
     return func().then((arg: {}) => {
@@ -221,7 +221,7 @@ describe('promisify', () => {
       },
       {
         singular: true,
-      }
+      },
     );
 
     return func().then((args: Array<{}>) => {
@@ -258,7 +258,7 @@ describe('promisify', () => {
           assert.strictEqual(args.length, 0);
           assert.strictEqual(typeof optional, 'function');
           optional(null);
-        }
+        },
       );
 
       func('foo').then(() => {

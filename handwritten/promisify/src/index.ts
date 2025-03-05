@@ -57,7 +57,7 @@ export interface CallbackMethod extends Function {
  */
 export function promisify(
   originalMethod: PromiseMethod,
-  options?: PromisifyOptions
+  options?: PromisifyOptions,
 ) {
   if (originalMethod.promisified_) {
     return originalMethod;
@@ -179,7 +179,7 @@ export function callbackify(originalMethod: CallbackMethod) {
         res = Array.isArray(res) ? res : [res];
         cb(null, ...res);
       },
-      (err: Error) => cb(err)
+      (err: Error) => cb(err),
     );
   };
   wrapper.callbackified_ = true;
@@ -196,7 +196,7 @@ export function callbackify(originalMethod: CallbackMethod) {
 export function callbackifyAll(
   // tslint:disable-next-line:variable-name
   Class: Function,
-  options?: CallbackifyAllOptions
+  options?: CallbackifyAllOptions,
 ) {
   const exclude = (options && options.exclude) || [];
   const ownPropertyNames = Object.getOwnPropertyNames(Class.prototype);
