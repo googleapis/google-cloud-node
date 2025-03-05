@@ -51,8 +51,8 @@
     "@google-cloud/common": "^6.0.0",
     "@google-cloud/paginator": "^5.0.2",
     "@google-cloud/promisify": "^4.0.0",
-    "arrify": "^3.0.0",
-    "dns-zonefile": "^0.3.2",
+    "arrify": "^2.0.0",
+    "dns-zonefile": "0.2.10",
     "lodash.groupby": "^4.6.0",
     "string-format-obj": "^1.1.1"
   },

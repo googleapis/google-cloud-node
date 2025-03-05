@@ -44,7 +44,7 @@ export interface CreateChangeCallback {
  * const change = zone.change('change-id');
  */
 export class Change extends ServiceObject {
-  parent!: Zone;
+  declare parent: Zone;
   constructor(zone: Zone, id?: string) {
     const methods = {
       /**
