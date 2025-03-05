@@ -1607,7 +1607,9 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "CloudFilestoreServiceProto",
                     "java_package": "com.google.cloud.filestore.v1beta1",
-                    "php_namespace": "Google\\Cloud\\Filestore\\V1beta1"
+                    "php_namespace": "Google\\Cloud\\Filestore\\V1beta1",
+                    "(google.api.resource_definition).type": "managedidentities.googleapis.com/Domain",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/domains/{domain}"
                   },
                   "nested": {
                     "CloudFilestoreManager": {
@@ -1745,6 +1747,30 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta1/{name=projects/*/locations/*/instances/*}:revert",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "google.cloud.common.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "PromoteReplica": {
+                          "requestType": "PromoteReplicaRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/instances/*}:promoteReplica",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/instances/*}:promoteReplica",
                                 "body": "*"
                               }
                             },
@@ -2272,11 +2298,18 @@
                       "fields": {
                         "domain": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedidentities.googleapis.com/Domain"
+                          }
                         },
                         "computer": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -2292,6 +2325,70 @@
                         "managedActiveDirectory": {
                           "type": "ManagedActiveDirectoryConfig",
                           "id": 1
+                        }
+                      }
+                    },
+                    "ReplicaConfig": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1
+                        },
+                        "stateReasons": {
+                          "rule": "repeated",
+                          "type": "StateReason",
+                          "id": 2
+                        },
+                        "peerInstance": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "file.googleapis.com/Instance"
+                          }
+                        },
+                        "lastActiveSyncTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 3,
+                            "REMOVING": 4,
+                            "FAILED": 5
+                          }
+                        },
+                        "StateReason": {
+                          "values": {
+                            "STATE_REASON_UNSPECIFIED": 0,
+                            "PEER_INSTANCE_UNREACHABLE": 1,
+                            "REMOVE_FAILED": 2
+                          }
+                        }
+                      }
+                    },
+                    "Replication": {
+                      "fields": {
+                        "role": {
+                          "type": "Role",
+                          "id": 1
+                        },
+                        "replicas": {
+                          "rule": "repeated",
+                          "type": "ReplicaConfig",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Role": {
+                          "values": {
+                            "ROLE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "STANDBY": 2
+                          }
                         }
                       }
                     },
@@ -2417,7 +2514,60 @@
                         },
                         "directoryServices": {
                           "type": "DirectoryServicesConfig",
-                          "id": 24
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "replication": {
+                          "type": "Replication",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "tags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "customPerformanceSupported": {
+                          "type": "bool",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "performanceConfig": {
+                          "type": "PerformanceConfig",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "performanceLimits": {
+                          "type": "PerformanceLimits",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deletionProtectionEnabled": {
+                          "type": "bool",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "deletionProtectionReason": {
+                          "type": "string",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2433,7 +2583,8 @@
                             "SUSPENDED": 8,
                             "REVERTING": 9,
                             "SUSPENDING": 10,
-                            "RESUMING": 11
+                            "RESUMING": 11,
+                            "PROMOTING": 13
                           }
                         },
                         "Tier": {
@@ -2460,6 +2611,87 @@
                             "FILE_PROTOCOL_UNSPECIFIED": 0,
                             "NFS_V3": 1,
                             "NFS_V4_1": 2
+                          }
+                        },
+                        "IOPSPerTB": {
+                          "fields": {
+                            "maxIopsPerTb": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "FixedIOPS": {
+                          "fields": {
+                            "maxIops": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "PerformanceConfig": {
+                          "oneofs": {
+                            "mode": {
+                              "oneof": [
+                                "iopsPerTb",
+                                "fixedIops"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "iopsPerTb": {
+                              "type": "IOPSPerTB",
+                              "id": 4
+                            },
+                            "fixedIops": {
+                              "type": "FixedIOPS",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "PerformanceLimits": {
+                          "fields": {
+                            "maxIops": {
+                              "type": "int64",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "maxReadIops": {
+                              "type": "int64",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "maxWriteIops": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "maxReadThroughputBps": {
+                              "type": "int64",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "maxWriteThroughputBps": {
+                              "type": "int64",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
                           }
                         }
                       }
@@ -2639,7 +2871,30 @@
                         "unreachable": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
+                        }
+                      }
+                    },
+                    "PromoteReplicaRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Instance"
+                          }
+                        },
+                        "peerInstance": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Instance"
+                          }
                         }
                       }
                     },
@@ -2684,6 +2939,14 @@
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "tags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -2791,6 +3054,13 @@
                         "filter": {
                           "type": "string",
                           "id": 5
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2804,6 +3074,14 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
                         }
                       }
                     },
@@ -2901,6 +3179,21 @@
                           "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "tags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "fileSystemProtocol": {
+                          "type": "Instance.FileProtocol",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       },
@@ -3027,7 +3320,10 @@
                         "unreachable": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
                         }
                       }
                     },
@@ -3199,7 +3495,10 @@
                         "unreachable": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
                         }
                       }
                     },
