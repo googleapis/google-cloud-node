@@ -1852,6 +1852,50 @@
             }
         },
         {
+            "regionTag": "dialogflow_v2_generated_Conversations_IngestContextReferences_async",
+            "title": "dialogflow ingestContextReferences Sample",
+            "origin": "API_DEFINITION",
+            "description": " Data ingestion API. Ingests context references for an existing conversation.",
+            "canonical": true,
+            "file": "conversations.ingest_context_references.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "IngestContextReferences",
+                "fullName": "google.cloud.dialogflow.v2.Conversations.IngestContextReferences",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "conversation",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "context_references",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.v2.IngestContextReferencesResponse",
+                "client": {
+                    "shortName": "ConversationsClient",
+                    "fullName": "google.cloud.dialogflow.v2.ConversationsClient"
+                },
+                "method": {
+                    "shortName": "IngestContextReferences",
+                    "fullName": "google.cloud.dialogflow.v2.Conversations.IngestContextReferences",
+                    "service": {
+                        "shortName": "Conversations",
+                        "fullName": "google.cloud.dialogflow.v2.Conversations"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "dialogflow_v2_generated_Conversations_ListMessages_async",
             "title": "dialogflow listMessages Sample",
             "origin": "API_DEFINITION",
@@ -2018,7 +2062,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -2038,6 +2082,10 @@
                     {
                         "name": "generator_name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "context_references",
+                        "type": "TYPE_MESSAGE[]"
                     },
                     {
                         "name": "conversation_context",
@@ -2132,6 +2180,54 @@
                 "method": {
                     "shortName": "SearchKnowledge",
                     "fullName": "google.cloud.dialogflow.v2.Conversations.SearchKnowledge",
+                    "service": {
+                        "shortName": "Conversations",
+                        "fullName": "google.cloud.dialogflow.v2.Conversations"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v2_generated_Conversations_GenerateSuggestions_async",
+            "title": "dialogflow generateSuggestions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generates all the suggestions using generators configured in the conversation profile. A generator is used only if its trigger event is matched.",
+            "canonical": true,
+            "file": "conversations.generate_suggestions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GenerateSuggestions",
+                "fullName": "google.cloud.dialogflow.v2.Conversations.GenerateSuggestions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "conversation",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "latest_message",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "trigger_events",
+                        "type": "TYPE_ENUM[]"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.v2.GenerateSuggestionsResponse",
+                "client": {
+                    "shortName": "ConversationsClient",
+                    "fullName": "google.cloud.dialogflow.v2.ConversationsClient"
+                },
+                "method": {
+                    "shortName": "GenerateSuggestions",
+                    "fullName": "google.cloud.dialogflow.v2.Conversations.GenerateSuggestions",
                     "service": {
                         "shortName": "Conversations",
                         "fullName": "google.cloud.dialogflow.v2.Conversations"
