@@ -4680,9 +4680,6 @@ export namespace google {
                     /** UploadQueueYamlRequest httpBody. */
                     public httpBody?: (google.api.IHttpBody|null);
 
-                    /** UploadQueueYamlRequest _httpBody. */
-                    public _httpBody?: "httpBody";
-
                     /**
                      * Creates a new UploadQueueYamlRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -7366,15 +7363,6 @@ export namespace google {
 
                     /** UriOverride uriOverrideEnforceMode. */
                     public uriOverrideEnforceMode: (google.cloud.tasks.v2beta2.UriOverride.UriOverrideEnforceMode|keyof typeof google.cloud.tasks.v2beta2.UriOverride.UriOverrideEnforceMode);
-
-                    /** UriOverride _scheme. */
-                    public _scheme?: "scheme";
-
-                    /** UriOverride _host. */
-                    public _host?: "host";
-
-                    /** UriOverride _port. */
-                    public _port?: "port";
 
                     /**
                      * Creates a new UriOverride instance using the specified properties.
@@ -11291,15 +11279,6 @@ export namespace google {
                     /** UriOverride uriOverrideEnforceMode. */
                     public uriOverrideEnforceMode: (google.cloud.tasks.v2beta3.UriOverride.UriOverrideEnforceMode|keyof typeof google.cloud.tasks.v2beta3.UriOverride.UriOverrideEnforceMode);
 
-                    /** UriOverride _scheme. */
-                    public _scheme?: "scheme";
-
-                    /** UriOverride _host. */
-                    public _host?: "host";
-
-                    /** UriOverride _port. */
-                    public _port?: "port";
-
                     /**
                      * Creates a new UriOverride instance using the specified properties.
                      * @param [properties] Properties to set
@@ -13352,6 +13331,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -13392,6 +13374,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -17719,6 +17704,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */

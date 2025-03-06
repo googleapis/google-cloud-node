@@ -24,9 +24,8 @@
     "esm/test/*.ts",
     "esm/test/**/*.ts",
     "esm/system-test/*.ts",
-    "src/**/*.json",
+    "esm/src/**/*.json",
     "protos/protos.json",
-    "src/**/*.json",
-    "protos/protos.json"
+    "esm/src/json-helper.cjs"
   ]
 }
