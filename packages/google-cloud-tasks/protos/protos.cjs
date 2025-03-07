@@ -10614,7 +10614,12 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * UploadQueueYamlRequest _httpBody.
+                         * @member {"httpBody"|undefined} _httpBody
+                         * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
+                         * @instance
+                         */
                         Object.defineProperty(UploadQueueYamlRequest.prototype, "_httpBody", {
                             get: $util.oneOfGetter($oneOfFields = ["httpBody"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -17447,19 +17452,34 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * UriOverride _scheme.
+                         * @member {"scheme"|undefined} _scheme
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @instance
+                         */
                         Object.defineProperty(UriOverride.prototype, "_scheme", {
                             get: $util.oneOfGetter($oneOfFields = ["scheme"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * UriOverride _host.
+                         * @member {"host"|undefined} _host
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @instance
+                         */
                         Object.defineProperty(UriOverride.prototype, "_host", {
                             get: $util.oneOfGetter($oneOfFields = ["host"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * UriOverride _port.
+                         * @member {"port"|undefined} _port
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @instance
+                         */
                         Object.defineProperty(UriOverride.prototype, "_port", {
                             get: $util.oneOfGetter($oneOfFields = ["port"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -26793,19 +26813,34 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * UriOverride _scheme.
+                         * @member {"scheme"|undefined} _scheme
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @instance
+                         */
                         Object.defineProperty(UriOverride.prototype, "_scheme", {
                             get: $util.oneOfGetter($oneOfFields = ["scheme"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * UriOverride _host.
+                         * @member {"host"|undefined} _host
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @instance
+                         */
                         Object.defineProperty(UriOverride.prototype, "_host", {
                             get: $util.oneOfGetter($oneOfFields = ["host"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * UriOverride _port.
+                         * @member {"port"|undefined} _port
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @instance
+                         */
                         Object.defineProperty(UriOverride.prototype, "_port", {
                             get: $util.oneOfGetter($oneOfFields = ["port"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -32475,7 +32510,6 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
-                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -32577,14 +32611,6 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
-                 * Publishing restReferenceDocumentationUri.
-                 * @member {string} restReferenceDocumentationUri
-                 * @memberof google.api.Publishing
-                 * @instance
-                 */
-                Publishing.prototype.restReferenceDocumentationUri = "";
-    
-                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -32631,8 +32657,6 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
-                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
-                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -32711,10 +32735,6 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
-                                break;
-                            }
-                        case 111: {
-                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -32809,9 +32829,6 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
-                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
-                        if (!$util.isString(message.restReferenceDocumentationUri))
-                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -32906,8 +32923,6 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
-                    if (object.restReferenceDocumentationUri != null)
-                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -32937,7 +32952,6 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
-                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -32968,8 +32982,6 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
-                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
-                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -42974,9 +42986,12 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
+                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
+                            writer.int32(message[".google.api.fieldBehavior"][i]);
+                        writer.ldelim();
+                    }
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
@@ -44822,7 +44837,6 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
-                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -44882,14 +44896,6 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
-                 * ServiceOptions .google.api.apiVersion.
-                 * @member {string} .google.api.apiVersion
-                 * @memberof google.protobuf.ServiceOptions
-                 * @instance
-                 */
-                ServiceOptions.prototype[".google.api.apiVersion"] = "";
-    
-                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -44924,8 +44930,6 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
-                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
-                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -44980,10 +44984,6 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
-                                break;
-                            }
-                        case 525000001: {
-                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -45044,9 +45044,6 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
-                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
-                        if (!$util.isString(message[".google.api.apiVersion"]))
-                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -45083,8 +45080,6 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
-                    if (object[".google.api.apiVersion"] != null)
-                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -45108,7 +45103,6 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
-                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -45123,8 +45117,6 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
-                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
-                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     

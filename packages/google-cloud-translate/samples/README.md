@@ -79,7 +79,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Translation_service.adaptive_mt_translate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.adaptive_mt_translate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.adaptive_mt_translate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.adaptive_mt_translate.js,samples/README.md)
 
@@ -96,7 +96,7 @@ __Usage:__
 
 ### Translation_service.batch_translate_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.batch_translate_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.batch_translate_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.batch_translate_document.js,samples/README.md)
 
@@ -113,7 +113,7 @@ __Usage:__
 
 ### Translation_service.batch_translate_text
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.batch_translate_text.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.batch_translate_text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.batch_translate_text.js,samples/README.md)
 
@@ -130,7 +130,7 @@ __Usage:__
 
 ### Translation_service.create_adaptive_mt_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.create_adaptive_mt_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.create_adaptive_mt_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.create_adaptive_mt_dataset.js,samples/README.md)
 
@@ -147,7 +147,7 @@ __Usage:__
 
 ### Translation_service.create_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.create_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.create_dataset.js,samples/README.md)
 
@@ -164,7 +164,7 @@ __Usage:__
 
 ### Translation_service.create_glossary
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.create_glossary.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.create_glossary.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.create_glossary.js,samples/README.md)
 
@@ -181,7 +181,7 @@ __Usage:__
 
 ### Translation_service.create_glossary_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.create_glossary_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.create_glossary_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.create_glossary_entry.js,samples/README.md)
 
@@ -198,7 +198,7 @@ __Usage:__
 
 ### Translation_service.create_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.create_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.create_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.create_model.js,samples/README.md)
 
@@ -215,7 +215,7 @@ __Usage:__
 
 ### Translation_service.delete_adaptive_mt_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_adaptive_mt_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_adaptive_mt_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.delete_adaptive_mt_dataset.js,samples/README.md)
 
@@ -232,7 +232,7 @@ __Usage:__
 
 ### Translation_service.delete_adaptive_mt_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_adaptive_mt_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_adaptive_mt_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.delete_adaptive_mt_file.js,samples/README.md)
 
@@ -249,7 +249,7 @@ __Usage:__
 
 ### Translation_service.delete_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.delete_dataset.js,samples/README.md)
 
@@ -266,7 +266,7 @@ __Usage:__
 
 ### Translation_service.delete_glossary
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_glossary.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_glossary.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.delete_glossary.js,samples/README.md)
 
@@ -283,7 +283,7 @@ __Usage:__
 
 ### Translation_service.delete_glossary_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_glossary_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_glossary_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.delete_glossary_entry.js,samples/README.md)
 
@@ -300,7 +300,7 @@ __Usage:__
 
 ### Translation_service.delete_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.delete_model.js,samples/README.md)
 
@@ -317,7 +317,7 @@ __Usage:__
 
 ### Translation_service.detect_language
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.detect_language.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.detect_language.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.detect_language.js,samples/README.md)
 
@@ -334,7 +334,7 @@ __Usage:__
 
 ### Translation_service.export_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.export_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.export_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.export_data.js,samples/README.md)
 
@@ -351,7 +351,7 @@ __Usage:__
 
 ### Translation_service.get_adaptive_mt_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.get_adaptive_mt_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.get_adaptive_mt_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.get_adaptive_mt_dataset.js,samples/README.md)
 
@@ -368,7 +368,7 @@ __Usage:__
 
 ### Translation_service.get_adaptive_mt_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.get_adaptive_mt_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.get_adaptive_mt_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.get_adaptive_mt_file.js,samples/README.md)
 
@@ -385,7 +385,7 @@ __Usage:__
 
 ### Translation_service.get_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.get_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.get_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.get_dataset.js,samples/README.md)
 
@@ -402,7 +402,7 @@ __Usage:__
 
 ### Translation_service.get_glossary
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.get_glossary.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.get_glossary.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.get_glossary.js,samples/README.md)
 
@@ -419,7 +419,7 @@ __Usage:__
 
 ### Translation_service.get_glossary_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.get_glossary_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.get_glossary_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.get_glossary_entry.js,samples/README.md)
 
@@ -436,7 +436,7 @@ __Usage:__
 
 ### Translation_service.get_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.get_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.get_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.get_model.js,samples/README.md)
 
@@ -453,7 +453,7 @@ __Usage:__
 
 ### Translation_service.get_supported_languages
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.get_supported_languages.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.get_supported_languages.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.get_supported_languages.js,samples/README.md)
 
@@ -470,7 +470,7 @@ __Usage:__
 
 ### Translation_service.import_adaptive_mt_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.import_adaptive_mt_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.import_adaptive_mt_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.import_adaptive_mt_file.js,samples/README.md)
 
@@ -487,7 +487,7 @@ __Usage:__
 
 ### Translation_service.import_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.import_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.import_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.import_data.js,samples/README.md)
 
@@ -504,7 +504,7 @@ __Usage:__
 
 ### Translation_service.list_adaptive_mt_datasets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_datasets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_datasets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_datasets.js,samples/README.md)
 
@@ -521,7 +521,7 @@ __Usage:__
 
 ### Translation_service.list_adaptive_mt_files
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_files.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_files.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_files.js,samples/README.md)
 
@@ -538,7 +538,7 @@ __Usage:__
 
 ### Translation_service.list_adaptive_mt_sentences
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_sentences.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_sentences.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_sentences.js,samples/README.md)
 
@@ -555,7 +555,7 @@ __Usage:__
 
 ### Translation_service.list_datasets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.list_datasets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.list_datasets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.list_datasets.js,samples/README.md)
 
@@ -572,7 +572,7 @@ __Usage:__
 
 ### Translation_service.list_examples
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.list_examples.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.list_examples.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.list_examples.js,samples/README.md)
 
@@ -589,7 +589,7 @@ __Usage:__
 
 ### Translation_service.list_glossaries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.list_glossaries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.list_glossaries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.list_glossaries.js,samples/README.md)
 
@@ -606,7 +606,7 @@ __Usage:__
 
 ### Translation_service.list_glossary_entries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.list_glossary_entries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.list_glossary_entries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.list_glossary_entries.js,samples/README.md)
 
@@ -623,7 +623,7 @@ __Usage:__
 
 ### Translation_service.list_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.list_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.list_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.list_models.js,samples/README.md)
 
@@ -640,7 +640,7 @@ __Usage:__
 
 ### Translation_service.romanize_text
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.romanize_text.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.romanize_text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.romanize_text.js,samples/README.md)
 
@@ -657,7 +657,7 @@ __Usage:__
 
 ### Translation_service.translate_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.translate_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.translate_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.translate_document.js,samples/README.md)
 
@@ -674,7 +674,7 @@ __Usage:__
 
 ### Translation_service.translate_text
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.translate_text.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.translate_text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.translate_text.js,samples/README.md)
 
@@ -691,7 +691,7 @@ __Usage:__
 
 ### Translation_service.update_glossary
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.update_glossary.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.update_glossary.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.update_glossary.js,samples/README.md)
 
@@ -708,7 +708,7 @@ __Usage:__
 
 ### Translation_service.update_glossary_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3/translation_service.update_glossary_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.update_glossary_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.update_glossary_entry.js,samples/README.md)
 
@@ -725,7 +725,7 @@ __Usage:__
 
 ### Translation_service.batch_translate_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.batch_translate_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.batch_translate_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.batch_translate_document.js,samples/README.md)
 
@@ -742,7 +742,7 @@ __Usage:__
 
 ### Translation_service.batch_translate_text
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.batch_translate_text.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.batch_translate_text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.batch_translate_text.js,samples/README.md)
 
@@ -759,7 +759,7 @@ __Usage:__
 
 ### Translation_service.create_glossary
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.create_glossary.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.create_glossary.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.create_glossary.js,samples/README.md)
 
@@ -776,7 +776,7 @@ __Usage:__
 
 ### Translation_service.delete_glossary
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.delete_glossary.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.delete_glossary.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.delete_glossary.js,samples/README.md)
 
@@ -793,7 +793,7 @@ __Usage:__
 
 ### Translation_service.detect_language
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.detect_language.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.detect_language.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.detect_language.js,samples/README.md)
 
@@ -810,7 +810,7 @@ __Usage:__
 
 ### Translation_service.get_glossary
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.get_glossary.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.get_glossary.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.get_glossary.js,samples/README.md)
 
@@ -827,7 +827,7 @@ __Usage:__
 
 ### Translation_service.get_supported_languages
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.get_supported_languages.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.get_supported_languages.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.get_supported_languages.js,samples/README.md)
 
@@ -844,7 +844,7 @@ __Usage:__
 
 ### Translation_service.list_glossaries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.list_glossaries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.list_glossaries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.list_glossaries.js,samples/README.md)
 
@@ -861,7 +861,7 @@ __Usage:__
 
 ### Translation_service.translate_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.translate_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.translate_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.translate_document.js,samples/README.md)
 
@@ -878,7 +878,7 @@ __Usage:__
 
 ### Translation_service.translate_text
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.translate_text.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.translate_text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.translate_text.js,samples/README.md)
 
@@ -895,7 +895,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-translate/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/quickstart.js,samples/README.md)
 
