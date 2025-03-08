@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,7 +41,8 @@ import * as gapicConfig from './autokey_admin_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Provides interfaces for managing Cloud KMS Autokey folder-level
+ *  Provides interfaces for managing [Cloud KMS
+ *  Autokey](https://cloud.google.com/kms/help/autokey) folder-level
  *  configurations. A configuration is inherited by all descendent projects. A
  *  configuration at one folder overrides any other configurations in its
  *  ancestry. Setting a configuration on a folder is a prerequisite for Cloud KMS
