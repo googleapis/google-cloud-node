@@ -350,7 +350,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.SearchDomainsResponse()
       );
@@ -381,7 +381,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.SearchDomainsResponse()
       );
@@ -428,7 +428,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchDomains = stubSimpleCall(
         undefined,
@@ -480,7 +480,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveRegisterParametersResponse()
       );
@@ -512,7 +512,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveRegisterParametersResponse()
       );
@@ -559,7 +559,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retrieveRegisterParameters = stubSimpleCall(
         undefined,
@@ -617,7 +617,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveTransferParametersResponse()
       );
@@ -649,7 +649,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveTransferParametersResponse()
       );
@@ -696,7 +696,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retrieveTransferParameters = stubSimpleCall(
         undefined,
@@ -754,7 +754,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.Registration()
       );
@@ -785,7 +785,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.Registration()
       );
@@ -832,7 +832,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRegistration = stubSimpleCall(
         undefined,
@@ -884,7 +884,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.AuthorizationCode()
       );
@@ -916,7 +916,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.AuthorizationCode()
       );
@@ -963,7 +963,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retrieveAuthorizationCode = stubSimpleCall(
         undefined,
@@ -1021,7 +1021,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.AuthorizationCode()
       );
@@ -1053,7 +1053,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.AuthorizationCode()
       );
@@ -1100,7 +1100,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetAuthorizationCode = stubSimpleCall(
         undefined,
@@ -1158,7 +1158,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1191,7 +1191,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1245,7 +1245,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.registerDomain = stubLongRunningCall(
         undefined,
@@ -1276,7 +1276,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.registerDomain = stubLongRunningCall(
         undefined,
@@ -1352,7 +1352,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1385,7 +1385,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1439,7 +1439,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.transferDomain = stubLongRunningCall(
         undefined,
@@ -1470,7 +1470,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.transferDomain = stubLongRunningCall(
         undefined,
@@ -1547,7 +1547,7 @@ describe('v1.DomainsClient', () => {
         ['registration', 'name']
       );
       request.registration.name = defaultValue1;
-      const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1581,7 +1581,7 @@ describe('v1.DomainsClient', () => {
         ['registration', 'name']
       );
       request.registration.name = defaultValue1;
-      const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1636,7 +1636,7 @@ describe('v1.DomainsClient', () => {
         ['registration', 'name']
       );
       request.registration.name = defaultValue1;
-      const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRegistration = stubLongRunningCall(
         undefined,
@@ -1668,7 +1668,7 @@ describe('v1.DomainsClient', () => {
         ['registration', 'name']
       );
       request.registration.name = defaultValue1;
-      const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRegistration = stubLongRunningCall(
         undefined,
@@ -1744,7 +1744,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1777,7 +1777,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1831,7 +1831,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureManagementSettings = stubLongRunningCall(
         undefined,
@@ -1865,7 +1865,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureManagementSettings = stubLongRunningCall(
         undefined,
@@ -1942,7 +1942,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1975,7 +1975,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2029,7 +2029,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureDnsSettings = stubLongRunningCall(
         undefined,
@@ -2060,7 +2060,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureDnsSettings = stubLongRunningCall(
         undefined,
@@ -2136,7 +2136,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2169,7 +2169,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2223,7 +2223,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureContactSettings = stubLongRunningCall(
         undefined,
@@ -2257,7 +2257,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureContactSettings = stubLongRunningCall(
         undefined,
@@ -2334,7 +2334,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2367,7 +2367,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2421,7 +2421,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportRegistration = stubLongRunningCall(
         undefined,
@@ -2452,7 +2452,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportRegistration = stubLongRunningCall(
         undefined,
@@ -2528,7 +2528,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2561,7 +2561,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2615,7 +2615,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRegistration = stubLongRunningCall(
         undefined,
@@ -2646,7 +2646,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRegistration = stubLongRunningCall(
         undefined,
@@ -2722,7 +2722,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.domains.v1.Registration()
@@ -2761,7 +2761,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.domains.v1.Registration()
@@ -2816,7 +2816,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRegistrations = stubSimpleCall(
         undefined,
@@ -2847,7 +2847,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.domains.v1.Registration()
@@ -2907,7 +2907,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRegistrations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2956,7 +2956,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.domains.v1.Registration()
@@ -3005,7 +3005,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRegistrations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
