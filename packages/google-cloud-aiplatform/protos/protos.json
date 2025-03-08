@@ -2226,6 +2226,20 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "versionId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "skipHfModelCache": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3876,9 +3890,23 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "googleSearch": {
+                          "type": "GoogleSearch",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "googleSearchRetrieval": {
                           "type": "GoogleSearchRetrieval",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enterpriseWebSearch": {
+                          "type": "EnterpriseWebSearch",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3892,6 +3920,9 @@
                         }
                       },
                       "nested": {
+                        "GoogleSearch": {
+                          "fields": {}
+                        },
                         "CodeExecution": {
                           "fields": {}
                         }
@@ -4136,6 +4167,9 @@
                           "id": 2
                         }
                       }
+                    },
+                    "EnterpriseWebSearch": {
+                      "fields": {}
                     },
                     "DynamicRetrievalConfig": {
                       "oneofs": {
@@ -34226,6 +34260,35 @@
                         }
                       }
                     },
+                    "RagFileParsingConfig": {
+                      "oneofs": {
+                        "parser": {
+                          "oneof": [
+                            "layoutParser"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "layoutParser": {
+                          "type": "LayoutParser",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "LayoutParser": {
+                          "fields": {
+                            "processorName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "maxParsingRequestsPerMin": {
+                              "type": "int32",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
                     "UploadRagFileConfig": {
                       "fields": {
                         "ragFileTransformationConfig": {
@@ -34290,6 +34353,13 @@
                         "ragFileTransformationConfig": {
                           "type": "RagFileTransformationConfig",
                           "id": 16
+                        },
+                        "ragFileParsingConfig": {
+                          "type": "RagFileParsingConfig",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "maxEmbeddingRequestsPerMin": {
                           "type": "int32",
