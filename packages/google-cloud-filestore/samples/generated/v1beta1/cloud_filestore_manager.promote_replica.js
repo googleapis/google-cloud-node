@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START file_v1beta1_generated_CloudFilestoreManager_ListSnapshots_async]
+function main(name) {
+  // [START file_v1beta1_generated_CloudFilestoreManager_PromoteReplica_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,33 +29,17 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The instance for which to retrieve snapshot information,
-   *  in the format
-   *  `projects/{project_id}/locations/{location}/instances/{instance_id}`.
+   *  Required. The resource name of the instance, in the format
+   *  `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  The maximum number of items to return.
+   *  Optional. The resource name of the peer instance to promote, in the format
+   *  `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
+   *  The peer instance is required if the operation is called on an active
+   *  instance.
    */
-  // const pageSize = 1234
-  /**
-   *  The next_page_token value to use if there are additional
-   *  results to retrieve for this list request.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Sort results. Supported values are "name", "name desc" or "" (unsorted).
-   */
-  // const orderBy = 'abc123'
-  /**
-   *  List filter.
-   */
-  // const filter = 'abc123'
-  /**
-   *  Optional. If true, allow partial responses for multi-regional Aggregated
-   *  List requests.
-   */
-  // const returnPartialSuccess = true
+  // const peerInstance = 'abc123'
 
   // Imports the Filestore library
   const {CloudFilestoreManagerClient} = require('@google-cloud/filestore').v1beta1;
@@ -63,21 +47,20 @@ function main(parent) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function callListSnapshots() {
+  async function callPromoteReplica() {
     // Construct request
     const request = {
-      parent,
+      name,
     };
 
     // Run request
-    const iterable = filestoreClient.listSnapshotsAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const [operation] = await filestoreClient.promoteReplica(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListSnapshots();
-  // [END file_v1beta1_generated_CloudFilestoreManager_ListSnapshots_async]
+  callPromoteReplica();
+  // [END file_v1beta1_generated_CloudFilestoreManager_PromoteReplica_async]
 }
 
 process.on('unhandledRejection', err => {
