@@ -105,7 +105,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Contact_center_insights.bulk_analyze_conversations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_analyze_conversations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_analyze_conversations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_analyze_conversations.js,samples/README.md)
 
@@ -122,7 +122,7 @@ __Usage:__
 
 ### Contact_center_insights.bulk_delete_conversations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_delete_conversations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_delete_conversations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_delete_conversations.js,samples/README.md)
 
@@ -139,7 +139,7 @@ __Usage:__
 
 ### Contact_center_insights.bulk_download_feedback_labels
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_download_feedback_labels.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_download_feedback_labels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_download_feedback_labels.js,samples/README.md)
 
@@ -156,7 +156,7 @@ __Usage:__
 
 ### Contact_center_insights.bulk_upload_feedback_labels
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_upload_feedback_labels.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_upload_feedback_labels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_upload_feedback_labels.js,samples/README.md)
 
@@ -173,7 +173,7 @@ __Usage:__
 
 ### Contact_center_insights.calculate_issue_model_stats
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.calculate_issue_model_stats.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.calculate_issue_model_stats.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.calculate_issue_model_stats.js,samples/README.md)
 
@@ -190,7 +190,7 @@ __Usage:__
 
 ### Contact_center_insights.calculate_stats
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.calculate_stats.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.calculate_stats.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.calculate_stats.js,samples/README.md)
 
@@ -207,7 +207,7 @@ __Usage:__
 
 ### Contact_center_insights.create_analysis
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_analysis.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_analysis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_analysis.js,samples/README.md)
 
@@ -224,7 +224,7 @@ __Usage:__
 
 ### Contact_center_insights.create_analysis_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_analysis_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_analysis_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_analysis_rule.js,samples/README.md)
 
@@ -241,7 +241,7 @@ __Usage:__
 
 ### Contact_center_insights.create_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_conversation.js,samples/README.md)
 
@@ -258,7 +258,7 @@ __Usage:__
 
 ### Contact_center_insights.create_feedback_label
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_feedback_label.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_feedback_label.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_feedback_label.js,samples/README.md)
 
@@ -275,7 +275,7 @@ __Usage:__
 
 ### Contact_center_insights.create_issue_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_issue_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_issue_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_issue_model.js,samples/README.md)
 
@@ -292,7 +292,7 @@ __Usage:__
 
 ### Contact_center_insights.create_phrase_matcher
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_phrase_matcher.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_phrase_matcher.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_phrase_matcher.js,samples/README.md)
 
@@ -309,7 +309,7 @@ __Usage:__
 
 ### Contact_center_insights.create_qa_question
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_qa_question.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_qa_question.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_qa_question.js,samples/README.md)
 
@@ -326,7 +326,7 @@ __Usage:__
 
 ### Contact_center_insights.create_qa_scorecard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_qa_scorecard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_qa_scorecard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_qa_scorecard.js,samples/README.md)
 
@@ -343,7 +343,7 @@ __Usage:__
 
 ### Contact_center_insights.create_qa_scorecard_revision
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_qa_scorecard_revision.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_qa_scorecard_revision.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_qa_scorecard_revision.js,samples/README.md)
 
@@ -360,7 +360,7 @@ __Usage:__
 
 ### Contact_center_insights.create_view
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_view.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_view.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.create_view.js,samples/README.md)
 
@@ -377,7 +377,7 @@ __Usage:__
 
 ### Contact_center_insights.delete_analysis
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_analysis.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_analysis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_analysis.js,samples/README.md)
 
@@ -394,7 +394,7 @@ __Usage:__
 
 ### Contact_center_insights.delete_analysis_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_analysis_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_analysis_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_analysis_rule.js,samples/README.md)
 
@@ -411,7 +411,7 @@ __Usage:__
 
 ### Contact_center_insights.delete_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_conversation.js,samples/README.md)
 
@@ -428,7 +428,7 @@ __Usage:__
 
 ### Contact_center_insights.delete_feedback_label
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_feedback_label.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_feedback_label.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_feedback_label.js,samples/README.md)
 
@@ -445,7 +445,7 @@ __Usage:__
 
 ### Contact_center_insights.delete_issue
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_issue.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_issue.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_issue.js,samples/README.md)
 
@@ -462,7 +462,7 @@ __Usage:__
 
 ### Contact_center_insights.delete_issue_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_issue_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_issue_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_issue_model.js,samples/README.md)
 
@@ -479,7 +479,7 @@ __Usage:__
 
 ### Contact_center_insights.delete_phrase_matcher
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_phrase_matcher.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_phrase_matcher.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_phrase_matcher.js,samples/README.md)
 
@@ -496,7 +496,7 @@ __Usage:__
 
 ### Contact_center_insights.delete_qa_question
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_qa_question.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_qa_question.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_qa_question.js,samples/README.md)
 
@@ -513,7 +513,7 @@ __Usage:__
 
 ### Contact_center_insights.delete_qa_scorecard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_qa_scorecard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_qa_scorecard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_qa_scorecard.js,samples/README.md)
 
@@ -530,7 +530,7 @@ __Usage:__
 
 ### Contact_center_insights.delete_qa_scorecard_revision
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_qa_scorecard_revision.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_qa_scorecard_revision.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_qa_scorecard_revision.js,samples/README.md)
 
@@ -547,7 +547,7 @@ __Usage:__
 
 ### Contact_center_insights.delete_view
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_view.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_view.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_view.js,samples/README.md)
 
@@ -564,7 +564,7 @@ __Usage:__
 
 ### Contact_center_insights.deploy_issue_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.deploy_issue_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.deploy_issue_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.deploy_issue_model.js,samples/README.md)
 
@@ -581,7 +581,7 @@ __Usage:__
 
 ### Contact_center_insights.deploy_qa_scorecard_revision
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.deploy_qa_scorecard_revision.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.deploy_qa_scorecard_revision.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.deploy_qa_scorecard_revision.js,samples/README.md)
 
@@ -598,7 +598,7 @@ __Usage:__
 
 ### Contact_center_insights.export_insights_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.export_insights_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.export_insights_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.export_insights_data.js,samples/README.md)
 
@@ -615,7 +615,7 @@ __Usage:__
 
 ### Contact_center_insights.export_issue_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.export_issue_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.export_issue_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.export_issue_model.js,samples/README.md)
 
@@ -632,7 +632,7 @@ __Usage:__
 
 ### Contact_center_insights.get_analysis
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_analysis.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_analysis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_analysis.js,samples/README.md)
 
@@ -649,7 +649,7 @@ __Usage:__
 
 ### Contact_center_insights.get_analysis_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_analysis_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_analysis_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_analysis_rule.js,samples/README.md)
 
@@ -666,7 +666,7 @@ __Usage:__
 
 ### Contact_center_insights.get_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_conversation.js,samples/README.md)
 
@@ -683,7 +683,7 @@ __Usage:__
 
 ### Contact_center_insights.get_encryption_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_encryption_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_encryption_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_encryption_spec.js,samples/README.md)
 
@@ -700,7 +700,7 @@ __Usage:__
 
 ### Contact_center_insights.get_feedback_label
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_feedback_label.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_feedback_label.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_feedback_label.js,samples/README.md)
 
@@ -717,7 +717,7 @@ __Usage:__
 
 ### Contact_center_insights.get_issue
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_issue.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_issue.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_issue.js,samples/README.md)
 
@@ -734,7 +734,7 @@ __Usage:__
 
 ### Contact_center_insights.get_issue_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_issue_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_issue_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_issue_model.js,samples/README.md)
 
@@ -751,7 +751,7 @@ __Usage:__
 
 ### Contact_center_insights.get_phrase_matcher
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_phrase_matcher.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_phrase_matcher.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_phrase_matcher.js,samples/README.md)
 
@@ -768,7 +768,7 @@ __Usage:__
 
 ### Contact_center_insights.get_qa_question
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_qa_question.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_qa_question.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_qa_question.js,samples/README.md)
 
@@ -785,7 +785,7 @@ __Usage:__
 
 ### Contact_center_insights.get_qa_scorecard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_qa_scorecard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_qa_scorecard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_qa_scorecard.js,samples/README.md)
 
@@ -802,7 +802,7 @@ __Usage:__
 
 ### Contact_center_insights.get_qa_scorecard_revision
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_qa_scorecard_revision.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_qa_scorecard_revision.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_qa_scorecard_revision.js,samples/README.md)
 
@@ -819,7 +819,7 @@ __Usage:__
 
 ### Contact_center_insights.get_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_settings.js,samples/README.md)
 
@@ -836,7 +836,7 @@ __Usage:__
 
 ### Contact_center_insights.get_view
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_view.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_view.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_view.js,samples/README.md)
 
@@ -853,7 +853,7 @@ __Usage:__
 
 ### Contact_center_insights.import_issue_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.import_issue_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.import_issue_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.import_issue_model.js,samples/README.md)
 
@@ -870,7 +870,7 @@ __Usage:__
 
 ### Contact_center_insights.ingest_conversations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.ingest_conversations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.ingest_conversations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.ingest_conversations.js,samples/README.md)
 
@@ -887,7 +887,7 @@ __Usage:__
 
 ### Contact_center_insights.initialize_encryption_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.initialize_encryption_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.initialize_encryption_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.initialize_encryption_spec.js,samples/README.md)
 
@@ -904,7 +904,7 @@ __Usage:__
 
 ### Contact_center_insights.list_all_feedback_labels
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_all_feedback_labels.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_all_feedback_labels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_all_feedback_labels.js,samples/README.md)
 
@@ -921,7 +921,7 @@ __Usage:__
 
 ### Contact_center_insights.list_analyses
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_analyses.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_analyses.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_analyses.js,samples/README.md)
 
@@ -938,7 +938,7 @@ __Usage:__
 
 ### Contact_center_insights.list_analysis_rules
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_analysis_rules.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_analysis_rules.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_analysis_rules.js,samples/README.md)
 
@@ -955,7 +955,7 @@ __Usage:__
 
 ### Contact_center_insights.list_conversations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_conversations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_conversations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_conversations.js,samples/README.md)
 
@@ -972,7 +972,7 @@ __Usage:__
 
 ### Contact_center_insights.list_feedback_labels
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_feedback_labels.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_feedback_labels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_feedback_labels.js,samples/README.md)
 
@@ -989,7 +989,7 @@ __Usage:__
 
 ### Contact_center_insights.list_issue_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_issue_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_issue_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_issue_models.js,samples/README.md)
 
@@ -1006,7 +1006,7 @@ __Usage:__
 
 ### Contact_center_insights.list_issues
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_issues.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_issues.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_issues.js,samples/README.md)
 
@@ -1023,7 +1023,7 @@ __Usage:__
 
 ### Contact_center_insights.list_phrase_matchers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_phrase_matchers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_phrase_matchers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_phrase_matchers.js,samples/README.md)
 
@@ -1040,7 +1040,7 @@ __Usage:__
 
 ### Contact_center_insights.list_qa_questions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_qa_questions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_qa_questions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_qa_questions.js,samples/README.md)
 
@@ -1057,7 +1057,7 @@ __Usage:__
 
 ### Contact_center_insights.list_qa_scorecard_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_qa_scorecard_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_qa_scorecard_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_qa_scorecard_revisions.js,samples/README.md)
 
@@ -1074,7 +1074,7 @@ __Usage:__
 
 ### Contact_center_insights.list_qa_scorecards
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_qa_scorecards.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_qa_scorecards.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_qa_scorecards.js,samples/README.md)
 
@@ -1091,7 +1091,7 @@ __Usage:__
 
 ### Contact_center_insights.list_views
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_views.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_views.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.list_views.js,samples/README.md)
 
@@ -1108,7 +1108,7 @@ __Usage:__
 
 ### Contact_center_insights.query_metrics
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.query_metrics.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.query_metrics.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.query_metrics.js,samples/README.md)
 
@@ -1125,7 +1125,7 @@ __Usage:__
 
 ### Contact_center_insights.tune_qa_scorecard_revision
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.tune_qa_scorecard_revision.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.tune_qa_scorecard_revision.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.tune_qa_scorecard_revision.js,samples/README.md)
 
@@ -1142,7 +1142,7 @@ __Usage:__
 
 ### Contact_center_insights.undeploy_issue_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.undeploy_issue_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.undeploy_issue_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.undeploy_issue_model.js,samples/README.md)
 
@@ -1159,7 +1159,7 @@ __Usage:__
 
 ### Contact_center_insights.undeploy_qa_scorecard_revision
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.undeploy_qa_scorecard_revision.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.undeploy_qa_scorecard_revision.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.undeploy_qa_scorecard_revision.js,samples/README.md)
 
@@ -1176,7 +1176,7 @@ __Usage:__
 
 ### Contact_center_insights.update_analysis_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_analysis_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_analysis_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_analysis_rule.js,samples/README.md)
 
@@ -1193,7 +1193,7 @@ __Usage:__
 
 ### Contact_center_insights.update_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_conversation.js,samples/README.md)
 
@@ -1210,7 +1210,7 @@ __Usage:__
 
 ### Contact_center_insights.update_feedback_label
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_feedback_label.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_feedback_label.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_feedback_label.js,samples/README.md)
 
@@ -1227,7 +1227,7 @@ __Usage:__
 
 ### Contact_center_insights.update_issue
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_issue.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_issue.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_issue.js,samples/README.md)
 
@@ -1244,7 +1244,7 @@ __Usage:__
 
 ### Contact_center_insights.update_issue_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_issue_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_issue_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_issue_model.js,samples/README.md)
 
@@ -1261,7 +1261,7 @@ __Usage:__
 
 ### Contact_center_insights.update_phrase_matcher
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_phrase_matcher.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_phrase_matcher.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_phrase_matcher.js,samples/README.md)
 
@@ -1278,7 +1278,7 @@ __Usage:__
 
 ### Contact_center_insights.update_qa_question
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_qa_question.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_qa_question.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_qa_question.js,samples/README.md)
 
@@ -1295,7 +1295,7 @@ __Usage:__
 
 ### Contact_center_insights.update_qa_scorecard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_qa_scorecard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_qa_scorecard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_qa_scorecard.js,samples/README.md)
 
@@ -1312,7 +1312,7 @@ __Usage:__
 
 ### Contact_center_insights.update_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_settings.js,samples/README.md)
 
@@ -1329,7 +1329,7 @@ __Usage:__
 
 ### Contact_center_insights.update_view
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_view.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_view.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_view.js,samples/README.md)
 
@@ -1346,7 +1346,7 @@ __Usage:__
 
 ### Contact_center_insights.upload_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.upload_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.upload_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.upload_conversation.js,samples/README.md)
 
@@ -1363,7 +1363,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contactcenterinsights/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/quickstart.js,samples/README.md)
 

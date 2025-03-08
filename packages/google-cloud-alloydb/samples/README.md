@@ -135,7 +135,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Alloy_d_b_admin.batch_create_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.batch_create_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.batch_create_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.batch_create_instances.js,samples/README.md)
 
@@ -152,7 +152,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_backup.js,samples/README.md)
 
@@ -169,7 +169,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_cluster.js,samples/README.md)
 
@@ -186,7 +186,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_instance.js,samples/README.md)
 
@@ -203,7 +203,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_secondary_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_secondary_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_secondary_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_secondary_cluster.js,samples/README.md)
 
@@ -220,7 +220,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_secondary_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_secondary_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_secondary_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_secondary_instance.js,samples/README.md)
 
@@ -237,7 +237,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_user
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_user.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_user.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.create_user.js,samples/README.md)
 
@@ -254,7 +254,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.delete_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.delete_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.delete_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.delete_backup.js,samples/README.md)
 
@@ -271,7 +271,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.delete_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.delete_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.delete_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.delete_cluster.js,samples/README.md)
 
@@ -288,7 +288,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.delete_instance.js,samples/README.md)
 
@@ -305,7 +305,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.delete_user
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.delete_user.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.delete_user.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.delete_user.js,samples/README.md)
 
@@ -322,7 +322,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.execute_sql
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.execute_sql.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.execute_sql.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.execute_sql.js,samples/README.md)
 
@@ -339,7 +339,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.failover_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.failover_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.failover_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.failover_instance.js,samples/README.md)
 
@@ -356,7 +356,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.generate_client_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.generate_client_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.generate_client_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.generate_client_certificate.js,samples/README.md)
 
@@ -373,7 +373,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_backup.js,samples/README.md)
 
@@ -390,7 +390,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_cluster.js,samples/README.md)
 
@@ -407,7 +407,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_connection_info
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_connection_info.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_connection_info.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_connection_info.js,samples/README.md)
 
@@ -424,7 +424,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_instance.js,samples/README.md)
 
@@ -441,7 +441,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_user
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_user.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_user.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_user.js,samples/README.md)
 
@@ -458,7 +458,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.inject_fault
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.inject_fault.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.inject_fault.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.inject_fault.js,samples/README.md)
 
@@ -475,7 +475,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_backups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_backups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_backups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_backups.js,samples/README.md)
 
@@ -492,7 +492,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_clusters.js,samples/README.md)
 
@@ -509,7 +509,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_databases
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_databases.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_databases.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_databases.js,samples/README.md)
 
@@ -526,7 +526,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_instances.js,samples/README.md)
 
@@ -543,7 +543,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_supported_database_flags
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_supported_database_flags.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_supported_database_flags.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_supported_database_flags.js,samples/README.md)
 
@@ -560,7 +560,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_users
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_users.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_users.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.list_users.js,samples/README.md)
 
@@ -577,7 +577,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.promote_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.promote_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.promote_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.promote_cluster.js,samples/README.md)
 
@@ -594,7 +594,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.restart_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.restart_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.restart_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.restart_instance.js,samples/README.md)
 
@@ -611,7 +611,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.restore_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.restore_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.restore_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.restore_cluster.js,samples/README.md)
 
@@ -628,7 +628,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.switchover_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.switchover_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.switchover_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.switchover_cluster.js,samples/README.md)
 
@@ -645,7 +645,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.update_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.update_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.update_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.update_backup.js,samples/README.md)
 
@@ -662,7 +662,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.update_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.update_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.update_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.update_cluster.js,samples/README.md)
 
@@ -679,7 +679,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.update_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.update_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.update_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.update_instance.js,samples/README.md)
 
@@ -696,7 +696,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.update_user
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.update_user.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.update_user.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.update_user.js,samples/README.md)
 
@@ -713,7 +713,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.batch_create_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.batch_create_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.batch_create_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.batch_create_instances.js,samples/README.md)
 
@@ -730,7 +730,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_backup.js,samples/README.md)
 
@@ -747,7 +747,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_cluster.js,samples/README.md)
 
@@ -764,7 +764,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_instance.js,samples/README.md)
 
@@ -781,7 +781,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_secondary_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_secondary_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_secondary_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_secondary_cluster.js,samples/README.md)
 
@@ -798,7 +798,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_secondary_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_secondary_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_secondary_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_secondary_instance.js,samples/README.md)
 
@@ -815,7 +815,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_user
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_user.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_user.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_user.js,samples/README.md)
 
@@ -832,7 +832,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.delete_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_backup.js,samples/README.md)
 
@@ -849,7 +849,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.delete_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_cluster.js,samples/README.md)
 
@@ -866,7 +866,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_instance.js,samples/README.md)
 
@@ -883,7 +883,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.delete_user
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_user.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_user.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_user.js,samples/README.md)
 
@@ -900,7 +900,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.execute_sql
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.execute_sql.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.execute_sql.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.execute_sql.js,samples/README.md)
 
@@ -917,7 +917,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.failover_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.failover_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.failover_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.failover_instance.js,samples/README.md)
 
@@ -934,7 +934,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.generate_client_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.generate_client_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.generate_client_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.generate_client_certificate.js,samples/README.md)
 
@@ -951,7 +951,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_backup.js,samples/README.md)
 
@@ -968,7 +968,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_cluster.js,samples/README.md)
 
@@ -985,7 +985,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_connection_info
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_connection_info.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_connection_info.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_connection_info.js,samples/README.md)
 
@@ -1002,7 +1002,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_instance.js,samples/README.md)
 
@@ -1019,7 +1019,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_user
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_user.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_user.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_user.js,samples/README.md)
 
@@ -1036,7 +1036,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.inject_fault
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.inject_fault.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.inject_fault.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.inject_fault.js,samples/README.md)
 
@@ -1053,7 +1053,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_backups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_backups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_backups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_backups.js,samples/README.md)
 
@@ -1070,7 +1070,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_clusters.js,samples/README.md)
 
@@ -1087,7 +1087,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_databases
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_databases.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_databases.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_databases.js,samples/README.md)
 
@@ -1104,7 +1104,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_instances.js,samples/README.md)
 
@@ -1121,7 +1121,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_supported_database_flags
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_supported_database_flags.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_supported_database_flags.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_supported_database_flags.js,samples/README.md)
 
@@ -1138,7 +1138,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_users
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_users.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_users.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_users.js,samples/README.md)
 
@@ -1155,7 +1155,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.promote_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.promote_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.promote_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.promote_cluster.js,samples/README.md)
 
@@ -1172,7 +1172,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.restart_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.restart_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.restart_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.restart_instance.js,samples/README.md)
 
@@ -1189,7 +1189,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.restore_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.restore_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.restore_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.restore_cluster.js,samples/README.md)
 
@@ -1206,7 +1206,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.switchover_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.switchover_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.switchover_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.switchover_cluster.js,samples/README.md)
 
@@ -1223,7 +1223,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.update_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_backup.js,samples/README.md)
 
@@ -1240,7 +1240,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.update_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_cluster.js,samples/README.md)
 
@@ -1257,7 +1257,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.update_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_instance.js,samples/README.md)
 
@@ -1274,7 +1274,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.update_user
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_user.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_user.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_user.js,samples/README.md)
 
@@ -1291,7 +1291,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.upgrade_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.upgrade_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.upgrade_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.upgrade_cluster.js,samples/README.md)
 
@@ -1308,7 +1308,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.batch_create_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.batch_create_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.batch_create_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.batch_create_instances.js,samples/README.md)
 
@@ -1325,7 +1325,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_backup.js,samples/README.md)
 
@@ -1342,7 +1342,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_cluster.js,samples/README.md)
 
@@ -1359,7 +1359,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_instance.js,samples/README.md)
 
@@ -1376,7 +1376,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_secondary_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_secondary_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_secondary_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_secondary_cluster.js,samples/README.md)
 
@@ -1393,7 +1393,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_secondary_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_secondary_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_secondary_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_secondary_instance.js,samples/README.md)
 
@@ -1410,7 +1410,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.create_user
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_user.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_user.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.create_user.js,samples/README.md)
 
@@ -1427,7 +1427,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.delete_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.delete_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.delete_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.delete_backup.js,samples/README.md)
 
@@ -1444,7 +1444,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.delete_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.delete_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.delete_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.delete_cluster.js,samples/README.md)
 
@@ -1461,7 +1461,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.delete_instance.js,samples/README.md)
 
@@ -1478,7 +1478,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.delete_user
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.delete_user.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.delete_user.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.delete_user.js,samples/README.md)
 
@@ -1495,7 +1495,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.execute_sql
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.execute_sql.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.execute_sql.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.execute_sql.js,samples/README.md)
 
@@ -1512,7 +1512,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.failover_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.failover_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.failover_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.failover_instance.js,samples/README.md)
 
@@ -1529,7 +1529,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.generate_client_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.generate_client_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.generate_client_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.generate_client_certificate.js,samples/README.md)
 
@@ -1546,7 +1546,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_backup.js,samples/README.md)
 
@@ -1563,7 +1563,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_cluster.js,samples/README.md)
 
@@ -1580,7 +1580,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_connection_info
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_connection_info.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_connection_info.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_connection_info.js,samples/README.md)
 
@@ -1597,7 +1597,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_instance.js,samples/README.md)
 
@@ -1614,7 +1614,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.get_user
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_user.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_user.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.get_user.js,samples/README.md)
 
@@ -1631,7 +1631,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.inject_fault
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.inject_fault.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.inject_fault.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.inject_fault.js,samples/README.md)
 
@@ -1648,7 +1648,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_backups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_backups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_backups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_backups.js,samples/README.md)
 
@@ -1665,7 +1665,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_clusters.js,samples/README.md)
 
@@ -1682,7 +1682,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_databases
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_databases.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_databases.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_databases.js,samples/README.md)
 
@@ -1699,7 +1699,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_instances.js,samples/README.md)
 
@@ -1716,7 +1716,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_supported_database_flags
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_supported_database_flags.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_supported_database_flags.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_supported_database_flags.js,samples/README.md)
 
@@ -1733,7 +1733,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.list_users
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_users.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_users.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.list_users.js,samples/README.md)
 
@@ -1750,7 +1750,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.promote_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.promote_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.promote_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.promote_cluster.js,samples/README.md)
 
@@ -1767,7 +1767,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.restart_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.restart_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.restart_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.restart_instance.js,samples/README.md)
 
@@ -1784,7 +1784,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.restore_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.restore_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.restore_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.restore_cluster.js,samples/README.md)
 
@@ -1801,7 +1801,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.switchover_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.switchover_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.switchover_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.switchover_cluster.js,samples/README.md)
 
@@ -1818,7 +1818,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.update_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.update_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.update_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.update_backup.js,samples/README.md)
 
@@ -1835,7 +1835,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.update_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.update_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.update_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.update_cluster.js,samples/README.md)
 
@@ -1852,7 +1852,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.update_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.update_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.update_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.update_instance.js,samples/README.md)
 
@@ -1869,7 +1869,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.update_user
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.update_user.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.update_user.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.update_user.js,samples/README.md)
 
@@ -1886,7 +1886,7 @@ __Usage:__
 
 ### Alloy_d_b_admin.upgrade_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.upgrade_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.upgrade_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.upgrade_cluster.js,samples/README.md)
 
@@ -1903,7 +1903,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-alloydb/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/quickstart.js,samples/README.md)
 

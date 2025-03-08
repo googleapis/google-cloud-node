@@ -47,7 +47,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Secure_source_manager.create_branch_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_branch_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_branch_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_branch_rule.js,samples/README.md)
 
@@ -64,7 +64,7 @@ __Usage:__
 
 ### Secure_source_manager.create_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_instance.js,samples/README.md)
 
@@ -81,7 +81,7 @@ __Usage:__
 
 ### Secure_source_manager.create_repository
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_repository.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_repository.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_repository.js,samples/README.md)
 
@@ -98,7 +98,7 @@ __Usage:__
 
 ### Secure_source_manager.delete_branch_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_branch_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_branch_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_branch_rule.js,samples/README.md)
 
@@ -115,7 +115,7 @@ __Usage:__
 
 ### Secure_source_manager.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_instance.js,samples/README.md)
 
@@ -132,7 +132,7 @@ __Usage:__
 
 ### Secure_source_manager.delete_repository
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_repository.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_repository.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_repository.js,samples/README.md)
 
@@ -149,7 +149,7 @@ __Usage:__
 
 ### Secure_source_manager.get_branch_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_branch_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_branch_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_branch_rule.js,samples/README.md)
 
@@ -166,7 +166,7 @@ __Usage:__
 
 ### Secure_source_manager.get_iam_policy_repo
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_iam_policy_repo.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_iam_policy_repo.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_iam_policy_repo.js,samples/README.md)
 
@@ -183,7 +183,7 @@ __Usage:__
 
 ### Secure_source_manager.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_instance.js,samples/README.md)
 
@@ -200,7 +200,7 @@ __Usage:__
 
 ### Secure_source_manager.get_repository
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_repository.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_repository.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_repository.js,samples/README.md)
 
@@ -217,7 +217,7 @@ __Usage:__
 
 ### Secure_source_manager.list_branch_rules
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_branch_rules.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_branch_rules.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_branch_rules.js,samples/README.md)
 
@@ -234,7 +234,7 @@ __Usage:__
 
 ### Secure_source_manager.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_instances.js,samples/README.md)
 
@@ -251,7 +251,7 @@ __Usage:__
 
 ### Secure_source_manager.list_repositories
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_repositories.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_repositories.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_repositories.js,samples/README.md)
 
@@ -268,7 +268,7 @@ __Usage:__
 
 ### Secure_source_manager.set_iam_policy_repo
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.set_iam_policy_repo.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.set_iam_policy_repo.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.set_iam_policy_repo.js,samples/README.md)
 
@@ -285,7 +285,7 @@ __Usage:__
 
 ### Secure_source_manager.test_iam_permissions_repo
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.test_iam_permissions_repo.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.test_iam_permissions_repo.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.test_iam_permissions_repo.js,samples/README.md)
 
@@ -302,7 +302,7 @@ __Usage:__
 
 ### Secure_source_manager.update_branch_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_branch_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_branch_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_branch_rule.js,samples/README.md)
 
@@ -319,7 +319,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securesourcemanager/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/quickstart.js,samples/README.md)
 

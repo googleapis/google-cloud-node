@@ -103,7 +103,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Telco_automation.apply_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.apply_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.apply_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.apply_deployment.js,samples/README.md)
 
@@ -120,7 +120,7 @@ __Usage:__
 
 ### Telco_automation.apply_hydrated_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.apply_hydrated_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.apply_hydrated_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.apply_hydrated_deployment.js,samples/README.md)
 
@@ -137,7 +137,7 @@ __Usage:__
 
 ### Telco_automation.approve_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.approve_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.approve_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.approve_blueprint.js,samples/README.md)
 
@@ -154,7 +154,7 @@ __Usage:__
 
 ### Telco_automation.compute_deployment_status
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.compute_deployment_status.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.compute_deployment_status.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.compute_deployment_status.js,samples/README.md)
 
@@ -171,7 +171,7 @@ __Usage:__
 
 ### Telco_automation.create_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.create_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.create_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.create_blueprint.js,samples/README.md)
 
@@ -188,7 +188,7 @@ __Usage:__
 
 ### Telco_automation.create_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.create_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.create_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.create_deployment.js,samples/README.md)
 
@@ -205,7 +205,7 @@ __Usage:__
 
 ### Telco_automation.create_edge_slm
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.create_edge_slm.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.create_edge_slm.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.create_edge_slm.js,samples/README.md)
 
@@ -222,7 +222,7 @@ __Usage:__
 
 ### Telco_automation.create_orchestration_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.create_orchestration_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.create_orchestration_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.create_orchestration_cluster.js,samples/README.md)
 
@@ -239,7 +239,7 @@ __Usage:__
 
 ### Telco_automation.delete_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.delete_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.delete_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.delete_blueprint.js,samples/README.md)
 
@@ -256,7 +256,7 @@ __Usage:__
 
 ### Telco_automation.delete_edge_slm
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.delete_edge_slm.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.delete_edge_slm.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.delete_edge_slm.js,samples/README.md)
 
@@ -273,7 +273,7 @@ __Usage:__
 
 ### Telco_automation.delete_orchestration_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.delete_orchestration_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.delete_orchestration_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.delete_orchestration_cluster.js,samples/README.md)
 
@@ -290,7 +290,7 @@ __Usage:__
 
 ### Telco_automation.discard_blueprint_changes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.discard_blueprint_changes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.discard_blueprint_changes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.discard_blueprint_changes.js,samples/README.md)
 
@@ -307,7 +307,7 @@ __Usage:__
 
 ### Telco_automation.discard_deployment_changes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.discard_deployment_changes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.discard_deployment_changes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.discard_deployment_changes.js,samples/README.md)
 
@@ -324,7 +324,7 @@ __Usage:__
 
 ### Telco_automation.get_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_blueprint.js,samples/README.md)
 
@@ -341,7 +341,7 @@ __Usage:__
 
 ### Telco_automation.get_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_deployment.js,samples/README.md)
 
@@ -358,7 +358,7 @@ __Usage:__
 
 ### Telco_automation.get_edge_slm
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_edge_slm.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_edge_slm.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_edge_slm.js,samples/README.md)
 
@@ -375,7 +375,7 @@ __Usage:__
 
 ### Telco_automation.get_hydrated_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_hydrated_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_hydrated_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_hydrated_deployment.js,samples/README.md)
 
@@ -392,7 +392,7 @@ __Usage:__
 
 ### Telco_automation.get_orchestration_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_orchestration_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_orchestration_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_orchestration_cluster.js,samples/README.md)
 
@@ -409,7 +409,7 @@ __Usage:__
 
 ### Telco_automation.get_public_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_public_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_public_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.get_public_blueprint.js,samples/README.md)
 
@@ -426,7 +426,7 @@ __Usage:__
 
 ### Telco_automation.list_blueprint_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_blueprint_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_blueprint_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_blueprint_revisions.js,samples/README.md)
 
@@ -443,7 +443,7 @@ __Usage:__
 
 ### Telco_automation.list_blueprints
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_blueprints.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_blueprints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_blueprints.js,samples/README.md)
 
@@ -460,7 +460,7 @@ __Usage:__
 
 ### Telco_automation.list_deployment_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_deployment_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_deployment_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_deployment_revisions.js,samples/README.md)
 
@@ -477,7 +477,7 @@ __Usage:__
 
 ### Telco_automation.list_deployments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_deployments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_deployments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_deployments.js,samples/README.md)
 
@@ -494,7 +494,7 @@ __Usage:__
 
 ### Telco_automation.list_edge_slms
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_edge_slms.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_edge_slms.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_edge_slms.js,samples/README.md)
 
@@ -511,7 +511,7 @@ __Usage:__
 
 ### Telco_automation.list_hydrated_deployments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_hydrated_deployments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_hydrated_deployments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_hydrated_deployments.js,samples/README.md)
 
@@ -528,7 +528,7 @@ __Usage:__
 
 ### Telco_automation.list_orchestration_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_orchestration_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_orchestration_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_orchestration_clusters.js,samples/README.md)
 
@@ -545,7 +545,7 @@ __Usage:__
 
 ### Telco_automation.list_public_blueprints
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_public_blueprints.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_public_blueprints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.list_public_blueprints.js,samples/README.md)
 
@@ -562,7 +562,7 @@ __Usage:__
 
 ### Telco_automation.propose_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.propose_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.propose_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.propose_blueprint.js,samples/README.md)
 
@@ -579,7 +579,7 @@ __Usage:__
 
 ### Telco_automation.reject_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.reject_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.reject_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.reject_blueprint.js,samples/README.md)
 
@@ -596,7 +596,7 @@ __Usage:__
 
 ### Telco_automation.remove_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.remove_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.remove_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.remove_deployment.js,samples/README.md)
 
@@ -613,7 +613,7 @@ __Usage:__
 
 ### Telco_automation.rollback_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.rollback_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.rollback_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.rollback_deployment.js,samples/README.md)
 
@@ -630,7 +630,7 @@ __Usage:__
 
 ### Telco_automation.search_blueprint_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.search_blueprint_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.search_blueprint_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.search_blueprint_revisions.js,samples/README.md)
 
@@ -647,7 +647,7 @@ __Usage:__
 
 ### Telco_automation.search_deployment_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.search_deployment_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.search_deployment_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.search_deployment_revisions.js,samples/README.md)
 
@@ -664,7 +664,7 @@ __Usage:__
 
 ### Telco_automation.update_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.update_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.update_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.update_blueprint.js,samples/README.md)
 
@@ -681,7 +681,7 @@ __Usage:__
 
 ### Telco_automation.update_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.update_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.update_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.update_deployment.js,samples/README.md)
 
@@ -698,7 +698,7 @@ __Usage:__
 
 ### Telco_automation.update_hydrated_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.update_hydrated_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.update_hydrated_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1/telco_automation.update_hydrated_deployment.js,samples/README.md)
 
@@ -715,7 +715,7 @@ __Usage:__
 
 ### Telco_automation.apply_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.apply_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.apply_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.apply_deployment.js,samples/README.md)
 
@@ -732,7 +732,7 @@ __Usage:__
 
 ### Telco_automation.apply_hydrated_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.apply_hydrated_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.apply_hydrated_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.apply_hydrated_deployment.js,samples/README.md)
 
@@ -749,7 +749,7 @@ __Usage:__
 
 ### Telco_automation.approve_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.approve_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.approve_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.approve_blueprint.js,samples/README.md)
 
@@ -766,7 +766,7 @@ __Usage:__
 
 ### Telco_automation.compute_deployment_status
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.compute_deployment_status.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.compute_deployment_status.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.compute_deployment_status.js,samples/README.md)
 
@@ -783,7 +783,7 @@ __Usage:__
 
 ### Telco_automation.create_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.create_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.create_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.create_blueprint.js,samples/README.md)
 
@@ -800,7 +800,7 @@ __Usage:__
 
 ### Telco_automation.create_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.create_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.create_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.create_deployment.js,samples/README.md)
 
@@ -817,7 +817,7 @@ __Usage:__
 
 ### Telco_automation.create_edge_slm
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.create_edge_slm.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.create_edge_slm.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.create_edge_slm.js,samples/README.md)
 
@@ -834,7 +834,7 @@ __Usage:__
 
 ### Telco_automation.create_orchestration_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.create_orchestration_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.create_orchestration_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.create_orchestration_cluster.js,samples/README.md)
 
@@ -851,7 +851,7 @@ __Usage:__
 
 ### Telco_automation.delete_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.delete_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.delete_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.delete_blueprint.js,samples/README.md)
 
@@ -868,7 +868,7 @@ __Usage:__
 
 ### Telco_automation.delete_edge_slm
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.delete_edge_slm.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.delete_edge_slm.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.delete_edge_slm.js,samples/README.md)
 
@@ -885,7 +885,7 @@ __Usage:__
 
 ### Telco_automation.delete_orchestration_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.delete_orchestration_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.delete_orchestration_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.delete_orchestration_cluster.js,samples/README.md)
 
@@ -902,7 +902,7 @@ __Usage:__
 
 ### Telco_automation.discard_blueprint_changes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.discard_blueprint_changes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.discard_blueprint_changes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.discard_blueprint_changes.js,samples/README.md)
 
@@ -919,7 +919,7 @@ __Usage:__
 
 ### Telco_automation.discard_deployment_changes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.discard_deployment_changes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.discard_deployment_changes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.discard_deployment_changes.js,samples/README.md)
 
@@ -936,7 +936,7 @@ __Usage:__
 
 ### Telco_automation.get_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_blueprint.js,samples/README.md)
 
@@ -953,7 +953,7 @@ __Usage:__
 
 ### Telco_automation.get_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_deployment.js,samples/README.md)
 
@@ -970,7 +970,7 @@ __Usage:__
 
 ### Telco_automation.get_edge_slm
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_edge_slm.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_edge_slm.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_edge_slm.js,samples/README.md)
 
@@ -987,7 +987,7 @@ __Usage:__
 
 ### Telco_automation.get_hydrated_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_hydrated_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_hydrated_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_hydrated_deployment.js,samples/README.md)
 
@@ -1004,7 +1004,7 @@ __Usage:__
 
 ### Telco_automation.get_orchestration_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_orchestration_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_orchestration_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_orchestration_cluster.js,samples/README.md)
 
@@ -1021,7 +1021,7 @@ __Usage:__
 
 ### Telco_automation.get_public_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_public_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_public_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.get_public_blueprint.js,samples/README.md)
 
@@ -1038,7 +1038,7 @@ __Usage:__
 
 ### Telco_automation.list_blueprint_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_blueprint_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_blueprint_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_blueprint_revisions.js,samples/README.md)
 
@@ -1055,7 +1055,7 @@ __Usage:__
 
 ### Telco_automation.list_blueprints
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_blueprints.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_blueprints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_blueprints.js,samples/README.md)
 
@@ -1072,7 +1072,7 @@ __Usage:__
 
 ### Telco_automation.list_deployment_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_deployment_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_deployment_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_deployment_revisions.js,samples/README.md)
 
@@ -1089,7 +1089,7 @@ __Usage:__
 
 ### Telco_automation.list_deployments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_deployments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_deployments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_deployments.js,samples/README.md)
 
@@ -1106,7 +1106,7 @@ __Usage:__
 
 ### Telco_automation.list_edge_slms
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_edge_slms.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_edge_slms.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_edge_slms.js,samples/README.md)
 
@@ -1123,7 +1123,7 @@ __Usage:__
 
 ### Telco_automation.list_hydrated_deployments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_hydrated_deployments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_hydrated_deployments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_hydrated_deployments.js,samples/README.md)
 
@@ -1140,7 +1140,7 @@ __Usage:__
 
 ### Telco_automation.list_orchestration_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_orchestration_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_orchestration_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_orchestration_clusters.js,samples/README.md)
 
@@ -1157,7 +1157,7 @@ __Usage:__
 
 ### Telco_automation.list_public_blueprints
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_public_blueprints.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_public_blueprints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.list_public_blueprints.js,samples/README.md)
 
@@ -1174,7 +1174,7 @@ __Usage:__
 
 ### Telco_automation.propose_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.propose_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.propose_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.propose_blueprint.js,samples/README.md)
 
@@ -1191,7 +1191,7 @@ __Usage:__
 
 ### Telco_automation.reject_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.reject_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.reject_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.reject_blueprint.js,samples/README.md)
 
@@ -1208,7 +1208,7 @@ __Usage:__
 
 ### Telco_automation.remove_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.remove_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.remove_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.remove_deployment.js,samples/README.md)
 
@@ -1225,7 +1225,7 @@ __Usage:__
 
 ### Telco_automation.rollback_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.rollback_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.rollback_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.rollback_deployment.js,samples/README.md)
 
@@ -1242,7 +1242,7 @@ __Usage:__
 
 ### Telco_automation.search_blueprint_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.search_blueprint_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.search_blueprint_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.search_blueprint_revisions.js,samples/README.md)
 
@@ -1259,7 +1259,7 @@ __Usage:__
 
 ### Telco_automation.search_deployment_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.search_deployment_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.search_deployment_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.search_deployment_revisions.js,samples/README.md)
 
@@ -1276,7 +1276,7 @@ __Usage:__
 
 ### Telco_automation.update_blueprint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.update_blueprint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.update_blueprint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.update_blueprint.js,samples/README.md)
 
@@ -1293,7 +1293,7 @@ __Usage:__
 
 ### Telco_automation.update_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.update_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.update_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.update_deployment.js,samples/README.md)
 
@@ -1310,7 +1310,7 @@ __Usage:__
 
 ### Telco_automation.update_hydrated_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.update_hydrated_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.update_hydrated_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/generated/v1alpha1/telco_automation.update_hydrated_deployment.js,samples/README.md)
 
@@ -1327,7 +1327,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-telcoautomation/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-telcoautomation/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-telcoautomation/samples/quickstart.js,samples/README.md)
 

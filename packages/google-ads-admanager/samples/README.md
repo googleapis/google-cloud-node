@@ -65,7 +65,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Ad_unit_service.get_ad_unit
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.get_ad_unit.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.get_ad_unit.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/ad_unit_service.get_ad_unit.js,samples/README.md)
 
@@ -82,7 +82,7 @@ __Usage:__
 
 ### Ad_unit_service.list_ad_unit_sizes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.list_ad_unit_sizes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.list_ad_unit_sizes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/ad_unit_service.list_ad_unit_sizes.js,samples/README.md)
 
@@ -99,7 +99,7 @@ __Usage:__
 
 ### Ad_unit_service.list_ad_units
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.list_ad_units.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.list_ad_units.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/ad_unit_service.list_ad_units.js,samples/README.md)
 
@@ -116,7 +116,7 @@ __Usage:__
 
 ### Company_service.get_company
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/company_service.get_company.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/company_service.get_company.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/company_service.get_company.js,samples/README.md)
 
@@ -133,7 +133,7 @@ __Usage:__
 
 ### Company_service.list_companies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/company_service.list_companies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/company_service.list_companies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/company_service.list_companies.js,samples/README.md)
 
@@ -150,7 +150,7 @@ __Usage:__
 
 ### Custom_field_service.get_custom_field
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/custom_field_service.get_custom_field.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_field_service.get_custom_field.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/custom_field_service.get_custom_field.js,samples/README.md)
 
@@ -167,7 +167,7 @@ __Usage:__
 
 ### Custom_field_service.list_custom_fields
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/custom_field_service.list_custom_fields.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_field_service.list_custom_fields.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/custom_field_service.list_custom_fields.js,samples/README.md)
 
@@ -184,7 +184,7 @@ __Usage:__
 
 ### Custom_targeting_key_service.get_custom_targeting_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/custom_targeting_key_service.get_custom_targeting_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_targeting_key_service.get_custom_targeting_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/custom_targeting_key_service.get_custom_targeting_key.js,samples/README.md)
 
@@ -201,7 +201,7 @@ __Usage:__
 
 ### Custom_targeting_key_service.list_custom_targeting_keys
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/custom_targeting_key_service.list_custom_targeting_keys.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_targeting_key_service.list_custom_targeting_keys.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/custom_targeting_key_service.list_custom_targeting_keys.js,samples/README.md)
 
@@ -218,7 +218,7 @@ __Usage:__
 
 ### Custom_targeting_value_service.get_custom_targeting_value
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/custom_targeting_value_service.get_custom_targeting_value.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_targeting_value_service.get_custom_targeting_value.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/custom_targeting_value_service.get_custom_targeting_value.js,samples/README.md)
 
@@ -235,7 +235,7 @@ __Usage:__
 
 ### Custom_targeting_value_service.list_custom_targeting_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/custom_targeting_value_service.list_custom_targeting_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_targeting_value_service.list_custom_targeting_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/custom_targeting_value_service.list_custom_targeting_values.js,samples/README.md)
 
@@ -252,7 +252,7 @@ __Usage:__
 
 ### Entity_signals_mapping_service.batch_create_entity_signals_mappings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.batch_create_entity_signals_mappings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.batch_create_entity_signals_mappings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.batch_create_entity_signals_mappings.js,samples/README.md)
 
@@ -269,7 +269,7 @@ __Usage:__
 
 ### Entity_signals_mapping_service.batch_update_entity_signals_mappings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.batch_update_entity_signals_mappings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.batch_update_entity_signals_mappings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.batch_update_entity_signals_mappings.js,samples/README.md)
 
@@ -286,7 +286,7 @@ __Usage:__
 
 ### Entity_signals_mapping_service.create_entity_signals_mapping
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.create_entity_signals_mapping.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.create_entity_signals_mapping.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.create_entity_signals_mapping.js,samples/README.md)
 
@@ -303,7 +303,7 @@ __Usage:__
 
 ### Entity_signals_mapping_service.get_entity_signals_mapping
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.get_entity_signals_mapping.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.get_entity_signals_mapping.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.get_entity_signals_mapping.js,samples/README.md)
 
@@ -320,7 +320,7 @@ __Usage:__
 
 ### Entity_signals_mapping_service.list_entity_signals_mappings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.list_entity_signals_mappings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.list_entity_signals_mappings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.list_entity_signals_mappings.js,samples/README.md)
 
@@ -337,7 +337,7 @@ __Usage:__
 
 ### Entity_signals_mapping_service.update_entity_signals_mapping
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.update_entity_signals_mapping.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.update_entity_signals_mapping.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.update_entity_signals_mapping.js,samples/README.md)
 
@@ -354,7 +354,7 @@ __Usage:__
 
 ### Network_service.get_network
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/network_service.get_network.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/network_service.get_network.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/network_service.get_network.js,samples/README.md)
 
@@ -371,7 +371,7 @@ __Usage:__
 
 ### Network_service.list_networks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/network_service.list_networks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/network_service.list_networks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/network_service.list_networks.js,samples/README.md)
 
@@ -388,7 +388,7 @@ __Usage:__
 
 ### Order_service.get_order
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/order_service.get_order.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/order_service.get_order.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/order_service.get_order.js,samples/README.md)
 
@@ -405,7 +405,7 @@ __Usage:__
 
 ### Order_service.list_orders
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/order_service.list_orders.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/order_service.list_orders.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/order_service.list_orders.js,samples/README.md)
 
@@ -422,7 +422,7 @@ __Usage:__
 
 ### Placement_service.get_placement
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/placement_service.get_placement.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/placement_service.get_placement.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/placement_service.get_placement.js,samples/README.md)
 
@@ -439,7 +439,7 @@ __Usage:__
 
 ### Placement_service.list_placements
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/placement_service.list_placements.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/placement_service.list_placements.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/placement_service.list_placements.js,samples/README.md)
 
@@ -456,7 +456,7 @@ __Usage:__
 
 ### Report_service.create_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/report_service.create_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/report_service.create_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/report_service.create_report.js,samples/README.md)
 
@@ -473,7 +473,7 @@ __Usage:__
 
 ### Report_service.fetch_report_result_rows
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/report_service.fetch_report_result_rows.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/report_service.fetch_report_result_rows.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/report_service.fetch_report_result_rows.js,samples/README.md)
 
@@ -490,7 +490,7 @@ __Usage:__
 
 ### Report_service.get_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/report_service.get_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/report_service.get_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/report_service.get_report.js,samples/README.md)
 
@@ -507,7 +507,7 @@ __Usage:__
 
 ### Report_service.list_reports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/report_service.list_reports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/report_service.list_reports.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/report_service.list_reports.js,samples/README.md)
 
@@ -524,7 +524,7 @@ __Usage:__
 
 ### Report_service.run_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/report_service.run_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/report_service.run_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/report_service.run_report.js,samples/README.md)
 
@@ -541,7 +541,7 @@ __Usage:__
 
 ### Report_service.update_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/report_service.update_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/report_service.update_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/report_service.update_report.js,samples/README.md)
 
@@ -558,7 +558,7 @@ __Usage:__
 
 ### Role_service.get_role
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/role_service.get_role.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/role_service.get_role.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/role_service.get_role.js,samples/README.md)
 
@@ -575,7 +575,7 @@ __Usage:__
 
 ### Role_service.list_roles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/role_service.list_roles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/role_service.list_roles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/role_service.list_roles.js,samples/README.md)
 
@@ -592,7 +592,7 @@ __Usage:__
 
 ### Taxonomy_category_service.get_taxonomy_category
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/taxonomy_category_service.get_taxonomy_category.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/taxonomy_category_service.get_taxonomy_category.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/taxonomy_category_service.get_taxonomy_category.js,samples/README.md)
 
@@ -609,7 +609,7 @@ __Usage:__
 
 ### Taxonomy_category_service.list_taxonomy_categories
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/taxonomy_category_service.list_taxonomy_categories.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/taxonomy_category_service.list_taxonomy_categories.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/taxonomy_category_service.list_taxonomy_categories.js,samples/README.md)
 
@@ -626,7 +626,7 @@ __Usage:__
 
 ### User_service.get_user
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/generated/v1/user_service.get_user.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/user_service.get_user.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/user_service.get_user.js,samples/README.md)
 
@@ -643,7 +643,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ads-admanager/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/quickstart.js,samples/README.md)
 

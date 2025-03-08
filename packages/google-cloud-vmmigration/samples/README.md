@@ -77,7 +77,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Vm_migration.add_group_migration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.add_group_migration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.add_group_migration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.add_group_migration.js,samples/README.md)
 
@@ -94,7 +94,7 @@ __Usage:__
 
 ### Vm_migration.cancel_clone_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.cancel_clone_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.cancel_clone_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.cancel_clone_job.js,samples/README.md)
 
@@ -111,7 +111,7 @@ __Usage:__
 
 ### Vm_migration.cancel_cutover_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.cancel_cutover_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.cancel_cutover_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.cancel_cutover_job.js,samples/README.md)
 
@@ -128,7 +128,7 @@ __Usage:__
 
 ### Vm_migration.create_clone_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_clone_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_clone_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_clone_job.js,samples/README.md)
 
@@ -145,7 +145,7 @@ __Usage:__
 
 ### Vm_migration.create_cutover_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_cutover_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_cutover_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_cutover_job.js,samples/README.md)
 
@@ -162,7 +162,7 @@ __Usage:__
 
 ### Vm_migration.create_datacenter_connector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_datacenter_connector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_datacenter_connector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_datacenter_connector.js,samples/README.md)
 
@@ -179,7 +179,7 @@ __Usage:__
 
 ### Vm_migration.create_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_group.js,samples/README.md)
 
@@ -196,7 +196,7 @@ __Usage:__
 
 ### Vm_migration.create_migrating_vm
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_migrating_vm.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_migrating_vm.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_migrating_vm.js,samples/README.md)
 
@@ -213,7 +213,7 @@ __Usage:__
 
 ### Vm_migration.create_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_source.js,samples/README.md)
 
@@ -230,7 +230,7 @@ __Usage:__
 
 ### Vm_migration.create_target_project
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_target_project.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_target_project.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_target_project.js,samples/README.md)
 
@@ -247,7 +247,7 @@ __Usage:__
 
 ### Vm_migration.create_utilization_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_utilization_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_utilization_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.create_utilization_report.js,samples/README.md)
 
@@ -264,7 +264,7 @@ __Usage:__
 
 ### Vm_migration.delete_datacenter_connector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_datacenter_connector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_datacenter_connector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_datacenter_connector.js,samples/README.md)
 
@@ -281,7 +281,7 @@ __Usage:__
 
 ### Vm_migration.delete_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_group.js,samples/README.md)
 
@@ -298,7 +298,7 @@ __Usage:__
 
 ### Vm_migration.delete_migrating_vm
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_migrating_vm.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_migrating_vm.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_migrating_vm.js,samples/README.md)
 
@@ -315,7 +315,7 @@ __Usage:__
 
 ### Vm_migration.delete_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_source.js,samples/README.md)
 
@@ -332,7 +332,7 @@ __Usage:__
 
 ### Vm_migration.delete_target_project
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_target_project.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_target_project.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_target_project.js,samples/README.md)
 
@@ -349,7 +349,7 @@ __Usage:__
 
 ### Vm_migration.delete_utilization_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_utilization_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_utilization_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.delete_utilization_report.js,samples/README.md)
 
@@ -366,7 +366,7 @@ __Usage:__
 
 ### Vm_migration.fetch_inventory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.fetch_inventory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.fetch_inventory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.fetch_inventory.js,samples/README.md)
 
@@ -383,7 +383,7 @@ __Usage:__
 
 ### Vm_migration.finalize_migration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.finalize_migration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.finalize_migration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.finalize_migration.js,samples/README.md)
 
@@ -400,7 +400,7 @@ __Usage:__
 
 ### Vm_migration.get_clone_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_clone_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_clone_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_clone_job.js,samples/README.md)
 
@@ -417,7 +417,7 @@ __Usage:__
 
 ### Vm_migration.get_cutover_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_cutover_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_cutover_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_cutover_job.js,samples/README.md)
 
@@ -434,7 +434,7 @@ __Usage:__
 
 ### Vm_migration.get_datacenter_connector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_datacenter_connector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_datacenter_connector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_datacenter_connector.js,samples/README.md)
 
@@ -451,7 +451,7 @@ __Usage:__
 
 ### Vm_migration.get_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_group.js,samples/README.md)
 
@@ -468,7 +468,7 @@ __Usage:__
 
 ### Vm_migration.get_migrating_vm
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_migrating_vm.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_migrating_vm.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_migrating_vm.js,samples/README.md)
 
@@ -485,7 +485,7 @@ __Usage:__
 
 ### Vm_migration.get_replication_cycle
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_replication_cycle.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_replication_cycle.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_replication_cycle.js,samples/README.md)
 
@@ -502,7 +502,7 @@ __Usage:__
 
 ### Vm_migration.get_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_source.js,samples/README.md)
 
@@ -519,7 +519,7 @@ __Usage:__
 
 ### Vm_migration.get_target_project
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_target_project.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_target_project.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_target_project.js,samples/README.md)
 
@@ -536,7 +536,7 @@ __Usage:__
 
 ### Vm_migration.get_utilization_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_utilization_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_utilization_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_utilization_report.js,samples/README.md)
 
@@ -553,7 +553,7 @@ __Usage:__
 
 ### Vm_migration.list_clone_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_clone_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_clone_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_clone_jobs.js,samples/README.md)
 
@@ -570,7 +570,7 @@ __Usage:__
 
 ### Vm_migration.list_cutover_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_cutover_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_cutover_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_cutover_jobs.js,samples/README.md)
 
@@ -587,7 +587,7 @@ __Usage:__
 
 ### Vm_migration.list_datacenter_connectors
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_datacenter_connectors.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_datacenter_connectors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_datacenter_connectors.js,samples/README.md)
 
@@ -604,7 +604,7 @@ __Usage:__
 
 ### Vm_migration.list_groups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_groups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_groups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_groups.js,samples/README.md)
 
@@ -621,7 +621,7 @@ __Usage:__
 
 ### Vm_migration.list_migrating_vms
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_migrating_vms.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_migrating_vms.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_migrating_vms.js,samples/README.md)
 
@@ -638,7 +638,7 @@ __Usage:__
 
 ### Vm_migration.list_replication_cycles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_replication_cycles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_replication_cycles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_replication_cycles.js,samples/README.md)
 
@@ -655,7 +655,7 @@ __Usage:__
 
 ### Vm_migration.list_sources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_sources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_sources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_sources.js,samples/README.md)
 
@@ -672,7 +672,7 @@ __Usage:__
 
 ### Vm_migration.list_target_projects
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_target_projects.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_target_projects.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_target_projects.js,samples/README.md)
 
@@ -689,7 +689,7 @@ __Usage:__
 
 ### Vm_migration.list_utilization_reports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_utilization_reports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_utilization_reports.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_utilization_reports.js,samples/README.md)
 
@@ -706,7 +706,7 @@ __Usage:__
 
 ### Vm_migration.pause_migration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.pause_migration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.pause_migration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.pause_migration.js,samples/README.md)
 
@@ -723,7 +723,7 @@ __Usage:__
 
 ### Vm_migration.remove_group_migration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.remove_group_migration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.remove_group_migration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.remove_group_migration.js,samples/README.md)
 
@@ -740,7 +740,7 @@ __Usage:__
 
 ### Vm_migration.resume_migration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.resume_migration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.resume_migration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.resume_migration.js,samples/README.md)
 
@@ -757,7 +757,7 @@ __Usage:__
 
 ### Vm_migration.start_migration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.start_migration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.start_migration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.start_migration.js,samples/README.md)
 
@@ -774,7 +774,7 @@ __Usage:__
 
 ### Vm_migration.update_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.update_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.update_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.update_group.js,samples/README.md)
 
@@ -791,7 +791,7 @@ __Usage:__
 
 ### Vm_migration.update_migrating_vm
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.update_migrating_vm.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.update_migrating_vm.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.update_migrating_vm.js,samples/README.md)
 
@@ -808,7 +808,7 @@ __Usage:__
 
 ### Vm_migration.update_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.update_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.update_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.update_source.js,samples/README.md)
 
@@ -825,7 +825,7 @@ __Usage:__
 
 ### Vm_migration.update_target_project
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.update_target_project.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.update_target_project.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.update_target_project.js,samples/README.md)
 
@@ -842,7 +842,7 @@ __Usage:__
 
 ### Vm_migration.upgrade_appliance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.upgrade_appliance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.upgrade_appliance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.upgrade_appliance.js,samples/README.md)
 
@@ -859,7 +859,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/quickstart.js,samples/README.md)
 

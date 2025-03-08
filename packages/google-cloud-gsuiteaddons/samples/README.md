@@ -40,7 +40,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### G_suite_add_ons.create_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.create_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.create_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.create_deployment.js,samples/README.md)
 
@@ -57,7 +57,7 @@ __Usage:__
 
 ### G_suite_add_ons.delete_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.delete_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.delete_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.delete_deployment.js,samples/README.md)
 
@@ -74,7 +74,7 @@ __Usage:__
 
 ### G_suite_add_ons.get_authorization
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.get_authorization.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.get_authorization.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.get_authorization.js,samples/README.md)
 
@@ -91,7 +91,7 @@ __Usage:__
 
 ### G_suite_add_ons.get_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.get_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.get_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.get_deployment.js,samples/README.md)
 
@@ -108,7 +108,7 @@ __Usage:__
 
 ### G_suite_add_ons.get_install_status
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.get_install_status.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.get_install_status.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.get_install_status.js,samples/README.md)
 
@@ -125,7 +125,7 @@ __Usage:__
 
 ### G_suite_add_ons.install_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.install_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.install_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.install_deployment.js,samples/README.md)
 
@@ -142,7 +142,7 @@ __Usage:__
 
 ### G_suite_add_ons.list_deployments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.list_deployments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.list_deployments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.list_deployments.js,samples/README.md)
 
@@ -159,7 +159,7 @@ __Usage:__
 
 ### G_suite_add_ons.replace_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.replace_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.replace_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.replace_deployment.js,samples/README.md)
 
@@ -176,7 +176,7 @@ __Usage:__
 
 ### G_suite_add_ons.uninstall_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.uninstall_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.uninstall_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.uninstall_deployment.js,samples/README.md)
 
@@ -193,7 +193,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gsuiteaddons/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gsuiteaddons/samples/quickstart.js,samples/README.md)
 

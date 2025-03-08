@@ -45,7 +45,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Cloud_quotas.create_quota_preference
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.create_quota_preference.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.create_quota_preference.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.create_quota_preference.js,samples/README.md)
 
@@ -62,7 +62,7 @@ __Usage:__
 
 ### Cloud_quotas.get_quota_info
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.get_quota_info.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.get_quota_info.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.get_quota_info.js,samples/README.md)
 
@@ -79,7 +79,7 @@ __Usage:__
 
 ### Cloud_quotas.get_quota_preference
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.get_quota_preference.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.get_quota_preference.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.get_quota_preference.js,samples/README.md)
 
@@ -96,7 +96,7 @@ __Usage:__
 
 ### Cloud_quotas.list_quota_infos
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.list_quota_infos.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.list_quota_infos.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.list_quota_infos.js,samples/README.md)
 
@@ -113,7 +113,7 @@ __Usage:__
 
 ### Cloud_quotas.list_quota_preferences
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.list_quota_preferences.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.list_quota_preferences.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.list_quota_preferences.js,samples/README.md)
 
@@ -130,7 +130,7 @@ __Usage:__
 
 ### Cloud_quotas.update_quota_preference
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.update_quota_preference.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.update_quota_preference.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.update_quota_preference.js,samples/README.md)
 
@@ -147,7 +147,7 @@ __Usage:__
 
 ### Cloud_quotas.create_quota_preference
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.create_quota_preference.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.create_quota_preference.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.create_quota_preference.js,samples/README.md)
 
@@ -164,7 +164,7 @@ __Usage:__
 
 ### Cloud_quotas.get_quota_info
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.get_quota_info.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.get_quota_info.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.get_quota_info.js,samples/README.md)
 
@@ -181,7 +181,7 @@ __Usage:__
 
 ### Cloud_quotas.get_quota_preference
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.get_quota_preference.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.get_quota_preference.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.get_quota_preference.js,samples/README.md)
 
@@ -198,7 +198,7 @@ __Usage:__
 
 ### Cloud_quotas.list_quota_infos
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.list_quota_infos.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.list_quota_infos.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.list_quota_infos.js,samples/README.md)
 
@@ -215,7 +215,7 @@ __Usage:__
 
 ### Cloud_quotas.list_quota_preferences
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.list_quota_preferences.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.list_quota_preferences.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.list_quota_preferences.js,samples/README.md)
 
@@ -232,7 +232,7 @@ __Usage:__
 
 ### Cloud_quotas.update_quota_preference
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.update_quota_preference.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.update_quota_preference.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.update_quota_preference.js,samples/README.md)
 
@@ -249,7 +249,7 @@ __Usage:__
 
 ### Quota_adjuster_settings_manager.get_quota_adjuster_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/generated/v1beta/quota_adjuster_settings_manager.get_quota_adjuster_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/quota_adjuster_settings_manager.get_quota_adjuster_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/quota_adjuster_settings_manager.get_quota_adjuster_settings.js,samples/README.md)
 
@@ -266,7 +266,7 @@ __Usage:__
 
 ### Quota_adjuster_settings_manager.update_quota_adjuster_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/generated/v1beta/quota_adjuster_settings_manager.update_quota_adjuster_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/quota_adjuster_settings_manager.update_quota_adjuster_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/quota_adjuster_settings_manager.update_quota_adjuster_settings.js,samples/README.md)
 
@@ -283,7 +283,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-cloudquotas/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/quickstart.js,samples/README.md)
 

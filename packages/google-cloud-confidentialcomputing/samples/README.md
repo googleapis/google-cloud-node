@@ -35,7 +35,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Confidential_computing.create_challenge
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.create_challenge.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.create_challenge.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.create_challenge.js,samples/README.md)
 
@@ -52,7 +52,7 @@ __Usage:__
 
 ### Confidential_computing.verify_attestation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.verify_attestation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.verify_attestation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.verify_attestation.js,samples/README.md)
 
@@ -69,7 +69,7 @@ __Usage:__
 
 ### Confidential_computing.create_challenge
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-confidentialcomputing/samples/generated/v1alpha1/confidential_computing.create_challenge.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-confidentialcomputing/samples/generated/v1alpha1/confidential_computing.create_challenge.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-confidentialcomputing/samples/generated/v1alpha1/confidential_computing.create_challenge.js,samples/README.md)
 
@@ -86,7 +86,7 @@ __Usage:__
 
 ### Confidential_computing.verify_attestation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-confidentialcomputing/samples/generated/v1alpha1/confidential_computing.verify_attestation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-confidentialcomputing/samples/generated/v1alpha1/confidential_computing.verify_attestation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-confidentialcomputing/samples/generated/v1alpha1/confidential_computing.verify_attestation.js,samples/README.md)
 
@@ -103,7 +103,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-confidentialcomputing/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-confidentialcomputing/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-confidentialcomputing/samples/quickstart.js,samples/README.md)
 

@@ -79,7 +79,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Migration_center.add_assets_to_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.add_assets_to_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.add_assets_to_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.add_assets_to_group.js,samples/README.md)
 
@@ -96,7 +96,7 @@ __Usage:__
 
 ### Migration_center.aggregate_assets_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.aggregate_assets_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.aggregate_assets_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.aggregate_assets_values.js,samples/README.md)
 
@@ -113,7 +113,7 @@ __Usage:__
 
 ### Migration_center.batch_delete_assets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.batch_delete_assets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.batch_delete_assets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.batch_delete_assets.js,samples/README.md)
 
@@ -130,7 +130,7 @@ __Usage:__
 
 ### Migration_center.batch_update_assets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.batch_update_assets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.batch_update_assets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.batch_update_assets.js,samples/README.md)
 
@@ -147,7 +147,7 @@ __Usage:__
 
 ### Migration_center.create_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_group.js,samples/README.md)
 
@@ -164,7 +164,7 @@ __Usage:__
 
 ### Migration_center.create_import_data_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_import_data_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_import_data_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_import_data_file.js,samples/README.md)
 
@@ -181,7 +181,7 @@ __Usage:__
 
 ### Migration_center.create_import_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_import_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_import_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_import_job.js,samples/README.md)
 
@@ -198,7 +198,7 @@ __Usage:__
 
 ### Migration_center.create_preference_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_preference_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_preference_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_preference_set.js,samples/README.md)
 
@@ -215,7 +215,7 @@ __Usage:__
 
 ### Migration_center.create_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_report.js,samples/README.md)
 
@@ -232,7 +232,7 @@ __Usage:__
 
 ### Migration_center.create_report_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_report_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_report_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_report_config.js,samples/README.md)
 
@@ -249,7 +249,7 @@ __Usage:__
 
 ### Migration_center.create_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.create_source.js,samples/README.md)
 
@@ -266,7 +266,7 @@ __Usage:__
 
 ### Migration_center.delete_asset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_asset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_asset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_asset.js,samples/README.md)
 
@@ -283,7 +283,7 @@ __Usage:__
 
 ### Migration_center.delete_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_group.js,samples/README.md)
 
@@ -300,7 +300,7 @@ __Usage:__
 
 ### Migration_center.delete_import_data_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_import_data_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_import_data_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_import_data_file.js,samples/README.md)
 
@@ -317,7 +317,7 @@ __Usage:__
 
 ### Migration_center.delete_import_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_import_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_import_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_import_job.js,samples/README.md)
 
@@ -334,7 +334,7 @@ __Usage:__
 
 ### Migration_center.delete_preference_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_preference_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_preference_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_preference_set.js,samples/README.md)
 
@@ -351,7 +351,7 @@ __Usage:__
 
 ### Migration_center.delete_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_report.js,samples/README.md)
 
@@ -368,7 +368,7 @@ __Usage:__
 
 ### Migration_center.delete_report_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_report_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_report_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_report_config.js,samples/README.md)
 
@@ -385,7 +385,7 @@ __Usage:__
 
 ### Migration_center.delete_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.delete_source.js,samples/README.md)
 
@@ -402,7 +402,7 @@ __Usage:__
 
 ### Migration_center.get_asset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_asset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_asset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_asset.js,samples/README.md)
 
@@ -419,7 +419,7 @@ __Usage:__
 
 ### Migration_center.get_error_frame
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_error_frame.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_error_frame.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_error_frame.js,samples/README.md)
 
@@ -436,7 +436,7 @@ __Usage:__
 
 ### Migration_center.get_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_group.js,samples/README.md)
 
@@ -453,7 +453,7 @@ __Usage:__
 
 ### Migration_center.get_import_data_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_import_data_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_import_data_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_import_data_file.js,samples/README.md)
 
@@ -470,7 +470,7 @@ __Usage:__
 
 ### Migration_center.get_import_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_import_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_import_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_import_job.js,samples/README.md)
 
@@ -487,7 +487,7 @@ __Usage:__
 
 ### Migration_center.get_preference_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_preference_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_preference_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_preference_set.js,samples/README.md)
 
@@ -504,7 +504,7 @@ __Usage:__
 
 ### Migration_center.get_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_report.js,samples/README.md)
 
@@ -521,7 +521,7 @@ __Usage:__
 
 ### Migration_center.get_report_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_report_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_report_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_report_config.js,samples/README.md)
 
@@ -538,7 +538,7 @@ __Usage:__
 
 ### Migration_center.get_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_settings.js,samples/README.md)
 
@@ -555,7 +555,7 @@ __Usage:__
 
 ### Migration_center.get_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.get_source.js,samples/README.md)
 
@@ -572,7 +572,7 @@ __Usage:__
 
 ### Migration_center.list_assets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_assets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_assets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_assets.js,samples/README.md)
 
@@ -589,7 +589,7 @@ __Usage:__
 
 ### Migration_center.list_error_frames
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_error_frames.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_error_frames.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_error_frames.js,samples/README.md)
 
@@ -606,7 +606,7 @@ __Usage:__
 
 ### Migration_center.list_groups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_groups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_groups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_groups.js,samples/README.md)
 
@@ -623,7 +623,7 @@ __Usage:__
 
 ### Migration_center.list_import_data_files
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_import_data_files.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_import_data_files.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_import_data_files.js,samples/README.md)
 
@@ -640,7 +640,7 @@ __Usage:__
 
 ### Migration_center.list_import_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_import_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_import_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_import_jobs.js,samples/README.md)
 
@@ -657,7 +657,7 @@ __Usage:__
 
 ### Migration_center.list_preference_sets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_preference_sets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_preference_sets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_preference_sets.js,samples/README.md)
 
@@ -674,7 +674,7 @@ __Usage:__
 
 ### Migration_center.list_report_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_report_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_report_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_report_configs.js,samples/README.md)
 
@@ -691,7 +691,7 @@ __Usage:__
 
 ### Migration_center.list_reports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_reports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_reports.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_reports.js,samples/README.md)
 
@@ -708,7 +708,7 @@ __Usage:__
 
 ### Migration_center.list_sources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_sources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_sources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.list_sources.js,samples/README.md)
 
@@ -725,7 +725,7 @@ __Usage:__
 
 ### Migration_center.remove_assets_from_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.remove_assets_from_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.remove_assets_from_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.remove_assets_from_group.js,samples/README.md)
 
@@ -742,7 +742,7 @@ __Usage:__
 
 ### Migration_center.report_asset_frames
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.report_asset_frames.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.report_asset_frames.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.report_asset_frames.js,samples/README.md)
 
@@ -759,7 +759,7 @@ __Usage:__
 
 ### Migration_center.run_import_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.run_import_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.run_import_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.run_import_job.js,samples/README.md)
 
@@ -776,7 +776,7 @@ __Usage:__
 
 ### Migration_center.update_asset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_asset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_asset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_asset.js,samples/README.md)
 
@@ -793,7 +793,7 @@ __Usage:__
 
 ### Migration_center.update_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_group.js,samples/README.md)
 
@@ -810,7 +810,7 @@ __Usage:__
 
 ### Migration_center.update_import_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_import_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_import_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_import_job.js,samples/README.md)
 
@@ -827,7 +827,7 @@ __Usage:__
 
 ### Migration_center.update_preference_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_preference_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_preference_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_preference_set.js,samples/README.md)
 
@@ -844,7 +844,7 @@ __Usage:__
 
 ### Migration_center.update_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_settings.js,samples/README.md)
 
@@ -861,7 +861,7 @@ __Usage:__
 
 ### Migration_center.update_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_source.js,samples/README.md)
 
@@ -878,7 +878,7 @@ __Usage:__
 
 ### Migration_center.validate_import_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.validate_import_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.validate_import_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.validate_import_job.js,samples/README.md)
 
@@ -895,7 +895,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-migrationcenter/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-migrationcenter/samples/quickstart.js,samples/README.md)
 

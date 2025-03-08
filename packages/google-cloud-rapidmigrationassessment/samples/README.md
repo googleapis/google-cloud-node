@@ -41,7 +41,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Rapid_migration_assessment.create_annotation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.create_annotation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.create_annotation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.create_annotation.js,samples/README.md)
 
@@ -58,7 +58,7 @@ __Usage:__
 
 ### Rapid_migration_assessment.create_collector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.create_collector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.create_collector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.create_collector.js,samples/README.md)
 
@@ -75,7 +75,7 @@ __Usage:__
 
 ### Rapid_migration_assessment.delete_collector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.delete_collector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.delete_collector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.delete_collector.js,samples/README.md)
 
@@ -92,7 +92,7 @@ __Usage:__
 
 ### Rapid_migration_assessment.get_annotation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.get_annotation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.get_annotation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.get_annotation.js,samples/README.md)
 
@@ -109,7 +109,7 @@ __Usage:__
 
 ### Rapid_migration_assessment.get_collector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.get_collector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.get_collector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.get_collector.js,samples/README.md)
 
@@ -126,7 +126,7 @@ __Usage:__
 
 ### Rapid_migration_assessment.list_collectors
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.list_collectors.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.list_collectors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.list_collectors.js,samples/README.md)
 
@@ -143,7 +143,7 @@ __Usage:__
 
 ### Rapid_migration_assessment.pause_collector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.pause_collector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.pause_collector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.pause_collector.js,samples/README.md)
 
@@ -160,7 +160,7 @@ __Usage:__
 
 ### Rapid_migration_assessment.register_collector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.register_collector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.register_collector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.register_collector.js,samples/README.md)
 
@@ -177,7 +177,7 @@ __Usage:__
 
 ### Rapid_migration_assessment.resume_collector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.resume_collector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.resume_collector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.resume_collector.js,samples/README.md)
 
@@ -194,7 +194,7 @@ __Usage:__
 
 ### Rapid_migration_assessment.update_collector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.update_collector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.update_collector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.update_collector.js,samples/README.md)
 
@@ -211,7 +211,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-rapidmigrationassessment/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-rapidmigrationassessment/samples/quickstart.js,samples/README.md)
 

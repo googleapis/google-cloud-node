@@ -60,7 +60,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Chat_service.complete_import_space
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.complete_import_space.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.complete_import_space.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.complete_import_space.js,samples/README.md)
 
@@ -77,7 +77,7 @@ __Usage:__
 
 ### Chat_service.create_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.create_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.create_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.create_membership.js,samples/README.md)
 
@@ -94,7 +94,7 @@ __Usage:__
 
 ### Chat_service.create_message
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.create_message.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.create_message.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.create_message.js,samples/README.md)
 
@@ -111,7 +111,7 @@ __Usage:__
 
 ### Chat_service.create_reaction
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.create_reaction.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.create_reaction.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.create_reaction.js,samples/README.md)
 
@@ -128,7 +128,7 @@ __Usage:__
 
 ### Chat_service.create_space
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.create_space.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.create_space.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.create_space.js,samples/README.md)
 
@@ -145,7 +145,7 @@ __Usage:__
 
 ### Chat_service.delete_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.delete_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.delete_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.delete_membership.js,samples/README.md)
 
@@ -162,7 +162,7 @@ __Usage:__
 
 ### Chat_service.delete_message
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.delete_message.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.delete_message.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.delete_message.js,samples/README.md)
 
@@ -179,7 +179,7 @@ __Usage:__
 
 ### Chat_service.delete_reaction
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.delete_reaction.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.delete_reaction.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.delete_reaction.js,samples/README.md)
 
@@ -196,7 +196,7 @@ __Usage:__
 
 ### Chat_service.delete_space
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.delete_space.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.delete_space.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.delete_space.js,samples/README.md)
 
@@ -213,7 +213,7 @@ __Usage:__
 
 ### Chat_service.find_direct_message
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.find_direct_message.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.find_direct_message.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.find_direct_message.js,samples/README.md)
 
@@ -230,7 +230,7 @@ __Usage:__
 
 ### Chat_service.get_attachment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.get_attachment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.get_attachment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.get_attachment.js,samples/README.md)
 
@@ -247,7 +247,7 @@ __Usage:__
 
 ### Chat_service.get_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.get_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.get_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.get_membership.js,samples/README.md)
 
@@ -264,7 +264,7 @@ __Usage:__
 
 ### Chat_service.get_message
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.get_message.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.get_message.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.get_message.js,samples/README.md)
 
@@ -281,7 +281,7 @@ __Usage:__
 
 ### Chat_service.get_space
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.get_space.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.get_space.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.get_space.js,samples/README.md)
 
@@ -298,7 +298,7 @@ __Usage:__
 
 ### Chat_service.get_space_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.get_space_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.get_space_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.get_space_event.js,samples/README.md)
 
@@ -315,7 +315,7 @@ __Usage:__
 
 ### Chat_service.get_space_read_state
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.get_space_read_state.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.get_space_read_state.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.get_space_read_state.js,samples/README.md)
 
@@ -332,7 +332,7 @@ __Usage:__
 
 ### Chat_service.get_thread_read_state
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.get_thread_read_state.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.get_thread_read_state.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.get_thread_read_state.js,samples/README.md)
 
@@ -349,7 +349,7 @@ __Usage:__
 
 ### Chat_service.list_memberships
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.list_memberships.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.list_memberships.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.list_memberships.js,samples/README.md)
 
@@ -366,7 +366,7 @@ __Usage:__
 
 ### Chat_service.list_messages
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.list_messages.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.list_messages.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.list_messages.js,samples/README.md)
 
@@ -383,7 +383,7 @@ __Usage:__
 
 ### Chat_service.list_reactions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.list_reactions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.list_reactions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.list_reactions.js,samples/README.md)
 
@@ -400,7 +400,7 @@ __Usage:__
 
 ### Chat_service.list_space_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.list_space_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.list_space_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.list_space_events.js,samples/README.md)
 
@@ -417,7 +417,7 @@ __Usage:__
 
 ### Chat_service.list_spaces
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.list_spaces.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.list_spaces.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.list_spaces.js,samples/README.md)
 
@@ -434,7 +434,7 @@ __Usage:__
 
 ### Chat_service.search_spaces
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.search_spaces.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.search_spaces.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.search_spaces.js,samples/README.md)
 
@@ -451,7 +451,7 @@ __Usage:__
 
 ### Chat_service.set_up_space
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.set_up_space.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.set_up_space.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.set_up_space.js,samples/README.md)
 
@@ -468,7 +468,7 @@ __Usage:__
 
 ### Chat_service.update_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.update_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.update_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.update_membership.js,samples/README.md)
 
@@ -485,7 +485,7 @@ __Usage:__
 
 ### Chat_service.update_message
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.update_message.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.update_message.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.update_message.js,samples/README.md)
 
@@ -502,7 +502,7 @@ __Usage:__
 
 ### Chat_service.update_space
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.update_space.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.update_space.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.update_space.js,samples/README.md)
 
@@ -519,7 +519,7 @@ __Usage:__
 
 ### Chat_service.update_space_read_state
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.update_space_read_state.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.update_space_read_state.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.update_space_read_state.js,samples/README.md)
 
@@ -536,7 +536,7 @@ __Usage:__
 
 ### Chat_service.upload_attachment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/generated/v1/chat_service.upload_attachment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.upload_attachment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.upload_attachment.js,samples/README.md)
 
@@ -553,7 +553,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-chat/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/quickstart.js,samples/README.md)
 

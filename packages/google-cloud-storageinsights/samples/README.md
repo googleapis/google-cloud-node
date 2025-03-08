@@ -38,7 +38,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Storage_insights.create_report_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.create_report_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.create_report_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.create_report_config.js,samples/README.md)
 
@@ -55,7 +55,7 @@ __Usage:__
 
 ### Storage_insights.delete_report_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.delete_report_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.delete_report_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.delete_report_config.js,samples/README.md)
 
@@ -72,7 +72,7 @@ __Usage:__
 
 ### Storage_insights.get_report_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.get_report_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.get_report_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.get_report_config.js,samples/README.md)
 
@@ -89,7 +89,7 @@ __Usage:__
 
 ### Storage_insights.get_report_detail
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.get_report_detail.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.get_report_detail.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.get_report_detail.js,samples/README.md)
 
@@ -106,7 +106,7 @@ __Usage:__
 
 ### Storage_insights.list_report_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.list_report_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.list_report_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.list_report_configs.js,samples/README.md)
 
@@ -123,7 +123,7 @@ __Usage:__
 
 ### Storage_insights.list_report_details
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.list_report_details.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.list_report_details.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.list_report_details.js,samples/README.md)
 
@@ -140,7 +140,7 @@ __Usage:__
 
 ### Storage_insights.update_report_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.update_report_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.update_report_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.update_report_config.js,samples/README.md)
 
@@ -157,7 +157,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-storageinsights/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storageinsights/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-storageinsights/samples/quickstart.js,samples/README.md)
 

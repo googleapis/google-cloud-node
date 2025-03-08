@@ -32,7 +32,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Quota_service.list_quota_groups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-quota/samples/generated/v1beta/quota_service.list_quota_groups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/samples/generated/v1beta/quota_service.list_quota_groups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-quota/samples/generated/v1beta/quota_service.list_quota_groups.js,samples/README.md)
 
@@ -49,7 +49,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-quota/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-quota/samples/quickstart.js,samples/README.md)
 

@@ -83,7 +83,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Folders.create_folder
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/folders.create_folder.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/folders.create_folder.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/folders.create_folder.js,samples/README.md)
 
@@ -100,7 +100,7 @@ __Usage:__
 
 ### Folders.delete_folder
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/folders.delete_folder.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/folders.delete_folder.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/folders.delete_folder.js,samples/README.md)
 
@@ -117,7 +117,7 @@ __Usage:__
 
 ### Folders.get_folder
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/folders.get_folder.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/folders.get_folder.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/folders.get_folder.js,samples/README.md)
 
@@ -134,7 +134,7 @@ __Usage:__
 
 ### Folders.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/folders.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/folders.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/folders.get_iam_policy.js,samples/README.md)
 
@@ -151,7 +151,7 @@ __Usage:__
 
 ### Folders.list_folders
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/folders.list_folders.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/folders.list_folders.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/folders.list_folders.js,samples/README.md)
 
@@ -168,7 +168,7 @@ __Usage:__
 
 ### Folders.move_folder
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/folders.move_folder.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/folders.move_folder.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/folders.move_folder.js,samples/README.md)
 
@@ -185,7 +185,7 @@ __Usage:__
 
 ### Folders.search_folders
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/folders.search_folders.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/folders.search_folders.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/folders.search_folders.js,samples/README.md)
 
@@ -202,7 +202,7 @@ __Usage:__
 
 ### Folders.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/folders.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/folders.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/folders.set_iam_policy.js,samples/README.md)
 
@@ -219,7 +219,7 @@ __Usage:__
 
 ### Folders.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/folders.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/folders.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/folders.test_iam_permissions.js,samples/README.md)
 
@@ -236,7 +236,7 @@ __Usage:__
 
 ### Folders.undelete_folder
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/folders.undelete_folder.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/folders.undelete_folder.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/folders.undelete_folder.js,samples/README.md)
 
@@ -253,7 +253,7 @@ __Usage:__
 
 ### Folders.update_folder
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/folders.update_folder.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/folders.update_folder.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/folders.update_folder.js,samples/README.md)
 
@@ -270,7 +270,7 @@ __Usage:__
 
 ### Organizations.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/organizations.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/organizations.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/organizations.get_iam_policy.js,samples/README.md)
 
@@ -287,7 +287,7 @@ __Usage:__
 
 ### Organizations.get_organization
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/organizations.get_organization.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/organizations.get_organization.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/organizations.get_organization.js,samples/README.md)
 
@@ -304,7 +304,7 @@ __Usage:__
 
 ### Organizations.search_organizations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/organizations.search_organizations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/organizations.search_organizations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/organizations.search_organizations.js,samples/README.md)
 
@@ -321,7 +321,7 @@ __Usage:__
 
 ### Organizations.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/organizations.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/organizations.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/organizations.set_iam_policy.js,samples/README.md)
 
@@ -338,7 +338,7 @@ __Usage:__
 
 ### Organizations.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/organizations.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/organizations.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/organizations.test_iam_permissions.js,samples/README.md)
 
@@ -355,7 +355,7 @@ __Usage:__
 
 ### Projects.create_project
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/projects.create_project.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.create_project.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/projects.create_project.js,samples/README.md)
 
@@ -372,7 +372,7 @@ __Usage:__
 
 ### Projects.delete_project
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/projects.delete_project.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.delete_project.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/projects.delete_project.js,samples/README.md)
 
@@ -389,7 +389,7 @@ __Usage:__
 
 ### Projects.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/projects.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/projects.get_iam_policy.js,samples/README.md)
 
@@ -406,7 +406,7 @@ __Usage:__
 
 ### Projects.get_project
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/projects.get_project.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.get_project.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/projects.get_project.js,samples/README.md)
 
@@ -423,7 +423,7 @@ __Usage:__
 
 ### Projects.list_projects
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/projects.list_projects.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.list_projects.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/projects.list_projects.js,samples/README.md)
 
@@ -440,7 +440,7 @@ __Usage:__
 
 ### Projects.move_project
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/projects.move_project.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.move_project.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/projects.move_project.js,samples/README.md)
 
@@ -457,7 +457,7 @@ __Usage:__
 
 ### Projects.search_projects
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/projects.search_projects.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.search_projects.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/projects.search_projects.js,samples/README.md)
 
@@ -474,7 +474,7 @@ __Usage:__
 
 ### Projects.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/projects.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/projects.set_iam_policy.js,samples/README.md)
 
@@ -491,7 +491,7 @@ __Usage:__
 
 ### Projects.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/projects.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/projects.test_iam_permissions.js,samples/README.md)
 
@@ -508,7 +508,7 @@ __Usage:__
 
 ### Projects.undelete_project
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/projects.undelete_project.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.undelete_project.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/projects.undelete_project.js,samples/README.md)
 
@@ -525,7 +525,7 @@ __Usage:__
 
 ### Projects.update_project
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/projects.update_project.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.update_project.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/projects.update_project.js,samples/README.md)
 
@@ -542,7 +542,7 @@ __Usage:__
 
 ### Tag_bindings.create_tag_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.create_tag_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.create_tag_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.create_tag_binding.js,samples/README.md)
 
@@ -559,7 +559,7 @@ __Usage:__
 
 ### Tag_bindings.delete_tag_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.delete_tag_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.delete_tag_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.delete_tag_binding.js,samples/README.md)
 
@@ -576,7 +576,7 @@ __Usage:__
 
 ### Tag_bindings.list_effective_tags
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.list_effective_tags.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.list_effective_tags.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.list_effective_tags.js,samples/README.md)
 
@@ -593,7 +593,7 @@ __Usage:__
 
 ### Tag_bindings.list_tag_bindings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.list_tag_bindings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.list_tag_bindings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.list_tag_bindings.js,samples/README.md)
 
@@ -610,7 +610,7 @@ __Usage:__
 
 ### Tag_holds.create_tag_hold
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.create_tag_hold.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.create_tag_hold.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.create_tag_hold.js,samples/README.md)
 
@@ -627,7 +627,7 @@ __Usage:__
 
 ### Tag_holds.delete_tag_hold
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.delete_tag_hold.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.delete_tag_hold.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.delete_tag_hold.js,samples/README.md)
 
@@ -644,7 +644,7 @@ __Usage:__
 
 ### Tag_holds.list_tag_holds
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.list_tag_holds.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.list_tag_holds.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.list_tag_holds.js,samples/README.md)
 
@@ -661,7 +661,7 @@ __Usage:__
 
 ### Tag_keys.create_tag_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.create_tag_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.create_tag_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.create_tag_key.js,samples/README.md)
 
@@ -678,7 +678,7 @@ __Usage:__
 
 ### Tag_keys.delete_tag_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.delete_tag_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.delete_tag_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.delete_tag_key.js,samples/README.md)
 
@@ -695,7 +695,7 @@ __Usage:__
 
 ### Tag_keys.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.get_iam_policy.js,samples/README.md)
 
@@ -712,7 +712,7 @@ __Usage:__
 
 ### Tag_keys.get_namespaced_tag_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.get_namespaced_tag_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.get_namespaced_tag_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.get_namespaced_tag_key.js,samples/README.md)
 
@@ -729,7 +729,7 @@ __Usage:__
 
 ### Tag_keys.get_tag_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.get_tag_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.get_tag_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.get_tag_key.js,samples/README.md)
 
@@ -746,7 +746,7 @@ __Usage:__
 
 ### Tag_keys.list_tag_keys
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.list_tag_keys.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.list_tag_keys.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.list_tag_keys.js,samples/README.md)
 
@@ -763,7 +763,7 @@ __Usage:__
 
 ### Tag_keys.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.set_iam_policy.js,samples/README.md)
 
@@ -780,7 +780,7 @@ __Usage:__
 
 ### Tag_keys.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.test_iam_permissions.js,samples/README.md)
 
@@ -797,7 +797,7 @@ __Usage:__
 
 ### Tag_keys.update_tag_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.update_tag_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.update_tag_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.update_tag_key.js,samples/README.md)
 
@@ -814,7 +814,7 @@ __Usage:__
 
 ### Tag_values.create_tag_value
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.create_tag_value.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.create_tag_value.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.create_tag_value.js,samples/README.md)
 
@@ -831,7 +831,7 @@ __Usage:__
 
 ### Tag_values.delete_tag_value
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.delete_tag_value.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.delete_tag_value.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.delete_tag_value.js,samples/README.md)
 
@@ -848,7 +848,7 @@ __Usage:__
 
 ### Tag_values.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.get_iam_policy.js,samples/README.md)
 
@@ -865,7 +865,7 @@ __Usage:__
 
 ### Tag_values.get_namespaced_tag_value
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.get_namespaced_tag_value.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.get_namespaced_tag_value.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.get_namespaced_tag_value.js,samples/README.md)
 
@@ -882,7 +882,7 @@ __Usage:__
 
 ### Tag_values.get_tag_value
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.get_tag_value.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.get_tag_value.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.get_tag_value.js,samples/README.md)
 
@@ -899,7 +899,7 @@ __Usage:__
 
 ### Tag_values.list_tag_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.list_tag_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.list_tag_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.list_tag_values.js,samples/README.md)
 
@@ -916,7 +916,7 @@ __Usage:__
 
 ### Tag_values.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.set_iam_policy.js,samples/README.md)
 
@@ -933,7 +933,7 @@ __Usage:__
 
 ### Tag_values.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.test_iam_permissions.js,samples/README.md)
 
@@ -950,7 +950,7 @@ __Usage:__
 
 ### Tag_values.update_tag_value
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.update_tag_value.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.update_tag_value.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.update_tag_value.js,samples/README.md)
 
@@ -967,7 +967,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-resourcemanager/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/quickstart.js,samples/README.md)
 

@@ -36,7 +36,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Notifications_api_service.create_notification_subscription
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.create_notification_subscription.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.create_notification_subscription.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.create_notification_subscription.js,samples/README.md)
 
@@ -53,7 +53,7 @@ __Usage:__
 
 ### Notifications_api_service.delete_notification_subscription
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.delete_notification_subscription.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.delete_notification_subscription.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.delete_notification_subscription.js,samples/README.md)
 
@@ -70,7 +70,7 @@ __Usage:__
 
 ### Notifications_api_service.get_notification_subscription
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.get_notification_subscription.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.get_notification_subscription.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.get_notification_subscription.js,samples/README.md)
 
@@ -87,7 +87,7 @@ __Usage:__
 
 ### Notifications_api_service.list_notification_subscriptions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.list_notification_subscriptions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.list_notification_subscriptions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.list_notification_subscriptions.js,samples/README.md)
 
@@ -104,7 +104,7 @@ __Usage:__
 
 ### Notifications_api_service.update_notification_subscription
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.update_notification_subscription.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.update_notification_subscription.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.update_notification_subscription.js,samples/README.md)
 
@@ -121,7 +121,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-notifications/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-notifications/samples/quickstart.js,samples/README.md)
 

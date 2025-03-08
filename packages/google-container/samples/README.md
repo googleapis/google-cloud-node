@@ -36,7 +36,7 @@
   * [Cluster_manager.set_locations](#cluster_manager.set_locations)
   * [Cluster_manager.set_logging_service](#cluster_manager.set_logging_service)
   * [Cluster_manager.set_maintenance_policy](#cluster_manager.set_maintenance_policy)
-  * [Cluster_manager.set_master_auth](#cluster_manager.set_master_auth)
+  * [Cluster_manager.set_main_auth](#cluster_manager.set_main_auth)
   * [Cluster_manager.set_monitoring_service](#cluster_manager.set_monitoring_service)
   * [Cluster_manager.set_network_policy](#cluster_manager.set_network_policy)
   * [Cluster_manager.set_node_pool_autoscaling](#cluster_manager.set_node_pool_autoscaling)
@@ -44,7 +44,7 @@
   * [Cluster_manager.set_node_pool_size](#cluster_manager.set_node_pool_size)
   * [Cluster_manager.start_i_p_rotation](#cluster_manager.start_i_p_rotation)
   * [Cluster_manager.update_cluster](#cluster_manager.update_cluster)
-  * [Cluster_manager.update_master](#cluster_manager.update_master)
+  * [Cluster_manager.update_main](#cluster_manager.update_main)
   * [Cluster_manager.update_node_pool](#cluster_manager.update_node_pool)
   * [Cluster_manager.cancel_operation](#cluster_manager.cancel_operation)
   * [Cluster_manager.check_autopilot_compatibility](#cluster_manager.check_autopilot_compatibility)
@@ -71,7 +71,7 @@
   * [Cluster_manager.set_locations](#cluster_manager.set_locations)
   * [Cluster_manager.set_logging_service](#cluster_manager.set_logging_service)
   * [Cluster_manager.set_maintenance_policy](#cluster_manager.set_maintenance_policy)
-  * [Cluster_manager.set_master_auth](#cluster_manager.set_master_auth)
+  * [Cluster_manager.set_main_auth](#cluster_manager.set_main_auth)
   * [Cluster_manager.set_monitoring_service](#cluster_manager.set_monitoring_service)
   * [Cluster_manager.set_network_policy](#cluster_manager.set_network_policy)
   * [Cluster_manager.set_node_pool_autoscaling](#cluster_manager.set_node_pool_autoscaling)
@@ -79,7 +79,7 @@
   * [Cluster_manager.set_node_pool_size](#cluster_manager.set_node_pool_size)
   * [Cluster_manager.start_i_p_rotation](#cluster_manager.start_i_p_rotation)
   * [Cluster_manager.update_cluster](#cluster_manager.update_cluster)
-  * [Cluster_manager.update_master](#cluster_manager.update_master)
+  * [Cluster_manager.update_main](#cluster_manager.update_main)
   * [Cluster_manager.update_node_pool](#cluster_manager.update_node_pool)
   * [Quickstart](#quickstart)
 
@@ -100,7 +100,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Cluster_manager.cancel_operation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.cancel_operation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.cancel_operation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.cancel_operation.js,samples/README.md)
 
@@ -117,7 +117,7 @@ __Usage:__
 
 ### Cluster_manager.check_autopilot_compatibility
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.check_autopilot_compatibility.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.check_autopilot_compatibility.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.check_autopilot_compatibility.js,samples/README.md)
 
@@ -134,7 +134,7 @@ __Usage:__
 
 ### Cluster_manager.complete_i_p_rotation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.complete_i_p_rotation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.complete_i_p_rotation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.complete_i_p_rotation.js,samples/README.md)
 
@@ -151,7 +151,7 @@ __Usage:__
 
 ### Cluster_manager.complete_node_pool_upgrade
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.complete_node_pool_upgrade.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.complete_node_pool_upgrade.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.complete_node_pool_upgrade.js,samples/README.md)
 
@@ -168,7 +168,7 @@ __Usage:__
 
 ### Cluster_manager.create_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.create_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.create_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.create_cluster.js,samples/README.md)
 
@@ -185,7 +185,7 @@ __Usage:__
 
 ### Cluster_manager.create_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.create_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.create_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.create_node_pool.js,samples/README.md)
 
@@ -202,7 +202,7 @@ __Usage:__
 
 ### Cluster_manager.delete_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.delete_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.delete_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.delete_cluster.js,samples/README.md)
 
@@ -219,7 +219,7 @@ __Usage:__
 
 ### Cluster_manager.delete_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.delete_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.delete_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.delete_node_pool.js,samples/README.md)
 
@@ -236,7 +236,7 @@ __Usage:__
 
 ### Cluster_manager.get_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.get_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.get_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.get_cluster.js,samples/README.md)
 
@@ -253,7 +253,7 @@ __Usage:__
 
 ### Cluster_manager.get_j_s_o_n_web_keys
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.get_j_s_o_n_web_keys.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.get_j_s_o_n_web_keys.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.get_j_s_o_n_web_keys.js,samples/README.md)
 
@@ -270,7 +270,7 @@ __Usage:__
 
 ### Cluster_manager.get_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.get_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.get_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.get_node_pool.js,samples/README.md)
 
@@ -287,7 +287,7 @@ __Usage:__
 
 ### Cluster_manager.get_operation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.get_operation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.get_operation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.get_operation.js,samples/README.md)
 
@@ -304,7 +304,7 @@ __Usage:__
 
 ### Cluster_manager.get_server_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.get_server_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.get_server_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.get_server_config.js,samples/README.md)
 
@@ -321,7 +321,7 @@ __Usage:__
 
 ### Cluster_manager.list_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.list_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.list_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.list_clusters.js,samples/README.md)
 
@@ -338,7 +338,7 @@ __Usage:__
 
 ### Cluster_manager.list_node_pools
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.list_node_pools.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.list_node_pools.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.list_node_pools.js,samples/README.md)
 
@@ -355,7 +355,7 @@ __Usage:__
 
 ### Cluster_manager.list_operations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.list_operations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.list_operations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.list_operations.js,samples/README.md)
 
@@ -372,7 +372,7 @@ __Usage:__
 
 ### Cluster_manager.list_usable_subnetworks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.list_usable_subnetworks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.list_usable_subnetworks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.list_usable_subnetworks.js,samples/README.md)
 
@@ -389,7 +389,7 @@ __Usage:__
 
 ### Cluster_manager.rollback_node_pool_upgrade
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.rollback_node_pool_upgrade.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.rollback_node_pool_upgrade.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.rollback_node_pool_upgrade.js,samples/README.md)
 
@@ -406,7 +406,7 @@ __Usage:__
 
 ### Cluster_manager.set_addons_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.set_addons_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.set_addons_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_addons_config.js,samples/README.md)
 
@@ -423,7 +423,7 @@ __Usage:__
 
 ### Cluster_manager.set_labels
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.set_labels.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.set_labels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_labels.js,samples/README.md)
 
@@ -440,7 +440,7 @@ __Usage:__
 
 ### Cluster_manager.set_legacy_abac
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.set_legacy_abac.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.set_legacy_abac.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_legacy_abac.js,samples/README.md)
 
@@ -457,7 +457,7 @@ __Usage:__
 
 ### Cluster_manager.set_locations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.set_locations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.set_locations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_locations.js,samples/README.md)
 
@@ -474,7 +474,7 @@ __Usage:__
 
 ### Cluster_manager.set_logging_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.set_logging_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.set_logging_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_logging_service.js,samples/README.md)
 
@@ -491,7 +491,7 @@ __Usage:__
 
 ### Cluster_manager.set_maintenance_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.set_maintenance_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.set_maintenance_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_maintenance_policy.js,samples/README.md)
 
@@ -506,16 +506,16 @@ __Usage:__
 
 
 
-### Cluster_manager.set_master_auth
+### Cluster_manager.set_main_auth
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.set_master_auth.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.set_main_auth.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_master_auth.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_main_auth.js,samples/README.md)
 
 __Usage:__
 
 
-`node packages/google-container/samples/generated/v1/cluster_manager.set_master_auth.js`
+`node packages/google-container/samples/generated/v1/cluster_manager.set_main_auth.js`
 
 
 -----
@@ -525,7 +525,7 @@ __Usage:__
 
 ### Cluster_manager.set_monitoring_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.set_monitoring_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.set_monitoring_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_monitoring_service.js,samples/README.md)
 
@@ -542,7 +542,7 @@ __Usage:__
 
 ### Cluster_manager.set_network_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.set_network_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.set_network_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_network_policy.js,samples/README.md)
 
@@ -559,7 +559,7 @@ __Usage:__
 
 ### Cluster_manager.set_node_pool_autoscaling
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.set_node_pool_autoscaling.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.set_node_pool_autoscaling.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_node_pool_autoscaling.js,samples/README.md)
 
@@ -576,7 +576,7 @@ __Usage:__
 
 ### Cluster_manager.set_node_pool_management
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.set_node_pool_management.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.set_node_pool_management.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_node_pool_management.js,samples/README.md)
 
@@ -593,7 +593,7 @@ __Usage:__
 
 ### Cluster_manager.set_node_pool_size
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.set_node_pool_size.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.set_node_pool_size.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_node_pool_size.js,samples/README.md)
 
@@ -610,7 +610,7 @@ __Usage:__
 
 ### Cluster_manager.start_i_p_rotation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.start_i_p_rotation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.start_i_p_rotation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.start_i_p_rotation.js,samples/README.md)
 
@@ -627,7 +627,7 @@ __Usage:__
 
 ### Cluster_manager.update_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.update_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.update_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.update_cluster.js,samples/README.md)
 
@@ -642,16 +642,16 @@ __Usage:__
 
 
 
-### Cluster_manager.update_master
+### Cluster_manager.update_main
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.update_master.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.update_main.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.update_master.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.update_main.js,samples/README.md)
 
 __Usage:__
 
 
-`node packages/google-container/samples/generated/v1/cluster_manager.update_master.js`
+`node packages/google-container/samples/generated/v1/cluster_manager.update_main.js`
 
 
 -----
@@ -661,7 +661,7 @@ __Usage:__
 
 ### Cluster_manager.update_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1/cluster_manager.update_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.update_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.update_node_pool.js,samples/README.md)
 
@@ -678,7 +678,7 @@ __Usage:__
 
 ### Cluster_manager.cancel_operation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.cancel_operation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.cancel_operation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.cancel_operation.js,samples/README.md)
 
@@ -695,7 +695,7 @@ __Usage:__
 
 ### Cluster_manager.check_autopilot_compatibility
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.check_autopilot_compatibility.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.check_autopilot_compatibility.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.check_autopilot_compatibility.js,samples/README.md)
 
@@ -712,7 +712,7 @@ __Usage:__
 
 ### Cluster_manager.complete_i_p_rotation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.complete_i_p_rotation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.complete_i_p_rotation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.complete_i_p_rotation.js,samples/README.md)
 
@@ -729,7 +729,7 @@ __Usage:__
 
 ### Cluster_manager.complete_node_pool_upgrade
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.complete_node_pool_upgrade.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.complete_node_pool_upgrade.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.complete_node_pool_upgrade.js,samples/README.md)
 
@@ -746,7 +746,7 @@ __Usage:__
 
 ### Cluster_manager.create_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.create_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.create_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.create_cluster.js,samples/README.md)
 
@@ -763,7 +763,7 @@ __Usage:__
 
 ### Cluster_manager.create_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.create_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.create_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.create_node_pool.js,samples/README.md)
 
@@ -780,7 +780,7 @@ __Usage:__
 
 ### Cluster_manager.delete_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.delete_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.delete_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.delete_cluster.js,samples/README.md)
 
@@ -797,7 +797,7 @@ __Usage:__
 
 ### Cluster_manager.delete_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.delete_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.delete_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.delete_node_pool.js,samples/README.md)
 
@@ -814,7 +814,7 @@ __Usage:__
 
 ### Cluster_manager.get_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.get_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.get_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.get_cluster.js,samples/README.md)
 
@@ -831,7 +831,7 @@ __Usage:__
 
 ### Cluster_manager.get_j_s_o_n_web_keys
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.get_j_s_o_n_web_keys.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.get_j_s_o_n_web_keys.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.get_j_s_o_n_web_keys.js,samples/README.md)
 
@@ -848,7 +848,7 @@ __Usage:__
 
 ### Cluster_manager.get_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.get_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.get_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.get_node_pool.js,samples/README.md)
 
@@ -865,7 +865,7 @@ __Usage:__
 
 ### Cluster_manager.get_operation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.get_operation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.get_operation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.get_operation.js,samples/README.md)
 
@@ -882,7 +882,7 @@ __Usage:__
 
 ### Cluster_manager.get_server_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.get_server_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.get_server_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.get_server_config.js,samples/README.md)
 
@@ -899,7 +899,7 @@ __Usage:__
 
 ### Cluster_manager.list_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.list_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.list_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.list_clusters.js,samples/README.md)
 
@@ -916,7 +916,7 @@ __Usage:__
 
 ### Cluster_manager.list_locations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.list_locations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.list_locations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.list_locations.js,samples/README.md)
 
@@ -933,7 +933,7 @@ __Usage:__
 
 ### Cluster_manager.list_node_pools
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.list_node_pools.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.list_node_pools.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.list_node_pools.js,samples/README.md)
 
@@ -950,7 +950,7 @@ __Usage:__
 
 ### Cluster_manager.list_operations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.list_operations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.list_operations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.list_operations.js,samples/README.md)
 
@@ -967,7 +967,7 @@ __Usage:__
 
 ### Cluster_manager.list_usable_subnetworks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.list_usable_subnetworks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.list_usable_subnetworks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.list_usable_subnetworks.js,samples/README.md)
 
@@ -984,7 +984,7 @@ __Usage:__
 
 ### Cluster_manager.rollback_node_pool_upgrade
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.rollback_node_pool_upgrade.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.rollback_node_pool_upgrade.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.rollback_node_pool_upgrade.js,samples/README.md)
 
@@ -1001,7 +1001,7 @@ __Usage:__
 
 ### Cluster_manager.set_addons_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.set_addons_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.set_addons_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_addons_config.js,samples/README.md)
 
@@ -1018,7 +1018,7 @@ __Usage:__
 
 ### Cluster_manager.set_labels
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.set_labels.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.set_labels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_labels.js,samples/README.md)
 
@@ -1035,7 +1035,7 @@ __Usage:__
 
 ### Cluster_manager.set_legacy_abac
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.set_legacy_abac.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.set_legacy_abac.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_legacy_abac.js,samples/README.md)
 
@@ -1052,7 +1052,7 @@ __Usage:__
 
 ### Cluster_manager.set_locations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.set_locations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.set_locations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_locations.js,samples/README.md)
 
@@ -1069,7 +1069,7 @@ __Usage:__
 
 ### Cluster_manager.set_logging_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.set_logging_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.set_logging_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_logging_service.js,samples/README.md)
 
@@ -1086,7 +1086,7 @@ __Usage:__
 
 ### Cluster_manager.set_maintenance_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.set_maintenance_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.set_maintenance_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_maintenance_policy.js,samples/README.md)
 
@@ -1101,16 +1101,16 @@ __Usage:__
 
 
 
-### Cluster_manager.set_master_auth
+### Cluster_manager.set_main_auth
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.set_master_auth.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.set_main_auth.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_master_auth.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_main_auth.js,samples/README.md)
 
 __Usage:__
 
 
-`node packages/google-container/samples/generated/v1beta1/cluster_manager.set_master_auth.js`
+`node packages/google-container/samples/generated/v1beta1/cluster_manager.set_main_auth.js`
 
 
 -----
@@ -1120,7 +1120,7 @@ __Usage:__
 
 ### Cluster_manager.set_monitoring_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.set_monitoring_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.set_monitoring_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_monitoring_service.js,samples/README.md)
 
@@ -1137,7 +1137,7 @@ __Usage:__
 
 ### Cluster_manager.set_network_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.set_network_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.set_network_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_network_policy.js,samples/README.md)
 
@@ -1154,7 +1154,7 @@ __Usage:__
 
 ### Cluster_manager.set_node_pool_autoscaling
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.set_node_pool_autoscaling.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.set_node_pool_autoscaling.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_node_pool_autoscaling.js,samples/README.md)
 
@@ -1171,7 +1171,7 @@ __Usage:__
 
 ### Cluster_manager.set_node_pool_management
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.set_node_pool_management.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.set_node_pool_management.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_node_pool_management.js,samples/README.md)
 
@@ -1188,7 +1188,7 @@ __Usage:__
 
 ### Cluster_manager.set_node_pool_size
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.set_node_pool_size.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.set_node_pool_size.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_node_pool_size.js,samples/README.md)
 
@@ -1205,7 +1205,7 @@ __Usage:__
 
 ### Cluster_manager.start_i_p_rotation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.start_i_p_rotation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.start_i_p_rotation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.start_i_p_rotation.js,samples/README.md)
 
@@ -1222,7 +1222,7 @@ __Usage:__
 
 ### Cluster_manager.update_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.update_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.update_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.update_cluster.js,samples/README.md)
 
@@ -1237,16 +1237,16 @@ __Usage:__
 
 
 
-### Cluster_manager.update_master
+### Cluster_manager.update_main
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.update_master.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.update_main.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.update_master.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.update_main.js,samples/README.md)
 
 __Usage:__
 
 
-`node packages/google-container/samples/generated/v1beta1/cluster_manager.update_master.js`
+`node packages/google-container/samples/generated/v1beta1/cluster_manager.update_main.js`
 
 
 -----
@@ -1256,7 +1256,7 @@ __Usage:__
 
 ### Cluster_manager.update_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/generated/v1beta1/cluster_manager.update_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.update_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.update_node_pool.js,samples/README.md)
 
@@ -1273,7 +1273,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-container/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/quickstart.js,samples/README.md)
 

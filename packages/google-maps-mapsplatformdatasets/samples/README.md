@@ -44,7 +44,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Maps_platform_datasets.create_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.create_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.create_dataset.js,samples/README.md)
 
@@ -61,7 +61,7 @@ __Usage:__
 
 ### Maps_platform_datasets.delete_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.delete_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.delete_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.delete_dataset.js,samples/README.md)
 
@@ -78,7 +78,7 @@ __Usage:__
 
 ### Maps_platform_datasets.fetch_dataset_errors
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.fetch_dataset_errors.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.fetch_dataset_errors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.fetch_dataset_errors.js,samples/README.md)
 
@@ -95,7 +95,7 @@ __Usage:__
 
 ### Maps_platform_datasets.get_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.get_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.get_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.get_dataset.js,samples/README.md)
 
@@ -112,7 +112,7 @@ __Usage:__
 
 ### Maps_platform_datasets.list_datasets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.list_datasets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.list_datasets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.list_datasets.js,samples/README.md)
 
@@ -129,7 +129,7 @@ __Usage:__
 
 ### Maps_platform_datasets.update_dataset_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.update_dataset_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.update_dataset_metadata.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.update_dataset_metadata.js,samples/README.md)
 
@@ -146,7 +146,7 @@ __Usage:__
 
 ### Maps_platform_datasets_v1_alpha.create_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.create_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.create_dataset.js,samples/README.md)
 
@@ -163,7 +163,7 @@ __Usage:__
 
 ### Maps_platform_datasets_v1_alpha.delete_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.delete_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.delete_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.delete_dataset.js,samples/README.md)
 
@@ -180,7 +180,7 @@ __Usage:__
 
 ### Maps_platform_datasets_v1_alpha.delete_dataset_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.delete_dataset_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.delete_dataset_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.delete_dataset_version.js,samples/README.md)
 
@@ -197,7 +197,7 @@ __Usage:__
 
 ### Maps_platform_datasets_v1_alpha.get_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.get_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.get_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.get_dataset.js,samples/README.md)
 
@@ -214,7 +214,7 @@ __Usage:__
 
 ### Maps_platform_datasets_v1_alpha.list_dataset_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.list_dataset_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.list_dataset_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.list_dataset_versions.js,samples/README.md)
 
@@ -231,7 +231,7 @@ __Usage:__
 
 ### Maps_platform_datasets_v1_alpha.list_datasets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.list_datasets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.list_datasets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.list_datasets.js,samples/README.md)
 
@@ -248,7 +248,7 @@ __Usage:__
 
 ### Maps_platform_datasets_v1_alpha.update_dataset_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.update_dataset_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.update_dataset_metadata.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1alpha/maps_platform_datasets_v1_alpha.update_dataset_metadata.js,samples/README.md)
 
@@ -265,7 +265,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-mapsplatformdatasets/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/quickstart.js,samples/README.md)
 

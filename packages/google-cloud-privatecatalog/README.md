@@ -87,10 +87,10 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Private_catalog.search_catalogs | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_catalogs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_catalogs.js,packages/google-cloud-privatecatalog/samples/README.md) |
-| Private_catalog.search_products | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_products.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_products.js,packages/google-cloud-privatecatalog/samples/README.md) |
-| Private_catalog.search_versions | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_versions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_versions.js,packages/google-cloud-privatecatalog/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-privatecatalog/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/quickstart.js,packages/google-cloud-privatecatalog/samples/README.md) |
+| Private_catalog.search_catalogs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_catalogs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_catalogs.js,packages/google-cloud-privatecatalog/samples/README.md) |
+| Private_catalog.search_products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_products.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_products.js,packages/google-cloud-privatecatalog/samples/README.md) |
+| Private_catalog.search_versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_versions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_versions.js,packages/google-cloud-privatecatalog/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/quickstart.js,packages/google-cloud-privatecatalog/samples/README.md) |
 
 
 
@@ -139,7 +139,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -151,7 +151,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/private-catalog/latest
 [product-docs]: https://cloud.google.com/private-catalog/

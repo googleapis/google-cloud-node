@@ -62,11 +62,11 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| I_d_s.create_endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-ids/samples/generated/v1/i_d_s.create_endpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-ids/samples/generated/v1/i_d_s.create_endpoint.js,packages/google-cloud-ids/samples/README.md) |
-| I_d_s.delete_endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-ids/samples/generated/v1/i_d_s.delete_endpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-ids/samples/generated/v1/i_d_s.delete_endpoint.js,packages/google-cloud-ids/samples/README.md) |
-| I_d_s.get_endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-ids/samples/generated/v1/i_d_s.get_endpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-ids/samples/generated/v1/i_d_s.get_endpoint.js,packages/google-cloud-ids/samples/README.md) |
-| I_d_s.list_endpoints | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-ids/samples/generated/v1/i_d_s.list_endpoints.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-ids/samples/generated/v1/i_d_s.list_endpoints.js,packages/google-cloud-ids/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-ids/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-ids/samples/quickstart.js,packages/google-cloud-ids/samples/README.md) |
+| I_d_s.create_endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ids/samples/generated/v1/i_d_s.create_endpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-ids/samples/generated/v1/i_d_s.create_endpoint.js,packages/google-cloud-ids/samples/README.md) |
+| I_d_s.delete_endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ids/samples/generated/v1/i_d_s.delete_endpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-ids/samples/generated/v1/i_d_s.delete_endpoint.js,packages/google-cloud-ids/samples/README.md) |
+| I_d_s.get_endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ids/samples/generated/v1/i_d_s.get_endpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-ids/samples/generated/v1/i_d_s.get_endpoint.js,packages/google-cloud-ids/samples/README.md) |
+| I_d_s.list_endpoints | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ids/samples/generated/v1/i_d_s.list_endpoints.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-ids/samples/generated/v1/i_d_s.list_endpoints.js,packages/google-cloud-ids/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ids/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-ids/samples/quickstart.js,packages/google-cloud-ids/samples/README.md) |
 
 
 
@@ -116,7 +116,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -128,7 +128,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/intrusion-detection-system
 [product-docs]: https://cloud.google.com/intrusion-detection-system/

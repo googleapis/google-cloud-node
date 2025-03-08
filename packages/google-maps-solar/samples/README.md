@@ -34,7 +34,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Solar.find_closest_building_insights
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-solar/samples/generated/v1/solar.find_closest_building_insights.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/solar.find_closest_building_insights.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/generated/v1/solar.find_closest_building_insights.js,samples/README.md)
 
@@ -51,7 +51,7 @@ __Usage:__
 
 ### Solar.get_data_layers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-solar/samples/generated/v1/solar.get_data_layers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/solar.get_data_layers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/generated/v1/solar.get_data_layers.js,samples/README.md)
 
@@ -68,7 +68,7 @@ __Usage:__
 
 ### Solar.get_geo_tiff
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-solar/samples/generated/v1/solar.get_geo_tiff.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/solar.get_geo_tiff.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/generated/v1/solar.get_geo_tiff.js,samples/README.md)
 
@@ -85,7 +85,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-solar/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/quickstart.js,samples/README.md)
 

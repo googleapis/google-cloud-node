@@ -118,10 +118,10 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Solar.find_closest_building_insights | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-solar/samples/generated/v1/solar.find_closest_building_insights.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/generated/v1/solar.find_closest_building_insights.js,packages/google-maps-solar/samples/README.md) |
-| Solar.get_data_layers | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-solar/samples/generated/v1/solar.get_data_layers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/generated/v1/solar.get_data_layers.js,packages/google-maps-solar/samples/README.md) |
-| Solar.get_geo_tiff | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-solar/samples/generated/v1/solar.get_geo_tiff.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/generated/v1/solar.get_geo_tiff.js,packages/google-maps-solar/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-solar/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/quickstart.js,packages/google-maps-solar/samples/README.md) |
+| Solar.find_closest_building_insights | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/solar.find_closest_building_insights.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/generated/v1/solar.find_closest_building_insights.js,packages/google-maps-solar/samples/README.md) |
+| Solar.get_data_layers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/solar.get_data_layers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/generated/v1/solar.get_data_layers.js,packages/google-maps-solar/samples/README.md) |
+| Solar.get_geo_tiff | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/solar.get_geo_tiff.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/generated/v1/solar.get_geo_tiff.js,packages/google-maps-solar/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/quickstart.js,packages/google-maps-solar/samples/README.md) |
 
 
 
@@ -170,7 +170,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -182,7 +182,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/solar/latest
 [product-docs]: https://developers.google.com/maps/documentation/solar/overview

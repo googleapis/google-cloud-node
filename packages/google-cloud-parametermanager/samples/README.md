@@ -42,7 +42,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Parameter_manager.create_parameter
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.create_parameter.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.create_parameter.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.create_parameter.js,samples/README.md)
 
@@ -59,7 +59,7 @@ __Usage:__
 
 ### Parameter_manager.create_parameter_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.create_parameter_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.create_parameter_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.create_parameter_version.js,samples/README.md)
 
@@ -76,7 +76,7 @@ __Usage:__
 
 ### Parameter_manager.delete_parameter
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.delete_parameter.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.delete_parameter.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.delete_parameter.js,samples/README.md)
 
@@ -93,7 +93,7 @@ __Usage:__
 
 ### Parameter_manager.delete_parameter_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.delete_parameter_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.delete_parameter_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.delete_parameter_version.js,samples/README.md)
 
@@ -110,7 +110,7 @@ __Usage:__
 
 ### Parameter_manager.get_parameter
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.get_parameter.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.get_parameter.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.get_parameter.js,samples/README.md)
 
@@ -127,7 +127,7 @@ __Usage:__
 
 ### Parameter_manager.get_parameter_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.get_parameter_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.get_parameter_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.get_parameter_version.js,samples/README.md)
 
@@ -144,7 +144,7 @@ __Usage:__
 
 ### Parameter_manager.list_parameter_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.list_parameter_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.list_parameter_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.list_parameter_versions.js,samples/README.md)
 
@@ -161,7 +161,7 @@ __Usage:__
 
 ### Parameter_manager.list_parameters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.list_parameters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.list_parameters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.list_parameters.js,samples/README.md)
 
@@ -178,7 +178,7 @@ __Usage:__
 
 ### Parameter_manager.render_parameter_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.render_parameter_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.render_parameter_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.render_parameter_version.js,samples/README.md)
 
@@ -195,7 +195,7 @@ __Usage:__
 
 ### Parameter_manager.update_parameter
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.update_parameter.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.update_parameter.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.update_parameter.js,samples/README.md)
 
@@ -212,7 +212,7 @@ __Usage:__
 
 ### Parameter_manager.update_parameter_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.update_parameter_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.update_parameter_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.update_parameter_version.js,samples/README.md)
 
@@ -229,7 +229,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parametermanager/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parametermanager/samples/quickstart.js,samples/README.md)
 

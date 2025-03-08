@@ -32,7 +32,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Area_insights.compute_insights
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-areainsights/samples/generated/v1/area_insights.compute_insights.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-areainsights/samples/generated/v1/area_insights.compute_insights.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-areainsights/samples/generated/v1/area_insights.compute_insights.js,samples/README.md)
 
@@ -49,7 +49,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-areainsights/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-areainsights/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-areainsights/samples/quickstart.js,samples/README.md)
 

@@ -42,7 +42,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Case_attachment_service.list_attachments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-support/samples/generated/v2/case_attachment_service.list_attachments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_attachment_service.list_attachments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2/case_attachment_service.list_attachments.js,samples/README.md)
 
@@ -59,7 +59,7 @@ __Usage:__
 
 ### Case_service.close_case
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-support/samples/generated/v2/case_service.close_case.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_service.close_case.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2/case_service.close_case.js,samples/README.md)
 
@@ -76,7 +76,7 @@ __Usage:__
 
 ### Case_service.create_case
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-support/samples/generated/v2/case_service.create_case.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_service.create_case.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2/case_service.create_case.js,samples/README.md)
 
@@ -93,7 +93,7 @@ __Usage:__
 
 ### Case_service.escalate_case
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-support/samples/generated/v2/case_service.escalate_case.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_service.escalate_case.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2/case_service.escalate_case.js,samples/README.md)
 
@@ -110,7 +110,7 @@ __Usage:__
 
 ### Case_service.get_case
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-support/samples/generated/v2/case_service.get_case.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_service.get_case.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2/case_service.get_case.js,samples/README.md)
 
@@ -127,7 +127,7 @@ __Usage:__
 
 ### Case_service.list_cases
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-support/samples/generated/v2/case_service.list_cases.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_service.list_cases.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2/case_service.list_cases.js,samples/README.md)
 
@@ -144,7 +144,7 @@ __Usage:__
 
 ### Case_service.search_case_classifications
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-support/samples/generated/v2/case_service.search_case_classifications.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_service.search_case_classifications.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2/case_service.search_case_classifications.js,samples/README.md)
 
@@ -161,7 +161,7 @@ __Usage:__
 
 ### Case_service.search_cases
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-support/samples/generated/v2/case_service.search_cases.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_service.search_cases.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2/case_service.search_cases.js,samples/README.md)
 
@@ -178,7 +178,7 @@ __Usage:__
 
 ### Case_service.update_case
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-support/samples/generated/v2/case_service.update_case.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_service.update_case.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2/case_service.update_case.js,samples/README.md)
 
@@ -195,7 +195,7 @@ __Usage:__
 
 ### Comment_service.create_comment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-support/samples/generated/v2/comment_service.create_comment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/comment_service.create_comment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2/comment_service.create_comment.js,samples/README.md)
 
@@ -212,7 +212,7 @@ __Usage:__
 
 ### Comment_service.list_comments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-support/samples/generated/v2/comment_service.list_comments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/comment_service.list_comments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2/comment_service.list_comments.js,samples/README.md)
 
@@ -229,7 +229,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-support/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/quickstart.js,samples/README.md)
 

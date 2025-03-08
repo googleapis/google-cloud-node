@@ -54,7 +54,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Cloud_controls_partner_core.get_customer
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_customer.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_customer.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_customer.js,samples/README.md)
 
@@ -71,7 +71,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.get_ekm_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_ekm_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_ekm_connections.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_ekm_connections.js,samples/README.md)
 
@@ -88,7 +88,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.get_partner
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_partner.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_partner.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_partner.js,samples/README.md)
 
@@ -105,7 +105,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.get_partner_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_partner_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_partner_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_partner_permissions.js,samples/README.md)
 
@@ -122,7 +122,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.get_workload
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_workload.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_workload.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_workload.js,samples/README.md)
 
@@ -139,7 +139,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.list_access_approval_requests
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_access_approval_requests.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_access_approval_requests.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_access_approval_requests.js,samples/README.md)
 
@@ -156,7 +156,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.list_customers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_customers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_customers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_customers.js,samples/README.md)
 
@@ -173,7 +173,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.list_workloads
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_workloads.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_workloads.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_workloads.js,samples/README.md)
 
@@ -190,7 +190,7 @@ __Usage:__
 
 ### Cloud_controls_partner_monitoring.get_violation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_monitoring.get_violation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_monitoring.get_violation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_monitoring.get_violation.js,samples/README.md)
 
@@ -207,7 +207,7 @@ __Usage:__
 
 ### Cloud_controls_partner_monitoring.list_violations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_monitoring.list_violations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_monitoring.list_violations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_monitoring.list_violations.js,samples/README.md)
 
@@ -224,7 +224,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.create_customer
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.create_customer.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.create_customer.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.create_customer.js,samples/README.md)
 
@@ -241,7 +241,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.delete_customer
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.delete_customer.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.delete_customer.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.delete_customer.js,samples/README.md)
 
@@ -258,7 +258,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.get_customer
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_customer.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_customer.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_customer.js,samples/README.md)
 
@@ -275,7 +275,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.get_ekm_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_ekm_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_ekm_connections.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_ekm_connections.js,samples/README.md)
 
@@ -292,7 +292,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.get_partner
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_partner.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_partner.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_partner.js,samples/README.md)
 
@@ -309,7 +309,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.get_partner_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_partner_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_partner_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_partner_permissions.js,samples/README.md)
 
@@ -326,7 +326,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.get_workload
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_workload.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_workload.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_workload.js,samples/README.md)
 
@@ -343,7 +343,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.list_access_approval_requests
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_access_approval_requests.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_access_approval_requests.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_access_approval_requests.js,samples/README.md)
 
@@ -360,7 +360,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.list_customers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_customers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_customers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_customers.js,samples/README.md)
 
@@ -377,7 +377,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.list_workloads
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_workloads.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_workloads.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_workloads.js,samples/README.md)
 
@@ -394,7 +394,7 @@ __Usage:__
 
 ### Cloud_controls_partner_core.update_customer
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.update_customer.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.update_customer.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.update_customer.js,samples/README.md)
 
@@ -411,7 +411,7 @@ __Usage:__
 
 ### Cloud_controls_partner_monitoring.get_violation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_monitoring.get_violation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_monitoring.get_violation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_monitoring.get_violation.js,samples/README.md)
 
@@ -428,7 +428,7 @@ __Usage:__
 
 ### Cloud_controls_partner_monitoring.list_violations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_monitoring.list_violations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_monitoring.list_violations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_monitoring.list_violations.js,samples/README.md)
 
@@ -445,7 +445,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-cloudcontrolspartner/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/quickstart.js,samples/README.md)
 

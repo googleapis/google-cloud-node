@@ -43,7 +43,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Account_labels_service.create_account_label
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-css/samples/generated/v1/account_labels_service.create_account_label.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/account_labels_service.create_account_label.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-css/samples/generated/v1/account_labels_service.create_account_label.js,samples/README.md)
 
@@ -60,7 +60,7 @@ __Usage:__
 
 ### Account_labels_service.delete_account_label
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-css/samples/generated/v1/account_labels_service.delete_account_label.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/account_labels_service.delete_account_label.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-css/samples/generated/v1/account_labels_service.delete_account_label.js,samples/README.md)
 
@@ -77,7 +77,7 @@ __Usage:__
 
 ### Account_labels_service.list_account_labels
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-css/samples/generated/v1/account_labels_service.list_account_labels.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/account_labels_service.list_account_labels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-css/samples/generated/v1/account_labels_service.list_account_labels.js,samples/README.md)
 
@@ -94,7 +94,7 @@ __Usage:__
 
 ### Account_labels_service.update_account_label
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-css/samples/generated/v1/account_labels_service.update_account_label.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/account_labels_service.update_account_label.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-css/samples/generated/v1/account_labels_service.update_account_label.js,samples/README.md)
 
@@ -111,7 +111,7 @@ __Usage:__
 
 ### Accounts_service.get_account
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-css/samples/generated/v1/accounts_service.get_account.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/accounts_service.get_account.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-css/samples/generated/v1/accounts_service.get_account.js,samples/README.md)
 
@@ -128,7 +128,7 @@ __Usage:__
 
 ### Accounts_service.list_child_accounts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-css/samples/generated/v1/accounts_service.list_child_accounts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/accounts_service.list_child_accounts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-css/samples/generated/v1/accounts_service.list_child_accounts.js,samples/README.md)
 
@@ -145,7 +145,7 @@ __Usage:__
 
 ### Accounts_service.update_labels
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-css/samples/generated/v1/accounts_service.update_labels.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/accounts_service.update_labels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-css/samples/generated/v1/accounts_service.update_labels.js,samples/README.md)
 
@@ -162,7 +162,7 @@ __Usage:__
 
 ### Css_product_inputs_service.delete_css_product_input
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-css/samples/generated/v1/css_product_inputs_service.delete_css_product_input.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/css_product_inputs_service.delete_css_product_input.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-css/samples/generated/v1/css_product_inputs_service.delete_css_product_input.js,samples/README.md)
 
@@ -179,7 +179,7 @@ __Usage:__
 
 ### Css_product_inputs_service.insert_css_product_input
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-css/samples/generated/v1/css_product_inputs_service.insert_css_product_input.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/css_product_inputs_service.insert_css_product_input.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-css/samples/generated/v1/css_product_inputs_service.insert_css_product_input.js,samples/README.md)
 
@@ -196,7 +196,7 @@ __Usage:__
 
 ### Css_product_inputs_service.update_css_product_input
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-css/samples/generated/v1/css_product_inputs_service.update_css_product_input.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/css_product_inputs_service.update_css_product_input.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-css/samples/generated/v1/css_product_inputs_service.update_css_product_input.js,samples/README.md)
 
@@ -213,7 +213,7 @@ __Usage:__
 
 ### Css_products_service.get_css_product
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-css/samples/generated/v1/css_products_service.get_css_product.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/css_products_service.get_css_product.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-css/samples/generated/v1/css_products_service.get_css_product.js,samples/README.md)
 
@@ -230,7 +230,7 @@ __Usage:__
 
 ### Css_products_service.list_css_products
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-css/samples/generated/v1/css_products_service.list_css_products.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/css_products_service.list_css_products.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-css/samples/generated/v1/css_products_service.list_css_products.js,samples/README.md)
 
@@ -247,7 +247,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-css/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-css/samples/quickstart.js,samples/README.md)
 

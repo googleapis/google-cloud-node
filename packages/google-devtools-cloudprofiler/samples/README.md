@@ -35,7 +35,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Export_service.list_profiles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudprofiler/samples/generated/v2/export_service.list_profiles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/generated/v2/export_service.list_profiles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/generated/v2/export_service.list_profiles.js,samples/README.md)
 
@@ -52,7 +52,7 @@ __Usage:__
 
 ### Profiler_service.create_offline_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_offline_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_offline_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_offline_profile.js,samples/README.md)
 
@@ -69,7 +69,7 @@ __Usage:__
 
 ### Profiler_service.create_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_profile.js,samples/README.md)
 
@@ -86,7 +86,7 @@ __Usage:__
 
 ### Profiler_service.update_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.update_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.update_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.update_profile.js,samples/README.md)
 
@@ -103,7 +103,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudprofiler/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/quickstart.js,samples/README.md)
 

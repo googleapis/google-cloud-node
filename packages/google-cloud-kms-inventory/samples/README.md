@@ -34,7 +34,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Key_dashboard_service.list_crypto_keys
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-kms-inventory/samples/generated/v1/key_dashboard_service.list_crypto_keys.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/generated/v1/key_dashboard_service.list_crypto_keys.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms-inventory/samples/generated/v1/key_dashboard_service.list_crypto_keys.js,samples/README.md)
 
@@ -51,7 +51,7 @@ __Usage:__
 
 ### Key_tracking_service.get_protected_resources_summary
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-kms-inventory/samples/generated/v1/key_tracking_service.get_protected_resources_summary.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/generated/v1/key_tracking_service.get_protected_resources_summary.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms-inventory/samples/generated/v1/key_tracking_service.get_protected_resources_summary.js,samples/README.md)
 
@@ -68,7 +68,7 @@ __Usage:__
 
 ### Key_tracking_service.search_protected_resources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-kms-inventory/samples/generated/v1/key_tracking_service.search_protected_resources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/generated/v1/key_tracking_service.search_protected_resources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms-inventory/samples/generated/v1/key_tracking_service.search_protected_resources.js,samples/README.md)
 
@@ -85,7 +85,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-kms-inventory/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms-inventory/samples/quickstart.js,samples/README.md)
 

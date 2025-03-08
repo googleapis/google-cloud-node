@@ -70,7 +70,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Web_security_scanner.create_scan_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.create_scan_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.create_scan_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.create_scan_config.js,samples/README.md)
 
@@ -87,7 +87,7 @@ __Usage:__
 
 ### Web_security_scanner.delete_scan_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.delete_scan_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.delete_scan_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.delete_scan_config.js,samples/README.md)
 
@@ -104,7 +104,7 @@ __Usage:__
 
 ### Web_security_scanner.get_finding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.get_finding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.get_finding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.get_finding.js,samples/README.md)
 
@@ -121,7 +121,7 @@ __Usage:__
 
 ### Web_security_scanner.get_scan_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.get_scan_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.get_scan_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.get_scan_config.js,samples/README.md)
 
@@ -138,7 +138,7 @@ __Usage:__
 
 ### Web_security_scanner.get_scan_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.get_scan_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.get_scan_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.get_scan_run.js,samples/README.md)
 
@@ -155,7 +155,7 @@ __Usage:__
 
 ### Web_security_scanner.list_crawled_urls
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_crawled_urls.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_crawled_urls.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_crawled_urls.js,samples/README.md)
 
@@ -172,7 +172,7 @@ __Usage:__
 
 ### Web_security_scanner.list_finding_type_stats
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_finding_type_stats.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_finding_type_stats.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_finding_type_stats.js,samples/README.md)
 
@@ -189,7 +189,7 @@ __Usage:__
 
 ### Web_security_scanner.list_findings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_findings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_findings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_findings.js,samples/README.md)
 
@@ -206,7 +206,7 @@ __Usage:__
 
 ### Web_security_scanner.list_scan_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_scan_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_scan_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_scan_configs.js,samples/README.md)
 
@@ -223,7 +223,7 @@ __Usage:__
 
 ### Web_security_scanner.list_scan_runs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_scan_runs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_scan_runs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.list_scan_runs.js,samples/README.md)
 
@@ -240,7 +240,7 @@ __Usage:__
 
 ### Web_security_scanner.start_scan_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.start_scan_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.start_scan_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.start_scan_run.js,samples/README.md)
 
@@ -257,7 +257,7 @@ __Usage:__
 
 ### Web_security_scanner.stop_scan_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.stop_scan_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.stop_scan_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.stop_scan_run.js,samples/README.md)
 
@@ -274,7 +274,7 @@ __Usage:__
 
 ### Web_security_scanner.update_scan_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.update_scan_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.update_scan_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.update_scan_config.js,samples/README.md)
 
@@ -291,7 +291,7 @@ __Usage:__
 
 ### Web_security_scanner.create_scan_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.create_scan_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.create_scan_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.create_scan_config.js,samples/README.md)
 
@@ -308,7 +308,7 @@ __Usage:__
 
 ### Web_security_scanner.delete_scan_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.delete_scan_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.delete_scan_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.delete_scan_config.js,samples/README.md)
 
@@ -325,7 +325,7 @@ __Usage:__
 
 ### Web_security_scanner.get_finding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.get_finding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.get_finding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.get_finding.js,samples/README.md)
 
@@ -342,7 +342,7 @@ __Usage:__
 
 ### Web_security_scanner.get_scan_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.get_scan_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.get_scan_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.get_scan_config.js,samples/README.md)
 
@@ -359,7 +359,7 @@ __Usage:__
 
 ### Web_security_scanner.get_scan_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.get_scan_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.get_scan_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.get_scan_run.js,samples/README.md)
 
@@ -376,7 +376,7 @@ __Usage:__
 
 ### Web_security_scanner.list_crawled_urls
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_crawled_urls.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_crawled_urls.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_crawled_urls.js,samples/README.md)
 
@@ -393,7 +393,7 @@ __Usage:__
 
 ### Web_security_scanner.list_finding_type_stats
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_finding_type_stats.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_finding_type_stats.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_finding_type_stats.js,samples/README.md)
 
@@ -410,7 +410,7 @@ __Usage:__
 
 ### Web_security_scanner.list_findings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_findings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_findings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_findings.js,samples/README.md)
 
@@ -427,7 +427,7 @@ __Usage:__
 
 ### Web_security_scanner.list_scan_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_scan_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_scan_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_scan_configs.js,samples/README.md)
 
@@ -444,7 +444,7 @@ __Usage:__
 
 ### Web_security_scanner.list_scan_runs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_scan_runs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_scan_runs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.list_scan_runs.js,samples/README.md)
 
@@ -461,7 +461,7 @@ __Usage:__
 
 ### Web_security_scanner.start_scan_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.start_scan_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.start_scan_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.start_scan_run.js,samples/README.md)
 
@@ -478,7 +478,7 @@ __Usage:__
 
 ### Web_security_scanner.stop_scan_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.stop_scan_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.stop_scan_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.stop_scan_run.js,samples/README.md)
 
@@ -495,7 +495,7 @@ __Usage:__
 
 ### Web_security_scanner.update_scan_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.update_scan_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.update_scan_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.update_scan_config.js,samples/README.md)
 
@@ -512,7 +512,7 @@ __Usage:__
 
 ### Web_security_scanner.create_scan_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.create_scan_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.create_scan_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.create_scan_config.js,samples/README.md)
 
@@ -529,7 +529,7 @@ __Usage:__
 
 ### Web_security_scanner.delete_scan_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.delete_scan_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.delete_scan_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.delete_scan_config.js,samples/README.md)
 
@@ -546,7 +546,7 @@ __Usage:__
 
 ### Web_security_scanner.get_finding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.get_finding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.get_finding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.get_finding.js,samples/README.md)
 
@@ -563,7 +563,7 @@ __Usage:__
 
 ### Web_security_scanner.get_scan_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.get_scan_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.get_scan_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.get_scan_config.js,samples/README.md)
 
@@ -580,7 +580,7 @@ __Usage:__
 
 ### Web_security_scanner.get_scan_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.get_scan_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.get_scan_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.get_scan_run.js,samples/README.md)
 
@@ -597,7 +597,7 @@ __Usage:__
 
 ### Web_security_scanner.list_crawled_urls
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_crawled_urls.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_crawled_urls.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_crawled_urls.js,samples/README.md)
 
@@ -614,7 +614,7 @@ __Usage:__
 
 ### Web_security_scanner.list_finding_type_stats
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_finding_type_stats.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_finding_type_stats.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_finding_type_stats.js,samples/README.md)
 
@@ -631,7 +631,7 @@ __Usage:__
 
 ### Web_security_scanner.list_findings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_findings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_findings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_findings.js,samples/README.md)
 
@@ -648,7 +648,7 @@ __Usage:__
 
 ### Web_security_scanner.list_scan_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_scan_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_scan_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_scan_configs.js,samples/README.md)
 
@@ -665,7 +665,7 @@ __Usage:__
 
 ### Web_security_scanner.list_scan_runs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_scan_runs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_scan_runs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.list_scan_runs.js,samples/README.md)
 
@@ -682,7 +682,7 @@ __Usage:__
 
 ### Web_security_scanner.start_scan_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.start_scan_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.start_scan_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.start_scan_run.js,samples/README.md)
 
@@ -699,7 +699,7 @@ __Usage:__
 
 ### Web_security_scanner.stop_scan_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.stop_scan_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.stop_scan_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.stop_scan_run.js,samples/README.md)
 
@@ -716,7 +716,7 @@ __Usage:__
 
 ### Web_security_scanner.update_scan_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.update_scan_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.update_scan_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.update_scan_config.js,samples/README.md)
 
@@ -733,7 +733,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-websecurityscanner/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-websecurityscanner/samples/quickstart.js,samples/README.md)
 

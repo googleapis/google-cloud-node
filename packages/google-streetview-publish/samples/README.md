@@ -45,7 +45,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Street_view_publish_service.batch_delete_photos
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.batch_delete_photos.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.batch_delete_photos.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.batch_delete_photos.js,samples/README.md)
 
@@ -62,7 +62,7 @@ __Usage:__
 
 ### Street_view_publish_service.batch_get_photos
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.batch_get_photos.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.batch_get_photos.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.batch_get_photos.js,samples/README.md)
 
@@ -79,7 +79,7 @@ __Usage:__
 
 ### Street_view_publish_service.batch_update_photos
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.batch_update_photos.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.batch_update_photos.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.batch_update_photos.js,samples/README.md)
 
@@ -96,7 +96,7 @@ __Usage:__
 
 ### Street_view_publish_service.create_photo
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.create_photo.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.create_photo.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.create_photo.js,samples/README.md)
 
@@ -113,7 +113,7 @@ __Usage:__
 
 ### Street_view_publish_service.create_photo_sequence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.create_photo_sequence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.create_photo_sequence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.create_photo_sequence.js,samples/README.md)
 
@@ -130,7 +130,7 @@ __Usage:__
 
 ### Street_view_publish_service.delete_photo
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.delete_photo.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.delete_photo.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.delete_photo.js,samples/README.md)
 
@@ -147,7 +147,7 @@ __Usage:__
 
 ### Street_view_publish_service.delete_photo_sequence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.delete_photo_sequence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.delete_photo_sequence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.delete_photo_sequence.js,samples/README.md)
 
@@ -164,7 +164,7 @@ __Usage:__
 
 ### Street_view_publish_service.get_photo
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.get_photo.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.get_photo.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.get_photo.js,samples/README.md)
 
@@ -181,7 +181,7 @@ __Usage:__
 
 ### Street_view_publish_service.get_photo_sequence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.get_photo_sequence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.get_photo_sequence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.get_photo_sequence.js,samples/README.md)
 
@@ -198,7 +198,7 @@ __Usage:__
 
 ### Street_view_publish_service.list_photo_sequences
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.list_photo_sequences.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.list_photo_sequences.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.list_photo_sequences.js,samples/README.md)
 
@@ -215,7 +215,7 @@ __Usage:__
 
 ### Street_view_publish_service.list_photos
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.list_photos.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.list_photos.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.list_photos.js,samples/README.md)
 
@@ -232,7 +232,7 @@ __Usage:__
 
 ### Street_view_publish_service.start_photo_sequence_upload
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.start_photo_sequence_upload.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.start_photo_sequence_upload.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.start_photo_sequence_upload.js,samples/README.md)
 
@@ -249,7 +249,7 @@ __Usage:__
 
 ### Street_view_publish_service.start_upload
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.start_upload.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.start_upload.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.start_upload.js,samples/README.md)
 
@@ -266,7 +266,7 @@ __Usage:__
 
 ### Street_view_publish_service.update_photo
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.update_photo.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.update_photo.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.update_photo.js,samples/README.md)
 
@@ -283,7 +283,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-streetview-publish/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-streetview-publish/samples/quickstart.js,samples/README.md)
 

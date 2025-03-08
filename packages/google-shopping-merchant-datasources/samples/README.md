@@ -38,7 +38,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Data_sources_service.create_data_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.create_data_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.create_data_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.create_data_source.js,samples/README.md)
 
@@ -55,7 +55,7 @@ __Usage:__
 
 ### Data_sources_service.delete_data_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.delete_data_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.delete_data_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.delete_data_source.js,samples/README.md)
 
@@ -72,7 +72,7 @@ __Usage:__
 
 ### Data_sources_service.fetch_data_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.fetch_data_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.fetch_data_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.fetch_data_source.js,samples/README.md)
 
@@ -89,7 +89,7 @@ __Usage:__
 
 ### Data_sources_service.get_data_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.get_data_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.get_data_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.get_data_source.js,samples/README.md)
 
@@ -106,7 +106,7 @@ __Usage:__
 
 ### Data_sources_service.list_data_sources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.list_data_sources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.list_data_sources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.list_data_sources.js,samples/README.md)
 
@@ -123,7 +123,7 @@ __Usage:__
 
 ### Data_sources_service.update_data_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.update_data_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.update_data_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.update_data_source.js,samples/README.md)
 
@@ -140,7 +140,7 @@ __Usage:__
 
 ### File_uploads_service.get_file_upload
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-datasources/samples/generated/v1beta/file_uploads_service.get_file_upload.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/file_uploads_service.get_file_upload.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/file_uploads_service.get_file_upload.js,samples/README.md)
 
@@ -157,7 +157,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-datasources/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/quickstart.js,samples/README.md)
 

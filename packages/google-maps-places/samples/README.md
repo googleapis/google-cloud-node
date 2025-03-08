@@ -36,7 +36,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Places.autocomplete_places
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-places/samples/generated/v1/places.autocomplete_places.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-places/samples/generated/v1/places.autocomplete_places.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-places/samples/generated/v1/places.autocomplete_places.js,samples/README.md)
 
@@ -53,7 +53,7 @@ __Usage:__
 
 ### Places.get_photo_media
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-places/samples/generated/v1/places.get_photo_media.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-places/samples/generated/v1/places.get_photo_media.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-places/samples/generated/v1/places.get_photo_media.js,samples/README.md)
 
@@ -70,7 +70,7 @@ __Usage:__
 
 ### Places.get_place
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-places/samples/generated/v1/places.get_place.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-places/samples/generated/v1/places.get_place.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-places/samples/generated/v1/places.get_place.js,samples/README.md)
 
@@ -87,7 +87,7 @@ __Usage:__
 
 ### Places.search_nearby
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-places/samples/generated/v1/places.search_nearby.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-places/samples/generated/v1/places.search_nearby.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-places/samples/generated/v1/places.search_nearby.js,samples/README.md)
 
@@ -104,7 +104,7 @@ __Usage:__
 
 ### Places.search_text
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-places/samples/generated/v1/places.search_text.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-places/samples/generated/v1/places.search_text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-places/samples/generated/v1/places.search_text.js,samples/README.md)
 
@@ -121,7 +121,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-places/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-places/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-places/samples/quickstart.js,samples/README.md)
 
