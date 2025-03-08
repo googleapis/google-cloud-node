@@ -36,7 +36,7 @@
   * [Cluster_manager.set_locations](#cluster_manager.set_locations)
   * [Cluster_manager.set_logging_service](#cluster_manager.set_logging_service)
   * [Cluster_manager.set_maintenance_policy](#cluster_manager.set_maintenance_policy)
-  * [Cluster_manager.set_master_auth](#cluster_manager.set_master_auth)
+  * [Cluster_manager.set_main_auth](#cluster_manager.set_main_auth)
   * [Cluster_manager.set_monitoring_service](#cluster_manager.set_monitoring_service)
   * [Cluster_manager.set_network_policy](#cluster_manager.set_network_policy)
   * [Cluster_manager.set_node_pool_autoscaling](#cluster_manager.set_node_pool_autoscaling)
@@ -44,7 +44,7 @@
   * [Cluster_manager.set_node_pool_size](#cluster_manager.set_node_pool_size)
   * [Cluster_manager.start_i_p_rotation](#cluster_manager.start_i_p_rotation)
   * [Cluster_manager.update_cluster](#cluster_manager.update_cluster)
-  * [Cluster_manager.update_master](#cluster_manager.update_master)
+  * [Cluster_manager.update_main](#cluster_manager.update_main)
   * [Cluster_manager.update_node_pool](#cluster_manager.update_node_pool)
   * [Cluster_manager.cancel_operation](#cluster_manager.cancel_operation)
   * [Cluster_manager.check_autopilot_compatibility](#cluster_manager.check_autopilot_compatibility)
@@ -71,7 +71,7 @@
   * [Cluster_manager.set_locations](#cluster_manager.set_locations)
   * [Cluster_manager.set_logging_service](#cluster_manager.set_logging_service)
   * [Cluster_manager.set_maintenance_policy](#cluster_manager.set_maintenance_policy)
-  * [Cluster_manager.set_master_auth](#cluster_manager.set_master_auth)
+  * [Cluster_manager.set_main_auth](#cluster_manager.set_main_auth)
   * [Cluster_manager.set_monitoring_service](#cluster_manager.set_monitoring_service)
   * [Cluster_manager.set_network_policy](#cluster_manager.set_network_policy)
   * [Cluster_manager.set_node_pool_autoscaling](#cluster_manager.set_node_pool_autoscaling)
@@ -79,7 +79,7 @@
   * [Cluster_manager.set_node_pool_size](#cluster_manager.set_node_pool_size)
   * [Cluster_manager.start_i_p_rotation](#cluster_manager.start_i_p_rotation)
   * [Cluster_manager.update_cluster](#cluster_manager.update_cluster)
-  * [Cluster_manager.update_master](#cluster_manager.update_master)
+  * [Cluster_manager.update_main](#cluster_manager.update_main)
   * [Cluster_manager.update_node_pool](#cluster_manager.update_node_pool)
   * [Quickstart](#quickstart)
 
@@ -506,16 +506,16 @@ __Usage:__
 
 
 
-### Cluster_manager.set_master_auth
+### Cluster_manager.set_main_auth
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.set_master_auth.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.set_main_auth.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_master_auth.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.set_main_auth.js,samples/README.md)
 
 __Usage:__
 
 
-`node packages/google-container/samples/generated/v1/cluster_manager.set_master_auth.js`
+`node packages/google-container/samples/generated/v1/cluster_manager.set_main_auth.js`
 
 
 -----
@@ -642,16 +642,16 @@ __Usage:__
 
 
 
-### Cluster_manager.update_master
+### Cluster_manager.update_main
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.update_master.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.update_main.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.update_master.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.update_main.js,samples/README.md)
 
 __Usage:__
 
 
-`node packages/google-container/samples/generated/v1/cluster_manager.update_master.js`
+`node packages/google-container/samples/generated/v1/cluster_manager.update_main.js`
 
 
 -----
@@ -1101,16 +1101,16 @@ __Usage:__
 
 
 
-### Cluster_manager.set_master_auth
+### Cluster_manager.set_main_auth
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.set_master_auth.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.set_main_auth.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_master_auth.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.set_main_auth.js,samples/README.md)
 
 __Usage:__
 
 
-`node packages/google-container/samples/generated/v1beta1/cluster_manager.set_master_auth.js`
+`node packages/google-container/samples/generated/v1beta1/cluster_manager.set_main_auth.js`
 
 
 -----
@@ -1237,16 +1237,16 @@ __Usage:__
 
 
 
-### Cluster_manager.update_master
+### Cluster_manager.update_main
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.update_master.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.update_main.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.update_master.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.update_main.js,samples/README.md)
 
 __Usage:__
 
 
-`node packages/google-container/samples/generated/v1beta1/cluster_manager.update_master.js`
+`node packages/google-container/samples/generated/v1beta1/cluster_manager.update_main.js`
 
 
 -----
