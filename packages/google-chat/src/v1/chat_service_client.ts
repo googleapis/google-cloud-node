@@ -219,6 +219,9 @@ export class ChatServiceClient {
       spaceEventPathTemplate: new this._gaxModule.PathTemplate(
         'spaces/{space}/spaceEvents/{space_event}'
       ),
+      spaceNotificationSettingPathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/spaces/{space}/spaceNotificationSetting'
+      ),
       spaceReadStatePathTemplate: new this._gaxModule.PathTemplate(
         'users/{user}/spaces/{space}/spaceReadState'
       ),
@@ -345,6 +348,8 @@ export class ChatServiceClient {
       'getThreadReadState',
       'getSpaceEvent',
       'listSpaceEvents',
+      'getSpaceNotificationSetting',
+      'updateSpaceNotificationSetting',
     ];
     for (const methodName of chatServiceStubMethods) {
       const callPromise = this.chatServiceStub.then(
@@ -460,6 +465,7 @@ export class ChatServiceClient {
       'https://www.googleapis.com/auth/chat.spaces.readonly',
       'https://www.googleapis.com/auth/chat.users.readstate',
       'https://www.googleapis.com/auth/chat.users.readstate.readonly',
+      'https://www.googleapis.com/auth/chat.users.spacesettings',
     ];
   }
 
@@ -3179,6 +3185,219 @@ export class ChatServiceClient {
     this.initialize();
     return this.innerApiCalls.getSpaceEvent(request, options, callback);
   }
+  /**
+   * Gets the space notification setting. For an example, see [Get the
+   * caller's space notification
+   * setting](https://developers.google.com/workspace/chat/get-space-notification-setting).
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Format: users/{user}/spaces/{space}/spaceNotificationSetting
+   *
+   *   - `users/me/spaces/{space}/spaceNotificationSetting`, OR
+   *   - `users/user@example.com/spaces/{space}/spaceNotificationSetting`, OR
+   *   - `users/123456789/spaces/{space}/spaceNotificationSetting`.
+   *   Note: Only the caller's user id or email is allowed in the path.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.SpaceNotificationSetting|SpaceNotificationSetting}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.get_space_notification_setting.js</caption>
+   * region_tag:chat_v1_generated_ChatService_GetSpaceNotificationSetting_async
+   */
+  getSpaceNotificationSetting(
+    request?: protos.google.chat.v1.IGetSpaceNotificationSettingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      protos.google.chat.v1.IGetSpaceNotificationSettingRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getSpaceNotificationSetting(
+    request: protos.google.chat.v1.IGetSpaceNotificationSettingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      | protos.google.chat.v1.IGetSpaceNotificationSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSpaceNotificationSetting(
+    request: protos.google.chat.v1.IGetSpaceNotificationSettingRequest,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      | protos.google.chat.v1.IGetSpaceNotificationSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSpaceNotificationSetting(
+    request?: protos.google.chat.v1.IGetSpaceNotificationSettingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.ISpaceNotificationSetting,
+          | protos.google.chat.v1.IGetSpaceNotificationSettingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      | protos.google.chat.v1.IGetSpaceNotificationSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      protos.google.chat.v1.IGetSpaceNotificationSettingRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getSpaceNotificationSetting(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates the space notification setting. For an example, see [Update
+   * the caller's space notification
+   * setting](https://developers.google.com/workspace/chat/update-space-notification-setting).
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.chat.v1.SpaceNotificationSetting} request.spaceNotificationSetting
+   *   Required. The resource name for the space notification settings must be
+   *   populated in the form of
+   *   `users/{user}/spaces/{space}/spaceNotificationSetting`. Only fields
+   *   specified by `update_mask` are updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Supported field paths:
+   *
+   *   - `notification_setting`
+   *
+   *   - `mute_setting`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.SpaceNotificationSetting|SpaceNotificationSetting}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.update_space_notification_setting.js</caption>
+   * region_tag:chat_v1_generated_ChatService_UpdateSpaceNotificationSetting_async
+   */
+  updateSpaceNotificationSetting(
+    request?: protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateSpaceNotificationSetting(
+    request: protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      | protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSpaceNotificationSetting(
+    request: protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      | protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSpaceNotificationSetting(
+    request?: protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.ISpaceNotificationSetting,
+          | protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      | protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'space_notification_setting.name':
+          request.spaceNotificationSetting!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateSpaceNotificationSetting(
+      request,
+      options,
+      callback
+    );
+  }
 
   /**
    * Lists messages in a space that the caller is a member of, including
@@ -5844,6 +6063,50 @@ export class ChatServiceClient {
   matchSpaceEventFromSpaceEventName(spaceEventName: string) {
     return this.pathTemplates.spaceEventPathTemplate.match(spaceEventName)
       .space_event;
+  }
+
+  /**
+   * Return a fully-qualified spaceNotificationSetting resource name string.
+   *
+   * @param {string} user
+   * @param {string} space
+   * @returns {string} Resource name string.
+   */
+  spaceNotificationSettingPath(user: string, space: string) {
+    return this.pathTemplates.spaceNotificationSettingPathTemplate.render({
+      user: user,
+      space: space,
+    });
+  }
+
+  /**
+   * Parse the user from SpaceNotificationSetting resource.
+   *
+   * @param {string} spaceNotificationSettingName
+   *   A fully-qualified path representing SpaceNotificationSetting resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromSpaceNotificationSettingName(
+    spaceNotificationSettingName: string
+  ) {
+    return this.pathTemplates.spaceNotificationSettingPathTemplate.match(
+      spaceNotificationSettingName
+    ).user;
+  }
+
+  /**
+   * Parse the space from SpaceNotificationSetting resource.
+   *
+   * @param {string} spaceNotificationSettingName
+   *   A fully-qualified path representing SpaceNotificationSetting resource.
+   * @returns {string} A string representing the space.
+   */
+  matchSpaceFromSpaceNotificationSettingName(
+    spaceNotificationSettingName: string
+  ) {
+    return this.pathTemplates.spaceNotificationSettingPathTemplate.match(
+      spaceNotificationSettingName
+    ).space;
   }
 
   /**

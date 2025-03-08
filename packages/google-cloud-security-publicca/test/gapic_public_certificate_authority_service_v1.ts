@@ -294,7 +294,7 @@ describe('v1.PublicCertificateAuthorityServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.publicca.v1.ExternalAccountKey()
       );
@@ -329,7 +329,7 @@ describe('v1.PublicCertificateAuthorityServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.publicca.v1.ExternalAccountKey()
       );
@@ -379,7 +379,7 @@ describe('v1.PublicCertificateAuthorityServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createExternalAccountKey = stubSimpleCall(
         undefined,

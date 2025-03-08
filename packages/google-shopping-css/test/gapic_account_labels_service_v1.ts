@@ -335,7 +335,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.css.v1.AccountLabel()
       );
@@ -368,7 +368,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.css.v1.AccountLabel()
       );
@@ -416,7 +416,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAccountLabel = stubSimpleCall(
         undefined,
@@ -471,7 +471,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['accountLabel', 'name']
       );
       request.accountLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_label.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account_label.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.css.v1.AccountLabel()
       );
@@ -505,7 +505,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['accountLabel', 'name']
       );
       request.accountLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_label.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account_label.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.css.v1.AccountLabel()
       );
@@ -554,7 +554,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['accountLabel', 'name']
       );
       request.accountLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_label.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account_label.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAccountLabel = stubSimpleCall(
         undefined,
@@ -609,7 +609,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -642,7 +642,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -690,7 +690,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAccountLabel = stubSimpleCall(
         undefined,
@@ -744,7 +744,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
@@ -778,7 +778,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
@@ -828,7 +828,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAccountLabels = stubSimpleCall(
         undefined,
@@ -860,7 +860,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
@@ -915,7 +915,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAccountLabels.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -965,7 +965,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
@@ -1009,7 +1009,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAccountLabels.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -232,6 +232,9 @@ export class CloudFilestoreManagerClient {
       backupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/backups/{backup}'
       ),
+      domainPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/domains/{domain}'
+      ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}'
       ),
@@ -337,6 +340,12 @@ export class CloudFilestoreManagerClient {
     const revertInstanceMetadata = protoFilesRoot.lookup(
       '.google.cloud.common.OperationMetadata'
     ) as gax.protobuf.Type;
+    const promoteReplicaResponse = protoFilesRoot.lookup(
+      '.google.cloud.filestore.v1beta1.Instance'
+    ) as gax.protobuf.Type;
+    const promoteReplicaMetadata = protoFilesRoot.lookup(
+      '.google.cloud.common.OperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteInstanceResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -418,6 +427,11 @@ export class CloudFilestoreManagerClient {
         this.operationsClient,
         revertInstanceResponse.decode.bind(revertInstanceResponse),
         revertInstanceMetadata.decode.bind(revertInstanceMetadata)
+      ),
+      promoteReplica: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        promoteReplicaResponse.decode.bind(promoteReplicaResponse),
+        promoteReplicaMetadata.decode.bind(promoteReplicaMetadata)
       ),
       deleteInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -528,6 +542,7 @@ export class CloudFilestoreManagerClient {
       'updateInstance',
       'restoreInstance',
       'revertInstance',
+      'promoteReplica',
       'deleteInstance',
       'listSnapshots',
       'getSnapshot',
@@ -1180,8 +1195,12 @@ export class CloudFilestoreManagerClient {
    *   these fields:
    *
    *   * "description"
+   *   * "directory_services"
    *   * "file_shares"
    *   * "labels"
+   *   * "performance_config"
+   *   * "deletion_protection_enabled"
+   *   * "deletion_protection_reason"
    * @param {google.cloud.filestore.v1beta1.Instance} request.instance
    *   Required. Only fields specified in update_mask are updated.
    * @param {object} [options]
@@ -1469,9 +1488,8 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
+   *   Required. The resource name of the instance, in the format
    *   `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
-   *   The resource name of the instance, in the format
    * @param {string} request.targetSnapshotId
    *   Required. The snapshot resource ID, in the format 'my-snapshot', where the
    *   specified ID is the {snapshot_id} of the fully qualified name like
@@ -1598,6 +1616,148 @@ export class CloudFilestoreManagerClient {
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.revertInstance,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.filestore.v1beta1.Instance,
+      protos.google.cloud.common.OperationMetadata
+    >;
+  }
+  /**
+   * Promote the standby instance (replica).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the instance, in the format
+   *   `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
+   * @param {string} [request.peerInstance]
+   *   Optional. The resource name of the peer instance to promote, in the format
+   *   `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
+   *   The peer instance is required if the operation is called on an active
+   *   instance.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.promote_replica.js</caption>
+   * region_tag:file_v1beta1_generated_CloudFilestoreManager_PromoteReplica_async
+   */
+  promoteReplica(
+    request?: protos.google.cloud.filestore.v1beta1.IPromoteReplicaRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.filestore.v1beta1.IInstance,
+        protos.google.cloud.common.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  promoteReplica(
+    request: protos.google.cloud.filestore.v1beta1.IPromoteReplicaRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.filestore.v1beta1.IInstance,
+        protos.google.cloud.common.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  promoteReplica(
+    request: protos.google.cloud.filestore.v1beta1.IPromoteReplicaRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.filestore.v1beta1.IInstance,
+        protos.google.cloud.common.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  promoteReplica(
+    request?: protos.google.cloud.filestore.v1beta1.IPromoteReplicaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IInstance,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.filestore.v1beta1.IInstance,
+        protos.google.cloud.common.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.filestore.v1beta1.IInstance,
+        protos.google.cloud.common.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.promoteReplica(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `promoteReplica()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.promote_replica.js</caption>
+   * region_tag:file_v1beta1_generated_CloudFilestoreManager_PromoteReplica_async
+   */
+  async checkPromoteReplicaProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.filestore.v1beta1.Instance,
+      protos.google.cloud.common.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.promoteReplica,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
@@ -3252,6 +3412,9 @@ export class CloudFilestoreManagerClient {
    *   Sort results. Supported values are "name", "name desc" or "" (unsorted).
    * @param {string} request.filter
    *   List filter.
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. If true, allow partial responses for multi-regional Aggregated
+   *   List requests.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3356,6 +3519,9 @@ export class CloudFilestoreManagerClient {
    *   Sort results. Supported values are "name", "name desc" or "" (unsorted).
    * @param {string} request.filter
    *   List filter.
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. If true, allow partial responses for multi-regional Aggregated
+   *   List requests.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3408,6 +3574,9 @@ export class CloudFilestoreManagerClient {
    *   Sort results. Supported values are "name", "name desc" or "" (unsorted).
    * @param {string} request.filter
    *   List filter.
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. If true, allow partial responses for multi-regional Aggregated
+   *   List requests.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4218,6 +4387,55 @@ export class CloudFilestoreManagerClient {
    */
   matchBackupFromBackupName(backupName: string) {
     return this.pathTemplates.backupPathTemplate.match(backupName).backup;
+  }
+
+  /**
+   * Return a fully-qualified domain resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} domain
+   * @returns {string} Resource name string.
+   */
+  domainPath(project: string, location: string, domain: string) {
+    return this.pathTemplates.domainPathTemplate.render({
+      project: project,
+      location: location,
+      domain: domain,
+    });
+  }
+
+  /**
+   * Parse the project from Domain resource.
+   *
+   * @param {string} domainName
+   *   A fully-qualified path representing Domain resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDomainName(domainName: string) {
+    return this.pathTemplates.domainPathTemplate.match(domainName).project;
+  }
+
+  /**
+   * Parse the location from Domain resource.
+   *
+   * @param {string} domainName
+   *   A fully-qualified path representing Domain resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDomainName(domainName: string) {
+    return this.pathTemplates.domainPathTemplate.match(domainName).location;
+  }
+
+  /**
+   * Parse the domain from Domain resource.
+   *
+   * @param {string} domainName
+   *   A fully-qualified path representing Domain resource.
+   * @returns {string} A string representing the domain.
+   */
+  matchDomainFromDomainName(domainName: string) {
+    return this.pathTemplates.domainPathTemplate.match(domainName).domain;
   }
 
   /**
