@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/gke-connect-gateway-v4.0.0...gke-connect-gateway-v5.0.0) (2025-03-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* gRPC support is being removed in favor of HTTP support, as gRPC is not currently supported by Connect Gateway.
+
+### Miscellaneous Chores
+
+* [gkeconnect] update copyright year for auto-generated protos ([#5798](https://github.com/googleapis/google-cloud-node/issues/5798)) ([e069a9d](https://github.com/googleapis/google-cloud-node/commit/e069a9dca4c60cc3f17c08f424853ebabe9e221f))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/gke-connect-gateway-v3.3.0...gke-connect-gateway-v4.0.0) (2024-08-29)
 
 

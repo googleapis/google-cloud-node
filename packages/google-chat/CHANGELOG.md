@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.13.0...chat-v0.14.0) (2025-03-08)
+
+
+### Features
+
+* [chat] Addition of space notification setting Chat API ([#6120](https://github.com/googleapis/google-cloud-node/issues/6120)) ([062dff4](https://github.com/googleapis/google-cloud-node/commit/062dff45982bfe20c43a4f6298043576ab52b156))
+
 ## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.12.0...chat-v0.13.0) (2025-02-28)
 
 

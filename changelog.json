@@ -5,6 +5,223 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "958b317b05196b76c9a62a03649eff5a77bb6a72",
+          "message": "[merchantapi] A new message `SeasonalOverride` is added",
+          "issues": [
+            "6114"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "958b317b05196b76c9a62a03649eff5a77bb6a72",
+          "message": "An existing optional field `type` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy",
+          "issues": [],
+          "breakingChangeNote": "An existing optional field `type` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy"
+        },
+        {
+          "type": "fix",
+          "sha": "958b317b05196b76c9a62a03649eff5a77bb6a72",
+          "message": "An existing optional field `label` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy",
+          "issues": [],
+          "breakingChangeNote": "An existing optional field `label` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy"
+        },
+        {
+          "type": "fix",
+          "sha": "958b317b05196b76c9a62a03649eff5a77bb6a72",
+          "message": "An existing optional field `countries` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy",
+          "issues": [],
+          "breakingChangeNote": "An existing optional field `countries` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy"
+        },
+        {
+          "type": "fix",
+          "sha": "958b317b05196b76c9a62a03649eff5a77bb6a72",
+          "message": "An existing optional field `return_policy_uri` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy",
+          "issues": [],
+          "breakingChangeNote": "An existing optional field `return_policy_uri` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy"
+        },
+        {
+          "type": "feat",
+          "sha": "958b317b05196b76c9a62a03649eff5a77bb6a72",
+          "message": "A new field `seasonal_overrides` is added to message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy",
+          "issues": []
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/accounts",
+      "id": "9781b886-68d7-435d-ab4f-899c2efc3b2c",
+      "createTime": "2025-03-08T01:49:58.167Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b35aae1a0467dba2ab684d4fe6a7cd385046d1a6",
+          "message": "Add backupplan proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "b35aae1a0467dba2ab684d4fe6a7cd385046d1a6",
+          "message": "Add backupplanassociation proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "b35aae1a0467dba2ab684d4fe6a7cd385046d1a6",
+          "message": "Add backupvault_ba proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "b35aae1a0467dba2ab684d4fe6a7cd385046d1a6",
+          "message": "Add backupvault_gce proto",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "3b2e1a69-a83c-4eb8-b1d6-da7794455a65",
+      "createTime": "2025-03-08T01:49:58.148Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "062dff45982bfe20c43a4f6298043576ab52b156",
+          "message": "[chat] Addition of space notification setting Chat API",
+          "issues": [
+            "6120"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "346f530a-98e1-40db-9f62-95801326e5e9",
+      "createTime": "2025-03-08T01:49:58.132Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c043c2edab6efc9980bceffcf0db888ef8fe41d4",
+          "message": "Adding a state field for AutokeyConfig",
+          "issues": []
+        }
+      ],
+      "version": "1.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "7a1d48d8-b4bd-4939-b40a-266a15eb74b6",
+      "createTime": "2025-03-08T01:49:58.117Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c8dd40a36be6c1efe12b335af17136605ece7a46",
+          "message": "Adding a state field for AutokeyConfig",
+          "issues": []
+        }
+      ],
+      "version": "4.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "0e2e77de-ab75-41f2-9131-ef940a95c007",
+      "createTime": "2025-03-08T01:49:58.096Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "e069a9dca4c60cc3f17c08f424853ebabe9e221f",
+          "message": "[gkeconnect] update copyright year for auto-generated protos",
+          "issues": [
+            "5798"
+          ],
+          "breakingChangeNote": "gRPC support is being removed in favor of HTTP support, as gRPC is not currently supported by Connect Gateway."
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "8351de35-8842-436d-880c-1e85716e655c",
+      "createTime": "2025-03-08T01:49:58.080Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9f33d6a030b696d8f42d11054e5896955b3d0720",
+          "message": "[filestore] add PromoteReplica API",
+          "issues": [
+            "6116"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "45ea843c-304d-43b1-9764-180e6e3c9856",
+      "createTime": "2025-03-08T01:49:58.063Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3f75a90d8f57ea6d896936fb2605db3268069fb9",
+          "message": "[dialogflow-cx] Change client_secret in OAuthConfig from required to optional",
+          "issues": [
+            "6119"
+          ]
+        }
+      ],
+      "version": "4.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "68b6c263-0245-4c60-8953-50c38cbc6a40",
+      "createTime": "2025-03-08T01:49:58.041Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9129d93549847996346f7842ea0a650d5cc493fc",
+          "message": "[dialogflow] Add new RPC IngestContextReferences, GenerateSuggestions",
+          "issues": [
+            "6111"
+          ]
+        }
+      ],
+      "version": "6.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "80cfc8b6-6502-4ec0-92a2-c1abbbd47b8a",
+      "createTime": "2025-03-08T01:49:58.025Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "beba36b9f0ef1655bef50d1c063b5f1b54e15a93",
+          "message": "[analytics-admin] added support for KeyEvents AdminAPI ChangeHistory",
+          "issues": [
+            "6113"
+          ]
+        }
+      ],
+      "version": "7.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "783b1e08-50c3-4347-9774-4b2184681508",
+      "createTime": "2025-03-08T01:49:58.008Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "ea04ff4128386abfebf1d4de3688d1c4ccde8a5b",
           "message": "Add initial files for google.maps.areainsights.v1",
           "issues": [
@@ -40912,5 +41129,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-02-28T17:10:28.034Z"
+  "updateTime": "2025-03-08T01:49:58.167Z"
 }

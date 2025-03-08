@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [6.15.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.14.0...dialogflow-v6.15.0) (2025-03-08)
+
+
+### Features
+
+* [dialogflow] Add new RPC IngestContextReferences, GenerateSuggestions ([#6111](https://github.com/googleapis/google-cloud-node/issues/6111)) ([9129d93](https://github.com/googleapis/google-cloud-node/commit/9129d93549847996346f7842ea0a650d5cc493fc))
+
 ## [6.14.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.13.0...dialogflow-v6.14.0) (2025-01-23)
 
 
