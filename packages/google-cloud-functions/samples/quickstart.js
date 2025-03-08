@@ -14,7 +14,7 @@
 'use strict';
 
 async function main(projectId) {
-  // [START cloud_nodejs_functions_quickstart]
+  // [START cloudfunctions_nodejs_quickstart]
   // Imports the Google Cloud client library
 
   // remove this line after package is released
@@ -35,7 +35,7 @@ async function main(projectId) {
     console.info(functions);
   }
   listFunctions();
-  // [END cloud_nodejs_functions_quickstart]
+  // [END cloudfunctions_nodejs_quickstart]
 }
 
 main(...process.argv.slice(2)).catch(err => {
