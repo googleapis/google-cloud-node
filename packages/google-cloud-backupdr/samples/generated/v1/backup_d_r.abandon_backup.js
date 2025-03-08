@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START backupdr_v1_generated_BackupDR_ListManagementServers_async]
+function main(dataSource) {
+  // [START backupdr_v1_generated_BackupDR_AbandonBackup_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,24 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location for which to retrieve management servers
-   *  information, in the format 'projects/{project_id}/locations/{location}'. In
-   *  Cloud BackupDR, locations map to Google Cloud regions, for example
-   *  **us-central1**. To retrieve management servers for all locations, use "-"
-   *  for the
-   *  '{location}' value.
+   *  Required. The resource name of the instance, in the format
+   *  'projects/* /locations/* /backupVaults/* /dataSources/'.
    */
-  // const parent = 'abc123'
+  // const dataSource = 'abc123'
   /**
-   *  Optional. Requested page size. Server may return fewer items than
-   *  requested. If unspecified, server will pick an appropriate default.
+   *  Optional. An optional request ID to identify requests. Specify a unique
+   *  request ID so that if you must retry your request, the server will know to
+   *  ignore the request if it has already been completed. The server will
+   *  guarantee that for at least 60 minutes since the first request.
+   *  For example, consider a situation where you make an initial request and
+   *  the request times out. If you make the request again with the same request
+   *  ID, the server can check if original operation with the same request ID
+   *  was received, and if so, will ignore the second request. This prevents
+   *  clients from accidentally creating duplicate commitments.
+   *  The request ID must be a valid UUID with the exception that zero UUID is
+   *  not supported (00000000-0000-0000-0000-000000000000).
    */
-  // const pageSize = 1234
-  /**
-   *  Optional. A token identifying a page of results the server should return.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Optional. Filtering results.
-   */
-  // const filter = 'abc123'
-  /**
-   *  Optional. Hint for how to order the results.
-   */
-  // const orderBy = 'abc123'
+  // const requestId = 'abc123'
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;
@@ -61,21 +54,20 @@ function main(parent) {
   // Instantiates a client
   const backupdrClient = new BackupDRClient();
 
-  async function callListManagementServers() {
+  async function callAbandonBackup() {
     // Construct request
     const request = {
-      parent,
+      dataSource,
     };
 
     // Run request
-    const iterable = backupdrClient.listManagementServersAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const [operation] = await backupdrClient.abandonBackup(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListManagementServers();
-  // [END backupdr_v1_generated_BackupDR_ListManagementServers_async]
+  callAbandonBackup();
+  // [END backupdr_v1_generated_BackupDR_AbandonBackup_async]
 }
 
 process.on('unhandledRejection', err => {

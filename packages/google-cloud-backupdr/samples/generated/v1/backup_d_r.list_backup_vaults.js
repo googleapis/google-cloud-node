@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START backupdr_v1_generated_BackupDR_ListManagementServers_async]
+  // [START backupdr_v1_generated_BackupDR_ListBackupVaults_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,11 +29,11 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location for which to retrieve management servers
+   *  Required. The project and location for which to retrieve backupvault stores
    *  information, in the format 'projects/{project_id}/locations/{location}'. In
-   *  Cloud BackupDR, locations map to Google Cloud regions, for example
-   *  **us-central1**. To retrieve management servers for all locations, use "-"
-   *  for the
+   *  Cloud Backup and DR, locations map to Google Cloud regions, for example
+   *  **us-central1**.
+   *  To retrieve backupvault stores for all locations, use "-" for the
    *  '{location}' value.
    */
   // const parent = 'abc123'
@@ -54,6 +54,11 @@ function main(parent) {
    *  Optional. Hint for how to order the results.
    */
   // const orderBy = 'abc123'
+  /**
+   *  Optional. Reserved for future use to provide a BASIC & FULL view of Backup
+   *  Vault.
+   */
+  // const view = {}
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;
@@ -61,21 +66,21 @@ function main(parent) {
   // Instantiates a client
   const backupdrClient = new BackupDRClient();
 
-  async function callListManagementServers() {
+  async function callListBackupVaults() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = backupdrClient.listManagementServersAsync(request);
+    const iterable = backupdrClient.listBackupVaultsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListManagementServers();
-  // [END backupdr_v1_generated_BackupDR_ListManagementServers_async]
+  callListBackupVaults();
+  // [END backupdr_v1_generated_BackupDR_ListBackupVaults_async]
 }
 
 process.on('unhandledRejection', err => {

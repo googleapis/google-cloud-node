@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, managementServerId, managementServer) {
-  // [START backupdr_v1_generated_BackupDR_CreateManagementServer_async]
+function main(dataSource, value, backupConfigState) {
+  // [START backupdr_v1_generated_BackupDR_SetInternalStatus_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,33 +29,30 @@ function main(parent, managementServerId, managementServer) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The management server project and location in the format
-   *  'projects/{project_id}/locations/{location}'. In Cloud Backup and DR
-   *  locations map to Google Cloud regions, for example **us-central1**.
+   *  Required. The resource name of the instance, in the format
+   *  'projects/* /locations/* /backupVaults/* /dataSources/'.
    */
-  // const parent = 'abc123'
+  // const dataSource = 'abc123'
   /**
-   *  Required. The name of the management server to create. The name must be
-   *  unique for the specified project and location.
+   *  Required. The value required for this method to work.  This field must be
+   *  the 32-byte SHA256 hash of the DataSourceID.  The DataSourceID used here is
+   *  only the final piece of the fully qualified resource path for this
+   *  DataSource (i.e. the part after '.../dataSources/'). This field exists to
+   *  make this method difficult to call since it is intended for use only by
+   *  Backup Appliances.
    */
-  // const managementServerId = 'abc123'
+  // const value = Buffer.from('string')
   /**
-   *  Required. A management server
-   *  resource google.cloud.backupdr.v1.ManagementServer 
+   *  Required. Output only. The new BackupConfigState to set for the DataSource.
    */
-  // const managementServer = {}
+  // const backupConfigState = {}
   /**
    *  Optional. An optional request ID to identify requests. Specify a unique
    *  request ID so that if you must retry your request, the server will know to
    *  ignore the request if it has already been completed. The server will
-   *  guarantee that for at least 60 minutes since the first request.
-   *  For example, consider a situation where you make an initial request and
-   *  the request times out. If you make the request again with the same request
-   *  ID, the server can check if original operation with the same request ID
-   *  was received, and if so, will ignore the second request. This prevents
-   *  clients from accidentally creating duplicate commitments.
-   *  The request ID must be a valid UUID with the exception that zero UUID is
-   *  not supported (00000000-0000-0000-0000-000000000000).
+   *  guarantee that for at least 60 minutes after the first request. The request
+   *  ID must be a valid UUID with the exception that zero UUID is not supported
+   *  (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
 
@@ -65,22 +62,22 @@ function main(parent, managementServerId, managementServer) {
   // Instantiates a client
   const backupdrClient = new BackupDRClient();
 
-  async function callCreateManagementServer() {
+  async function callSetInternalStatus() {
     // Construct request
     const request = {
-      parent,
-      managementServerId,
-      managementServer,
+      dataSource,
+      value,
+      backupConfigState,
     };
 
     // Run request
-    const [operation] = await backupdrClient.createManagementServer(request);
+    const [operation] = await backupdrClient.setInternalStatus(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateManagementServer();
-  // [END backupdr_v1_generated_BackupDR_CreateManagementServer_async]
+  callSetInternalStatus();
+  // [END backupdr_v1_generated_BackupDR_SetInternalStatus_async]
 }
 
 process.on('unhandledRejection', err => {

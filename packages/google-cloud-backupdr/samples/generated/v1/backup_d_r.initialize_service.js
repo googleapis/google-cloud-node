@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, managementServerId, managementServer) {
-  // [START backupdr_v1_generated_BackupDR_CreateManagementServer_async]
+function main(name, resourceType) {
+  // [START backupdr_v1_generated_BackupDR_InitializeService_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,28 +29,24 @@ function main(parent, managementServerId, managementServer) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The management server project and location in the format
-   *  'projects/{project_id}/locations/{location}'. In Cloud Backup and DR
-   *  locations map to Google Cloud regions, for example **us-central1**.
+   *  Required. The resource name of the serviceConfig used to initialize the
+   *  service. Format:
+   *  `projects/{project_id}/locations/{location}/serviceConfig`.
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Required. The name of the management server to create. The name must be
-   *  unique for the specified project and location.
+   *  Required. The resource type to which the default service config will be
+   *  applied. Examples include, "compute.googleapis.com/Instance" and
+   *  "storage.googleapis.com/Bucket".
    */
-  // const managementServerId = 'abc123'
-  /**
-   *  Required. A management server
-   *  resource google.cloud.backupdr.v1.ManagementServer 
-   */
-  // const managementServer = {}
+  // const resourceType = 'abc123'
   /**
    *  Optional. An optional request ID to identify requests. Specify a unique
    *  request ID so that if you must retry your request, the server will know to
    *  ignore the request if it has already been completed. The server will
    *  guarantee that for at least 60 minutes since the first request.
-   *  For example, consider a situation where you make an initial request and
-   *  the request times out. If you make the request again with the same request
+   *  For example, consider a situation where you make an initial request and t
+   *  he request times out. If you make the request again with the same request
    *  ID, the server can check if original operation with the same request ID
    *  was received, and if so, will ignore the second request. This prevents
    *  clients from accidentally creating duplicate commitments.
@@ -65,22 +61,21 @@ function main(parent, managementServerId, managementServer) {
   // Instantiates a client
   const backupdrClient = new BackupDRClient();
 
-  async function callCreateManagementServer() {
+  async function callInitializeService() {
     // Construct request
     const request = {
-      parent,
-      managementServerId,
-      managementServer,
+      name,
+      resourceType,
     };
 
     // Run request
-    const [operation] = await backupdrClient.createManagementServer(request);
+    const [operation] = await backupdrClient.initializeService(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateManagementServer();
-  // [END backupdr_v1_generated_BackupDR_CreateManagementServer_async]
+  callInitializeService();
+  // [END backupdr_v1_generated_BackupDR_InitializeService_async]
 }
 
 process.on('unhandledRejection', err => {

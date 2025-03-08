@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START backupdr_v1_generated_BackupDR_ListManagementServers_async]
+function main(name) {
+  // [START backupdr_v1_generated_BackupDR_DeleteBackup_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,23 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location for which to retrieve management servers
-   *  information, in the format 'projects/{project_id}/locations/{location}'. In
-   *  Cloud BackupDR, locations map to Google Cloud regions, for example
-   *  **us-central1**. To retrieve management servers for all locations, use "-"
-   *  for the
-   *  '{location}' value.
+   *  Required. Name of the resource.
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Optional. Requested page size. Server may return fewer items than
-   *  requested. If unspecified, server will pick an appropriate default.
+   *  Optional. An optional request ID to identify requests. Specify a unique
+   *  request ID so that if you must retry your request, the server will know to
+   *  ignore the request if it has already been completed. The server will
+   *  guarantee that for at least 60 minutes after the first request.
+   *  For example, consider a situation where you make an initial request and
+   *  the request times out. If you make the request again with the same request
+   *  ID, the server can check if original operation with the same request ID
+   *  was received, and if so, will ignore the second request. This prevents
+   *  clients from accidentally creating duplicate commitments.
+   *  The request ID must be a valid UUID with the exception that zero UUID is
+   *  not supported (00000000-0000-0000-0000-000000000000).
    */
-  // const pageSize = 1234
-  /**
-   *  Optional. A token identifying a page of results the server should return.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Optional. Filtering results.
-   */
-  // const filter = 'abc123'
-  /**
-   *  Optional. Hint for how to order the results.
-   */
-  // const orderBy = 'abc123'
+  // const requestId = 'abc123'
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;
@@ -61,21 +53,20 @@ function main(parent) {
   // Instantiates a client
   const backupdrClient = new BackupDRClient();
 
-  async function callListManagementServers() {
+  async function callDeleteBackup() {
     // Construct request
     const request = {
-      parent,
+      name,
     };
 
     // Run request
-    const iterable = backupdrClient.listManagementServersAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const [operation] = await backupdrClient.deleteBackup(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListManagementServers();
-  // [END backupdr_v1_generated_BackupDR_ListManagementServers_async]
+  callDeleteBackup();
+  // [END backupdr_v1_generated_BackupDR_DeleteBackup_async]
 }
 
 process.on('unhandledRejection', err => {

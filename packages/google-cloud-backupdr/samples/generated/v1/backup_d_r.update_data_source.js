@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, managementServerId, managementServer) {
-  // [START backupdr_v1_generated_BackupDR_CreateManagementServer_async]
+function main(updateMask, dataSource) {
+  // [START backupdr_v1_generated_BackupDR_UpdateDataSource_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,21 +29,17 @@ function main(parent, managementServerId, managementServer) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The management server project and location in the format
-   *  'projects/{project_id}/locations/{location}'. In Cloud Backup and DR
-   *  locations map to Google Cloud regions, for example **us-central1**.
+   *  Required. Field mask is used to specify the fields to be overwritten in the
+   *  DataSource resource by the update.
+   *  The fields specified in the update_mask are relative to the resource, not
+   *  the full request. A field will be overwritten if it is in the mask. If the
+   *  user does not provide a mask then the request will fail.
    */
-  // const parent = 'abc123'
+  // const updateMask = {}
   /**
-   *  Required. The name of the management server to create. The name must be
-   *  unique for the specified project and location.
+   *  Required. The resource being updated
    */
-  // const managementServerId = 'abc123'
-  /**
-   *  Required. A management server
-   *  resource google.cloud.backupdr.v1.ManagementServer 
-   */
-  // const managementServer = {}
+  // const dataSource = {}
   /**
    *  Optional. An optional request ID to identify requests. Specify a unique
    *  request ID so that if you must retry your request, the server will know to
@@ -58,6 +54,10 @@ function main(parent, managementServerId, managementServer) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. Enable upsert.
+   */
+  // const allowMissing = true
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;
@@ -65,22 +65,21 @@ function main(parent, managementServerId, managementServer) {
   // Instantiates a client
   const backupdrClient = new BackupDRClient();
 
-  async function callCreateManagementServer() {
+  async function callUpdateDataSource() {
     // Construct request
     const request = {
-      parent,
-      managementServerId,
-      managementServer,
+      updateMask,
+      dataSource,
     };
 
     // Run request
-    const [operation] = await backupdrClient.createManagementServer(request);
+    const [operation] = await backupdrClient.updateDataSource(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateManagementServer();
-  // [END backupdr_v1_generated_BackupDR_CreateManagementServer_async]
+  callUpdateDataSource();
+  // [END backupdr_v1_generated_BackupDR_UpdateDataSource_async]
 }
 
 process.on('unhandledRejection', err => {

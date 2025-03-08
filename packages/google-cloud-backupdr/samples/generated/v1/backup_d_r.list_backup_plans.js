@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START backupdr_v1_generated_BackupDR_ListManagementServers_async]
+  // [START backupdr_v1_generated_BackupDR_ListBackupPlans_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,29 +29,37 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location for which to retrieve management servers
-   *  information, in the format 'projects/{project_id}/locations/{location}'. In
-   *  Cloud BackupDR, locations map to Google Cloud regions, for example
-   *  **us-central1**. To retrieve management servers for all locations, use "-"
-   *  for the
-   *  '{location}' value.
+   *  Required. The project and location for which to retrieve `BackupPlans`
+   *  information. Format: `projects/{project}/locations/{location}`. In Cloud
+   *  BackupDR, locations map to GCP regions, for e.g. **us-central1**. To
+   *  retrieve backup plans for all locations, use "-" for the
+   *  `{location}` value.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Requested page size. Server may return fewer items than
-   *  requested. If unspecified, server will pick an appropriate default.
+   *  Optional. The maximum number of `BackupPlans` to return in a single
+   *  response. If not specified, a default value will be chosen by the service.
+   *  Note that the response may include a partial list and a caller should
+   *  only rely on the response's
+   *  next_page_token google.cloud.backupdr.v1.ListBackupPlansResponse.next_page_token 
+   *  to determine if there are more instances left to be queried.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A token identifying a page of results the server should return.
+   *  Optional. The value of
+   *  next_page_token google.cloud.backupdr.v1.ListBackupPlansResponse.next_page_token 
+   *  received from a previous `ListBackupPlans` call.
+   *  Provide this to retrieve the subsequent page in a multi-page list of
+   *  results. When paginating, all other parameters provided to
+   *  `ListBackupPlans` must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Filtering results.
+   *  Optional. Field match expression used to filter the results.
    */
   // const filter = 'abc123'
   /**
-   *  Optional. Hint for how to order the results.
+   *  Optional. Field by which to sort the results.
    */
   // const orderBy = 'abc123'
 
@@ -61,21 +69,21 @@ function main(parent) {
   // Instantiates a client
   const backupdrClient = new BackupDRClient();
 
-  async function callListManagementServers() {
+  async function callListBackupPlans() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = backupdrClient.listManagementServersAsync(request);
+    const iterable = backupdrClient.listBackupPlansAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListManagementServers();
-  // [END backupdr_v1_generated_BackupDR_ListManagementServers_async]
+  callListBackupPlans();
+  // [END backupdr_v1_generated_BackupDR_ListBackupPlans_async]
 }
 
 process.on('unhandledRejection', err => {
