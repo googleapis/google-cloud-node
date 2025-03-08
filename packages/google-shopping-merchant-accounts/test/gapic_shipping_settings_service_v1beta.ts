@@ -274,7 +274,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.ShippingSettings()
       );
@@ -307,7 +307,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.ShippingSettings()
       );
@@ -355,7 +355,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getShippingSettings = stubSimpleCall(
         undefined,
@@ -409,7 +409,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.ShippingSettings()
       );
@@ -442,7 +442,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.ShippingSettings()
       );
@@ -490,7 +490,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insertShippingSettings = stubSimpleCall(
         undefined,

@@ -274,7 +274,7 @@ describe('v1beta.AutofeedSettingsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.AutofeedSettings()
       );
@@ -307,7 +307,7 @@ describe('v1beta.AutofeedSettingsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.AutofeedSettings()
       );
@@ -355,7 +355,7 @@ describe('v1beta.AutofeedSettingsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAutofeedSettings = stubSimpleCall(
         undefined,
@@ -410,7 +410,7 @@ describe('v1beta.AutofeedSettingsServiceClient', () => {
         ['autofeedSettings', 'name']
       );
       request.autofeedSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `autofeed_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `autofeed_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.AutofeedSettings()
       );
@@ -444,7 +444,7 @@ describe('v1beta.AutofeedSettingsServiceClient', () => {
         ['autofeedSettings', 'name']
       );
       request.autofeedSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `autofeed_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `autofeed_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.AutofeedSettings()
       );
@@ -493,7 +493,7 @@ describe('v1beta.AutofeedSettingsServiceClient', () => {
         ['autofeedSettings', 'name']
       );
       request.autofeedSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `autofeed_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `autofeed_settings.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAutofeedSettings = stubSimpleCall(
         undefined,

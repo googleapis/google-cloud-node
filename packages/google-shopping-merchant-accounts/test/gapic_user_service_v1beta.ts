@@ -320,7 +320,7 @@ describe('v1beta.UserServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.User()
       );
@@ -351,7 +351,7 @@ describe('v1beta.UserServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.User()
       );
@@ -398,7 +398,7 @@ describe('v1beta.UserServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getUser = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getUser(request), expectedError);
@@ -447,7 +447,7 @@ describe('v1beta.UserServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.User()
       );
@@ -478,7 +478,7 @@ describe('v1beta.UserServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.User()
       );
@@ -525,7 +525,7 @@ describe('v1beta.UserServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createUser = stubSimpleCall(
         undefined,
@@ -577,7 +577,7 @@ describe('v1beta.UserServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -608,7 +608,7 @@ describe('v1beta.UserServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -655,7 +655,7 @@ describe('v1beta.UserServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteUser = stubSimpleCall(
         undefined,
@@ -708,7 +708,7 @@ describe('v1beta.UserServiceClient', () => {
         ['user', 'name']
       );
       request.user.name = defaultValue1;
-      const expectedHeaderRequestParams = `user.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `user.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.User()
       );
@@ -740,7 +740,7 @@ describe('v1beta.UserServiceClient', () => {
         ['user', 'name']
       );
       request.user.name = defaultValue1;
-      const expectedHeaderRequestParams = `user.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `user.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.User()
       );
@@ -788,7 +788,7 @@ describe('v1beta.UserServiceClient', () => {
         ['user', 'name']
       );
       request.user.name = defaultValue1;
-      const expectedHeaderRequestParams = `user.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `user.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateUser = stubSimpleCall(
         undefined,
@@ -841,7 +841,7 @@ describe('v1beta.UserServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.User()
@@ -880,7 +880,7 @@ describe('v1beta.UserServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.User()
@@ -937,7 +937,7 @@ describe('v1beta.UserServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listUsers = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listUsers(request), expectedError);
@@ -965,7 +965,7 @@ describe('v1beta.UserServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.User()
@@ -1026,7 +1026,7 @@ describe('v1beta.UserServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUsers.createStream = stubPageStreamingCall(
         undefined,
@@ -1078,7 +1078,7 @@ describe('v1beta.UserServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.accounts.v1beta.User()
@@ -1127,7 +1127,7 @@ describe('v1beta.UserServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUsers.asyncIterate = stubAsyncIterationCall(
         undefined,
