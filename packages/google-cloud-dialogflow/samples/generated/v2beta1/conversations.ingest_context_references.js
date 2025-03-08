@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START dialogflow_v2_generated_Conversations_GenerateStatelessSuggestion_async]
+function main(conversation, contextReferences) {
+  // [START dialogflow_v2beta1_generated_Conversations_IngestContextReferences_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,56 +29,39 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource to charge for the Suggestion's generation.
-   *  Format: `projects/<Project ID>/locations/<Location ID>`.
+   *  Required. Resource identifier of the conversation to ingest context
+   *  information for. Format: `projects/<Project ID>/locations/<Location
+   *  ID>/conversations/<Conversation ID>`.
    */
-  // const parent = 'abc123'
+  // const conversation = 'abc123'
   /**
-   *  Uncreated generator. It should be a complete generator that includes all
-   *  information about the generator.
-   */
-  // const generator = {}
-  /**
-   *  The resource name of the existing created generator. Format:
-   *  `projects/<Project ID>/locations/<Location ID>/generators/<Generator ID>`
-   */
-  // const generatorName = 'abc123'
-  /**
-   *  Optional. A section of ingested context information. The key is the name of
-   *  the context reference and the value contains the contents of the context
+   *  Required. The context references to ingest. The key is the name of the
+   *  context reference and the value contains the contents of the context
    *  reference. The key is used to incorporate ingested context references to
    *  enhance the generator.
    */
   // const contextReferences = [1,2,3,4]
-  /**
-   *  Optional. Context of the conversation, including transcripts.
-   */
-  // const conversationContext = {}
-  /**
-   *  Optional. A list of trigger events. Generator will be triggered only if
-   *  it's trigger event is included here.
-   */
-  // const triggerEvents = [1,2,3,4]
 
   // Imports the Dialogflow library
-  const {ConversationsClient} = require('@google-cloud/dialogflow').v2;
+  const {ConversationsClient} = require('@google-cloud/dialogflow').v2beta1;
 
   // Instantiates a client
   const dialogflowClient = new ConversationsClient();
 
-  async function callGenerateStatelessSuggestion() {
+  async function callIngestContextReferences() {
     // Construct request
     const request = {
-      parent,
+      conversation,
+      contextReferences,
     };
 
     // Run request
-    const response = await dialogflowClient.generateStatelessSuggestion(request);
+    const response = await dialogflowClient.ingestContextReferences(request);
     console.log(response);
   }
 
-  callGenerateStatelessSuggestion();
-  // [END dialogflow_v2_generated_Conversations_GenerateStatelessSuggestion_async]
+  callIngestContextReferences();
+  // [END dialogflow_v2beta1_generated_Conversations_IngestContextReferences_async]
 }
 
 process.on('unhandledRejection', err => {

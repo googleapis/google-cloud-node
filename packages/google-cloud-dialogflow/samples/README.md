@@ -54,7 +54,9 @@
   * [Conversations.create_conversation](#conversations.create_conversation)
   * [Conversations.generate_stateless_suggestion](#conversations.generate_stateless_suggestion)
   * [Conversations.generate_stateless_summary](#conversations.generate_stateless_summary)
+  * [Conversations.generate_suggestions](#conversations.generate_suggestions)
   * [Conversations.get_conversation](#conversations.get_conversation)
+  * [Conversations.ingest_context_references](#conversations.ingest_context_references)
   * [Conversations.list_conversations](#conversations.list_conversations)
   * [Conversations.list_messages](#conversations.list_messages)
   * [Conversations.search_knowledge](#conversations.search_knowledge)
@@ -156,7 +158,9 @@
   * [Conversations.create_conversation](#conversations.create_conversation)
   * [Conversations.generate_stateless_suggestion](#conversations.generate_stateless_suggestion)
   * [Conversations.generate_stateless_summary](#conversations.generate_stateless_summary)
+  * [Conversations.generate_suggestions](#conversations.generate_suggestions)
   * [Conversations.get_conversation](#conversations.get_conversation)
+  * [Conversations.ingest_context_references](#conversations.ingest_context_references)
   * [Conversations.list_conversations](#conversations.list_conversations)
   * [Conversations.list_messages](#conversations.list_messages)
   * [Conversations.search_knowledge](#conversations.search_knowledge)
@@ -969,6 +973,23 @@ __Usage:__
 
 
 
+### Conversations.generate_suggestions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversations.generate_suggestions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversations.generate_suggestions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2/conversations.generate_suggestions.js`
+
+
+-----
+
+
+
+
 ### Conversations.get_conversation
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversations.get_conversation.js).
@@ -979,6 +1000,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/generated/v2/conversations.get_conversation.js`
+
+
+-----
+
+
+
+
+### Conversations.ingest_context_references
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversations.ingest_context_references.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversations.ingest_context_references.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2/conversations.ingest_context_references.js`
 
 
 -----
@@ -2703,6 +2741,23 @@ __Usage:__
 
 
 
+### Conversations.generate_suggestions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.generate_suggestions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.generate_suggestions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.generate_suggestions.js`
+
+
+-----
+
+
+
+
 ### Conversations.get_conversation
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.get_conversation.js).
@@ -2713,6 +2768,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.get_conversation.js`
+
+
+-----
+
+
+
+
+### Conversations.ingest_context_references
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.ingest_context_references.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.ingest_context_references.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.ingest_context_references.js`
 
 
 -----

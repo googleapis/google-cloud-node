@@ -44,6 +44,13 @@ function main(parent) {
    */
   // const generatorName = 'abc123'
   /**
+   *  Optional. A section of ingested context information. The key is the name of
+   *  the context reference and the value contains the contents of the context
+   *  reference. The key is used to incorporate ingested context references to
+   *  enhance the generator.
+   */
+  // const contextReferences = [1,2,3,4]
+  /**
    *  Optional. Context of the conversation, including transcripts.
    */
   // const conversationContext = {}
