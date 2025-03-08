@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as groundedgenerationserviceModule from '../src';
+
+import {PassThrough} from 'stream';
 
 import {protobuf, LocationProtos} from 'google-gax';
 
@@ -62,6 +64,20 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubBidiStreamingCall<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  return sinon.stub().returns(mockStream);
 }
 
 function stubAsyncIterationCall<ResponseType>(
@@ -296,6 +312,155 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
     });
   });
 
+  describe('generateGroundedContent', () => {
+    it('invokes generateGroundedContent without error', async () => {
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GenerateGroundedContentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.GenerateGroundedContentRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GenerateGroundedContentResponse()
+      );
+      client.innerApiCalls.generateGroundedContent =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.generateGroundedContent(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.generateGroundedContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateGroundedContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateGroundedContent without error using callback', async () => {
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GenerateGroundedContentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.GenerateGroundedContentRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GenerateGroundedContentResponse()
+      );
+      client.innerApiCalls.generateGroundedContent =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.generateGroundedContent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1beta.IGenerateGroundedContentResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.generateGroundedContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateGroundedContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateGroundedContent with error', async () => {
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GenerateGroundedContentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.GenerateGroundedContentRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.generateGroundedContent = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.generateGroundedContent(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.generateGroundedContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateGroundedContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateGroundedContent with closed client', async () => {
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GenerateGroundedContentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.GenerateGroundedContentRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.generateGroundedContent(request),
+        expectedError
+      );
+    });
+  });
+
   describe('checkGrounding', () => {
     it('invokes checkGrounding without error', async () => {
       const client =
@@ -314,7 +479,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         ['groundingConfig']
       );
       request.groundingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `grounding_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.CheckGroundingResponse()
       );
@@ -348,7 +513,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         ['groundingConfig']
       );
       request.groundingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `grounding_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.CheckGroundingResponse()
       );
@@ -398,7 +563,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         ['groundingConfig']
       );
       request.groundingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `grounding_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.checkGrounding = stubSimpleCall(
         undefined,
@@ -435,6 +600,100 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.checkGrounding(request), expectedError);
+    });
+  });
+
+  describe('streamGenerateGroundedContent', () => {
+    it('invokes streamGenerateGroundedContent without error', async () => {
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GenerateGroundedContentRequest()
+      );
+
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GenerateGroundedContentResponse()
+      );
+      client.innerApiCalls.streamGenerateGroundedContent =
+        stubBidiStreamingCall(expectedResponse);
+      const stream = client.streamGenerateGroundedContent();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1beta.GenerateGroundedContentResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.streamGenerateGroundedContent as SinonStub)
+          .getCall(0)
+          .calledWith(null)
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request
+      );
+    });
+
+    it('invokes streamGenerateGroundedContent with error', async () => {
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GenerateGroundedContentRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.streamGenerateGroundedContent =
+        stubBidiStreamingCall(undefined, expectedError);
+      const stream = client.streamGenerateGroundedContent();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1beta.GenerateGroundedContentResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.innerApiCalls.streamGenerateGroundedContent as SinonStub)
+          .getCall(0)
+          .calledWith(null)
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request
+      );
     });
   });
   describe('getLocation', () => {
@@ -860,6 +1119,58 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         assert.strictEqual(result, 'groundingConfigValue');
         assert(
           (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('location', () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2468,6 +2779,136 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationCollectionDataStoreSiteSearchEnginePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCollectionDataStoreSiteSearchEngineSitemap', () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineSitemap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+        sitemap: 'sitemapValue',
+      };
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStoreSiteSearchEngineSitemapPath', () => {
+        const result =
+          client.projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'dataStoreValue',
+            'sitemapValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sitemapValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -4549,6 +4990,117 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationDataStoreSiteSearchEnginePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDataStoreSiteSearchEngineSitemap', () => {
+      const fakePath =
+        '/rendered/path/projectLocationDataStoreSiteSearchEngineSitemap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+        sitemap: 'sitemapValue',
+      };
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDataStoreSiteSearchEngineSitemapPath', () => {
+        const result =
+          client.projectLocationDataStoreSiteSearchEngineSitemapPath(
+            'projectValue',
+            'locationValue',
+            'dataStoreValue',
+            'sitemapValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sitemapValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
