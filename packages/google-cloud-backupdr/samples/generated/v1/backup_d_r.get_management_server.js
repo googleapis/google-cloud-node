@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Name of the management server resource name, in the format
-   *  `projects/{project_id}/locations/{location}/managementServers/{resource_name}`
+   *  'projects/{project_id}/locations/{location}/managementServers/{resource_name}'
    */
   // const name = 'abc123'
 

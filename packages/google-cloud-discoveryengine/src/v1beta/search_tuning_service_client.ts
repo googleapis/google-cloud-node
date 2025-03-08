@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -213,6 +213,9 @@ export class SearchTuningServiceClient {
       evaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/evaluations/{evaluation}'
       ),
+      groundingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/groundingConfigs/{grounding_config}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -263,6 +266,10 @@ export class SearchTuningServiceClient {
       projectLocationCollectionDataStoreSiteSearchEnginePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
+        ),
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
         ),
       projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -334,6 +341,10 @@ export class SearchTuningServiceClient {
       projectLocationDataStoreSiteSearchEnginePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
+        ),
+      projectLocationDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
         ),
       projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -1003,7 +1014,7 @@ export class SearchTuningServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1016,6 +1027,20 @@ export class SearchTuningServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1052,6 +1077,13 @@ export class SearchTuningServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1087,11 +1119,11 @@ export class SearchTuningServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1100,6 +1132,20 @@ export class SearchTuningServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1130,7 +1176,7 @@ export class SearchTuningServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1143,6 +1189,20 @@ export class SearchTuningServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1267,6 +1327,65 @@ export class SearchTuningServiceClient {
   matchEvaluationFromEvaluationName(evaluationName: string) {
     return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
       .evaluation;
+  }
+
+  /**
+   * Return a fully-qualified groundingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} grounding_config
+   * @returns {string} Resource name string.
+   */
+  groundingConfigPath(
+    project: string,
+    location: string,
+    groundingConfig: string
+  ) {
+    return this.pathTemplates.groundingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      grounding_config: groundingConfig,
+    });
+  }
+
+  /**
+   * Parse the project from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the grounding_config from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the grounding_config.
+   */
+  matchGroundingConfigFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).grounding_config;
   }
 
   /**
@@ -2544,6 +2663,109 @@ export class SearchTuningServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
       projectLocationCollectionDataStoreSiteSearchEngineName
     ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
   }
 
   /**
@@ -4216,6 +4438,91 @@ export class SearchTuningServiceClient {
     return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
       projectLocationDataStoreSiteSearchEngineName
     ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
   }
 
   /**

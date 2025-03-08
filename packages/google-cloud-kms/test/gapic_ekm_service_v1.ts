@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -318,7 +318,7 @@ describe('v1.EkmServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.EkmConnection()
       );
@@ -349,7 +349,7 @@ describe('v1.EkmServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.EkmConnection()
       );
@@ -396,7 +396,7 @@ describe('v1.EkmServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEkmConnection = stubSimpleCall(
         undefined,
@@ -448,7 +448,7 @@ describe('v1.EkmServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.EkmConnection()
       );
@@ -480,7 +480,7 @@ describe('v1.EkmServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.EkmConnection()
       );
@@ -527,7 +527,7 @@ describe('v1.EkmServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEkmConnection = stubSimpleCall(
         undefined,
@@ -580,7 +580,7 @@ describe('v1.EkmServiceClient', () => {
         ['ekmConnection', 'name']
       );
       request.ekmConnection.name = defaultValue1;
-      const expectedHeaderRequestParams = `ekm_connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `ekm_connection.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.EkmConnection()
       );
@@ -613,7 +613,7 @@ describe('v1.EkmServiceClient', () => {
         ['ekmConnection', 'name']
       );
       request.ekmConnection.name = defaultValue1;
-      const expectedHeaderRequestParams = `ekm_connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `ekm_connection.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.EkmConnection()
       );
@@ -661,7 +661,7 @@ describe('v1.EkmServiceClient', () => {
         ['ekmConnection', 'name']
       );
       request.ekmConnection.name = defaultValue1;
-      const expectedHeaderRequestParams = `ekm_connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `ekm_connection.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEkmConnection = stubSimpleCall(
         undefined,
@@ -714,7 +714,7 @@ describe('v1.EkmServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.EkmConfig()
       );
@@ -745,7 +745,7 @@ describe('v1.EkmServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.EkmConfig()
       );
@@ -792,7 +792,7 @@ describe('v1.EkmServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEkmConfig = stubSimpleCall(
         undefined,
@@ -845,7 +845,7 @@ describe('v1.EkmServiceClient', () => {
         ['ekmConfig', 'name']
       );
       request.ekmConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `ekm_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `ekm_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.EkmConfig()
       );
@@ -877,7 +877,7 @@ describe('v1.EkmServiceClient', () => {
         ['ekmConfig', 'name']
       );
       request.ekmConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `ekm_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `ekm_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.EkmConfig()
       );
@@ -925,7 +925,7 @@ describe('v1.EkmServiceClient', () => {
         ['ekmConfig', 'name']
       );
       request.ekmConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `ekm_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `ekm_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEkmConfig = stubSimpleCall(
         undefined,
@@ -978,7 +978,7 @@ describe('v1.EkmServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.VerifyConnectivityResponse()
       );
@@ -1010,7 +1010,7 @@ describe('v1.EkmServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.VerifyConnectivityResponse()
       );
@@ -1057,7 +1057,7 @@ describe('v1.EkmServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.verifyConnectivity = stubSimpleCall(
         undefined,
@@ -1109,7 +1109,7 @@ describe('v1.EkmServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
         generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
@@ -1143,7 +1143,7 @@ describe('v1.EkmServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
         generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
@@ -1192,7 +1192,7 @@ describe('v1.EkmServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEkmConnections = stubSimpleCall(
         undefined,
@@ -1223,7 +1223,7 @@ describe('v1.EkmServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
         generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
@@ -1277,7 +1277,7 @@ describe('v1.EkmServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEkmConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1326,7 +1326,7 @@ describe('v1.EkmServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
         generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
@@ -1369,7 +1369,7 @@ describe('v1.EkmServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEkmConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
