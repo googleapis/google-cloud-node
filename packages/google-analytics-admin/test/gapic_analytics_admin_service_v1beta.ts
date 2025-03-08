@@ -340,7 +340,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.Account()
       );
@@ -372,7 +372,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.Account()
       );
@@ -420,7 +420,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAccount = stubSimpleCall(
         undefined,
@@ -474,7 +474,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -506,7 +506,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -554,7 +554,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAccount = stubSimpleCall(
         undefined,
@@ -609,7 +609,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['account', 'name']
       );
       request.account.name = defaultValue1;
-      const expectedHeaderRequestParams = `account.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.Account()
       );
@@ -642,7 +642,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['account', 'name']
       );
       request.account.name = defaultValue1;
-      const expectedHeaderRequestParams = `account.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.Account()
       );
@@ -691,7 +691,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['account', 'name']
       );
       request.account.name = defaultValue1;
-      const expectedHeaderRequestParams = `account.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAccount = stubSimpleCall(
         undefined,
@@ -840,7 +840,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.Property()
       );
@@ -872,7 +872,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.Property()
       );
@@ -920,7 +920,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProperty = stubSimpleCall(
         undefined,
@@ -1061,7 +1061,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.Property()
       );
@@ -1093,7 +1093,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.Property()
       );
@@ -1141,7 +1141,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProperty = stubSimpleCall(
         undefined,
@@ -1196,7 +1196,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['property', 'name']
       );
       request.property.name = defaultValue1;
-      const expectedHeaderRequestParams = `property.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.Property()
       );
@@ -1229,7 +1229,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['property', 'name']
       );
       request.property.name = defaultValue1;
-      const expectedHeaderRequestParams = `property.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.Property()
       );
@@ -1278,7 +1278,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['property', 'name']
       );
       request.property.name = defaultValue1;
-      const expectedHeaderRequestParams = `property.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateProperty = stubSimpleCall(
         undefined,
@@ -1333,7 +1333,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.FirebaseLink()
       );
@@ -1366,7 +1366,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.FirebaseLink()
       );
@@ -1414,7 +1414,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFirebaseLink = stubSimpleCall(
         undefined,
@@ -1468,7 +1468,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1501,7 +1501,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1549,7 +1549,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFirebaseLink = stubSimpleCall(
         undefined,
@@ -1603,7 +1603,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GoogleAdsLink()
       );
@@ -1636,7 +1636,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GoogleAdsLink()
       );
@@ -1684,7 +1684,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGoogleAdsLink = stubSimpleCall(
         undefined,
@@ -1739,7 +1739,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['googleAdsLink', 'name']
       );
       request.googleAdsLink.name = defaultValue1;
-      const expectedHeaderRequestParams = `google_ads_link.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `google_ads_link.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GoogleAdsLink()
       );
@@ -1773,7 +1773,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['googleAdsLink', 'name']
       );
       request.googleAdsLink.name = defaultValue1;
-      const expectedHeaderRequestParams = `google_ads_link.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `google_ads_link.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GoogleAdsLink()
       );
@@ -1822,7 +1822,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['googleAdsLink', 'name']
       );
       request.googleAdsLink.name = defaultValue1;
-      const expectedHeaderRequestParams = `google_ads_link.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `google_ads_link.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGoogleAdsLink = stubSimpleCall(
         undefined,
@@ -1877,7 +1877,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1910,7 +1910,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1958,7 +1958,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGoogleAdsLink = stubSimpleCall(
         undefined,
@@ -2012,7 +2012,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DataSharingSettings()
       );
@@ -2045,7 +2045,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DataSharingSettings()
       );
@@ -2093,7 +2093,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataSharingSettings = stubSimpleCall(
         undefined,
@@ -2153,7 +2153,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.MeasurementProtocolSecret()
       );
@@ -2186,7 +2186,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.MeasurementProtocolSecret()
       );
@@ -2234,7 +2234,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMeasurementProtocolSecret = stubSimpleCall(
         undefined,
@@ -2294,7 +2294,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.MeasurementProtocolSecret()
       );
@@ -2327,7 +2327,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.MeasurementProtocolSecret()
       );
@@ -2375,7 +2375,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMeasurementProtocolSecret = stubSimpleCall(
         undefined,
@@ -2435,7 +2435,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2468,7 +2468,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2516,7 +2516,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMeasurementProtocolSecret = stubSimpleCall(
         undefined,
@@ -2577,7 +2577,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['measurementProtocolSecret', 'name']
       );
       request.measurementProtocolSecret.name = defaultValue1;
-      const expectedHeaderRequestParams = `measurement_protocol_secret.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `measurement_protocol_secret.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.MeasurementProtocolSecret()
       );
@@ -2611,7 +2611,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['measurementProtocolSecret', 'name']
       );
       request.measurementProtocolSecret.name = defaultValue1;
-      const expectedHeaderRequestParams = `measurement_protocol_secret.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `measurement_protocol_secret.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.MeasurementProtocolSecret()
       );
@@ -2660,7 +2660,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['measurementProtocolSecret', 'name']
       );
       request.measurementProtocolSecret.name = defaultValue1;
-      const expectedHeaderRequestParams = `measurement_protocol_secret.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `measurement_protocol_secret.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMeasurementProtocolSecret = stubSimpleCall(
         undefined,
@@ -2721,7 +2721,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.AcknowledgeUserDataCollectionResponse()
       );
@@ -2754,7 +2754,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.AcknowledgeUserDataCollectionResponse()
       );
@@ -2802,7 +2802,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.acknowledgeUserDataCollection = stubSimpleCall(
         undefined,
@@ -2863,7 +2863,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ConversionEvent()
       );
@@ -2898,7 +2898,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ConversionEvent()
       );
@@ -2948,7 +2948,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConversionEvent = stubSimpleCall(
         undefined,
@@ -3013,7 +3013,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['conversionEvent', 'name']
       );
       request.conversionEvent.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_event.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_event.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ConversionEvent()
       );
@@ -3049,7 +3049,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['conversionEvent', 'name']
       );
       request.conversionEvent.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_event.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_event.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ConversionEvent()
       );
@@ -3100,7 +3100,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['conversionEvent', 'name']
       );
       request.conversionEvent.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversion_event.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversion_event.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConversionEvent = stubSimpleCall(
         undefined,
@@ -3165,7 +3165,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ConversionEvent()
       );
@@ -3200,7 +3200,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ConversionEvent()
       );
@@ -3250,7 +3250,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConversionEvent = stubSimpleCall(
         undefined,
@@ -3308,7 +3308,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3343,7 +3343,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3393,7 +3393,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConversionEvent = stubSimpleCall(
         undefined,
@@ -3456,7 +3456,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.KeyEvent()
       );
@@ -3488,7 +3488,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.KeyEvent()
       );
@@ -3536,7 +3536,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createKeyEvent = stubSimpleCall(
         undefined,
@@ -3591,7 +3591,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['keyEvent', 'name']
       );
       request.keyEvent.name = defaultValue1;
-      const expectedHeaderRequestParams = `key_event.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `key_event.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.KeyEvent()
       );
@@ -3624,7 +3624,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['keyEvent', 'name']
       );
       request.keyEvent.name = defaultValue1;
-      const expectedHeaderRequestParams = `key_event.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `key_event.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.KeyEvent()
       );
@@ -3673,7 +3673,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['keyEvent', 'name']
       );
       request.keyEvent.name = defaultValue1;
-      const expectedHeaderRequestParams = `key_event.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `key_event.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateKeyEvent = stubSimpleCall(
         undefined,
@@ -3728,7 +3728,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.KeyEvent()
       );
@@ -3760,7 +3760,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.KeyEvent()
       );
@@ -3808,7 +3808,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getKeyEvent = stubSimpleCall(
         undefined,
@@ -3862,7 +3862,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3894,7 +3894,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3942,7 +3942,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteKeyEvent = stubSimpleCall(
         undefined,
@@ -3996,7 +3996,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CustomDimension()
       );
@@ -4029,7 +4029,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CustomDimension()
       );
@@ -4077,7 +4077,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCustomDimension = stubSimpleCall(
         undefined,
@@ -4138,7 +4138,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['customDimension', 'name']
       );
       request.customDimension.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_dimension.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_dimension.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CustomDimension()
       );
@@ -4172,7 +4172,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['customDimension', 'name']
       );
       request.customDimension.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_dimension.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_dimension.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CustomDimension()
       );
@@ -4221,7 +4221,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['customDimension', 'name']
       );
       request.customDimension.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_dimension.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_dimension.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCustomDimension = stubSimpleCall(
         undefined,
@@ -4282,7 +4282,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4315,7 +4315,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4363,7 +4363,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.archiveCustomDimension = stubSimpleCall(
         undefined,
@@ -4423,7 +4423,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CustomDimension()
       );
@@ -4456,7 +4456,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CustomDimension()
       );
@@ -4504,7 +4504,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCustomDimension = stubSimpleCall(
         undefined,
@@ -4558,7 +4558,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CustomMetric()
       );
@@ -4591,7 +4591,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CustomMetric()
       );
@@ -4639,7 +4639,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCustomMetric = stubSimpleCall(
         undefined,
@@ -4694,7 +4694,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['customMetric', 'name']
       );
       request.customMetric.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_metric.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_metric.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CustomMetric()
       );
@@ -4728,7 +4728,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['customMetric', 'name']
       );
       request.customMetric.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_metric.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_metric.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CustomMetric()
       );
@@ -4777,7 +4777,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['customMetric', 'name']
       );
       request.customMetric.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_metric.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_metric.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCustomMetric = stubSimpleCall(
         undefined,
@@ -4832,7 +4832,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4865,7 +4865,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4913,7 +4913,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.archiveCustomMetric = stubSimpleCall(
         undefined,
@@ -4967,7 +4967,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CustomMetric()
       );
@@ -4999,7 +4999,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CustomMetric()
       );
@@ -5047,7 +5047,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCustomMetric = stubSimpleCall(
         undefined,
@@ -5101,7 +5101,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DataRetentionSettings()
       );
@@ -5134,7 +5134,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DataRetentionSettings()
       );
@@ -5182,7 +5182,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataRetentionSettings = stubSimpleCall(
         undefined,
@@ -5243,7 +5243,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['dataRetentionSettings', 'name']
       );
       request.dataRetentionSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_retention_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_retention_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DataRetentionSettings()
       );
@@ -5277,7 +5277,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['dataRetentionSettings', 'name']
       );
       request.dataRetentionSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_retention_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_retention_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DataRetentionSettings()
       );
@@ -5326,7 +5326,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['dataRetentionSettings', 'name']
       );
       request.dataRetentionSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_retention_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_retention_settings.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataRetentionSettings = stubSimpleCall(
         undefined,
@@ -5387,7 +5387,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DataStream()
       );
@@ -5419,7 +5419,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DataStream()
       );
@@ -5467,7 +5467,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataStream = stubSimpleCall(
         undefined,
@@ -5521,7 +5521,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5553,7 +5553,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5601,7 +5601,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataStream = stubSimpleCall(
         undefined,
@@ -5656,7 +5656,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['dataStream', 'name']
       );
       request.dataStream.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_stream.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_stream.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DataStream()
       );
@@ -5689,7 +5689,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['dataStream', 'name']
       );
       request.dataStream.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_stream.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_stream.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DataStream()
       );
@@ -5738,7 +5738,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['dataStream', 'name']
       );
       request.dataStream.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_stream.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_stream.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataStream = stubSimpleCall(
         undefined,
@@ -5793,7 +5793,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DataStream()
       );
@@ -5825,7 +5825,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DataStream()
       );
@@ -5873,7 +5873,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataStream = stubSimpleCall(
         undefined,
@@ -5927,7 +5927,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['entity']
       );
       request.entity = defaultValue1;
-      const expectedHeaderRequestParams = `entity=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.RunAccessReportResponse()
       );
@@ -5959,7 +5959,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['entity']
       );
       request.entity = defaultValue1;
-      const expectedHeaderRequestParams = `entity=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.RunAccessReportResponse()
       );
@@ -6007,7 +6007,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['entity']
       );
       request.entity = defaultValue1;
-      const expectedHeaderRequestParams = `entity=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runAccessReport = stubSimpleCall(
         undefined,
@@ -6784,7 +6784,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.FirebaseLink()
@@ -6824,7 +6824,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.FirebaseLink()
@@ -6880,7 +6880,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFirebaseLinks = stubSimpleCall(
         undefined,
@@ -6912,7 +6912,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.FirebaseLink()
@@ -6974,7 +6974,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFirebaseLinks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7025,7 +7025,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.FirebaseLink()
@@ -7076,7 +7076,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFirebaseLinks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7120,7 +7120,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.GoogleAdsLink()
@@ -7161,7 +7161,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.GoogleAdsLink()
@@ -7219,7 +7219,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGoogleAdsLinks = stubSimpleCall(
         undefined,
@@ -7251,7 +7251,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.GoogleAdsLink()
@@ -7313,7 +7313,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGoogleAdsLinks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7364,7 +7364,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.GoogleAdsLink()
@@ -7415,7 +7415,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGoogleAdsLinks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7459,7 +7459,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.MeasurementProtocolSecret()
@@ -7500,7 +7500,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.MeasurementProtocolSecret()
@@ -7558,7 +7558,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMeasurementProtocolSecrets = stubSimpleCall(
         undefined,
@@ -7593,7 +7593,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.MeasurementProtocolSecret()
@@ -7666,7 +7666,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMeasurementProtocolSecrets.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7728,7 +7728,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.MeasurementProtocolSecret()
@@ -7783,7 +7783,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMeasurementProtocolSecrets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7831,7 +7831,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['account']
       );
       request.account = defaultValue1;
-      const expectedHeaderRequestParams = `account=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.ChangeHistoryEvent()
@@ -7872,7 +7872,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['account']
       );
       request.account = defaultValue1;
-      const expectedHeaderRequestParams = `account=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.ChangeHistoryEvent()
@@ -7930,7 +7930,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['account']
       );
       request.account = defaultValue1;
-      const expectedHeaderRequestParams = `account=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchChangeHistoryEvents = stubSimpleCall(
         undefined,
@@ -7965,7 +7965,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['account']
       );
       request.account = defaultValue1;
-      const expectedHeaderRequestParams = `account=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.ChangeHistoryEvent()
@@ -8035,7 +8035,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['account']
       );
       request.account = defaultValue1;
-      const expectedHeaderRequestParams = `account=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchChangeHistoryEvents.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8094,7 +8094,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['account']
       );
       request.account = defaultValue1;
-      const expectedHeaderRequestParams = `account=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.ChangeHistoryEvent()
@@ -8149,7 +8149,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['account']
       );
       request.account = defaultValue1;
-      const expectedHeaderRequestParams = `account=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchChangeHistoryEvents.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8198,7 +8198,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.ConversionEvent()
@@ -8241,7 +8241,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.ConversionEvent()
@@ -8301,7 +8301,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConversionEvents = stubSimpleCall(
         undefined,
@@ -8335,7 +8335,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.ConversionEvent()
@@ -8399,7 +8399,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversionEvents.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8452,7 +8452,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.ConversionEvent()
@@ -8505,7 +8505,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversionEvents.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8550,7 +8550,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.KeyEvent()
@@ -8590,7 +8590,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.KeyEvent()
@@ -8646,7 +8646,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listKeyEvents = stubSimpleCall(
         undefined,
@@ -8678,7 +8678,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.KeyEvent()
@@ -8739,7 +8739,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKeyEvents.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8789,7 +8789,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.KeyEvent()
@@ -8839,7 +8839,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKeyEvents.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8882,7 +8882,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.CustomDimension()
@@ -8923,7 +8923,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.CustomDimension()
@@ -8981,7 +8981,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCustomDimensions = stubSimpleCall(
         undefined,
@@ -9013,7 +9013,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.CustomDimension()
@@ -9075,7 +9075,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomDimensions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9126,7 +9126,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.CustomDimension()
@@ -9177,7 +9177,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomDimensions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -9221,7 +9221,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.CustomMetric()
@@ -9261,7 +9261,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.CustomMetric()
@@ -9317,7 +9317,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCustomMetrics = stubSimpleCall(
         undefined,
@@ -9349,7 +9349,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.CustomMetric()
@@ -9411,7 +9411,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomMetrics.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9462,7 +9462,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.CustomMetric()
@@ -9513,7 +9513,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomMetrics.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -9557,7 +9557,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.DataStream()
@@ -9597,7 +9597,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.DataStream()
@@ -9653,7 +9653,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataStreams = stubSimpleCall(
         undefined,
@@ -9685,7 +9685,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.DataStream()
@@ -9746,7 +9746,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataStreams.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9796,7 +9796,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1beta.DataStream()
@@ -9846,7 +9846,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataStreams.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

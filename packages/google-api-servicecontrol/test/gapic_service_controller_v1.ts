@@ -261,7 +261,7 @@ describe('v1.ServiceControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.CheckResponse()
       );
@@ -291,7 +291,7 @@ describe('v1.ServiceControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.CheckResponse()
       );
@@ -336,7 +336,7 @@ describe('v1.ServiceControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.check = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.check(request), expectedError);
@@ -384,7 +384,7 @@ describe('v1.ServiceControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.ReportResponse()
       );
@@ -415,7 +415,7 @@ describe('v1.ServiceControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.ReportResponse()
       );
@@ -462,7 +462,7 @@ describe('v1.ServiceControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.report = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.report(request), expectedError);
