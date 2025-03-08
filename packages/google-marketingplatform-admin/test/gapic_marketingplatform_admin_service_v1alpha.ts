@@ -360,7 +360,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.Organization()
       );
@@ -394,7 +394,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.Organization()
       );
@@ -444,7 +444,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getOrganization = stubSimpleCall(
         undefined,
@@ -502,7 +502,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.AnalyticsAccountLink()
       );
@@ -537,7 +537,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.AnalyticsAccountLink()
       );
@@ -587,7 +587,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAnalyticsAccountLink = stubSimpleCall(
         undefined,
@@ -651,7 +651,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -686,7 +686,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -736,7 +736,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAnalyticsAccountLink = stubSimpleCall(
         undefined,
@@ -800,7 +800,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['analyticsAccountLink']
       );
       request.analyticsAccountLink = defaultValue1;
-      const expectedHeaderRequestParams = `analytics_account_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analytics_account_link=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.SetPropertyServiceLevelResponse()
       );
@@ -835,7 +835,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['analyticsAccountLink']
       );
       request.analyticsAccountLink = defaultValue1;
-      const expectedHeaderRequestParams = `analytics_account_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analytics_account_link=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.SetPropertyServiceLevelResponse()
       );
@@ -885,7 +885,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['analyticsAccountLink']
       );
       request.analyticsAccountLink = defaultValue1;
-      const expectedHeaderRequestParams = `analytics_account_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analytics_account_link=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setPropertyServiceLevel = stubSimpleCall(
         undefined,
@@ -949,7 +949,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.marketingplatform.admin.v1alpha.AnalyticsAccountLink()
@@ -992,7 +992,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.marketingplatform.admin.v1alpha.AnalyticsAccountLink()
@@ -1052,7 +1052,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAnalyticsAccountLinks = stubSimpleCall(
         undefined,
@@ -1089,7 +1089,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.marketingplatform.admin.v1alpha.AnalyticsAccountLink()
@@ -1161,7 +1161,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnalyticsAccountLinks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1222,7 +1222,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.marketingplatform.admin.v1alpha.AnalyticsAccountLink()
@@ -1279,7 +1279,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnalyticsAccountLinks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

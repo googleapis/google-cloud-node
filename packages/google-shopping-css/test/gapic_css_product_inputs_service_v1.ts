@@ -274,7 +274,7 @@ describe('v1.CssProductInputsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.css.v1.CssProductInput()
       );
@@ -307,7 +307,7 @@ describe('v1.CssProductInputsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.css.v1.CssProductInput()
       );
@@ -355,7 +355,7 @@ describe('v1.CssProductInputsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insertCssProductInput = stubSimpleCall(
         undefined,
@@ -416,7 +416,7 @@ describe('v1.CssProductInputsServiceClient', () => {
         ['cssProductInput', 'name']
       );
       request.cssProductInput.name = defaultValue1;
-      const expectedHeaderRequestParams = `css_product_input.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `css_product_input.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.css.v1.CssProductInput()
       );
@@ -450,7 +450,7 @@ describe('v1.CssProductInputsServiceClient', () => {
         ['cssProductInput', 'name']
       );
       request.cssProductInput.name = defaultValue1;
-      const expectedHeaderRequestParams = `css_product_input.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `css_product_input.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.css.v1.CssProductInput()
       );
@@ -499,7 +499,7 @@ describe('v1.CssProductInputsServiceClient', () => {
         ['cssProductInput', 'name']
       );
       request.cssProductInput.name = defaultValue1;
-      const expectedHeaderRequestParams = `css_product_input.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `css_product_input.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCssProductInput = stubSimpleCall(
         undefined,
@@ -560,7 +560,7 @@ describe('v1.CssProductInputsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -593,7 +593,7 @@ describe('v1.CssProductInputsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -641,7 +641,7 @@ describe('v1.CssProductInputsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCssProductInput = stubSimpleCall(
         undefined,
