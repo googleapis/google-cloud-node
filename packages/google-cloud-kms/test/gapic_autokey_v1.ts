@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as autokeyModule from '../src';
+
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -100,6 +102,44 @@ function stubLongRunningCallWithCallback<ResponseType>(
   return callError
     ? sinon.stub().callsArgWith(2, callError)
     : sinon.stub().callsArgWith(2, null, mockOperation);
+}
+
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
 function stubAsyncIterationCall<ResponseType>(
@@ -316,7 +356,7 @@ describe('v1.AutokeyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.KeyHandle()
       );
@@ -347,7 +387,7 @@ describe('v1.AutokeyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.KeyHandle()
       );
@@ -394,7 +434,7 @@ describe('v1.AutokeyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getKeyHandle = stubSimpleCall(
         undefined,
@@ -431,136 +471,6 @@ describe('v1.AutokeyClient', () => {
     });
   });
 
-  describe('listKeyHandles', () => {
-    it('invokes listKeyHandles without error', async () => {
-      const client = new autokeyModule.v1.AutokeyClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.ListKeyHandlesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.ListKeyHandlesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.ListKeyHandlesResponse()
-      );
-      client.innerApiCalls.listKeyHandles = stubSimpleCall(expectedResponse);
-      const [response] = await client.listKeyHandles(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listKeyHandles as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listKeyHandles as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listKeyHandles without error using callback', async () => {
-      const client = new autokeyModule.v1.AutokeyClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.ListKeyHandlesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.ListKeyHandlesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.ListKeyHandlesResponse()
-      );
-      client.innerApiCalls.listKeyHandles =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listKeyHandles(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.kms.v1.IListKeyHandlesResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listKeyHandles as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listKeyHandles as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listKeyHandles with error', async () => {
-      const client = new autokeyModule.v1.AutokeyClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.ListKeyHandlesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.ListKeyHandlesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listKeyHandles = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listKeyHandles(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listKeyHandles as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listKeyHandles as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listKeyHandles with closed client', async () => {
-      const client = new autokeyModule.v1.AutokeyClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.ListKeyHandlesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.ListKeyHandlesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.listKeyHandles(request), expectedError);
-    });
-  });
-
   describe('createKeyHandle', () => {
     it('invokes createKeyHandle without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
@@ -576,7 +486,7 @@ describe('v1.AutokeyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -609,7 +519,7 @@ describe('v1.AutokeyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -663,7 +573,7 @@ describe('v1.AutokeyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createKeyHandle = stubLongRunningCall(
         undefined,
@@ -694,7 +604,7 @@ describe('v1.AutokeyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createKeyHandle = stubLongRunningCall(
         undefined,
@@ -752,6 +662,301 @@ describe('v1.AutokeyClient', () => {
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listKeyHandles', () => {
+    it('invokes listKeyHandles without error', async () => {
+      const client = new autokeyModule.v1.AutokeyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ListKeyHandlesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListKeyHandlesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.kms.v1.KeyHandle()),
+        generateSampleMessage(new protos.google.cloud.kms.v1.KeyHandle()),
+        generateSampleMessage(new protos.google.cloud.kms.v1.KeyHandle()),
+      ];
+      client.innerApiCalls.listKeyHandles = stubSimpleCall(expectedResponse);
+      const [response] = await client.listKeyHandles(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listKeyHandles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKeyHandles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listKeyHandles without error using callback', async () => {
+      const client = new autokeyModule.v1.AutokeyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ListKeyHandlesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListKeyHandlesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.kms.v1.KeyHandle()),
+        generateSampleMessage(new protos.google.cloud.kms.v1.KeyHandle()),
+        generateSampleMessage(new protos.google.cloud.kms.v1.KeyHandle()),
+      ];
+      client.innerApiCalls.listKeyHandles =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listKeyHandles(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.kms.v1.IKeyHandle[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listKeyHandles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKeyHandles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listKeyHandles with error', async () => {
+      const client = new autokeyModule.v1.AutokeyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ListKeyHandlesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListKeyHandlesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listKeyHandles = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listKeyHandles(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listKeyHandles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKeyHandles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listKeyHandlesStream without error', async () => {
+      const client = new autokeyModule.v1.AutokeyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ListKeyHandlesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListKeyHandlesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.kms.v1.KeyHandle()),
+        generateSampleMessage(new protos.google.cloud.kms.v1.KeyHandle()),
+        generateSampleMessage(new protos.google.cloud.kms.v1.KeyHandle()),
+      ];
+      client.descriptors.page.listKeyHandles.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listKeyHandlesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.kms.v1.KeyHandle[] = [];
+        stream.on('data', (response: protos.google.cloud.kms.v1.KeyHandle) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listKeyHandles.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listKeyHandles, request)
+      );
+      assert(
+        (client.descriptors.page.listKeyHandles.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listKeyHandlesStream with error', async () => {
+      const client = new autokeyModule.v1.AutokeyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ListKeyHandlesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListKeyHandlesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listKeyHandles.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listKeyHandlesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.kms.v1.KeyHandle[] = [];
+        stream.on('data', (response: protos.google.cloud.kms.v1.KeyHandle) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listKeyHandles.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listKeyHandles, request)
+      );
+      assert(
+        (client.descriptors.page.listKeyHandles.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listKeyHandles without error', async () => {
+      const client = new autokeyModule.v1.AutokeyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ListKeyHandlesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListKeyHandlesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.kms.v1.KeyHandle()),
+        generateSampleMessage(new protos.google.cloud.kms.v1.KeyHandle()),
+        generateSampleMessage(new protos.google.cloud.kms.v1.KeyHandle()),
+      ];
+      client.descriptors.page.listKeyHandles.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.kms.v1.IKeyHandle[] = [];
+      const iterable = client.listKeyHandlesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listKeyHandles.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listKeyHandles.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listKeyHandles with error', async () => {
+      const client = new autokeyModule.v1.AutokeyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ListKeyHandlesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListKeyHandlesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listKeyHandles.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listKeyHandlesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.kms.v1.IKeyHandle[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listKeyHandles.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listKeyHandles.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
     });
   });
   describe('getIamPolicy', () => {
