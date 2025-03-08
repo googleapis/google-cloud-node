@@ -1044,7 +1044,7 @@ export class StorageInsightsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listReportConfigs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1245,7 +1245,7 @@ export class StorageInsightsClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listReportDetails`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
