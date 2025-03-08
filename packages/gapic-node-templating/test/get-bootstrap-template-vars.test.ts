@@ -106,7 +106,6 @@ describe('get bootstrap template vars', () => {
     it('should get the distribution name', async () => {
       const getContentStub = sinon
         .stub(octokit.repos, 'getContent')
-        // .stub(octokit.repos, 'getContent')
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .resolves({data: {name: 'BUILD.bazel', content: 'content'}} as any);
 
