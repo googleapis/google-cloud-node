@@ -233,10 +233,15 @@
   * [Test_cases.run_test_case](#test_cases.run_test_case)
   * [Test_cases.update_test_case](#test_cases.update_test_case)
   * [Tools.create_tool](#tools.create_tool)
+  * [Tools.create_tool_version](#tools.create_tool_version)
   * [Tools.delete_tool](#tools.delete_tool)
+  * [Tools.delete_tool_version](#tools.delete_tool_version)
   * [Tools.export_tools](#tools.export_tools)
   * [Tools.get_tool](#tools.get_tool)
+  * [Tools.get_tool_version](#tools.get_tool_version)
+  * [Tools.list_tool_versions](#tools.list_tool_versions)
   * [Tools.list_tools](#tools.list_tools)
+  * [Tools.restore_tool_version](#tools.restore_tool_version)
   * [Tools.update_tool](#tools.update_tool)
   * [Transition_route_groups.create_transition_route_group](#transition_route_groups.create_transition_route_group)
   * [Transition_route_groups.delete_transition_route_group](#transition_route_groups.delete_transition_route_group)
@@ -4029,6 +4034,23 @@ __Usage:__
 
 
 
+### Tools.create_tool_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.create_tool_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.create_tool_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.create_tool_version.js`
+
+
+-----
+
+
+
+
 ### Tools.delete_tool
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.delete_tool.js).
@@ -4039,6 +4061,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.delete_tool.js`
+
+
+-----
+
+
+
+
+### Tools.delete_tool_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.delete_tool_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.delete_tool_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.delete_tool_version.js`
 
 
 -----
@@ -4080,6 +4119,40 @@ __Usage:__
 
 
 
+### Tools.get_tool_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.get_tool_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.get_tool_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.get_tool_version.js`
+
+
+-----
+
+
+
+
+### Tools.list_tool_versions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.list_tool_versions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.list_tool_versions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.list_tool_versions.js`
+
+
+-----
+
+
+
+
 ### Tools.list_tools
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.list_tools.js).
@@ -4090,6 +4163,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.list_tools.js`
+
+
+-----
+
+
+
+
+### Tools.restore_tool_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.restore_tool_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.restore_tool_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.restore_tool_version.js`
 
 
 -----
