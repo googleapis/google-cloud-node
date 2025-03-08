@@ -18,7 +18,7 @@ deep-remove-regex:
 
 deep-copy-regex:
   - source: /google/cloud/aiplatform/v1/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-aiplatform
+    dest: /owl-bot-staging/google-cloud-aiplatform/v1
 
 begin-after-commit-hash: 674a41e0de2869f44f45eb7b1a605852a5394bba
 
