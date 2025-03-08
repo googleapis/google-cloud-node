@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.7.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.6.0...admin-v7.7.0) (2025-03-08)
+
+
+### Features
+
+* [analytics-admin] added support for KeyEvents AdminAPI ChangeHistory ([#6113](https://github.com/googleapis/google-cloud-node/issues/6113)) ([beba36b](https://github.com/googleapis/google-cloud-node/commit/beba36b9f0ef1655bef50d1c063b5f1b54e15a93))
+
 ## [7.6.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.5.0...admin-v7.6.0) (2024-08-09)
 
 

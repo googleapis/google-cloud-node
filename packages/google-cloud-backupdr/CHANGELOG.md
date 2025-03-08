@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.2.0...backupdr-v0.3.0) (2025-03-08)
+
+
+### Features
+
+* Add backupplan proto ([b35aae1](https://github.com/googleapis/google-cloud-node/commit/b35aae1a0467dba2ab684d4fe6a7cd385046d1a6))
+* Add backupplanassociation proto ([b35aae1](https://github.com/googleapis/google-cloud-node/commit/b35aae1a0467dba2ab684d4fe6a7cd385046d1a6))
+* Add backupvault_ba proto ([b35aae1](https://github.com/googleapis/google-cloud-node/commit/b35aae1a0467dba2ab684d4fe6a7cd385046d1a6))
+* Add backupvault_gce proto ([b35aae1](https://github.com/googleapis/google-cloud-node/commit/b35aae1a0467dba2ab684d4fe6a7cd385046d1a6))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.1.0...backupdr-v0.2.0) (2024-05-21)
 
 

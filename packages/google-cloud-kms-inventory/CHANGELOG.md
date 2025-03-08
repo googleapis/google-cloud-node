@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v1.5.0...kms-inventory-v1.6.0) (2025-03-08)
+
+
+### Features
+
+* Adding a state field for AutokeyConfig ([c043c2e](https://github.com/googleapis/google-cloud-node/commit/c043c2edab6efc9980bceffcf0db888ef8fe41d4))
+
 ## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v1.4.0...kms-inventory-v1.5.0) (2024-06-21)
 
 
