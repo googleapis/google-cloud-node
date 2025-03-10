@@ -1,5 +1,21 @@
 # Changelog
 
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.6.0...admin-v8.0.0) (2025-03-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [analytics-admin] added support for KeyEvents AdminAPI ChangeHistory ([#6113](https://github.com/googleapis/google-cloud-node/issues/6113)) ([beba36b](https://github.com/googleapis/google-cloud-node/commit/beba36b9f0ef1655bef50d1c063b5f1b54e15a93))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [7.6.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.5.0...admin-v7.6.0) (2024-08-09)
 
 

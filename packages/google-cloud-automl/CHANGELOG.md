@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/automl-v4.3.0...automl-v5.0.0) (2025-03-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/automl-v4.2.0...automl-v4.3.0) (2024-05-21)
 
 

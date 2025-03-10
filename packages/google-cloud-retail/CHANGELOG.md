@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.6.1...retail-v4.0.0) (2025-03-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [3.6.1](https://github.com/googleapis/google-cloud-node/compare/retail-v3.6.0...retail-v3.6.1) (2025-02-12)
 
 

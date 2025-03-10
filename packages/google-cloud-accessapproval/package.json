@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/access-approval",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "description": "Accessapproval client for Node.js",
   "repository": {
     "type": "git",
