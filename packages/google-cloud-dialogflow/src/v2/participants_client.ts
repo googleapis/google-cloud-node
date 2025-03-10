@@ -861,6 +861,8 @@ export class ParticipantsClient {
    *   ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
    * @param {google.cloud.dialogflow.v2.TextInput} request.textInput
    *   The natural language text to be processed.
+   * @param {google.cloud.dialogflow.v2.AudioInput} request.audioInput
+   *   The natural language speech audio to be processed.
    * @param {google.cloud.dialogflow.v2.EventInput} request.eventInput
    *   An input event to send to Dialogflow.
    * @param {google.cloud.dialogflow.v2.SuggestionInput} request.suggestionInput
@@ -1308,7 +1310,7 @@ export class ParticipantsClient {
    *   default 100 and at most 100.
    * @param {string} [request.previousSuggestedQuery]
    *   Optional. The previously suggested query for the given conversation. This
-   *   helps identify whether the next suggestion we generate is resonably
+   *   helps identify whether the next suggestion we generate is reasonably
    *   different from the previous one. This is useful to avoid similar
    *   suggestions within the conversation.
    * @param {object} [options]

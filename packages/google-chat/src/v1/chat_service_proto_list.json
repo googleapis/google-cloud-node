@@ -16,6 +16,7 @@
   "../../protos/google/chat/v1/slash_command.proto",
   "../../protos/google/chat/v1/space.proto",
   "../../protos/google/chat/v1/space_event.proto",
+  "../../protos/google/chat/v1/space_notification_setting.proto",
   "../../protos/google/chat/v1/space_read_state.proto",
   "../../protos/google/chat/v1/space_setup.proto",
   "../../protos/google/chat/v1/thread_read_state.proto",

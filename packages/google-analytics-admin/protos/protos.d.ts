@@ -28688,7 +28688,8 @@ export namespace google {
                     ADSENSE_LINK = 27,
                     AUDIENCE = 28,
                     EVENT_CREATE_RULE = 29,
-                    CALCULATED_METRIC = 31
+                    CALCULATED_METRIC = 31,
+                    KEY_EVENT = 32
                 }
 
                 /** GoogleSignalsState enum. */
@@ -31122,6 +31123,9 @@ export namespace google {
 
                         /** ChangeHistoryResource calculatedMetric */
                         calculatedMetric?: (google.analytics.admin.v1alpha.ICalculatedMetric|null);
+
+                        /** ChangeHistoryResource keyEvent */
+                        keyEvent?: (google.analytics.admin.v1alpha.IKeyEvent|null);
                     }
 
                     /** Represents a ChangeHistoryResource. */
@@ -31208,8 +31212,11 @@ export namespace google {
                         /** ChangeHistoryResource calculatedMetric. */
                         public calculatedMetric?: (google.analytics.admin.v1alpha.ICalculatedMetric|null);
 
+                        /** ChangeHistoryResource keyEvent. */
+                        public keyEvent?: (google.analytics.admin.v1alpha.IKeyEvent|null);
+
                         /** ChangeHistoryResource resource. */
-                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"calculatedMetric");
+                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"calculatedMetric"|"keyEvent");
 
                         /**
                          * Creates a new ChangeHistoryResource instance using the specified properties.

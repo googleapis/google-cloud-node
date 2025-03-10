@@ -295,6 +295,9 @@ export class ExperimentsClient {
       toolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}'
       ),
+      toolVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}/versions/{version}'
+      ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}'
       ),
@@ -3427,6 +3430,92 @@ export class ExperimentsClient {
    */
   matchToolFromToolName(toolName: string) {
     return this.pathTemplates.toolPathTemplate.match(toolName).tool;
+  }
+
+  /**
+   * Return a fully-qualified toolVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} tool
+   * @param {string} version
+   * @returns {string} Resource name string.
+   */
+  toolVersionPath(
+    project: string,
+    location: string,
+    agent: string,
+    tool: string,
+    version: string
+  ) {
+    return this.pathTemplates.toolVersionPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      tool: tool,
+      version: version,
+    });
+  }
+
+  /**
+   * Parse the project from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .location;
+  }
+
+  /**
+   * Parse the agent from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .agent;
+  }
+
+  /**
+   * Parse the tool from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the tool.
+   */
+  matchToolFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .tool;
+  }
+
+  /**
+   * Parse the version from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the version.
+   */
+  matchVersionFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .version;
   }
 
   /**

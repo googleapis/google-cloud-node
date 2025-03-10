@@ -431,7 +431,7 @@ export class OnlineReturnPolicyServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets an existing return policy.
+   * Gets an existing return policy for a given business.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -529,12 +529,12 @@ export class OnlineReturnPolicyServiceClient {
   }
 
   /**
-   * Lists all existing return policies.
+   * Lists all existing return policies for a given business.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The merchant account for which to list return policies.
+   *   Required. The business account for which to list return policies.
    *   Format: `accounts/{account}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of `OnlineReturnPolicy` resources to return.
@@ -643,11 +643,11 @@ export class OnlineReturnPolicyServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listOnlineReturnPolicies`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The merchant account for which to list return policies.
+   *   Required. The business account for which to list return policies.
    *   Format: `accounts/{account}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of `OnlineReturnPolicy` resources to return.
@@ -704,7 +704,7 @@ export class OnlineReturnPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The merchant account for which to list return policies.
+   *   Required. The business account for which to list return policies.
    *   Format: `accounts/{account}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of `OnlineReturnPolicy` resources to return.

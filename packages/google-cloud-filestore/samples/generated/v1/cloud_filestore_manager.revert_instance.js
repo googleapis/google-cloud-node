@@ -29,9 +29,8 @@ function main(name, targetSnapshotId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required.
+   *  Required. The resource name of the instance, in the format
    *  `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
-   *  The resource name of the instance, in the format
    */
   // const name = 'abc123'
   /**

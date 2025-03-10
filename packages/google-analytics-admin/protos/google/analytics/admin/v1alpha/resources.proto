@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -240,6 +240,9 @@ enum ChangeHistoryResourceType {
 
   // CalculatedMetric resource
   CALCULATED_METRIC = 31;
+
+  // KeyEvent resource
+  KEY_EVENT = 32;
 }
 
 // Status of the Google Signals settings.
@@ -998,6 +1001,9 @@ message ChangeHistoryChange {
 
       // A snapshot of a CalculatedMetric resource in change history.
       CalculatedMetric calculated_metric = 31;
+
+      // A snapshot of a KeyEvent resource in change history.
+      KeyEvent key_event = 32;
     }
   }
 
