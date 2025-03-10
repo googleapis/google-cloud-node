@@ -14,13 +14,13 @@
 
 # Use a multi-stage docker build to limit production dependencies.
 
-# Use the official lightweight Node.js 14 image.
+# Use the official lightweight Node.js 18 image.
 # https://hub.docker.com/_/node
 FROM golang:1.16-alpine as gobuild
 
 RUN go install github.com/bazelbuild/buildtools/buildozer@latest
 
-FROM node:14-slim as nodebuild
+FROM node:18-slim as nodebuild
 
 COPY package*.json /
  

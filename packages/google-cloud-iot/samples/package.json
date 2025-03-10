@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "repository": "googleapis/nodejs-iot",
   "private": true,
