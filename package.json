@@ -36,13 +36,13 @@
   "dependencies": {
     "chalk": "^5.0.0",
     "figures": "^6.0.0",
-    "gaxios": "^6.0.0",
+    "gaxios": "^7.0.0-rc",
     "parse-link-header": "^2.0.0"
   },
   "devDependencies": {
     "semistandard": "^17.0.0"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   }
 }
