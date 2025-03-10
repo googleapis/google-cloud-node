@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/kms-v4.5.0...kms-v5.0.0) (2025-03-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* Adding a state field for AutokeyConfig ([c8dd40a](https://github.com/googleapis/google-cloud-node/commit/c8dd40a36be6c1efe12b335af17136605ece7a46))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/kms-v4.4.0...kms-v4.5.0) (2024-06-21)
 
 
