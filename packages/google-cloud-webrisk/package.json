@@ -31,12 +31,12 @@
     "google-gax": "^5.0.0-rc.0"
   },
   "devDependencies": {
-    "@types/chai": "^5.0.1",
+    "@types/chai": "^4.2.7",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.13.9",
     "@types/sinon": "^17.0.4",
     "c8": "^10.1.3",
-    "chai": "^5.2.0",
+    "chai": "^4.0.0",
     "gapic-tools": "^1.0.0",
     "gts": "^6.0.2",
     "http2spy": "^2.0.2",
