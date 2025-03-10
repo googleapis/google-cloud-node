@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v1.0.0...cloudquotas-v2.0.0) (2025-03-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v0.6.0...cloudquotas-v1.0.0) (2025-02-28)
 
 
