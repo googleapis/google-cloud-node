@@ -1,5 +1,34 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v1.0.0...accounts-v2.0.0) (2025-03-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+* An existing optional field `type` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy
+* An existing optional field `label` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy
+* An existing optional field `countries` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy
+* An existing optional field `return_policy_uri` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy
+
+### Features
+
+* [merchantapi] A new message `SeasonalOverride` is added ([#6114](https://github.com/googleapis/google-cloud-node/issues/6114)) ([958b317](https://github.com/googleapis/google-cloud-node/commit/958b317b05196b76c9a62a03649eff5a77bb6a72))
+* A new field `seasonal_overrides` is added to message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy ([958b317](https://github.com/googleapis/google-cloud-node/commit/958b317b05196b76c9a62a03649eff5a77bb6a72))
+
+
+### Bug Fixes
+
+* An existing optional field `countries` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy ([958b317](https://github.com/googleapis/google-cloud-node/commit/958b317b05196b76c9a62a03649eff5a77bb6a72))
+* An existing optional field `label` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy ([958b317](https://github.com/googleapis/google-cloud-node/commit/958b317b05196b76c9a62a03649eff5a77bb6a72))
+* An existing optional field `return_policy_uri` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy ([958b317](https://github.com/googleapis/google-cloud-node/commit/958b317b05196b76c9a62a03649eff5a77bb6a72))
+* An existing optional field `type` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy ([958b317](https://github.com/googleapis/google-cloud-node/commit/958b317b05196b76c9a62a03649eff5a77bb6a72))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v0.1.0...accounts-v1.0.0) (2024-10-10)
 
 
