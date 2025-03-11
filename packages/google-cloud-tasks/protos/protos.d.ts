@@ -2409,7 +2409,7 @@ export namespace google {
                     headers?: ({ [k: string]: string }|null);
 
                     /** HttpRequest body */
-                    body?: (Uint8Array|Buffer|string|null);
+                    body?: (Uint8Array|string|null);
 
                     /** HttpRequest oauthToken */
                     oauthToken?: (google.cloud.tasks.v2.IOAuthToken|null);
@@ -2437,7 +2437,7 @@ export namespace google {
                     public headers: { [k: string]: string };
 
                     /** HttpRequest body. */
-                    public body: (Uint8Array|Buffer|string);
+                    public body: (Uint8Array|string);
 
                     /** HttpRequest oauthToken. */
                     public oauthToken?: (google.cloud.tasks.v2.IOAuthToken|null);
@@ -2542,7 +2542,7 @@ export namespace google {
                     headers?: ({ [k: string]: string }|null);
 
                     /** AppEngineHttpRequest body */
-                    body?: (Uint8Array|Buffer|string|null);
+                    body?: (Uint8Array|string|null);
                 }
 
                 /** Represents an AppEngineHttpRequest. */
@@ -2567,7 +2567,7 @@ export namespace google {
                     public headers: { [k: string]: string };
 
                     /** AppEngineHttpRequest body. */
-                    public body: (Uint8Array|Buffer|string);
+                    public body: (Uint8Array|string);
 
                     /**
                      * Creates a new AppEngineHttpRequest instance using the specified properties.
@@ -4680,6 +4680,9 @@ export namespace google {
                     /** UploadQueueYamlRequest httpBody. */
                     public httpBody?: (google.api.IHttpBody|null);
 
+                    /** UploadQueueYamlRequest _httpBody. */
+                    public _httpBody?: "httpBody";
+
                     /**
                      * Creates a new UploadQueueYamlRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -6559,7 +6562,7 @@ export namespace google {
                 interface IPullMessage {
 
                     /** PullMessage payload */
-                    payload?: (Uint8Array|Buffer|string|null);
+                    payload?: (Uint8Array|string|null);
 
                     /** PullMessage tag */
                     tag?: (string|null);
@@ -6575,7 +6578,7 @@ export namespace google {
                     constructor(properties?: google.cloud.tasks.v2beta2.IPullMessage);
 
                     /** PullMessage payload. */
-                    public payload: (Uint8Array|Buffer|string);
+                    public payload: (Uint8Array|string);
 
                     /** PullMessage tag. */
                     public tag: string;
@@ -6771,7 +6774,7 @@ export namespace google {
                     headers?: ({ [k: string]: string }|null);
 
                     /** AppEngineHttpRequest payload */
-                    payload?: (Uint8Array|Buffer|string|null);
+                    payload?: (Uint8Array|string|null);
                 }
 
                 /** Represents an AppEngineHttpRequest. */
@@ -6796,7 +6799,7 @@ export namespace google {
                     public headers: { [k: string]: string };
 
                     /** AppEngineHttpRequest payload. */
-                    public payload: (Uint8Array|Buffer|string);
+                    public payload: (Uint8Array|string);
 
                     /**
                      * Creates a new AppEngineHttpRequest instance using the specified properties.
@@ -7004,7 +7007,7 @@ export namespace google {
                     headers?: ({ [k: string]: string }|null);
 
                     /** HttpRequest body */
-                    body?: (Uint8Array|Buffer|string|null);
+                    body?: (Uint8Array|string|null);
 
                     /** HttpRequest oauthToken */
                     oauthToken?: (google.cloud.tasks.v2beta2.IOAuthToken|null);
@@ -7032,7 +7035,7 @@ export namespace google {
                     public headers: { [k: string]: string };
 
                     /** HttpRequest body. */
-                    public body: (Uint8Array|Buffer|string);
+                    public body: (Uint8Array|string);
 
                     /** HttpRequest oauthToken. */
                     public oauthToken?: (google.cloud.tasks.v2beta2.IOAuthToken|null);
@@ -7363,6 +7366,15 @@ export namespace google {
 
                     /** UriOverride uriOverrideEnforceMode. */
                     public uriOverrideEnforceMode: (google.cloud.tasks.v2beta2.UriOverride.UriOverrideEnforceMode|keyof typeof google.cloud.tasks.v2beta2.UriOverride.UriOverrideEnforceMode);
+
+                    /** UriOverride _scheme. */
+                    public _scheme?: "scheme";
+
+                    /** UriOverride _host. */
+                    public _host?: "host";
+
+                    /** UriOverride _port. */
+                    public _port?: "port";
 
                     /**
                      * Creates a new UriOverride instance using the specified properties.
@@ -10937,7 +10949,7 @@ export namespace google {
                 interface IPullMessage {
 
                     /** PullMessage payload */
-                    payload?: (Uint8Array|Buffer|string|null);
+                    payload?: (Uint8Array|string|null);
 
                     /** PullMessage tag */
                     tag?: (string|null);
@@ -10953,7 +10965,7 @@ export namespace google {
                     constructor(properties?: google.cloud.tasks.v2beta3.IPullMessage);
 
                     /** PullMessage payload. */
-                    public payload: (Uint8Array|Buffer|string);
+                    public payload: (Uint8Array|string);
 
                     /** PullMessage tag. */
                     public tag: string;
@@ -11278,6 +11290,15 @@ export namespace google {
 
                     /** UriOverride uriOverrideEnforceMode. */
                     public uriOverrideEnforceMode: (google.cloud.tasks.v2beta3.UriOverride.UriOverrideEnforceMode|keyof typeof google.cloud.tasks.v2beta3.UriOverride.UriOverrideEnforceMode);
+
+                    /** UriOverride _scheme. */
+                    public _scheme?: "scheme";
+
+                    /** UriOverride _host. */
+                    public _host?: "host";
+
+                    /** UriOverride _port. */
+                    public _port?: "port";
 
                     /**
                      * Creates a new UriOverride instance using the specified properties.
@@ -11714,7 +11735,7 @@ export namespace google {
                     headers?: ({ [k: string]: string }|null);
 
                     /** HttpRequest body */
-                    body?: (Uint8Array|Buffer|string|null);
+                    body?: (Uint8Array|string|null);
 
                     /** HttpRequest oauthToken */
                     oauthToken?: (google.cloud.tasks.v2beta3.IOAuthToken|null);
@@ -11742,7 +11763,7 @@ export namespace google {
                     public headers: { [k: string]: string };
 
                     /** HttpRequest body. */
-                    public body: (Uint8Array|Buffer|string);
+                    public body: (Uint8Array|string);
 
                     /** HttpRequest oauthToken. */
                     public oauthToken?: (google.cloud.tasks.v2beta3.IOAuthToken|null);
@@ -11944,7 +11965,7 @@ export namespace google {
                     headers?: ({ [k: string]: string }|null);
 
                     /** AppEngineHttpRequest body */
-                    body?: (Uint8Array|Buffer|string|null);
+                    body?: (Uint8Array|string|null);
                 }
 
                 /** Represents an AppEngineHttpRequest. */
@@ -11969,7 +11990,7 @@ export namespace google {
                     public headers: { [k: string]: string };
 
                     /** AppEngineHttpRequest body. */
-                    public body: (Uint8Array|Buffer|string);
+                    public body: (Uint8Array|string);
 
                     /**
                      * Creates a new AppEngineHttpRequest instance using the specified properties.
@@ -13331,9 +13352,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
-
-            /** Publishing restReferenceDocumentationUri */
-            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -13374,9 +13392,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
-
-            /** Publishing restReferenceDocumentationUri. */
-            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -14804,7 +14819,7 @@ export namespace google {
             contentType?: (string|null);
 
             /** HttpBody data */
-            data?: (Uint8Array|Buffer|string|null);
+            data?: (Uint8Array|string|null);
 
             /** HttpBody extensions */
             extensions?: (google.protobuf.IAny[]|null);
@@ -14823,7 +14838,7 @@ export namespace google {
             public contentType: string;
 
             /** HttpBody data. */
-            public data: (Uint8Array|Buffer|string);
+            public data: (Uint8Array|string);
 
             /** HttpBody extensions. */
             public extensions: google.protobuf.IAny[];
@@ -17704,9 +17719,6 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
-
-            /** ServiceOptions .google.api.apiVersion */
-            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -17955,7 +17967,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|Buffer|string|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -17986,7 +17998,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|Buffer|string);
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -19228,7 +19240,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|Buffer|string|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents an Any. */
@@ -19244,7 +19256,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|Buffer|string);
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -20241,7 +20253,7 @@ export namespace google {
                 auditConfigs?: (google.iam.v1.IAuditConfig[]|null);
 
                 /** Policy etag */
-                etag?: (Uint8Array|Buffer|string|null);
+                etag?: (Uint8Array|string|null);
             }
 
             /** Represents a Policy. */
@@ -20263,7 +20275,7 @@ export namespace google {
                 public auditConfigs: google.iam.v1.IAuditConfig[];
 
                 /** Policy etag. */
-                public etag: (Uint8Array|Buffer|string);
+                public etag: (Uint8Array|string);
 
                 /**
                  * Creates a new Policy instance using the specified properties.
