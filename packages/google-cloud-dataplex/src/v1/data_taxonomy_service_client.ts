@@ -47,6 +47,7 @@ const version = require('../../../package.json').version;
  *  currently offered include DataTaxonomy and DataAttribute.
  * @class
  * @memberof v1
+ * @deprecated DataTaxonomyService is deprecated and may be removed in a future version.
  */
 export class DataTaxonomyServiceClient {
   private _terminated = false;
@@ -716,6 +717,11 @@ export class DataTaxonomyServiceClient {
   initialize() {
     // If the client stub promise is already initialized, return immediately.
     if (this.dataTaxonomyServiceStub) {
+      this.warn(
+        'DEP$DataTaxonomyService',
+        'DataTaxonomyService is deprecated and may be removed in a future version.',
+        'DeprecationWarning'
+      );
       return this.dataTaxonomyServiceStub;
     }
 
@@ -779,6 +785,11 @@ export class DataTaxonomyServiceClient {
 
       this.innerApiCalls[methodName] = apiCall;
     }
+    this.warn(
+      'DEP$DataTaxonomyService',
+      'DataTaxonomyService is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
 
     return this.dataTaxonomyServiceStub;
   }
@@ -873,8 +884,6 @@ export class DataTaxonomyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the DataTaxonomy:
-   *   projects/{project_number}/locations/{location_id}/dataTaxonomies/{data_taxonomy_id}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -883,6 +892,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.get_data_taxonomy.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_GetDataTaxonomy_async
+   * @deprecated GetDataTaxonomy is deprecated and may be removed in a future version.
    */
   getDataTaxonomy(
     request?: protos.google.cloud.dataplex.v1.IGetDataTaxonomyRequest,
@@ -956,6 +966,11 @@ export class DataTaxonomyServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$GetDataTaxonomy',
+      'GetDataTaxonomy is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.getDataTaxonomy(request, options, callback);
   }
   /**
@@ -974,6 +989,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.get_data_attribute_binding.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_GetDataAttributeBinding_async
+   * @deprecated GetDataAttributeBinding is deprecated and may be removed in a future version.
    */
   getDataAttributeBinding(
     request?: protos.google.cloud.dataplex.v1.IGetDataAttributeBindingRequest,
@@ -1053,6 +1069,11 @@ export class DataTaxonomyServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$GetDataAttributeBinding',
+      'GetDataAttributeBinding is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.getDataAttributeBinding(
       request,
       options,
@@ -1075,6 +1096,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.get_data_attribute.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_GetDataAttribute_async
+   * @deprecated GetDataAttribute is deprecated and may be removed in a future version.
    */
   getDataAttribute(
     request?: protos.google.cloud.dataplex.v1.IGetDataAttributeRequest,
@@ -1148,6 +1170,11 @@ export class DataTaxonomyServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$GetDataAttribute',
+      'GetDataAttribute is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.getDataAttribute(request, options, callback);
   }
 
@@ -1157,9 +1184,6 @@ export class DataTaxonomyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the data taxonomy location, of the form:
-   *   projects/{project_number}/locations/{location_id}
-   *   where `location_id` refers to a GCP region.
    * @param {string} request.dataTaxonomyId
    *   Required. DataTaxonomy identifier.
    *   * Must contain only lowercase letters, numbers and hyphens.
@@ -1182,6 +1206,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.create_data_taxonomy.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_CreateDataTaxonomy_async
+   * @deprecated CreateDataTaxonomy is deprecated and may be removed in a future version.
    */
   createDataTaxonomy(
     request?: protos.google.cloud.dataplex.v1.ICreateDataTaxonomyRequest,
@@ -1265,6 +1290,11 @@ export class DataTaxonomyServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$CreateDataTaxonomy',
+      'CreateDataTaxonomy is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.createDataTaxonomy(request, options, callback);
   }
   /**
@@ -1277,6 +1307,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.create_data_taxonomy.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_CreateDataTaxonomy_async
+   * @deprecated CreateDataTaxonomy is deprecated and may be removed in a future version.
    */
   async checkCreateDataTaxonomyProgress(
     name: string
@@ -1286,6 +1317,11 @@ export class DataTaxonomyServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this.warn(
+      'DEP$DataTaxonomyService-$checkCreateDataTaxonomyProgress',
+      'checkCreateDataTaxonomyProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1323,6 +1359,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.update_data_taxonomy.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_UpdateDataTaxonomy_async
+   * @deprecated UpdateDataTaxonomy is deprecated and may be removed in a future version.
    */
   updateDataTaxonomy(
     request?: protos.google.cloud.dataplex.v1.IUpdateDataTaxonomyRequest,
@@ -1406,6 +1443,11 @@ export class DataTaxonomyServiceClient {
         'data_taxonomy.name': request.dataTaxonomy!.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$UpdateDataTaxonomy',
+      'UpdateDataTaxonomy is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.updateDataTaxonomy(request, options, callback);
   }
   /**
@@ -1418,6 +1460,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.update_data_taxonomy.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_UpdateDataTaxonomy_async
+   * @deprecated UpdateDataTaxonomy is deprecated and may be removed in a future version.
    */
   async checkUpdateDataTaxonomyProgress(
     name: string
@@ -1427,6 +1470,11 @@ export class DataTaxonomyServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this.warn(
+      'DEP$DataTaxonomyService-$checkUpdateDataTaxonomyProgress',
+      'checkUpdateDataTaxonomyProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1464,6 +1512,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.delete_data_taxonomy.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_DeleteDataTaxonomy_async
+   * @deprecated DeleteDataTaxonomy is deprecated and may be removed in a future version.
    */
   deleteDataTaxonomy(
     request?: protos.google.cloud.dataplex.v1.IDeleteDataTaxonomyRequest,
@@ -1547,6 +1596,11 @@ export class DataTaxonomyServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$DeleteDataTaxonomy',
+      'DeleteDataTaxonomy is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.deleteDataTaxonomy(request, options, callback);
   }
   /**
@@ -1559,6 +1613,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.delete_data_taxonomy.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_DeleteDataTaxonomy_async
+   * @deprecated DeleteDataTaxonomy is deprecated and may be removed in a future version.
    */
   async checkDeleteDataTaxonomyProgress(
     name: string
@@ -1568,6 +1623,11 @@ export class DataTaxonomyServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this.warn(
+      'DEP$DataTaxonomyService-$checkDeleteDataTaxonomyProgress',
+      'checkDeleteDataTaxonomyProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1613,6 +1673,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.create_data_attribute_binding.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_CreateDataAttributeBinding_async
+   * @deprecated CreateDataAttributeBinding is deprecated and may be removed in a future version.
    */
   createDataAttributeBinding(
     request?: protos.google.cloud.dataplex.v1.ICreateDataAttributeBindingRequest,
@@ -1696,6 +1757,11 @@ export class DataTaxonomyServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$CreateDataAttributeBinding',
+      'CreateDataAttributeBinding is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.createDataAttributeBinding(
       request,
       options,
@@ -1712,6 +1778,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.create_data_attribute_binding.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_CreateDataAttributeBinding_async
+   * @deprecated CreateDataAttributeBinding is deprecated and may be removed in a future version.
    */
   async checkCreateDataAttributeBindingProgress(
     name: string
@@ -1721,6 +1788,11 @@ export class DataTaxonomyServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this.warn(
+      'DEP$DataTaxonomyService-$checkCreateDataAttributeBindingProgress',
+      'checkCreateDataAttributeBindingProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1758,6 +1830,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.update_data_attribute_binding.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_UpdateDataAttributeBinding_async
+   * @deprecated UpdateDataAttributeBinding is deprecated and may be removed in a future version.
    */
   updateDataAttributeBinding(
     request?: protos.google.cloud.dataplex.v1.IUpdateDataAttributeBindingRequest,
@@ -1841,6 +1914,11 @@ export class DataTaxonomyServiceClient {
         'data_attribute_binding.name': request.dataAttributeBinding!.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$UpdateDataAttributeBinding',
+      'UpdateDataAttributeBinding is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.updateDataAttributeBinding(
       request,
       options,
@@ -1857,6 +1935,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.update_data_attribute_binding.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_UpdateDataAttributeBinding_async
+   * @deprecated UpdateDataAttributeBinding is deprecated and may be removed in a future version.
    */
   async checkUpdateDataAttributeBindingProgress(
     name: string
@@ -1866,6 +1945,11 @@ export class DataTaxonomyServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this.warn(
+      'DEP$DataTaxonomyService-$checkUpdateDataAttributeBindingProgress',
+      'checkUpdateDataAttributeBindingProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1906,6 +1990,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.delete_data_attribute_binding.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_DeleteDataAttributeBinding_async
+   * @deprecated DeleteDataAttributeBinding is deprecated and may be removed in a future version.
    */
   deleteDataAttributeBinding(
     request?: protos.google.cloud.dataplex.v1.IDeleteDataAttributeBindingRequest,
@@ -1989,6 +2074,11 @@ export class DataTaxonomyServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$DeleteDataAttributeBinding',
+      'DeleteDataAttributeBinding is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.deleteDataAttributeBinding(
       request,
       options,
@@ -2005,6 +2095,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.delete_data_attribute_binding.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_DeleteDataAttributeBinding_async
+   * @deprecated DeleteDataAttributeBinding is deprecated and may be removed in a future version.
    */
   async checkDeleteDataAttributeBindingProgress(
     name: string
@@ -2014,6 +2105,11 @@ export class DataTaxonomyServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this.warn(
+      'DEP$DataTaxonomyService-$checkDeleteDataAttributeBindingProgress',
+      'checkDeleteDataAttributeBindingProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2059,6 +2155,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.create_data_attribute.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_CreateDataAttribute_async
+   * @deprecated CreateDataAttribute is deprecated and may be removed in a future version.
    */
   createDataAttribute(
     request?: protos.google.cloud.dataplex.v1.ICreateDataAttributeRequest,
@@ -2142,6 +2239,11 @@ export class DataTaxonomyServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$CreateDataAttribute',
+      'CreateDataAttribute is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.createDataAttribute(request, options, callback);
   }
   /**
@@ -2154,6 +2256,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.create_data_attribute.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_CreateDataAttribute_async
+   * @deprecated CreateDataAttribute is deprecated and may be removed in a future version.
    */
   async checkCreateDataAttributeProgress(
     name: string
@@ -2163,6 +2266,11 @@ export class DataTaxonomyServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this.warn(
+      'DEP$DataTaxonomyService-$checkCreateDataAttributeProgress',
+      'checkCreateDataAttributeProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2200,6 +2308,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.update_data_attribute.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_UpdateDataAttribute_async
+   * @deprecated UpdateDataAttribute is deprecated and may be removed in a future version.
    */
   updateDataAttribute(
     request?: protos.google.cloud.dataplex.v1.IUpdateDataAttributeRequest,
@@ -2283,6 +2392,11 @@ export class DataTaxonomyServiceClient {
         'data_attribute.name': request.dataAttribute!.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$UpdateDataAttribute',
+      'UpdateDataAttribute is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.updateDataAttribute(request, options, callback);
   }
   /**
@@ -2295,6 +2409,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.update_data_attribute.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_UpdateDataAttribute_async
+   * @deprecated UpdateDataAttribute is deprecated and may be removed in a future version.
    */
   async checkUpdateDataAttributeProgress(
     name: string
@@ -2304,6 +2419,11 @@ export class DataTaxonomyServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this.warn(
+      'DEP$DataTaxonomyService-$checkUpdateDataAttributeProgress',
+      'checkUpdateDataAttributeProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2340,6 +2460,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.delete_data_attribute.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_DeleteDataAttribute_async
+   * @deprecated DeleteDataAttribute is deprecated and may be removed in a future version.
    */
   deleteDataAttribute(
     request?: protos.google.cloud.dataplex.v1.IDeleteDataAttributeRequest,
@@ -2423,6 +2544,11 @@ export class DataTaxonomyServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$DeleteDataAttribute',
+      'DeleteDataAttribute is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.deleteDataAttribute(request, options, callback);
   }
   /**
@@ -2435,6 +2561,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.delete_data_attribute.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_DeleteDataAttribute_async
+   * @deprecated DeleteDataAttribute is deprecated and may be removed in a future version.
    */
   async checkDeleteDataAttributeProgress(
     name: string
@@ -2444,6 +2571,11 @@ export class DataTaxonomyServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this.warn(
+      'DEP$DataTaxonomyService-$checkDeleteDataAttributeProgress',
+      'checkDeleteDataAttributeProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2493,6 +2625,7 @@ export class DataTaxonomyServiceClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListDataTaxonomies is deprecated and may be removed in a future version.
    */
   listDataTaxonomies(
     request?: protos.google.cloud.dataplex.v1.IListDataTaxonomiesRequest,
@@ -2566,6 +2699,11 @@ export class DataTaxonomyServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$ListDataTaxonomies',
+      'ListDataTaxonomies is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.listDataTaxonomies(request, options, callback);
   }
 
@@ -2601,6 +2739,7 @@ export class DataTaxonomyServiceClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListDataTaxonomies is deprecated and may be removed in a future version.
    */
   listDataTaxonomiesStream(
     request?: protos.google.cloud.dataplex.v1.IListDataTaxonomiesRequest,
@@ -2617,6 +2756,11 @@ export class DataTaxonomyServiceClient {
     const defaultCallSettings = this._defaults['listDataTaxonomies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$ListDataTaxonomies',
+      'ListDataTaxonomies is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listDataTaxonomies.createStream(
       this.innerApiCalls.listDataTaxonomies as GaxCall,
       request,
@@ -2659,6 +2803,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.list_data_taxonomies.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_ListDataTaxonomies_async
+   * @deprecated ListDataTaxonomies is deprecated and may be removed in a future version.
    */
   listDataTaxonomiesAsync(
     request?: protos.google.cloud.dataplex.v1.IListDataTaxonomiesRequest,
@@ -2675,6 +2820,11 @@ export class DataTaxonomyServiceClient {
     const defaultCallSettings = this._defaults['listDataTaxonomies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$ListDataTaxonomies',
+      'ListDataTaxonomies is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listDataTaxonomies.asyncIterate(
       this.innerApiCalls['listDataTaxonomies'] as GaxCall,
       request as {},
@@ -2718,6 +2868,7 @@ export class DataTaxonomyServiceClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListDataAttributeBindings is deprecated and may be removed in a future version.
    */
   listDataAttributeBindings(
     request?: protos.google.cloud.dataplex.v1.IListDataAttributeBindingsRequest,
@@ -2791,6 +2942,11 @@ export class DataTaxonomyServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$ListDataAttributeBindings',
+      'ListDataAttributeBindings is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.listDataAttributeBindings(
       request,
       options,
@@ -2833,6 +2989,7 @@ export class DataTaxonomyServiceClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListDataAttributeBindings is deprecated and may be removed in a future version.
    */
   listDataAttributeBindingsStream(
     request?: protos.google.cloud.dataplex.v1.IListDataAttributeBindingsRequest,
@@ -2849,6 +3006,11 @@ export class DataTaxonomyServiceClient {
     const defaultCallSettings = this._defaults['listDataAttributeBindings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$ListDataAttributeBindings',
+      'ListDataAttributeBindings is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listDataAttributeBindings.createStream(
       this.innerApiCalls.listDataAttributeBindings as GaxCall,
       request,
@@ -2894,6 +3056,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.list_data_attribute_bindings.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_ListDataAttributeBindings_async
+   * @deprecated ListDataAttributeBindings is deprecated and may be removed in a future version.
    */
   listDataAttributeBindingsAsync(
     request?: protos.google.cloud.dataplex.v1.IListDataAttributeBindingsRequest,
@@ -2910,6 +3073,11 @@ export class DataTaxonomyServiceClient {
     const defaultCallSettings = this._defaults['listDataAttributeBindings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$ListDataAttributeBindings',
+      'ListDataAttributeBindings is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listDataAttributeBindings.asyncIterate(
       this.innerApiCalls['listDataAttributeBindings'] as GaxCall,
       request as {},
@@ -2949,6 +3117,7 @@ export class DataTaxonomyServiceClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListDataAttributes is deprecated and may be removed in a future version.
    */
   listDataAttributes(
     request?: protos.google.cloud.dataplex.v1.IListDataAttributesRequest,
@@ -3022,6 +3191,11 @@ export class DataTaxonomyServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$ListDataAttributes',
+      'ListDataAttributes is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.listDataAttributes(request, options, callback);
   }
 
@@ -3056,6 +3230,7 @@ export class DataTaxonomyServiceClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListDataAttributes is deprecated and may be removed in a future version.
    */
   listDataAttributesStream(
     request?: protos.google.cloud.dataplex.v1.IListDataAttributesRequest,
@@ -3072,6 +3247,11 @@ export class DataTaxonomyServiceClient {
     const defaultCallSettings = this._defaults['listDataAttributes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$ListDataAttributes',
+      'ListDataAttributes is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listDataAttributes.createStream(
       this.innerApiCalls.listDataAttributes as GaxCall,
       request,
@@ -3113,6 +3293,7 @@ export class DataTaxonomyServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_taxonomy_service.list_data_attributes.js</caption>
    * region_tag:dataplex_v1_generated_DataTaxonomyService_ListDataAttributes_async
+   * @deprecated ListDataAttributes is deprecated and may be removed in a future version.
    */
   listDataAttributesAsync(
     request?: protos.google.cloud.dataplex.v1.IListDataAttributesRequest,
@@ -3129,6 +3310,11 @@ export class DataTaxonomyServiceClient {
     const defaultCallSettings = this._defaults['listDataAttributes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$DataTaxonomyService-$ListDataAttributes',
+      'ListDataAttributes is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listDataAttributes.asyncIterate(
       this.innerApiCalls['listDataAttributes'] as GaxCall,
       request as {},

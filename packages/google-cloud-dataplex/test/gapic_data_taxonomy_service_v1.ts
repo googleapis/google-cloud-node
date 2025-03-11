@@ -367,6 +367,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataTaxonomyRequest()
@@ -382,6 +383,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       );
       client.innerApiCalls.getDataTaxonomy = stubSimpleCall(expectedResponse);
       const [response] = await client.getDataTaxonomy(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getDataTaxonomy as SinonStub
@@ -400,6 +402,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataTaxonomyRequest()
@@ -431,6 +434,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getDataTaxonomy as SinonStub
@@ -449,6 +453,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataTaxonomyRequest()
@@ -465,6 +470,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.getDataTaxonomy(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.getDataTaxonomy as SinonStub
       ).getCall(0).args[0];
@@ -482,6 +488,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataTaxonomyRequest()
@@ -494,6 +501,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDataTaxonomy(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -505,6 +513,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataAttributeBindingRequest()
@@ -521,6 +530,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       client.innerApiCalls.getDataAttributeBinding =
         stubSimpleCall(expectedResponse);
       const [response] = await client.getDataAttributeBinding(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getDataAttributeBinding as SinonStub
@@ -539,6 +549,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataAttributeBindingRequest()
@@ -570,6 +581,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getDataAttributeBinding as SinonStub
@@ -588,6 +600,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataAttributeBindingRequest()
@@ -607,6 +620,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.getDataAttributeBinding(request),
         expectedError
       );
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.getDataAttributeBinding as SinonStub
       ).getCall(0).args[0];
@@ -624,6 +638,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataAttributeBindingRequest()
@@ -639,6 +654,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.getDataAttributeBinding(request),
         expectedError
       );
+      assert(stub.calledOnce);
     });
   });
 
@@ -650,6 +666,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataAttributeRequest()
@@ -665,6 +682,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       );
       client.innerApiCalls.getDataAttribute = stubSimpleCall(expectedResponse);
       const [response] = await client.getDataAttribute(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getDataAttribute as SinonStub
@@ -683,6 +701,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataAttributeRequest()
@@ -714,6 +733,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getDataAttribute as SinonStub
@@ -732,6 +752,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataAttributeRequest()
@@ -748,6 +769,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.getDataAttribute(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.getDataAttribute as SinonStub
       ).getCall(0).args[0];
@@ -765,6 +787,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataAttributeRequest()
@@ -777,6 +800,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDataAttribute(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -788,6 +812,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataTaxonomyRequest()
@@ -805,6 +830,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.createDataTaxonomy(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createDataTaxonomy as SinonStub
@@ -823,6 +849,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataTaxonomyRequest()
@@ -861,6 +888,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createDataTaxonomy as SinonStub
@@ -879,6 +907,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataTaxonomyRequest()
@@ -895,6 +924,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.createDataTaxonomy(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.createDataTaxonomy as SinonStub
       ).getCall(0).args[0];
@@ -912,6 +942,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataTaxonomyRequest()
@@ -930,6 +961,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       );
       const [operation] = await client.createDataTaxonomy(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.createDataTaxonomy as SinonStub
       ).getCall(0).args[0];
@@ -947,6 +979,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -959,6 +992,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       const decodedOperation = await client.checkCreateDataTaxonomyProgress(
         expectedResponse.name
       );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -971,6 +1005,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -982,6 +1017,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.checkCreateDataTaxonomyProgress(''),
         expectedError
       );
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -994,6 +1030,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataTaxonomyRequest()
@@ -1012,6 +1049,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateDataTaxonomy(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateDataTaxonomy as SinonStub
@@ -1030,6 +1068,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataTaxonomyRequest()
@@ -1069,6 +1108,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateDataTaxonomy as SinonStub
@@ -1087,6 +1127,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataTaxonomyRequest()
@@ -1104,6 +1145,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.updateDataTaxonomy(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.updateDataTaxonomy as SinonStub
       ).getCall(0).args[0];
@@ -1121,6 +1163,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataTaxonomyRequest()
@@ -1140,6 +1183,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       );
       const [operation] = await client.updateDataTaxonomy(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.updateDataTaxonomy as SinonStub
       ).getCall(0).args[0];
@@ -1157,6 +1201,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1169,6 +1214,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       const decodedOperation = await client.checkUpdateDataTaxonomyProgress(
         expectedResponse.name
       );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -1181,6 +1227,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1192,6 +1239,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.checkUpdateDataTaxonomyProgress(''),
         expectedError
       );
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -1204,6 +1252,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataTaxonomyRequest()
@@ -1221,6 +1270,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteDataTaxonomy(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteDataTaxonomy as SinonStub
@@ -1239,6 +1289,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataTaxonomyRequest()
@@ -1277,6 +1328,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteDataTaxonomy as SinonStub
@@ -1295,6 +1347,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataTaxonomyRequest()
@@ -1311,6 +1364,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.deleteDataTaxonomy(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.deleteDataTaxonomy as SinonStub
       ).getCall(0).args[0];
@@ -1328,6 +1382,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataTaxonomyRequest()
@@ -1346,6 +1401,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       );
       const [operation] = await client.deleteDataTaxonomy(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.deleteDataTaxonomy as SinonStub
       ).getCall(0).args[0];
@@ -1363,6 +1419,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1375,6 +1432,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       const decodedOperation = await client.checkDeleteDataTaxonomyProgress(
         expectedResponse.name
       );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -1387,6 +1445,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1398,6 +1457,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.checkDeleteDataTaxonomyProgress(''),
         expectedError
       );
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -1410,6 +1470,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataAttributeBindingRequest()
@@ -1427,6 +1488,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.createDataAttributeBinding(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createDataAttributeBinding as SinonStub
@@ -1445,6 +1507,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataAttributeBindingRequest()
@@ -1483,6 +1546,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createDataAttributeBinding as SinonStub
@@ -1501,6 +1565,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataAttributeBindingRequest()
@@ -1520,6 +1585,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.createDataAttributeBinding(request),
         expectedError
       );
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.createDataAttributeBinding as SinonStub
       ).getCall(0).args[0];
@@ -1537,6 +1603,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataAttributeBindingRequest()
@@ -1555,6 +1622,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       );
       const [operation] = await client.createDataAttributeBinding(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.createDataAttributeBinding as SinonStub
       ).getCall(0).args[0];
@@ -1572,6 +1640,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1585,6 +1654,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         await client.checkCreateDataAttributeBindingProgress(
           expectedResponse.name
         );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -1597,6 +1667,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1608,6 +1679,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.checkCreateDataAttributeBindingProgress(''),
         expectedError
       );
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -1620,6 +1692,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataAttributeBindingRequest()
@@ -1638,6 +1711,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateDataAttributeBinding(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateDataAttributeBinding as SinonStub
@@ -1656,6 +1730,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataAttributeBindingRequest()
@@ -1695,6 +1770,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateDataAttributeBinding as SinonStub
@@ -1713,6 +1789,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataAttributeBindingRequest()
@@ -1733,6 +1810,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.updateDataAttributeBinding(request),
         expectedError
       );
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.updateDataAttributeBinding as SinonStub
       ).getCall(0).args[0];
@@ -1750,6 +1828,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataAttributeBindingRequest()
@@ -1769,6 +1848,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       );
       const [operation] = await client.updateDataAttributeBinding(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.updateDataAttributeBinding as SinonStub
       ).getCall(0).args[0];
@@ -1786,6 +1866,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1799,6 +1880,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         await client.checkUpdateDataAttributeBindingProgress(
           expectedResponse.name
         );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -1811,6 +1893,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1822,6 +1905,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.checkUpdateDataAttributeBindingProgress(''),
         expectedError
       );
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -1834,6 +1918,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataAttributeBindingRequest()
@@ -1851,6 +1936,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteDataAttributeBinding(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteDataAttributeBinding as SinonStub
@@ -1869,6 +1955,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataAttributeBindingRequest()
@@ -1907,6 +1994,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteDataAttributeBinding as SinonStub
@@ -1925,6 +2013,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataAttributeBindingRequest()
@@ -1944,6 +2033,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.deleteDataAttributeBinding(request),
         expectedError
       );
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.deleteDataAttributeBinding as SinonStub
       ).getCall(0).args[0];
@@ -1961,6 +2051,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataAttributeBindingRequest()
@@ -1979,6 +2070,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       );
       const [operation] = await client.deleteDataAttributeBinding(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.deleteDataAttributeBinding as SinonStub
       ).getCall(0).args[0];
@@ -1996,6 +2088,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2009,6 +2102,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         await client.checkDeleteDataAttributeBindingProgress(
           expectedResponse.name
         );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -2021,6 +2115,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2032,6 +2127,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.checkDeleteDataAttributeBindingProgress(''),
         expectedError
       );
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -2044,6 +2140,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataAttributeRequest()
@@ -2061,6 +2158,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.createDataAttribute(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createDataAttribute as SinonStub
@@ -2079,6 +2177,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataAttributeRequest()
@@ -2117,6 +2216,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createDataAttribute as SinonStub
@@ -2135,6 +2235,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataAttributeRequest()
@@ -2151,6 +2252,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.createDataAttribute(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.createDataAttribute as SinonStub
       ).getCall(0).args[0];
@@ -2168,6 +2270,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataAttributeRequest()
@@ -2186,6 +2289,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       );
       const [operation] = await client.createDataAttribute(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.createDataAttribute as SinonStub
       ).getCall(0).args[0];
@@ -2203,6 +2307,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2215,6 +2320,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       const decodedOperation = await client.checkCreateDataAttributeProgress(
         expectedResponse.name
       );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -2227,6 +2333,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2238,6 +2345,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.checkCreateDataAttributeProgress(''),
         expectedError
       );
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -2250,6 +2358,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataAttributeRequest()
@@ -2268,6 +2377,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateDataAttribute(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateDataAttribute as SinonStub
@@ -2286,6 +2396,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataAttributeRequest()
@@ -2325,6 +2436,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateDataAttribute as SinonStub
@@ -2343,6 +2455,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataAttributeRequest()
@@ -2360,6 +2473,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.updateDataAttribute(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.updateDataAttribute as SinonStub
       ).getCall(0).args[0];
@@ -2377,6 +2491,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataAttributeRequest()
@@ -2396,6 +2511,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       );
       const [operation] = await client.updateDataAttribute(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.updateDataAttribute as SinonStub
       ).getCall(0).args[0];
@@ -2413,6 +2529,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2425,6 +2542,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       const decodedOperation = await client.checkUpdateDataAttributeProgress(
         expectedResponse.name
       );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -2437,6 +2555,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2448,6 +2567,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.checkUpdateDataAttributeProgress(''),
         expectedError
       );
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -2460,6 +2580,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataAttributeRequest()
@@ -2477,6 +2598,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteDataAttribute(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteDataAttribute as SinonStub
@@ -2495,6 +2617,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataAttributeRequest()
@@ -2533,6 +2656,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteDataAttribute as SinonStub
@@ -2551,6 +2675,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataAttributeRequest()
@@ -2567,6 +2692,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.deleteDataAttribute(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.deleteDataAttribute as SinonStub
       ).getCall(0).args[0];
@@ -2584,6 +2710,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataAttributeRequest()
@@ -2602,6 +2729,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       );
       const [operation] = await client.deleteDataAttribute(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.deleteDataAttribute as SinonStub
       ).getCall(0).args[0];
@@ -2619,6 +2747,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2631,6 +2760,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       const decodedOperation = await client.checkDeleteDataAttributeProgress(
         expectedResponse.name
       );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -2643,6 +2773,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2654,6 +2785,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.checkDeleteDataAttributeProgress(''),
         expectedError
       );
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -2666,6 +2798,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataTaxonomiesRequest()
@@ -2690,6 +2823,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       client.innerApiCalls.listDataTaxonomies =
         stubSimpleCall(expectedResponse);
       const [response] = await client.listDataTaxonomies(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listDataTaxonomies as SinonStub
@@ -2708,6 +2842,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataTaxonomiesRequest()
@@ -2747,6 +2882,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listDataTaxonomies as SinonStub
@@ -2765,6 +2901,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataTaxonomiesRequest()
@@ -2781,6 +2918,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.listDataTaxonomies(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.listDataTaxonomies as SinonStub
       ).getCall(0).args[0];
@@ -2798,6 +2936,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataTaxonomiesRequest()
@@ -2838,6 +2977,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (client.descriptors.page.listDataTaxonomies.createStream as SinonStub)
@@ -2860,6 +3000,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataTaxonomiesRequest()
@@ -2890,6 +3031,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.descriptors.page.listDataTaxonomies.createStream as SinonStub)
           .getCall(0)
@@ -2911,6 +3053,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataTaxonomiesRequest()
@@ -2939,6 +3082,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
@@ -2962,6 +3106,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataTaxonomiesRequest()
@@ -2982,6 +3127,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (
           client.descriptors.page.listDataTaxonomies.asyncIterate as SinonStub
@@ -3006,6 +3152,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataAttributeBindingsRequest()
@@ -3030,6 +3177,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       client.innerApiCalls.listDataAttributeBindings =
         stubSimpleCall(expectedResponse);
       const [response] = await client.listDataAttributeBindings(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listDataAttributeBindings as SinonStub
@@ -3048,6 +3196,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataAttributeBindingsRequest()
@@ -3089,6 +3238,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listDataAttributeBindings as SinonStub
@@ -3107,6 +3257,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataAttributeBindingsRequest()
@@ -3126,6 +3277,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         client.listDataAttributeBindings(request),
         expectedError
       );
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.listDataAttributeBindings as SinonStub
       ).getCall(0).args[0];
@@ -3143,6 +3295,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataAttributeBindingsRequest()
@@ -3184,6 +3337,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (
@@ -3212,6 +3366,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataAttributeBindingsRequest()
@@ -3243,6 +3398,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (
           client.descriptors.page.listDataAttributeBindings
@@ -3270,6 +3426,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataAttributeBindingsRequest()
@@ -3299,6 +3456,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
@@ -3326,6 +3484,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataAttributeBindingsRequest()
@@ -3347,6 +3506,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (
           client.descriptors.page.listDataAttributeBindings
@@ -3375,6 +3535,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataAttributesRequest()
@@ -3399,6 +3560,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       client.innerApiCalls.listDataAttributes =
         stubSimpleCall(expectedResponse);
       const [response] = await client.listDataAttributes(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listDataAttributes as SinonStub
@@ -3417,6 +3579,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataAttributesRequest()
@@ -3456,6 +3619,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listDataAttributes as SinonStub
@@ -3474,6 +3638,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataAttributesRequest()
@@ -3490,6 +3655,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.listDataAttributes(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.listDataAttributes as SinonStub
       ).getCall(0).args[0];
@@ -3507,6 +3673,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataAttributesRequest()
@@ -3547,6 +3714,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (client.descriptors.page.listDataAttributes.createStream as SinonStub)
@@ -3569,6 +3737,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataAttributesRequest()
@@ -3599,6 +3768,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.descriptors.page.listDataAttributes.createStream as SinonStub)
           .getCall(0)
@@ -3620,6 +3790,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataAttributesRequest()
@@ -3648,6 +3819,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
@@ -3671,6 +3843,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataAttributesRequest()
@@ -3691,6 +3864,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (
           client.descriptors.page.listDataAttributes.asyncIterate as SinonStub

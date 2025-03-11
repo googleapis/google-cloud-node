@@ -1462,11 +1462,6 @@ export class CatalogServiceClient {
   /**
    * Gets an Entry.
    *
-   * **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is
-   * changing. For more information, see [Changes to BigQuery metadata stored in
-   * Dataplex
-   * Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -1557,12 +1552,7 @@ export class CatalogServiceClient {
     return this.innerApiCalls.getEntry(request, options, callback);
   }
   /**
-   * Looks up a single Entry by name using the permission on the source system.
-   *
-   * **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is
-   * changing. For more information, see [Changes to BigQuery metadata stored in
-   * Dataplex
-   * Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).
+   * Looks up an entry by name using the permission on the source system.
    *
    * @param {Object} request
    *   The request object that will be sent.
