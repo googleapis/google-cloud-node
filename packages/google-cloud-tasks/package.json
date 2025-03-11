@@ -75,7 +75,7 @@
     "compile:esm": "tsc -p ./tsconfig.esm.json && cp -r esm/src/json-helper.cjs build/esm/src/json-helper.cjs",
     "babel": "babel esm --out-dir build/cjs --ignore \"esm/**/*.d.ts\" --extensions \".ts\" --out-file-extension .cjs --copy-files",
     "compile:cjs": "tsc -p ./tsconfig.json && npm run babel",
-    "compile": "npm run compile:esm && npm run compile:cjs && rm -rf build/protos && cp -r protos build/protos"
+    "compile": "npm run compile:esm && rm -rf esm/src/json-helper.d.cts && npm run compile:cjs && rm -rf build/protos && cp -r protos build/protos"
   },
   "dependencies": {
     "google-gax": "^5.0.0-rc.3"
