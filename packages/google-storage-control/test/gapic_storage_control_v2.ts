@@ -1282,6 +1282,493 @@ describe('v2.StorageControlClient', () => {
     });
   });
 
+  describe('disableAnywhereCache', () => {
+    it('invokes disableAnywhereCache without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DisableAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.AnywhereCache()
+      );
+      client.innerApiCalls.disableAnywhereCache =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.disableAnywhereCache(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.disableAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes disableAnywhereCache without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DisableAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.AnywhereCache()
+      );
+      client.innerApiCalls.disableAnywhereCache =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.disableAnywhereCache(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IAnywhereCache | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.disableAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes disableAnywhereCache with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DisableAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.disableAnywhereCache = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.disableAnywhereCache(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.disableAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes disableAnywhereCache with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DisableAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.disableAnywhereCache(request), expectedError);
+    });
+  });
+
+  describe('pauseAnywhereCache', () => {
+    it('invokes pauseAnywhereCache without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.PauseAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.AnywhereCache()
+      );
+      client.innerApiCalls.pauseAnywhereCache =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.pauseAnywhereCache(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.pauseAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pauseAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes pauseAnywhereCache without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.PauseAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.AnywhereCache()
+      );
+      client.innerApiCalls.pauseAnywhereCache =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.pauseAnywhereCache(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IAnywhereCache | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.pauseAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pauseAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes pauseAnywhereCache with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.PauseAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.pauseAnywhereCache = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.pauseAnywhereCache(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.pauseAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pauseAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes pauseAnywhereCache with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.PauseAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.pauseAnywhereCache(request), expectedError);
+    });
+  });
+
+  describe('resumeAnywhereCache', () => {
+    it('invokes resumeAnywhereCache without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ResumeAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.AnywhereCache()
+      );
+      client.innerApiCalls.resumeAnywhereCache =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.resumeAnywhereCache(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.resumeAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resumeAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resumeAnywhereCache without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ResumeAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.AnywhereCache()
+      );
+      client.innerApiCalls.resumeAnywhereCache =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.resumeAnywhereCache(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IAnywhereCache | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.resumeAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resumeAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resumeAnywhereCache with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ResumeAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.resumeAnywhereCache = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.resumeAnywhereCache(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.resumeAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resumeAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resumeAnywhereCache with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ResumeAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.resumeAnywhereCache(request), expectedError);
+    });
+  });
+
+  describe('getAnywhereCache', () => {
+    it('invokes getAnywhereCache without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.AnywhereCache()
+      );
+      client.innerApiCalls.getAnywhereCache = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAnywhereCache(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAnywhereCache without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.AnywhereCache()
+      );
+      client.innerApiCalls.getAnywhereCache =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAnywhereCache(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IAnywhereCache | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAnywhereCache with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAnywhereCache = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getAnywhereCache(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAnywhereCache with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetAnywhereCacheRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAnywhereCache(request), expectedError);
+    });
+  });
+
   describe('renameFolder', () => {
     it('invokes renameFolder without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
@@ -1480,6 +1967,378 @@ describe('v2.StorageControlClient', () => {
         expectedError
       );
       await assert.rejects(client.checkRenameFolderProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createAnywhereCache', () => {
+    it('invokes createAnywhereCache without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.CreateAnywhereCacheRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createAnywhereCache =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createAnywhereCache(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAnywhereCache without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.CreateAnywhereCacheRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createAnywhereCache =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAnywhereCache(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.storage.control.v2.IAnywhereCache,
+              protos.google.storage.control.v2.ICreateAnywhereCacheMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.ICreateAnywhereCacheMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAnywhereCache with call error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.CreateAnywhereCacheRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAnywhereCache = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createAnywhereCache(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAnywhereCache with LRO error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.CreateAnywhereCacheRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAnywhereCache = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createAnywhereCache(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateAnywhereCacheProgress without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateAnywhereCacheProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateAnywhereCacheProgress with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateAnywhereCacheProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateAnywhereCache', () => {
+    it('invokes updateAnywhereCache without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateAnywhereCacheRequest()
+      );
+      request.anywhereCache = {};
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.anywhereCache.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateAnywhereCache =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateAnywhereCache(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAnywhereCache without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateAnywhereCacheRequest()
+      );
+      request.anywhereCache = {};
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.anywhereCache.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateAnywhereCache =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAnywhereCache(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.storage.control.v2.IAnywhereCache,
+              protos.google.storage.control.v2.IUpdateAnywhereCacheMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.IUpdateAnywhereCacheMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAnywhereCache with call error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateAnywhereCacheRequest()
+      );
+      request.anywhereCache = {};
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.anywhereCache.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAnywhereCache = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateAnywhereCache(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAnywhereCache with LRO error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateAnywhereCacheRequest()
+      );
+      request.anywhereCache = {};
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.anywhereCache.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAnywhereCache = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateAnywhereCache(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAnywhereCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAnywhereCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateAnywhereCacheProgress without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateAnywhereCacheProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateAnywhereCacheProgress with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateAnywhereCacheProgress(''),
+        expectedError
+      );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -2099,6 +2958,311 @@ describe('v2.StorageControlClient', () => {
       );
     });
   });
+
+  describe('listAnywhereCaches', () => {
+    it('invokes listAnywhereCaches without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListAnywhereCachesRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.AnywhereCache()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.AnywhereCache()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.AnywhereCache()
+        ),
+      ];
+      client.innerApiCalls.listAnywhereCaches =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listAnywhereCaches(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAnywhereCaches as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAnywhereCaches as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAnywhereCaches without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListAnywhereCachesRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.AnywhereCache()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.AnywhereCache()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.AnywhereCache()
+        ),
+      ];
+      client.innerApiCalls.listAnywhereCaches =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAnywhereCaches(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IAnywhereCache[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAnywhereCaches as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAnywhereCaches as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAnywhereCaches with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListAnywhereCachesRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAnywhereCaches = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listAnywhereCaches(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAnywhereCaches as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAnywhereCaches as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAnywhereCachesStream without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListAnywhereCachesRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.AnywhereCache()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.AnywhereCache()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.AnywhereCache()
+        ),
+      ];
+      client.descriptors.page.listAnywhereCaches.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAnywhereCachesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.storage.control.v2.AnywhereCache[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.storage.control.v2.AnywhereCache) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAnywhereCaches.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAnywhereCaches, request)
+      );
+      assert(
+        (client.descriptors.page.listAnywhereCaches.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listAnywhereCachesStream with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListAnywhereCachesRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAnywhereCaches.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAnywhereCachesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.storage.control.v2.AnywhereCache[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.storage.control.v2.AnywhereCache) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAnywhereCaches.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAnywhereCaches, request)
+      );
+      assert(
+        (client.descriptors.page.listAnywhereCaches.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listAnywhereCaches without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListAnywhereCachesRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.AnywhereCache()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.AnywhereCache()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.AnywhereCache()
+        ),
+      ];
+      client.descriptors.page.listAnywhereCaches.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.storage.control.v2.IAnywhereCache[] = [];
+      const iterable = client.listAnywhereCachesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAnywhereCaches.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAnywhereCaches.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listAnywhereCaches with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListAnywhereCachesRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAnywhereCaches.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAnywhereCachesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.storage.control.v2.IAnywhereCache[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAnywhereCaches.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAnywhereCaches.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
@@ -2406,6 +3570,70 @@ describe('v2.StorageControlClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('anywhereCache', () => {
+      const fakePath = '/rendered/path/anywhereCache';
+      const expectedParameters = {
+        project: 'projectValue',
+        bucket: 'bucketValue',
+        anywhere_cache: 'anywhereCacheValue',
+      };
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.anywhereCachePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.anywhereCachePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('anywhereCachePath', () => {
+        const result = client.anywhereCachePath(
+          'projectValue',
+          'bucketValue',
+          'anywhereCacheValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.anywhereCachePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAnywhereCacheName', () => {
+        const result = client.matchProjectFromAnywhereCacheName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.anywhereCachePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBucketFromAnywhereCacheName', () => {
+        const result = client.matchBucketFromAnywhereCacheName(fakePath);
+        assert.strictEqual(result, 'bucketValue');
+        assert(
+          (client.pathTemplates.anywhereCachePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAnywhereCacheFromAnywhereCacheName', () => {
+        const result = client.matchAnywhereCacheFromAnywhereCacheName(fakePath);
+        assert.strictEqual(result, 'anywhereCacheValue');
+        assert(
+          (client.pathTemplates.anywhereCachePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('bucket', () => {
       const fakePath = '/rendered/path/bucket';
       const expectedParameters = {
