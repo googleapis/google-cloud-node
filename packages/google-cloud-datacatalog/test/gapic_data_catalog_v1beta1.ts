@@ -311,6 +311,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest()
@@ -326,6 +327,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.createEntryGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.createEntryGroup(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createEntryGroup as SinonStub
@@ -342,6 +344,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest()
@@ -373,6 +376,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createEntryGroup as SinonStub
@@ -389,6 +393,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest()
@@ -405,6 +410,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.createEntryGroup(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.createEntryGroup as SinonStub
       ).getCall(0).args[0];
@@ -420,6 +426,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest()
@@ -432,6 +439,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createEntryGroup(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -441,6 +449,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest()
@@ -457,6 +466,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.updateEntryGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.updateEntryGroup(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateEntryGroup as SinonStub
@@ -473,6 +483,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest()
@@ -505,6 +516,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateEntryGroup as SinonStub
@@ -521,6 +533,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest()
@@ -538,6 +551,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.updateEntryGroup(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.updateEntryGroup as SinonStub
       ).getCall(0).args[0];
@@ -553,6 +567,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest()
@@ -566,6 +581,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateEntryGroup(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -575,6 +591,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest()
@@ -590,6 +607,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.getEntryGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.getEntryGroup(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getEntryGroup as SinonStub
@@ -606,6 +624,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest()
@@ -637,6 +656,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getEntryGroup as SinonStub
@@ -653,6 +673,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest()
@@ -669,6 +690,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.getEntryGroup(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.getEntryGroup as SinonStub
       ).getCall(0).args[0];
@@ -684,6 +706,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest()
@@ -696,6 +719,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEntryGroup(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -705,6 +729,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest()
@@ -720,6 +745,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.deleteEntryGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteEntryGroup(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteEntryGroup as SinonStub
@@ -736,6 +762,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest()
@@ -767,6 +794,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteEntryGroup as SinonStub
@@ -783,6 +811,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest()
@@ -799,6 +828,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.deleteEntryGroup(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.deleteEntryGroup as SinonStub
       ).getCall(0).args[0];
@@ -814,6 +844,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest()
@@ -826,6 +857,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteEntryGroup(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -835,6 +867,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryRequest()
@@ -850,6 +883,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.createEntry = stubSimpleCall(expectedResponse);
       const [response] = await client.createEntry(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createEntry as SinonStub
@@ -866,6 +900,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryRequest()
@@ -897,6 +932,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createEntry as SinonStub
@@ -913,6 +949,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryRequest()
@@ -929,6 +966,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.createEntry(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.createEntry as SinonStub
       ).getCall(0).args[0];
@@ -944,6 +982,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryRequest()
@@ -956,6 +995,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createEntry(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -965,6 +1005,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryRequest()
@@ -981,6 +1022,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.updateEntry = stubSimpleCall(expectedResponse);
       const [response] = await client.updateEntry(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateEntry as SinonStub
@@ -997,6 +1039,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryRequest()
@@ -1029,6 +1072,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateEntry as SinonStub
@@ -1045,6 +1089,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryRequest()
@@ -1062,6 +1107,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.updateEntry(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.updateEntry as SinonStub
       ).getCall(0).args[0];
@@ -1077,6 +1123,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryRequest()
@@ -1090,6 +1137,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateEntry(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -1099,6 +1147,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryRequest()
@@ -1114,6 +1163,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.deleteEntry = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteEntry(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteEntry as SinonStub
@@ -1130,6 +1180,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryRequest()
@@ -1161,6 +1212,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteEntry as SinonStub
@@ -1177,6 +1229,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryRequest()
@@ -1193,6 +1246,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.deleteEntry(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.deleteEntry as SinonStub
       ).getCall(0).args[0];
@@ -1208,6 +1262,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryRequest()
@@ -1220,6 +1275,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteEntry(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -1229,6 +1285,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryRequest()
@@ -1244,6 +1301,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.getEntry = stubSimpleCall(expectedResponse);
       const [response] = await client.getEntry(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getEntry as SinonStub
@@ -1260,6 +1318,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryRequest()
@@ -1291,6 +1350,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getEntry as SinonStub
@@ -1307,6 +1367,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryRequest()
@@ -1320,6 +1381,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.getEntry = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getEntry(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.getEntry as SinonStub
       ).getCall(0).args[0];
@@ -1335,6 +1397,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryRequest()
@@ -1347,6 +1410,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEntry(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -1356,6 +1420,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
@@ -1365,6 +1430,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.lookupEntry = stubSimpleCall(expectedResponse);
       const [response] = await client.lookupEntry(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
     });
 
@@ -1373,6 +1439,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
@@ -1398,6 +1465,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
     });
 
@@ -1406,6 +1474,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
@@ -1416,6 +1485,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.lookupEntry(request), expectedError);
+      assert(stub.calledOnce);
     });
 
     it('invokes lookupEntry with closed client', async () => {
@@ -1423,6 +1493,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
@@ -1430,6 +1501,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.lookupEntry(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -1439,6 +1511,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest()
@@ -1454,6 +1527,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.createTagTemplate = stubSimpleCall(expectedResponse);
       const [response] = await client.createTagTemplate(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createTagTemplate as SinonStub
@@ -1470,6 +1544,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest()
@@ -1501,6 +1576,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createTagTemplate as SinonStub
@@ -1517,6 +1593,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest()
@@ -1533,6 +1610,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.createTagTemplate(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.createTagTemplate as SinonStub
       ).getCall(0).args[0];
@@ -1548,6 +1626,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest()
@@ -1560,6 +1639,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createTagTemplate(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -1569,6 +1649,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest()
@@ -1584,6 +1665,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.getTagTemplate = stubSimpleCall(expectedResponse);
       const [response] = await client.getTagTemplate(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getTagTemplate as SinonStub
@@ -1600,6 +1682,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest()
@@ -1631,6 +1714,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getTagTemplate as SinonStub
@@ -1647,6 +1731,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest()
@@ -1663,6 +1748,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.getTagTemplate(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.getTagTemplate as SinonStub
       ).getCall(0).args[0];
@@ -1678,6 +1764,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest()
@@ -1690,6 +1777,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTagTemplate(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -1699,6 +1787,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest()
@@ -1715,6 +1804,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.updateTagTemplate = stubSimpleCall(expectedResponse);
       const [response] = await client.updateTagTemplate(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateTagTemplate as SinonStub
@@ -1731,6 +1821,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest()
@@ -1763,6 +1854,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateTagTemplate as SinonStub
@@ -1779,6 +1871,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest()
@@ -1796,6 +1889,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.updateTagTemplate(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.updateTagTemplate as SinonStub
       ).getCall(0).args[0];
@@ -1811,6 +1905,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest()
@@ -1824,6 +1919,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateTagTemplate(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -1833,6 +1929,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest()
@@ -1848,6 +1945,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.deleteTagTemplate = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteTagTemplate(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteTagTemplate as SinonStub
@@ -1864,6 +1962,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest()
@@ -1895,6 +1994,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteTagTemplate as SinonStub
@@ -1911,6 +2011,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest()
@@ -1927,6 +2028,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.deleteTagTemplate(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.deleteTagTemplate as SinonStub
       ).getCall(0).args[0];
@@ -1942,6 +2044,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest()
@@ -1954,6 +2057,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteTagTemplate(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -1963,6 +2067,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest()
@@ -1979,6 +2084,7 @@ describe('v1beta1.DataCatalogClient', () => {
       client.innerApiCalls.createTagTemplateField =
         stubSimpleCall(expectedResponse);
       const [response] = await client.createTagTemplateField(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createTagTemplateField as SinonStub
@@ -1995,6 +2101,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest()
@@ -2026,6 +2133,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createTagTemplateField as SinonStub
@@ -2042,6 +2150,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest()
@@ -2061,6 +2170,7 @@ describe('v1beta1.DataCatalogClient', () => {
         client.createTagTemplateField(request),
         expectedError
       );
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.createTagTemplateField as SinonStub
       ).getCall(0).args[0];
@@ -2076,6 +2186,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest()
@@ -2091,6 +2202,7 @@ describe('v1beta1.DataCatalogClient', () => {
         client.createTagTemplateField(request),
         expectedError
       );
+      assert(stub.calledOnce);
     });
   });
 
@@ -2100,6 +2212,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest()
@@ -2116,6 +2229,7 @@ describe('v1beta1.DataCatalogClient', () => {
       client.innerApiCalls.updateTagTemplateField =
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateTagTemplateField(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateTagTemplateField as SinonStub
@@ -2132,6 +2246,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest()
@@ -2163,6 +2278,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateTagTemplateField as SinonStub
@@ -2179,6 +2295,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest()
@@ -2198,6 +2315,7 @@ describe('v1beta1.DataCatalogClient', () => {
         client.updateTagTemplateField(request),
         expectedError
       );
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.updateTagTemplateField as SinonStub
       ).getCall(0).args[0];
@@ -2213,6 +2331,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest()
@@ -2228,6 +2347,7 @@ describe('v1beta1.DataCatalogClient', () => {
         client.updateTagTemplateField(request),
         expectedError
       );
+      assert(stub.calledOnce);
     });
   });
 
@@ -2237,6 +2357,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest()
@@ -2253,6 +2374,7 @@ describe('v1beta1.DataCatalogClient', () => {
       client.innerApiCalls.renameTagTemplateField =
         stubSimpleCall(expectedResponse);
       const [response] = await client.renameTagTemplateField(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.renameTagTemplateField as SinonStub
@@ -2269,6 +2391,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest()
@@ -2300,6 +2423,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.renameTagTemplateField as SinonStub
@@ -2316,6 +2440,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest()
@@ -2335,6 +2460,7 @@ describe('v1beta1.DataCatalogClient', () => {
         client.renameTagTemplateField(request),
         expectedError
       );
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.renameTagTemplateField as SinonStub
       ).getCall(0).args[0];
@@ -2350,6 +2476,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest()
@@ -2365,6 +2492,7 @@ describe('v1beta1.DataCatalogClient', () => {
         client.renameTagTemplateField(request),
         expectedError
       );
+      assert(stub.calledOnce);
     });
   });
 
@@ -2374,6 +2502,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest()
@@ -2390,6 +2519,7 @@ describe('v1beta1.DataCatalogClient', () => {
       client.innerApiCalls.renameTagTemplateFieldEnumValue =
         stubSimpleCall(expectedResponse);
       const [response] = await client.renameTagTemplateFieldEnumValue(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.renameTagTemplateFieldEnumValue as SinonStub
@@ -2406,6 +2536,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest()
@@ -2437,6 +2568,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.renameTagTemplateFieldEnumValue as SinonStub
@@ -2453,6 +2585,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest()
@@ -2472,6 +2605,7 @@ describe('v1beta1.DataCatalogClient', () => {
         client.renameTagTemplateFieldEnumValue(request),
         expectedError
       );
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.renameTagTemplateFieldEnumValue as SinonStub
       ).getCall(0).args[0];
@@ -2487,6 +2621,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest()
@@ -2502,6 +2637,7 @@ describe('v1beta1.DataCatalogClient', () => {
         client.renameTagTemplateFieldEnumValue(request),
         expectedError
       );
+      assert(stub.calledOnce);
     });
   });
 
@@ -2511,6 +2647,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest()
@@ -2527,6 +2664,7 @@ describe('v1beta1.DataCatalogClient', () => {
       client.innerApiCalls.deleteTagTemplateField =
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteTagTemplateField(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteTagTemplateField as SinonStub
@@ -2543,6 +2681,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest()
@@ -2574,6 +2713,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteTagTemplateField as SinonStub
@@ -2590,6 +2730,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest()
@@ -2609,6 +2750,7 @@ describe('v1beta1.DataCatalogClient', () => {
         client.deleteTagTemplateField(request),
         expectedError
       );
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.deleteTagTemplateField as SinonStub
       ).getCall(0).args[0];
@@ -2624,6 +2766,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest()
@@ -2639,6 +2782,7 @@ describe('v1beta1.DataCatalogClient', () => {
         client.deleteTagTemplateField(request),
         expectedError
       );
+      assert(stub.calledOnce);
     });
   });
 
@@ -2648,6 +2792,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagRequest()
@@ -2663,6 +2808,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.createTag = stubSimpleCall(expectedResponse);
       const [response] = await client.createTag(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createTag as SinonStub
@@ -2679,6 +2825,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagRequest()
@@ -2710,6 +2857,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createTag as SinonStub
@@ -2726,6 +2874,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagRequest()
@@ -2739,6 +2888,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.createTag = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.createTag(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.createTag as SinonStub
       ).getCall(0).args[0];
@@ -2754,6 +2904,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagRequest()
@@ -2766,6 +2917,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createTag(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -2775,6 +2927,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagRequest()
@@ -2791,6 +2944,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.updateTag = stubSimpleCall(expectedResponse);
       const [response] = await client.updateTag(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateTag as SinonStub
@@ -2807,6 +2961,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagRequest()
@@ -2839,6 +2994,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateTag as SinonStub
@@ -2855,6 +3011,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagRequest()
@@ -2869,6 +3026,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTag = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.updateTag(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.updateTag as SinonStub
       ).getCall(0).args[0];
@@ -2884,6 +3042,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagRequest()
@@ -2897,6 +3056,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateTag(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -2906,6 +3066,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagRequest()
@@ -2921,6 +3082,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.deleteTag = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteTag(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteTag as SinonStub
@@ -2937,6 +3099,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagRequest()
@@ -2968,6 +3131,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteTag as SinonStub
@@ -2984,6 +3148,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagRequest()
@@ -2997,6 +3162,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTag = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.deleteTag(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.deleteTag as SinonStub
       ).getCall(0).args[0];
@@ -3012,6 +3178,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagRequest()
@@ -3024,6 +3191,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteTag(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -3033,6 +3201,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
@@ -3048,6 +3217,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.setIamPolicy(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.setIamPolicy as SinonStub
@@ -3064,6 +3234,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
@@ -3095,6 +3266,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.setIamPolicy as SinonStub
@@ -3111,6 +3283,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
@@ -3127,6 +3300,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.setIamPolicy(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.setIamPolicy as SinonStub
       ).getCall(0).args[0];
@@ -3142,6 +3316,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
@@ -3154,6 +3329,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -3163,6 +3339,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
@@ -3178,6 +3355,7 @@ describe('v1beta1.DataCatalogClient', () => {
       );
       client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.getIamPolicy(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getIamPolicy as SinonStub
@@ -3194,6 +3372,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
@@ -3225,6 +3404,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getIamPolicy as SinonStub
@@ -3241,6 +3421,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
@@ -3257,6 +3438,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.getIamPolicy(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.getIamPolicy as SinonStub
       ).getCall(0).args[0];
@@ -3272,6 +3454,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
@@ -3284,6 +3467,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -3293,6 +3477,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
@@ -3309,6 +3494,7 @@ describe('v1beta1.DataCatalogClient', () => {
       client.innerApiCalls.testIamPermissions =
         stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.testIamPermissions as SinonStub
@@ -3325,6 +3511,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
@@ -3356,6 +3543,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.testIamPermissions as SinonStub
@@ -3372,6 +3560,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
@@ -3388,6 +3577,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.testIamPermissions(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.testIamPermissions as SinonStub
       ).getCall(0).args[0];
@@ -3403,6 +3593,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
@@ -3415,6 +3606,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -3424,6 +3616,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
@@ -3441,6 +3634,7 @@ describe('v1beta1.DataCatalogClient', () => {
       ];
       client.innerApiCalls.searchCatalog = stubSimpleCall(expectedResponse);
       const [response] = await client.searchCatalog(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
     });
 
@@ -3449,6 +3643,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
@@ -3484,6 +3679,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
     });
 
@@ -3492,6 +3688,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
@@ -3502,6 +3699,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.searchCatalog(request), expectedError);
+      assert(stub.calledOnce);
     });
 
     it('invokes searchCatalogStream without error', async () => {
@@ -3509,6 +3707,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
@@ -3546,6 +3745,7 @@ describe('v1beta1.DataCatalogClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (client.descriptors.page.searchCatalog.createStream as SinonStub)
@@ -3559,6 +3759,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
@@ -3586,6 +3787,7 @@ describe('v1beta1.DataCatalogClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.descriptors.page.searchCatalog.createStream as SinonStub)
           .getCall(0)
@@ -3598,6 +3800,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
@@ -3621,6 +3824,7 @@ describe('v1beta1.DataCatalogClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
@@ -3635,6 +3839,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
@@ -3650,6 +3855,7 @@ describe('v1beta1.DataCatalogClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (
           client.descriptors.page.searchCatalog.asyncIterate as SinonStub
@@ -3665,6 +3871,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
@@ -3688,6 +3895,7 @@ describe('v1beta1.DataCatalogClient', () => {
       ];
       client.innerApiCalls.listEntryGroups = stubSimpleCall(expectedResponse);
       const [response] = await client.listEntryGroups(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listEntryGroups as SinonStub
@@ -3704,6 +3912,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
@@ -3745,6 +3954,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listEntryGroups as SinonStub
@@ -3761,6 +3971,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
@@ -3777,6 +3988,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.listEntryGroups(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.listEntryGroups as SinonStub
       ).getCall(0).args[0];
@@ -3792,6 +4004,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
@@ -3833,6 +4046,7 @@ describe('v1beta1.DataCatalogClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (client.descriptors.page.listEntryGroups.createStream as SinonStub)
@@ -3853,6 +4067,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
@@ -3884,6 +4099,7 @@ describe('v1beta1.DataCatalogClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.descriptors.page.listEntryGroups.createStream as SinonStub)
           .getCall(0)
@@ -3903,6 +4119,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
@@ -3932,6 +4149,7 @@ describe('v1beta1.DataCatalogClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
@@ -3953,6 +4171,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
@@ -3974,6 +4193,7 @@ describe('v1beta1.DataCatalogClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (
           client.descriptors.page.listEntryGroups.asyncIterate as SinonStub
@@ -3996,6 +4216,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
@@ -4019,6 +4240,7 @@ describe('v1beta1.DataCatalogClient', () => {
       ];
       client.innerApiCalls.listEntries = stubSimpleCall(expectedResponse);
       const [response] = await client.listEntries(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listEntries as SinonStub
@@ -4035,6 +4257,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
@@ -4074,6 +4297,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listEntries as SinonStub
@@ -4090,6 +4314,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
@@ -4106,6 +4331,7 @@ describe('v1beta1.DataCatalogClient', () => {
         expectedError
       );
       await assert.rejects(client.listEntries(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.listEntries as SinonStub
       ).getCall(0).args[0];
@@ -4121,6 +4347,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
@@ -4161,6 +4388,7 @@ describe('v1beta1.DataCatalogClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (client.descriptors.page.listEntries.createStream as SinonStub)
@@ -4181,6 +4409,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
@@ -4213,6 +4442,7 @@ describe('v1beta1.DataCatalogClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.descriptors.page.listEntries.createStream as SinonStub)
           .getCall(0)
@@ -4232,6 +4462,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
@@ -4260,6 +4491,7 @@ describe('v1beta1.DataCatalogClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (client.descriptors.page.listEntries.asyncIterate as SinonStub).getCall(
@@ -4281,6 +4513,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
@@ -4303,6 +4536,7 @@ describe('v1beta1.DataCatalogClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (client.descriptors.page.listEntries.asyncIterate as SinonStub).getCall(
           0
@@ -4325,6 +4559,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
@@ -4348,6 +4583,7 @@ describe('v1beta1.DataCatalogClient', () => {
       ];
       client.innerApiCalls.listTags = stubSimpleCall(expectedResponse);
       const [response] = await client.listTags(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listTags as SinonStub
@@ -4364,6 +4600,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
@@ -4403,6 +4640,7 @@ describe('v1beta1.DataCatalogClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listTags as SinonStub
@@ -4419,6 +4657,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
@@ -4432,6 +4671,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.listTags = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listTags(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.listTags as SinonStub
       ).getCall(0).args[0];
@@ -4447,6 +4687,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
@@ -4487,6 +4728,7 @@ describe('v1beta1.DataCatalogClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (client.descriptors.page.listTags.createStream as SinonStub)
@@ -4507,6 +4749,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
@@ -4539,6 +4782,7 @@ describe('v1beta1.DataCatalogClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.descriptors.page.listTags.createStream as SinonStub)
           .getCall(0)
@@ -4558,6 +4802,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
@@ -4586,6 +4831,7 @@ describe('v1beta1.DataCatalogClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (client.descriptors.page.listTags.asyncIterate as SinonStub).getCall(0)
@@ -4606,6 +4852,7 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
@@ -4628,6 +4875,7 @@ describe('v1beta1.DataCatalogClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (client.descriptors.page.listTags.asyncIterate as SinonStub).getCall(0)
           .args[1],
