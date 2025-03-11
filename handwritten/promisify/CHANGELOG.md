@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/nodejs-promisify/compare/v4.1.0...v5.0.0) (2025-03-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#363](https://github.com/googleapis/nodejs-promisify/issues/363))
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#363](https://github.com/googleapis/nodejs-promisify/issues/363)) ([f8454e2](https://github.com/googleapis/nodejs-promisify/commit/f8454e21c87fd94f482e51675d604bf6f33cbeab))
+
 ## [4.1.0](https://github.com/googleapis/nodejs-promisify/compare/v4.0.0...v4.1.0) (2025-03-05)
 
 
