@@ -409,9 +409,9 @@ export class QuotaAdjusterSettingsManagerClient {
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. The list of fields to update.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set to true, validate the request, but do not actually update.
-   *   Note that a request being valid does not mean that the request is
-   *   guaranteed to be fulfilled.
+   *   Optional. If set to true, checks the syntax of the request but doesn't
+   *   update the quota adjuster settings value. Note that although a request can
+   *   be valid, that doesn't guarantee that the request will be fulfilled.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -512,8 +512,8 @@ export class QuotaAdjusterSettingsManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Name of the config. Required to be “settings”, as only a single
-   *   setting per container will be supported initially.
+   *   Required. Name of the `quotaAdjusterSettings` configuration. Only a single
+   *   setting per project is supported.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
