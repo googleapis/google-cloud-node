@@ -31,6 +31,7 @@ import type {
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class ReasoningEngineExecutionServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class ReasoningEngineExecutionServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -669,7 +672,36 @@ export class ReasoningEngineExecutionServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.queryReasoningEngine(request, options, callback);
+    this._log.info('queryReasoningEngine request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IQueryReasoningEngineResponse,
+          | protos.google.cloud.aiplatform.v1.IQueryReasoningEngineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('queryReasoningEngine response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .queryReasoningEngine(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IQueryReasoningEngineResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IQueryReasoningEngineRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryReasoningEngine response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -709,6 +741,7 @@ export class ReasoningEngineExecutionServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this._log.info('streamQueryReasoningEngine stream %j', options);
     return this.innerApiCalls.streamQueryReasoningEngine(request, options);
   }
 
@@ -4463,6 +4496,7 @@ export class ReasoningEngineExecutionServiceClient {
   close(): Promise<void> {
     if (this.reasoningEngineExecutionServiceStub && !this._terminated) {
       return this.reasoningEngineExecutionServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class FeaturestoreServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class FeaturestoreServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2430,7 +2433,33 @@ export class FeaturestoreServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getFeaturestore(request, options, callback);
+    this._log.info('getFeaturestore request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IFeaturestore,
+          | protos.google.cloud.aiplatform.v1.IGetFeaturestoreRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFeaturestore response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFeaturestore(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IFeaturestore,
+          protos.google.cloud.aiplatform.v1.IGetFeaturestoreRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getFeaturestore response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single EntityType.
@@ -2522,7 +2551,33 @@ export class FeaturestoreServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEntityType(request, options, callback);
+    this._log.info('getEntityType request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IEntityType,
+          | protos.google.cloud.aiplatform.v1.IGetEntityTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEntityType response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEntityType(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IEntityType,
+          protos.google.cloud.aiplatform.v1.IGetEntityTypeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEntityType response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the parameters of a single EntityType.
@@ -2635,7 +2690,36 @@ export class FeaturestoreServiceClient {
         'entity_type.name': request.entityType!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateEntityType(request, options, callback);
+    this._log.info('updateEntityType request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IEntityType,
+          | protos.google.cloud.aiplatform.v1.IUpdateEntityTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEntityType response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEntityType(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IEntityType,
+          (
+            | protos.google.cloud.aiplatform.v1.IUpdateEntityTypeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEntityType response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Feature.
@@ -2723,7 +2807,33 @@ export class FeaturestoreServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getFeature(request, options, callback);
+    this._log.info('getFeature request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IFeature,
+          | protos.google.cloud.aiplatform.v1.IGetFeatureRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFeature response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IFeature,
+          protos.google.cloud.aiplatform.v1.IGetFeatureRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getFeature response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the parameters of a single Feature.
@@ -2832,7 +2942,33 @@ export class FeaturestoreServiceClient {
         'feature.name': request.feature!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateFeature(request, options, callback);
+    this._log.info('updateFeature request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IFeature,
+          | protos.google.cloud.aiplatform.v1.IUpdateFeatureRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateFeature response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IFeature,
+          protos.google.cloud.aiplatform.v1.IUpdateFeatureRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFeature response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2947,7 +3083,37 @@ export class FeaturestoreServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createFeaturestore(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeaturestore,
+            protos.google.cloud.aiplatform.v1.ICreateFeaturestoreOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createFeaturestore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createFeaturestore request %j', request);
+    return this.innerApiCalls
+      .createFeaturestore(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeaturestore,
+            protos.google.cloud.aiplatform.v1.ICreateFeaturestoreOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createFeaturestore response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createFeaturestore()`.
@@ -2968,6 +3134,7 @@ export class FeaturestoreServiceClient {
       protos.google.cloud.aiplatform.v1.CreateFeaturestoreOperationMetadata
     >
   > {
+    this._log.info('createFeaturestore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3100,7 +3267,37 @@ export class FeaturestoreServiceClient {
         'featurestore.name': request.featurestore!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateFeaturestore(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeaturestore,
+            protos.google.cloud.aiplatform.v1.IUpdateFeaturestoreOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateFeaturestore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateFeaturestore request %j', request);
+    return this.innerApiCalls
+      .updateFeaturestore(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeaturestore,
+            protos.google.cloud.aiplatform.v1.IUpdateFeaturestoreOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFeaturestore response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateFeaturestore()`.
@@ -3121,6 +3318,7 @@ export class FeaturestoreServiceClient {
       protos.google.cloud.aiplatform.v1.UpdateFeaturestoreOperationMetadata
     >
   > {
+    this._log.info('updateFeaturestore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3243,7 +3441,37 @@ export class FeaturestoreServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteFeaturestore(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteFeaturestore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteFeaturestore request %j', request);
+    return this.innerApiCalls
+      .deleteFeaturestore(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFeaturestore response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteFeaturestore()`.
@@ -3264,6 +3492,7 @@ export class FeaturestoreServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteFeaturestore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3391,7 +3620,37 @@ export class FeaturestoreServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEntityType(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IEntityType,
+            protos.google.cloud.aiplatform.v1.ICreateEntityTypeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createEntityType response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createEntityType request %j', request);
+    return this.innerApiCalls
+      .createEntityType(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IEntityType,
+            protos.google.cloud.aiplatform.v1.ICreateEntityTypeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEntityType response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createEntityType()`.
@@ -3412,6 +3671,7 @@ export class FeaturestoreServiceClient {
       protos.google.cloud.aiplatform.v1.CreateEntityTypeOperationMetadata
     >
   > {
+    this._log.info('createEntityType long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3533,7 +3793,37 @@ export class FeaturestoreServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteEntityType(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteEntityType response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteEntityType request %j', request);
+    return this.innerApiCalls
+      .deleteEntityType(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEntityType response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteEntityType()`.
@@ -3554,6 +3844,7 @@ export class FeaturestoreServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteEntityType long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3683,7 +3974,37 @@ export class FeaturestoreServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createFeature(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeature,
+            protos.google.cloud.aiplatform.v1.ICreateFeatureOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createFeature response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createFeature request %j', request);
+    return this.innerApiCalls
+      .createFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeature,
+            protos.google.cloud.aiplatform.v1.ICreateFeatureOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createFeature response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createFeature()`.
@@ -3704,6 +4025,7 @@ export class FeaturestoreServiceClient {
       protos.google.cloud.aiplatform.v1.CreateFeatureOperationMetadata
     >
   > {
+    this._log.info('createFeature long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3828,7 +4150,37 @@ export class FeaturestoreServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchCreateFeatures(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesResponse,
+            protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchCreateFeatures response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchCreateFeatures request %j', request);
+    return this.innerApiCalls
+      .batchCreateFeatures(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesResponse,
+            protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateFeatures response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchCreateFeatures()`.
@@ -3849,6 +4201,7 @@ export class FeaturestoreServiceClient {
       protos.google.cloud.aiplatform.v1.BatchCreateFeaturesOperationMetadata
     >
   > {
+    this._log.info('batchCreateFeatures long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3967,7 +4320,37 @@ export class FeaturestoreServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteFeature(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteFeature response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteFeature request %j', request);
+    return this.innerApiCalls
+      .deleteFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFeature response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteFeature()`.
@@ -3988,6 +4371,7 @@ export class FeaturestoreServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteFeature long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4153,7 +4537,37 @@ export class FeaturestoreServiceClient {
         entity_type: request.entityType ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importFeatureValues(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IImportFeatureValuesResponse,
+            protos.google.cloud.aiplatform.v1.IImportFeatureValuesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importFeatureValues response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importFeatureValues request %j', request);
+    return this.innerApiCalls
+      .importFeatureValues(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IImportFeatureValuesResponse,
+            protos.google.cloud.aiplatform.v1.IImportFeatureValuesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importFeatureValues response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importFeatureValues()`.
@@ -4174,6 +4588,7 @@ export class FeaturestoreServiceClient {
       protos.google.cloud.aiplatform.v1.ImportFeatureValuesOperationMetadata
     >
   > {
+    this._log.info('importFeatureValues long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4340,11 +4755,37 @@ export class FeaturestoreServiceClient {
         featurestore: request.featurestore ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchReadFeatureValues(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IBatchReadFeatureValuesResponse,
+            protos.google.cloud.aiplatform.v1.IBatchReadFeatureValuesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchReadFeatureValues response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchReadFeatureValues request %j', request);
+    return this.innerApiCalls
+      .batchReadFeatureValues(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IBatchReadFeatureValuesResponse,
+            protos.google.cloud.aiplatform.v1.IBatchReadFeatureValuesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchReadFeatureValues response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchReadFeatureValues()`.
@@ -4365,6 +4806,7 @@ export class FeaturestoreServiceClient {
       protos.google.cloud.aiplatform.v1.BatchReadFeatureValuesOperationMetadata
     >
   > {
+    this._log.info('batchReadFeatureValues long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4494,7 +4936,37 @@ export class FeaturestoreServiceClient {
         entity_type: request.entityType ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportFeatureValues(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IExportFeatureValuesResponse,
+            protos.google.cloud.aiplatform.v1.IExportFeatureValuesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportFeatureValues response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportFeatureValues request %j', request);
+    return this.innerApiCalls
+      .exportFeatureValues(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IExportFeatureValuesResponse,
+            protos.google.cloud.aiplatform.v1.IExportFeatureValuesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportFeatureValues response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportFeatureValues()`.
@@ -4515,6 +4987,7 @@ export class FeaturestoreServiceClient {
       protos.google.cloud.aiplatform.v1.ExportFeatureValuesOperationMetadata
     >
   > {
+    this._log.info('exportFeatureValues long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4646,7 +5119,37 @@ export class FeaturestoreServiceClient {
         entity_type: request.entityType ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteFeatureValues(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesResponse,
+            protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteFeatureValues response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteFeatureValues request %j', request);
+    return this.innerApiCalls
+      .deleteFeatureValues(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesResponse,
+            protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFeatureValues response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteFeatureValues()`.
@@ -4667,6 +5170,7 @@ export class FeaturestoreServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteFeatureValuesOperationMetadata
     >
   > {
+    this._log.info('deleteFeatureValues long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4818,7 +5322,33 @@ export class FeaturestoreServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listFeaturestores(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListFeaturestoresRequest,
+          | protos.google.cloud.aiplatform.v1.IListFeaturestoresResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IFeaturestore
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFeaturestores values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFeaturestores request %j', request);
+    return this.innerApiCalls
+      .listFeaturestores(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IFeaturestore[],
+          protos.google.cloud.aiplatform.v1.IListFeaturestoresRequest | null,
+          protos.google.cloud.aiplatform.v1.IListFeaturestoresResponse,
+        ]) => {
+          this._log.info('listFeaturestores values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4898,6 +5428,7 @@ export class FeaturestoreServiceClient {
     const defaultCallSettings = this._defaults['listFeaturestores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFeaturestores stream %j', request);
     return this.descriptors.page.listFeaturestores.createStream(
       this.innerApiCalls.listFeaturestores as GaxCall,
       request,
@@ -4985,6 +5516,7 @@ export class FeaturestoreServiceClient {
     const defaultCallSettings = this._defaults['listFeaturestores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFeaturestores iterate %j', request);
     return this.descriptors.page.listFeaturestores.asyncIterate(
       this.innerApiCalls['listFeaturestores'] as GaxCall,
       request as {},
@@ -5127,7 +5659,33 @@ export class FeaturestoreServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEntityTypes(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListEntityTypesRequest,
+          | protos.google.cloud.aiplatform.v1.IListEntityTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IEntityType
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEntityTypes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEntityTypes request %j', request);
+    return this.innerApiCalls
+      .listEntityTypes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IEntityType[],
+          protos.google.cloud.aiplatform.v1.IListEntityTypesRequest | null,
+          protos.google.cloud.aiplatform.v1.IListEntityTypesResponse,
+        ]) => {
+          this._log.info('listEntityTypes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5207,6 +5765,7 @@ export class FeaturestoreServiceClient {
     const defaultCallSettings = this._defaults['listEntityTypes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEntityTypes stream %j', request);
     return this.descriptors.page.listEntityTypes.createStream(
       this.innerApiCalls.listEntityTypes as GaxCall,
       request,
@@ -5294,6 +5853,7 @@ export class FeaturestoreServiceClient {
     const defaultCallSettings = this._defaults['listEntityTypes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEntityTypes iterate %j', request);
     return this.descriptors.page.listEntityTypes.asyncIterate(
       this.innerApiCalls['listEntityTypes'] as GaxCall,
       request as {},
@@ -5452,7 +6012,33 @@ export class FeaturestoreServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listFeatures(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListFeaturesRequest,
+          | protos.google.cloud.aiplatform.v1.IListFeaturesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IFeature
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFeatures values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFeatures request %j', request);
+    return this.innerApiCalls
+      .listFeatures(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IFeature[],
+          protos.google.cloud.aiplatform.v1.IListFeaturesRequest | null,
+          protos.google.cloud.aiplatform.v1.IListFeaturesResponse,
+        ]) => {
+          this._log.info('listFeatures values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5548,6 +6134,7 @@ export class FeaturestoreServiceClient {
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFeatures stream %j', request);
     return this.descriptors.page.listFeatures.createStream(
       this.innerApiCalls.listFeatures as GaxCall,
       request,
@@ -5651,6 +6238,7 @@ export class FeaturestoreServiceClient {
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFeatures iterate %j', request);
     return this.descriptors.page.listFeatures.asyncIterate(
       this.innerApiCalls['listFeatures'] as GaxCall,
       request as {},
@@ -5824,7 +6412,33 @@ export class FeaturestoreServiceClient {
         location: request.location ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.searchFeatures(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.ISearchFeaturesRequest,
+          | protos.google.cloud.aiplatform.v1.ISearchFeaturesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IFeature
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchFeatures values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchFeatures request %j', request);
+    return this.innerApiCalls
+      .searchFeatures(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IFeature[],
+          protos.google.cloud.aiplatform.v1.ISearchFeaturesRequest | null,
+          protos.google.cloud.aiplatform.v1.ISearchFeaturesResponse,
+        ]) => {
+          this._log.info('searchFeatures values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5935,6 +6549,7 @@ export class FeaturestoreServiceClient {
     const defaultCallSettings = this._defaults['searchFeatures'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchFeatures stream %j', request);
     return this.descriptors.page.searchFeatures.createStream(
       this.innerApiCalls.searchFeatures as GaxCall,
       request,
@@ -6053,6 +6668,7 @@ export class FeaturestoreServiceClient {
     const defaultCallSettings = this._defaults['searchFeatures'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchFeatures iterate %j', request);
     return this.descriptors.page.searchFeatures.asyncIterate(
       this.innerApiCalls['searchFeatures'] as GaxCall,
       request as {},
@@ -10093,6 +10709,7 @@ export class FeaturestoreServiceClient {
   close(): Promise<void> {
     if (this.featurestoreServiceStub && !this._terminated) {
       return this.featurestoreServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

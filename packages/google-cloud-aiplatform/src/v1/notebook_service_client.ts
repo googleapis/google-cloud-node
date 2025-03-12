@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class NotebookServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class NotebookServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2412,11 +2415,36 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNotebookRuntimeTemplate(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getNotebookRuntimeTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+          | protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNotebookRuntimeTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNotebookRuntimeTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNotebookRuntimeTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a NotebookRuntimeTemplate.
@@ -2520,11 +2548,36 @@ export class NotebookServiceClient {
           request.notebookRuntimeTemplate!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateNotebookRuntimeTemplate(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateNotebookRuntimeTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+          | protos.google.cloud.aiplatform.v1.IUpdateNotebookRuntimeTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateNotebookRuntimeTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateNotebookRuntimeTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+          (
+            | protos.google.cloud.aiplatform.v1.IUpdateNotebookRuntimeTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateNotebookRuntimeTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a NotebookRuntime.
@@ -2617,7 +2670,36 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNotebookRuntime(request, options, callback);
+    this._log.info('getNotebookRuntime request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.INotebookRuntime,
+          | protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNotebookRuntime response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNotebookRuntime(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.INotebookRuntime,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNotebookRuntime response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a NotebookExecutionJob.
@@ -2715,11 +2797,36 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNotebookExecutionJob(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getNotebookExecutionJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.INotebookExecutionJob,
+          | protos.google.cloud.aiplatform.v1.IGetNotebookExecutionJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNotebookExecutionJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNotebookExecutionJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.INotebookExecutionJob,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetNotebookExecutionJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNotebookExecutionJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2827,11 +2934,43 @@ export class NotebookServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createNotebookRuntimeTemplate(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+            protos.google.cloud.aiplatform.v1.ICreateNotebookRuntimeTemplateOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'createNotebookRuntimeTemplate response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createNotebookRuntimeTemplate request %j', request);
+    return this.innerApiCalls
+      .createNotebookRuntimeTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+            protos.google.cloud.aiplatform.v1.ICreateNotebookRuntimeTemplateOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createNotebookRuntimeTemplate response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createNotebookRuntimeTemplate()`.
@@ -2852,6 +2991,7 @@ export class NotebookServiceClient {
       protos.google.cloud.aiplatform.v1.CreateNotebookRuntimeTemplateOperationMetadata
     >
   > {
+    this._log.info('createNotebookRuntimeTemplate long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2969,11 +3109,43 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteNotebookRuntimeTemplate(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteNotebookRuntimeTemplate response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteNotebookRuntimeTemplate request %j', request);
+    return this.innerApiCalls
+      .deleteNotebookRuntimeTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteNotebookRuntimeTemplate response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteNotebookRuntimeTemplate()`.
@@ -2994,6 +3166,7 @@ export class NotebookServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteNotebookRuntimeTemplate long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3119,7 +3292,37 @@ export class NotebookServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.assignNotebookRuntime(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.INotebookRuntime,
+            protos.google.cloud.aiplatform.v1.IAssignNotebookRuntimeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('assignNotebookRuntime response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('assignNotebookRuntime request %j', request);
+    return this.innerApiCalls
+      .assignNotebookRuntime(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.INotebookRuntime,
+            protos.google.cloud.aiplatform.v1.IAssignNotebookRuntimeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('assignNotebookRuntime response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `assignNotebookRuntime()`.
@@ -3140,6 +3343,7 @@ export class NotebookServiceClient {
       protos.google.cloud.aiplatform.v1.AssignNotebookRuntimeOperationMetadata
     >
   > {
+    this._log.info('assignNotebookRuntime long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3258,7 +3462,37 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteNotebookRuntime(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteNotebookRuntime response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteNotebookRuntime request %j', request);
+    return this.innerApiCalls
+      .deleteNotebookRuntime(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNotebookRuntime response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteNotebookRuntime()`.
@@ -3279,6 +3513,7 @@ export class NotebookServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteNotebookRuntime long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3397,11 +3632,37 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.upgradeNotebookRuntime(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeResponse,
+            protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('upgradeNotebookRuntime response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('upgradeNotebookRuntime request %j', request);
+    return this.innerApiCalls
+      .upgradeNotebookRuntime(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeResponse,
+            protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('upgradeNotebookRuntime response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `upgradeNotebookRuntime()`.
@@ -3422,6 +3683,7 @@ export class NotebookServiceClient {
       protos.google.cloud.aiplatform.v1.UpgradeNotebookRuntimeOperationMetadata
     >
   > {
+    this._log.info('upgradeNotebookRuntime long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3540,7 +3802,37 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.startNotebookRuntime(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeResponse,
+            protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('startNotebookRuntime response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('startNotebookRuntime request %j', request);
+    return this.innerApiCalls
+      .startNotebookRuntime(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeResponse,
+            protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startNotebookRuntime response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `startNotebookRuntime()`.
@@ -3561,6 +3853,7 @@ export class NotebookServiceClient {
       protos.google.cloud.aiplatform.v1.StartNotebookRuntimeOperationMetadata
     >
   > {
+    this._log.info('startNotebookRuntime long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3679,7 +3972,37 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.stopNotebookRuntime(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeResponse,
+            protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('stopNotebookRuntime response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('stopNotebookRuntime request %j', request);
+    return this.innerApiCalls
+      .stopNotebookRuntime(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeResponse,
+            protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('stopNotebookRuntime response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `stopNotebookRuntime()`.
@@ -3700,6 +4023,7 @@ export class NotebookServiceClient {
       protos.google.cloud.aiplatform.v1.StopNotebookRuntimeOperationMetadata
     >
   > {
+    this._log.info('stopNotebookRuntime long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3820,11 +4144,37 @@ export class NotebookServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createNotebookExecutionJob(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.INotebookExecutionJob,
+            protos.google.cloud.aiplatform.v1.ICreateNotebookExecutionJobOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createNotebookExecutionJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createNotebookExecutionJob request %j', request);
+    return this.innerApiCalls
+      .createNotebookExecutionJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.INotebookExecutionJob,
+            protos.google.cloud.aiplatform.v1.ICreateNotebookExecutionJobOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createNotebookExecutionJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createNotebookExecutionJob()`.
@@ -3845,6 +4195,7 @@ export class NotebookServiceClient {
       protos.google.cloud.aiplatform.v1.CreateNotebookExecutionJobOperationMetadata
     >
   > {
+    this._log.info('createNotebookExecutionJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3960,11 +4311,37 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteNotebookExecutionJob(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteNotebookExecutionJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteNotebookExecutionJob request %j', request);
+    return this.innerApiCalls
+      .deleteNotebookExecutionJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNotebookExecutionJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteNotebookExecutionJob()`.
@@ -3985,6 +4362,7 @@ export class NotebookServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteNotebookExecutionJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4139,11 +4517,33 @@ export class NotebookServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNotebookRuntimeTemplates(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest,
+          | protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNotebookRuntimeTemplates values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNotebookRuntimeTemplates request %j', request);
+    return this.innerApiCalls
+      .listNotebookRuntimeTemplates(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate[],
+          protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest | null,
+          protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesResponse,
+        ]) => {
+          this._log.info('listNotebookRuntimeTemplates values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4226,6 +4626,7 @@ export class NotebookServiceClient {
     const defaultCallSettings = this._defaults['listNotebookRuntimeTemplates'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNotebookRuntimeTemplates stream %j', request);
     return this.descriptors.page.listNotebookRuntimeTemplates.createStream(
       this.innerApiCalls.listNotebookRuntimeTemplates as GaxCall,
       request,
@@ -4316,6 +4717,7 @@ export class NotebookServiceClient {
     const defaultCallSettings = this._defaults['listNotebookRuntimeTemplates'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNotebookRuntimeTemplates iterate %j', request);
     return this.descriptors.page.listNotebookRuntimeTemplates.asyncIterate(
       this.innerApiCalls['listNotebookRuntimeTemplates'] as GaxCall,
       request as {},
@@ -4475,7 +4877,33 @@ export class NotebookServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNotebookRuntimes(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest,
+          | protos.google.cloud.aiplatform.v1.IListNotebookRuntimesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.INotebookRuntime
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNotebookRuntimes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNotebookRuntimes request %j', request);
+    return this.innerApiCalls
+      .listNotebookRuntimes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.INotebookRuntime[],
+          protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest | null,
+          protos.google.cloud.aiplatform.v1.IListNotebookRuntimesResponse,
+        ]) => {
+          this._log.info('listNotebookRuntimes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4572,6 +5000,7 @@ export class NotebookServiceClient {
     const defaultCallSettings = this._defaults['listNotebookRuntimes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNotebookRuntimes stream %j', request);
     return this.descriptors.page.listNotebookRuntimes.createStream(
       this.innerApiCalls.listNotebookRuntimes as GaxCall,
       request,
@@ -4676,6 +5105,7 @@ export class NotebookServiceClient {
     const defaultCallSettings = this._defaults['listNotebookRuntimes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNotebookRuntimes iterate %j', request);
     return this.descriptors.page.listNotebookRuntimes.asyncIterate(
       this.innerApiCalls['listNotebookRuntimes'] as GaxCall,
       request as {},
@@ -4808,11 +5238,33 @@ export class NotebookServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNotebookExecutionJobs(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListNotebookExecutionJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListNotebookExecutionJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.INotebookExecutionJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNotebookExecutionJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNotebookExecutionJobs request %j', request);
+    return this.innerApiCalls
+      .listNotebookExecutionJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.INotebookExecutionJob[],
+          protos.google.cloud.aiplatform.v1.IListNotebookExecutionJobsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListNotebookExecutionJobsResponse,
+        ]) => {
+          this._log.info('listNotebookExecutionJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4882,6 +5334,7 @@ export class NotebookServiceClient {
     const defaultCallSettings = this._defaults['listNotebookExecutionJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNotebookExecutionJobs stream %j', request);
     return this.descriptors.page.listNotebookExecutionJobs.createStream(
       this.innerApiCalls.listNotebookExecutionJobs as GaxCall,
       request,
@@ -4959,6 +5412,7 @@ export class NotebookServiceClient {
     const defaultCallSettings = this._defaults['listNotebookExecutionJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNotebookExecutionJobs iterate %j', request);
     return this.descriptors.page.listNotebookExecutionJobs.asyncIterate(
       this.innerApiCalls['listNotebookExecutionJobs'] as GaxCall,
       request as {},
@@ -8976,6 +9430,7 @@ export class NotebookServiceClient {
   close(): Promise<void> {
     if (this.notebookServiceStub && !this._terminated) {
       return this.notebookServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

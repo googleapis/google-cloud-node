@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -61,6 +62,8 @@ export class PipelineServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -98,7 +101,7 @@ export class PipelineServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2343,11 +2346,36 @@ export class PipelineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createTrainingPipeline(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createTrainingPipeline request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITrainingPipeline,
+          | protos.google.cloud.aiplatform.v1.ICreateTrainingPipelineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTrainingPipeline response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTrainingPipeline(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITrainingPipeline,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreateTrainingPipelineRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createTrainingPipeline response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a TrainingPipeline.
@@ -2439,7 +2467,36 @@ export class PipelineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTrainingPipeline(request, options, callback);
+    this._log.info('getTrainingPipeline request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITrainingPipeline,
+          | protos.google.cloud.aiplatform.v1.IGetTrainingPipelineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTrainingPipeline response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTrainingPipeline(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITrainingPipeline,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetTrainingPipelineRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTrainingPipeline response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Cancels a TrainingPipeline.
@@ -2550,11 +2607,36 @@ export class PipelineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.cancelTrainingPipeline(
-      request,
-      options,
-      callback
-    );
+    this._log.info('cancelTrainingPipeline request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.ICancelTrainingPipelineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('cancelTrainingPipeline response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .cancelTrainingPipeline(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.aiplatform.v1.ICancelTrainingPipelineRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelTrainingPipeline response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a PipelineJob. A PipelineJob will run immediately when created.
@@ -2654,7 +2736,36 @@ export class PipelineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createPipelineJob(request, options, callback);
+    this._log.info('createPipelineJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IPipelineJob,
+          | protos.google.cloud.aiplatform.v1.ICreatePipelineJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createPipelineJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createPipelineJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IPipelineJob,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreatePipelineJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createPipelineJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a PipelineJob.
@@ -2746,7 +2857,33 @@ export class PipelineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPipelineJob(request, options, callback);
+    this._log.info('getPipelineJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IPipelineJob,
+          | protos.google.cloud.aiplatform.v1.IGetPipelineJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPipelineJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPipelineJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IPipelineJob,
+          protos.google.cloud.aiplatform.v1.IGetPipelineJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPipelineJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Cancels a PipelineJob.
@@ -2850,7 +2987,36 @@ export class PipelineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.cancelPipelineJob(request, options, callback);
+    this._log.info('cancelPipelineJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.ICancelPipelineJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('cancelPipelineJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .cancelPipelineJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.aiplatform.v1.ICancelPipelineJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelPipelineJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2955,11 +3121,37 @@ export class PipelineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteTrainingPipeline(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteTrainingPipeline response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTrainingPipeline request %j', request);
+    return this.innerApiCalls
+      .deleteTrainingPipeline(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTrainingPipeline response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteTrainingPipeline()`.
@@ -2980,6 +3172,7 @@ export class PipelineServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteTrainingPipeline long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3097,7 +3290,37 @@ export class PipelineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePipelineJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deletePipelineJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deletePipelineJob request %j', request);
+    return this.innerApiCalls
+      .deletePipelineJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePipelineJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deletePipelineJob()`.
@@ -3118,6 +3341,7 @@ export class PipelineServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deletePipelineJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3241,11 +3465,37 @@ export class PipelineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchDeletePipelineJobs(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IBatchDeletePipelineJobsResponse,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchDeletePipelineJobs response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchDeletePipelineJobs request %j', request);
+    return this.innerApiCalls
+      .batchDeletePipelineJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IBatchDeletePipelineJobsResponse,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeletePipelineJobs response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchDeletePipelineJobs()`.
@@ -3266,6 +3516,7 @@ export class PipelineServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('batchDeletePipelineJobs long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3393,11 +3644,37 @@ export class PipelineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchCancelPipelineJobs(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IBatchCancelPipelineJobsResponse,
+            protos.google.cloud.aiplatform.v1.IBatchCancelPipelineJobsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchCancelPipelineJobs response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchCancelPipelineJobs request %j', request);
+    return this.innerApiCalls
+      .batchCancelPipelineJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IBatchCancelPipelineJobsResponse,
+            protos.google.cloud.aiplatform.v1.IBatchCancelPipelineJobsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCancelPipelineJobs response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchCancelPipelineJobs()`.
@@ -3418,6 +3695,7 @@ export class PipelineServiceClient {
       protos.google.cloud.aiplatform.v1.BatchCancelPipelineJobsOperationMetadata
     >
   > {
+    this._log.info('batchCancelPipelineJobs long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3557,7 +3835,33 @@ export class PipelineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTrainingPipelines(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListTrainingPipelinesRequest,
+          | protos.google.cloud.aiplatform.v1.IListTrainingPipelinesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.ITrainingPipeline
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTrainingPipelines values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTrainingPipelines request %j', request);
+    return this.innerApiCalls
+      .listTrainingPipelines(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.ITrainingPipeline[],
+          protos.google.cloud.aiplatform.v1.IListTrainingPipelinesRequest | null,
+          protos.google.cloud.aiplatform.v1.IListTrainingPipelinesResponse,
+        ]) => {
+          this._log.info('listTrainingPipelines values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3625,6 +3929,7 @@ export class PipelineServiceClient {
     const defaultCallSettings = this._defaults['listTrainingPipelines'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTrainingPipelines stream %j', request);
     return this.descriptors.page.listTrainingPipelines.createStream(
       this.innerApiCalls.listTrainingPipelines as GaxCall,
       request,
@@ -3700,6 +4005,7 @@ export class PipelineServiceClient {
     const defaultCallSettings = this._defaults['listTrainingPipelines'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTrainingPipelines iterate %j', request);
     return this.descriptors.page.listTrainingPipelines.asyncIterate(
       this.innerApiCalls['listTrainingPipelines'] as GaxCall,
       request as {},
@@ -3858,7 +4164,33 @@ export class PipelineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPipelineJobs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListPipelineJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IPipelineJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPipelineJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPipelineJobs request %j', request);
+    return this.innerApiCalls
+      .listPipelineJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IPipelineJob[],
+          protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListPipelineJobsResponse,
+        ]) => {
+          this._log.info('listPipelineJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3954,6 +4286,7 @@ export class PipelineServiceClient {
     const defaultCallSettings = this._defaults['listPipelineJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPipelineJobs stream %j', request);
     return this.descriptors.page.listPipelineJobs.createStream(
       this.innerApiCalls.listPipelineJobs as GaxCall,
       request,
@@ -4057,6 +4390,7 @@ export class PipelineServiceClient {
     const defaultCallSettings = this._defaults['listPipelineJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPipelineJobs iterate %j', request);
     return this.descriptors.page.listPipelineJobs.asyncIterate(
       this.innerApiCalls['listPipelineJobs'] as GaxCall,
       request as {},
@@ -8097,6 +8431,7 @@ export class PipelineServiceClient {
   close(): Promise<void> {
     if (this.pipelineServiceStub && !this._terminated) {
       return this.pipelineServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();
