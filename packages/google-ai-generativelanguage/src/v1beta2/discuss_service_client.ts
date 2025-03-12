@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class DiscussServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('generativelanguage');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class DiscussServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -495,7 +498,36 @@ export class DiscussServiceClient {
         model: request.model ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.generateMessage(request, options, callback);
+    this._log.info('generateMessage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta2.IGenerateMessageResponse,
+          | protos.google.ai.generativelanguage.v1beta2.IGenerateMessageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateMessage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateMessage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta2.IGenerateMessageResponse,
+          (
+            | protos.google.ai.generativelanguage.v1beta2.IGenerateMessageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateMessage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Runs a model's tokenizer on a string and returns the token count.
@@ -598,7 +630,36 @@ export class DiscussServiceClient {
         model: request.model ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.countMessageTokens(request, options, callback);
+    this._log.info('countMessageTokens request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta2.ICountMessageTokensResponse,
+          | protos.google.ai.generativelanguage.v1beta2.ICountMessageTokensRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('countMessageTokens response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .countMessageTokens(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta2.ICountMessageTokensResponse,
+          (
+            | protos.google.ai.generativelanguage.v1beta2.ICountMessageTokensRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('countMessageTokens response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -637,6 +698,7 @@ export class DiscussServiceClient {
   close(): Promise<void> {
     if (this.discussServiceStub && !this._terminated) {
       return this.discussServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

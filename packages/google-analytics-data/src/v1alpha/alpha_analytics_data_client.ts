@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class AlphaAnalyticsDataClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('data');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class AlphaAnalyticsDataClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -631,7 +634,36 @@ export class AlphaAnalyticsDataClient {
         property: request.property ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.runFunnelReport(request, options, callback);
+    this._log.info('runFunnelReport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
+          | protos.google.analytics.data.v1alpha.IRunFunnelReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('runFunnelReport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .runFunnelReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
+          (
+            | protos.google.analytics.data.v1alpha.IRunFunnelReportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('runFunnelReport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves an audience list of users. After creating an audience, the users
@@ -766,7 +798,36 @@ export class AlphaAnalyticsDataClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.queryAudienceList(request, options, callback);
+    this._log.info('queryAudienceList request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
+          | protos.google.analytics.data.v1alpha.IQueryAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('queryAudienceList response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .queryAudienceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
+          (
+            | protos.google.analytics.data.v1alpha.IQueryAudienceListRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryAudienceList response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Exports an audience list of users to a Google Sheet. After creating an
@@ -902,11 +963,36 @@ export class AlphaAnalyticsDataClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.sheetExportAudienceList(
-      request,
-      options,
-      callback
-    );
+    this._log.info('sheetExportAudienceList request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.ISheetExportAudienceListResponse,
+          | protos.google.analytics.data.v1alpha.ISheetExportAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('sheetExportAudienceList response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .sheetExportAudienceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.ISheetExportAudienceListResponse,
+          (
+            | protos.google.analytics.data.v1alpha.ISheetExportAudienceListRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('sheetExportAudienceList response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets configuration metadata about a specific audience list. This method
@@ -1008,7 +1094,36 @@ export class AlphaAnalyticsDataClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAudienceList(request, options, callback);
+    this._log.info('getAudienceList request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IAudienceList,
+          | protos.google.analytics.data.v1alpha.IGetAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAudienceList response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAudienceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IAudienceList,
+          (
+            | protos.google.analytics.data.v1alpha.IGetAudienceListRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAudienceList response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a recurring audience list. Recurring audience lists produces new
@@ -1124,11 +1239,36 @@ export class AlphaAnalyticsDataClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createRecurringAudienceList(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createRecurringAudienceList request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+          | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createRecurringAudienceList response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createRecurringAudienceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+          (
+            | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createRecurringAudienceList response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets configuration metadata about a specific recurring audience list. This
@@ -1236,11 +1376,36 @@ export class AlphaAnalyticsDataClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRecurringAudienceList(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getRecurringAudienceList request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+          | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRecurringAudienceList response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRecurringAudienceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+          (
+            | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRecurringAudienceList response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get all property quotas organized by quota category for a given property.
@@ -1338,11 +1503,36 @@ export class AlphaAnalyticsDataClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPropertyQuotasSnapshot(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getPropertyQuotasSnapshot request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+          | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPropertyQuotasSnapshot response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPropertyQuotasSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+          (
+            | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPropertyQuotasSnapshot response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a report task's content. After requesting the `CreateReportTask`,
@@ -1463,7 +1653,36 @@ export class AlphaAnalyticsDataClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.queryReportTask(request, options, callback);
+    this._log.info('queryReportTask request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+          | protos.google.analytics.data.v1alpha.IQueryReportTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('queryReportTask response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .queryReportTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+          (
+            | protos.google.analytics.data.v1alpha.IQueryReportTaskRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryReportTask response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets report metadata about a specific report task. After creating a report
@@ -1556,7 +1775,36 @@ export class AlphaAnalyticsDataClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getReportTask(request, options, callback);
+    this._log.info('getReportTask request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IReportTask,
+          | protos.google.analytics.data.v1alpha.IGetReportTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getReportTask response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getReportTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IReportTask,
+          (
+            | protos.google.analytics.data.v1alpha.IGetReportTaskRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getReportTask response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1685,7 +1933,37 @@ export class AlphaAnalyticsDataClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createAudienceList(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.analytics.data.v1alpha.IAudienceList,
+            protos.google.analytics.data.v1alpha.IAudienceListMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAudienceList response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAudienceList request %j', request);
+    return this.innerApiCalls
+      .createAudienceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.analytics.data.v1alpha.IAudienceList,
+            protos.google.analytics.data.v1alpha.IAudienceListMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAudienceList response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAudienceList()`.
@@ -1706,6 +1984,7 @@ export class AlphaAnalyticsDataClient {
       protos.google.analytics.data.v1alpha.AudienceListMetadata
     >
   > {
+    this._log.info('createAudienceList long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1833,7 +2112,37 @@ export class AlphaAnalyticsDataClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createReportTask(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.analytics.data.v1alpha.IReportTask,
+            protos.google.analytics.data.v1alpha.IReportTaskMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createReportTask response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createReportTask request %j', request);
+    return this.innerApiCalls
+      .createReportTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.analytics.data.v1alpha.IReportTask,
+            protos.google.analytics.data.v1alpha.IReportTaskMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createReportTask response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createReportTask()`.
@@ -1854,6 +2163,7 @@ export class AlphaAnalyticsDataClient {
       protos.google.analytics.data.v1alpha.ReportTaskMetadata
     >
   > {
+    this._log.info('createReportTask long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1985,7 +2295,33 @@ export class AlphaAnalyticsDataClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAudienceLists(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
+          | protos.google.analytics.data.v1alpha.IListAudienceListsResponse
+          | null
+          | undefined,
+          protos.google.analytics.data.v1alpha.IAudienceList
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAudienceLists values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAudienceLists request %j', request);
+    return this.innerApiCalls
+      .listAudienceLists(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.data.v1alpha.IAudienceList[],
+          protos.google.analytics.data.v1alpha.IListAudienceListsRequest | null,
+          protos.google.analytics.data.v1alpha.IListAudienceListsResponse,
+        ]) => {
+          this._log.info('listAudienceLists values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2032,6 +2368,7 @@ export class AlphaAnalyticsDataClient {
     const defaultCallSettings = this._defaults['listAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAudienceLists stream %j', request);
     return this.descriptors.page.listAudienceLists.createStream(
       this.innerApiCalls.listAudienceLists as GaxCall,
       request,
@@ -2086,6 +2423,7 @@ export class AlphaAnalyticsDataClient {
     const defaultCallSettings = this._defaults['listAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAudienceLists iterate %j', request);
     return this.descriptors.page.listAudienceLists.asyncIterate(
       this.innerApiCalls['listAudienceLists'] as GaxCall,
       request as {},
@@ -2208,11 +2546,33 @@ export class AlphaAnalyticsDataClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRecurringAudienceLists(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+          | protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse
+          | null
+          | undefined,
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRecurringAudienceLists values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRecurringAudienceLists request %j', request);
+    return this.innerApiCalls
+      .listRecurringAudienceLists(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList[],
+          protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest | null,
+          protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse,
+        ]) => {
+          this._log.info('listRecurringAudienceLists values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2261,6 +2621,7 @@ export class AlphaAnalyticsDataClient {
     const defaultCallSettings = this._defaults['listRecurringAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRecurringAudienceLists stream %j', request);
     return this.descriptors.page.listRecurringAudienceLists.createStream(
       this.innerApiCalls.listRecurringAudienceLists as GaxCall,
       request,
@@ -2317,6 +2678,7 @@ export class AlphaAnalyticsDataClient {
     const defaultCallSettings = this._defaults['listRecurringAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRecurringAudienceLists iterate %j', request);
     return this.descriptors.page.listRecurringAudienceLists.asyncIterate(
       this.innerApiCalls['listRecurringAudienceLists'] as GaxCall,
       request as {},
@@ -2420,7 +2782,33 @@ export class AlphaAnalyticsDataClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listReportTasks(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+          | protos.google.analytics.data.v1alpha.IListReportTasksResponse
+          | null
+          | undefined,
+          protos.google.analytics.data.v1alpha.IReportTask
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listReportTasks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listReportTasks request %j', request);
+    return this.innerApiCalls
+      .listReportTasks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.data.v1alpha.IReportTask[],
+          protos.google.analytics.data.v1alpha.IListReportTasksRequest | null,
+          protos.google.analytics.data.v1alpha.IListReportTasksResponse,
+        ]) => {
+          this._log.info('listReportTasks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2461,6 +2849,7 @@ export class AlphaAnalyticsDataClient {
     const defaultCallSettings = this._defaults['listReportTasks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReportTasks stream %j', request);
     return this.descriptors.page.listReportTasks.createStream(
       this.innerApiCalls.listReportTasks as GaxCall,
       request,
@@ -2509,6 +2898,7 @@ export class AlphaAnalyticsDataClient {
     const defaultCallSettings = this._defaults['listReportTasks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReportTasks iterate %j', request);
     return this.descriptors.page.listReportTasks.asyncIterate(
       this.innerApiCalls['listReportTasks'] as GaxCall,
       request as {},
@@ -2922,6 +3312,7 @@ export class AlphaAnalyticsDataClient {
   close(): Promise<void> {
     if (this.alphaAnalyticsDataStub && !this._terminated) {
       return this.alphaAnalyticsDataStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

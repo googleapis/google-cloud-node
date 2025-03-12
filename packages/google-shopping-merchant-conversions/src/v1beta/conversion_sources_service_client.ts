@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class ConversionSourcesServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('conversions');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class ConversionSourcesServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -488,11 +491,36 @@ export class ConversionSourcesServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createConversionSource(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createConversionSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          | protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createConversionSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createConversionSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          (
+            | protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createConversionSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates information of an existing conversion source. Available only for
@@ -592,11 +620,36 @@ export class ConversionSourcesServiceClient {
         'conversion_source.name': request.conversionSource!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateConversionSource(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateConversionSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          | protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateConversionSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateConversionSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          (
+            | protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConversionSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Archives an existing conversion source. If the conversion source is a
@@ -696,11 +749,36 @@ export class ConversionSourcesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteConversionSource(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteConversionSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteConversionSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteConversionSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConversionSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Re-enables an archived conversion source. Only Available for Merchant
@@ -798,11 +876,36 @@ export class ConversionSourcesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.undeleteConversionSource(
-      request,
-      options,
-      callback
-    );
+    this._log.info('undeleteConversionSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          | protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('undeleteConversionSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .undeleteConversionSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          (
+            | protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('undeleteConversionSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches a conversion source.
@@ -899,7 +1002,36 @@ export class ConversionSourcesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getConversionSource(request, options, callback);
+    this._log.info('getConversionSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          | protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConversionSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConversionSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          (
+            | protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConversionSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1004,7 +1136,33 @@ export class ConversionSourcesServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listConversionSources(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
+          | protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConversionSources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConversionSources request %j', request);
+    return this.innerApiCalls
+      .listConversionSources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource[],
+          protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest | null,
+          protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse,
+        ]) => {
+          this._log.info('listConversionSources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1050,6 +1208,7 @@ export class ConversionSourcesServiceClient {
     const defaultCallSettings = this._defaults['listConversionSources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConversionSources stream %j', request);
     return this.descriptors.page.listConversionSources.createStream(
       this.innerApiCalls.listConversionSources as GaxCall,
       request,
@@ -1103,6 +1262,7 @@ export class ConversionSourcesServiceClient {
     const defaultCallSettings = this._defaults['listConversionSources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConversionSources iterate %j', request);
     return this.descriptors.page.listConversionSources.asyncIterate(
       this.innerApiCalls['listConversionSources'] as GaxCall,
       request as {},
@@ -1185,6 +1345,7 @@ export class ConversionSourcesServiceClient {
   close(): Promise<void> {
     if (this.conversionSourcesServiceStub && !this._terminated) {
       return this.conversionSourcesServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

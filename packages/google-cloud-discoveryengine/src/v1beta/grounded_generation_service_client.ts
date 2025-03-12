@@ -29,6 +29,7 @@ import type {
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class GroundedGenerationServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class GroundedGenerationServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -678,11 +681,36 @@ export class GroundedGenerationServiceClient {
         location: request.location ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.generateGroundedContent(
-      request,
-      options,
-      callback
-    );
+    this._log.info('generateGroundedContent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.IGenerateGroundedContentResponse,
+          | protos.google.cloud.discoveryengine.v1beta.IGenerateGroundedContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateGroundedContent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateGroundedContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1beta.IGenerateGroundedContentResponse,
+          (
+            | protos.google.cloud.discoveryengine.v1beta.IGenerateGroundedContentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateGroundedContent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Performs a grounding check.
@@ -804,7 +832,36 @@ export class GroundedGenerationServiceClient {
         grounding_config: request.groundingConfig ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.checkGrounding(request, options, callback);
+    this._log.info('checkGrounding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.ICheckGroundingResponse,
+          | protos.google.cloud.discoveryengine.v1beta.ICheckGroundingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('checkGrounding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .checkGrounding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1beta.ICheckGroundingResponse,
+          (
+            | protos.google.cloud.discoveryengine.v1beta.ICheckGroundingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('checkGrounding response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -823,6 +880,7 @@ export class GroundedGenerationServiceClient {
    */
   streamGenerateGroundedContent(options?: CallOptions): gax.CancellableStream {
     this.initialize();
+    this._log.info('streamGenerateGroundedContent stream %j', options);
     return this.innerApiCalls.streamGenerateGroundedContent(null, options);
   }
 
@@ -4483,6 +4541,7 @@ export class GroundedGenerationServiceClient {
   close(): Promise<void> {
     if (this.groundedGenerationServiceStub && !this._terminated) {
       return this.groundedGenerationServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

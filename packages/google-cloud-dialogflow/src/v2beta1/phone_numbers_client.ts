@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class PhoneNumbersClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class PhoneNumbersClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -624,7 +627,36 @@ export class PhoneNumbersClient {
         'phone_number.name': request.phoneNumber!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updatePhoneNumber(request, options, callback);
+    this._log.info('updatePhoneNumber request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IPhoneNumber,
+          | protos.google.cloud.dialogflow.v2beta1.IUpdatePhoneNumberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updatePhoneNumber response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updatePhoneNumber(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IPhoneNumber,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IUpdatePhoneNumberRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePhoneNumber response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Requests deletion of a `PhoneNumber`. The `PhoneNumber` is moved into the
@@ -728,7 +760,36 @@ export class PhoneNumbersClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePhoneNumber(request, options, callback);
+    this._log.info('deletePhoneNumber request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IPhoneNumber,
+          | protos.google.cloud.dialogflow.v2beta1.IDeletePhoneNumberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deletePhoneNumber response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deletePhoneNumber(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IPhoneNumber,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IDeletePhoneNumberRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePhoneNumber response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Cancels the deletion request for a `PhoneNumber`. This method may only be
@@ -830,7 +891,36 @@ export class PhoneNumbersClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.undeletePhoneNumber(request, options, callback);
+    this._log.info('undeletePhoneNumber request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IPhoneNumber,
+          | protos.google.cloud.dialogflow.v2beta1.IUndeletePhoneNumberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('undeletePhoneNumber response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .undeletePhoneNumber(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IPhoneNumber,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IUndeletePhoneNumberRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('undeletePhoneNumber response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -935,7 +1025,33 @@ export class PhoneNumbersClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPhoneNumbers(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2beta1.IListPhoneNumbersRequest,
+          | protos.google.cloud.dialogflow.v2beta1.IListPhoneNumbersResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.IPhoneNumber
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPhoneNumbers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPhoneNumbers request %j', request);
+    return this.innerApiCalls
+      .listPhoneNumbers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2beta1.IPhoneNumber[],
+          protos.google.cloud.dialogflow.v2beta1.IListPhoneNumbersRequest | null,
+          protos.google.cloud.dialogflow.v2beta1.IListPhoneNumbersResponse,
+        ]) => {
+          this._log.info('listPhoneNumbers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -981,6 +1097,7 @@ export class PhoneNumbersClient {
     const defaultCallSettings = this._defaults['listPhoneNumbers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPhoneNumbers stream %j', request);
     return this.descriptors.page.listPhoneNumbers.createStream(
       this.innerApiCalls.listPhoneNumbers as GaxCall,
       request,
@@ -1034,6 +1151,7 @@ export class PhoneNumbersClient {
     const defaultCallSettings = this._defaults['listPhoneNumbers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPhoneNumbers iterate %j', request);
     return this.descriptors.page.listPhoneNumbers.asyncIterate(
       this.innerApiCalls['listPhoneNumbers'] as GaxCall,
       request as {},
@@ -3601,6 +3719,7 @@ export class PhoneNumbersClient {
   close(): Promise<void> {
     if (this.phoneNumbersStub && !this._terminated) {
       return this.phoneNumbersStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

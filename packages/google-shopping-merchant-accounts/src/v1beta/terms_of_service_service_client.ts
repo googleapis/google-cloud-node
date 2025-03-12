@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class TermsOfServiceServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('accounts');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -85,7 +88,7 @@ export class TermsOfServiceServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -509,7 +512,36 @@ export class TermsOfServiceServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTermsOfService(request, options, callback);
+    this._log.info('getTermsOfService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.ITermsOfService,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTermsOfService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTermsOfService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.ITermsOfService,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTermsOfService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the latest version of the `TermsOfService` for a given `kind` and
@@ -606,11 +638,36 @@ export class TermsOfServiceServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.retrieveLatestTermsOfService(
-      request,
-      options,
-      callback
-    );
+    this._log.info('retrieveLatestTermsOfService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.ITermsOfService,
+          | protos.google.shopping.merchant.accounts.v1beta.IRetrieveLatestTermsOfServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('retrieveLatestTermsOfService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .retrieveLatestTermsOfService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.ITermsOfService,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IRetrieveLatestTermsOfServiceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('retrieveLatestTermsOfService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Accepts a `TermsOfService`. Executing this method requires admin access.
@@ -713,7 +770,36 @@ export class TermsOfServiceServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.acceptTermsOfService(request, options, callback);
+    this._log.info('acceptTermsOfService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.shopping.merchant.accounts.v1beta.IAcceptTermsOfServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('acceptTermsOfService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .acceptTermsOfService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IAcceptTermsOfServiceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('acceptTermsOfService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -1206,6 +1292,7 @@ export class TermsOfServiceServiceClient {
   close(): Promise<void> {
     if (this.termsOfServiceServiceStub && !this._terminated) {
       return this.termsOfServiceServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
