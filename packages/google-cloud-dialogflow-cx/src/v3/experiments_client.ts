@@ -32,6 +32,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class ExperimentsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -92,7 +95,7 @@ export class ExperimentsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -613,7 +616,36 @@ export class ExperimentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getExperiment(request, options, callback);
+    this._log.info('getExperiment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IExperiment,
+          | protos.google.cloud.dialogflow.cx.v3.IGetExperimentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getExperiment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getExperiment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IExperiment,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IGetExperimentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getExperiment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment} in the
@@ -708,7 +740,36 @@ export class ExperimentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createExperiment(request, options, callback);
+    this._log.info('createExperiment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IExperiment,
+          | protos.google.cloud.dialogflow.cx.v3.ICreateExperimentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createExperiment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createExperiment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IExperiment,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.ICreateExperimentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createExperiment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified
@@ -801,7 +862,36 @@ export class ExperimentsClient {
         'experiment.name': request.experiment!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateExperiment(request, options, callback);
+    this._log.info('updateExperiment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IExperiment,
+          | protos.google.cloud.dialogflow.cx.v3.IUpdateExperimentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateExperiment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateExperiment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IExperiment,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IUpdateExperimentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateExperiment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified
@@ -894,7 +984,36 @@ export class ExperimentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteExperiment(request, options, callback);
+    this._log.info('deleteExperiment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3.IDeleteExperimentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteExperiment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteExperiment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IDeleteExperimentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteExperiment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Starts the specified
@@ -988,7 +1107,36 @@ export class ExperimentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.startExperiment(request, options, callback);
+    this._log.info('startExperiment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IExperiment,
+          | protos.google.cloud.dialogflow.cx.v3.IStartExperimentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('startExperiment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .startExperiment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IExperiment,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IStartExperimentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('startExperiment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Stops the specified {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
@@ -1081,7 +1229,36 @@ export class ExperimentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.stopExperiment(request, options, callback);
+    this._log.info('stopExperiment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IExperiment,
+          | protos.google.cloud.dialogflow.cx.v3.IStopExperimentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('stopExperiment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .stopExperiment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IExperiment,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IStopExperimentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('stopExperiment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1183,7 +1360,33 @@ export class ExperimentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listExperiments(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3.IListExperimentsRequest,
+          | protos.google.cloud.dialogflow.cx.v3.IListExperimentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3.IExperiment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listExperiments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listExperiments request %j', request);
+    return this.innerApiCalls
+      .listExperiments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3.IExperiment[],
+          protos.google.cloud.dialogflow.cx.v3.IListExperimentsRequest | null,
+          protos.google.cloud.dialogflow.cx.v3.IListExperimentsResponse,
+        ]) => {
+          this._log.info('listExperiments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1225,6 +1428,7 @@ export class ExperimentsClient {
     const defaultCallSettings = this._defaults['listExperiments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listExperiments stream %j', request);
     return this.descriptors.page.listExperiments.createStream(
       this.innerApiCalls.listExperiments as GaxCall,
       request,
@@ -1274,6 +1478,7 @@ export class ExperimentsClient {
     const defaultCallSettings = this._defaults['listExperiments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listExperiments iterate %j', request);
     return this.descriptors.page.listExperiments.asyncIterate(
       this.innerApiCalls['listExperiments'] as GaxCall,
       request as {},
@@ -3432,6 +3637,7 @@ export class ExperimentsClient {
   close(): Promise<void> {
     if (this.experimentsStub && !this._terminated) {
       return this.experimentsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
