@@ -30,6 +30,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class RegionInstanceGroupManagersClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('compute');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class RegionInstanceGroupManagersClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -516,9 +519,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('abandonInstances request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('abandonInstances response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .abandonInstances(request, options, callback)
-      .then(
+      .abandonInstances(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -639,9 +657,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('applyUpdatesToInstances request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('applyUpdatesToInstances response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .applyUpdatesToInstances(request, options, callback)
-      .then(
+      .applyUpdatesToInstances(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -764,9 +797,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('createInstances request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('createInstances response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .createInstances(request, options, callback)
-      .then(
+      .createInstances(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -887,9 +935,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('delete request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('delete response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .delete(request, options, callback)
-      .then(
+      .delete(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1012,9 +1075,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('deleteInstances request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('deleteInstances response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .deleteInstances(request, options, callback)
-      .then(
+      .deleteInstances(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1135,9 +1213,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('deletePerInstanceConfigs request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('deletePerInstanceConfigs response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .deletePerInstanceConfigs(request, options, callback)
-      .then(
+      .deletePerInstanceConfigs(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1257,7 +1350,36 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.get(request, options, callback);
+    this._log.info('get request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IInstanceGroupManager,
+          | protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('get response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .get(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.IInstanceGroupManager,
+          (
+            | protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a managed instance group using the information that you specify in the request. After the group is created, instances in the group are created using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method. A regional managed instance group can contain up to 2000 instances.
@@ -1359,9 +1481,24 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
       });
     this.initialize();
+    this._log.info('insert request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('insert response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .insert(request, options, callback)
-      .then(
+      .insert(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1484,9 +1621,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('patch request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('patch response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .patch(request, options, callback)
-      .then(
+      .patch(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1609,9 +1761,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('patchPerInstanceConfigs request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('patchPerInstanceConfigs response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .patchPerInstanceConfigs(request, options, callback)
-      .then(
+      .patchPerInstanceConfigs(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1734,9 +1901,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('recreateInstances request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('recreateInstances response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .recreateInstances(request, options, callback)
-      .then(
+      .recreateInstances(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1859,9 +2041,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('resize request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('resize response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .resize(request, options, callback)
-      .then(
+      .resize(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1984,9 +2181,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('resumeInstances request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IResumeInstancesRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('resumeInstances response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .resumeInstances(request, options, callback)
-      .then(
+      .resumeInstances(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -2109,9 +2321,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('setInstanceTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('setInstanceTemplate response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .setInstanceTemplate(request, options, callback)
-      .then(
+      .setInstanceTemplate(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -2234,9 +2461,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('setTargetPools request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('setTargetPools response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .setTargetPools(request, options, callback)
-      .then(
+      .setTargetPools(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -2359,9 +2601,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('startInstances request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IStartInstancesRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('startInstances response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .startInstances(request, options, callback)
-      .then(
+      .startInstances(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -2484,9 +2741,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('stopInstances request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IStopInstancesRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('stopInstances response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .stopInstances(request, options, callback)
-      .then(
+      .stopInstances(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -2609,9 +2881,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('suspendInstances request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.ISuspendInstancesRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('suspendInstances response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .suspendInstances(request, options, callback)
-      .then(
+      .suspendInstances(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -2734,9 +3021,24 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
+    this._log.info('updatePerInstanceConfigs request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('updatePerInstanceConfigs response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .updatePerInstanceConfigs(request, options, callback)
-      .then(
+      .updatePerInstanceConfigs(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -2861,7 +3163,33 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.list(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest,
+          | protos.google.cloud.compute.v1.IRegionInstanceGroupManagerList
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1.IInstanceGroupManager
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('list values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('list request %j', request);
+    return this.innerApiCalls
+      .list(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.IInstanceGroupManager[],
+          protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest | null,
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagerList,
+        ]) => {
+          this._log.info('list values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2909,6 +3237,7 @@ export class RegionInstanceGroupManagersClient {
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
       request,
@@ -2964,6 +3293,7 @@ export class RegionInstanceGroupManagersClient {
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
       request as {},
@@ -3077,7 +3407,33 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listErrors(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest,
+          | protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListErrorsResponse
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1.IInstanceManagedByIgmError
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listErrors values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listErrors request %j', request);
+    return this.innerApiCalls
+      .listErrors(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.IInstanceManagedByIgmError[],
+          protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest | null,
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListErrorsResponse,
+        ]) => {
+          this._log.info('listErrors values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3128,6 +3484,7 @@ export class RegionInstanceGroupManagersClient {
     const defaultCallSettings = this._defaults['listErrors'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listErrors stream %j', request);
     return this.descriptors.page.listErrors.createStream(
       this.innerApiCalls.listErrors as GaxCall,
       request,
@@ -3186,6 +3543,7 @@ export class RegionInstanceGroupManagersClient {
     const defaultCallSettings = this._defaults['listErrors'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listErrors iterate %j', request);
     return this.descriptors.page.listErrors.asyncIterate(
       this.innerApiCalls['listErrors'] as GaxCall,
       request as {},
@@ -3299,7 +3657,33 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listManagedInstances(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest,
+          | protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1.IManagedInstance
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listManagedInstances values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listManagedInstances request %j', request);
+    return this.innerApiCalls
+      .listManagedInstances(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.IManagedInstance[],
+          protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest | null,
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstancesResponse,
+        ]) => {
+          this._log.info('listManagedInstances values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3350,6 +3734,7 @@ export class RegionInstanceGroupManagersClient {
     const defaultCallSettings = this._defaults['listManagedInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listManagedInstances stream %j', request);
     return this.descriptors.page.listManagedInstances.createStream(
       this.innerApiCalls.listManagedInstances as GaxCall,
       request,
@@ -3408,6 +3793,7 @@ export class RegionInstanceGroupManagersClient {
     const defaultCallSettings = this._defaults['listManagedInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listManagedInstances iterate %j', request);
     return this.descriptors.page.listManagedInstances.asyncIterate(
       this.innerApiCalls['listManagedInstances'] as GaxCall,
       request as {},
@@ -3521,11 +3907,33 @@ export class RegionInstanceGroupManagersClient {
         instance_group_manager: request.instanceGroupManager ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPerInstanceConfigs(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest,
+          | protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstanceConfigsResp
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1.IPerInstanceConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPerInstanceConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPerInstanceConfigs request %j', request);
+    return this.innerApiCalls
+      .listPerInstanceConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.IPerInstanceConfig[],
+          protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest | null,
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstanceConfigsResp,
+        ]) => {
+          this._log.info('listPerInstanceConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3576,6 +3984,7 @@ export class RegionInstanceGroupManagersClient {
     const defaultCallSettings = this._defaults['listPerInstanceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPerInstanceConfigs stream %j', request);
     return this.descriptors.page.listPerInstanceConfigs.createStream(
       this.innerApiCalls.listPerInstanceConfigs as GaxCall,
       request,
@@ -3634,6 +4043,7 @@ export class RegionInstanceGroupManagersClient {
     const defaultCallSettings = this._defaults['listPerInstanceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPerInstanceConfigs iterate %j', request);
     return this.descriptors.page.listPerInstanceConfigs.asyncIterate(
       this.innerApiCalls['listPerInstanceConfigs'] as GaxCall,
       request as {},
@@ -3650,6 +4060,7 @@ export class RegionInstanceGroupManagersClient {
   close(): Promise<void> {
     if (this.regionInstanceGroupManagersStub && !this._terminated) {
       return this.regionInstanceGroupManagersStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

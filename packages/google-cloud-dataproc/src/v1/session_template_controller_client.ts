@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class SessionTemplateControllerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dataproc');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class SessionTemplateControllerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -511,7 +514,36 @@ export class SessionTemplateControllerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSessionTemplate(request, options, callback);
+    this._log.info('createSessionTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataproc.v1.ISessionTemplate,
+          | protos.google.cloud.dataproc.v1.ICreateSessionTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSessionTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSessionTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataproc.v1.ISessionTemplate,
+          (
+            | protos.google.cloud.dataproc.v1.ICreateSessionTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createSessionTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the session template synchronously.
@@ -601,7 +633,36 @@ export class SessionTemplateControllerClient {
         'session_template.name': request.sessionTemplate!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSessionTemplate(request, options, callback);
+    this._log.info('updateSessionTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataproc.v1.ISessionTemplate,
+          | protos.google.cloud.dataproc.v1.IUpdateSessionTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSessionTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSessionTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataproc.v1.ISessionTemplate,
+          (
+            | protos.google.cloud.dataproc.v1.IUpdateSessionTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSessionTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the resource representation for a session template.
@@ -691,7 +752,36 @@ export class SessionTemplateControllerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSessionTemplate(request, options, callback);
+    this._log.info('getSessionTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataproc.v1.ISessionTemplate,
+          | protos.google.cloud.dataproc.v1.IGetSessionTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSessionTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSessionTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataproc.v1.ISessionTemplate,
+          (
+            | protos.google.cloud.dataproc.v1.IGetSessionTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSessionTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a session template.
@@ -781,7 +871,36 @@ export class SessionTemplateControllerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSessionTemplate(request, options, callback);
+    this._log.info('deleteSessionTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dataproc.v1.IDeleteSessionTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSessionTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSessionTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dataproc.v1.IDeleteSessionTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSessionTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -886,7 +1005,33 @@ export class SessionTemplateControllerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSessionTemplates(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataproc.v1.IListSessionTemplatesRequest,
+          | protos.google.cloud.dataproc.v1.IListSessionTemplatesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataproc.v1.ISessionTemplate
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSessionTemplates values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSessionTemplates request %j', request);
+    return this.innerApiCalls
+      .listSessionTemplates(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataproc.v1.ISessionTemplate[],
+          protos.google.cloud.dataproc.v1.IListSessionTemplatesRequest | null,
+          protos.google.cloud.dataproc.v1.IListSessionTemplatesResponse,
+        ]) => {
+          this._log.info('listSessionTemplates values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -932,6 +1077,7 @@ export class SessionTemplateControllerClient {
     const defaultCallSettings = this._defaults['listSessionTemplates'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSessionTemplates stream %j', request);
     return this.descriptors.page.listSessionTemplates.createStream(
       this.innerApiCalls.listSessionTemplates as GaxCall,
       request,
@@ -985,6 +1131,7 @@ export class SessionTemplateControllerClient {
     const defaultCallSettings = this._defaults['listSessionTemplates'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSessionTemplates iterate %j', request);
     return this.descriptors.page.listSessionTemplates.asyncIterate(
       this.innerApiCalls['listSessionTemplates'] as GaxCall,
       request as {},
@@ -1690,6 +1837,7 @@ export class SessionTemplateControllerClient {
   close(): Promise<void> {
     if (this.sessionTemplateControllerStub && !this._terminated) {
       return this.sessionTemplateControllerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

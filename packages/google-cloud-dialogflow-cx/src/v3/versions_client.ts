@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class VersionsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class VersionsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -639,7 +642,33 @@ export class VersionsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getVersion(request, options, callback);
+    this._log.info('getVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IVersion,
+          | protos.google.cloud.dialogflow.cx.v3.IGetVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IVersion,
+          protos.google.cloud.dialogflow.cx.v3.IGetVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified {@link protos.google.cloud.dialogflow.cx.v3.Version|Version}.
@@ -732,7 +761,36 @@ export class VersionsClient {
         'version.name': request.version!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateVersion(request, options, callback);
+    this._log.info('updateVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IVersion,
+          | protos.google.cloud.dialogflow.cx.v3.IUpdateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IVersion,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IUpdateVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified {@link protos.google.cloud.dialogflow.cx.v3.Version|Version}.
@@ -824,7 +882,36 @@ export class VersionsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteVersion(request, options, callback);
+    this._log.info('deleteVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3.IDeleteVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IDeleteVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Compares the specified base version with target version.
@@ -931,7 +1018,36 @@ export class VersionsClient {
         base_version: request.baseVersion ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.compareVersions(request, options, callback);
+    this._log.info('compareVersions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.ICompareVersionsResponse,
+          | protos.google.cloud.dialogflow.cx.v3.ICompareVersionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('compareVersions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .compareVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.ICompareVersionsResponse,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.ICompareVersionsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('compareVersions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1047,7 +1163,37 @@ export class VersionsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createVersion(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IVersion,
+            protos.google.cloud.dialogflow.cx.v3.ICreateVersionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createVersion request %j', request);
+    return this.innerApiCalls
+      .createVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IVersion,
+            protos.google.cloud.dialogflow.cx.v3.ICreateVersionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createVersion response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createVersion()`.
@@ -1068,6 +1214,7 @@ export class VersionsClient {
       protos.google.cloud.dialogflow.cx.v3.CreateVersionOperationMetadata
     >
   > {
+    this._log.info('createVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1199,7 +1346,37 @@ export class VersionsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.loadVersion(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('loadVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('loadVersion request %j', request);
+    return this.innerApiCalls
+      .loadVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('loadVersion response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `loadVersion()`.
@@ -1217,6 +1394,7 @@ export class VersionsClient {
   ): Promise<
     LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
   > {
+    this._log.info('loadVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1331,7 +1509,33 @@ export class VersionsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listVersions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3.IListVersionsRequest,
+          | protos.google.cloud.dialogflow.cx.v3.IListVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3.IVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVersions request %j', request);
+    return this.innerApiCalls
+      .listVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3.IVersion[],
+          protos.google.cloud.dialogflow.cx.v3.IListVersionsRequest | null,
+          protos.google.cloud.dialogflow.cx.v3.IListVersionsResponse,
+        ]) => {
+          this._log.info('listVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1373,6 +1577,7 @@ export class VersionsClient {
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVersions stream %j', request);
     return this.descriptors.page.listVersions.createStream(
       this.innerApiCalls.listVersions as GaxCall,
       request,
@@ -1422,6 +1627,7 @@ export class VersionsClient {
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVersions iterate %j', request);
     return this.descriptors.page.listVersions.asyncIterate(
       this.innerApiCalls['listVersions'] as GaxCall,
       request as {},
@@ -3580,6 +3786,7 @@ export class VersionsClient {
   close(): Promise<void> {
     if (this.versionsStub && !this._terminated) {
       return this.versionsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

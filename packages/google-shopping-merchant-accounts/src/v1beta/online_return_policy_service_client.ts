@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class OnlineReturnPolicyServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('accounts');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class OnlineReturnPolicyServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -525,7 +528,36 @@ export class OnlineReturnPolicyServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getOnlineReturnPolicy(request, options, callback);
+    this._log.info('getOnlineReturnPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetOnlineReturnPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOnlineReturnPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOnlineReturnPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IGetOnlineReturnPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getOnlineReturnPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -635,11 +667,33 @@ export class OnlineReturnPolicyServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listOnlineReturnPolicies(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest,
+          | protos.google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOnlineReturnPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOnlineReturnPolicies request %j', request);
+    return this.innerApiCalls
+      .listOnlineReturnPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy[],
+          protos.google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest | null,
+          protos.google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesResponse,
+        ]) => {
+          this._log.info('listOnlineReturnPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -690,6 +744,7 @@ export class OnlineReturnPolicyServiceClient {
     const defaultCallSettings = this._defaults['listOnlineReturnPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listOnlineReturnPolicies stream %j', request);
     return this.descriptors.page.listOnlineReturnPolicies.createStream(
       this.innerApiCalls.listOnlineReturnPolicies as GaxCall,
       request,
@@ -748,6 +803,7 @@ export class OnlineReturnPolicyServiceClient {
     const defaultCallSettings = this._defaults['listOnlineReturnPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listOnlineReturnPolicies iterate %j', request);
     return this.descriptors.page.listOnlineReturnPolicies.asyncIterate(
       this.innerApiCalls['listOnlineReturnPolicies'] as GaxCall,
       request as {},
@@ -1244,6 +1300,7 @@ export class OnlineReturnPolicyServiceClient {
   close(): Promise<void> {
     if (this.onlineReturnPolicyServiceStub && !this._terminated) {
       return this.onlineReturnPolicyServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

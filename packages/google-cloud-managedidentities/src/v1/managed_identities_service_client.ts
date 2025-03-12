@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -86,6 +87,8 @@ export class ManagedIdentitiesServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('managed-identities');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -121,7 +124,7 @@ export class ManagedIdentitiesServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -697,7 +700,36 @@ export class ManagedIdentitiesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.resetAdminPassword(request, options, callback);
+    this._log.info('resetAdminPassword request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
+          | protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('resetAdminPassword response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resetAdminPassword(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
+          (
+            | protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('resetAdminPassword response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets information about a domain.
@@ -788,7 +820,36 @@ export class ManagedIdentitiesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDomain(request, options, callback);
+    this._log.info('getDomain request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedidentities.v1.IDomain,
+          | protos.google.cloud.managedidentities.v1.IGetDomainRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDomain response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDomain(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedidentities.v1.IDomain,
+          (
+            | protos.google.cloud.managedidentities.v1.IGetDomainRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDomain response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -907,11 +968,37 @@ export class ManagedIdentitiesServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createMicrosoftAdDomain(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.managedidentities.v1.IDomain,
+            protos.google.cloud.managedidentities.v1.IOpMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createMicrosoftAdDomain response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createMicrosoftAdDomain request %j', request);
+    return this.innerApiCalls
+      .createMicrosoftAdDomain(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.managedidentities.v1.IDomain,
+            protos.google.cloud.managedidentities.v1.IOpMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMicrosoftAdDomain response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createMicrosoftAdDomain()`.
@@ -932,6 +1019,7 @@ export class ManagedIdentitiesServiceClient {
       protos.google.cloud.managedidentities.v1.OpMetadata
     >
   > {
+    this._log.info('createMicrosoftAdDomain long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1055,7 +1143,37 @@ export class ManagedIdentitiesServiceClient {
         'domain.name': request.domain!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDomain(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.managedidentities.v1.IDomain,
+            protos.google.cloud.managedidentities.v1.IOpMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateDomain response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateDomain request %j', request);
+    return this.innerApiCalls
+      .updateDomain(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.managedidentities.v1.IDomain,
+            protos.google.cloud.managedidentities.v1.IOpMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDomain response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateDomain()`.
@@ -1076,6 +1194,7 @@ export class ManagedIdentitiesServiceClient {
       protos.google.cloud.managedidentities.v1.OpMetadata
     >
   > {
+    this._log.info('updateDomain long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1192,7 +1311,37 @@ export class ManagedIdentitiesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDomain(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.managedidentities.v1.IOpMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDomain response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDomain request %j', request);
+    return this.innerApiCalls
+      .deleteDomain(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.managedidentities.v1.IOpMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDomain response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDomain()`.
@@ -1213,6 +1362,7 @@ export class ManagedIdentitiesServiceClient {
       protos.google.cloud.managedidentities.v1.OpMetadata
     >
   > {
+    this._log.info('deleteDomain long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1331,7 +1481,37 @@ export class ManagedIdentitiesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.attachTrust(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.managedidentities.v1.IDomain,
+            protos.google.cloud.managedidentities.v1.IOpMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('attachTrust response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('attachTrust request %j', request);
+    return this.innerApiCalls
+      .attachTrust(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.managedidentities.v1.IDomain,
+            protos.google.cloud.managedidentities.v1.IOpMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('attachTrust response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `attachTrust()`.
@@ -1352,6 +1532,7 @@ export class ManagedIdentitiesServiceClient {
       protos.google.cloud.managedidentities.v1.OpMetadata
     >
   > {
+    this._log.info('attachTrust long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1474,7 +1655,37 @@ export class ManagedIdentitiesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.reconfigureTrust(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.managedidentities.v1.IDomain,
+            protos.google.cloud.managedidentities.v1.IOpMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('reconfigureTrust response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('reconfigureTrust request %j', request);
+    return this.innerApiCalls
+      .reconfigureTrust(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.managedidentities.v1.IDomain,
+            protos.google.cloud.managedidentities.v1.IOpMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('reconfigureTrust response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `reconfigureTrust()`.
@@ -1495,6 +1706,7 @@ export class ManagedIdentitiesServiceClient {
       protos.google.cloud.managedidentities.v1.OpMetadata
     >
   > {
+    this._log.info('reconfigureTrust long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1613,7 +1825,37 @@ export class ManagedIdentitiesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.detachTrust(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.managedidentities.v1.IDomain,
+            protos.google.cloud.managedidentities.v1.IOpMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('detachTrust response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('detachTrust request %j', request);
+    return this.innerApiCalls
+      .detachTrust(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.managedidentities.v1.IDomain,
+            protos.google.cloud.managedidentities.v1.IOpMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('detachTrust response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `detachTrust()`.
@@ -1634,6 +1876,7 @@ export class ManagedIdentitiesServiceClient {
       protos.google.cloud.managedidentities.v1.OpMetadata
     >
   > {
+    this._log.info('detachTrust long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1753,7 +1996,37 @@ export class ManagedIdentitiesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.validateTrust(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.managedidentities.v1.IDomain,
+            protos.google.cloud.managedidentities.v1.IOpMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('validateTrust response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('validateTrust request %j', request);
+    return this.innerApiCalls
+      .validateTrust(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.managedidentities.v1.IDomain,
+            protos.google.cloud.managedidentities.v1.IOpMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('validateTrust response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `validateTrust()`.
@@ -1774,6 +2047,7 @@ export class ManagedIdentitiesServiceClient {
       protos.google.cloud.managedidentities.v1.OpMetadata
     >
   > {
+    this._log.info('validateTrust long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1899,7 +2173,33 @@ export class ManagedIdentitiesServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDomains(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.managedidentities.v1.IListDomainsRequest,
+          | protos.google.cloud.managedidentities.v1.IListDomainsResponse
+          | null
+          | undefined,
+          protos.google.cloud.managedidentities.v1.IDomain
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDomains values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDomains request %j', request);
+    return this.innerApiCalls
+      .listDomains(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.managedidentities.v1.IDomain[],
+          protos.google.cloud.managedidentities.v1.IListDomainsRequest | null,
+          protos.google.cloud.managedidentities.v1.IListDomainsResponse,
+        ]) => {
+          this._log.info('listDomains values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1953,6 +2253,7 @@ export class ManagedIdentitiesServiceClient {
     const defaultCallSettings = this._defaults['listDomains'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDomains stream %j', request);
     return this.descriptors.page.listDomains.createStream(
       this.innerApiCalls.listDomains as GaxCall,
       request,
@@ -2014,6 +2315,7 @@ export class ManagedIdentitiesServiceClient {
     const defaultCallSettings = this._defaults['listDomains'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDomains iterate %j', request);
     return this.descriptors.page.listDomains.asyncIterate(
       this.innerApiCalls['listDomains'] as GaxCall,
       request as {},
@@ -2141,6 +2443,7 @@ export class ManagedIdentitiesServiceClient {
   close(): Promise<void> {
     if (this.managedIdentitiesServiceStub && !this._terminated) {
       return this.managedIdentitiesServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
