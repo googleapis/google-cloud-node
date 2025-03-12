@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -61,6 +62,8 @@ export class SecretManagerServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('secret-manager');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class SecretManagerServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -238,6 +241,7 @@ export class SecretManagerServiceClient {
         'projects/{project}/secrets/{secret}/versions/{secret_version}'
       ),
     };
+
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
@@ -535,7 +539,33 @@ export class SecretManagerServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSecret(request, options, callback);
+    this._log.info('createSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecret,
+          | protos.google.cloud.secretmanager.v1.ICreateSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSecret response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.secretmanager.v1.ISecret,
+          protos.google.cloud.secretmanager.v1.ICreateSecretRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSecret response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}
@@ -633,7 +663,36 @@ export class SecretManagerServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.addSecretVersion(request, options, callback);
+    this._log.info('addSecretVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          | protos.google.cloud.secretmanager.v1.IAddSecretVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('addSecretVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .addSecretVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          (
+            | protos.google.cloud.secretmanager.v1.IAddSecretVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('addSecretVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets metadata for a given {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
@@ -719,7 +778,33 @@ export class SecretManagerServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSecret(request, options, callback);
+    this._log.info('getSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecret,
+          | protos.google.cloud.secretmanager.v1.IGetSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSecret response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.secretmanager.v1.ISecret,
+          protos.google.cloud.secretmanager.v1.IGetSecretRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSecret response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates metadata of an existing
@@ -813,7 +898,33 @@ export class SecretManagerServiceClient {
         'secret.name': request.secret!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSecret(request, options, callback);
+    this._log.info('updateSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecret,
+          | protos.google.cloud.secretmanager.v1.IUpdateSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSecret response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.secretmanager.v1.ISecret,
+          protos.google.cloud.secretmanager.v1.IUpdateSecretRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSecret response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
@@ -909,7 +1020,33 @@ export class SecretManagerServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSecret(request, options, callback);
+    this._log.info('deleteSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.secretmanager.v1.IDeleteSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSecret response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.secretmanager.v1.IDeleteSecretRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSecret response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets metadata for a
@@ -1011,7 +1148,36 @@ export class SecretManagerServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSecretVersion(request, options, callback);
+    this._log.info('getSecretVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          | protos.google.cloud.secretmanager.v1.IGetSecretVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSecretVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSecretVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          (
+            | protos.google.cloud.secretmanager.v1.IGetSecretVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSecretVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Accesses a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
@@ -1119,7 +1285,36 @@ export class SecretManagerServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.accessSecretVersion(request, options, callback);
+    this._log.info('accessSecretVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.secretmanager.v1.IAccessSecretVersionResponse,
+          | protos.google.cloud.secretmanager.v1.IAccessSecretVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('accessSecretVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .accessSecretVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.secretmanager.v1.IAccessSecretVersionResponse,
+          (
+            | protos.google.cloud.secretmanager.v1.IAccessSecretVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('accessSecretVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Disables a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
@@ -1227,7 +1422,36 @@ export class SecretManagerServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.disableSecretVersion(request, options, callback);
+    this._log.info('disableSecretVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          | protos.google.cloud.secretmanager.v1.IDisableSecretVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('disableSecretVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .disableSecretVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          (
+            | protos.google.cloud.secretmanager.v1.IDisableSecretVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('disableSecretVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Enables a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
@@ -1335,7 +1559,36 @@ export class SecretManagerServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.enableSecretVersion(request, options, callback);
+    this._log.info('enableSecretVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          | protos.google.cloud.secretmanager.v1.IEnableSecretVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('enableSecretVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .enableSecretVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          (
+            | protos.google.cloud.secretmanager.v1.IEnableSecretVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('enableSecretVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Destroys a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
@@ -1444,7 +1697,36 @@ export class SecretManagerServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.destroySecretVersion(request, options, callback);
+    this._log.info('destroySecretVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          | protos.google.cloud.secretmanager.v1.IDestroySecretVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('destroySecretVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .destroySecretVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          (
+            | protos.google.cloud.secretmanager.v1.IDestroySecretVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('destroySecretVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the access control policy on the specified secret. Replaces any
@@ -1544,7 +1826,31 @@ export class SecretManagerServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the access control policy for a secret.
@@ -1631,7 +1937,31 @@ export class SecretManagerServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns permissions that a caller has for the specified secret.
@@ -1725,7 +2055,31 @@ export class SecretManagerServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1834,7 +2188,33 @@ export class SecretManagerServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSecrets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.secretmanager.v1.IListSecretsRequest,
+          | protos.google.cloud.secretmanager.v1.IListSecretsResponse
+          | null
+          | undefined,
+          protos.google.cloud.secretmanager.v1.ISecret
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSecrets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSecrets request %j', request);
+    return this.innerApiCalls
+      .listSecrets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.secretmanager.v1.ISecret[],
+          protos.google.cloud.secretmanager.v1.IListSecretsRequest | null,
+          protos.google.cloud.secretmanager.v1.IListSecretsResponse,
+        ]) => {
+          this._log.info('listSecrets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1884,6 +2264,7 @@ export class SecretManagerServiceClient {
     const defaultCallSettings = this._defaults['listSecrets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSecrets stream %j', request);
     return this.descriptors.page.listSecrets.createStream(
       this.innerApiCalls.listSecrets as GaxCall,
       request,
@@ -1941,6 +2322,7 @@ export class SecretManagerServiceClient {
     const defaultCallSettings = this._defaults['listSecrets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSecrets iterate %j', request);
     return this.descriptors.page.listSecrets.asyncIterate(
       this.innerApiCalls['listSecrets'] as GaxCall,
       request as {},
@@ -2055,7 +2437,33 @@ export class SecretManagerServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSecretVersions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.secretmanager.v1.IListSecretVersionsRequest,
+          | protos.google.cloud.secretmanager.v1.IListSecretVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.secretmanager.v1.ISecretVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSecretVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSecretVersions request %j', request);
+    return this.innerApiCalls
+      .listSecretVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.secretmanager.v1.ISecretVersion[],
+          protos.google.cloud.secretmanager.v1.IListSecretVersionsRequest | null,
+          protos.google.cloud.secretmanager.v1.IListSecretVersionsResponse,
+        ]) => {
+          this._log.info('listSecretVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2106,6 +2514,7 @@ export class SecretManagerServiceClient {
     const defaultCallSettings = this._defaults['listSecretVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSecretVersions stream %j', request);
     return this.descriptors.page.listSecretVersions.createStream(
       this.innerApiCalls.listSecretVersions as GaxCall,
       request,
@@ -2164,6 +2573,7 @@ export class SecretManagerServiceClient {
     const defaultCallSettings = this._defaults['listSecretVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSecretVersions iterate %j', request);
     return this.descriptors.page.listSecretVersions.asyncIterate(
       this.innerApiCalls['listSecretVersions'] as GaxCall,
       request as {},
@@ -2565,6 +2975,7 @@ export class SecretManagerServiceClient {
   close(): Promise<void> {
     if (this.secretManagerServiceStub && !this._terminated) {
       return this.secretManagerServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
@@ -2642,7 +3053,7 @@ export class SecretManagerServiceClient {
    *   A fully-qualified path representing SecretVersion resource.
    * @returns {string} A string representing the secret.
    */
-  matchSecretFromSecretVersionName(secretVersionName: string) {
+    matchSecretFromSecretVersionName(secretVersionName: string) {
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .secret;
   }
@@ -2659,3 +3070,4 @@ export class SecretManagerServiceClient {
       .secret_version;
   }
 }
+
