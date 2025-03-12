@@ -4291,6 +4291,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "ranking": {
+                          "type": "Ranking",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -4323,6 +4330,72 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Ranking": {
+                          "oneofs": {
+                            "rankingConfig": {
+                              "oneof": [
+                                "rankService",
+                                "llmRanker"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "rankService": {
+                              "type": "RankService",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "llmRanker": {
+                              "type": "LlmRanker",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RankService": {
+                              "oneofs": {
+                                "_modelName": {
+                                  "oneof": [
+                                    "modelName"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "modelName": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
+                            "LlmRanker": {
+                              "oneofs": {
+                                "_modelName": {
+                                  "oneof": [
+                                    "modelName"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "modelName": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                }
                               }
                             }
                           }
