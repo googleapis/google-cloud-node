@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class AppHubClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('apphub');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class AppHubClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -755,11 +758,42 @@ export class AppHubClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.lookupServiceProjectAttachment(
-      request,
-      options,
-      callback
-    );
+    this._log.info('lookupServiceProjectAttachment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
+          | protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'lookupServiceProjectAttachment response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .lookupServiceProjectAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
+          (
+            | protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'lookupServiceProjectAttachment response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a service project attachment.
@@ -857,11 +891,36 @@ export class AppHubClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getServiceProjectAttachment(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getServiceProjectAttachment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apphub.v1.IServiceProjectAttachment,
+          | protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getServiceProjectAttachment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getServiceProjectAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apphub.v1.IServiceProjectAttachment,
+          (
+            | protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getServiceProjectAttachment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Detaches a service project from a host project.
@@ -961,11 +1020,42 @@ export class AppHubClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.detachServiceProjectAttachment(
-      request,
-      options,
-      callback
-    );
+    this._log.info('detachServiceProjectAttachment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
+          | protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'detachServiceProjectAttachment response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .detachServiceProjectAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
+          (
+            | protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'detachServiceProjectAttachment response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Discovered Service in a host project and location.
@@ -1057,7 +1147,36 @@ export class AppHubClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDiscoveredService(request, options, callback);
+    this._log.info('getDiscoveredService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apphub.v1.IDiscoveredService,
+          | protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDiscoveredService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDiscoveredService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apphub.v1.IDiscoveredService,
+          (
+            | protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDiscoveredService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists a Discovered Service in a host project and location, with a
@@ -1153,11 +1272,36 @@ export class AppHubClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.lookupDiscoveredService(
-      request,
-      options,
-      callback
-    );
+    this._log.info('lookupDiscoveredService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
+          | protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('lookupDiscoveredService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .lookupDiscoveredService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
+          (
+            | protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('lookupDiscoveredService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Service in an Application.
@@ -1241,7 +1385,31 @@ export class AppHubClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getService(request, options, callback);
+    this._log.info('getService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apphub.v1.IService,
+          protos.google.cloud.apphub.v1.IGetServiceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apphub.v1.IService,
+          protos.google.cloud.apphub.v1.IGetServiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Discovered Workload in a host project and location.
@@ -1333,7 +1501,36 @@ export class AppHubClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDiscoveredWorkload(request, options, callback);
+    this._log.info('getDiscoveredWorkload request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apphub.v1.IDiscoveredWorkload,
+          | protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDiscoveredWorkload response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDiscoveredWorkload(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apphub.v1.IDiscoveredWorkload,
+          (
+            | protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDiscoveredWorkload response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists a Discovered Workload in a host project and location, with a
@@ -1435,11 +1632,36 @@ export class AppHubClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.lookupDiscoveredWorkload(
-      request,
-      options,
-      callback
-    );
+    this._log.info('lookupDiscoveredWorkload request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
+          | protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('lookupDiscoveredWorkload response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .lookupDiscoveredWorkload(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
+          (
+            | protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('lookupDiscoveredWorkload response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Workload in an Application.
@@ -1523,7 +1745,31 @@ export class AppHubClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getWorkload(request, options, callback);
+    this._log.info('getWorkload request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apphub.v1.IWorkload,
+          protos.google.cloud.apphub.v1.IGetWorkloadRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getWorkload response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getWorkload(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apphub.v1.IWorkload,
+          protos.google.cloud.apphub.v1.IGetWorkloadRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getWorkload response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an Application in a host project and location.
@@ -1609,7 +1855,33 @@ export class AppHubClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getApplication(request, options, callback);
+    this._log.info('getApplication request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apphub.v1.IApplication,
+          | protos.google.cloud.apphub.v1.IGetApplicationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getApplication response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getApplication(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apphub.v1.IApplication,
+          protos.google.cloud.apphub.v1.IGetApplicationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getApplication response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1734,11 +2006,43 @@ export class AppHubClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createServiceProjectAttachment(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.apphub.v1.IServiceProjectAttachment,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'createServiceProjectAttachment response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createServiceProjectAttachment request %j', request);
+    return this.innerApiCalls
+      .createServiceProjectAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.apphub.v1.IServiceProjectAttachment,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createServiceProjectAttachment response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createServiceProjectAttachment()`.
@@ -1759,6 +2063,7 @@ export class AppHubClient {
       protos.google.cloud.apphub.v1.OperationMetadata
     >
   > {
+    this._log.info('createServiceProjectAttachment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1890,11 +2195,43 @@ export class AppHubClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteServiceProjectAttachment(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteServiceProjectAttachment response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteServiceProjectAttachment request %j', request);
+    return this.innerApiCalls
+      .deleteServiceProjectAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteServiceProjectAttachment response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteServiceProjectAttachment()`.
@@ -1915,6 +2252,7 @@ export class AppHubClient {
       protos.google.cloud.apphub.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteServiceProjectAttachment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2053,7 +2391,37 @@ export class AppHubClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.apphub.v1.IService,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createService request %j', request);
+    return this.innerApiCalls
+      .createService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.apphub.v1.IService,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createService()`.
@@ -2074,6 +2442,7 @@ export class AppHubClient {
       protos.google.cloud.apphub.v1.OperationMetadata
     >
   > {
+    this._log.info('createService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2213,7 +2582,37 @@ export class AppHubClient {
         'service.name': request.service!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.apphub.v1.IService,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateService request %j', request);
+    return this.innerApiCalls
+      .updateService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.apphub.v1.IService,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateService()`.
@@ -2234,6 +2633,7 @@ export class AppHubClient {
       protos.google.cloud.apphub.v1.OperationMetadata
     >
   > {
+    this._log.info('updateService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2365,7 +2765,37 @@ export class AppHubClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteService request %j', request);
+    return this.innerApiCalls
+      .deleteService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteService()`.
@@ -2386,6 +2816,7 @@ export class AppHubClient {
       protos.google.cloud.apphub.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2524,7 +2955,37 @@ export class AppHubClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createWorkload(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.apphub.v1.IWorkload,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createWorkload response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createWorkload request %j', request);
+    return this.innerApiCalls
+      .createWorkload(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.apphub.v1.IWorkload,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createWorkload response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createWorkload()`.
@@ -2545,6 +3006,7 @@ export class AppHubClient {
       protos.google.cloud.apphub.v1.OperationMetadata
     >
   > {
+    this._log.info('createWorkload long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2684,7 +3146,37 @@ export class AppHubClient {
         'workload.name': request.workload!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateWorkload(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.apphub.v1.IWorkload,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateWorkload response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateWorkload request %j', request);
+    return this.innerApiCalls
+      .updateWorkload(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.apphub.v1.IWorkload,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateWorkload response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateWorkload()`.
@@ -2705,6 +3197,7 @@ export class AppHubClient {
       protos.google.cloud.apphub.v1.OperationMetadata
     >
   > {
+    this._log.info('updateWorkload long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2836,7 +3329,37 @@ export class AppHubClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteWorkload(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteWorkload response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteWorkload request %j', request);
+    return this.innerApiCalls
+      .deleteWorkload(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteWorkload response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteWorkload()`.
@@ -2857,6 +3380,7 @@ export class AppHubClient {
       protos.google.cloud.apphub.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteWorkload long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2994,7 +3518,37 @@ export class AppHubClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createApplication(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.apphub.v1.IApplication,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createApplication response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createApplication request %j', request);
+    return this.innerApiCalls
+      .createApplication(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.apphub.v1.IApplication,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createApplication response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createApplication()`.
@@ -3015,6 +3569,7 @@ export class AppHubClient {
       protos.google.cloud.apphub.v1.OperationMetadata
     >
   > {
+    this._log.info('createApplication long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3154,7 +3709,37 @@ export class AppHubClient {
         'application.name': request.application!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateApplication(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.apphub.v1.IApplication,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateApplication response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateApplication request %j', request);
+    return this.innerApiCalls
+      .updateApplication(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.apphub.v1.IApplication,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateApplication response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateApplication()`.
@@ -3175,6 +3760,7 @@ export class AppHubClient {
       protos.google.cloud.apphub.v1.OperationMetadata
     >
   > {
+    this._log.info('updateApplication long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3306,7 +3892,37 @@ export class AppHubClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteApplication(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteApplication response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteApplication request %j', request);
+    return this.innerApiCalls
+      .deleteApplication(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteApplication response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteApplication()`.
@@ -3327,6 +3943,7 @@ export class AppHubClient {
       protos.google.cloud.apphub.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteApplication long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3444,11 +4061,33 @@ export class AppHubClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listServiceProjectAttachments(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
+          | protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apphub.v1.IServiceProjectAttachment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServiceProjectAttachments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServiceProjectAttachments request %j', request);
+    return this.innerApiCalls
+      .listServiceProjectAttachments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apphub.v1.IServiceProjectAttachment[],
+          protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest | null,
+          protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse,
+        ]) => {
+          this._log.info('listServiceProjectAttachments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3494,6 +4133,7 @@ export class AppHubClient {
     const defaultCallSettings = this._defaults['listServiceProjectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServiceProjectAttachments stream %j', request);
     return this.descriptors.page.listServiceProjectAttachments.createStream(
       this.innerApiCalls.listServiceProjectAttachments as GaxCall,
       request,
@@ -3547,6 +4187,7 @@ export class AppHubClient {
     const defaultCallSettings = this._defaults['listServiceProjectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServiceProjectAttachments iterate %j', request);
     return this.descriptors.page.listServiceProjectAttachments.asyncIterate(
       this.innerApiCalls['listServiceProjectAttachments'] as GaxCall,
       request as {},
@@ -3655,11 +4296,33 @@ export class AppHubClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDiscoveredServices(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
+          | protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse
+          | null
+          | undefined,
+          protos.google.cloud.apphub.v1.IDiscoveredService
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDiscoveredServices values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDiscoveredServices request %j', request);
+    return this.innerApiCalls
+      .listDiscoveredServices(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apphub.v1.IDiscoveredService[],
+          protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest | null,
+          protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse,
+        ]) => {
+          this._log.info('listDiscoveredServices values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3704,6 +4367,7 @@ export class AppHubClient {
     const defaultCallSettings = this._defaults['listDiscoveredServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDiscoveredServices stream %j', request);
     return this.descriptors.page.listDiscoveredServices.createStream(
       this.innerApiCalls.listDiscoveredServices as GaxCall,
       request,
@@ -3756,6 +4420,7 @@ export class AppHubClient {
     const defaultCallSettings = this._defaults['listDiscoveredServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDiscoveredServices iterate %j', request);
     return this.descriptors.page.listDiscoveredServices.asyncIterate(
       this.innerApiCalls['listDiscoveredServices'] as GaxCall,
       request as {},
@@ -3858,7 +4523,33 @@ export class AppHubClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listServices(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apphub.v1.IListServicesRequest,
+          | protos.google.cloud.apphub.v1.IListServicesResponse
+          | null
+          | undefined,
+          protos.google.cloud.apphub.v1.IService
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServices values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServices request %j', request);
+    return this.innerApiCalls
+      .listServices(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apphub.v1.IService[],
+          protos.google.cloud.apphub.v1.IListServicesRequest | null,
+          protos.google.cloud.apphub.v1.IListServicesResponse,
+        ]) => {
+          this._log.info('listServices values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3904,6 +4595,7 @@ export class AppHubClient {
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
       request,
@@ -3957,6 +4649,7 @@ export class AppHubClient {
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
       request as {},
@@ -4065,11 +4758,33 @@ export class AppHubClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDiscoveredWorkloads(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
+          | protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apphub.v1.IDiscoveredWorkload
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDiscoveredWorkloads values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDiscoveredWorkloads request %j', request);
+    return this.innerApiCalls
+      .listDiscoveredWorkloads(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apphub.v1.IDiscoveredWorkload[],
+          protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest | null,
+          protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse,
+        ]) => {
+          this._log.info('listDiscoveredWorkloads values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4114,6 +4829,7 @@ export class AppHubClient {
     const defaultCallSettings = this._defaults['listDiscoveredWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDiscoveredWorkloads stream %j', request);
     return this.descriptors.page.listDiscoveredWorkloads.createStream(
       this.innerApiCalls.listDiscoveredWorkloads as GaxCall,
       request,
@@ -4166,6 +4882,7 @@ export class AppHubClient {
     const defaultCallSettings = this._defaults['listDiscoveredWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDiscoveredWorkloads iterate %j', request);
     return this.descriptors.page.listDiscoveredWorkloads.asyncIterate(
       this.innerApiCalls['listDiscoveredWorkloads'] as GaxCall,
       request as {},
@@ -4268,7 +4985,33 @@ export class AppHubClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listWorkloads(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apphub.v1.IListWorkloadsRequest,
+          | protos.google.cloud.apphub.v1.IListWorkloadsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apphub.v1.IWorkload
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWorkloads values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWorkloads request %j', request);
+    return this.innerApiCalls
+      .listWorkloads(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apphub.v1.IWorkload[],
+          protos.google.cloud.apphub.v1.IListWorkloadsRequest | null,
+          protos.google.cloud.apphub.v1.IListWorkloadsResponse,
+        ]) => {
+          this._log.info('listWorkloads values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4314,6 +5057,7 @@ export class AppHubClient {
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listWorkloads stream %j', request);
     return this.descriptors.page.listWorkloads.createStream(
       this.innerApiCalls.listWorkloads as GaxCall,
       request,
@@ -4367,6 +5111,7 @@ export class AppHubClient {
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listWorkloads iterate %j', request);
     return this.descriptors.page.listWorkloads.asyncIterate(
       this.innerApiCalls['listWorkloads'] as GaxCall,
       request as {},
@@ -4474,7 +5219,33 @@ export class AppHubClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listApplications(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apphub.v1.IListApplicationsRequest,
+          | protos.google.cloud.apphub.v1.IListApplicationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apphub.v1.IApplication
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listApplications values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listApplications request %j', request);
+    return this.innerApiCalls
+      .listApplications(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apphub.v1.IApplication[],
+          protos.google.cloud.apphub.v1.IListApplicationsRequest | null,
+          protos.google.cloud.apphub.v1.IListApplicationsResponse,
+        ]) => {
+          this._log.info('listApplications values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4519,6 +5290,7 @@ export class AppHubClient {
     const defaultCallSettings = this._defaults['listApplications'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApplications stream %j', request);
     return this.descriptors.page.listApplications.createStream(
       this.innerApiCalls.listApplications as GaxCall,
       request,
@@ -4571,6 +5343,7 @@ export class AppHubClient {
     const defaultCallSettings = this._defaults['listApplications'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApplications iterate %j', request);
     return this.descriptors.page.listApplications.asyncIterate(
       this.innerApiCalls['listApplications'] as GaxCall,
       request as {},
@@ -5464,6 +6237,7 @@ export class AppHubClient {
   close(): Promise<void> {
     if (this.appHubStub && !this._terminated) {
       return this.appHubStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();
