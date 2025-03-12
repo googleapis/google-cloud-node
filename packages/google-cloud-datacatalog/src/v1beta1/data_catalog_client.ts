@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class DataCatalogClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('datacatalog');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class DataCatalogClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -577,7 +580,36 @@ export class DataCatalogClient {
       'CreateEntryGroup is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.createEntryGroup(request, options, callback);
+    this._log.info('createEntryGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
+          | protos.google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createEntryGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createEntryGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createEntryGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an EntryGroup. The user should enable the Data Catalog API in the
@@ -689,7 +721,36 @@ export class DataCatalogClient {
       'UpdateEntryGroup is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.updateEntryGroup(request, options, callback);
+    this._log.info('updateEntryGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
+          | protos.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEntryGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEntryGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEntryGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an EntryGroup.
@@ -788,7 +849,36 @@ export class DataCatalogClient {
       'GetEntryGroup is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.getEntryGroup(request, options, callback);
+    this._log.info('getEntryGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
+          | protos.google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEntryGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEntryGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEntryGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an EntryGroup. Only entry groups that do not contain entries can be
@@ -897,7 +987,36 @@ export class DataCatalogClient {
       'DeleteEntryGroup is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.deleteEntryGroup(request, options, callback);
+    this._log.info('deleteEntryGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteEntryGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteEntryGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEntryGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an entry. Only entries of 'FILESET' type or user-specified type can
@@ -1010,7 +1129,36 @@ export class DataCatalogClient {
       'CreateEntry is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.createEntry(request, options, callback);
+    this._log.info('createEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.IEntry,
+          | protos.google.cloud.datacatalog.v1beta1.ICreateEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.IEntry,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.ICreateEntryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an existing entry.
@@ -1135,7 +1283,36 @@ export class DataCatalogClient {
       'UpdateEntry is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.updateEntry(request, options, callback);
+    this._log.info('updateEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.IEntry,
+          | protos.google.cloud.datacatalog.v1beta1.IUpdateEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.IEntry,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.IUpdateEntryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an existing entry. Only entries created through
@@ -1239,7 +1416,36 @@ export class DataCatalogClient {
       'DeleteEntry is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.deleteEntry(request, options, callback);
+    this._log.info('deleteEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.datacatalog.v1beta1.IDeleteEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.IDeleteEntryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an entry.
@@ -1337,7 +1543,33 @@ export class DataCatalogClient {
       'GetEntry is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.getEntry(request, options, callback);
+    this._log.info('getEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.IEntry,
+          | protos.google.cloud.datacatalog.v1beta1.IGetEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.IEntry,
+          protos.google.cloud.datacatalog.v1beta1.IGetEntryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get an entry by target resource name. This method allows clients to use
@@ -1452,7 +1684,36 @@ export class DataCatalogClient {
       'LookupEntry is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.lookupEntry(request, options, callback);
+    this._log.info('lookupEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.IEntry,
+          | protos.google.cloud.datacatalog.v1beta1.ILookupEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('lookupEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .lookupEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.IEntry,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.ILookupEntryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('lookupEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a tag template. The user should enable the Data Catalog API in
@@ -1567,7 +1828,36 @@ export class DataCatalogClient {
       'CreateTagTemplate is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.createTagTemplate(request, options, callback);
+    this._log.info('createTagTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
+          | protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTagTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTagTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createTagTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a tag template.
@@ -1671,7 +1961,36 @@ export class DataCatalogClient {
       'GetTagTemplate is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.getTagTemplate(request, options, callback);
+    this._log.info('getTagTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
+          | protos.google.cloud.datacatalog.v1beta1.IGetTagTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTagTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTagTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.IGetTagTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTagTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a tag template. This method cannot be used to update the fields of
@@ -1786,7 +2105,36 @@ export class DataCatalogClient {
       'UpdateTagTemplate is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.updateTagTemplate(request, options, callback);
+    this._log.info('updateTagTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
+          | protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTagTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTagTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTagTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a tag template and all tags using the template.
@@ -1898,7 +2246,36 @@ export class DataCatalogClient {
       'DeleteTagTemplate is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.deleteTagTemplate(request, options, callback);
+    this._log.info('deleteTagTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTagTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTagTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTagTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a field in a tag template. The user should enable the Data Catalog
@@ -2017,11 +2394,36 @@ export class DataCatalogClient {
       'CreateTagTemplateField is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.createTagTemplateField(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createTagTemplateField request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
+          | protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateFieldRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTagTemplateField response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTagTemplateField(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateFieldRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createTagTemplateField response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a field in a tag template. This method cannot be used to update the
@@ -2148,11 +2550,36 @@ export class DataCatalogClient {
       'UpdateTagTemplateField is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.updateTagTemplateField(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateTagTemplateField request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
+          | protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateFieldRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTagTemplateField response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTagTemplateField(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateFieldRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTagTemplateField response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Renames a field in a tag template. The user should enable the Data Catalog
@@ -2263,11 +2690,36 @@ export class DataCatalogClient {
       'RenameTagTemplateField is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.renameTagTemplateField(
-      request,
-      options,
-      callback
-    );
+    this._log.info('renameTagTemplateField request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
+          | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('renameTagTemplateField response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .renameTagTemplateField(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('renameTagTemplateField response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Renames an enum value in a tag template. The enum values have to be unique
@@ -2376,11 +2828,42 @@ export class DataCatalogClient {
       'RenameTagTemplateFieldEnumValue is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.renameTagTemplateFieldEnumValue(
-      request,
-      options,
-      callback
-    );
+    this._log.info('renameTagTemplateFieldEnumValue request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
+          | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'renameTagTemplateFieldEnumValue response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .renameTagTemplateFieldEnumValue(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'renameTagTemplateFieldEnumValue response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a field in a tag template and all uses of that field.
@@ -2492,11 +2975,36 @@ export class DataCatalogClient {
       'DeleteTagTemplateField is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.deleteTagTemplateField(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteTagTemplateField request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateFieldRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTagTemplateField response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTagTemplateField(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateFieldRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTagTemplateField response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a tag on an {@link protos.google.cloud.datacatalog.v1beta1.Entry|Entry}.
@@ -2607,7 +3115,33 @@ export class DataCatalogClient {
       'CreateTag is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.createTag(request, options, callback);
+    this._log.info('createTag request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.ITag,
+          | protos.google.cloud.datacatalog.v1beta1.ICreateTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTag response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTag(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.ITag,
+          protos.google.cloud.datacatalog.v1beta1.ICreateTagRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTag response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an existing tag.
@@ -2712,7 +3246,33 @@ export class DataCatalogClient {
       'UpdateTag is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.updateTag(request, options, callback);
+    this._log.info('updateTag request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.ITag,
+          | protos.google.cloud.datacatalog.v1beta1.IUpdateTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTag response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTag(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1beta1.ITag,
+          protos.google.cloud.datacatalog.v1beta1.IUpdateTagRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTag response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a tag.
@@ -2810,7 +3370,33 @@ export class DataCatalogClient {
       'DeleteTag is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.deleteTag(request, options, callback);
+    this._log.info('deleteTag request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.datacatalog.v1beta1.IDeleteTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTag response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTag(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datacatalog.v1beta1.IDeleteTagRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTag response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the access control policy for a resource. Replaces any existing
@@ -2923,7 +3509,31 @@ export class DataCatalogClient {
       'SetIamPolicy is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the access control policy for a resource. A `NOT_FOUND` error
@@ -3030,7 +3640,31 @@ export class DataCatalogClient {
       'GetIamPolicy is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the caller's permissions on a resource.
@@ -3136,7 +3770,31 @@ export class DataCatalogClient {
       'TestIamPermissions is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -3283,7 +3941,33 @@ export class DataCatalogClient {
       'SearchCatalog is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.searchCatalog(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datacatalog.v1beta1.ISearchCatalogRequest,
+          | protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResponse
+          | null
+          | undefined,
+          protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchCatalog values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchCatalog request %j', request);
+    return this.innerApiCalls
+      .searchCatalog(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResult[],
+          protos.google.cloud.datacatalog.v1beta1.ISearchCatalogRequest | null,
+          protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResponse,
+        ]) => {
+          this._log.info('searchCatalog values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3356,6 +4040,7 @@ export class DataCatalogClient {
       'SearchCatalog is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('searchCatalog stream %j', request);
     return this.descriptors.page.searchCatalog.createStream(
       this.innerApiCalls.searchCatalog as GaxCall,
       request,
@@ -3436,6 +4121,7 @@ export class DataCatalogClient {
       'SearchCatalog is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('searchCatalog iterate %j', request);
     return this.descriptors.page.searchCatalog.asyncIterate(
       this.innerApiCalls['searchCatalog'] as GaxCall,
       request as {},
@@ -3548,7 +4234,33 @@ export class DataCatalogClient {
       'ListEntryGroups is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.listEntryGroups(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest,
+          | protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.datacatalog.v1beta1.IEntryGroup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEntryGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEntryGroups request %j', request);
+    return this.innerApiCalls
+      .listEntryGroups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datacatalog.v1beta1.IEntryGroup[],
+          protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest | null,
+          protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsResponse,
+        ]) => {
+          this._log.info('listEntryGroups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3598,6 +4310,7 @@ export class DataCatalogClient {
       'ListEntryGroups is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listEntryGroups stream %j', request);
     return this.descriptors.page.listEntryGroups.createStream(
       this.innerApiCalls.listEntryGroups as GaxCall,
       request,
@@ -3655,6 +4368,7 @@ export class DataCatalogClient {
       'ListEntryGroups is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listEntryGroups iterate %j', request);
     return this.descriptors.page.listEntryGroups.asyncIterate(
       this.innerApiCalls['listEntryGroups'] as GaxCall,
       request as {},
@@ -3772,7 +4486,33 @@ export class DataCatalogClient {
       'ListEntries is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.listEntries(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datacatalog.v1beta1.IListEntriesRequest,
+          | protos.google.cloud.datacatalog.v1beta1.IListEntriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.datacatalog.v1beta1.IEntry
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEntries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEntries request %j', request);
+    return this.innerApiCalls
+      .listEntries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datacatalog.v1beta1.IEntry[],
+          protos.google.cloud.datacatalog.v1beta1.IListEntriesRequest | null,
+          protos.google.cloud.datacatalog.v1beta1.IListEntriesResponse,
+        ]) => {
+          this._log.info('listEntries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3827,6 +4567,7 @@ export class DataCatalogClient {
       'ListEntries is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listEntries stream %j', request);
     return this.descriptors.page.listEntries.createStream(
       this.innerApiCalls.listEntries as GaxCall,
       request,
@@ -3889,6 +4630,7 @@ export class DataCatalogClient {
       'ListEntries is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listEntries iterate %j', request);
     return this.descriptors.page.listEntries.asyncIterate(
       this.innerApiCalls['listEntries'] as GaxCall,
       request as {},
@@ -4006,7 +4748,33 @@ export class DataCatalogClient {
       'ListTags is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.listTags(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datacatalog.v1beta1.IListTagsRequest,
+          | protos.google.cloud.datacatalog.v1beta1.IListTagsResponse
+          | null
+          | undefined,
+          protos.google.cloud.datacatalog.v1beta1.ITag
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTags values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTags request %j', request);
+    return this.innerApiCalls
+      .listTags(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datacatalog.v1beta1.ITag[],
+          protos.google.cloud.datacatalog.v1beta1.IListTagsRequest | null,
+          protos.google.cloud.datacatalog.v1beta1.IListTagsResponse,
+        ]) => {
+          this._log.info('listTags values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4059,6 +4827,7 @@ export class DataCatalogClient {
       'ListTags is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listTags stream %j', request);
     return this.descriptors.page.listTags.createStream(
       this.innerApiCalls.listTags as GaxCall,
       request,
@@ -4119,6 +4888,7 @@ export class DataCatalogClient {
       'ListTags is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listTags iterate %j', request);
     return this.descriptors.page.listTags.asyncIterate(
       this.innerApiCalls['listTags'] as GaxCall,
       request as {},
@@ -4745,6 +5515,7 @@ export class DataCatalogClient {
   close(): Promise<void> {
     if (this.dataCatalogStub && !this._terminated) {
       return this.dataCatalogStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
