@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -61,6 +62,8 @@ export class VpcFlowLogsServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('network-management');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -98,7 +101,7 @@ export class VpcFlowLogsServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -613,7 +616,36 @@ export class VpcFlowLogsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getVpcFlowLogsConfig(request, options, callback);
+    this._log.info('getVpcFlowLogsConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
+          | protos.google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVpcFlowLogsConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVpcFlowLogsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
+          (
+            | protos.google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVpcFlowLogsConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -734,11 +766,37 @@ export class VpcFlowLogsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createVpcFlowLogsConfig(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
+            protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createVpcFlowLogsConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createVpcFlowLogsConfig request %j', request);
+    return this.innerApiCalls
+      .createVpcFlowLogsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
+            protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createVpcFlowLogsConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createVpcFlowLogsConfig()`.
@@ -759,6 +817,7 @@ export class VpcFlowLogsServiceClient {
       protos.google.cloud.networkmanagement.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('createVpcFlowLogsConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -889,11 +948,37 @@ export class VpcFlowLogsServiceClient {
         'vpc_flow_logs_config.name': request.vpcFlowLogsConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateVpcFlowLogsConfig(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
+            protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateVpcFlowLogsConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateVpcFlowLogsConfig request %j', request);
+    return this.innerApiCalls
+      .updateVpcFlowLogsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
+            protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateVpcFlowLogsConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateVpcFlowLogsConfig()`.
@@ -914,6 +999,7 @@ export class VpcFlowLogsServiceClient {
       protos.google.cloud.networkmanagement.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('updateVpcFlowLogsConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1030,11 +1116,37 @@ export class VpcFlowLogsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteVpcFlowLogsConfig(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteVpcFlowLogsConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteVpcFlowLogsConfig request %j', request);
+    return this.innerApiCalls
+      .deleteVpcFlowLogsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteVpcFlowLogsConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteVpcFlowLogsConfig()`.
@@ -1055,6 +1167,7 @@ export class VpcFlowLogsServiceClient {
       protos.google.cloud.networkmanagement.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('deleteVpcFlowLogsConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1173,11 +1286,33 @@ export class VpcFlowLogsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listVpcFlowLogsConfigs(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest,
+          | protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVpcFlowLogsConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVpcFlowLogsConfigs request %j', request);
+    return this.innerApiCalls
+      .listVpcFlowLogsConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig[],
+          protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest | null,
+          protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsResponse,
+        ]) => {
+          this._log.info('listVpcFlowLogsConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1224,6 +1359,7 @@ export class VpcFlowLogsServiceClient {
     const defaultCallSettings = this._defaults['listVpcFlowLogsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVpcFlowLogsConfigs stream %j', request);
     return this.descriptors.page.listVpcFlowLogsConfigs.createStream(
       this.innerApiCalls.listVpcFlowLogsConfigs as GaxCall,
       request,
@@ -1278,6 +1414,7 @@ export class VpcFlowLogsServiceClient {
     const defaultCallSettings = this._defaults['listVpcFlowLogsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVpcFlowLogsConfigs iterate %j', request);
     return this.descriptors.page.listVpcFlowLogsConfigs.asyncIterate(
       this.innerApiCalls['listVpcFlowLogsConfigs'] as GaxCall,
       request as {},
@@ -1897,6 +2034,7 @@ export class VpcFlowLogsServiceClient {
   close(): Promise<void> {
     if (this.vpcFlowLogsServiceStub && !this._terminated) {
       return this.vpcFlowLogsServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();
