@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -35,9 +32,9 @@
         "type": {
           "options": {
             "cc_enable_arenas": true,
-            "go_package": "google.golang.org/genproto/googleapis/type/date;date",
+            "go_package": "google.golang.org/genproto/googleapis/type/postaladdress;postaladdress",
             "java_multiple_files": true,
-            "java_outer_classname": "DateProto",
+            "java_outer_classname": "PostalAddressProto",
             "java_package": "com.google.type",
             "objc_class_prefix": "GTP"
           },
@@ -95,6 +92,116 @@
                 "day": {
                   "type": "int32",
                   "id": 3
+                }
+              }
+            },
+            "DateTime": {
+              "oneofs": {
+                "timeOffset": {
+                  "oneof": [
+                    "utcOffset",
+                    "timeZone"
+                  ]
+                }
+              },
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "hours": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "minutes": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "seconds": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "utcOffset": {
+                  "type": "google.protobuf.Duration",
+                  "id": 8
+                },
+                "timeZone": {
+                  "type": "TimeZone",
+                  "id": 9
+                }
+              }
+            },
+            "TimeZone": {
+              "fields": {
+                "id": {
+                  "type": "string",
+                  "id": 1
+                },
+                "version": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "PostalAddress": {
+              "fields": {
+                "revision": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "regionCode": {
+                  "type": "string",
+                  "id": 2
+                },
+                "languageCode": {
+                  "type": "string",
+                  "id": 3
+                },
+                "postalCode": {
+                  "type": "string",
+                  "id": 4
+                },
+                "sortingCode": {
+                  "type": "string",
+                  "id": 5
+                },
+                "administrativeArea": {
+                  "type": "string",
+                  "id": 6
+                },
+                "locality": {
+                  "type": "string",
+                  "id": 7
+                },
+                "sublocality": {
+                  "type": "string",
+                  "id": 8
+                },
+                "addressLines": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 9
+                },
+                "recipients": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                },
+                "organization": {
+                  "type": "string",
+                  "id": 11
                 }
               }
             }
@@ -666,6 +773,10 @@
                           "type": "string",
                           "id": 51
                         },
+                        "postalAddress": {
+                          "type": "google.type.PostalAddress",
+                          "id": 90
+                        },
                         "addressComponents": {
                           "rule": "repeated",
                           "type": "AddressComponent",
@@ -710,6 +821,10 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "timeZone": {
+                          "type": "google.type.TimeZone",
+                          "id": 88
                         },
                         "photos": {
                           "rule": "repeated",

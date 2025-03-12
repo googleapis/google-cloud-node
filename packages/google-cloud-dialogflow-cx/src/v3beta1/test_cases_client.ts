@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class TestCasesClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -95,7 +98,7 @@ export class TestCasesClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -701,7 +704,36 @@ export class TestCasesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchDeleteTestCases(request, options, callback);
+    this._log.info('batchDeleteTestCases request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IBatchDeleteTestCasesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDeleteTestCases response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDeleteTestCases(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IBatchDeleteTestCasesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeleteTestCases response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a test case.
@@ -793,7 +825,36 @@ export class TestCasesClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTestCase(request, options, callback);
+    this._log.info('getTestCase request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.ITestCase,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTestCase response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTestCase(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ITestCase,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTestCase response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a test case for the given agent.
@@ -892,7 +953,36 @@ export class TestCasesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createTestCase(request, options, callback);
+    this._log.info('createTestCase request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.ITestCase,
+          | protos.google.cloud.dialogflow.cx.v3beta1.ICreateTestCaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTestCase response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTestCase(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ITestCase,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.ICreateTestCaseRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createTestCase response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified test case.
@@ -994,7 +1084,36 @@ export class TestCasesClient {
         'test_case.name': request.testCase!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateTestCase(request, options, callback);
+    this._log.info('updateTestCase request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.ITestCase,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateTestCaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTestCase response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTestCase(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ITestCase,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateTestCaseRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTestCase response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Calculates the test coverage for an agent.
@@ -1093,7 +1212,36 @@ export class TestCasesClient {
         agent: request.agent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.calculateCoverage(request, options, callback);
+    this._log.info('calculateCoverage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.ICalculateCoverageResponse,
+          | protos.google.cloud.dialogflow.cx.v3beta1.ICalculateCoverageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('calculateCoverage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .calculateCoverage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ICalculateCoverageResponse,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.ICalculateCoverageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('calculateCoverage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a test case result.
@@ -1191,7 +1339,36 @@ export class TestCasesClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTestCaseResult(request, options, callback);
+    this._log.info('getTestCaseResult request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTestCaseResult response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTestCaseResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseResultRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTestCaseResult response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1308,7 +1485,37 @@ export class TestCasesClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.runTestCase(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IRunTestCaseResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IRunTestCaseMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('runTestCase response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('runTestCase request %j', request);
+    return this.innerApiCalls
+      .runTestCase(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IRunTestCaseResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IRunTestCaseMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runTestCase response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `runTestCase()`.
@@ -1329,6 +1536,7 @@ export class TestCasesClient {
       protos.google.cloud.dialogflow.cx.v3beta1.RunTestCaseMetadata
     >
   > {
+    this._log.info('runTestCase long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1460,7 +1668,37 @@ export class TestCasesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchRunTestCases(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IBatchRunTestCasesResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IBatchRunTestCasesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchRunTestCases response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchRunTestCases request %j', request);
+    return this.innerApiCalls
+      .batchRunTestCases(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IBatchRunTestCasesResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IBatchRunTestCasesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchRunTestCases response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchRunTestCases()`.
@@ -1481,6 +1719,7 @@ export class TestCasesClient {
       protos.google.cloud.dialogflow.cx.v3beta1.BatchRunTestCasesMetadata
     >
   > {
+    this._log.info('batchRunTestCases long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1620,7 +1859,37 @@ export class TestCasesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importTestCases(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IImportTestCasesResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IImportTestCasesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importTestCases response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importTestCases request %j', request);
+    return this.innerApiCalls
+      .importTestCases(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IImportTestCasesResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IImportTestCasesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importTestCases response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importTestCases()`.
@@ -1641,6 +1910,7 @@ export class TestCasesClient {
       protos.google.cloud.dialogflow.cx.v3beta1.ImportTestCasesMetadata
     >
   > {
+    this._log.info('importTestCases long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1792,7 +2062,37 @@ export class TestCasesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportTestCases(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IExportTestCasesResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IExportTestCasesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportTestCases response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportTestCases request %j', request);
+    return this.innerApiCalls
+      .exportTestCases(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IExportTestCasesResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IExportTestCasesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportTestCases response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportTestCases()`.
@@ -1813,6 +2113,7 @@ export class TestCasesClient {
       protos.google.cloud.dialogflow.cx.v3beta1.ExportTestCasesMetadata
     >
   > {
+    this._log.info('exportTestCases long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1928,7 +2229,33 @@ export class TestCasesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTestCases(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IListTestCasesRequest,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IListTestCasesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.ITestCase
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTestCases values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTestCases request %j', request);
+    return this.innerApiCalls
+      .listTestCases(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ITestCase[],
+          protos.google.cloud.dialogflow.cx.v3beta1.IListTestCasesRequest | null,
+          protos.google.cloud.dialogflow.cx.v3beta1.IListTestCasesResponse,
+        ]) => {
+          this._log.info('listTestCases values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1972,6 +2299,7 @@ export class TestCasesClient {
     const defaultCallSettings = this._defaults['listTestCases'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTestCases stream %j', request);
     return this.descriptors.page.listTestCases.createStream(
       this.innerApiCalls.listTestCases as GaxCall,
       request,
@@ -2023,6 +2351,7 @@ export class TestCasesClient {
     const defaultCallSettings = this._defaults['listTestCases'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTestCases iterate %j', request);
     return this.descriptors.page.listTestCases.asyncIterate(
       this.innerApiCalls['listTestCases'] as GaxCall,
       request as {},
@@ -2155,7 +2484,33 @@ export class TestCasesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTestCaseResults(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IListTestCaseResultsRequest,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IListTestCaseResultsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTestCaseResults values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTestCaseResults request %j', request);
+    return this.innerApiCalls
+      .listTestCaseResults(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult[],
+          protos.google.cloud.dialogflow.cx.v3beta1.IListTestCaseResultsRequest | null,
+          protos.google.cloud.dialogflow.cx.v3beta1.IListTestCaseResultsResponse,
+        ]) => {
+          this._log.info('listTestCaseResults values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2224,6 +2579,7 @@ export class TestCasesClient {
     const defaultCallSettings = this._defaults['listTestCaseResults'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTestCaseResults stream %j', request);
     return this.descriptors.page.listTestCaseResults.createStream(
       this.innerApiCalls.listTestCaseResults as GaxCall,
       request,
@@ -2300,6 +2656,7 @@ export class TestCasesClient {
     const defaultCallSettings = this._defaults['listTestCaseResults'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTestCaseResults iterate %j', request);
     return this.descriptors.page.listTestCaseResults.asyncIterate(
       this.innerApiCalls['listTestCaseResults'] as GaxCall,
       request as {},
@@ -4916,6 +5273,7 @@ export class TestCasesClient {
   close(): Promise<void> {
     if (this.testCasesStub && !this._terminated) {
       return this.testCasesStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
