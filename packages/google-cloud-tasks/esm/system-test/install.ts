@@ -31,7 +31,7 @@ describe('📦 pack-n-play test', () => {
           './esm/system-test/fixtures/sample/src/index.ts'
         ).toString(),
       },
-      tsconfigPath: './tsconfig.json'
+      tsconfigPath: './tsconfig.json',
     });
   });
 
