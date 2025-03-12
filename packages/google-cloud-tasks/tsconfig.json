@@ -23,6 +23,7 @@
     "esm/src/**/*.ts",
     "esm/test/*.ts",
     "esm/test/**/*.ts",
-    "esm/system-test/*.ts"
+    "esm/system-test/*.ts",
+    "esm/src/*.cjs"
   ]
 }
