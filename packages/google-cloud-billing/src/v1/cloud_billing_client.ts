@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class CloudBillingClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('billing');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class CloudBillingClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -509,7 +512,33 @@ export class CloudBillingClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getBillingAccount(request, options, callback);
+    this._log.info('getBillingAccount request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.billing.v1.IBillingAccount,
+          | protos.google.cloud.billing.v1.IGetBillingAccountRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBillingAccount response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBillingAccount(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.billing.v1.IBillingAccount,
+          protos.google.cloud.billing.v1.IGetBillingAccountRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBillingAccount response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a billing account's fields.
@@ -610,7 +639,36 @@ export class CloudBillingClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateBillingAccount(request, options, callback);
+    this._log.info('updateBillingAccount request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.billing.v1.IBillingAccount,
+          | protos.google.cloud.billing.v1.IUpdateBillingAccountRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateBillingAccount response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateBillingAccount(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.billing.v1.IBillingAccount,
+          (
+            | protos.google.cloud.billing.v1.IUpdateBillingAccountRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBillingAccount response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * This method creates [billing
@@ -722,7 +780,36 @@ export class CloudBillingClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createBillingAccount(request, options, callback);
+    this._log.info('createBillingAccount request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.billing.v1.IBillingAccount,
+          | protos.google.cloud.billing.v1.ICreateBillingAccountRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createBillingAccount response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createBillingAccount(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.billing.v1.IBillingAccount,
+          (
+            | protos.google.cloud.billing.v1.ICreateBillingAccountRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createBillingAccount response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the billing information for a project. The current authenticated user
@@ -817,7 +904,36 @@ export class CloudBillingClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getProjectBillingInfo(request, options, callback);
+    this._log.info('getProjectBillingInfo request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.billing.v1.IProjectBillingInfo,
+          | protos.google.cloud.billing.v1.IGetProjectBillingInfoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProjectBillingInfo response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProjectBillingInfo(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.billing.v1.IProjectBillingInfo,
+          (
+            | protos.google.cloud.billing.v1.IGetProjectBillingInfoRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getProjectBillingInfo response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets or updates the billing account associated with a project. You specify
@@ -950,11 +1066,36 @@ export class CloudBillingClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateProjectBillingInfo(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateProjectBillingInfo request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.billing.v1.IProjectBillingInfo,
+          | protos.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateProjectBillingInfo response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateProjectBillingInfo(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.billing.v1.IProjectBillingInfo,
+          (
+            | protos.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateProjectBillingInfo response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the access control policy for a billing account.
@@ -1043,7 +1184,31 @@ export class CloudBillingClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the access control policy for a billing account. Replaces any existing
@@ -1141,7 +1306,31 @@ export class CloudBillingClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Tests the access control policy for a billing account. This method takes
@@ -1231,7 +1420,31 @@ export class CloudBillingClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Changes which parent organization a billing account belongs to.
@@ -1329,7 +1542,33 @@ export class CloudBillingClient {
         destination_parent: request.destinationParent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.moveBillingAccount(request, options, callback);
+    this._log.info('moveBillingAccount request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.billing.v1.IBillingAccount,
+          | protos.google.cloud.billing.v1.IMoveBillingAccountRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('moveBillingAccount response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .moveBillingAccount(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.billing.v1.IBillingAccount,
+          protos.google.cloud.billing.v1.IMoveBillingAccountRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('moveBillingAccount response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1445,7 +1684,33 @@ export class CloudBillingClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listBillingAccounts(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.billing.v1.IListBillingAccountsRequest,
+          | protos.google.cloud.billing.v1.IListBillingAccountsResponse
+          | null
+          | undefined,
+          protos.google.cloud.billing.v1.IBillingAccount
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBillingAccounts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBillingAccounts request %j', request);
+    return this.innerApiCalls
+      .listBillingAccounts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.billing.v1.IBillingAccount[],
+          protos.google.cloud.billing.v1.IListBillingAccountsRequest | null,
+          protos.google.cloud.billing.v1.IListBillingAccountsResponse,
+        ]) => {
+          this._log.info('listBillingAccounts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1500,6 +1765,7 @@ export class CloudBillingClient {
     const defaultCallSettings = this._defaults['listBillingAccounts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBillingAccounts stream %j', request);
     return this.descriptors.page.listBillingAccounts.createStream(
       this.innerApiCalls.listBillingAccounts as GaxCall,
       request,
@@ -1562,6 +1828,7 @@ export class CloudBillingClient {
     const defaultCallSettings = this._defaults['listBillingAccounts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBillingAccounts iterate %j', request);
     return this.descriptors.page.listBillingAccounts.asyncIterate(
       this.innerApiCalls['listBillingAccounts'] as GaxCall,
       request as {},
@@ -1671,11 +1938,33 @@ export class CloudBillingClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listProjectBillingInfo(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.billing.v1.IListProjectBillingInfoRequest,
+          | protos.google.cloud.billing.v1.IListProjectBillingInfoResponse
+          | null
+          | undefined,
+          protos.google.cloud.billing.v1.IProjectBillingInfo
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProjectBillingInfo values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProjectBillingInfo request %j', request);
+    return this.innerApiCalls
+      .listProjectBillingInfo(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.billing.v1.IProjectBillingInfo[],
+          protos.google.cloud.billing.v1.IListProjectBillingInfoRequest | null,
+          protos.google.cloud.billing.v1.IListProjectBillingInfoResponse,
+        ]) => {
+          this._log.info('listProjectBillingInfo values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1719,6 +2008,7 @@ export class CloudBillingClient {
     const defaultCallSettings = this._defaults['listProjectBillingInfo'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProjectBillingInfo stream %j', request);
     return this.descriptors.page.listProjectBillingInfo.createStream(
       this.innerApiCalls.listProjectBillingInfo as GaxCall,
       request,
@@ -1770,6 +2060,7 @@ export class CloudBillingClient {
     const defaultCallSettings = this._defaults['listProjectBillingInfo'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProjectBillingInfo iterate %j', request);
     return this.descriptors.page.listProjectBillingInfo.asyncIterate(
       this.innerApiCalls['listProjectBillingInfo'] as GaxCall,
       request as {},
@@ -1989,6 +2280,7 @@ export class CloudBillingClient {
   close(): Promise<void> {
     if (this.cloudBillingStub && !this._terminated) {
       return this.cloudBillingStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
