@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -72,6 +73,8 @@ export class ProductSearchClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('vision');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -107,7 +110,7 @@ export class ProductSearchClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -591,7 +594,36 @@ export class ProductSearchClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createProductSet(request, options, callback);
+    this._log.info('createProductSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vision.v1p4beta1.IProductSet,
+          | protos.google.cloud.vision.v1p4beta1.ICreateProductSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createProductSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createProductSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vision.v1p4beta1.IProductSet,
+          (
+            | protos.google.cloud.vision.v1p4beta1.ICreateProductSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createProductSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets information associated with a ProductSet.
@@ -688,7 +720,36 @@ export class ProductSearchClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getProductSet(request, options, callback);
+    this._log.info('getProductSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vision.v1p4beta1.IProductSet,
+          | protos.google.cloud.vision.v1p4beta1.IGetProductSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProductSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProductSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vision.v1p4beta1.IProductSet,
+          (
+            | protos.google.cloud.vision.v1p4beta1.IGetProductSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getProductSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Makes changes to a ProductSet resource.
@@ -790,7 +851,36 @@ export class ProductSearchClient {
         'product_set.name': request.productSet!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateProductSet(request, options, callback);
+    this._log.info('updateProductSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vision.v1p4beta1.IProductSet,
+          | protos.google.cloud.vision.v1p4beta1.IUpdateProductSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateProductSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateProductSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vision.v1p4beta1.IProductSet,
+          (
+            | protos.google.cloud.vision.v1p4beta1.IUpdateProductSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateProductSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Permanently deletes a ProductSet. Products and ReferenceImages in the
@@ -886,7 +976,36 @@ export class ProductSearchClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteProductSet(request, options, callback);
+    this._log.info('deleteProductSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.vision.v1p4beta1.IDeleteProductSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteProductSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteProductSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.vision.v1p4beta1.IDeleteProductSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteProductSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates and returns a new product resource.
@@ -993,7 +1112,36 @@ export class ProductSearchClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createProduct(request, options, callback);
+    this._log.info('createProduct request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vision.v1p4beta1.IProduct,
+          | protos.google.cloud.vision.v1p4beta1.ICreateProductRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createProduct response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createProduct(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vision.v1p4beta1.IProduct,
+          (
+            | protos.google.cloud.vision.v1p4beta1.ICreateProductRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createProduct response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets information associated with a Product.
@@ -1090,7 +1238,33 @@ export class ProductSearchClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getProduct(request, options, callback);
+    this._log.info('getProduct request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vision.v1p4beta1.IProduct,
+          | protos.google.cloud.vision.v1p4beta1.IGetProductRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProduct response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProduct(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vision.v1p4beta1.IProduct,
+          protos.google.cloud.vision.v1p4beta1.IGetProductRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getProduct response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Makes changes to a Product resource.
@@ -1201,7 +1375,36 @@ export class ProductSearchClient {
         'product.name': request.product!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateProduct(request, options, callback);
+    this._log.info('updateProduct request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vision.v1p4beta1.IProduct,
+          | protos.google.cloud.vision.v1p4beta1.IUpdateProductRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateProduct response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateProduct(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vision.v1p4beta1.IProduct,
+          (
+            | protos.google.cloud.vision.v1p4beta1.IUpdateProductRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateProduct response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Permanently deletes a product and its reference images.
@@ -1298,7 +1501,36 @@ export class ProductSearchClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteProduct(request, options, callback);
+    this._log.info('deleteProduct request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.vision.v1p4beta1.IDeleteProductRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteProduct response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteProduct(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.vision.v1p4beta1.IDeleteProductRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteProduct response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates and returns a new ReferenceImage resource.
@@ -1424,7 +1656,36 @@ export class ProductSearchClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createReferenceImage(request, options, callback);
+    this._log.info('createReferenceImage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vision.v1p4beta1.IReferenceImage,
+          | protos.google.cloud.vision.v1p4beta1.ICreateReferenceImageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createReferenceImage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createReferenceImage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vision.v1p4beta1.IReferenceImage,
+          (
+            | protos.google.cloud.vision.v1p4beta1.ICreateReferenceImageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createReferenceImage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Permanently deletes a reference image.
@@ -1530,7 +1791,36 @@ export class ProductSearchClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteReferenceImage(request, options, callback);
+    this._log.info('deleteReferenceImage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.vision.v1p4beta1.IDeleteReferenceImageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteReferenceImage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteReferenceImage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.vision.v1p4beta1.IDeleteReferenceImageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteReferenceImage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets information associated with a ReferenceImage.
@@ -1634,7 +1924,36 @@ export class ProductSearchClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getReferenceImage(request, options, callback);
+    this._log.info('getReferenceImage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vision.v1p4beta1.IReferenceImage,
+          | protos.google.cloud.vision.v1p4beta1.IGetReferenceImageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getReferenceImage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getReferenceImage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vision.v1p4beta1.IReferenceImage,
+          (
+            | protos.google.cloud.vision.v1p4beta1.IGetReferenceImageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getReferenceImage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Adds a Product to the specified ProductSet. If the Product is already
@@ -1745,11 +2064,36 @@ export class ProductSearchClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.addProductToProductSet(
-      request,
-      options,
-      callback
-    );
+    this._log.info('addProductToProductSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.vision.v1p4beta1.IAddProductToProductSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('addProductToProductSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .addProductToProductSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.vision.v1p4beta1.IAddProductToProductSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('addProductToProductSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Removes a Product from the specified ProductSet.
@@ -1854,11 +2198,36 @@ export class ProductSearchClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.removeProductFromProductSet(
-      request,
-      options,
-      callback
-    );
+    this._log.info('removeProductFromProductSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.vision.v1p4beta1.IRemoveProductFromProductSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('removeProductFromProductSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .removeProductFromProductSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.vision.v1p4beta1.IRemoveProductFromProductSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('removeProductFromProductSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1975,7 +2344,37 @@ export class ProductSearchClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importProductSets(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vision.v1p4beta1.IImportProductSetsResponse,
+            protos.google.cloud.vision.v1p4beta1.IBatchOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importProductSets response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importProductSets request %j', request);
+    return this.innerApiCalls
+      .importProductSets(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vision.v1p4beta1.IImportProductSetsResponse,
+            protos.google.cloud.vision.v1p4beta1.IBatchOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importProductSets response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importProductSets()`.
@@ -1996,6 +2395,7 @@ export class ProductSearchClient {
       protos.google.cloud.vision.v1p4beta1.BatchOperationMetadata
     >
   > {
+    this._log.info('importProductSets long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2144,7 +2544,37 @@ export class ProductSearchClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.purgeProducts(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vision.v1p4beta1.IBatchOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('purgeProducts response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('purgeProducts request %j', request);
+    return this.innerApiCalls
+      .purgeProducts(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vision.v1p4beta1.IBatchOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('purgeProducts response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `purgeProducts()`.
@@ -2165,6 +2595,7 @@ export class ProductSearchClient {
       protos.google.cloud.vision.v1p4beta1.BatchOperationMetadata
     >
   > {
+    this._log.info('purgeProducts long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2282,7 +2713,33 @@ export class ProductSearchClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listProductSets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vision.v1p4beta1.IListProductSetsRequest,
+          | protos.google.cloud.vision.v1p4beta1.IListProductSetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vision.v1p4beta1.IProductSet
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProductSets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProductSets request %j', request);
+    return this.innerApiCalls
+      .listProductSets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vision.v1p4beta1.IProductSet[],
+          protos.google.cloud.vision.v1p4beta1.IListProductSetsRequest | null,
+          protos.google.cloud.vision.v1p4beta1.IListProductSetsResponse,
+        ]) => {
+          this._log.info('listProductSets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2323,6 +2780,7 @@ export class ProductSearchClient {
     const defaultCallSettings = this._defaults['listProductSets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProductSets stream %j', request);
     return this.descriptors.page.listProductSets.createStream(
       this.innerApiCalls.listProductSets as GaxCall,
       request,
@@ -2371,6 +2829,7 @@ export class ProductSearchClient {
     const defaultCallSettings = this._defaults['listProductSets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProductSets iterate %j', request);
     return this.descriptors.page.listProductSets.asyncIterate(
       this.innerApiCalls['listProductSets'] as GaxCall,
       request as {},
@@ -2479,7 +2938,33 @@ export class ProductSearchClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listProducts(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vision.v1p4beta1.IListProductsRequest,
+          | protos.google.cloud.vision.v1p4beta1.IListProductsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vision.v1p4beta1.IProduct
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProducts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProducts request %j', request);
+    return this.innerApiCalls
+      .listProducts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vision.v1p4beta1.IProduct[],
+          protos.google.cloud.vision.v1p4beta1.IListProductsRequest | null,
+          protos.google.cloud.vision.v1p4beta1.IListProductsResponse,
+        ]) => {
+          this._log.info('listProducts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2521,6 +3006,7 @@ export class ProductSearchClient {
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProducts stream %j', request);
     return this.descriptors.page.listProducts.createStream(
       this.innerApiCalls.listProducts as GaxCall,
       request,
@@ -2570,6 +3056,7 @@ export class ProductSearchClient {
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProducts iterate %j', request);
     return this.descriptors.page.listProducts.asyncIterate(
       this.innerApiCalls['listProducts'] as GaxCall,
       request as {},
@@ -2683,7 +3170,33 @@ export class ProductSearchClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listReferenceImages(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vision.v1p4beta1.IListReferenceImagesRequest,
+          | protos.google.cloud.vision.v1p4beta1.IListReferenceImagesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vision.v1p4beta1.IReferenceImage
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listReferenceImages values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listReferenceImages request %j', request);
+    return this.innerApiCalls
+      .listReferenceImages(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vision.v1p4beta1.IReferenceImage[],
+          protos.google.cloud.vision.v1p4beta1.IListReferenceImagesRequest | null,
+          protos.google.cloud.vision.v1p4beta1.IListReferenceImagesResponse,
+        ]) => {
+          this._log.info('listReferenceImages values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2728,6 +3241,7 @@ export class ProductSearchClient {
     const defaultCallSettings = this._defaults['listReferenceImages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReferenceImages stream %j', request);
     return this.descriptors.page.listReferenceImages.createStream(
       this.innerApiCalls.listReferenceImages as GaxCall,
       request,
@@ -2780,6 +3294,7 @@ export class ProductSearchClient {
     const defaultCallSettings = this._defaults['listReferenceImages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReferenceImages iterate %j', request);
     return this.descriptors.page.listReferenceImages.asyncIterate(
       this.innerApiCalls['listReferenceImages'] as GaxCall,
       request as {},
@@ -2890,11 +3405,33 @@ export class ProductSearchClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listProductsInProductSet(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vision.v1p4beta1.IListProductsInProductSetRequest,
+          | protos.google.cloud.vision.v1p4beta1.IListProductsInProductSetResponse
+          | null
+          | undefined,
+          protos.google.cloud.vision.v1p4beta1.IProduct
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProductsInProductSet values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProductsInProductSet request %j', request);
+    return this.innerApiCalls
+      .listProductsInProductSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vision.v1p4beta1.IProduct[],
+          protos.google.cloud.vision.v1p4beta1.IListProductsInProductSetRequest | null,
+          protos.google.cloud.vision.v1p4beta1.IListProductsInProductSetResponse,
+        ]) => {
+          this._log.info('listProductsInProductSet values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2936,6 +3473,7 @@ export class ProductSearchClient {
     const defaultCallSettings = this._defaults['listProductsInProductSet'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProductsInProductSet stream %j', request);
     return this.descriptors.page.listProductsInProductSet.createStream(
       this.innerApiCalls.listProductsInProductSet as GaxCall,
       request,
@@ -2985,6 +3523,7 @@ export class ProductSearchClient {
     const defaultCallSettings = this._defaults['listProductsInProductSet'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProductsInProductSet iterate %j', request);
     return this.descriptors.page.listProductsInProductSet.asyncIterate(
       this.innerApiCalls['listProductsInProductSet'] as GaxCall,
       request as {},
@@ -3216,6 +3755,7 @@ export class ProductSearchClient {
   close(): Promise<void> {
     if (this.productSearchStub && !this._terminated) {
       return this.productSearchStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

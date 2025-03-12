@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -52,6 +53,8 @@ export class WebRiskServiceV1Beta1Client {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('web-risk');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -85,7 +88,7 @@ export class WebRiskServiceV1Beta1Client {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -457,7 +460,36 @@ export class WebRiskServiceV1Beta1Client {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.computeThreatListDiff(request, options, callback);
+    this._log.info('computeThreatListDiff request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.webrisk.v1beta1.IComputeThreatListDiffResponse,
+          | protos.google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('computeThreatListDiff response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .computeThreatListDiff(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.webrisk.v1beta1.IComputeThreatListDiffResponse,
+          (
+            | protos.google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('computeThreatListDiff response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * This method is used to check whether a URI is on a given threatList.
@@ -539,7 +571,33 @@ export class WebRiskServiceV1Beta1Client {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.searchUris(request, options, callback);
+    this._log.info('searchUris request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.webrisk.v1beta1.ISearchUrisResponse,
+          | protos.google.cloud.webrisk.v1beta1.ISearchUrisRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('searchUris response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .searchUris(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.webrisk.v1beta1.ISearchUrisResponse,
+          protos.google.cloud.webrisk.v1beta1.ISearchUrisRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('searchUris response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the full hashes that match the requested hash prefix.
@@ -632,7 +690,33 @@ export class WebRiskServiceV1Beta1Client {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.searchHashes(request, options, callback);
+    this._log.info('searchHashes request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.webrisk.v1beta1.ISearchHashesResponse,
+          | protos.google.cloud.webrisk.v1beta1.ISearchHashesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('searchHashes response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .searchHashes(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.webrisk.v1beta1.ISearchHashesResponse,
+          protos.google.cloud.webrisk.v1beta1.ISearchHashesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('searchHashes response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -644,6 +728,7 @@ export class WebRiskServiceV1Beta1Client {
   close(): Promise<void> {
     if (this.webRiskServiceV1Beta1Stub && !this._terminated) {
       return this.webRiskServiceV1Beta1Stub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
