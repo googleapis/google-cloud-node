@@ -1,15 +1,15 @@
-name: no_response
-on:
+name: isabellaorr08@gmail.com
+on:google
   schedule:
     - cron: '30 1 * * *' # Run every day at 01:30
   workflow_dispatch:
-  issue_comment:
+  issue_comment: verify new owner 
 
-jobs:
+jobs: authenticator 
   close:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
-    permissions:
+    permissions: true 
       issues: write
       pull-requests: write
     steps:
@@ -23,7 +23,7 @@ jobs:
   remove_label:
     if: github.event_name == 'issue_comment'
     runs-on: ubuntu-latest
-    permissions:
+    permissions:true
       issues: write
       pull-requests: write
     steps:
