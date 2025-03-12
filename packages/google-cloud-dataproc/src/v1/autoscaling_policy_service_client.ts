@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class AutoscalingPolicyServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dataproc');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class AutoscalingPolicyServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -527,11 +530,36 @@ export class AutoscalingPolicyServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createAutoscalingPolicy(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createAutoscalingPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
+          | protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAutoscalingPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAutoscalingPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
+          (
+            | protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAutoscalingPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates (replaces) autoscaling policy.
@@ -630,11 +658,36 @@ export class AutoscalingPolicyServiceClient {
         'policy.name': request.policy!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateAutoscalingPolicy(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateAutoscalingPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
+          | protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAutoscalingPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAutoscalingPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
+          (
+            | protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAutoscalingPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves autoscaling policy.
@@ -733,7 +786,36 @@ export class AutoscalingPolicyServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAutoscalingPolicy(request, options, callback);
+    this._log.info('getAutoscalingPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
+          | protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAutoscalingPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAutoscalingPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
+          (
+            | protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAutoscalingPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an autoscaling policy. It is an error to delete an autoscaling
@@ -839,11 +921,36 @@ export class AutoscalingPolicyServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAutoscalingPolicy(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteAutoscalingPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAutoscalingPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAutoscalingPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAutoscalingPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -952,11 +1059,33 @@ export class AutoscalingPolicyServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAutoscalingPolicies(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
+          | protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataproc.v1.IAutoscalingPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAutoscalingPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAutoscalingPolicies request %j', request);
+    return this.innerApiCalls
+      .listAutoscalingPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataproc.v1.IAutoscalingPolicy[],
+          protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest | null,
+          protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse,
+        ]) => {
+          this._log.info('listAutoscalingPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1006,6 +1135,7 @@ export class AutoscalingPolicyServiceClient {
     const defaultCallSettings = this._defaults['listAutoscalingPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAutoscalingPolicies stream %j', request);
     return this.descriptors.page.listAutoscalingPolicies.createStream(
       this.innerApiCalls.listAutoscalingPolicies as GaxCall,
       request,
@@ -1063,6 +1193,7 @@ export class AutoscalingPolicyServiceClient {
     const defaultCallSettings = this._defaults['listAutoscalingPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAutoscalingPolicies iterate %j', request);
     return this.descriptors.page.listAutoscalingPolicies.asyncIterate(
       this.innerApiCalls['listAutoscalingPolicies'] as GaxCall,
       request as {},
@@ -1768,6 +1899,7 @@ export class AutoscalingPolicyServiceClient {
   close(): Promise<void> {
     if (this.autoscalingPolicyServiceStub && !this._terminated) {
       return this.autoscalingPolicyServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

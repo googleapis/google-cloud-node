@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -82,6 +83,8 @@ export class CertificateManagerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('certificate-manager');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -118,7 +121,7 @@ export class CertificateManagerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -851,7 +854,36 @@ export class CertificateManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCertificate(request, options, callback);
+    this._log.info('getCertificate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificate,
+          | protos.google.cloud.certificatemanager.v1.IGetCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCertificate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.certificatemanager.v1.ICertificate,
+          (
+            | protos.google.cloud.certificatemanager.v1.IGetCertificateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCertificate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single CertificateMap.
@@ -948,7 +980,36 @@ export class CertificateManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCertificateMap(request, options, callback);
+    this._log.info('getCertificateMap request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificateMap,
+          | protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCertificateMap response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCertificateMap(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.certificatemanager.v1.ICertificateMap,
+          (
+            | protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCertificateMap response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single CertificateMapEntry.
@@ -1045,11 +1106,36 @@ export class CertificateManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCertificateMapEntry(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getCertificateMapEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
+          | protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCertificateMapEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCertificateMapEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
+          (
+            | protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCertificateMapEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single DnsAuthorization.
@@ -1146,7 +1232,36 @@ export class CertificateManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDnsAuthorization(request, options, callback);
+    this._log.info('getDnsAuthorization request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
+          | protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDnsAuthorization response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDnsAuthorization(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
+          (
+            | protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDnsAuthorization response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single CertificateIssuanceConfig.
@@ -1243,11 +1358,36 @@ export class CertificateManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCertificateIssuanceConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getCertificateIssuanceConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+          | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCertificateIssuanceConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCertificateIssuanceConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+          (
+            | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCertificateIssuanceConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single TrustConfig.
@@ -1344,7 +1484,36 @@ export class CertificateManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTrustConfig(request, options, callback);
+    this._log.info('getTrustConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.certificatemanager.v1.ITrustConfig,
+          | protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTrustConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTrustConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.certificatemanager.v1.ITrustConfig,
+          (
+            | protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTrustConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1452,7 +1621,37 @@ export class CertificateManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCertificate(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificate,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createCertificate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCertificate request %j', request);
+    return this.innerApiCalls
+      .createCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificate,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCertificate response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createCertificate()`.
@@ -1473,6 +1672,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('createCertificate long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1592,7 +1792,37 @@ export class CertificateManagerClient {
         'certificate.name': request.certificate!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateCertificate(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificate,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateCertificate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCertificate request %j', request);
+    return this.innerApiCalls
+      .updateCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificate,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCertificate response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateCertificate()`.
@@ -1613,6 +1843,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('updateCertificate long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1729,7 +1960,37 @@ export class CertificateManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteCertificate(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCertificate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCertificate request %j', request);
+    return this.innerApiCalls
+      .deleteCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCertificate response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteCertificate()`.
@@ -1750,6 +2011,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteCertificate long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1870,7 +2132,37 @@ export class CertificateManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCertificateMap(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificateMap,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createCertificateMap response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCertificateMap request %j', request);
+    return this.innerApiCalls
+      .createCertificateMap(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificateMap,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCertificateMap response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createCertificateMap()`.
@@ -1891,6 +2183,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('createCertificateMap long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2010,7 +2303,37 @@ export class CertificateManagerClient {
         'certificate_map.name': request.certificateMap!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateCertificateMap(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificateMap,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateCertificateMap response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCertificateMap request %j', request);
+    return this.innerApiCalls
+      .updateCertificateMap(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificateMap,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCertificateMap response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateCertificateMap()`.
@@ -2031,6 +2354,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('updateCertificateMap long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2149,7 +2473,37 @@ export class CertificateManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteCertificateMap(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCertificateMap response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCertificateMap request %j', request);
+    return this.innerApiCalls
+      .deleteCertificateMap(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCertificateMap response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteCertificateMap()`.
@@ -2170,6 +2524,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteCertificateMap long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2290,11 +2645,37 @@ export class CertificateManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCertificateMapEntry(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createCertificateMapEntry response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCertificateMapEntry request %j', request);
+    return this.innerApiCalls
+      .createCertificateMapEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCertificateMapEntry response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createCertificateMapEntry()`.
@@ -2315,6 +2696,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('createCertificateMapEntry long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2434,11 +2816,37 @@ export class CertificateManagerClient {
         'certificate_map_entry.name': request.certificateMapEntry!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateCertificateMapEntry(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateCertificateMapEntry response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCertificateMapEntry request %j', request);
+    return this.innerApiCalls
+      .updateCertificateMapEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCertificateMapEntry response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateCertificateMapEntry()`.
@@ -2459,6 +2867,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('updateCertificateMapEntry long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2575,11 +2984,37 @@ export class CertificateManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteCertificateMapEntry(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCertificateMapEntry response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCertificateMapEntry request %j', request);
+    return this.innerApiCalls
+      .deleteCertificateMapEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCertificateMapEntry response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteCertificateMapEntry()`.
@@ -2600,6 +3035,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteCertificateMapEntry long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2720,11 +3156,37 @@ export class CertificateManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDnsAuthorization(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDnsAuthorization response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDnsAuthorization request %j', request);
+    return this.innerApiCalls
+      .createDnsAuthorization(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDnsAuthorization response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createDnsAuthorization()`.
@@ -2745,6 +3207,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('createDnsAuthorization long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2864,11 +3327,37 @@ export class CertificateManagerClient {
         'dns_authorization.name': request.dnsAuthorization!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDnsAuthorization(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateDnsAuthorization response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateDnsAuthorization request %j', request);
+    return this.innerApiCalls
+      .updateDnsAuthorization(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDnsAuthorization response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateDnsAuthorization()`.
@@ -2889,6 +3378,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('updateDnsAuthorization long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3005,11 +3495,37 @@ export class CertificateManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDnsAuthorization(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDnsAuthorization response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDnsAuthorization request %j', request);
+    return this.innerApiCalls
+      .deleteDnsAuthorization(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDnsAuthorization response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDnsAuthorization()`.
@@ -3030,6 +3546,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteDnsAuthorization long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3150,11 +3667,43 @@ export class CertificateManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCertificateIssuanceConfig(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'createCertificateIssuanceConfig response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCertificateIssuanceConfig request %j', request);
+    return this.innerApiCalls
+      .createCertificateIssuanceConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createCertificateIssuanceConfig response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createCertificateIssuanceConfig()`.
@@ -3175,6 +3724,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('createCertificateIssuanceConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3291,11 +3841,43 @@ export class CertificateManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteCertificateIssuanceConfig(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteCertificateIssuanceConfig response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCertificateIssuanceConfig request %j', request);
+    return this.innerApiCalls
+      .deleteCertificateIssuanceConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteCertificateIssuanceConfig response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteCertificateIssuanceConfig()`.
@@ -3316,6 +3898,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteCertificateIssuanceConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3437,7 +4020,37 @@ export class CertificateManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createTrustConfig(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ITrustConfig,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createTrustConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createTrustConfig request %j', request);
+    return this.innerApiCalls
+      .createTrustConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ITrustConfig,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTrustConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createTrustConfig()`.
@@ -3458,6 +4071,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('createTrustConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3577,7 +4191,37 @@ export class CertificateManagerClient {
         'trust_config.name': request.trustConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateTrustConfig(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ITrustConfig,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateTrustConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateTrustConfig request %j', request);
+    return this.innerApiCalls
+      .updateTrustConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ITrustConfig,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTrustConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateTrustConfig()`.
@@ -3598,6 +4242,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('updateTrustConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3718,7 +4363,37 @@ export class CertificateManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteTrustConfig(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteTrustConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTrustConfig request %j', request);
+    return this.innerApiCalls
+      .deleteTrustConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTrustConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteTrustConfig()`.
@@ -3739,6 +4414,7 @@ export class CertificateManagerClient {
       protos.google.cloud.certificatemanager.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteTrustConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3858,7 +4534,33 @@ export class CertificateManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCertificates(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
+          | protos.google.cloud.certificatemanager.v1.IListCertificatesResponse
+          | null
+          | undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificate
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCertificates values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCertificates request %j', request);
+    return this.innerApiCalls
+      .listCertificates(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.certificatemanager.v1.ICertificate[],
+          protos.google.cloud.certificatemanager.v1.IListCertificatesRequest | null,
+          protos.google.cloud.certificatemanager.v1.IListCertificatesResponse,
+        ]) => {
+          this._log.info('listCertificates values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3906,6 +4608,7 @@ export class CertificateManagerClient {
     const defaultCallSettings = this._defaults['listCertificates'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCertificates stream %j', request);
     return this.descriptors.page.listCertificates.createStream(
       this.innerApiCalls.listCertificates as GaxCall,
       request,
@@ -3961,6 +4664,7 @@ export class CertificateManagerClient {
     const defaultCallSettings = this._defaults['listCertificates'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCertificates iterate %j', request);
     return this.descriptors.page.listCertificates.asyncIterate(
       this.innerApiCalls['listCertificates'] as GaxCall,
       request as {},
@@ -4071,7 +4775,33 @@ export class CertificateManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCertificateMaps(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
+          | protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse
+          | null
+          | undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateMap
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCertificateMaps values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCertificateMaps request %j', request);
+    return this.innerApiCalls
+      .listCertificateMaps(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.certificatemanager.v1.ICertificateMap[],
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest | null,
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse,
+        ]) => {
+          this._log.info('listCertificateMaps values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4119,6 +4849,7 @@ export class CertificateManagerClient {
     const defaultCallSettings = this._defaults['listCertificateMaps'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCertificateMaps stream %j', request);
     return this.descriptors.page.listCertificateMaps.createStream(
       this.innerApiCalls.listCertificateMaps as GaxCall,
       request,
@@ -4174,6 +4905,7 @@ export class CertificateManagerClient {
     const defaultCallSettings = this._defaults['listCertificateMaps'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCertificateMaps iterate %j', request);
     return this.descriptors.page.listCertificateMaps.asyncIterate(
       this.innerApiCalls['listCertificateMaps'] as GaxCall,
       request as {},
@@ -4289,11 +5021,33 @@ export class CertificateManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCertificateMapEntries(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
+          | protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCertificateMapEntries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCertificateMapEntries request %j', request);
+    return this.innerApiCalls
+      .listCertificateMapEntries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry[],
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest | null,
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse,
+        ]) => {
+          this._log.info('listCertificateMapEntries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4346,6 +5100,7 @@ export class CertificateManagerClient {
     const defaultCallSettings = this._defaults['listCertificateMapEntries'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCertificateMapEntries stream %j', request);
     return this.descriptors.page.listCertificateMapEntries.createStream(
       this.innerApiCalls.listCertificateMapEntries as GaxCall,
       request,
@@ -4406,6 +5161,7 @@ export class CertificateManagerClient {
     const defaultCallSettings = this._defaults['listCertificateMapEntries'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCertificateMapEntries iterate %j', request);
     return this.descriptors.page.listCertificateMapEntries.asyncIterate(
       this.innerApiCalls['listCertificateMapEntries'] as GaxCall,
       request as {},
@@ -4516,7 +5272,33 @@ export class CertificateManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDnsAuthorizations(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
+          | protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.certificatemanager.v1.IDnsAuthorization
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDnsAuthorizations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDnsAuthorizations request %j', request);
+    return this.innerApiCalls
+      .listDnsAuthorizations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.certificatemanager.v1.IDnsAuthorization[],
+          protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest | null,
+          protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse,
+        ]) => {
+          this._log.info('listDnsAuthorizations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4564,6 +5346,7 @@ export class CertificateManagerClient {
     const defaultCallSettings = this._defaults['listDnsAuthorizations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDnsAuthorizations stream %j', request);
     return this.descriptors.page.listDnsAuthorizations.createStream(
       this.innerApiCalls.listDnsAuthorizations as GaxCall,
       request,
@@ -4619,6 +5402,7 @@ export class CertificateManagerClient {
     const defaultCallSettings = this._defaults['listDnsAuthorizations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDnsAuthorizations iterate %j', request);
     return this.descriptors.page.listDnsAuthorizations.asyncIterate(
       this.innerApiCalls['listDnsAuthorizations'] as GaxCall,
       request as {},
@@ -4730,11 +5514,33 @@ export class CertificateManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCertificateIssuanceConfigs(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+          | protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCertificateIssuanceConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCertificateIssuanceConfigs request %j', request);
+    return this.innerApiCalls
+      .listCertificateIssuanceConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig[],
+          protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest | null,
+          protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse,
+        ]) => {
+          this._log.info('listCertificateIssuanceConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4784,6 +5590,7 @@ export class CertificateManagerClient {
       this._defaults['listCertificateIssuanceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCertificateIssuanceConfigs stream %j', request);
     return this.descriptors.page.listCertificateIssuanceConfigs.createStream(
       this.innerApiCalls.listCertificateIssuanceConfigs as GaxCall,
       request,
@@ -4841,6 +5648,7 @@ export class CertificateManagerClient {
       this._defaults['listCertificateIssuanceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCertificateIssuanceConfigs iterate %j', request);
     return this.descriptors.page.listCertificateIssuanceConfigs.asyncIterate(
       this.innerApiCalls['listCertificateIssuanceConfigs'] as GaxCall,
       request as {},
@@ -4951,7 +5759,33 @@ export class CertificateManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTrustConfigs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
+          | protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.certificatemanager.v1.ITrustConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTrustConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTrustConfigs request %j', request);
+    return this.innerApiCalls
+      .listTrustConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.certificatemanager.v1.ITrustConfig[],
+          protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest | null,
+          protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse,
+        ]) => {
+          this._log.info('listTrustConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4999,6 +5833,7 @@ export class CertificateManagerClient {
     const defaultCallSettings = this._defaults['listTrustConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTrustConfigs stream %j', request);
     return this.descriptors.page.listTrustConfigs.createStream(
       this.innerApiCalls.listTrustConfigs as GaxCall,
       request,
@@ -5054,6 +5889,7 @@ export class CertificateManagerClient {
     const defaultCallSettings = this._defaults['listTrustConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTrustConfigs iterate %j', request);
     return this.descriptors.page.listTrustConfigs.asyncIterate(
       this.innerApiCalls['listTrustConfigs'] as GaxCall,
       request as {},
@@ -5777,6 +6613,7 @@ export class CertificateManagerClient {
   close(): Promise<void> {
     if (this.certificateManagerStub && !this._terminated) {
       return this.certificateManagerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
