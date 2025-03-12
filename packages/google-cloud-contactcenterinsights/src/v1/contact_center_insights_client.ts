@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class ContactCenterInsightsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('contact-center-insights');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class ContactCenterInsightsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -914,7 +917,36 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createConversation(request, options, callback);
+    this._log.info('createConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IConversation,
+          | protos.google.cloud.contactcenterinsights.v1.ICreateConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IConversation,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.ICreateConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createConversation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a conversation.
@@ -1025,7 +1057,36 @@ export class ContactCenterInsightsClient {
         'conversation.name': request.conversation!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateConversation(request, options, callback);
+    this._log.info('updateConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IConversation,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IConversation,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IUpdateConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConversation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a conversation.
@@ -1123,7 +1184,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getConversation(request, options, callback);
+    this._log.info('getConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IConversation,
+          | protos.google.cloud.contactcenterinsights.v1.IGetConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IConversation,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IGetConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConversation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a conversation.
@@ -1223,7 +1313,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteConversation(request, options, callback);
+    this._log.info('deleteConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IDeleteConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConversation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an analysis.
@@ -1319,7 +1438,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAnalysis(request, options, callback);
+    this._log.info('getAnalysis request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IAnalysis,
+          | protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAnalysis response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAnalysis(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IAnalysis,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAnalysis response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an analysis.
@@ -1415,7 +1563,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAnalysis(request, options, callback);
+    this._log.info('deleteAnalysis request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAnalysis response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAnalysis(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAnalysis response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an issue model.
@@ -1513,7 +1690,36 @@ export class ContactCenterInsightsClient {
         'issue_model.name': request.issueModel!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateIssueModel(request, options, callback);
+    this._log.info('updateIssueModel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateIssueModel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateIssueModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateIssueModel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an issue model.
@@ -1609,7 +1815,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIssueModel(request, options, callback);
+    this._log.info('getIssueModel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+          | protos.google.cloud.contactcenterinsights.v1.IGetIssueModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIssueModel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIssueModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IGetIssueModelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getIssueModel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists issue models.
@@ -1705,7 +1940,36 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listIssueModels(request, options, callback);
+    this._log.info('listIssueModels request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IListIssueModelsResponse,
+          | protos.google.cloud.contactcenterinsights.v1.IListIssueModelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listIssueModels response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listIssueModels(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IListIssueModelsResponse,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IListIssueModelsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listIssueModels response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an issue.
@@ -1795,7 +2059,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIssue(request, options, callback);
+    this._log.info('getIssue request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IIssue,
+          | protos.google.cloud.contactcenterinsights.v1.IGetIssueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIssue response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIssue(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IIssue,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IGetIssueRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getIssue response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists issues.
@@ -1891,7 +2184,36 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listIssues(request, options, callback);
+    this._log.info('listIssues request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IListIssuesResponse,
+          | protos.google.cloud.contactcenterinsights.v1.IListIssuesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listIssues response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listIssues(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IListIssuesResponse,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IListIssuesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listIssues response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an issue.
@@ -1989,7 +2311,36 @@ export class ContactCenterInsightsClient {
         'issue.name': request.issue!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateIssue(request, options, callback);
+    this._log.info('updateIssue request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IIssue,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateIssue response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateIssue(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IIssue,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateIssue response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an issue.
@@ -2085,7 +2436,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteIssue(request, options, callback);
+    this._log.info('deleteIssue request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteIssueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteIssue response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteIssue(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IDeleteIssueRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteIssue response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an issue model's statistics.
@@ -2181,11 +2561,36 @@ export class ContactCenterInsightsClient {
         issue_model: request.issueModel ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.calculateIssueModelStats(
-      request,
-      options,
-      callback
-    );
+    this._log.info('calculateIssueModelStats request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.ICalculateIssueModelStatsResponse,
+          | protos.google.cloud.contactcenterinsights.v1.ICalculateIssueModelStatsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('calculateIssueModelStats response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .calculateIssueModelStats(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.ICalculateIssueModelStatsResponse,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.ICalculateIssueModelStatsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('calculateIssueModelStats response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a phrase matcher.
@@ -2286,7 +2691,36 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createPhraseMatcher(request, options, callback);
+    this._log.info('createPhraseMatcher request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IPhraseMatcher,
+          | protos.google.cloud.contactcenterinsights.v1.ICreatePhraseMatcherRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createPhraseMatcher response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createPhraseMatcher(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IPhraseMatcher,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.ICreatePhraseMatcherRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createPhraseMatcher response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a phrase matcher.
@@ -2382,7 +2816,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPhraseMatcher(request, options, callback);
+    this._log.info('getPhraseMatcher request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IPhraseMatcher,
+          | protos.google.cloud.contactcenterinsights.v1.IGetPhraseMatcherRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPhraseMatcher response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPhraseMatcher(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IPhraseMatcher,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IGetPhraseMatcherRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPhraseMatcher response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a phrase matcher.
@@ -2478,7 +2941,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePhraseMatcher(request, options, callback);
+    this._log.info('deletePhraseMatcher request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeletePhraseMatcherRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deletePhraseMatcher response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deletePhraseMatcher(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IDeletePhraseMatcherRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePhraseMatcher response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a phrase matcher.
@@ -2576,7 +3068,36 @@ export class ContactCenterInsightsClient {
         'phrase_matcher.name': request.phraseMatcher!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updatePhraseMatcher(request, options, callback);
+    this._log.info('updatePhraseMatcher request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IPhraseMatcher,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updatePhraseMatcher response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updatePhraseMatcher(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IPhraseMatcher,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePhraseMatcher response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets conversation statistics.
@@ -2675,7 +3196,36 @@ export class ContactCenterInsightsClient {
         location: request.location ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.calculateStats(request, options, callback);
+    this._log.info('calculateStats request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.ICalculateStatsResponse,
+          | protos.google.cloud.contactcenterinsights.v1.ICalculateStatsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('calculateStats response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .calculateStats(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.ICalculateStatsResponse,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.ICalculateStatsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('calculateStats response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets project-level settings.
@@ -2771,7 +3321,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSettings(request, options, callback);
+    this._log.info('getSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.ISettings,
+          | protos.google.cloud.contactcenterinsights.v1.IGetSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.ISettings,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IGetSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates project-level settings.
@@ -2869,7 +3448,36 @@ export class ContactCenterInsightsClient {
         'settings.name': request.settings!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSettings(request, options, callback);
+    this._log.info('updateSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.ISettings,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.ISettings,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IUpdateSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a analysis rule.
@@ -2970,7 +3578,36 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createAnalysisRule(request, options, callback);
+    this._log.info('createAnalysisRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+          | protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAnalysisRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAnalysisRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAnalysisRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a analysis rule.
@@ -3066,7 +3703,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAnalysisRule(request, options, callback);
+    this._log.info('getAnalysisRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+          | protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAnalysisRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAnalysisRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAnalysisRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a analysis rule.
@@ -3166,7 +3832,36 @@ export class ContactCenterInsightsClient {
         'analysis_rule.name': request.analysisRule!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateAnalysisRule(request, options, callback);
+    this._log.info('updateAnalysisRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAnalysisRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAnalysisRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IAnalysisRule,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAnalysisRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a analysis rule.
@@ -3262,7 +3957,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAnalysisRule(request, options, callback);
+    this._log.info('deleteAnalysisRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAnalysisRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAnalysisRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAnalysisRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets location-level encryption key specification.
@@ -3358,7 +4082,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEncryptionSpec(request, options, callback);
+    this._log.info('getEncryptionSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec,
+          | protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEncryptionSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEncryptionSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEncryptionSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a view.
@@ -3459,7 +4212,36 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createView(request, options, callback);
+    this._log.info('createView request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IView,
+          | protos.google.cloud.contactcenterinsights.v1.ICreateViewRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createView response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createView(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IView,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.ICreateViewRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createView response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a view.
@@ -3549,7 +4331,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getView(request, options, callback);
+    this._log.info('getView request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IView,
+          | protos.google.cloud.contactcenterinsights.v1.IGetViewRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getView response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getView(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IView,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IGetViewRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getView response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a view.
@@ -3647,7 +4458,36 @@ export class ContactCenterInsightsClient {
         'view.name': request.view!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateView(request, options, callback);
+    this._log.info('updateView request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IView,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateViewRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateView response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateView(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IView,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IUpdateViewRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateView response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a view.
@@ -3743,7 +4583,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteView(request, options, callback);
+    this._log.info('deleteView request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteViewRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteView response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteView(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IDeleteViewRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteView response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create a QaQuestion.
@@ -3848,7 +4717,36 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createQaQuestion(request, options, callback);
+    this._log.info('createQaQuestion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+          | protos.google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createQaQuestion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createQaQuestion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createQaQuestion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a QaQuestion.
@@ -3944,7 +4842,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getQaQuestion(request, options, callback);
+    this._log.info('getQaQuestion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+          | protos.google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getQaQuestion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getQaQuestion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getQaQuestion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a QaQuestion.
@@ -4051,7 +4978,36 @@ export class ContactCenterInsightsClient {
         'qa_question.name': request.qaQuestion!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateQaQuestion(request, options, callback);
+    this._log.info('updateQaQuestion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateQaQuestion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateQaQuestion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IQaQuestion,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateQaQuestion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a QaQuestion.
@@ -4147,7 +5103,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteQaQuestion(request, options, callback);
+    this._log.info('deleteQaQuestion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteQaQuestion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteQaQuestion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteQaQuestion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create a QaScorecard.
@@ -4252,7 +5237,36 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createQaScorecard(request, options, callback);
+    this._log.info('createQaScorecard request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+          | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createQaScorecard response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createQaScorecard(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createQaScorecard response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a QaScorecard.
@@ -4348,7 +5362,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getQaScorecard(request, options, callback);
+    this._log.info('getQaScorecard request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+          | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getQaScorecard response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getQaScorecard(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getQaScorecard response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a QaScorecard.
@@ -4451,7 +5494,36 @@ export class ContactCenterInsightsClient {
         'qa_scorecard.name': request.qaScorecard!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateQaScorecard(request, options, callback);
+    this._log.info('updateQaScorecard request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateQaScorecard response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateQaScorecard(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecard,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateQaScorecard response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a QaScorecard.
@@ -4550,7 +5622,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteQaScorecard(request, options, callback);
+    this._log.info('deleteQaScorecard request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteQaScorecard response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteQaScorecard(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteQaScorecard response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a QaScorecardRevision.
@@ -4655,11 +5756,36 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createQaScorecardRevision(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createQaScorecardRevision request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+          | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createQaScorecardRevision response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createQaScorecardRevision(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createQaScorecardRevision response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a QaScorecardRevision.
@@ -4755,11 +5881,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getQaScorecardRevision(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getQaScorecardRevision request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+          | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getQaScorecardRevision response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getQaScorecardRevision(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getQaScorecardRevision response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deploy a QaScorecardRevision.
@@ -4855,11 +6006,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deployQaScorecardRevision(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deployQaScorecardRevision request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+          | protos.google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deployQaScorecardRevision response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deployQaScorecardRevision(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deployQaScorecardRevision response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Undeploy a QaScorecardRevision.
@@ -4955,11 +6131,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.undeployQaScorecardRevision(
-      request,
-      options,
-      callback
-    );
+    this._log.info('undeployQaScorecardRevision request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+          | protos.google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('undeployQaScorecardRevision response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .undeployQaScorecardRevision(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('undeployQaScorecardRevision response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a QaScorecardRevision.
@@ -5059,11 +6260,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteQaScorecardRevision(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteQaScorecardRevision request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteQaScorecardRevision response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteQaScorecardRevision(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteQaScorecardRevision response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create feedback label.
@@ -5164,7 +6390,36 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createFeedbackLabel(request, options, callback);
+    this._log.info('createFeedbackLabel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+          | protos.google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createFeedbackLabel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createFeedbackLabel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createFeedbackLabel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get feedback label.
@@ -5260,7 +6515,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getFeedbackLabel(request, options, callback);
+    this._log.info('getFeedbackLabel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+          | protos.google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFeedbackLabel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFeedbackLabel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getFeedbackLabel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update feedback label.
@@ -5358,7 +6642,36 @@ export class ContactCenterInsightsClient {
         'feedback_label.name': request.feedbackLabel!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateFeedbackLabel(request, options, callback);
+    this._log.info('updateFeedbackLabel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateFeedbackLabel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateFeedbackLabel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFeedbackLabel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Delete feedback label.
@@ -5454,7 +6767,36 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteFeedbackLabel(request, options, callback);
+    this._log.info('deleteFeedbackLabel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteFeedbackLabel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteFeedbackLabel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFeedbackLabel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -5574,7 +6916,37 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.uploadConversation(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IConversation,
+            protos.google.cloud.contactcenterinsights.v1.IUploadConversationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('uploadConversation response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('uploadConversation request %j', request);
+    return this.innerApiCalls
+      .uploadConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IConversation,
+            protos.google.cloud.contactcenterinsights.v1.IUploadConversationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('uploadConversation response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `uploadConversation()`.
@@ -5595,6 +6967,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.UploadConversationMetadata
     >
   > {
+    this._log.info('uploadConversation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5713,7 +7086,37 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createAnalysis(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IAnalysis,
+            protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAnalysis response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAnalysis request %j', request);
+    return this.innerApiCalls
+      .createAnalysis(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IAnalysis,
+            protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAnalysis response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAnalysis()`.
@@ -5734,6 +7137,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.CreateAnalysisOperationMetadata
     >
   > {
+    this._log.info('createAnalysis long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5857,11 +7261,37 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.bulkAnalyzeConversations(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('bulkAnalyzeConversations response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('bulkAnalyzeConversations request %j', request);
+    return this.innerApiCalls
+      .bulkAnalyzeConversations(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('bulkAnalyzeConversations response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `bulkAnalyzeConversations()`.
@@ -5882,6 +7312,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata
     >
   > {
+    this._log.info('bulkAnalyzeConversations long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6007,11 +7438,37 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.bulkDeleteConversations(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('bulkDeleteConversations response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('bulkDeleteConversations request %j', request);
+    return this.innerApiCalls
+      .bulkDeleteConversations(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('bulkDeleteConversations response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `bulkDeleteConversations()`.
@@ -6032,6 +7489,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
     >
   > {
+    this._log.info('bulkDeleteConversations long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6166,7 +7624,37 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.ingestConversations(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IIngestConversationsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IIngestConversationsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('ingestConversations response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('ingestConversations request %j', request);
+    return this.innerApiCalls
+      .ingestConversations(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IIngestConversationsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IIngestConversationsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('ingestConversations response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `ingestConversations()`.
@@ -6187,6 +7675,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.IngestConversationsMetadata
     >
   > {
+    this._log.info('ingestConversations long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6313,7 +7802,37 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportInsightsData(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IExportInsightsDataResponse,
+            protos.google.cloud.contactcenterinsights.v1.IExportInsightsDataMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportInsightsData response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportInsightsData request %j', request);
+    return this.innerApiCalls
+      .exportInsightsData(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IExportInsightsDataResponse,
+            protos.google.cloud.contactcenterinsights.v1.IExportInsightsDataMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportInsightsData response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportInsightsData()`.
@@ -6334,6 +7853,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataMetadata
     >
   > {
+    this._log.info('exportInsightsData long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6451,7 +7971,37 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createIssueModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+            protos.google.cloud.contactcenterinsights.v1.ICreateIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createIssueModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createIssueModel request %j', request);
+    return this.innerApiCalls
+      .createIssueModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+            protos.google.cloud.contactcenterinsights.v1.ICreateIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createIssueModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createIssueModel()`.
@@ -6472,6 +8022,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
     >
   > {
+    this._log.info('createIssueModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6587,7 +8138,37 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteIssueModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.contactcenterinsights.v1.IDeleteIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteIssueModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteIssueModel request %j', request);
+    return this.innerApiCalls
+      .deleteIssueModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.contactcenterinsights.v1.IDeleteIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteIssueModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteIssueModel()`.
@@ -6608,6 +8189,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
     >
   > {
+    this._log.info('deleteIssueModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6724,7 +8306,37 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deployIssueModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelResponse,
+            protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deployIssueModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deployIssueModel request %j', request);
+    return this.innerApiCalls
+      .deployIssueModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelResponse,
+            protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deployIssueModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deployIssueModel()`.
@@ -6745,6 +8357,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
     >
   > {
+    this._log.info('deployIssueModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6861,7 +8474,37 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.undeployIssueModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelResponse,
+            protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('undeployIssueModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('undeployIssueModel request %j', request);
+    return this.innerApiCalls
+      .undeployIssueModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelResponse,
+            protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('undeployIssueModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `undeployIssueModel()`.
@@ -6882,6 +8525,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
     >
   > {
+    this._log.info('undeployIssueModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6999,7 +8643,37 @@ export class ContactCenterInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportIssueModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+            protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportIssueModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportIssueModel request %j', request);
+    return this.innerApiCalls
+      .exportIssueModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+            protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportIssueModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportIssueModel()`.
@@ -7020,6 +8694,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
     >
   > {
+    this._log.info('exportIssueModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7141,7 +8816,37 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importIssueModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+            protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importIssueModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importIssueModel request %j', request);
+    return this.innerApiCalls
+      .importIssueModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+            protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importIssueModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importIssueModel()`.
@@ -7162,6 +8867,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
     >
   > {
+    this._log.info('importIssueModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7284,11 +8990,37 @@ export class ContactCenterInsightsClient {
         'encryption_spec.name': request.encryptionSpec!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.initializeEncryptionSpec(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+            protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('initializeEncryptionSpec response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('initializeEncryptionSpec request %j', request);
+    return this.innerApiCalls
+      .initializeEncryptionSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+            protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('initializeEncryptionSpec response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `initializeEncryptionSpec()`.
@@ -7309,6 +9041,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
     >
   > {
+    this._log.info('initializeEncryptionSpec long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7448,7 +9181,37 @@ export class ContactCenterInsightsClient {
         location: request.location ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.queryMetrics(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IQueryMetricsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IQueryMetricsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('queryMetrics response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('queryMetrics request %j', request);
+    return this.innerApiCalls
+      .queryMetrics(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IQueryMetricsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IQueryMetricsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('queryMetrics response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `queryMetrics()`.
@@ -7469,6 +9232,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.QueryMetricsMetadata
     >
   > {
+    this._log.info('queryMetrics long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7595,11 +9359,37 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.tuneQaScorecardRevision(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionResponse,
+            protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('tuneQaScorecardRevision response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('tuneQaScorecardRevision request %j', request);
+    return this.innerApiCalls
+      .tuneQaScorecardRevision(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionResponse,
+            protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('tuneQaScorecardRevision response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `tuneQaScorecardRevision()`.
@@ -7620,6 +9410,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata
     >
   > {
+    this._log.info('tuneQaScorecardRevision long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7741,11 +9532,37 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.bulkUploadFeedbackLabels(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('bulkUploadFeedbackLabels response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('bulkUploadFeedbackLabels request %j', request);
+    return this.innerApiCalls
+      .bulkUploadFeedbackLabels(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('bulkUploadFeedbackLabels response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `bulkUploadFeedbackLabels()`.
@@ -7766,6 +9583,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata
     >
   > {
+    this._log.info('bulkUploadFeedbackLabels long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7912,11 +9730,37 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.bulkDownloadFeedbackLabels(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('bulkDownloadFeedbackLabels response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('bulkDownloadFeedbackLabels request %j', request);
+    return this.innerApiCalls
+      .bulkDownloadFeedbackLabels(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('bulkDownloadFeedbackLabels response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `bulkDownloadFeedbackLabels()`.
@@ -7937,6 +9781,7 @@ export class ContactCenterInsightsClient {
       protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata
     >
   > {
+    this._log.info('bulkDownloadFeedbackLabels long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -8073,7 +9918,33 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listConversations(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListConversationsRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListConversationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IConversation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConversations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConversations request %j', request);
+    return this.innerApiCalls
+      .listConversations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contactcenterinsights.v1.IConversation[],
+          protos.google.cloud.contactcenterinsights.v1.IListConversationsRequest | null,
+          protos.google.cloud.contactcenterinsights.v1.IListConversationsResponse,
+        ]) => {
+          this._log.info('listConversations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -8138,6 +10009,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConversations stream %j', request);
     return this.descriptors.page.listConversations.createStream(
       this.innerApiCalls.listConversations as GaxCall,
       request,
@@ -8210,6 +10082,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConversations iterate %j', request);
     return this.descriptors.page.listConversations.asyncIterate(
       this.innerApiCalls['listConversations'] as GaxCall,
       request as {},
@@ -8319,7 +10192,33 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAnalyses(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListAnalysesRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListAnalysesResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IAnalysis
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAnalyses values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAnalyses request %j', request);
+    return this.innerApiCalls
+      .listAnalyses(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contactcenterinsights.v1.IAnalysis[],
+          protos.google.cloud.contactcenterinsights.v1.IListAnalysesRequest | null,
+          protos.google.cloud.contactcenterinsights.v1.IListAnalysesResponse,
+        ]) => {
+          this._log.info('listAnalyses values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -8366,6 +10265,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listAnalyses'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAnalyses stream %j', request);
     return this.descriptors.page.listAnalyses.createStream(
       this.innerApiCalls.listAnalyses as GaxCall,
       request,
@@ -8420,6 +10320,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listAnalyses'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAnalyses iterate %j', request);
     return this.descriptors.page.listAnalyses.asyncIterate(
       this.innerApiCalls['listAnalyses'] as GaxCall,
       request as {},
@@ -8529,7 +10430,33 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPhraseMatchers(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListPhraseMatchersRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListPhraseMatchersResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IPhraseMatcher
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPhraseMatchers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPhraseMatchers request %j', request);
+    return this.innerApiCalls
+      .listPhraseMatchers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contactcenterinsights.v1.IPhraseMatcher[],
+          protos.google.cloud.contactcenterinsights.v1.IListPhraseMatchersRequest | null,
+          protos.google.cloud.contactcenterinsights.v1.IListPhraseMatchersResponse,
+        ]) => {
+          this._log.info('listPhraseMatchers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -8576,6 +10503,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listPhraseMatchers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPhraseMatchers stream %j', request);
     return this.descriptors.page.listPhraseMatchers.createStream(
       this.innerApiCalls.listPhraseMatchers as GaxCall,
       request,
@@ -8630,6 +10558,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listPhraseMatchers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPhraseMatchers iterate %j', request);
     return this.descriptors.page.listPhraseMatchers.asyncIterate(
       this.innerApiCalls['listPhraseMatchers'] as GaxCall,
       request as {},
@@ -8736,7 +10665,33 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAnalysisRules(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IAnalysisRule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAnalysisRules values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAnalysisRules request %j', request);
+    return this.innerApiCalls
+      .listAnalysisRules(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contactcenterinsights.v1.IAnalysisRule[],
+          protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest | null,
+          protos.google.cloud.contactcenterinsights.v1.IListAnalysisRulesResponse,
+        ]) => {
+          this._log.info('listAnalysisRules values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -8780,6 +10735,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listAnalysisRules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAnalysisRules stream %j', request);
     return this.descriptors.page.listAnalysisRules.createStream(
       this.innerApiCalls.listAnalysisRules as GaxCall,
       request,
@@ -8831,6 +10787,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listAnalysisRules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAnalysisRules iterate %j', request);
     return this.descriptors.page.listAnalysisRules.asyncIterate(
       this.innerApiCalls['listAnalysisRules'] as GaxCall,
       request as {},
@@ -8937,7 +10894,33 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listViews(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListViewsRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListViewsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IView
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listViews values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listViews request %j', request);
+    return this.innerApiCalls
+      .listViews(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contactcenterinsights.v1.IView[],
+          protos.google.cloud.contactcenterinsights.v1.IListViewsRequest | null,
+          protos.google.cloud.contactcenterinsights.v1.IListViewsResponse,
+        ]) => {
+          this._log.info('listViews values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -8981,6 +10964,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listViews'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listViews stream %j', request);
     return this.descriptors.page.listViews.createStream(
       this.innerApiCalls.listViews as GaxCall,
       request,
@@ -9032,6 +11016,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listViews'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listViews iterate %j', request);
     return this.descriptors.page.listViews.asyncIterate(
       this.innerApiCalls['listViews'] as GaxCall,
       request as {},
@@ -9138,7 +11123,33 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listQaQuestions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IQaQuestion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listQaQuestions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listQaQuestions request %j', request);
+    return this.innerApiCalls
+      .listQaQuestions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contactcenterinsights.v1.IQaQuestion[],
+          protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest | null,
+          protos.google.cloud.contactcenterinsights.v1.IListQaQuestionsResponse,
+        ]) => {
+          this._log.info('listQaQuestions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -9182,6 +11193,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listQaQuestions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listQaQuestions stream %j', request);
     return this.descriptors.page.listQaQuestions.createStream(
       this.innerApiCalls.listQaQuestions as GaxCall,
       request,
@@ -9233,6 +11245,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listQaQuestions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listQaQuestions iterate %j', request);
     return this.descriptors.page.listQaQuestions.asyncIterate(
       this.innerApiCalls['listQaQuestions'] as GaxCall,
       request as {},
@@ -9339,7 +11352,33 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listQaScorecards(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecard
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listQaScorecards values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listQaScorecards request %j', request);
+    return this.innerApiCalls
+      .listQaScorecards(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecard[],
+          protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest | null,
+          protos.google.cloud.contactcenterinsights.v1.IListQaScorecardsResponse,
+        ]) => {
+          this._log.info('listQaScorecards values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -9383,6 +11422,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listQaScorecards'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listQaScorecards stream %j', request);
     return this.descriptors.page.listQaScorecards.createStream(
       this.innerApiCalls.listQaScorecards as GaxCall,
       request,
@@ -9434,6 +11474,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listQaScorecards'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listQaScorecards iterate %j', request);
     return this.descriptors.page.listQaScorecards.asyncIterate(
       this.innerApiCalls['listQaScorecards'] as GaxCall,
       request as {},
@@ -9546,11 +11587,33 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listQaScorecardRevisions(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listQaScorecardRevisions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listQaScorecardRevisions request %j', request);
+    return this.innerApiCalls
+      .listQaScorecardRevisions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision[],
+          protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest | null,
+          protos.google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsResponse,
+        ]) => {
+          this._log.info('listQaScorecardRevisions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -9600,6 +11663,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listQaScorecardRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listQaScorecardRevisions stream %j', request);
     return this.descriptors.page.listQaScorecardRevisions.createStream(
       this.innerApiCalls.listQaScorecardRevisions as GaxCall,
       request,
@@ -9657,6 +11721,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listQaScorecardRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listQaScorecardRevisions iterate %j', request);
     return this.descriptors.page.listQaScorecardRevisions.asyncIterate(
       this.innerApiCalls['listQaScorecardRevisions'] as GaxCall,
       request as {},
@@ -9779,7 +11844,33 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listFeedbackLabels(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFeedbackLabels values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFeedbackLabels request %j', request);
+    return this.innerApiCalls
+      .listFeedbackLabels(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel[],
+          protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest | null,
+          protos.google.cloud.contactcenterinsights.v1.IListFeedbackLabelsResponse,
+        ]) => {
+          this._log.info('listFeedbackLabels values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -9839,6 +11930,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listFeedbackLabels'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFeedbackLabels stream %j', request);
     return this.descriptors.page.listFeedbackLabels.createStream(
       this.innerApiCalls.listFeedbackLabels as GaxCall,
       request,
@@ -9906,6 +11998,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listFeedbackLabels'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFeedbackLabels iterate %j', request);
     return this.descriptors.page.listFeedbackLabels.asyncIterate(
       this.innerApiCalls['listFeedbackLabels'] as GaxCall,
       request as {},
@@ -10026,7 +12119,33 @@ export class ContactCenterInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAllFeedbackLabels(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAllFeedbackLabels values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAllFeedbackLabels request %j', request);
+    return this.innerApiCalls
+      .listAllFeedbackLabels(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel[],
+          protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest | null,
+          protos.google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsResponse,
+        ]) => {
+          this._log.info('listAllFeedbackLabels values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -10084,6 +12203,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listAllFeedbackLabels'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAllFeedbackLabels stream %j', request);
     return this.descriptors.page.listAllFeedbackLabels.createStream(
       this.innerApiCalls.listAllFeedbackLabels as GaxCall,
       request,
@@ -10149,6 +12269,7 @@ export class ContactCenterInsightsClient {
     const defaultCallSettings = this._defaults['listAllFeedbackLabels'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAllFeedbackLabels iterate %j', request);
     return this.descriptors.page.listAllFeedbackLabels.asyncIterate(
       this.innerApiCalls['listAllFeedbackLabels'] as GaxCall,
       request as {},
@@ -11768,6 +13889,7 @@ export class ContactCenterInsightsClient {
   close(): Promise<void> {
     if (this.contactCenterInsightsStub && !this._terminated) {
       return this.contactCenterInsightsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();
