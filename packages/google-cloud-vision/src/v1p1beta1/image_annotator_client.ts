@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class ImageAnnotatorClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('vision');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -86,7 +89,7 @@ export class ImageAnnotatorClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -450,7 +453,36 @@ export class ImageAnnotatorClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.batchAnnotateImages(request, options, callback);
+    this._log.info('batchAnnotateImages request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vision.v1p1beta1.IBatchAnnotateImagesResponse,
+          | protos.google.cloud.vision.v1p1beta1.IBatchAnnotateImagesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchAnnotateImages response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchAnnotateImages(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vision.v1p1beta1.IBatchAnnotateImagesResponse,
+          (
+            | protos.google.cloud.vision.v1p1beta1.IBatchAnnotateImagesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchAnnotateImages response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -462,6 +494,7 @@ export class ImageAnnotatorClient {
   close(): Promise<void> {
     if (this.imageAnnotatorStub && !this._terminated) {
       return this.imageAnnotatorStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
