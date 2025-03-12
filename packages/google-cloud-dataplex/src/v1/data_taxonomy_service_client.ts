@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class DataTaxonomyServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dataplex');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -95,7 +98,7 @@ export class DataTaxonomyServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -971,7 +974,33 @@ export class DataTaxonomyServiceClient {
       'GetDataTaxonomy is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.getDataTaxonomy(request, options, callback);
+    this._log.info('getDataTaxonomy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IDataTaxonomy,
+          | protos.google.cloud.dataplex.v1.IGetDataTaxonomyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataTaxonomy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataTaxonomy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IDataTaxonomy,
+          protos.google.cloud.dataplex.v1.IGetDataTaxonomyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataTaxonomy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a DataAttributeBinding resource.
@@ -1074,11 +1103,36 @@ export class DataTaxonomyServiceClient {
       'GetDataAttributeBinding is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.getDataAttributeBinding(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getDataAttributeBinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IDataAttributeBinding,
+          | protos.google.cloud.dataplex.v1.IGetDataAttributeBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataAttributeBinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataAttributeBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IDataAttributeBinding,
+          (
+            | protos.google.cloud.dataplex.v1.IGetDataAttributeBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataAttributeBinding response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a Data Attribute resource.
@@ -1175,7 +1229,33 @@ export class DataTaxonomyServiceClient {
       'GetDataAttribute is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.getDataAttribute(request, options, callback);
+    this._log.info('getDataAttribute request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IDataAttribute,
+          | protos.google.cloud.dataplex.v1.IGetDataAttributeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataAttribute response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataAttribute(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IDataAttribute,
+          protos.google.cloud.dataplex.v1.IGetDataAttributeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataAttribute response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1295,7 +1375,37 @@ export class DataTaxonomyServiceClient {
       'CreateDataTaxonomy is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.createDataTaxonomy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataTaxonomy,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDataTaxonomy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDataTaxonomy request %j', request);
+    return this.innerApiCalls
+      .createDataTaxonomy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataTaxonomy,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataTaxonomy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createDataTaxonomy()`.
@@ -1322,6 +1432,7 @@ export class DataTaxonomyServiceClient {
       'checkCreateDataTaxonomyProgress is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('createDataTaxonomy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1448,7 +1559,37 @@ export class DataTaxonomyServiceClient {
       'UpdateDataTaxonomy is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.updateDataTaxonomy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataTaxonomy,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateDataTaxonomy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateDataTaxonomy request %j', request);
+    return this.innerApiCalls
+      .updateDataTaxonomy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataTaxonomy,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataTaxonomy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateDataTaxonomy()`.
@@ -1475,6 +1616,7 @@ export class DataTaxonomyServiceClient {
       'checkUpdateDataTaxonomyProgress is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('updateDataTaxonomy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1601,7 +1743,37 @@ export class DataTaxonomyServiceClient {
       'DeleteDataTaxonomy is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.deleteDataTaxonomy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDataTaxonomy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDataTaxonomy request %j', request);
+    return this.innerApiCalls
+      .deleteDataTaxonomy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataTaxonomy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDataTaxonomy()`.
@@ -1628,6 +1800,7 @@ export class DataTaxonomyServiceClient {
       'checkDeleteDataTaxonomyProgress is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('deleteDataTaxonomy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1762,11 +1935,37 @@ export class DataTaxonomyServiceClient {
       'CreateDataAttributeBinding is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.createDataAttributeBinding(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataAttributeBinding,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDataAttributeBinding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDataAttributeBinding request %j', request);
+    return this.innerApiCalls
+      .createDataAttributeBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataAttributeBinding,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataAttributeBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createDataAttributeBinding()`.
@@ -1793,6 +1992,7 @@ export class DataTaxonomyServiceClient {
       'checkCreateDataAttributeBindingProgress is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('createDataAttributeBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1919,11 +2119,37 @@ export class DataTaxonomyServiceClient {
       'UpdateDataAttributeBinding is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.updateDataAttributeBinding(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataAttributeBinding,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateDataAttributeBinding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateDataAttributeBinding request %j', request);
+    return this.innerApiCalls
+      .updateDataAttributeBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataAttributeBinding,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataAttributeBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateDataAttributeBinding()`.
@@ -1950,6 +2176,7 @@ export class DataTaxonomyServiceClient {
       'checkUpdateDataAttributeBindingProgress is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('updateDataAttributeBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2079,11 +2306,37 @@ export class DataTaxonomyServiceClient {
       'DeleteDataAttributeBinding is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.deleteDataAttributeBinding(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDataAttributeBinding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDataAttributeBinding request %j', request);
+    return this.innerApiCalls
+      .deleteDataAttributeBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataAttributeBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDataAttributeBinding()`.
@@ -2110,6 +2363,7 @@ export class DataTaxonomyServiceClient {
       'checkDeleteDataAttributeBindingProgress is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('deleteDataAttributeBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2244,7 +2498,37 @@ export class DataTaxonomyServiceClient {
       'CreateDataAttribute is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.createDataAttribute(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataAttribute,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDataAttribute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDataAttribute request %j', request);
+    return this.innerApiCalls
+      .createDataAttribute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataAttribute,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataAttribute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createDataAttribute()`.
@@ -2271,6 +2555,7 @@ export class DataTaxonomyServiceClient {
       'checkCreateDataAttributeProgress is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('createDataAttribute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2397,7 +2682,37 @@ export class DataTaxonomyServiceClient {
       'UpdateDataAttribute is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.updateDataAttribute(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataAttribute,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateDataAttribute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateDataAttribute request %j', request);
+    return this.innerApiCalls
+      .updateDataAttribute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataAttribute,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataAttribute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateDataAttribute()`.
@@ -2424,6 +2739,7 @@ export class DataTaxonomyServiceClient {
       'checkUpdateDataAttributeProgress is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('updateDataAttribute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2549,7 +2865,37 @@ export class DataTaxonomyServiceClient {
       'DeleteDataAttribute is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.deleteDataAttribute(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDataAttribute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDataAttribute request %j', request);
+    return this.innerApiCalls
+      .deleteDataAttribute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataAttribute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDataAttribute()`.
@@ -2576,6 +2922,7 @@ export class DataTaxonomyServiceClient {
       'checkDeleteDataAttributeProgress is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('deleteDataAttribute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2704,7 +3051,33 @@ export class DataTaxonomyServiceClient {
       'ListDataTaxonomies is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.listDataTaxonomies(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListDataTaxonomiesRequest,
+          | protos.google.cloud.dataplex.v1.IListDataTaxonomiesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IDataTaxonomy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDataTaxonomies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDataTaxonomies request %j', request);
+    return this.innerApiCalls
+      .listDataTaxonomies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IDataTaxonomy[],
+          protos.google.cloud.dataplex.v1.IListDataTaxonomiesRequest | null,
+          protos.google.cloud.dataplex.v1.IListDataTaxonomiesResponse,
+        ]) => {
+          this._log.info('listDataTaxonomies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2761,6 +3134,7 @@ export class DataTaxonomyServiceClient {
       'ListDataTaxonomies is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listDataTaxonomies stream %j', request);
     return this.descriptors.page.listDataTaxonomies.createStream(
       this.innerApiCalls.listDataTaxonomies as GaxCall,
       request,
@@ -2825,6 +3199,7 @@ export class DataTaxonomyServiceClient {
       'ListDataTaxonomies is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listDataTaxonomies iterate %j', request);
     return this.descriptors.page.listDataTaxonomies.asyncIterate(
       this.innerApiCalls['listDataTaxonomies'] as GaxCall,
       request as {},
@@ -2947,11 +3322,33 @@ export class DataTaxonomyServiceClient {
       'ListDataAttributeBindings is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.listDataAttributeBindings(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListDataAttributeBindingsRequest,
+          | protos.google.cloud.dataplex.v1.IListDataAttributeBindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IDataAttributeBinding
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDataAttributeBindings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDataAttributeBindings request %j', request);
+    return this.innerApiCalls
+      .listDataAttributeBindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IDataAttributeBinding[],
+          protos.google.cloud.dataplex.v1.IListDataAttributeBindingsRequest | null,
+          protos.google.cloud.dataplex.v1.IListDataAttributeBindingsResponse,
+        ]) => {
+          this._log.info('listDataAttributeBindings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3011,6 +3408,7 @@ export class DataTaxonomyServiceClient {
       'ListDataAttributeBindings is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listDataAttributeBindings stream %j', request);
     return this.descriptors.page.listDataAttributeBindings.createStream(
       this.innerApiCalls.listDataAttributeBindings as GaxCall,
       request,
@@ -3078,6 +3476,7 @@ export class DataTaxonomyServiceClient {
       'ListDataAttributeBindings is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listDataAttributeBindings iterate %j', request);
     return this.descriptors.page.listDataAttributeBindings.asyncIterate(
       this.innerApiCalls['listDataAttributeBindings'] as GaxCall,
       request as {},
@@ -3196,7 +3595,33 @@ export class DataTaxonomyServiceClient {
       'ListDataAttributes is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.listDataAttributes(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListDataAttributesRequest,
+          | protos.google.cloud.dataplex.v1.IListDataAttributesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IDataAttribute
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDataAttributes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDataAttributes request %j', request);
+    return this.innerApiCalls
+      .listDataAttributes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IDataAttribute[],
+          protos.google.cloud.dataplex.v1.IListDataAttributesRequest | null,
+          protos.google.cloud.dataplex.v1.IListDataAttributesResponse,
+        ]) => {
+          this._log.info('listDataAttributes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3252,6 +3677,7 @@ export class DataTaxonomyServiceClient {
       'ListDataAttributes is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listDataAttributes stream %j', request);
     return this.descriptors.page.listDataAttributes.createStream(
       this.innerApiCalls.listDataAttributes as GaxCall,
       request,
@@ -3315,6 +3741,7 @@ export class DataTaxonomyServiceClient {
       'ListDataAttributes is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listDataAttributes iterate %j', request);
     return this.descriptors.page.listDataAttributes.asyncIterate(
       this.innerApiCalls['listDataAttributes'] as GaxCall,
       request as {},
@@ -5290,6 +5717,7 @@ export class DataTaxonomyServiceClient {
   close(): Promise<void> {
     if (this.dataTaxonomyServiceStub && !this._terminated) {
       return this.dataTaxonomyServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
