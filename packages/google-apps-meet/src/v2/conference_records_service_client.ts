@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class ConferenceRecordsServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('meet');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class ConferenceRecordsServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -518,7 +521,33 @@ export class ConferenceRecordsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getConferenceRecord(request, options, callback);
+    this._log.info('getConferenceRecord request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.IConferenceRecord,
+          | protos.google.apps.meet.v2.IGetConferenceRecordRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConferenceRecord response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConferenceRecord(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.IConferenceRecord,
+          protos.google.apps.meet.v2.IGetConferenceRecordRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getConferenceRecord response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a participant by participant ID.
@@ -600,7 +629,31 @@ export class ConferenceRecordsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getParticipant(request, options, callback);
+    this._log.info('getParticipant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.IParticipant,
+          protos.google.apps.meet.v2.IGetParticipantRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getParticipant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getParticipant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.IParticipant,
+          protos.google.apps.meet.v2.IGetParticipantRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getParticipant response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a participant session by participant session ID.
@@ -690,7 +743,33 @@ export class ConferenceRecordsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getParticipantSession(request, options, callback);
+    this._log.info('getParticipantSession request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.IParticipantSession,
+          | protos.google.apps.meet.v2.IGetParticipantSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getParticipantSession response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getParticipantSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.IParticipantSession,
+          protos.google.apps.meet.v2.IGetParticipantSessionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getParticipantSession response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a recording by recording ID.
@@ -772,7 +851,31 @@ export class ConferenceRecordsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRecording(request, options, callback);
+    this._log.info('getRecording request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.IRecording,
+          protos.google.apps.meet.v2.IGetRecordingRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRecording response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRecording(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.IRecording,
+          protos.google.apps.meet.v2.IGetRecordingRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getRecording response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a transcript by transcript ID.
@@ -854,7 +957,31 @@ export class ConferenceRecordsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTranscript(request, options, callback);
+    this._log.info('getTranscript request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.ITranscript,
+          protos.google.apps.meet.v2.IGetTranscriptRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTranscript response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTranscript(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.ITranscript,
+          protos.google.apps.meet.v2.IGetTranscriptRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTranscript response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a `TranscriptEntry` resource by entry ID.
@@ -942,7 +1069,33 @@ export class ConferenceRecordsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTranscriptEntry(request, options, callback);
+    this._log.info('getTranscriptEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.ITranscriptEntry,
+          | protos.google.apps.meet.v2.IGetTranscriptEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTranscriptEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTranscriptEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.ITranscriptEntry,
+          protos.google.apps.meet.v2.IGetTranscriptEntryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTranscriptEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1055,7 +1208,33 @@ export class ConferenceRecordsServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.listConferenceRecords(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.apps.meet.v2.IListConferenceRecordsRequest,
+          | protos.google.apps.meet.v2.IListConferenceRecordsResponse
+          | null
+          | undefined,
+          protos.google.apps.meet.v2.IConferenceRecord
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConferenceRecords values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConferenceRecords request %j', request);
+    return this.innerApiCalls
+      .listConferenceRecords(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.apps.meet.v2.IConferenceRecord[],
+          protos.google.apps.meet.v2.IListConferenceRecordsRequest | null,
+          protos.google.apps.meet.v2.IListConferenceRecordsResponse,
+        ]) => {
+          this._log.info('listConferenceRecords values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1108,6 +1287,7 @@ export class ConferenceRecordsServiceClient {
     const defaultCallSettings = this._defaults['listConferenceRecords'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConferenceRecords stream %j', request);
     return this.descriptors.page.listConferenceRecords.createStream(
       this.innerApiCalls.listConferenceRecords as GaxCall,
       request,
@@ -1168,6 +1348,7 @@ export class ConferenceRecordsServiceClient {
     const defaultCallSettings = this._defaults['listConferenceRecords'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConferenceRecords iterate %j', request);
     return this.descriptors.page.listConferenceRecords.asyncIterate(
       this.innerApiCalls['listConferenceRecords'] as GaxCall,
       request as {},
@@ -1281,7 +1462,33 @@ export class ConferenceRecordsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listParticipants(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.apps.meet.v2.IListParticipantsRequest,
+          | protos.google.apps.meet.v2.IListParticipantsResponse
+          | null
+          | undefined,
+          protos.google.apps.meet.v2.IParticipant
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listParticipants values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listParticipants request %j', request);
+    return this.innerApiCalls
+      .listParticipants(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.apps.meet.v2.IParticipant[],
+          protos.google.apps.meet.v2.IListParticipantsRequest | null,
+          protos.google.apps.meet.v2.IListParticipantsResponse,
+        ]) => {
+          this._log.info('listParticipants values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1334,6 +1541,7 @@ export class ConferenceRecordsServiceClient {
     const defaultCallSettings = this._defaults['listParticipants'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listParticipants stream %j', request);
     return this.descriptors.page.listParticipants.createStream(
       this.innerApiCalls.listParticipants as GaxCall,
       request,
@@ -1394,6 +1602,7 @@ export class ConferenceRecordsServiceClient {
     const defaultCallSettings = this._defaults['listParticipants'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listParticipants iterate %j', request);
     return this.descriptors.page.listParticipants.asyncIterate(
       this.innerApiCalls['listParticipants'] as GaxCall,
       request as {},
@@ -1513,11 +1722,33 @@ export class ConferenceRecordsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listParticipantSessions(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.apps.meet.v2.IListParticipantSessionsRequest,
+          | protos.google.apps.meet.v2.IListParticipantSessionsResponse
+          | null
+          | undefined,
+          protos.google.apps.meet.v2.IParticipantSession
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listParticipantSessions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listParticipantSessions request %j', request);
+    return this.innerApiCalls
+      .listParticipantSessions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.apps.meet.v2.IParticipantSession[],
+          protos.google.apps.meet.v2.IListParticipantSessionsRequest | null,
+          protos.google.apps.meet.v2.IListParticipantSessionsResponse,
+        ]) => {
+          this._log.info('listParticipantSessions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1570,6 +1801,7 @@ export class ConferenceRecordsServiceClient {
     const defaultCallSettings = this._defaults['listParticipantSessions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listParticipantSessions stream %j', request);
     return this.descriptors.page.listParticipantSessions.createStream(
       this.innerApiCalls.listParticipantSessions as GaxCall,
       request,
@@ -1630,6 +1862,7 @@ export class ConferenceRecordsServiceClient {
     const defaultCallSettings = this._defaults['listParticipantSessions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listParticipantSessions iterate %j', request);
     return this.descriptors.page.listParticipantSessions.asyncIterate(
       this.innerApiCalls['listParticipantSessions'] as GaxCall,
       request as {},
@@ -1728,7 +1961,31 @@ export class ConferenceRecordsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRecordings(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.apps.meet.v2.IListRecordingsRequest,
+          protos.google.apps.meet.v2.IListRecordingsResponse | null | undefined,
+          protos.google.apps.meet.v2.IRecording
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRecordings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRecordings request %j', request);
+    return this.innerApiCalls
+      .listRecordings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.apps.meet.v2.IRecording[],
+          protos.google.apps.meet.v2.IListRecordingsRequest | null,
+          protos.google.apps.meet.v2.IListRecordingsResponse,
+        ]) => {
+          this._log.info('listRecordings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1771,6 +2028,7 @@ export class ConferenceRecordsServiceClient {
     const defaultCallSettings = this._defaults['listRecordings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRecordings stream %j', request);
     return this.descriptors.page.listRecordings.createStream(
       this.innerApiCalls.listRecordings as GaxCall,
       request,
@@ -1821,6 +2079,7 @@ export class ConferenceRecordsServiceClient {
     const defaultCallSettings = this._defaults['listRecordings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRecordings iterate %j', request);
     return this.descriptors.page.listRecordings.asyncIterate(
       this.innerApiCalls['listRecordings'] as GaxCall,
       request as {},
@@ -1921,7 +2180,33 @@ export class ConferenceRecordsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTranscripts(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.apps.meet.v2.IListTranscriptsRequest,
+          | protos.google.apps.meet.v2.IListTranscriptsResponse
+          | null
+          | undefined,
+          protos.google.apps.meet.v2.ITranscript
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTranscripts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTranscripts request %j', request);
+    return this.innerApiCalls
+      .listTranscripts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.apps.meet.v2.ITranscript[],
+          protos.google.apps.meet.v2.IListTranscriptsRequest | null,
+          protos.google.apps.meet.v2.IListTranscriptsResponse,
+        ]) => {
+          this._log.info('listTranscripts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1964,6 +2249,7 @@ export class ConferenceRecordsServiceClient {
     const defaultCallSettings = this._defaults['listTranscripts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTranscripts stream %j', request);
     return this.descriptors.page.listTranscripts.createStream(
       this.innerApiCalls.listTranscripts as GaxCall,
       request,
@@ -2014,6 +2300,7 @@ export class ConferenceRecordsServiceClient {
     const defaultCallSettings = this._defaults['listTranscripts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTranscripts iterate %j', request);
     return this.descriptors.page.listTranscripts.asyncIterate(
       this.innerApiCalls['listTranscripts'] as GaxCall,
       request as {},
@@ -2125,7 +2412,33 @@ export class ConferenceRecordsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTranscriptEntries(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.apps.meet.v2.IListTranscriptEntriesRequest,
+          | protos.google.apps.meet.v2.IListTranscriptEntriesResponse
+          | null
+          | undefined,
+          protos.google.apps.meet.v2.ITranscriptEntry
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTranscriptEntries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTranscriptEntries request %j', request);
+    return this.innerApiCalls
+      .listTranscriptEntries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.apps.meet.v2.ITranscriptEntry[],
+          protos.google.apps.meet.v2.IListTranscriptEntriesRequest | null,
+          protos.google.apps.meet.v2.IListTranscriptEntriesResponse,
+        ]) => {
+          this._log.info('listTranscriptEntries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2169,6 +2482,7 @@ export class ConferenceRecordsServiceClient {
     const defaultCallSettings = this._defaults['listTranscriptEntries'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTranscriptEntries stream %j', request);
     return this.descriptors.page.listTranscriptEntries.createStream(
       this.innerApiCalls.listTranscriptEntries as GaxCall,
       request,
@@ -2220,6 +2534,7 @@ export class ConferenceRecordsServiceClient {
     const defaultCallSettings = this._defaults['listTranscriptEntries'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTranscriptEntries iterate %j', request);
     return this.descriptors.page.listTranscriptEntries.asyncIterate(
       this.innerApiCalls['listTranscriptEntries'] as GaxCall,
       request as {},
@@ -2523,6 +2838,7 @@ export class ConferenceRecordsServiceClient {
   close(): Promise<void> {
     if (this.conferenceRecordsServiceStub && !this._terminated) {
       return this.conferenceRecordsServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

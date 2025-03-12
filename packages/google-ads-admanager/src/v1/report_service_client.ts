@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class ReportServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('admanager');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class ReportServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -566,7 +569,31 @@ export class ReportServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getReport(request, options, callback);
+    this._log.info('getReport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IReport,
+          protos.google.ads.admanager.v1.IGetReportRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getReport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IReport,
+          protos.google.ads.admanager.v1.IGetReportRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getReport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * API to create a `Report` object.
@@ -653,7 +680,33 @@ export class ReportServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createReport(request, options, callback);
+    this._log.info('createReport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IReport,
+          | protos.google.ads.admanager.v1.ICreateReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createReport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IReport,
+          protos.google.ads.admanager.v1.ICreateReportRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createReport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * API to update a `Report` object.
@@ -739,7 +792,33 @@ export class ReportServiceClient {
         'report.name': request.report!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateReport(request, options, callback);
+    this._log.info('updateReport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IReport,
+          | protos.google.ads.admanager.v1.IUpdateReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateReport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IReport,
+          protos.google.ads.admanager.v1.IUpdateReportRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateReport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -850,7 +929,37 @@ export class ReportServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.runReport(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.ads.admanager.v1.IRunReportResponse,
+            protos.google.ads.admanager.v1.IRunReportMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('runReport response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('runReport request %j', request);
+    return this.innerApiCalls
+      .runReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.ads.admanager.v1.IRunReportResponse,
+            protos.google.ads.admanager.v1.IRunReportMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runReport response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `runReport()`.
@@ -871,6 +980,7 @@ export class ReportServiceClient {
       protos.google.ads.admanager.v1.RunReportMetadata
     >
   > {
+    this._log.info('runReport long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -993,7 +1103,33 @@ export class ReportServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listReports(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ads.admanager.v1.IListReportsRequest,
+          | protos.google.ads.admanager.v1.IListReportsResponse
+          | null
+          | undefined,
+          protos.google.ads.admanager.v1.IReport
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listReports values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listReports request %j', request);
+    return this.innerApiCalls
+      .listReports(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ads.admanager.v1.IReport[],
+          protos.google.ads.admanager.v1.IListReportsRequest | null,
+          protos.google.ads.admanager.v1.IListReportsResponse,
+        ]) => {
+          this._log.info('listReports values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1050,6 +1186,7 @@ export class ReportServiceClient {
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReports stream %j', request);
     return this.descriptors.page.listReports.createStream(
       this.innerApiCalls.listReports as GaxCall,
       request,
@@ -1114,6 +1251,7 @@ export class ReportServiceClient {
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReports iterate %j', request);
     return this.descriptors.page.listReports.asyncIterate(
       this.innerApiCalls['listReports'] as GaxCall,
       request as {},
@@ -1223,7 +1361,33 @@ export class ReportServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.fetchReportResultRows(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
+          | protos.google.ads.admanager.v1.IFetchReportResultRowsResponse
+          | null
+          | undefined,
+          protos.google.ads.admanager.v1.Report.DataTable.IRow
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchReportResultRows values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchReportResultRows request %j', request);
+    return this.innerApiCalls
+      .fetchReportResultRows(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ads.admanager.v1.Report.DataTable.IRow[],
+          protos.google.ads.admanager.v1.IFetchReportResultRowsRequest | null,
+          protos.google.ads.admanager.v1.IFetchReportResultRowsResponse,
+        ]) => {
+          this._log.info('fetchReportResultRows values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1267,6 +1431,7 @@ export class ReportServiceClient {
     const defaultCallSettings = this._defaults['fetchReportResultRows'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('fetchReportResultRows stream %j', request);
     return this.descriptors.page.fetchReportResultRows.createStream(
       this.innerApiCalls.fetchReportResultRows as GaxCall,
       request,
@@ -1318,6 +1483,7 @@ export class ReportServiceClient {
     const defaultCallSettings = this._defaults['fetchReportResultRows'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('fetchReportResultRows iterate %j', request);
     return this.descriptors.page.fetchReportResultRows.asyncIterate(
       this.innerApiCalls['fetchReportResultRows'] as GaxCall,
       request as {},
@@ -2178,6 +2344,7 @@ export class ReportServiceClient {
   close(): Promise<void> {
     if (this.reportServiceStub && !this._terminated) {
       return this.reportServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
