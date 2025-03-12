@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class ServiceManagerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('service-management');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class ServiceManagerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -610,7 +613,33 @@ export class ServiceManagerClient {
         service_name: request.serviceName ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getService(request, options, callback);
+    this._log.info('getService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.servicemanagement.v1.IManagedService,
+          | protos.google.api.servicemanagement.v1.IGetServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.servicemanagement.v1.IManagedService,
+          protos.google.api.servicemanagement.v1.IGetServiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a service configuration (version) for a managed service.
@@ -717,7 +746,36 @@ export class ServiceManagerClient {
         config_id: request.configId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getServiceConfig(request, options, callback);
+    this._log.info('getServiceConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IService,
+          | protos.google.api.servicemanagement.v1.IGetServiceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getServiceConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getServiceConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IService,
+          (
+            | protos.google.api.servicemanagement.v1.IGetServiceConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getServiceConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new service configuration (version) for a managed service.
@@ -824,7 +882,36 @@ export class ServiceManagerClient {
         service_name: request.serviceName ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createServiceConfig(request, options, callback);
+    this._log.info('createServiceConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IService,
+          | protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createServiceConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createServiceConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IService,
+          (
+            | protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createServiceConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a service configuration
@@ -926,7 +1013,36 @@ export class ServiceManagerClient {
         rollout_id: request.rolloutId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getServiceRollout(request, options, callback);
+    this._log.info('getServiceRollout request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.servicemanagement.v1.IRollout,
+          | protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getServiceRollout response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getServiceRollout(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.servicemanagement.v1.IRollout,
+          (
+            | protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getServiceRollout response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates and returns a report (errors, warnings and changes from
@@ -1038,7 +1154,36 @@ export class ServiceManagerClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.generateConfigReport(request, options, callback);
+    this._log.info('generateConfigReport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
+          | protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateConfigReport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateConfigReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
+          (
+            | protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateConfigReport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1147,7 +1292,37 @@ export class ServiceManagerClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.createService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.servicemanagement.v1.IManagedService,
+            protos.google.api.servicemanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createService request %j', request);
+    return this.innerApiCalls
+      .createService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.servicemanagement.v1.IManagedService,
+            protos.google.api.servicemanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createService()`.
@@ -1168,6 +1343,7 @@ export class ServiceManagerClient {
       protos.google.api.servicemanagement.v1.OperationMetadata
     >
   > {
+    this._log.info('createService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1292,7 +1468,37 @@ export class ServiceManagerClient {
         service_name: request.serviceName ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.api.servicemanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteService request %j', request);
+    return this.innerApiCalls
+      .deleteService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.api.servicemanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteService()`.
@@ -1313,6 +1519,7 @@ export class ServiceManagerClient {
       protos.google.api.servicemanagement.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1435,7 +1642,37 @@ export class ServiceManagerClient {
         service_name: request.serviceName ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.undeleteService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.servicemanagement.v1.IUndeleteServiceResponse,
+            protos.google.api.servicemanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('undeleteService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('undeleteService request %j', request);
+    return this.innerApiCalls
+      .undeleteService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.servicemanagement.v1.IUndeleteServiceResponse,
+            protos.google.api.servicemanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('undeleteService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `undeleteService()`.
@@ -1456,6 +1693,7 @@ export class ServiceManagerClient {
       protos.google.api.servicemanagement.v1.OperationMetadata
     >
   > {
+    this._log.info('undeleteService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1592,7 +1830,37 @@ export class ServiceManagerClient {
         service_name: request.serviceName ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.submitConfigSource(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse,
+            protos.google.api.servicemanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('submitConfigSource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('submitConfigSource request %j', request);
+    return this.innerApiCalls
+      .submitConfigSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse,
+            protos.google.api.servicemanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('submitConfigSource response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `submitConfigSource()`.
@@ -1613,6 +1881,7 @@ export class ServiceManagerClient {
       protos.google.api.servicemanagement.v1.OperationMetadata
     >
   > {
+    this._log.info('submitConfigSource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1745,7 +2014,37 @@ export class ServiceManagerClient {
         service_name: request.serviceName ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createServiceRollout(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.servicemanagement.v1.IRollout,
+            protos.google.api.servicemanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createServiceRollout response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createServiceRollout request %j', request);
+    return this.innerApiCalls
+      .createServiceRollout(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.servicemanagement.v1.IRollout,
+            protos.google.api.servicemanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createServiceRollout response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createServiceRollout()`.
@@ -1766,6 +2065,7 @@ export class ServiceManagerClient {
       protos.google.api.servicemanagement.v1.OperationMetadata
     >
   > {
+    this._log.info('createServiceRollout long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1884,7 +2184,33 @@ export class ServiceManagerClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.listServices(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.api.servicemanagement.v1.IListServicesRequest,
+          | protos.google.api.servicemanagement.v1.IListServicesResponse
+          | null
+          | undefined,
+          protos.google.api.servicemanagement.v1.IManagedService
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServices values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServices request %j', request);
+    return this.innerApiCalls
+      .listServices(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.api.servicemanagement.v1.IManagedService[],
+          protos.google.api.servicemanagement.v1.IListServicesRequest | null,
+          protos.google.api.servicemanagement.v1.IListServicesResponse,
+        ]) => {
+          this._log.info('listServices values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1927,6 +2253,7 @@ export class ServiceManagerClient {
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
       request,
@@ -1977,6 +2304,7 @@ export class ServiceManagerClient {
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
       request as {},
@@ -2082,7 +2410,33 @@ export class ServiceManagerClient {
         service_name: request.serviceName ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listServiceConfigs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
+          | protos.google.api.servicemanagement.v1.IListServiceConfigsResponse
+          | null
+          | undefined,
+          protos.google.api.IService
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServiceConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServiceConfigs request %j', request);
+    return this.innerApiCalls
+      .listServiceConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.api.IService[],
+          protos.google.api.servicemanagement.v1.IListServiceConfigsRequest | null,
+          protos.google.api.servicemanagement.v1.IListServiceConfigsResponse,
+        ]) => {
+          this._log.info('listServiceConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2124,6 +2478,7 @@ export class ServiceManagerClient {
     const defaultCallSettings = this._defaults['listServiceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServiceConfigs stream %j', request);
     return this.descriptors.page.listServiceConfigs.createStream(
       this.innerApiCalls.listServiceConfigs as GaxCall,
       request,
@@ -2173,6 +2528,7 @@ export class ServiceManagerClient {
     const defaultCallSettings = this._defaults['listServiceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServiceConfigs iterate %j', request);
     return this.descriptors.page.listServiceConfigs.asyncIterate(
       this.innerApiCalls['listServiceConfigs'] as GaxCall,
       request as {},
@@ -2289,7 +2645,33 @@ export class ServiceManagerClient {
         service_name: request.serviceName ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listServiceRollouts(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
+          | protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse
+          | null
+          | undefined,
+          protos.google.api.servicemanagement.v1.IRollout
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServiceRollouts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServiceRollouts request %j', request);
+    return this.innerApiCalls
+      .listServiceRollouts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.api.servicemanagement.v1.IRollout[],
+          protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest | null,
+          protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse,
+        ]) => {
+          this._log.info('listServiceRollouts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2342,6 +2724,7 @@ export class ServiceManagerClient {
     const defaultCallSettings = this._defaults['listServiceRollouts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServiceRollouts stream %j', request);
     return this.descriptors.page.listServiceRollouts.createStream(
       this.innerApiCalls.listServiceRollouts as GaxCall,
       request,
@@ -2402,6 +2785,7 @@ export class ServiceManagerClient {
     const defaultCallSettings = this._defaults['listServiceRollouts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServiceRollouts iterate %j', request);
     return this.descriptors.page.listServiceRollouts.asyncIterate(
       this.innerApiCalls['listServiceRollouts'] as GaxCall,
       request as {},
@@ -2779,6 +3163,7 @@ export class ServiceManagerClient {
   close(): Promise<void> {
     if (this.serviceManagerStub && !this._terminated) {
       return this.serviceManagerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

@@ -30,6 +30,7 @@ import type {
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class SessionsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class SessionsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -663,7 +666,33 @@ export class SessionsClient {
         session: request.session ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.detectIntent(request, options, callback);
+    this._log.info('detectIntent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IDetectIntentResponse,
+          | protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('detectIntent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .detectIntent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IDetectIntentResponse,
+          protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('detectIntent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns preliminary intent match results, doesn't change the session
@@ -772,7 +801,33 @@ export class SessionsClient {
         session: request.session ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.matchIntent(request, options, callback);
+    this._log.info('matchIntent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IMatchIntentResponse,
+          | protos.google.cloud.dialogflow.cx.v3.IMatchIntentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('matchIntent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .matchIntent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IMatchIntentResponse,
+          protos.google.cloud.dialogflow.cx.v3.IMatchIntentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('matchIntent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fulfills a matched intent returned by
@@ -874,7 +929,36 @@ export class SessionsClient {
           request.matchIntentRequest!.session ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.fulfillIntent(request, options, callback);
+    this._log.info('fulfillIntent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IFulfillIntentResponse,
+          | protos.google.cloud.dialogflow.cx.v3.IFulfillIntentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fulfillIntent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fulfillIntent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IFulfillIntentResponse,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IFulfillIntentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fulfillIntent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the feedback received from the user for a single turn of the bot
@@ -979,7 +1063,36 @@ export class SessionsClient {
         session: request.session ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.submitAnswerFeedback(request, options, callback);
+    this._log.info('submitAnswerFeedback request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IAnswerFeedback,
+          | protos.google.cloud.dialogflow.cx.v3.ISubmitAnswerFeedbackRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('submitAnswerFeedback response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .submitAnswerFeedback(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IAnswerFeedback,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.ISubmitAnswerFeedbackRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('submitAnswerFeedback response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1037,6 +1150,7 @@ export class SessionsClient {
         session: request.session ?? '',
       });
     this.initialize();
+    this._log.info('serverStreamingDetectIntent stream %j', options);
     return this.innerApiCalls.serverStreamingDetectIntent(request, options);
   }
 
@@ -1062,6 +1176,7 @@ export class SessionsClient {
    */
   streamingDetectIntent(options?: CallOptions): gax.CancellableStream {
     this.initialize();
+    this._log.info('streamingDetectIntent stream %j', options);
     return this.innerApiCalls.streamingDetectIntent(null, options);
   }
 
@@ -3494,6 +3609,7 @@ export class SessionsClient {
   close(): Promise<void> {
     if (this.sessionsStub && !this._terminated) {
       return this.sessionsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

@@ -31,6 +31,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class UserEventServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('retail');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class UserEventServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -582,7 +585,33 @@ export class UserEventServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.writeUserEvent(request, options, callback);
+    this._log.info('writeUserEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2beta.IUserEvent,
+          | protos.google.cloud.retail.v2beta.IWriteUserEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('writeUserEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .writeUserEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2beta.IUserEvent,
+          protos.google.cloud.retail.v2beta.IWriteUserEventRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('writeUserEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Writes a single user event from the browser. This uses a GET request to
@@ -697,7 +726,36 @@ export class UserEventServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.collectUserEvent(request, options, callback);
+    this._log.info('collectUserEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.retail.v2beta.ICollectUserEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('collectUserEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .collectUserEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          (
+            | protos.google.cloud.retail.v2beta.ICollectUserEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('collectUserEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -834,7 +892,37 @@ export class UserEventServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.purgeUserEvents(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
+            protos.google.cloud.retail.v2beta.IPurgeMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('purgeUserEvents response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('purgeUserEvents request %j', request);
+    return this.innerApiCalls
+      .purgeUserEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
+            protos.google.cloud.retail.v2beta.IPurgeMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('purgeUserEvents response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `purgeUserEvents()`.
@@ -855,6 +943,7 @@ export class UserEventServiceClient {
       protos.google.cloud.retail.v2beta.PurgeMetadata
     >
   > {
+    this._log.info('purgeUserEvents long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -981,7 +1070,37 @@ export class UserEventServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importUserEvents(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2beta.IImportUserEventsResponse,
+            protos.google.cloud.retail.v2beta.IImportMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importUserEvents response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importUserEvents request %j', request);
+    return this.innerApiCalls
+      .importUserEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2beta.IImportUserEventsResponse,
+            protos.google.cloud.retail.v2beta.IImportMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importUserEvents response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importUserEvents()`.
@@ -1002,6 +1121,7 @@ export class UserEventServiceClient {
       protos.google.cloud.retail.v2beta.ImportMetadata
     >
   > {
+    this._log.info('importUserEvents long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1160,7 +1280,37 @@ export class UserEventServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportUserEvents(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2beta.IExportUserEventsResponse,
+            protos.google.cloud.retail.v2beta.IExportMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportUserEvents response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportUserEvents request %j', request);
+    return this.innerApiCalls
+      .exportUserEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2beta.IExportUserEventsResponse,
+            protos.google.cloud.retail.v2beta.IExportMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportUserEvents response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportUserEvents()`.
@@ -1181,6 +1331,7 @@ export class UserEventServiceClient {
       protos.google.cloud.retail.v2beta.ExportMetadata
     >
   > {
+    this._log.info('exportUserEvents long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1309,7 +1460,37 @@ export class UserEventServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.rejoinUserEvents(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse,
+            protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('rejoinUserEvents response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('rejoinUserEvents request %j', request);
+    return this.innerApiCalls
+      .rejoinUserEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse,
+            protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('rejoinUserEvents response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `rejoinUserEvents()`.
@@ -1330,6 +1511,7 @@ export class UserEventServiceClient {
       protos.google.cloud.retail.v2beta.RejoinUserEventsMetadata
     >
   > {
+    this._log.info('rejoinUserEvents long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2124,6 +2306,7 @@ export class UserEventServiceClient {
   close(): Promise<void> {
     if (this.userEventServiceStub && !this._terminated) {
       return this.userEventServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class HomepageServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('accounts');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -85,7 +88,7 @@ export class HomepageServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -509,7 +512,36 @@ export class HomepageServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getHomepage(request, options, callback);
+    this._log.info('getHomepage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getHomepage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getHomepage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getHomepage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a store's homepage. Executing this method requires admin access.
@@ -607,7 +639,36 @@ export class HomepageServiceClient {
         'homepage.name': request.homepage!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateHomepage(request, options, callback);
+    this._log.info('updateHomepage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+          | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateHomepage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateHomepage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateHomepage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Claims a store's homepage. Executing this method requires admin access.
@@ -717,7 +778,36 @@ export class HomepageServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.claimHomepage(request, options, callback);
+    this._log.info('claimHomepage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+          | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('claimHomepage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .claimHomepage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('claimHomepage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Unclaims a store's homepage. Executing this method requires admin access.
@@ -814,7 +904,36 @@ export class HomepageServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.unclaimHomepage(request, options, callback);
+    this._log.info('unclaimHomepage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+          | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('unclaimHomepage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .unclaimHomepage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('unclaimHomepage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -1307,6 +1426,7 @@ export class HomepageServiceClient {
   close(): Promise<void> {
     if (this.homepageServiceStub && !this._terminated) {
       return this.homepageServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
