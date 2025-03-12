@@ -1,0 +1,12 @@
+[
+  "../../protos/google/cloud/datalabeling/v1beta1/annotation.proto",
+  "../../protos/google/cloud/datalabeling/v1beta1/annotation_spec_set.proto",
+  "../../protos/google/cloud/datalabeling/v1beta1/data_labeling_service.proto",
+  "../../protos/google/cloud/datalabeling/v1beta1/data_payloads.proto",
+  "../../protos/google/cloud/datalabeling/v1beta1/dataset.proto",
+  "../../protos/google/cloud/datalabeling/v1beta1/evaluation.proto",
+  "../../protos/google/cloud/datalabeling/v1beta1/evaluation_job.proto",
+  "../../protos/google/cloud/datalabeling/v1beta1/human_annotation_config.proto",
+  "../../protos/google/cloud/datalabeling/v1beta1/instruction.proto",
+  "../../protos/google/cloud/datalabeling/v1beta1/operations.proto"
+]
