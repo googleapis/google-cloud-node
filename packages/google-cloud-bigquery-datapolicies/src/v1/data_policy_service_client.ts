@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class DataPolicyServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('datapolicies');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class DataPolicyServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -497,7 +500,36 @@ export class DataPolicyServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDataPolicy(request, options, callback);
+    this._log.info('createDataPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy,
+          | protos.google.cloud.bigquery.datapolicies.v1.ICreateDataPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDataPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDataPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy,
+          (
+            | protos.google.cloud.bigquery.datapolicies.v1.ICreateDataPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the metadata for an existing data policy. The target data policy
@@ -604,7 +636,36 @@ export class DataPolicyServiceClient {
         'data_policy.name': request.dataPolicy!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDataPolicy(request, options, callback);
+    this._log.info('updateDataPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy,
+          | protos.google.cloud.bigquery.datapolicies.v1.IUpdateDataPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDataPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDataPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy,
+          (
+            | protos.google.cloud.bigquery.datapolicies.v1.IUpdateDataPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Renames the id (display name) of the specified data policy.
@@ -703,7 +764,36 @@ export class DataPolicyServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.renameDataPolicy(request, options, callback);
+    this._log.info('renameDataPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy,
+          | protos.google.cloud.bigquery.datapolicies.v1.IRenameDataPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('renameDataPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .renameDataPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy,
+          (
+            | protos.google.cloud.bigquery.datapolicies.v1.IRenameDataPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('renameDataPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the data policy specified by its resource name.
@@ -800,7 +890,36 @@ export class DataPolicyServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDataPolicy(request, options, callback);
+    this._log.info('deleteDataPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.bigquery.datapolicies.v1.IDeleteDataPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDataPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDataPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.bigquery.datapolicies.v1.IDeleteDataPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the data policy specified by its resource name.
@@ -897,7 +1016,36 @@ export class DataPolicyServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDataPolicy(request, options, callback);
+    this._log.info('getDataPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy,
+          | protos.google.cloud.bigquery.datapolicies.v1.IGetDataPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy,
+          (
+            | protos.google.cloud.bigquery.datapolicies.v1.IGetDataPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the IAM policy for the specified data policy.
@@ -983,7 +1131,31 @@ export class DataPolicyServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the IAM policy for the specified data policy.
@@ -1077,7 +1249,31 @@ export class DataPolicyServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the caller's permission on the specified data policy resource.
@@ -1165,7 +1361,31 @@ export class DataPolicyServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1276,7 +1496,33 @@ export class DataPolicyServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDataPolicies(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.bigquery.datapolicies.v1.IListDataPoliciesRequest,
+          | protos.google.cloud.bigquery.datapolicies.v1.IListDataPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDataPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDataPolicies request %j', request);
+    return this.innerApiCalls
+      .listDataPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy[],
+          protos.google.cloud.bigquery.datapolicies.v1.IListDataPoliciesRequest | null,
+          protos.google.cloud.bigquery.datapolicies.v1.IListDataPoliciesResponse,
+        ]) => {
+          this._log.info('listDataPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1328,6 +1574,7 @@ export class DataPolicyServiceClient {
     const defaultCallSettings = this._defaults['listDataPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDataPolicies stream %j', request);
     return this.descriptors.page.listDataPolicies.createStream(
       this.innerApiCalls.listDataPolicies as GaxCall,
       request,
@@ -1387,6 +1634,7 @@ export class DataPolicyServiceClient {
     const defaultCallSettings = this._defaults['listDataPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDataPolicies iterate %j', request);
     return this.descriptors.page.listDataPolicies.asyncIterate(
       this.innerApiCalls['listDataPolicies'] as GaxCall,
       request as {},
@@ -1517,6 +1765,7 @@ export class DataPolicyServiceClient {
   close(): Promise<void> {
     if (this.dataPolicyServiceStub && !this._terminated) {
       return this.dataPolicyServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

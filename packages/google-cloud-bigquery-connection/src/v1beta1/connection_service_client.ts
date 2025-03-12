@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class ConnectionServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('connection');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -85,7 +88,7 @@ export class ConnectionServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -481,7 +484,36 @@ export class ConnectionServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createConnection(request, options, callback);
+    this._log.info('createConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          | protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          (
+            | protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns specified connection.
@@ -578,7 +610,36 @@ export class ConnectionServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getConnection(request, options, callback);
+    this._log.info('getConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          | protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          (
+            | protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a list of connections in the given project.
@@ -679,7 +740,36 @@ export class ConnectionServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listConnections(request, options, callback);
+    this._log.info('listConnections request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
+          | protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listConnections response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listConnections(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
+          (
+            | protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listConnections response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified connection. For security reasons, also resets
@@ -781,7 +871,36 @@ export class ConnectionServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateConnection(request, options, callback);
+    this._log.info('updateConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          (
+            | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the credential for the specified connection.
@@ -880,11 +999,36 @@ export class ConnectionServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateConnectionCredential(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateConnectionCredential request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateConnectionCredential response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateConnectionCredential(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConnectionCredential response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes connection and associated credential.
@@ -981,7 +1125,36 @@ export class ConnectionServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteConnection(request, options, callback);
+    this._log.info('deleteConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the access control policy for a resource.
@@ -1069,7 +1242,31 @@ export class ConnectionServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the access control policy on the specified resource. Replaces any
@@ -1166,7 +1363,31 @@ export class ConnectionServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns permissions that a caller has on the specified resource.
@@ -1260,7 +1481,31 @@ export class ConnectionServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -1364,6 +1609,7 @@ export class ConnectionServiceClient {
   close(): Promise<void> {
     if (this.connectionServiceStub && !this._terminated) {
       return this.connectionServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
