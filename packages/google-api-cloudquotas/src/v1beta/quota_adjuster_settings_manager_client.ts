@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class QuotaAdjusterSettingsManagerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('cloudquotas');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class QuotaAdjusterSettingsManagerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -500,11 +503,36 @@ export class QuotaAdjusterSettingsManagerClient {
           request.quotaAdjusterSettings!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateQuotaAdjusterSettings(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateQuotaAdjusterSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+          | protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateQuotaAdjusterSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateQuotaAdjusterSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+          (
+            | protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateQuotaAdjusterSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * RPC Method for getting QuotaAdjusterSettings based on the request
@@ -601,11 +629,36 @@ export class QuotaAdjusterSettingsManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getQuotaAdjusterSettings(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getQuotaAdjusterSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+          | protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getQuotaAdjusterSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getQuotaAdjusterSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+          (
+            | protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getQuotaAdjusterSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -1117,6 +1170,7 @@ export class QuotaAdjusterSettingsManagerClient {
   close(): Promise<void> {
     if (this.quotaAdjusterSettingsManagerStub && !this._terminated) {
       return this.quotaAdjusterSettingsManagerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
