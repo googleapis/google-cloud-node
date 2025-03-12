@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class DocumentsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class DocumentsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -736,7 +739,36 @@ export class DocumentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDocument(request, options, callback);
+    this._log.info('getDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IDocument,
+          | protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IDocument,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -857,7 +889,37 @@ export class DocumentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDocument(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2beta1.IDocument,
+            protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDocument response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDocument request %j', request);
+    return this.innerApiCalls
+      .createDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.v2beta1.IDocument,
+            protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDocument response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createDocument()`.
@@ -878,6 +940,7 @@ export class DocumentsClient {
       protos.google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata
     >
   > {
+    this._log.info('createDocument long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1018,7 +1081,37 @@ export class DocumentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importDocuments(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2beta1.IImportDocumentsResponse,
+            protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importDocuments response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importDocuments request %j', request);
+    return this.innerApiCalls
+      .importDocuments(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.v2beta1.IImportDocumentsResponse,
+            protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importDocuments response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importDocuments()`.
@@ -1039,6 +1132,7 @@ export class DocumentsClient {
       protos.google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata
     >
   > {
+    this._log.info('importDocuments long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1168,7 +1262,37 @@ export class DocumentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDocument(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDocument response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDocument request %j', request);
+    return this.innerApiCalls
+      .deleteDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDocument response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDocument()`.
@@ -1189,6 +1313,7 @@ export class DocumentsClient {
       protos.google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata
     >
   > {
+    this._log.info('deleteDocument long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1319,7 +1444,37 @@ export class DocumentsClient {
         'document.name': request.document!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDocument(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2beta1.IDocument,
+            protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateDocument response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateDocument request %j', request);
+    return this.innerApiCalls
+      .updateDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.v2beta1.IDocument,
+            protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDocument response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateDocument()`.
@@ -1340,6 +1495,7 @@ export class DocumentsClient {
       protos.google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata
     >
   > {
+    this._log.info('updateDocument long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1480,7 +1636,37 @@ export class DocumentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.reloadDocument(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2beta1.IDocument,
+            protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('reloadDocument response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('reloadDocument request %j', request);
+    return this.innerApiCalls
+      .reloadDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.v2beta1.IDocument,
+            protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('reloadDocument response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `reloadDocument()`.
@@ -1501,6 +1687,7 @@ export class DocumentsClient {
       protos.google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata
     >
   > {
+    this._log.info('reloadDocument long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1639,7 +1826,33 @@ export class DocumentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDocuments(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
+          | protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.IDocument
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDocuments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDocuments request %j', request);
+    return this.innerApiCalls
+      .listDocuments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2beta1.IDocument[],
+          protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest | null,
+          protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse,
+        ]) => {
+          this._log.info('listDocuments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1703,6 +1916,7 @@ export class DocumentsClient {
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDocuments stream %j', request);
     return this.descriptors.page.listDocuments.createStream(
       this.innerApiCalls.listDocuments as GaxCall,
       request,
@@ -1774,6 +1988,7 @@ export class DocumentsClient {
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDocuments iterate %j', request);
     return this.descriptors.page.listDocuments.asyncIterate(
       this.innerApiCalls['listDocuments'] as GaxCall,
       request as {},
@@ -4565,6 +4780,7 @@ export class DocumentsClient {
   close(): Promise<void> {
     if (this.documentsStub && !this._terminated) {
       return this.documentsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
