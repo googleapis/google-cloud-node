@@ -570,7 +570,7 @@ describe('Translate v2', () => {
         FakeService.prototype.request = request;
       });
 
-      it('should make the correct request', done => {
+      it.only('should make the correct request', done => {
         const fakeOptions = {
           uri: '/test',
           a: 'b',
@@ -587,6 +587,7 @@ describe('Translate v2', () => {
           callback();
         };
 
+        console.log(translate);
         translate.request(fakeOptions, done);
       });
     });
