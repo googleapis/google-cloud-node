@@ -31,6 +31,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class SearchTuningServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class SearchTuningServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -726,7 +729,36 @@ export class SearchTuningServiceClient {
         data_store: request.dataStore ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCustomModels(request, options, callback);
+    this._log.info('listCustomModels request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IListCustomModelsResponse,
+          | protos.google.cloud.discoveryengine.v1.IListCustomModelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listCustomModels response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listCustomModels(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IListCustomModelsResponse,
+          (
+            | protos.google.cloud.discoveryengine.v1.IListCustomModelsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listCustomModels response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -842,7 +874,37 @@ export class SearchTuningServiceClient {
         data_store: request.dataStore ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.trainCustomModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.ITrainCustomModelResponse,
+            protos.google.cloud.discoveryengine.v1.ITrainCustomModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('trainCustomModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('trainCustomModel request %j', request);
+    return this.innerApiCalls
+      .trainCustomModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.ITrainCustomModelResponse,
+            protos.google.cloud.discoveryengine.v1.ITrainCustomModelMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('trainCustomModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `trainCustomModel()`.
@@ -863,6 +925,7 @@ export class SearchTuningServiceClient {
       protos.google.cloud.discoveryengine.v1.TrainCustomModelMetadata
     >
   > {
+    this._log.info('trainCustomModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4003,6 +4066,7 @@ export class SearchTuningServiceClient {
   close(): Promise<void> {
     if (this.searchTuningServiceStub && !this._terminated) {
       return this.searchTuningServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

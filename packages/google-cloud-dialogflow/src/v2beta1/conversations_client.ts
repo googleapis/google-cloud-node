@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class ConversationsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class ConversationsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -672,7 +675,36 @@ export class ConversationsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createConversation(request, options, callback);
+    this._log.info('createConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IConversation,
+          | protos.google.cloud.dialogflow.v2beta1.ICreateConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IConversation,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.ICreateConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createConversation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the specific conversation.
@@ -770,7 +802,36 @@ export class ConversationsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getConversation(request, options, callback);
+    this._log.info('getConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IConversation,
+          | protos.google.cloud.dialogflow.v2beta1.IGetConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IConversation,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IGetConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConversation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Completes the specified conversation. Finished conversations are purged
@@ -869,7 +930,36 @@ export class ConversationsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.completeConversation(request, options, callback);
+    this._log.info('completeConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IConversation,
+          | protos.google.cloud.dialogflow.v2beta1.ICompleteConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('completeConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .completeConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IConversation,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.ICompleteConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('completeConversation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Data ingestion API.
@@ -973,11 +1063,36 @@ export class ConversationsClient {
         conversation: request.conversation ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.ingestContextReferences(
-      request,
-      options,
-      callback
-    );
+    this._log.info('ingestContextReferences request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IIngestContextReferencesResponse,
+          | protos.google.cloud.dialogflow.v2beta1.IIngestContextReferencesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('ingestContextReferences response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .ingestContextReferences(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IIngestContextReferencesResponse,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IIngestContextReferencesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('ingestContextReferences response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Batch ingests messages to conversation. Customers can use this RPC to
@@ -1081,7 +1196,36 @@ export class ConversationsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchCreateMessages(request, options, callback);
+    this._log.info('batchCreateMessages request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IBatchCreateMessagesResponse,
+          | protos.google.cloud.dialogflow.v2beta1.IBatchCreateMessagesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateMessages response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateMessages(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IBatchCreateMessagesResponse,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IBatchCreateMessagesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateMessages response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Suggest summary for a conversation based on specific historical messages.
@@ -1195,11 +1339,36 @@ export class ConversationsClient {
         conversation: request.conversation ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.suggestConversationSummary(
-      request,
-      options,
-      callback
-    );
+    this._log.info('suggestConversationSummary request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.ISuggestConversationSummaryResponse,
+          | protos.google.cloud.dialogflow.v2beta1.ISuggestConversationSummaryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('suggestConversationSummary response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .suggestConversationSummary(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.ISuggestConversationSummaryResponse,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.ISuggestConversationSummaryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('suggestConversationSummary response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates and returns a summary for a conversation that does not have a
@@ -1311,11 +1480,36 @@ export class ConversationsClient {
           request.statelessConversation!.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.generateStatelessSummary(
-      request,
-      options,
-      callback
-    );
+    this._log.info('generateStatelessSummary request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IGenerateStatelessSummaryResponse,
+          | protos.google.cloud.dialogflow.v2beta1.IGenerateStatelessSummaryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateStatelessSummary response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateStatelessSummary(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IGenerateStatelessSummaryResponse,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IGenerateStatelessSummaryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateStatelessSummary response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates and returns a suggestion for a conversation that does not have a
@@ -1429,11 +1623,36 @@ export class ConversationsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.generateStatelessSuggestion(
-      request,
-      options,
-      callback
-    );
+    this._log.info('generateStatelessSuggestion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IGenerateStatelessSuggestionResponse,
+          | protos.google.cloud.dialogflow.v2beta1.IGenerateStatelessSuggestionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateStatelessSuggestion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateStatelessSuggestion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IGenerateStatelessSuggestionResponse,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IGenerateStatelessSuggestionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateStatelessSuggestion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get answers for the given query based on knowledge documents.
@@ -1579,7 +1798,36 @@ export class ConversationsClient {
         conversation: request.conversation ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.searchKnowledge(request, options, callback);
+    this._log.info('searchKnowledge request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeResponse,
+          | protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('searchKnowledge response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .searchKnowledge(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeResponse,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('searchKnowledge response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates all the suggestions using generators configured in the
@@ -1689,7 +1937,36 @@ export class ConversationsClient {
         conversation: request.conversation ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.generateSuggestions(request, options, callback);
+    this._log.info('generateSuggestions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IGenerateSuggestionsResponse,
+          | protos.google.cloud.dialogflow.v2beta1.IGenerateSuggestionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateSuggestions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateSuggestions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IGenerateSuggestionsResponse,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IGenerateSuggestionsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateSuggestions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1798,7 +2075,33 @@ export class ConversationsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listConversations(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2beta1.IListConversationsRequest,
+          | protos.google.cloud.dialogflow.v2beta1.IListConversationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.IConversation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConversations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConversations request %j', request);
+    return this.innerApiCalls
+      .listConversations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2beta1.IConversation[],
+          protos.google.cloud.dialogflow.v2beta1.IListConversationsRequest | null,
+          protos.google.cloud.dialogflow.v2beta1.IListConversationsResponse,
+        ]) => {
+          this._log.info('listConversations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1848,6 +2151,7 @@ export class ConversationsClient {
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConversations stream %j', request);
     return this.descriptors.page.listConversations.createStream(
       this.innerApiCalls.listConversations as GaxCall,
       request,
@@ -1905,6 +2209,7 @@ export class ConversationsClient {
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConversations iterate %j', request);
     return this.descriptors.page.listConversations.asyncIterate(
       this.innerApiCalls['listConversations'] as GaxCall,
       request as {},
@@ -2022,7 +2327,33 @@ export class ConversationsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listMessages(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2beta1.IListMessagesRequest,
+          | protos.google.cloud.dialogflow.v2beta1.IListMessagesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.IMessage
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMessages values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMessages request %j', request);
+    return this.innerApiCalls
+      .listMessages(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2beta1.IMessage[],
+          protos.google.cloud.dialogflow.v2beta1.IListMessagesRequest | null,
+          protos.google.cloud.dialogflow.v2beta1.IListMessagesResponse,
+        ]) => {
+          this._log.info('listMessages values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2073,6 +2404,7 @@ export class ConversationsClient {
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMessages stream %j', request);
     return this.descriptors.page.listMessages.createStream(
       this.innerApiCalls.listMessages as GaxCall,
       request,
@@ -2131,6 +2463,7 @@ export class ConversationsClient {
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMessages iterate %j', request);
     return this.descriptors.page.listMessages.asyncIterate(
       this.innerApiCalls['listMessages'] as GaxCall,
       request as {},
@@ -4734,6 +5067,7 @@ export class ConversationsClient {
   close(): Promise<void> {
     if (this.conversationsStub && !this._terminated) {
       return this.conversationsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
