@@ -29,6 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -70,6 +71,8 @@ export class RouteOptimizationClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('routeoptimization');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -104,7 +107,7 @@ export class RouteOptimizationClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -695,7 +698,36 @@ export class RouteOptimizationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.optimizeTours(request, options, callback);
+    this._log.info('optimizeTours request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+          | protos.google.maps.routeoptimization.v1.IOptimizeToursRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('optimizeTours response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .optimizeTours(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+          (
+            | protos.google.maps.routeoptimization.v1.IOptimizeToursRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('optimizeTours response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -828,7 +860,37 @@ export class RouteOptimizationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchOptimizeTours(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse,
+            protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchOptimizeTours response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchOptimizeTours request %j', request);
+    return this.innerApiCalls
+      .batchOptimizeTours(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse,
+            protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchOptimizeTours response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchOptimizeTours()`.
@@ -849,6 +911,7 @@ export class RouteOptimizationClient {
       protos.google.maps.routeoptimization.v1.BatchOptimizeToursMetadata
     >
   > {
+    this._log.info('batchOptimizeTours long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1097,6 +1160,7 @@ export class RouteOptimizationClient {
   close(): Promise<void> {
     if (this.routeOptimizationStub && !this._terminated) {
       return this.routeOptimizationStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

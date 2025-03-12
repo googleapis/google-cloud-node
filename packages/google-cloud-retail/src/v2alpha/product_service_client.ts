@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class ProductServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('retail');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class ProductServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -684,7 +687,33 @@ export class ProductServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createProduct(request, options, callback);
+    this._log.info('createProduct request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IProduct,
+          | protos.google.cloud.retail.v2alpha.ICreateProductRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createProduct response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createProduct(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2alpha.IProduct,
+          protos.google.cloud.retail.v2alpha.ICreateProductRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createProduct response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a {@link protos.google.cloud.retail.v2alpha.Product|Product}.
@@ -777,7 +806,33 @@ export class ProductServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getProduct(request, options, callback);
+    this._log.info('getProduct request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IProduct,
+          | protos.google.cloud.retail.v2alpha.IGetProductRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProduct response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProduct(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2alpha.IProduct,
+          protos.google.cloud.retail.v2alpha.IGetProductRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getProduct response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a {@link protos.google.cloud.retail.v2alpha.Product|Product}.
@@ -893,7 +948,33 @@ export class ProductServiceClient {
         'product.name': request.product!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateProduct(request, options, callback);
+    this._log.info('updateProduct request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IProduct,
+          | protos.google.cloud.retail.v2alpha.IUpdateProductRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateProduct response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateProduct(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2alpha.IProduct,
+          protos.google.cloud.retail.v2alpha.IUpdateProductRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateProduct response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a {@link protos.google.cloud.retail.v2alpha.Product|Product}.
@@ -1013,7 +1094,33 @@ export class ProductServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteProduct(request, options, callback);
+    this._log.info('deleteProduct request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.retail.v2alpha.IDeleteProductRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteProduct response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteProduct(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.retail.v2alpha.IDeleteProductRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteProduct response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1179,7 +1286,37 @@ export class ProductServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.purgeProducts(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IPurgeProductsResponse,
+            protos.google.cloud.retail.v2alpha.IPurgeProductsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('purgeProducts response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('purgeProducts request %j', request);
+    return this.innerApiCalls
+      .purgeProducts(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IPurgeProductsResponse,
+            protos.google.cloud.retail.v2alpha.IPurgeProductsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('purgeProducts response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `purgeProducts()`.
@@ -1200,6 +1337,7 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.PurgeProductsMetadata
     >
   > {
+    this._log.info('purgeProducts long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1364,7 +1502,37 @@ export class ProductServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importProducts(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IImportProductsResponse,
+            protos.google.cloud.retail.v2alpha.IImportMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importProducts response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importProducts request %j', request);
+    return this.innerApiCalls
+      .importProducts(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IImportProductsResponse,
+            protos.google.cloud.retail.v2alpha.IImportMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importProducts response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importProducts()`.
@@ -1385,6 +1553,7 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.ImportMetadata
     >
   > {
+    this._log.info('importProducts long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1549,7 +1718,37 @@ export class ProductServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportProducts(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IExportProductsResponse,
+            protos.google.cloud.retail.v2alpha.IExportMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportProducts response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportProducts request %j', request);
+    return this.innerApiCalls
+      .exportProducts(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IExportProductsResponse,
+            protos.google.cloud.retail.v2alpha.IExportMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportProducts response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportProducts()`.
@@ -1570,6 +1769,7 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.ExportMetadata
     >
   > {
+    this._log.info('exportProducts long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1809,7 +2009,37 @@ export class ProductServiceClient {
         'inventory.name': request.inventory!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setInventory(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.ISetInventoryResponse,
+            protos.google.cloud.retail.v2alpha.ISetInventoryMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('setInventory response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('setInventory request %j', request);
+    return this.innerApiCalls
+      .setInventory(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2alpha.ISetInventoryResponse,
+            protos.google.cloud.retail.v2alpha.ISetInventoryMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setInventory response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `setInventory()`.
@@ -1830,6 +2060,7 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.SetInventoryMetadata
     >
   > {
+    this._log.info('setInventory long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2028,7 +2259,37 @@ export class ProductServiceClient {
         product: request.product ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.addFulfillmentPlaces(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesResponse,
+            protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('addFulfillmentPlaces response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('addFulfillmentPlaces request %j', request);
+    return this.innerApiCalls
+      .addFulfillmentPlaces(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesResponse,
+            protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('addFulfillmentPlaces response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `addFulfillmentPlaces()`.
@@ -2049,6 +2310,7 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesMetadata
     >
   > {
+    this._log.info('addFulfillmentPlaces long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2242,11 +2504,37 @@ export class ProductServiceClient {
         product: request.product ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.removeFulfillmentPlaces(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesResponse,
+            protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('removeFulfillmentPlaces response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('removeFulfillmentPlaces request %j', request);
+    return this.innerApiCalls
+      .removeFulfillmentPlaces(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesResponse,
+            protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('removeFulfillmentPlaces response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `removeFulfillmentPlaces()`.
@@ -2267,6 +2555,7 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesMetadata
     >
   > {
+    this._log.info('removeFulfillmentPlaces long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2446,7 +2735,37 @@ export class ProductServiceClient {
         product: request.product ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.addLocalInventories(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IAddLocalInventoriesResponse,
+            protos.google.cloud.retail.v2alpha.IAddLocalInventoriesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('addLocalInventories response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('addLocalInventories request %j', request);
+    return this.innerApiCalls
+      .addLocalInventories(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IAddLocalInventoriesResponse,
+            protos.google.cloud.retail.v2alpha.IAddLocalInventoriesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('addLocalInventories response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `addLocalInventories()`.
@@ -2467,6 +2786,7 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.AddLocalInventoriesMetadata
     >
   > {
+    this._log.info('addLocalInventories long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2627,11 +2947,37 @@ export class ProductServiceClient {
         product: request.product ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.removeLocalInventories(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesResponse,
+            protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('removeLocalInventories response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('removeLocalInventories request %j', request);
+    return this.innerApiCalls
+      .removeLocalInventories(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesResponse,
+            protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('removeLocalInventories response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `removeLocalInventories()`.
@@ -2652,6 +2998,7 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesMetadata
     >
   > {
+    this._log.info('removeLocalInventories long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2839,7 +3186,33 @@ export class ProductServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listProducts(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.retail.v2alpha.IListProductsRequest,
+          | protos.google.cloud.retail.v2alpha.IListProductsResponse
+          | null
+          | undefined,
+          protos.google.cloud.retail.v2alpha.IProduct
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProducts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProducts request %j', request);
+    return this.innerApiCalls
+      .listProducts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.retail.v2alpha.IProduct[],
+          protos.google.cloud.retail.v2alpha.IListProductsRequest | null,
+          protos.google.cloud.retail.v2alpha.IListProductsResponse,
+        ]) => {
+          this._log.info('listProducts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2955,6 +3328,7 @@ export class ProductServiceClient {
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProducts stream %j', request);
     return this.descriptors.page.listProducts.createStream(
       this.innerApiCalls.listProducts as GaxCall,
       request,
@@ -3078,6 +3452,7 @@ export class ProductServiceClient {
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProducts iterate %j', request);
     return this.descriptors.page.listProducts.asyncIterate(
       this.innerApiCalls['listProducts'] as GaxCall,
       request as {},
@@ -4061,6 +4436,7 @@ export class ProductServiceClient {
   close(): Promise<void> {
     if (this.productServiceStub && !this._terminated) {
       return this.productServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

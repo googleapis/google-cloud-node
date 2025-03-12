@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class ServiceUsageClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('service-usage');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -89,7 +92,7 @@ export class ServiceUsageClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -691,7 +694,33 @@ export class ServiceUsageClient {
       'GetService is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.getService(request, options, callback);
+    this._log.info('getService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.serviceusage.v1beta1.IService,
+          | protos.google.api.serviceusage.v1beta1.IGetServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.serviceusage.v1beta1.IService,
+          protos.google.api.serviceusage.v1beta1.IGetServiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a summary of quota information for a specific quota metric
@@ -792,11 +821,36 @@ export class ServiceUsageClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getConsumerQuotaMetric(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getConsumerQuotaMetric request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric,
+          | protos.google.api.serviceusage.v1beta1.IGetConsumerQuotaMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConsumerQuotaMetric response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConsumerQuotaMetric(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric,
+          (
+            | protos.google.api.serviceusage.v1beta1.IGetConsumerQuotaMetricRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConsumerQuotaMetric response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a summary of quota information for a specific quota limit.
@@ -897,7 +951,36 @@ export class ServiceUsageClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getConsumerQuotaLimit(request, options, callback);
+    this._log.info('getConsumerQuotaLimit request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.serviceusage.v1beta1.IConsumerQuotaLimit,
+          | protos.google.api.serviceusage.v1beta1.IGetConsumerQuotaLimitRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConsumerQuotaLimit response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConsumerQuotaLimit(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.serviceusage.v1beta1.IConsumerQuotaLimit,
+          (
+            | protos.google.api.serviceusage.v1beta1.IGetConsumerQuotaLimitRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConsumerQuotaLimit response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1018,7 +1101,37 @@ export class ServiceUsageClient {
       'EnableService is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.enableService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('enableService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('enableService request %j', request);
+    return this.innerApiCalls
+      .enableService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('enableService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `enableService()`.
@@ -1045,6 +1158,7 @@ export class ServiceUsageClient {
       'checkEnableServiceProgress is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('enableService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1180,7 +1294,37 @@ export class ServiceUsageClient {
       'DisableService is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.disableService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('disableService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('disableService request %j', request);
+    return this.innerApiCalls
+      .disableService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('disableService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `disableService()`.
@@ -1207,6 +1351,7 @@ export class ServiceUsageClient {
       'checkDisableServiceProgress is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('disableService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1353,7 +1498,37 @@ export class ServiceUsageClient {
       'BatchEnableServices is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.batchEnableServices(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchEnableServices response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchEnableServices request %j', request);
+    return this.innerApiCalls
+      .batchEnableServices(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchEnableServices response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchEnableServices()`.
@@ -1380,6 +1555,7 @@ export class ServiceUsageClient {
       'checkBatchEnableServicesProgress is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('batchEnableServices long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1515,7 +1691,37 @@ export class ServiceUsageClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createAdminOverride(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.serviceusage.v1beta1.IQuotaOverride,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAdminOverride response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAdminOverride request %j', request);
+    return this.innerApiCalls
+      .createAdminOverride(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.serviceusage.v1beta1.IQuotaOverride,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAdminOverride response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAdminOverride()`.
@@ -1536,6 +1742,7 @@ export class ServiceUsageClient {
       protos.google.api.serviceusage.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('createAdminOverride long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1669,7 +1876,37 @@ export class ServiceUsageClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateAdminOverride(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.serviceusage.v1beta1.IQuotaOverride,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAdminOverride response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAdminOverride request %j', request);
+    return this.innerApiCalls
+      .updateAdminOverride(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.serviceusage.v1beta1.IQuotaOverride,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAdminOverride response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateAdminOverride()`.
@@ -1690,6 +1927,7 @@ export class ServiceUsageClient {
       protos.google.api.serviceusage.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('updateAdminOverride long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1817,7 +2055,37 @@ export class ServiceUsageClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAdminOverride(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAdminOverride response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAdminOverride request %j', request);
+    return this.innerApiCalls
+      .deleteAdminOverride(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAdminOverride response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteAdminOverride()`.
@@ -1838,6 +2106,7 @@ export class ServiceUsageClient {
       protos.google.api.serviceusage.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('deleteAdminOverride long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1969,7 +2238,37 @@ export class ServiceUsageClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importAdminOverrides(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.serviceusage.v1beta1.IImportAdminOverridesResponse,
+            protos.google.api.serviceusage.v1beta1.IImportAdminOverridesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importAdminOverrides response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importAdminOverrides request %j', request);
+    return this.innerApiCalls
+      .importAdminOverrides(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.serviceusage.v1beta1.IImportAdminOverridesResponse,
+            protos.google.api.serviceusage.v1beta1.IImportAdminOverridesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importAdminOverrides response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importAdminOverrides()`.
@@ -1990,6 +2289,7 @@ export class ServiceUsageClient {
       protos.google.api.serviceusage.v1beta1.ImportAdminOverridesMetadata
     >
   > {
+    this._log.info('importAdminOverrides long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2124,11 +2424,37 @@ export class ServiceUsageClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createConsumerOverride(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.serviceusage.v1beta1.IQuotaOverride,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createConsumerOverride response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createConsumerOverride request %j', request);
+    return this.innerApiCalls
+      .createConsumerOverride(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.serviceusage.v1beta1.IQuotaOverride,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createConsumerOverride response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createConsumerOverride()`.
@@ -2149,6 +2475,7 @@ export class ServiceUsageClient {
       protos.google.api.serviceusage.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('createConsumerOverride long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2282,11 +2609,37 @@ export class ServiceUsageClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateConsumerOverride(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.serviceusage.v1beta1.IQuotaOverride,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateConsumerOverride response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateConsumerOverride request %j', request);
+    return this.innerApiCalls
+      .updateConsumerOverride(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.serviceusage.v1beta1.IQuotaOverride,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConsumerOverride response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateConsumerOverride()`.
@@ -2307,6 +2660,7 @@ export class ServiceUsageClient {
       protos.google.api.serviceusage.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('updateConsumerOverride long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2434,11 +2788,37 @@ export class ServiceUsageClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteConsumerOverride(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteConsumerOverride response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteConsumerOverride request %j', request);
+    return this.innerApiCalls
+      .deleteConsumerOverride(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.api.serviceusage.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConsumerOverride response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteConsumerOverride()`.
@@ -2459,6 +2839,7 @@ export class ServiceUsageClient {
       protos.google.api.serviceusage.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('deleteConsumerOverride long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2590,11 +2971,37 @@ export class ServiceUsageClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importConsumerOverrides(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.serviceusage.v1beta1.IImportConsumerOverridesResponse,
+            protos.google.api.serviceusage.v1beta1.IImportConsumerOverridesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importConsumerOverrides response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importConsumerOverrides request %j', request);
+    return this.innerApiCalls
+      .importConsumerOverrides(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.serviceusage.v1beta1.IImportConsumerOverridesResponse,
+            protos.google.api.serviceusage.v1beta1.IImportConsumerOverridesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importConsumerOverrides response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importConsumerOverrides()`.
@@ -2615,6 +3022,7 @@ export class ServiceUsageClient {
       protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesMetadata
     >
   > {
+    this._log.info('importConsumerOverrides long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2738,11 +3146,37 @@ export class ServiceUsageClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.generateServiceIdentity(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.serviceusage.v1beta1.IServiceIdentity,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('generateServiceIdentity response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('generateServiceIdentity request %j', request);
+    return this.innerApiCalls
+      .generateServiceIdentity(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.serviceusage.v1beta1.IServiceIdentity,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('generateServiceIdentity response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `generateServiceIdentity()`.
@@ -2763,6 +3197,7 @@ export class ServiceUsageClient {
       protos.google.protobuf.Empty
     >
   > {
+    this._log.info('generateServiceIdentity long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2895,7 +3330,33 @@ export class ServiceUsageClient {
       'ListServices is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.listServices(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.api.serviceusage.v1beta1.IListServicesRequest,
+          | protos.google.api.serviceusage.v1beta1.IListServicesResponse
+          | null
+          | undefined,
+          protos.google.api.serviceusage.v1beta1.IService
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServices values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServices request %j', request);
+    return this.innerApiCalls
+      .listServices(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.api.serviceusage.v1beta1.IService[],
+          protos.google.api.serviceusage.v1beta1.IListServicesRequest | null,
+          protos.google.api.serviceusage.v1beta1.IListServicesResponse,
+        ]) => {
+          this._log.info('listServices values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2950,6 +3411,7 @@ export class ServiceUsageClient {
       'ListServices is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
       request,
@@ -3012,6 +3474,7 @@ export class ServiceUsageClient {
       'ListServices is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
       request as {},
@@ -3125,11 +3588,33 @@ export class ServiceUsageClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listConsumerQuotaMetrics(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.api.serviceusage.v1beta1.IListConsumerQuotaMetricsRequest,
+          | protos.google.api.serviceusage.v1beta1.IListConsumerQuotaMetricsResponse
+          | null
+          | undefined,
+          protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConsumerQuotaMetrics values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConsumerQuotaMetrics request %j', request);
+    return this.innerApiCalls
+      .listConsumerQuotaMetrics(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric[],
+          protos.google.api.serviceusage.v1beta1.IListConsumerQuotaMetricsRequest | null,
+          protos.google.api.serviceusage.v1beta1.IListConsumerQuotaMetricsResponse,
+        ]) => {
+          this._log.info('listConsumerQuotaMetrics values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3176,6 +3661,7 @@ export class ServiceUsageClient {
     const defaultCallSettings = this._defaults['listConsumerQuotaMetrics'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConsumerQuotaMetrics stream %j', request);
     return this.descriptors.page.listConsumerQuotaMetrics.createStream(
       this.innerApiCalls.listConsumerQuotaMetrics as GaxCall,
       request,
@@ -3230,6 +3716,7 @@ export class ServiceUsageClient {
     const defaultCallSettings = this._defaults['listConsumerQuotaMetrics'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConsumerQuotaMetrics iterate %j', request);
     return this.descriptors.page.listConsumerQuotaMetrics.asyncIterate(
       this.innerApiCalls['listConsumerQuotaMetrics'] as GaxCall,
       request as {},
@@ -3336,7 +3823,33 @@ export class ServiceUsageClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAdminOverrides(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.api.serviceusage.v1beta1.IListAdminOverridesRequest,
+          | protos.google.api.serviceusage.v1beta1.IListAdminOverridesResponse
+          | null
+          | undefined,
+          protos.google.api.serviceusage.v1beta1.IQuotaOverride
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAdminOverrides values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAdminOverrides request %j', request);
+    return this.innerApiCalls
+      .listAdminOverrides(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.api.serviceusage.v1beta1.IQuotaOverride[],
+          protos.google.api.serviceusage.v1beta1.IListAdminOverridesRequest | null,
+          protos.google.api.serviceusage.v1beta1.IListAdminOverridesResponse,
+        ]) => {
+          this._log.info('listAdminOverrides values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3380,6 +3893,7 @@ export class ServiceUsageClient {
     const defaultCallSettings = this._defaults['listAdminOverrides'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAdminOverrides stream %j', request);
     return this.descriptors.page.listAdminOverrides.createStream(
       this.innerApiCalls.listAdminOverrides as GaxCall,
       request,
@@ -3431,6 +3945,7 @@ export class ServiceUsageClient {
     const defaultCallSettings = this._defaults['listAdminOverrides'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAdminOverrides iterate %j', request);
     return this.descriptors.page.listAdminOverrides.asyncIterate(
       this.innerApiCalls['listAdminOverrides'] as GaxCall,
       request as {},
@@ -3537,7 +4052,33 @@ export class ServiceUsageClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listConsumerOverrides(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.api.serviceusage.v1beta1.IListConsumerOverridesRequest,
+          | protos.google.api.serviceusage.v1beta1.IListConsumerOverridesResponse
+          | null
+          | undefined,
+          protos.google.api.serviceusage.v1beta1.IQuotaOverride
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConsumerOverrides values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConsumerOverrides request %j', request);
+    return this.innerApiCalls
+      .listConsumerOverrides(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.api.serviceusage.v1beta1.IQuotaOverride[],
+          protos.google.api.serviceusage.v1beta1.IListConsumerOverridesRequest | null,
+          protos.google.api.serviceusage.v1beta1.IListConsumerOverridesResponse,
+        ]) => {
+          this._log.info('listConsumerOverrides values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3581,6 +4122,7 @@ export class ServiceUsageClient {
     const defaultCallSettings = this._defaults['listConsumerOverrides'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConsumerOverrides stream %j', request);
     return this.descriptors.page.listConsumerOverrides.createStream(
       this.innerApiCalls.listConsumerOverrides as GaxCall,
       request,
@@ -3632,6 +4174,7 @@ export class ServiceUsageClient {
     const defaultCallSettings = this._defaults['listConsumerOverrides'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConsumerOverrides iterate %j', request);
     return this.descriptors.page.listConsumerOverrides.asyncIterate(
       this.innerApiCalls['listConsumerOverrides'] as GaxCall,
       request as {},
@@ -3871,6 +4414,7 @@ export class ServiceUsageClient {
   close(): Promise<void> {
     if (this.serviceUsageStub && !this._terminated) {
       return this.serviceUsageStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

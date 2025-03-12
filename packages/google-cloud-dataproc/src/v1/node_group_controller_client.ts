@@ -31,6 +31,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class NodeGroupControllerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dataproc');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -92,7 +95,7 @@ export class NodeGroupControllerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -659,7 +662,33 @@ export class NodeGroupControllerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNodeGroup(request, options, callback);
+    this._log.info('getNodeGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataproc.v1.INodeGroup,
+          | protos.google.cloud.dataproc.v1.IGetNodeGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNodeGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNodeGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataproc.v1.INodeGroup,
+          protos.google.cloud.dataproc.v1.IGetNodeGroupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getNodeGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -786,7 +815,37 @@ export class NodeGroupControllerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createNodeGroup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1.INodeGroup,
+            protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createNodeGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createNodeGroup request %j', request);
+    return this.innerApiCalls
+      .createNodeGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataproc.v1.INodeGroup,
+            protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createNodeGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createNodeGroup()`.
@@ -807,6 +866,7 @@ export class NodeGroupControllerClient {
       protos.google.cloud.dataproc.v1.NodeGroupOperationMetadata
     >
   > {
+    this._log.info('createNodeGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -956,7 +1016,37 @@ export class NodeGroupControllerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.resizeNodeGroup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1.INodeGroup,
+            protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('resizeNodeGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('resizeNodeGroup request %j', request);
+    return this.innerApiCalls
+      .resizeNodeGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataproc.v1.INodeGroup,
+            protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('resizeNodeGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `resizeNodeGroup()`.
@@ -977,6 +1067,7 @@ export class NodeGroupControllerClient {
       protos.google.cloud.dataproc.v1.NodeGroupOperationMetadata
     >
   > {
+    this._log.info('resizeNodeGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1967,6 +2058,7 @@ export class NodeGroupControllerClient {
   close(): Promise<void> {
     if (this.nodeGroupControllerStub && !this._terminated) {
       return this.nodeGroupControllerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

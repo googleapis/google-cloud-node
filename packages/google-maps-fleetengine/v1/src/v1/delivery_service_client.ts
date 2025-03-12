@@ -22,6 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallba
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -46,6 +47,8 @@ export class DeliveryServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('fleetengine-delivery');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -80,7 +83,7 @@ export class DeliveryServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -446,7 +449,25 @@ export class DeliveryServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.createDeliveryVehicle(request, options, callback);
+    this._log.info('createDeliveryVehicle request %j', request);
+    const wrappedCallback: Callback<
+        protos.maps.fleetengine.delivery.v1.IDeliveryVehicle,
+        protos.maps.fleetengine.delivery.v1.ICreateDeliveryVehicleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDeliveryVehicle response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createDeliveryVehicle(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.maps.fleetengine.delivery.v1.IDeliveryVehicle,
+        protos.maps.fleetengine.delivery.v1.ICreateDeliveryVehicleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDeliveryVehicle response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 /**
  * Returns the specified `DeliveryVehicle` instance.
@@ -532,7 +553,25 @@ export class DeliveryServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.getDeliveryVehicle(request, options, callback);
+    this._log.info('getDeliveryVehicle request %j', request);
+    const wrappedCallback: Callback<
+        protos.maps.fleetengine.delivery.v1.IDeliveryVehicle,
+        protos.maps.fleetengine.delivery.v1.IGetDeliveryVehicleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDeliveryVehicle response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getDeliveryVehicle(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.maps.fleetengine.delivery.v1.IDeliveryVehicle,
+        protos.maps.fleetengine.delivery.v1.IGetDeliveryVehicleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDeliveryVehicle response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 /**
  * Deletes a DeliveryVehicle from the Fleet Engine.
@@ -621,7 +660,25 @@ export class DeliveryServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.deleteDeliveryVehicle(request, options, callback);
+    this._log.info('deleteDeliveryVehicle request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.maps.fleetengine.delivery.v1.IDeleteDeliveryVehicleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDeliveryVehicle response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteDeliveryVehicle(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.maps.fleetengine.delivery.v1.IDeleteDeliveryVehicleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDeliveryVehicle response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 /**
  * Writes updated `DeliveryVehicle` data to Fleet Engine, and assigns
@@ -717,7 +774,25 @@ export class DeliveryServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.updateDeliveryVehicle(request, options, callback);
+    this._log.info('updateDeliveryVehicle request %j', request);
+    const wrappedCallback: Callback<
+        protos.maps.fleetengine.delivery.v1.IDeliveryVehicle,
+        protos.maps.fleetengine.delivery.v1.IUpdateDeliveryVehicleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDeliveryVehicle response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateDeliveryVehicle(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.maps.fleetengine.delivery.v1.IDeliveryVehicle,
+        protos.maps.fleetengine.delivery.v1.IUpdateDeliveryVehicleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDeliveryVehicle response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 /**
  * Creates and returns a batch of new `Task` objects.
@@ -810,7 +885,25 @@ export class DeliveryServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.batchCreateTasks(request, options, callback);
+    this._log.info('batchCreateTasks request %j', request);
+    const wrappedCallback: Callback<
+        protos.maps.fleetengine.delivery.v1.IBatchCreateTasksResponse,
+        protos.maps.fleetengine.delivery.v1.IBatchCreateTasksRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateTasks response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchCreateTasks(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.maps.fleetengine.delivery.v1.IBatchCreateTasksResponse,
+        protos.maps.fleetengine.delivery.v1.IBatchCreateTasksRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchCreateTasks response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 /**
  * Creates and returns a new `Task` object.
@@ -925,7 +1018,25 @@ export class DeliveryServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.createTask(request, options, callback);
+    this._log.info('createTask request %j', request);
+    const wrappedCallback: Callback<
+        protos.maps.fleetengine.delivery.v1.ITask,
+        protos.maps.fleetengine.delivery.v1.ICreateTaskRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTask response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createTask(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.maps.fleetengine.delivery.v1.ITask,
+        protos.maps.fleetengine.delivery.v1.ICreateTaskRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createTask response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 /**
  * Gets information about a `Task`.
@@ -1010,7 +1121,25 @@ export class DeliveryServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.getTask(request, options, callback);
+    this._log.info('getTask request %j', request);
+    const wrappedCallback: Callback<
+        protos.maps.fleetengine.delivery.v1.ITask,
+        protos.maps.fleetengine.delivery.v1.IGetTaskRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTask response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getTask(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.maps.fleetengine.delivery.v1.ITask,
+        protos.maps.fleetengine.delivery.v1.IGetTaskRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getTask response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 /**
  * Deletes a single Task.
@@ -1098,7 +1227,25 @@ export class DeliveryServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.deleteTask(request, options, callback);
+    this._log.info('deleteTask request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.maps.fleetengine.delivery.v1.IDeleteTaskRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTask response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteTask(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.maps.fleetengine.delivery.v1.IDeleteTaskRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteTask response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 /**
  * Updates `Task` data.
@@ -1202,7 +1349,25 @@ export class DeliveryServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.updateTask(request, options, callback);
+    this._log.info('updateTask request %j', request);
+    const wrappedCallback: Callback<
+        protos.maps.fleetengine.delivery.v1.ITask,
+        protos.maps.fleetengine.delivery.v1.IUpdateTaskRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTask response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateTask(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.maps.fleetengine.delivery.v1.ITask,
+        protos.maps.fleetengine.delivery.v1.IUpdateTaskRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateTask response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 /**
  * Returns the specified `TaskTrackingInfo` instance.
@@ -1289,7 +1454,25 @@ export class DeliveryServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.getTaskTrackingInfo(request, options, callback);
+    this._log.info('getTaskTrackingInfo request %j', request);
+    const wrappedCallback: Callback<
+        protos.maps.fleetengine.delivery.v1.ITaskTrackingInfo,
+        protos.maps.fleetengine.delivery.v1.IGetTaskTrackingInfoRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTaskTrackingInfo response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getTaskTrackingInfo(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.maps.fleetengine.delivery.v1.ITaskTrackingInfo,
+        protos.maps.fleetengine.delivery.v1.IGetTaskTrackingInfoRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getTaskTrackingInfo response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
  /**
@@ -1396,7 +1579,26 @@ export class DeliveryServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.listTasks(request, options, callback);
+    const wrappedCallback: PaginationCallback<
+      protos.maps.fleetengine.delivery.v1.IListTasksRequest,
+      protos.maps.fleetengine.delivery.v1.IListTasksResponse|null|undefined,
+      protos.maps.fleetengine.delivery.v1.ITask>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTasks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTasks request %j', request);
+    return this.innerApiCalls
+      .listTasks(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.maps.fleetengine.delivery.v1.ITask[],
+        protos.maps.fleetengine.delivery.v1.IListTasksRequest|null,
+        protos.maps.fleetengine.delivery.v1.IListTasksResponse
+      ]) => {
+        this._log.info('listTasks values %j', response);
+        return [response, input, output];
+      });
   }
 
 /**
@@ -1463,6 +1665,7 @@ export class DeliveryServiceClient {
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTasks stream %j', request);
     return this.descriptors.page.listTasks.createStream(
       this.innerApiCalls.listTasks as GaxCall,
       request,
@@ -1537,6 +1740,7 @@ export class DeliveryServiceClient {
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTasks iterate %j', request);
     return this.descriptors.page.listTasks.asyncIterate(
       this.innerApiCalls['listTasks'] as GaxCall,
       request as {},
@@ -1663,7 +1867,26 @@ export class DeliveryServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.listDeliveryVehicles(request, options, callback);
+    const wrappedCallback: PaginationCallback<
+      protos.maps.fleetengine.delivery.v1.IListDeliveryVehiclesRequest,
+      protos.maps.fleetengine.delivery.v1.IListDeliveryVehiclesResponse|null|undefined,
+      protos.maps.fleetengine.delivery.v1.IDeliveryVehicle>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDeliveryVehicles values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDeliveryVehicles request %j', request);
+    return this.innerApiCalls
+      .listDeliveryVehicles(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.maps.fleetengine.delivery.v1.IDeliveryVehicle[],
+        protos.maps.fleetengine.delivery.v1.IListDeliveryVehiclesRequest|null,
+        protos.maps.fleetengine.delivery.v1.IListDeliveryVehiclesResponse
+      ]) => {
+        this._log.info('listDeliveryVehicles values %j', response);
+        return [response, input, output];
+      });
   }
 
 /**
@@ -1746,6 +1969,7 @@ export class DeliveryServiceClient {
     const defaultCallSettings = this._defaults['listDeliveryVehicles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDeliveryVehicles stream %j', request);
     return this.descriptors.page.listDeliveryVehicles.createStream(
       this.innerApiCalls.listDeliveryVehicles as GaxCall,
       request,
@@ -1836,6 +2060,7 @@ export class DeliveryServiceClient {
     const defaultCallSettings = this._defaults['listDeliveryVehicles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDeliveryVehicles iterate %j', request);
     return this.descriptors.page.listDeliveryVehicles.asyncIterate(
       this.innerApiCalls['listDeliveryVehicles'] as GaxCall,
       request as {},
@@ -1986,6 +2211,7 @@ export class DeliveryServiceClient {
   close(): Promise<void> {
     if (this.deliveryServiceStub && !this._terminated) {
       return this.deliveryServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
