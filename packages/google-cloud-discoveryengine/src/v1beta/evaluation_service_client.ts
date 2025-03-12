@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class EvaluationServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class EvaluationServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -786,7 +789,36 @@ export class EvaluationServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEvaluation(request, options, callback);
+    this._log.info('getEvaluation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.IEvaluation,
+          | protos.google.cloud.discoveryengine.v1beta.IGetEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEvaluation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1beta.IEvaluation,
+          (
+            | protos.google.cloud.discoveryengine.v1beta.IGetEvaluationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEvaluation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -896,7 +928,37 @@ export class EvaluationServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEvaluation(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IEvaluation,
+            protos.google.cloud.discoveryengine.v1beta.ICreateEvaluationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createEvaluation response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createEvaluation request %j', request);
+    return this.innerApiCalls
+      .createEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IEvaluation,
+            protos.google.cloud.discoveryengine.v1beta.ICreateEvaluationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEvaluation response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createEvaluation()`.
@@ -917,6 +979,7 @@ export class EvaluationServiceClient {
       protos.google.cloud.discoveryengine.v1beta.CreateEvaluationMetadata
     >
   > {
+    this._log.info('createEvaluation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1048,7 +1111,33 @@ export class EvaluationServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEvaluations(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1beta.IListEvaluationsRequest,
+          | protos.google.cloud.discoveryengine.v1beta.IListEvaluationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1beta.IEvaluation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEvaluations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEvaluations request %j', request);
+    return this.innerApiCalls
+      .listEvaluations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1beta.IEvaluation[],
+          protos.google.cloud.discoveryengine.v1beta.IListEvaluationsRequest | null,
+          protos.google.cloud.discoveryengine.v1beta.IListEvaluationsResponse,
+        ]) => {
+          this._log.info('listEvaluations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1107,6 +1196,7 @@ export class EvaluationServiceClient {
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEvaluations stream %j', request);
     return this.descriptors.page.listEvaluations.createStream(
       this.innerApiCalls.listEvaluations as GaxCall,
       request,
@@ -1173,6 +1263,7 @@ export class EvaluationServiceClient {
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEvaluations iterate %j', request);
     return this.descriptors.page.listEvaluations.asyncIterate(
       this.innerApiCalls['listEvaluations'] as GaxCall,
       request as {},
@@ -1293,7 +1384,33 @@ export class EvaluationServiceClient {
         evaluation: request.evaluation ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEvaluationResults(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1beta.IListEvaluationResultsRequest,
+          | protos.google.cloud.discoveryengine.v1beta.IListEvaluationResultsResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.IEvaluationResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEvaluationResults values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEvaluationResults request %j', request);
+    return this.innerApiCalls
+      .listEvaluationResults(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.IEvaluationResult[],
+          protos.google.cloud.discoveryengine.v1beta.IListEvaluationResultsRequest | null,
+          protos.google.cloud.discoveryengine.v1beta.IListEvaluationResultsResponse,
+        ]) => {
+          this._log.info('listEvaluationResults values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1350,6 +1467,7 @@ export class EvaluationServiceClient {
     const defaultCallSettings = this._defaults['listEvaluationResults'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEvaluationResults stream %j', request);
     return this.descriptors.page.listEvaluationResults.createStream(
       this.innerApiCalls.listEvaluationResults as GaxCall,
       request,
@@ -1414,6 +1532,7 @@ export class EvaluationServiceClient {
     const defaultCallSettings = this._defaults['listEvaluationResults'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEvaluationResults iterate %j', request);
     return this.descriptors.page.listEvaluationResults.asyncIterate(
       this.innerApiCalls['listEvaluationResults'] as GaxCall,
       request as {},
@@ -5301,6 +5420,7 @@ export class EvaluationServiceClient {
   close(): Promise<void> {
     if (this.evaluationServiceStub && !this._terminated) {
       return this.evaluationServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

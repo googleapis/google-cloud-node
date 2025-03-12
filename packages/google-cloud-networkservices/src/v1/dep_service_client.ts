@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class DepServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('networkservices');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class DepServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -762,7 +765,36 @@ export class DepServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getLbTrafficExtension(request, options, callback);
+    this._log.info('getLbTrafficExtension request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkservices.v1.ILbTrafficExtension,
+          | protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLbTrafficExtension response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLbTrafficExtension(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkservices.v1.ILbTrafficExtension,
+          (
+            | protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getLbTrafficExtension response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of the specified `LbRouteExtension` resource.
@@ -860,7 +892,36 @@ export class DepServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getLbRouteExtension(request, options, callback);
+    this._log.info('getLbRouteExtension request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkservices.v1.ILbRouteExtension,
+          | protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLbRouteExtension response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLbRouteExtension(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkservices.v1.ILbRouteExtension,
+          (
+            | protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getLbRouteExtension response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -984,11 +1045,37 @@ export class DepServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createLbTrafficExtension(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.ILbTrafficExtension,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createLbTrafficExtension response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createLbTrafficExtension request %j', request);
+    return this.innerApiCalls
+      .createLbTrafficExtension(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.ILbTrafficExtension,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createLbTrafficExtension response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createLbTrafficExtension()`.
@@ -1009,6 +1096,7 @@ export class DepServiceClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createLbTrafficExtension long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1144,11 +1232,37 @@ export class DepServiceClient {
         'lb_traffic_extension.name': request.lbTrafficExtension!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateLbTrafficExtension(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.ILbTrafficExtension,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateLbTrafficExtension response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateLbTrafficExtension request %j', request);
+    return this.innerApiCalls
+      .updateLbTrafficExtension(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.ILbTrafficExtension,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateLbTrafficExtension response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateLbTrafficExtension()`.
@@ -1169,6 +1283,7 @@ export class DepServiceClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updateLbTrafficExtension long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1300,11 +1415,37 @@ export class DepServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteLbTrafficExtension(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteLbTrafficExtension response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteLbTrafficExtension request %j', request);
+    return this.innerApiCalls
+      .deleteLbTrafficExtension(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteLbTrafficExtension response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteLbTrafficExtension()`.
@@ -1325,6 +1466,7 @@ export class DepServiceClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteLbTrafficExtension long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1460,11 +1602,37 @@ export class DepServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createLbRouteExtension(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.ILbRouteExtension,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createLbRouteExtension response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createLbRouteExtension request %j', request);
+    return this.innerApiCalls
+      .createLbRouteExtension(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.ILbRouteExtension,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createLbRouteExtension response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createLbRouteExtension()`.
@@ -1485,6 +1653,7 @@ export class DepServiceClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createLbRouteExtension long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1620,11 +1789,37 @@ export class DepServiceClient {
         'lb_route_extension.name': request.lbRouteExtension!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateLbRouteExtension(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.ILbRouteExtension,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateLbRouteExtension response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateLbRouteExtension request %j', request);
+    return this.innerApiCalls
+      .updateLbRouteExtension(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.ILbRouteExtension,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateLbRouteExtension response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateLbRouteExtension()`.
@@ -1645,6 +1840,7 @@ export class DepServiceClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updateLbRouteExtension long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1776,11 +1972,37 @@ export class DepServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteLbRouteExtension(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteLbRouteExtension response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteLbRouteExtension request %j', request);
+    return this.innerApiCalls
+      .deleteLbRouteExtension(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteLbRouteExtension response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteLbRouteExtension()`.
@@ -1801,6 +2023,7 @@ export class DepServiceClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteLbRouteExtension long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1918,11 +2141,33 @@ export class DepServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listLbTrafficExtensions(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
+          | protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1.ILbTrafficExtension
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLbTrafficExtensions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLbTrafficExtensions request %j', request);
+    return this.innerApiCalls
+      .listLbTrafficExtensions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkservices.v1.ILbTrafficExtension[],
+          protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest | null,
+          protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse,
+        ]) => {
+          this._log.info('listLbTrafficExtensions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1968,6 +2213,7 @@ export class DepServiceClient {
     const defaultCallSettings = this._defaults['listLbTrafficExtensions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLbTrafficExtensions stream %j', request);
     return this.descriptors.page.listLbTrafficExtensions.createStream(
       this.innerApiCalls.listLbTrafficExtensions as GaxCall,
       request,
@@ -2021,6 +2267,7 @@ export class DepServiceClient {
     const defaultCallSettings = this._defaults['listLbTrafficExtensions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLbTrafficExtensions iterate %j', request);
     return this.descriptors.page.listLbTrafficExtensions.asyncIterate(
       this.innerApiCalls['listLbTrafficExtensions'] as GaxCall,
       request as {},
@@ -2129,7 +2376,33 @@ export class DepServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listLbRouteExtensions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
+          | protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1.ILbRouteExtension
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLbRouteExtensions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLbRouteExtensions request %j', request);
+    return this.innerApiCalls
+      .listLbRouteExtensions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkservices.v1.ILbRouteExtension[],
+          protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest | null,
+          protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse,
+        ]) => {
+          this._log.info('listLbRouteExtensions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2175,6 +2448,7 @@ export class DepServiceClient {
     const defaultCallSettings = this._defaults['listLbRouteExtensions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLbRouteExtensions stream %j', request);
     return this.descriptors.page.listLbRouteExtensions.createStream(
       this.innerApiCalls.listLbRouteExtensions as GaxCall,
       request,
@@ -2228,6 +2502,7 @@ export class DepServiceClient {
     const defaultCallSettings = this._defaults['listLbRouteExtensions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLbRouteExtensions iterate %j', request);
     return this.descriptors.page.listLbRouteExtensions.asyncIterate(
       this.innerApiCalls['listLbRouteExtensions'] as GaxCall,
       request as {},
@@ -3286,6 +3561,7 @@ export class DepServiceClient {
   close(): Promise<void> {
     if (this.depServiceStub && !this._terminated) {
       return this.depServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();
