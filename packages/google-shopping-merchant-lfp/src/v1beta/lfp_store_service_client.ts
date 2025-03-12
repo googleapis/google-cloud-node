@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class LfpStoreServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('lfp');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -89,7 +92,7 @@ export class LfpStoreServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -490,7 +493,36 @@ export class LfpStoreServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getLfpStore(request, options, callback);
+    this._log.info('getLfpStore request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.lfp.v1beta.ILfpStore,
+          | protos.google.shopping.merchant.lfp.v1beta.IGetLfpStoreRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLfpStore response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLfpStore(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.lfp.v1beta.ILfpStore,
+          (
+            | protos.google.shopping.merchant.lfp.v1beta.IGetLfpStoreRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getLfpStore response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Inserts a store for the target merchant. If the store with the same store
@@ -590,7 +622,36 @@ export class LfpStoreServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.insertLfpStore(request, options, callback);
+    this._log.info('insertLfpStore request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.lfp.v1beta.ILfpStore,
+          | protos.google.shopping.merchant.lfp.v1beta.IInsertLfpStoreRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('insertLfpStore response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .insertLfpStore(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.lfp.v1beta.ILfpStore,
+          (
+            | protos.google.shopping.merchant.lfp.v1beta.IInsertLfpStoreRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('insertLfpStore response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a store for a target merchant.
@@ -687,7 +748,36 @@ export class LfpStoreServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteLfpStore(request, options, callback);
+    this._log.info('deleteLfpStore request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.shopping.merchant.lfp.v1beta.IDeleteLfpStoreRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteLfpStore response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteLfpStore(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.shopping.merchant.lfp.v1beta.IDeleteLfpStoreRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteLfpStore response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -798,7 +888,33 @@ export class LfpStoreServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listLfpStores(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.lfp.v1beta.IListLfpStoresRequest,
+          | protos.google.shopping.merchant.lfp.v1beta.IListLfpStoresResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.lfp.v1beta.ILfpStore
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLfpStores values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLfpStores request %j', request);
+    return this.innerApiCalls
+      .listLfpStores(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.lfp.v1beta.ILfpStore[],
+          protos.google.shopping.merchant.lfp.v1beta.IListLfpStoresRequest | null,
+          protos.google.shopping.merchant.lfp.v1beta.IListLfpStoresResponse,
+        ]) => {
+          this._log.info('listLfpStores values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -849,6 +965,7 @@ export class LfpStoreServiceClient {
     const defaultCallSettings = this._defaults['listLfpStores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLfpStores stream %j', request);
     return this.descriptors.page.listLfpStores.createStream(
       this.innerApiCalls.listLfpStores as GaxCall,
       request,
@@ -907,6 +1024,7 @@ export class LfpStoreServiceClient {
     const defaultCallSettings = this._defaults['listLfpStores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLfpStores iterate %j', request);
     return this.descriptors.page.listLfpStores.asyncIterate(
       this.innerApiCalls['listLfpStores'] as GaxCall,
       request as {},
@@ -1107,6 +1225,7 @@ export class LfpStoreServiceClient {
   close(): Promise<void> {
     if (this.lfpStoreServiceStub && !this._terminated) {
       return this.lfpStoreServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
