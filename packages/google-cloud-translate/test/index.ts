@@ -570,7 +570,7 @@ describe('Translate v2', () => {
         FakeService.prototype.request = request;
       });
 
-      it.only('should make the correct request', done => {
+      it('should make the correct request', done => {
         const fakeOptions = {
           uri: '/test',
           a: 'b',
