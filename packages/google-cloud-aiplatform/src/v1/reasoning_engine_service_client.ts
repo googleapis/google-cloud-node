@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class ReasoningEngineServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class ReasoningEngineServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2303,7 +2306,36 @@ export class ReasoningEngineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getReasoningEngine(request, options, callback);
+    this._log.info('getReasoningEngine request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IReasoningEngine,
+          | protos.google.cloud.aiplatform.v1.IGetReasoningEngineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getReasoningEngine response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getReasoningEngine(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IReasoningEngine,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetReasoningEngineRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getReasoningEngine response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2409,7 +2441,37 @@ export class ReasoningEngineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createReasoningEngine(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IReasoningEngine,
+            protos.google.cloud.aiplatform.v1.ICreateReasoningEngineOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createReasoningEngine response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createReasoningEngine request %j', request);
+    return this.innerApiCalls
+      .createReasoningEngine(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IReasoningEngine,
+            protos.google.cloud.aiplatform.v1.ICreateReasoningEngineOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createReasoningEngine response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createReasoningEngine()`.
@@ -2430,6 +2492,7 @@ export class ReasoningEngineServiceClient {
       protos.google.cloud.aiplatform.v1.CreateReasoningEngineOperationMetadata
     >
   > {
+    this._log.info('createReasoningEngine long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2547,7 +2610,37 @@ export class ReasoningEngineServiceClient {
         'reasoning_engine.name': request.reasoningEngine!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateReasoningEngine(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IReasoningEngine,
+            protos.google.cloud.aiplatform.v1.IUpdateReasoningEngineOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateReasoningEngine response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateReasoningEngine request %j', request);
+    return this.innerApiCalls
+      .updateReasoningEngine(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IReasoningEngine,
+            protos.google.cloud.aiplatform.v1.IUpdateReasoningEngineOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateReasoningEngine response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateReasoningEngine()`.
@@ -2568,6 +2661,7 @@ export class ReasoningEngineServiceClient {
       protos.google.cloud.aiplatform.v1.UpdateReasoningEngineOperationMetadata
     >
   > {
+    this._log.info('updateReasoningEngine long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2685,7 +2779,37 @@ export class ReasoningEngineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteReasoningEngine(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteReasoningEngine response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteReasoningEngine request %j', request);
+    return this.innerApiCalls
+      .deleteReasoningEngine(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteReasoningEngine response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteReasoningEngine()`.
@@ -2706,6 +2830,7 @@ export class ReasoningEngineServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteReasoningEngine long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2820,7 +2945,33 @@ export class ReasoningEngineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listReasoningEngines(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListReasoningEnginesRequest,
+          | protos.google.cloud.aiplatform.v1.IListReasoningEnginesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IReasoningEngine
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listReasoningEngines values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listReasoningEngines request %j', request);
+    return this.innerApiCalls
+      .listReasoningEngines(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IReasoningEngine[],
+          protos.google.cloud.aiplatform.v1.IListReasoningEnginesRequest | null,
+          protos.google.cloud.aiplatform.v1.IListReasoningEnginesResponse,
+        ]) => {
+          this._log.info('listReasoningEngines values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2863,6 +3014,7 @@ export class ReasoningEngineServiceClient {
     const defaultCallSettings = this._defaults['listReasoningEngines'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReasoningEngines stream %j', request);
     return this.descriptors.page.listReasoningEngines.createStream(
       this.innerApiCalls.listReasoningEngines as GaxCall,
       request,
@@ -2913,6 +3065,7 @@ export class ReasoningEngineServiceClient {
     const defaultCallSettings = this._defaults['listReasoningEngines'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReasoningEngines iterate %j', request);
     return this.descriptors.page.listReasoningEngines.asyncIterate(
       this.innerApiCalls['listReasoningEngines'] as GaxCall,
       request as {},
@@ -6930,6 +7083,7 @@ export class ReasoningEngineServiceClient {
   close(): Promise<void> {
     if (this.reasoningEngineServiceStub && !this._terminated) {
       return this.reasoningEngineServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

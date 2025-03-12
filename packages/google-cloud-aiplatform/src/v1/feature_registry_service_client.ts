@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,6 +61,8 @@ export class FeatureRegistryServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -97,7 +100,7 @@ export class FeatureRegistryServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2354,7 +2357,33 @@ export class FeatureRegistryServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getFeatureGroup(request, options, callback);
+    this._log.info('getFeatureGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IFeatureGroup,
+          | protos.google.cloud.aiplatform.v1.IGetFeatureGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFeatureGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFeatureGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IFeatureGroup,
+          protos.google.cloud.aiplatform.v1.IGetFeatureGroupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getFeatureGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Feature.
@@ -2442,7 +2471,33 @@ export class FeatureRegistryServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getFeature(request, options, callback);
+    this._log.info('getFeature request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IFeature,
+          | protos.google.cloud.aiplatform.v1.IGetFeatureRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFeature response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IFeature,
+          protos.google.cloud.aiplatform.v1.IGetFeatureRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getFeature response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2557,7 +2612,37 @@ export class FeatureRegistryServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createFeatureGroup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeatureGroup,
+            protos.google.cloud.aiplatform.v1.ICreateFeatureGroupOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createFeatureGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createFeatureGroup request %j', request);
+    return this.innerApiCalls
+      .createFeatureGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeatureGroup,
+            protos.google.cloud.aiplatform.v1.ICreateFeatureGroupOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createFeatureGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createFeatureGroup()`.
@@ -2578,6 +2663,7 @@ export class FeatureRegistryServiceClient {
       protos.google.cloud.aiplatform.v1.CreateFeatureGroupOperationMetadata
     >
   > {
+    this._log.info('createFeatureGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2710,7 +2796,37 @@ export class FeatureRegistryServiceClient {
         'feature_group.name': request.featureGroup!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateFeatureGroup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeatureGroup,
+            protos.google.cloud.aiplatform.v1.IUpdateFeatureGroupOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateFeatureGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateFeatureGroup request %j', request);
+    return this.innerApiCalls
+      .updateFeatureGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeatureGroup,
+            protos.google.cloud.aiplatform.v1.IUpdateFeatureGroupOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFeatureGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateFeatureGroup()`.
@@ -2731,6 +2847,7 @@ export class FeatureRegistryServiceClient {
       protos.google.cloud.aiplatform.v1.UpdateFeatureGroupOperationMetadata
     >
   > {
+    this._log.info('updateFeatureGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2852,7 +2969,37 @@ export class FeatureRegistryServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteFeatureGroup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteFeatureGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteFeatureGroup request %j', request);
+    return this.innerApiCalls
+      .deleteFeatureGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFeatureGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteFeatureGroup()`.
@@ -2873,6 +3020,7 @@ export class FeatureRegistryServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteFeatureGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3002,7 +3150,37 @@ export class FeatureRegistryServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createFeature(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeature,
+            protos.google.cloud.aiplatform.v1.ICreateFeatureOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createFeature response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createFeature request %j', request);
+    return this.innerApiCalls
+      .createFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeature,
+            protos.google.cloud.aiplatform.v1.ICreateFeatureOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createFeature response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createFeature()`.
@@ -3023,6 +3201,7 @@ export class FeatureRegistryServiceClient {
       protos.google.cloud.aiplatform.v1.CreateFeatureOperationMetadata
     >
   > {
+    this._log.info('createFeature long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3147,7 +3326,37 @@ export class FeatureRegistryServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchCreateFeatures(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesResponse,
+            protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchCreateFeatures response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchCreateFeatures request %j', request);
+    return this.innerApiCalls
+      .batchCreateFeatures(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesResponse,
+            protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateFeatures response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchCreateFeatures()`.
@@ -3168,6 +3377,7 @@ export class FeatureRegistryServiceClient {
       protos.google.cloud.aiplatform.v1.BatchCreateFeaturesOperationMetadata
     >
   > {
+    this._log.info('batchCreateFeatures long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3302,7 +3512,37 @@ export class FeatureRegistryServiceClient {
         'feature.name': request.feature!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateFeature(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeature,
+            protos.google.cloud.aiplatform.v1.IUpdateFeatureOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateFeature response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateFeature request %j', request);
+    return this.innerApiCalls
+      .updateFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeature,
+            protos.google.cloud.aiplatform.v1.IUpdateFeatureOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFeature response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateFeature()`.
@@ -3323,6 +3563,7 @@ export class FeatureRegistryServiceClient {
       protos.google.cloud.aiplatform.v1.UpdateFeatureOperationMetadata
     >
   > {
+    this._log.info('updateFeature long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3441,7 +3682,37 @@ export class FeatureRegistryServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteFeature(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteFeature response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteFeature request %j', request);
+    return this.innerApiCalls
+      .deleteFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFeature response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteFeature()`.
@@ -3462,6 +3733,7 @@ export class FeatureRegistryServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteFeature long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3608,7 +3880,33 @@ export class FeatureRegistryServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listFeatureGroups(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListFeatureGroupsRequest,
+          | protos.google.cloud.aiplatform.v1.IListFeatureGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IFeatureGroup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFeatureGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFeatureGroups request %j', request);
+    return this.innerApiCalls
+      .listFeatureGroups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IFeatureGroup[],
+          protos.google.cloud.aiplatform.v1.IListFeatureGroupsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListFeatureGroupsResponse,
+        ]) => {
+          this._log.info('listFeatureGroups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3683,6 +3981,7 @@ export class FeatureRegistryServiceClient {
     const defaultCallSettings = this._defaults['listFeatureGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFeatureGroups stream %j', request);
     return this.descriptors.page.listFeatureGroups.createStream(
       this.innerApiCalls.listFeatureGroups as GaxCall,
       request,
@@ -3765,6 +4064,7 @@ export class FeatureRegistryServiceClient {
     const defaultCallSettings = this._defaults['listFeatureGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFeatureGroups iterate %j', request);
     return this.descriptors.page.listFeatureGroups.asyncIterate(
       this.innerApiCalls['listFeatureGroups'] as GaxCall,
       request as {},
@@ -3923,7 +4223,33 @@ export class FeatureRegistryServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listFeatures(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListFeaturesRequest,
+          | protos.google.cloud.aiplatform.v1.IListFeaturesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IFeature
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFeatures values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFeatures request %j', request);
+    return this.innerApiCalls
+      .listFeatures(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IFeature[],
+          protos.google.cloud.aiplatform.v1.IListFeaturesRequest | null,
+          protos.google.cloud.aiplatform.v1.IListFeaturesResponse,
+        ]) => {
+          this._log.info('listFeatures values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4019,6 +4345,7 @@ export class FeatureRegistryServiceClient {
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFeatures stream %j', request);
     return this.descriptors.page.listFeatures.createStream(
       this.innerApiCalls.listFeatures as GaxCall,
       request,
@@ -4122,6 +4449,7 @@ export class FeatureRegistryServiceClient {
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFeatures iterate %j', request);
     return this.descriptors.page.listFeatures.asyncIterate(
       this.innerApiCalls['listFeatures'] as GaxCall,
       request as {},
@@ -8162,6 +8490,7 @@ export class FeatureRegistryServiceClient {
   close(): Promise<void> {
     if (this.featureRegistryServiceStub && !this._terminated) {
       return this.featureRegistryServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

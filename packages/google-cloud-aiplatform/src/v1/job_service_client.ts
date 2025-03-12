@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class JobServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class JobServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2430,7 +2433,33 @@ export class JobServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCustomJob(request, options, callback);
+    this._log.info('createCustomJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ICustomJob,
+          | protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCustomJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCustomJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ICustomJob,
+          protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCustomJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a CustomJob.
@@ -2516,7 +2545,33 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCustomJob(request, options, callback);
+    this._log.info('getCustomJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ICustomJob,
+          | protos.google.cloud.aiplatform.v1.IGetCustomJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCustomJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCustomJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ICustomJob,
+          protos.google.cloud.aiplatform.v1.IGetCustomJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCustomJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Cancels a CustomJob.
@@ -2620,7 +2675,33 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.cancelCustomJob(request, options, callback);
+    this._log.info('cancelCustomJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('cancelCustomJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .cancelCustomJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelCustomJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a DataLabelingJob.
@@ -2719,7 +2800,36 @@ export class JobServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDataLabelingJob(request, options, callback);
+    this._log.info('createDataLabelingJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+          | protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDataLabelingJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDataLabelingJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataLabelingJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a DataLabelingJob.
@@ -2811,7 +2921,36 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDataLabelingJob(request, options, callback);
+    this._log.info('getDataLabelingJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+          | protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataLabelingJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataLabelingJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataLabelingJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Cancels a DataLabelingJob. Success of cancellation is not guaranteed.
@@ -2909,7 +3048,36 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.cancelDataLabelingJob(request, options, callback);
+    this._log.info('cancelDataLabelingJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('cancelDataLabelingJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .cancelDataLabelingJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelDataLabelingJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a HyperparameterTuningJob
@@ -3009,11 +3177,36 @@ export class JobServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createHyperparameterTuningJob(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createHyperparameterTuningJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+          | protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createHyperparameterTuningJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createHyperparameterTuningJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createHyperparameterTuningJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a HyperparameterTuningJob
@@ -3111,11 +3304,36 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getHyperparameterTuningJob(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getHyperparameterTuningJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+          | protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getHyperparameterTuningJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getHyperparameterTuningJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getHyperparameterTuningJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Cancels a HyperparameterTuningJob.
@@ -3226,11 +3444,36 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.cancelHyperparameterTuningJob(
-      request,
-      options,
-      callback
-    );
+    this._log.info('cancelHyperparameterTuningJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('cancelHyperparameterTuningJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .cancelHyperparameterTuningJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelHyperparameterTuningJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a NasJob
@@ -3317,7 +3560,33 @@ export class JobServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createNasJob(request, options, callback);
+    this._log.info('createNasJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.INasJob,
+          | protos.google.cloud.aiplatform.v1.ICreateNasJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createNasJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createNasJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.INasJob,
+          protos.google.cloud.aiplatform.v1.ICreateNasJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createNasJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a NasJob
@@ -3403,7 +3672,33 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNasJob(request, options, callback);
+    this._log.info('getNasJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.INasJob,
+          | protos.google.cloud.aiplatform.v1.IGetNasJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNasJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNasJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.INasJob,
+          protos.google.cloud.aiplatform.v1.IGetNasJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getNasJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Cancels a NasJob.
@@ -3501,7 +3796,33 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.cancelNasJob(request, options, callback);
+    this._log.info('cancelNasJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.ICancelNasJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('cancelNasJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .cancelNasJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1.ICancelNasJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelNasJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a NasTrialDetail.
@@ -3593,7 +3914,36 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNasTrialDetail(request, options, callback);
+    this._log.info('getNasTrialDetail request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.INasTrialDetail,
+          | protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNasTrialDetail response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNasTrialDetail(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.INasTrialDetail,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNasTrialDetail response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a BatchPredictionJob. A BatchPredictionJob once created will
@@ -3693,11 +4043,36 @@ export class JobServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createBatchPredictionJob(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createBatchPredictionJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+          | protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createBatchPredictionJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createBatchPredictionJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createBatchPredictionJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a BatchPredictionJob
@@ -3795,7 +4170,36 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getBatchPredictionJob(request, options, callback);
+    this._log.info('getBatchPredictionJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+          | protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBatchPredictionJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBatchPredictionJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getBatchPredictionJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Cancels a BatchPredictionJob.
@@ -3904,11 +4308,36 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.cancelBatchPredictionJob(
-      request,
-      options,
-      callback
-    );
+    this._log.info('cancelBatchPredictionJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('cancelBatchPredictionJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .cancelBatchPredictionJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelBatchPredictionJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a ModelDeploymentMonitoringJob. It will run periodically on a
@@ -4008,11 +4437,42 @@ export class JobServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createModelDeploymentMonitoringJob(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createModelDeploymentMonitoringJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+          | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createModelDeploymentMonitoringJob response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createModelDeploymentMonitoringJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createModelDeploymentMonitoringJob response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a ModelDeploymentMonitoringJob.
@@ -4110,11 +4570,42 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getModelDeploymentMonitoringJob(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getModelDeploymentMonitoringJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+          | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getModelDeploymentMonitoringJob response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getModelDeploymentMonitoringJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getModelDeploymentMonitoringJob response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Pauses a ModelDeploymentMonitoringJob. If the job is running, the server
@@ -4215,11 +4706,42 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.pauseModelDeploymentMonitoringJob(
-      request,
-      options,
-      callback
-    );
+    this._log.info('pauseModelDeploymentMonitoringJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'pauseModelDeploymentMonitoringJob response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .pauseModelDeploymentMonitoringJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'pauseModelDeploymentMonitoringJob response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Resumes a paused ModelDeploymentMonitoringJob. It will start to run from
@@ -4319,11 +4841,42 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.resumeModelDeploymentMonitoringJob(
-      request,
-      options,
-      callback
-    );
+    this._log.info('resumeModelDeploymentMonitoringJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'resumeModelDeploymentMonitoringJob response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resumeModelDeploymentMonitoringJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'resumeModelDeploymentMonitoringJob response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -4428,7 +4981,37 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteCustomJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCustomJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCustomJob request %j', request);
+    return this.innerApiCalls
+      .deleteCustomJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCustomJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteCustomJob()`.
@@ -4449,6 +5032,7 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteCustomJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4566,7 +5150,37 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDataLabelingJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDataLabelingJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDataLabelingJob request %j', request);
+    return this.innerApiCalls
+      .deleteDataLabelingJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataLabelingJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDataLabelingJob()`.
@@ -4587,6 +5201,7 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteDataLabelingJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4704,11 +5319,43 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteHyperparameterTuningJob(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteHyperparameterTuningJob response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteHyperparameterTuningJob request %j', request);
+    return this.innerApiCalls
+      .deleteHyperparameterTuningJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteHyperparameterTuningJob response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteHyperparameterTuningJob()`.
@@ -4729,6 +5376,7 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteHyperparameterTuningJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4846,7 +5494,37 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteNasJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteNasJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteNasJob request %j', request);
+    return this.innerApiCalls
+      .deleteNasJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNasJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteNasJob()`.
@@ -4867,6 +5545,7 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteNasJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4985,11 +5664,37 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteBatchPredictionJob(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteBatchPredictionJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteBatchPredictionJob request %j', request);
+    return this.innerApiCalls
+      .deleteBatchPredictionJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBatchPredictionJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteBatchPredictionJob()`.
@@ -5010,6 +5715,7 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteBatchPredictionJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5154,11 +5860,43 @@ export class JobServiceClient {
           request.modelDeploymentMonitoringJob!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateModelDeploymentMonitoringJob(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+            protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'updateModelDeploymentMonitoringJob response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateModelDeploymentMonitoringJob request %j', request);
+    return this.innerApiCalls
+      .updateModelDeploymentMonitoringJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+            protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateModelDeploymentMonitoringJob response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateModelDeploymentMonitoringJob()`.
@@ -5179,6 +5917,7 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobOperationMetadata
     >
   > {
+    this._log.info('updateModelDeploymentMonitoringJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5296,11 +6035,43 @@ export class JobServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteModelDeploymentMonitoringJob(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteModelDeploymentMonitoringJob response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteModelDeploymentMonitoringJob request %j', request);
+    return this.innerApiCalls
+      .deleteModelDeploymentMonitoringJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteModelDeploymentMonitoringJob response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteModelDeploymentMonitoringJob()`.
@@ -5321,6 +6092,7 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteModelDeploymentMonitoringJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5460,7 +6232,33 @@ export class JobServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCustomJobs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListCustomJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.ICustomJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCustomJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCustomJobs request %j', request);
+    return this.innerApiCalls
+      .listCustomJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.ICustomJob[],
+          protos.google.cloud.aiplatform.v1.IListCustomJobsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListCustomJobsResponse,
+        ]) => {
+          this._log.info('listCustomJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5528,6 +6326,7 @@ export class JobServiceClient {
     const defaultCallSettings = this._defaults['listCustomJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCustomJobs stream %j', request);
     return this.descriptors.page.listCustomJobs.createStream(
       this.innerApiCalls.listCustomJobs as GaxCall,
       request,
@@ -5603,6 +6402,7 @@ export class JobServiceClient {
     const defaultCallSettings = this._defaults['listCustomJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCustomJobs iterate %j', request);
     return this.descriptors.page.listCustomJobs.asyncIterate(
       this.innerApiCalls['listCustomJobs'] as GaxCall,
       request as {},
@@ -5735,7 +6535,33 @@ export class JobServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDataLabelingJobs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IDataLabelingJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDataLabelingJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDataLabelingJobs request %j', request);
+    return this.innerApiCalls
+      .listDataLabelingJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IDataLabelingJob[],
+          protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse,
+        ]) => {
+          this._log.info('listDataLabelingJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5805,6 +6631,7 @@ export class JobServiceClient {
     const defaultCallSettings = this._defaults['listDataLabelingJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDataLabelingJobs stream %j', request);
     return this.descriptors.page.listDataLabelingJobs.createStream(
       this.innerApiCalls.listDataLabelingJobs as GaxCall,
       request,
@@ -5882,6 +6709,7 @@ export class JobServiceClient {
     const defaultCallSettings = this._defaults['listDataLabelingJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDataLabelingJobs iterate %j', request);
     return this.descriptors.page.listDataLabelingJobs.asyncIterate(
       this.innerApiCalls['listDataLabelingJobs'] as GaxCall,
       request as {},
@@ -6013,11 +6841,33 @@ export class JobServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listHyperparameterTuningJobs(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listHyperparameterTuningJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listHyperparameterTuningJobs request %j', request);
+    return this.innerApiCalls
+      .listHyperparameterTuningJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob[],
+          protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse,
+        ]) => {
+          this._log.info('listHyperparameterTuningJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6086,6 +6936,7 @@ export class JobServiceClient {
     const defaultCallSettings = this._defaults['listHyperparameterTuningJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listHyperparameterTuningJobs stream %j', request);
     return this.descriptors.page.listHyperparameterTuningJobs.createStream(
       this.innerApiCalls.listHyperparameterTuningJobs as GaxCall,
       request,
@@ -6162,6 +7013,7 @@ export class JobServiceClient {
     const defaultCallSettings = this._defaults['listHyperparameterTuningJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listHyperparameterTuningJobs iterate %j', request);
     return this.descriptors.page.listHyperparameterTuningJobs.asyncIterate(
       this.innerApiCalls['listHyperparameterTuningJobs'] as GaxCall,
       request as {},
@@ -6286,7 +7138,33 @@ export class JobServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNasJobs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListNasJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.INasJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNasJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNasJobs request %j', request);
+    return this.innerApiCalls
+      .listNasJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.INasJob[],
+          protos.google.cloud.aiplatform.v1.IListNasJobsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListNasJobsResponse,
+        ]) => {
+          this._log.info('listNasJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6354,6 +7232,7 @@ export class JobServiceClient {
     const defaultCallSettings = this._defaults['listNasJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNasJobs stream %j', request);
     return this.descriptors.page.listNasJobs.createStream(
       this.innerApiCalls.listNasJobs as GaxCall,
       request,
@@ -6429,6 +7308,7 @@ export class JobServiceClient {
     const defaultCallSettings = this._defaults['listNasJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNasJobs iterate %j', request);
     return this.descriptors.page.listNasJobs.asyncIterate(
       this.innerApiCalls['listNasJobs'] as GaxCall,
       request as {},
@@ -6537,7 +7417,33 @@ export class JobServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNasTrialDetails(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+          | protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.INasTrialDetail
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNasTrialDetails values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNasTrialDetails request %j', request);
+    return this.innerApiCalls
+      .listNasTrialDetails(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.INasTrialDetail[],
+          protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse,
+        ]) => {
+          this._log.info('listNasTrialDetails values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6583,6 +7489,7 @@ export class JobServiceClient {
     const defaultCallSettings = this._defaults['listNasTrialDetails'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNasTrialDetails stream %j', request);
     return this.descriptors.page.listNasTrialDetails.createStream(
       this.innerApiCalls.listNasTrialDetails as GaxCall,
       request,
@@ -6636,6 +7543,7 @@ export class JobServiceClient {
     const defaultCallSettings = this._defaults['listNasTrialDetails'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNasTrialDetails iterate %j', request);
     return this.descriptors.page.listNasTrialDetails.asyncIterate(
       this.innerApiCalls['listNasTrialDetails'] as GaxCall,
       request as {},
@@ -6767,11 +7675,33 @@ export class JobServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listBatchPredictionJobs(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IBatchPredictionJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBatchPredictionJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBatchPredictionJobs request %j', request);
+    return this.innerApiCalls
+      .listBatchPredictionJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IBatchPredictionJob[],
+          protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse,
+        ]) => {
+          this._log.info('listBatchPredictionJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6840,6 +7770,7 @@ export class JobServiceClient {
     const defaultCallSettings = this._defaults['listBatchPredictionJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBatchPredictionJobs stream %j', request);
     return this.descriptors.page.listBatchPredictionJobs.createStream(
       this.innerApiCalls.listBatchPredictionJobs as GaxCall,
       request,
@@ -6916,6 +7847,7 @@ export class JobServiceClient {
     const defaultCallSettings = this._defaults['listBatchPredictionJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBatchPredictionJobs iterate %j', request);
     return this.descriptors.page.listBatchPredictionJobs.asyncIterate(
       this.innerApiCalls['listBatchPredictionJobs'] as GaxCall,
       request as {},
@@ -7038,11 +7970,46 @@ export class JobServiceClient {
           request.modelDeploymentMonitoringJob ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.searchModelDeploymentMonitoringStatsAnomalies(
-      request,
-      options,
-      callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+          | protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'searchModelDeploymentMonitoringStatsAnomalies values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'searchModelDeploymentMonitoringStatsAnomalies request %j',
+      request
     );
+    return this.innerApiCalls
+      .searchModelDeploymentMonitoringStatsAnomalies(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies[],
+          protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest | null,
+          protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse,
+        ]) => {
+          this._log.info(
+            'searchModelDeploymentMonitoringStatsAnomalies values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -7103,6 +8070,10 @@ export class JobServiceClient {
       this._defaults['searchModelDeploymentMonitoringStatsAnomalies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info(
+      'searchModelDeploymentMonitoringStatsAnomalies stream %j',
+      request
+    );
     return this.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.createStream(
       this.innerApiCalls
         .searchModelDeploymentMonitoringStatsAnomalies as GaxCall,
@@ -7172,6 +8143,10 @@ export class JobServiceClient {
       this._defaults['searchModelDeploymentMonitoringStatsAnomalies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info(
+      'searchModelDeploymentMonitoringStatsAnomalies iterate %j',
+      request
+    );
     return this.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.asyncIterate(
       this.innerApiCalls[
         'searchModelDeploymentMonitoringStatsAnomalies'
@@ -7299,11 +8274,36 @@ export class JobServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listModelDeploymentMonitoringJobs(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listModelDeploymentMonitoringJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listModelDeploymentMonitoringJobs request %j', request);
+    return this.innerApiCalls
+      .listModelDeploymentMonitoringJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob[],
+          protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse,
+        ]) => {
+          this._log.info(
+            'listModelDeploymentMonitoringJobs values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -7367,6 +8367,7 @@ export class JobServiceClient {
       this._defaults['listModelDeploymentMonitoringJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listModelDeploymentMonitoringJobs stream %j', request);
     return this.descriptors.page.listModelDeploymentMonitoringJobs.createStream(
       this.innerApiCalls.listModelDeploymentMonitoringJobs as GaxCall,
       request,
@@ -7438,6 +8439,7 @@ export class JobServiceClient {
       this._defaults['listModelDeploymentMonitoringJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listModelDeploymentMonitoringJobs iterate %j', request);
     return this.descriptors.page.listModelDeploymentMonitoringJobs.asyncIterate(
       this.innerApiCalls['listModelDeploymentMonitoringJobs'] as GaxCall,
       request as {},
@@ -11455,6 +12457,7 @@ export class JobServiceClient {
   close(): Promise<void> {
     if (this.jobServiceStub && !this._terminated) {
       return this.jobServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class DeploymentResourcePoolServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class DeploymentResourcePoolServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2324,11 +2327,36 @@ export class DeploymentResourcePoolServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDeploymentResourcePool(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getDeploymentResourcePool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+          | protos.google.cloud.aiplatform.v1.IGetDeploymentResourcePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDeploymentResourcePool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDeploymentResourcePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetDeploymentResourcePoolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDeploymentResourcePool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2441,11 +2469,43 @@ export class DeploymentResourcePoolServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDeploymentResourcePool(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+            protos.google.cloud.aiplatform.v1.ICreateDeploymentResourcePoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'createDeploymentResourcePool response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDeploymentResourcePool request %j', request);
+    return this.innerApiCalls
+      .createDeploymentResourcePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+            protos.google.cloud.aiplatform.v1.ICreateDeploymentResourcePoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createDeploymentResourcePool response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createDeploymentResourcePool()`.
@@ -2466,6 +2526,7 @@ export class DeploymentResourcePoolServiceClient {
       protos.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolOperationMetadata
     >
   > {
+    this._log.info('createDeploymentResourcePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2589,11 +2650,43 @@ export class DeploymentResourcePoolServiceClient {
           request.deploymentResourcePool!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDeploymentResourcePool(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+            protos.google.cloud.aiplatform.v1.IUpdateDeploymentResourcePoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'updateDeploymentResourcePool response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateDeploymentResourcePool request %j', request);
+    return this.innerApiCalls
+      .updateDeploymentResourcePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+            protos.google.cloud.aiplatform.v1.IUpdateDeploymentResourcePoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateDeploymentResourcePool response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateDeploymentResourcePool()`.
@@ -2614,6 +2707,7 @@ export class DeploymentResourcePoolServiceClient {
       protos.google.cloud.aiplatform.v1.UpdateDeploymentResourcePoolOperationMetadata
     >
   > {
+    this._log.info('updateDeploymentResourcePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2731,11 +2825,43 @@ export class DeploymentResourcePoolServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDeploymentResourcePool(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteDeploymentResourcePool response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDeploymentResourcePool request %j', request);
+    return this.innerApiCalls
+      .deleteDeploymentResourcePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteDeploymentResourcePool response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDeploymentResourcePool()`.
@@ -2756,6 +2882,7 @@ export class DeploymentResourcePoolServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteDeploymentResourcePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2873,11 +3000,33 @@ export class DeploymentResourcePoolServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDeploymentResourcePools(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest,
+          | protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IDeploymentResourcePool
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDeploymentResourcePools values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDeploymentResourcePools request %j', request);
+    return this.innerApiCalls
+      .listDeploymentResourcePools(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IDeploymentResourcePool[],
+          protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsResponse,
+        ]) => {
+          this._log.info('listDeploymentResourcePools values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2923,6 +3072,7 @@ export class DeploymentResourcePoolServiceClient {
     const defaultCallSettings = this._defaults['listDeploymentResourcePools'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDeploymentResourcePools stream %j', request);
     return this.descriptors.page.listDeploymentResourcePools.createStream(
       this.innerApiCalls.listDeploymentResourcePools as GaxCall,
       request,
@@ -2976,6 +3126,7 @@ export class DeploymentResourcePoolServiceClient {
     const defaultCallSettings = this._defaults['listDeploymentResourcePools'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDeploymentResourcePools iterate %j', request);
     return this.descriptors.page.listDeploymentResourcePools.asyncIterate(
       this.innerApiCalls['listDeploymentResourcePools'] as GaxCall,
       request as {},
@@ -3085,7 +3236,33 @@ export class DeploymentResourcePoolServiceClient {
         deployment_resource_pool: request.deploymentResourcePool ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.queryDeployedModels(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest,
+          | protos.google.cloud.aiplatform.v1.IQueryDeployedModelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IDeployedModel
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('queryDeployedModels values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('queryDeployedModels request %j', request);
+    return this.innerApiCalls
+      .queryDeployedModels(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IDeployedModel[],
+          protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest | null,
+          protos.google.cloud.aiplatform.v1.IQueryDeployedModelsResponse,
+        ]) => {
+          this._log.info('queryDeployedModels values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3132,6 +3309,7 @@ export class DeploymentResourcePoolServiceClient {
     const defaultCallSettings = this._defaults['queryDeployedModels'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('queryDeployedModels stream %j', request);
     return this.descriptors.page.queryDeployedModels.createStream(
       this.innerApiCalls.queryDeployedModels as GaxCall,
       request,
@@ -3186,6 +3364,7 @@ export class DeploymentResourcePoolServiceClient {
     const defaultCallSettings = this._defaults['queryDeployedModels'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('queryDeployedModels iterate %j', request);
     return this.descriptors.page.queryDeployedModels.asyncIterate(
       this.innerApiCalls['queryDeployedModels'] as GaxCall,
       request as {},
@@ -7226,6 +7405,7 @@ export class DeploymentResourcePoolServiceClient {
   close(): Promise<void> {
     if (this.deploymentResourcePoolServiceStub && !this._terminated) {
       return this.deploymentResourcePoolServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

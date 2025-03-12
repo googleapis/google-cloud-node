@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class MetadataServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class MetadataServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2400,7 +2403,36 @@ export class MetadataServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getMetadataStore(request, options, callback);
+    this._log.info('getMetadataStore request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IMetadataStore,
+          | protos.google.cloud.aiplatform.v1.IGetMetadataStoreRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMetadataStore response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMetadataStore(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IMetadataStore,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetMetadataStoreRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMetadataStore response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an Artifact associated with a MetadataStore.
@@ -2503,7 +2535,33 @@ export class MetadataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createArtifact(request, options, callback);
+    this._log.info('createArtifact request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IArtifact,
+          | protos.google.cloud.aiplatform.v1.ICreateArtifactRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createArtifact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createArtifact(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IArtifact,
+          protos.google.cloud.aiplatform.v1.ICreateArtifactRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createArtifact response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a specific Artifact.
@@ -2589,7 +2647,33 @@ export class MetadataServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getArtifact(request, options, callback);
+    this._log.info('getArtifact request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IArtifact,
+          | protos.google.cloud.aiplatform.v1.IGetArtifactRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getArtifact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getArtifact(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IArtifact,
+          protos.google.cloud.aiplatform.v1.IGetArtifactRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getArtifact response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a stored Artifact.
@@ -2688,7 +2772,33 @@ export class MetadataServiceClient {
         'artifact.name': request.artifact!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateArtifact(request, options, callback);
+    this._log.info('updateArtifact request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IArtifact,
+          | protos.google.cloud.aiplatform.v1.IUpdateArtifactRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateArtifact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateArtifact(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IArtifact,
+          protos.google.cloud.aiplatform.v1.IUpdateArtifactRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateArtifact response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a Context associated with a MetadataStore.
@@ -2790,7 +2900,33 @@ export class MetadataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createContext(request, options, callback);
+    this._log.info('createContext request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IContext,
+          | protos.google.cloud.aiplatform.v1.ICreateContextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createContext response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createContext(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IContext,
+          protos.google.cloud.aiplatform.v1.ICreateContextRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createContext response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a specific Context.
@@ -2876,7 +3012,33 @@ export class MetadataServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getContext(request, options, callback);
+    this._log.info('getContext request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IContext,
+          | protos.google.cloud.aiplatform.v1.IGetContextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getContext response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getContext(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IContext,
+          protos.google.cloud.aiplatform.v1.IGetContextRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getContext response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a stored Context.
@@ -2974,7 +3136,33 @@ export class MetadataServiceClient {
         'context.name': request.context!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateContext(request, options, callback);
+    this._log.info('updateContext request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IContext,
+          | protos.google.cloud.aiplatform.v1.IUpdateContextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateContext response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateContext(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IContext,
+          protos.google.cloud.aiplatform.v1.IUpdateContextRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateContext response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Adds a set of Artifacts and Executions to a Context. If any of the
@@ -3085,11 +3273,42 @@ export class MetadataServiceClient {
         context: request.context ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.addContextArtifactsAndExecutions(
-      request,
-      options,
-      callback
-    );
+    this._log.info('addContextArtifactsAndExecutions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IAddContextArtifactsAndExecutionsResponse,
+          | protos.google.cloud.aiplatform.v1.IAddContextArtifactsAndExecutionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'addContextArtifactsAndExecutions response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .addContextArtifactsAndExecutions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IAddContextArtifactsAndExecutionsResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IAddContextArtifactsAndExecutionsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'addContextArtifactsAndExecutions response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Adds a set of Contexts as children to a parent Context. If any of the
@@ -3188,7 +3407,36 @@ export class MetadataServiceClient {
         context: request.context ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.addContextChildren(request, options, callback);
+    this._log.info('addContextChildren request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IAddContextChildrenResponse,
+          | protos.google.cloud.aiplatform.v1.IAddContextChildrenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('addContextChildren response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .addContextChildren(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IAddContextChildrenResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IAddContextChildrenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('addContextChildren response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Remove a set of children contexts from a parent Context. If any of the
@@ -3291,7 +3539,36 @@ export class MetadataServiceClient {
         context: request.context ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.removeContextChildren(request, options, callback);
+    this._log.info('removeContextChildren request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IRemoveContextChildrenResponse,
+          | protos.google.cloud.aiplatform.v1.IRemoveContextChildrenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('removeContextChildren response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .removeContextChildren(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IRemoveContextChildrenResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IRemoveContextChildrenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('removeContextChildren response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves Artifacts and Executions within the specified Context, connected
@@ -3395,11 +3672,36 @@ export class MetadataServiceClient {
         context: request.context ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.queryContextLineageSubgraph(
-      request,
-      options,
-      callback
-    );
+    this._log.info('queryContextLineageSubgraph request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ILineageSubgraph,
+          | protos.google.cloud.aiplatform.v1.IQueryContextLineageSubgraphRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('queryContextLineageSubgraph response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .queryContextLineageSubgraph(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ILineageSubgraph,
+          (
+            | protos.google.cloud.aiplatform.v1.IQueryContextLineageSubgraphRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryContextLineageSubgraph response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an Execution associated with a MetadataStore.
@@ -3503,7 +3805,33 @@ export class MetadataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createExecution(request, options, callback);
+    this._log.info('createExecution request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IExecution,
+          | protos.google.cloud.aiplatform.v1.ICreateExecutionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createExecution response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createExecution(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IExecution,
+          protos.google.cloud.aiplatform.v1.ICreateExecutionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createExecution response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a specific Execution.
@@ -3589,7 +3917,33 @@ export class MetadataServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getExecution(request, options, callback);
+    this._log.info('getExecution request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IExecution,
+          | protos.google.cloud.aiplatform.v1.IGetExecutionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getExecution response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getExecution(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IExecution,
+          protos.google.cloud.aiplatform.v1.IGetExecutionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getExecution response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a stored Execution.
@@ -3688,7 +4042,33 @@ export class MetadataServiceClient {
         'execution.name': request.execution!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateExecution(request, options, callback);
+    this._log.info('updateExecution request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IExecution,
+          | protos.google.cloud.aiplatform.v1.IUpdateExecutionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateExecution response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateExecution(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IExecution,
+          protos.google.cloud.aiplatform.v1.IUpdateExecutionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateExecution response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Adds Events to the specified Execution. An Event indicates whether an
@@ -3786,7 +4166,36 @@ export class MetadataServiceClient {
         execution: request.execution ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.addExecutionEvents(request, options, callback);
+    this._log.info('addExecutionEvents request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IAddExecutionEventsResponse,
+          | protos.google.cloud.aiplatform.v1.IAddExecutionEventsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('addExecutionEvents response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .addExecutionEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IAddExecutionEventsResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IAddExecutionEventsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('addExecutionEvents response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Obtains the set of input and output Artifacts for this Execution, in the
@@ -3886,11 +4295,42 @@ export class MetadataServiceClient {
         execution: request.execution ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.queryExecutionInputsAndOutputs(
-      request,
-      options,
-      callback
-    );
+    this._log.info('queryExecutionInputsAndOutputs request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ILineageSubgraph,
+          | protos.google.cloud.aiplatform.v1.IQueryExecutionInputsAndOutputsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'queryExecutionInputsAndOutputs response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .queryExecutionInputsAndOutputs(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ILineageSubgraph,
+          (
+            | protos.google.cloud.aiplatform.v1.IQueryExecutionInputsAndOutputsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'queryExecutionInputsAndOutputs response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a MetadataSchema.
@@ -3999,7 +4439,36 @@ export class MetadataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createMetadataSchema(request, options, callback);
+    this._log.info('createMetadataSchema request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IMetadataSchema,
+          | protos.google.cloud.aiplatform.v1.ICreateMetadataSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createMetadataSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createMetadataSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IMetadataSchema,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreateMetadataSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createMetadataSchema response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a specific MetadataSchema.
@@ -4091,7 +4560,36 @@ export class MetadataServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getMetadataSchema(request, options, callback);
+    this._log.info('getMetadataSchema request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IMetadataSchema,
+          | protos.google.cloud.aiplatform.v1.IGetMetadataSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMetadataSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMetadataSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IMetadataSchema,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetMetadataSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMetadataSchema response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves lineage of an Artifact represented through Artifacts and
@@ -4226,11 +4724,36 @@ export class MetadataServiceClient {
         artifact: request.artifact ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.queryArtifactLineageSubgraph(
-      request,
-      options,
-      callback
-    );
+    this._log.info('queryArtifactLineageSubgraph request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ILineageSubgraph,
+          | protos.google.cloud.aiplatform.v1.IQueryArtifactLineageSubgraphRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('queryArtifactLineageSubgraph response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .queryArtifactLineageSubgraph(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ILineageSubgraph,
+          (
+            | protos.google.cloud.aiplatform.v1.IQueryArtifactLineageSubgraphRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryArtifactLineageSubgraph response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -4346,7 +4869,37 @@ export class MetadataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createMetadataStore(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IMetadataStore,
+            protos.google.cloud.aiplatform.v1.ICreateMetadataStoreOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createMetadataStore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createMetadataStore request %j', request);
+    return this.innerApiCalls
+      .createMetadataStore(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IMetadataStore,
+            protos.google.cloud.aiplatform.v1.ICreateMetadataStoreOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMetadataStore response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createMetadataStore()`.
@@ -4367,6 +4920,7 @@ export class MetadataServiceClient {
       protos.google.cloud.aiplatform.v1.CreateMetadataStoreOperationMetadata
     >
   > {
+    this._log.info('createMetadataStore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4487,7 +5041,37 @@ export class MetadataServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteMetadataStore(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteMetadataStoreOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteMetadataStore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteMetadataStore request %j', request);
+    return this.innerApiCalls
+      .deleteMetadataStore(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteMetadataStoreOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMetadataStore response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteMetadataStore()`.
@@ -4508,6 +5092,7 @@ export class MetadataServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteMetadataStoreOperationMetadata
     >
   > {
+    this._log.info('deleteMetadataStore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4629,7 +5214,37 @@ export class MetadataServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteArtifact(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteArtifact response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteArtifact request %j', request);
+    return this.innerApiCalls
+      .deleteArtifact(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteArtifact response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteArtifact()`.
@@ -4650,6 +5265,7 @@ export class MetadataServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteArtifact long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4774,7 +5390,37 @@ export class MetadataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.purgeArtifacts(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IPurgeArtifactsResponse,
+            protos.google.cloud.aiplatform.v1.IPurgeArtifactsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('purgeArtifacts response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('purgeArtifacts request %j', request);
+    return this.innerApiCalls
+      .purgeArtifacts(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IPurgeArtifactsResponse,
+            protos.google.cloud.aiplatform.v1.IPurgeArtifactsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('purgeArtifacts response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `purgeArtifacts()`.
@@ -4795,6 +5441,7 @@ export class MetadataServiceClient {
       protos.google.cloud.aiplatform.v1.PurgeArtifactsMetadata
     >
   > {
+    this._log.info('purgeArtifacts long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4919,7 +5566,37 @@ export class MetadataServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteContext(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteContext response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteContext request %j', request);
+    return this.innerApiCalls
+      .deleteContext(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteContext response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteContext()`.
@@ -4940,6 +5617,7 @@ export class MetadataServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteContext long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5064,7 +5742,37 @@ export class MetadataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.purgeContexts(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IPurgeContextsResponse,
+            protos.google.cloud.aiplatform.v1.IPurgeContextsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('purgeContexts response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('purgeContexts request %j', request);
+    return this.innerApiCalls
+      .purgeContexts(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IPurgeContextsResponse,
+            protos.google.cloud.aiplatform.v1.IPurgeContextsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('purgeContexts response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `purgeContexts()`.
@@ -5085,6 +5793,7 @@ export class MetadataServiceClient {
       protos.google.cloud.aiplatform.v1.PurgeContextsMetadata
     >
   > {
+    this._log.info('purgeContexts long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5206,7 +5915,37 @@ export class MetadataServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteExecution(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteExecution response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteExecution request %j', request);
+    return this.innerApiCalls
+      .deleteExecution(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteExecution response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteExecution()`.
@@ -5227,6 +5966,7 @@ export class MetadataServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteExecution long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5351,7 +6091,37 @@ export class MetadataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.purgeExecutions(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IPurgeExecutionsResponse,
+            protos.google.cloud.aiplatform.v1.IPurgeExecutionsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('purgeExecutions response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('purgeExecutions request %j', request);
+    return this.innerApiCalls
+      .purgeExecutions(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IPurgeExecutionsResponse,
+            protos.google.cloud.aiplatform.v1.IPurgeExecutionsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('purgeExecutions response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `purgeExecutions()`.
@@ -5372,6 +6142,7 @@ export class MetadataServiceClient {
       protos.google.cloud.aiplatform.v1.PurgeExecutionsMetadata
     >
   > {
+    this._log.info('purgeExecutions long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5492,7 +6263,33 @@ export class MetadataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listMetadataStores(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListMetadataStoresRequest,
+          | protos.google.cloud.aiplatform.v1.IListMetadataStoresResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IMetadataStore
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMetadataStores values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMetadataStores request %j', request);
+    return this.innerApiCalls
+      .listMetadataStores(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IMetadataStore[],
+          protos.google.cloud.aiplatform.v1.IListMetadataStoresRequest | null,
+          protos.google.cloud.aiplatform.v1.IListMetadataStoresResponse,
+        ]) => {
+          this._log.info('listMetadataStores values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5541,6 +6338,7 @@ export class MetadataServiceClient {
     const defaultCallSettings = this._defaults['listMetadataStores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMetadataStores stream %j', request);
     return this.descriptors.page.listMetadataStores.createStream(
       this.innerApiCalls.listMetadataStores as GaxCall,
       request,
@@ -5597,6 +6395,7 @@ export class MetadataServiceClient {
     const defaultCallSettings = this._defaults['listMetadataStores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMetadataStores iterate %j', request);
     return this.descriptors.page.listMetadataStores.asyncIterate(
       this.innerApiCalls['listMetadataStores'] as GaxCall,
       request as {},
@@ -5746,7 +6545,33 @@ export class MetadataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listArtifacts(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListArtifactsRequest,
+          | protos.google.cloud.aiplatform.v1.IListArtifactsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IArtifact
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listArtifacts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listArtifacts request %j', request);
+    return this.innerApiCalls
+      .listArtifacts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IArtifact[],
+          protos.google.cloud.aiplatform.v1.IListArtifactsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListArtifactsResponse,
+        ]) => {
+          this._log.info('listArtifacts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5833,6 +6658,7 @@ export class MetadataServiceClient {
     const defaultCallSettings = this._defaults['listArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listArtifacts stream %j', request);
     return this.descriptors.page.listArtifacts.createStream(
       this.innerApiCalls.listArtifacts as GaxCall,
       request,
@@ -5927,6 +6753,7 @@ export class MetadataServiceClient {
     const defaultCallSettings = this._defaults['listArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listArtifacts iterate %j', request);
     return this.descriptors.page.listArtifacts.asyncIterate(
       this.innerApiCalls['listArtifacts'] as GaxCall,
       request as {},
@@ -6080,7 +6907,33 @@ export class MetadataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listContexts(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListContextsRequest,
+          | protos.google.cloud.aiplatform.v1.IListContextsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IContext
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listContexts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listContexts request %j', request);
+    return this.innerApiCalls
+      .listContexts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IContext[],
+          protos.google.cloud.aiplatform.v1.IListContextsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListContextsResponse,
+        ]) => {
+          this._log.info('listContexts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6171,6 +7024,7 @@ export class MetadataServiceClient {
     const defaultCallSettings = this._defaults['listContexts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listContexts stream %j', request);
     return this.descriptors.page.listContexts.createStream(
       this.innerApiCalls.listContexts as GaxCall,
       request,
@@ -6269,6 +7123,7 @@ export class MetadataServiceClient {
     const defaultCallSettings = this._defaults['listContexts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listContexts iterate %j', request);
     return this.descriptors.page.listContexts.asyncIterate(
       this.innerApiCalls['listContexts'] as GaxCall,
       request as {},
@@ -6418,7 +7273,33 @@ export class MetadataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listExecutions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListExecutionsRequest,
+          | protos.google.cloud.aiplatform.v1.IListExecutionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IExecution
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listExecutions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listExecutions request %j', request);
+    return this.innerApiCalls
+      .listExecutions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IExecution[],
+          protos.google.cloud.aiplatform.v1.IListExecutionsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListExecutionsResponse,
+        ]) => {
+          this._log.info('listExecutions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6505,6 +7386,7 @@ export class MetadataServiceClient {
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listExecutions stream %j', request);
     return this.descriptors.page.listExecutions.createStream(
       this.innerApiCalls.listExecutions as GaxCall,
       request,
@@ -6599,6 +7481,7 @@ export class MetadataServiceClient {
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listExecutions iterate %j', request);
     return this.descriptors.page.listExecutions.asyncIterate(
       this.innerApiCalls['listExecutions'] as GaxCall,
       request as {},
@@ -6712,7 +7595,33 @@ export class MetadataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listMetadataSchemas(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListMetadataSchemasRequest,
+          | protos.google.cloud.aiplatform.v1.IListMetadataSchemasResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IMetadataSchema
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMetadataSchemas values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMetadataSchemas request %j', request);
+    return this.innerApiCalls
+      .listMetadataSchemas(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IMetadataSchema[],
+          protos.google.cloud.aiplatform.v1.IListMetadataSchemasRequest | null,
+          protos.google.cloud.aiplatform.v1.IListMetadataSchemasResponse,
+        ]) => {
+          this._log.info('listMetadataSchemas values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6763,6 +7672,7 @@ export class MetadataServiceClient {
     const defaultCallSettings = this._defaults['listMetadataSchemas'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMetadataSchemas stream %j', request);
     return this.descriptors.page.listMetadataSchemas.createStream(
       this.innerApiCalls.listMetadataSchemas as GaxCall,
       request,
@@ -6821,6 +7731,7 @@ export class MetadataServiceClient {
     const defaultCallSettings = this._defaults['listMetadataSchemas'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMetadataSchemas iterate %j', request);
     return this.descriptors.page.listMetadataSchemas.asyncIterate(
       this.innerApiCalls['listMetadataSchemas'] as GaxCall,
       request as {},
@@ -10861,6 +11772,7 @@ export class MetadataServiceClient {
   close(): Promise<void> {
     if (this.metadataServiceStub && !this._terminated) {
       return this.metadataServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

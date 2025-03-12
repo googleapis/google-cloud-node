@@ -31,6 +31,7 @@ import type {
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class PredictionServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class PredictionServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -707,7 +710,31 @@ export class PredictionServiceClient {
         endpoint: request.endpoint ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.predict(request, options, callback);
+    this._log.info('predict request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IPredictResponse,
+          protos.google.cloud.aiplatform.v1.IPredictRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('predict response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .predict(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IPredictResponse,
+          protos.google.cloud.aiplatform.v1.IPredictRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('predict response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Perform an online prediction with an arbitrary HTTP payload.
@@ -819,7 +846,33 @@ export class PredictionServiceClient {
         endpoint: request.endpoint ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.rawPredict(request, options, callback);
+    this._log.info('rawPredict request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.aiplatform.v1.IRawPredictRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('rawPredict response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .rawPredict(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          protos.google.cloud.aiplatform.v1.IRawPredictRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('rawPredict response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Perform an unary online prediction request to a gRPC model server for
@@ -916,7 +969,33 @@ export class PredictionServiceClient {
         endpoint: request.endpoint ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.directPredict(request, options, callback);
+    this._log.info('directPredict request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IDirectPredictResponse,
+          | protos.google.cloud.aiplatform.v1.IDirectPredictRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('directPredict response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .directPredict(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IDirectPredictResponse,
+          protos.google.cloud.aiplatform.v1.IDirectPredictRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('directPredict response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Perform an unary online prediction request to a gRPC model server for
@@ -1019,7 +1098,36 @@ export class PredictionServiceClient {
         endpoint: request.endpoint ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.directRawPredict(request, options, callback);
+    this._log.info('directRawPredict request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IDirectRawPredictResponse,
+          | protos.google.cloud.aiplatform.v1.IDirectRawPredictRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('directRawPredict response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .directRawPredict(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IDirectRawPredictResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IDirectRawPredictRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('directRawPredict response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Perform an online explanation.
@@ -1142,7 +1250,31 @@ export class PredictionServiceClient {
         endpoint: request.endpoint ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.explain(request, options, callback);
+    this._log.info('explain request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IExplainResponse,
+          protos.google.cloud.aiplatform.v1.IExplainRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('explain response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .explain(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IExplainResponse,
+          protos.google.cloud.aiplatform.v1.IExplainRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('explain response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generate content with multimodal inputs.
@@ -1278,7 +1410,33 @@ export class PredictionServiceClient {
         model: request.model ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.generateContent(request, options, callback);
+    this._log.info('generateContent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IGenerateContentResponse,
+          | protos.google.cloud.aiplatform.v1.IGenerateContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateContent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IGenerateContentResponse,
+          protos.google.cloud.aiplatform.v1.IGenerateContentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('generateContent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1314,6 +1472,7 @@ export class PredictionServiceClient {
         endpoint: request.endpoint ?? '',
       });
     this.initialize();
+    this._log.info('streamRawPredict stream %j', options);
     return this.innerApiCalls.streamRawPredict(request, options);
   }
 
@@ -1334,6 +1493,7 @@ export class PredictionServiceClient {
    */
   streamDirectPredict(options?: CallOptions): gax.CancellableStream {
     this.initialize();
+    this._log.info('streamDirectPredict stream %j', options);
     return this.innerApiCalls.streamDirectPredict(null, options);
   }
 
@@ -1354,6 +1514,7 @@ export class PredictionServiceClient {
    */
   streamDirectRawPredict(options?: CallOptions): gax.CancellableStream {
     this.initialize();
+    this._log.info('streamDirectRawPredict stream %j', options);
     return this.innerApiCalls.streamDirectRawPredict(null, options);
   }
 
@@ -1374,6 +1535,7 @@ export class PredictionServiceClient {
    */
   streamingPredict(options?: CallOptions): gax.CancellableStream {
     this.initialize();
+    this._log.info('streamingPredict stream %j', options);
     return this.innerApiCalls.streamingPredict(null, options);
   }
 
@@ -1413,6 +1575,7 @@ export class PredictionServiceClient {
         endpoint: request.endpoint ?? '',
       });
     this.initialize();
+    this._log.info('serverStreamingPredict stream %j', options);
     return this.innerApiCalls.serverStreamingPredict(request, options);
   }
 
@@ -1432,6 +1595,7 @@ export class PredictionServiceClient {
    */
   streamingRawPredict(options?: CallOptions): gax.CancellableStream {
     this.initialize();
+    this._log.info('streamingRawPredict stream %j', options);
     return this.innerApiCalls.streamingRawPredict(null, options);
   }
 
@@ -1510,6 +1674,7 @@ export class PredictionServiceClient {
         model: request.model ?? '',
       });
     this.initialize();
+    this._log.info('streamGenerateContent stream %j', options);
     return this.innerApiCalls.streamGenerateContent(request, options);
   }
 
@@ -5264,6 +5429,7 @@ export class PredictionServiceClient {
   close(): Promise<void> {
     if (this.predictionServiceStub && !this._terminated) {
       return this.predictionServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

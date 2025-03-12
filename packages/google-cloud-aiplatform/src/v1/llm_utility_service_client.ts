@@ -31,6 +31,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class LlmUtilityServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class LlmUtilityServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -647,7 +650,33 @@ export class LlmUtilityServiceClient {
         endpoint: request.endpoint ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.countTokens(request, options, callback);
+    this._log.info('countTokens request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ICountTokensResponse,
+          | protos.google.cloud.aiplatform.v1.ICountTokensRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('countTokens response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .countTokens(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ICountTokensResponse,
+          protos.google.cloud.aiplatform.v1.ICountTokensRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('countTokens response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Return a list of tokens based on the input text.
@@ -748,7 +777,33 @@ export class LlmUtilityServiceClient {
         endpoint: request.endpoint ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.computeTokens(request, options, callback);
+    this._log.info('computeTokens request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IComputeTokensResponse,
+          | protos.google.cloud.aiplatform.v1.IComputeTokensRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('computeTokens response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .computeTokens(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IComputeTokensResponse,
+          protos.google.cloud.aiplatform.v1.IComputeTokensRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('computeTokens response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -4502,6 +4557,7 @@ export class LlmUtilityServiceClient {
   close(): Promise<void> {
     if (this.llmUtilityServiceStub && !this._terminated) {
       return this.llmUtilityServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

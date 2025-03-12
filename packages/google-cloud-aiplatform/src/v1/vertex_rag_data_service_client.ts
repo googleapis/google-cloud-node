@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class VertexRagDataServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class VertexRagDataServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2321,7 +2324,33 @@ export class VertexRagDataServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRagCorpus(request, options, callback);
+    this._log.info('getRagCorpus request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IRagCorpus,
+          | protos.google.cloud.aiplatform.v1.IGetRagCorpusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRagCorpus response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRagCorpus(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IRagCorpus,
+          protos.google.cloud.aiplatform.v1.IGetRagCorpusRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getRagCorpus response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Upload a file into a RagCorpus.
@@ -2418,7 +2447,33 @@ export class VertexRagDataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.uploadRagFile(request, options, callback);
+    this._log.info('uploadRagFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IUploadRagFileResponse,
+          | protos.google.cloud.aiplatform.v1.IUploadRagFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('uploadRagFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .uploadRagFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IUploadRagFileResponse,
+          protos.google.cloud.aiplatform.v1.IUploadRagFileRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('uploadRagFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a RagFile.
@@ -2504,7 +2559,33 @@ export class VertexRagDataServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRagFile(request, options, callback);
+    this._log.info('getRagFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IRagFile,
+          | protos.google.cloud.aiplatform.v1.IGetRagFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRagFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRagFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IRagFile,
+          protos.google.cloud.aiplatform.v1.IGetRagFileRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getRagFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2610,7 +2691,37 @@ export class VertexRagDataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createRagCorpus(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IRagCorpus,
+            protos.google.cloud.aiplatform.v1.ICreateRagCorpusOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createRagCorpus response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createRagCorpus request %j', request);
+    return this.innerApiCalls
+      .createRagCorpus(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IRagCorpus,
+            protos.google.cloud.aiplatform.v1.ICreateRagCorpusOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createRagCorpus response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createRagCorpus()`.
@@ -2631,6 +2742,7 @@ export class VertexRagDataServiceClient {
       protos.google.cloud.aiplatform.v1.CreateRagCorpusOperationMetadata
     >
   > {
+    this._log.info('createRagCorpus long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2746,7 +2858,37 @@ export class VertexRagDataServiceClient {
         'rag_corpus.name': request.ragCorpus!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateRagCorpus(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IRagCorpus,
+            protos.google.cloud.aiplatform.v1.IUpdateRagCorpusOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateRagCorpus response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateRagCorpus request %j', request);
+    return this.innerApiCalls
+      .updateRagCorpus(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IRagCorpus,
+            protos.google.cloud.aiplatform.v1.IUpdateRagCorpusOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRagCorpus response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateRagCorpus()`.
@@ -2767,6 +2909,7 @@ export class VertexRagDataServiceClient {
       protos.google.cloud.aiplatform.v1.UpdateRagCorpusOperationMetadata
     >
   > {
+    this._log.info('updateRagCorpus long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2888,7 +3031,37 @@ export class VertexRagDataServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteRagCorpus(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteRagCorpus response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteRagCorpus request %j', request);
+    return this.innerApiCalls
+      .deleteRagCorpus(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRagCorpus response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteRagCorpus()`.
@@ -2909,6 +3082,7 @@ export class VertexRagDataServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteRagCorpus long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3030,7 +3204,37 @@ export class VertexRagDataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importRagFiles(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IImportRagFilesResponse,
+            protos.google.cloud.aiplatform.v1.IImportRagFilesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importRagFiles response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importRagFiles request %j', request);
+    return this.innerApiCalls
+      .importRagFiles(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IImportRagFilesResponse,
+            protos.google.cloud.aiplatform.v1.IImportRagFilesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importRagFiles response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importRagFiles()`.
@@ -3051,6 +3255,7 @@ export class VertexRagDataServiceClient {
       protos.google.cloud.aiplatform.v1.ImportRagFilesOperationMetadata
     >
   > {
+    this._log.info('importRagFiles long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3168,7 +3373,37 @@ export class VertexRagDataServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteRagFile(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteRagFile response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteRagFile request %j', request);
+    return this.innerApiCalls
+      .deleteRagFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRagFile response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteRagFile()`.
@@ -3189,6 +3424,7 @@ export class VertexRagDataServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteRagFile long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3305,7 +3541,33 @@ export class VertexRagDataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRagCorpora(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListRagCorporaRequest,
+          | protos.google.cloud.aiplatform.v1.IListRagCorporaResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IRagCorpus
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRagCorpora values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRagCorpora request %j', request);
+    return this.innerApiCalls
+      .listRagCorpora(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IRagCorpus[],
+          protos.google.cloud.aiplatform.v1.IListRagCorporaRequest | null,
+          protos.google.cloud.aiplatform.v1.IListRagCorporaResponse,
+        ]) => {
+          this._log.info('listRagCorpora values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3350,6 +3612,7 @@ export class VertexRagDataServiceClient {
     const defaultCallSettings = this._defaults['listRagCorpora'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRagCorpora stream %j', request);
     return this.descriptors.page.listRagCorpora.createStream(
       this.innerApiCalls.listRagCorpora as GaxCall,
       request,
@@ -3402,6 +3665,7 @@ export class VertexRagDataServiceClient {
     const defaultCallSettings = this._defaults['listRagCorpora'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRagCorpora iterate %j', request);
     return this.descriptors.page.listRagCorpora.asyncIterate(
       this.innerApiCalls['listRagCorpora'] as GaxCall,
       request as {},
@@ -3510,7 +3774,33 @@ export class VertexRagDataServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRagFiles(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListRagFilesRequest,
+          | protos.google.cloud.aiplatform.v1.IListRagFilesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IRagFile
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRagFiles values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRagFiles request %j', request);
+    return this.innerApiCalls
+      .listRagFiles(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IRagFile[],
+          protos.google.cloud.aiplatform.v1.IListRagFilesRequest | null,
+          protos.google.cloud.aiplatform.v1.IListRagFilesResponse,
+        ]) => {
+          this._log.info('listRagFiles values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3556,6 +3846,7 @@ export class VertexRagDataServiceClient {
     const defaultCallSettings = this._defaults['listRagFiles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRagFiles stream %j', request);
     return this.descriptors.page.listRagFiles.createStream(
       this.innerApiCalls.listRagFiles as GaxCall,
       request,
@@ -3609,6 +3900,7 @@ export class VertexRagDataServiceClient {
     const defaultCallSettings = this._defaults['listRagFiles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRagFiles iterate %j', request);
     return this.descriptors.page.listRagFiles.asyncIterate(
       this.innerApiCalls['listRagFiles'] as GaxCall,
       request as {},
@@ -7626,6 +7918,7 @@ export class VertexRagDataServiceClient {
   close(): Promise<void> {
     if (this.vertexRagDataServiceStub && !this._terminated) {
       return this.vertexRagDataServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();
