@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class PolicyTagManagerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('datacatalog');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -92,7 +95,7 @@ export class PolicyTagManagerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -515,7 +518,33 @@ export class PolicyTagManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createTaxonomy(request, options, callback);
+    this._log.info('createTaxonomy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1.ITaxonomy,
+          | protos.google.cloud.datacatalog.v1.ICreateTaxonomyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTaxonomy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTaxonomy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1.ITaxonomy,
+          protos.google.cloud.datacatalog.v1.ICreateTaxonomyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTaxonomy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a taxonomy, including all policy tags in this
@@ -609,7 +638,33 @@ export class PolicyTagManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteTaxonomy(request, options, callback);
+    this._log.info('deleteTaxonomy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.datacatalog.v1.IDeleteTaxonomyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTaxonomy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTaxonomy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datacatalog.v1.IDeleteTaxonomyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTaxonomy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a taxonomy, including its display name,
@@ -707,7 +762,33 @@ export class PolicyTagManagerClient {
         'taxonomy.name': request.taxonomy!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateTaxonomy(request, options, callback);
+    this._log.info('updateTaxonomy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1.ITaxonomy,
+          | protos.google.cloud.datacatalog.v1.IUpdateTaxonomyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTaxonomy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTaxonomy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1.ITaxonomy,
+          protos.google.cloud.datacatalog.v1.IUpdateTaxonomyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTaxonomy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a taxonomy.
@@ -791,7 +872,33 @@ export class PolicyTagManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTaxonomy(request, options, callback);
+    this._log.info('getTaxonomy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1.ITaxonomy,
+          | protos.google.cloud.datacatalog.v1.IGetTaxonomyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTaxonomy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTaxonomy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1.ITaxonomy,
+          protos.google.cloud.datacatalog.v1.IGetTaxonomyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTaxonomy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a policy tag in a taxonomy.
@@ -883,7 +990,36 @@ export class PolicyTagManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createPolicyTag(request, options, callback);
+    this._log.info('createPolicyTag request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1.IPolicyTag,
+          | protos.google.cloud.datacatalog.v1.ICreatePolicyTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createPolicyTag response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createPolicyTag(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1.IPolicyTag,
+          (
+            | protos.google.cloud.datacatalog.v1.ICreatePolicyTagRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createPolicyTag response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a policy tag together with the following:
@@ -980,7 +1116,36 @@ export class PolicyTagManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePolicyTag(request, options, callback);
+    this._log.info('deletePolicyTag request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.datacatalog.v1.IDeletePolicyTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deletePolicyTag response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deletePolicyTag(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.datacatalog.v1.IDeletePolicyTagRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePolicyTag response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a policy tag, including its display
@@ -1079,7 +1244,36 @@ export class PolicyTagManagerClient {
         'policy_tag.name': request.policyTag!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updatePolicyTag(request, options, callback);
+    this._log.info('updatePolicyTag request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1.IPolicyTag,
+          | protos.google.cloud.datacatalog.v1.IUpdatePolicyTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updatePolicyTag response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updatePolicyTag(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1.IPolicyTag,
+          (
+            | protos.google.cloud.datacatalog.v1.IUpdatePolicyTagRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePolicyTag response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a policy tag.
@@ -1169,7 +1363,33 @@ export class PolicyTagManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPolicyTag(request, options, callback);
+    this._log.info('getPolicyTag request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1.IPolicyTag,
+          | protos.google.cloud.datacatalog.v1.IGetPolicyTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPolicyTag response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPolicyTag(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1.IPolicyTag,
+          protos.google.cloud.datacatalog.v1.IGetPolicyTagRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPolicyTag response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the IAM policy for a policy tag or a taxonomy.
@@ -1255,7 +1475,31 @@ export class PolicyTagManagerClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the IAM policy for a policy tag or a taxonomy.
@@ -1349,7 +1593,31 @@ export class PolicyTagManagerClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns your permissions on a specified policy tag or
@@ -1438,7 +1706,31 @@ export class PolicyTagManagerClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1544,7 +1836,33 @@ export class PolicyTagManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTaxonomies(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datacatalog.v1.IListTaxonomiesRequest,
+          | protos.google.cloud.datacatalog.v1.IListTaxonomiesResponse
+          | null
+          | undefined,
+          protos.google.cloud.datacatalog.v1.ITaxonomy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTaxonomies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTaxonomies request %j', request);
+    return this.innerApiCalls
+      .listTaxonomies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datacatalog.v1.ITaxonomy[],
+          protos.google.cloud.datacatalog.v1.IListTaxonomiesRequest | null,
+          protos.google.cloud.datacatalog.v1.IListTaxonomiesResponse,
+        ]) => {
+          this._log.info('listTaxonomies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1590,6 +1908,7 @@ export class PolicyTagManagerClient {
     const defaultCallSettings = this._defaults['listTaxonomies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTaxonomies stream %j', request);
     return this.descriptors.page.listTaxonomies.createStream(
       this.innerApiCalls.listTaxonomies as GaxCall,
       request,
@@ -1643,6 +1962,7 @@ export class PolicyTagManagerClient {
     const defaultCallSettings = this._defaults['listTaxonomies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTaxonomies iterate %j', request);
     return this.descriptors.page.listTaxonomies.asyncIterate(
       this.innerApiCalls['listTaxonomies'] as GaxCall,
       request as {},
@@ -1749,7 +2069,33 @@ export class PolicyTagManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPolicyTags(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datacatalog.v1.IListPolicyTagsRequest,
+          | protos.google.cloud.datacatalog.v1.IListPolicyTagsResponse
+          | null
+          | undefined,
+          protos.google.cloud.datacatalog.v1.IPolicyTag
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPolicyTags values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPolicyTags request %j', request);
+    return this.innerApiCalls
+      .listPolicyTags(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datacatalog.v1.IPolicyTag[],
+          protos.google.cloud.datacatalog.v1.IListPolicyTagsRequest | null,
+          protos.google.cloud.datacatalog.v1.IListPolicyTagsResponse,
+        ]) => {
+          this._log.info('listPolicyTags values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1793,6 +2139,7 @@ export class PolicyTagManagerClient {
     const defaultCallSettings = this._defaults['listPolicyTags'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPolicyTags stream %j', request);
     return this.descriptors.page.listPolicyTags.createStream(
       this.innerApiCalls.listPolicyTags as GaxCall,
       request,
@@ -1844,6 +2191,7 @@ export class PolicyTagManagerClient {
     const defaultCallSettings = this._defaults['listPolicyTags'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPolicyTags iterate %j', request);
     return this.descriptors.page.listPolicyTags.asyncIterate(
       this.innerApiCalls['listPolicyTags'] as GaxCall,
       request as {},
@@ -2369,6 +2717,7 @@ export class PolicyTagManagerClient {
   close(): Promise<void> {
     if (this.policyTagManagerStub && !this._terminated) {
       return this.policyTagManagerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
