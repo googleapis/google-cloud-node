@@ -5,6 +5,7 @@
   "../../protos/google/shopping/merchant/accounts/v1beta/accounts.proto",
   "../../protos/google/shopping/merchant/accounts/v1beta/accountservices.proto",
   "../../protos/google/shopping/merchant/accounts/v1beta/autofeedsettings.proto",
+  "../../protos/google/shopping/merchant/accounts/v1beta/automaticimprovements.proto",
   "../../protos/google/shopping/merchant/accounts/v1beta/businessidentity.proto",
   "../../protos/google/shopping/merchant/accounts/v1beta/businessinfo.proto",
   "../../protos/google/shopping/merchant/accounts/v1beta/customerservice.proto",

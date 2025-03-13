@@ -21,9 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as accounttaxserviceModule from '../src';
-
-import {PassThrough} from 'stream';
+import * as automaticimprovementsserviceModule from '../src';
 
 import {protobuf} from 'google-gax';
 
@@ -66,79 +64,18 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-    }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
-    }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
-}
-
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
-}
-
-describe('v1beta.AccountTaxServiceClient', () => {
+describe('v1beta.AutomaticImprovementsServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new accounttaxserviceModule.v1beta.AccountTaxServiceClient();
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new accounttaxserviceModule.v1beta.AccountTaxServiceClient();
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -150,7 +87,8 @@ describe('v1beta.AccountTaxServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          accounttaxserviceModule.v1beta.AccountTaxServiceClient.servicePath;
+          automaticimprovementsserviceModule.v1beta
+            .AutomaticImprovementsServiceClient.servicePath;
         assert.strictEqual(servicePath, 'merchantapi.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -159,24 +97,27 @@ describe('v1beta.AccountTaxServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          accounttaxserviceModule.v1beta.AccountTaxServiceClient.apiEndpoint;
+          automaticimprovementsserviceModule.v1beta
+            .AutomaticImprovementsServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {universeDomain: 'example.com'}
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {universeDomain: 'example.com'}
+        );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'merchantapi.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {universe_domain: 'example.com'}
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {universe_domain: 'example.com'}
+        );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'merchantapi.example.com');
     });
@@ -187,7 +128,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new accounttaxserviceModule.v1beta.AccountTaxServiceClient();
+            new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.example.com');
           if (saved) {
@@ -201,9 +142,9 @@ describe('v1beta.AccountTaxServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new accounttaxserviceModule.v1beta.AccountTaxServiceClient({
-              universeDomain: 'configured.example.com',
-            });
+            new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+              {universeDomain: 'configured.example.com'}
+            );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.configured.example.com');
           if (saved) {
@@ -216,68 +157,73 @@ describe('v1beta.AccountTaxServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new accounttaxserviceModule.v1beta.AccountTaxServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
       });
     });
 
     it('has port', () => {
-      const port = accounttaxserviceModule.v1beta.AccountTaxServiceClient.port;
+      const port =
+        automaticimprovementsserviceModule.v1beta
+          .AutomaticImprovementsServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new accounttaxserviceModule.v1beta.AccountTaxServiceClient();
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          fallback: true,
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            fallback: true,
+          }
+        );
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert.strictEqual(client.accountTaxServiceStub, undefined);
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.automaticImprovementsServiceStub, undefined);
       await client.initialize();
-      assert(client.accountTaxServiceStub);
+      assert(client.automaticImprovementsServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      assert(client.accountTaxServiceStub);
+      assert(client.automaticImprovementsServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert.strictEqual(client.accountTaxServiceStub, undefined);
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.automaticImprovementsServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -285,12 +231,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -299,12 +246,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -322,68 +270,71 @@ describe('v1beta.AccountTaxServiceClient', () => {
     });
   });
 
-  describe('getAccountTax', () => {
-    it('invokes getAccountTax without error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+  describe('getAutomaticImprovements', () => {
+    it('invokes getAutomaticImprovements without error', async () => {
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest',
+        '.google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+        new protos.google.shopping.merchant.accounts.v1beta.AutomaticImprovements()
       );
-      client.innerApiCalls.getAccountTax = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAccountTax(request);
+      client.innerApiCalls.getAutomaticImprovements =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getAutomaticImprovements(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getAccountTax as SinonStub
+        client.innerApiCalls.getAutomaticImprovements as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccountTax as SinonStub
+        client.innerApiCalls.getAutomaticImprovements as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getAccountTax without error using callback', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes getAutomaticImprovements without error using callback', async () => {
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest',
+        '.google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+        new protos.google.shopping.merchant.accounts.v1beta.AutomaticImprovements()
       );
-      client.innerApiCalls.getAccountTax =
+      client.innerApiCalls.getAutomaticImprovements =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getAccountTax(
+        client.getAutomaticImprovements(
           request,
           (
             err?: Error | null,
-            result?: protos.google.shopping.merchant.accounts.v1beta.IAccountTax | null
+            result?: protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements | null
           ) => {
             if (err) {
               reject(err);
@@ -396,134 +347,145 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getAccountTax as SinonStub
+        client.innerApiCalls.getAutomaticImprovements as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccountTax as SinonStub
+        client.innerApiCalls.getAutomaticImprovements as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getAccountTax with error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes getAutomaticImprovements with error', async () => {
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest',
+        '.google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getAccountTax = stubSimpleCall(
+      client.innerApiCalls.getAutomaticImprovements = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.getAccountTax(request), expectedError);
+      await assert.rejects(
+        client.getAutomaticImprovements(request),
+        expectedError
+      );
       const actualRequest = (
-        client.innerApiCalls.getAccountTax as SinonStub
+        client.innerApiCalls.getAutomaticImprovements as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccountTax as SinonStub
+        client.innerApiCalls.getAutomaticImprovements as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getAccountTax with closed client', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes getAutomaticImprovements with closed client', async () => {
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest',
+        '.google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.getAccountTax(request), expectedError);
+      await assert.rejects(
+        client.getAutomaticImprovements(request),
+        expectedError
+      );
     });
   });
 
-  describe('updateAccountTax', () => {
-    it('invokes updateAccountTax without error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+  describe('updateAutomaticImprovements', () => {
+    it('invokes updateAutomaticImprovements without error', async () => {
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest()
       );
-      request.accountTax ??= {};
+      request.automaticImprovements ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest',
-        ['accountTax', 'name']
+        '.google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest',
+        ['automaticImprovements', 'name']
       );
-      request.accountTax.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_tax.name=${defaultValue1 ?? ''}`;
+      request.automaticImprovements.name = defaultValue1;
+      const expectedHeaderRequestParams = `automatic_improvements.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+        new protos.google.shopping.merchant.accounts.v1beta.AutomaticImprovements()
       );
-      client.innerApiCalls.updateAccountTax = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateAccountTax(request);
+      client.innerApiCalls.updateAutomaticImprovements =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateAutomaticImprovements(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateAccountTax as SinonStub
+        client.innerApiCalls.updateAutomaticImprovements as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccountTax as SinonStub
+        client.innerApiCalls.updateAutomaticImprovements as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateAccountTax without error using callback', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes updateAutomaticImprovements without error using callback', async () => {
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest()
       );
-      request.accountTax ??= {};
+      request.automaticImprovements ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest',
-        ['accountTax', 'name']
+        '.google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest',
+        ['automaticImprovements', 'name']
       );
-      request.accountTax.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_tax.name=${defaultValue1 ?? ''}`;
+      request.automaticImprovements.name = defaultValue1;
+      const expectedHeaderRequestParams = `automatic_improvements.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+        new protos.google.shopping.merchant.accounts.v1beta.AutomaticImprovements()
       );
-      client.innerApiCalls.updateAccountTax =
+      client.innerApiCalls.updateAutomaticImprovements =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.updateAccountTax(
+        client.updateAutomaticImprovements(
           request,
           (
             err?: Error | null,
-            result?: protos.google.shopping.merchant.accounts.v1beta.IAccountTax | null
+            result?: protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements | null
           ) => {
             if (err) {
               reject(err);
@@ -536,417 +498,76 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateAccountTax as SinonStub
+        client.innerApiCalls.updateAutomaticImprovements as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccountTax as SinonStub
+        client.innerApiCalls.updateAutomaticImprovements as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateAccountTax with error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes updateAutomaticImprovements with error', async () => {
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest()
       );
-      request.accountTax ??= {};
+      request.automaticImprovements ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest',
-        ['accountTax', 'name']
+        '.google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest',
+        ['automaticImprovements', 'name']
       );
-      request.accountTax.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_tax.name=${defaultValue1 ?? ''}`;
+      request.automaticImprovements.name = defaultValue1;
+      const expectedHeaderRequestParams = `automatic_improvements.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateAccountTax = stubSimpleCall(
+      client.innerApiCalls.updateAutomaticImprovements = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.updateAccountTax(request), expectedError);
+      await assert.rejects(
+        client.updateAutomaticImprovements(request),
+        expectedError
+      );
       const actualRequest = (
-        client.innerApiCalls.updateAccountTax as SinonStub
+        client.innerApiCalls.updateAutomaticImprovements as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccountTax as SinonStub
+        client.innerApiCalls.updateAutomaticImprovements as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateAccountTax with closed client', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes updateAutomaticImprovements with closed client', async () => {
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest()
       );
-      request.accountTax ??= {};
+      request.automaticImprovements ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest',
-        ['accountTax', 'name']
+        '.google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest',
+        ['automaticImprovements', 'name']
       );
-      request.accountTax.name = defaultValue1;
+      request.automaticImprovements.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.updateAccountTax(request), expectedError);
-    });
-  });
-
-  describe('listAccountTax', () => {
-    it('invokes listAccountTax without error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-      ];
-      client.innerApiCalls.listAccountTax = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAccountTax(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAccountTax as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccountTax as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAccountTax without error using callback', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-      ];
-      client.innerApiCalls.listAccountTax =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAccountTax(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.shopping.merchant.accounts.v1beta.IAccountTax[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAccountTax as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccountTax as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAccountTax with error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAccountTax = stubSimpleCall(
-        undefined,
+      await assert.rejects(
+        client.updateAutomaticImprovements(request),
         expectedError
-      );
-      await assert.rejects(client.listAccountTax(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listAccountTax as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccountTax as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAccountTaxStream without error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-      ];
-      client.descriptors.page.listAccountTax.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAccountTaxStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.shopping.merchant.accounts.v1beta.AccountTax[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.shopping.merchant.accounts.v1beta.AccountTax
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listAccountTax.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAccountTax, request)
-      );
-      assert(
-        (client.descriptors.page.listAccountTax.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listAccountTaxStream with error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAccountTax.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAccountTaxStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.shopping.merchant.accounts.v1beta.AccountTax[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.shopping.merchant.accounts.v1beta.AccountTax
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listAccountTax.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAccountTax, request)
-      );
-      assert(
-        (client.descriptors.page.listAccountTax.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listAccountTax without error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-      ];
-      client.descriptors.page.listAccountTax.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.shopping.merchant.accounts.v1beta.IAccountTax[] =
-        [];
-      const iterable = client.listAccountTaxAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAccountTax.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAccountTax.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listAccountTax with error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAccountTax.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAccountTaxAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.shopping.merchant.accounts.v1beta.IAccountTax[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAccountTax.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAccountTax.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -957,12 +578,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         account: 'accountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.accountPathTemplate.render = sinon
         .stub()
@@ -998,12 +620,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         issue: 'issueValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.accountIssuePathTemplate.render = sinon
         .stub()
@@ -1049,12 +672,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         tax: 'taxValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.accountTaxPathTemplate.render = sinon
         .stub()
@@ -1099,12 +723,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         account: 'accountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.autofeedSettingsPathTemplate.render = sinon
         .stub()
@@ -1142,12 +767,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         account: 'accountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.automaticImprovementsPathTemplate.render = sinon
         .stub()
@@ -1189,12 +815,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         account: 'accountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.businessIdentityPathTemplate.render = sinon
         .stub()
@@ -1232,12 +859,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         account: 'accountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.businessInfoPathTemplate.render = sinon
         .stub()
@@ -1273,12 +901,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         email: 'emailValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.emailPreferencesPathTemplate.render = sinon
         .stub()
@@ -1329,12 +958,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         account: 'accountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.homepagePathTemplate.render = sinon
         .stub()
@@ -1370,12 +1000,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         return_policy: 'returnPolicyValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.onlineReturnPolicyPathTemplate.render = sinon
         .stub()
@@ -1434,12 +1065,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         program: 'programValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.programPathTemplate.render = sinon
         .stub()
@@ -1485,12 +1117,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         region: 'regionValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.regionPathTemplate.render = sinon
         .stub()
@@ -1535,12 +1168,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         account: 'accountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.shippingSettingsPathTemplate.render = sinon
         .stub()
@@ -1578,12 +1212,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         version: 'versionValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.termsOfServicePathTemplate.render = sinon
         .stub()
@@ -1619,12 +1254,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         identifier: 'identifierValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.termsOfServiceAgreementStatePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1682,12 +1318,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         email: 'emailValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new automaticimprovementsserviceModule.v1beta.AutomaticImprovementsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.userPathTemplate.render = sinon
         .stub()
