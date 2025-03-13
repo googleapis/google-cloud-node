@@ -571,6 +571,9 @@ describe('Translate v2', () => {
       });
 
       it('should make the correct request', done => {
+        translate.request = () => {
+          done();
+        };
         const fakeOptions = {
           uri: '/test',
           a: 'b',
@@ -587,7 +590,6 @@ describe('Translate v2', () => {
           callback();
         };
 
-        console.log(translate);
         translate.request(fakeOptions, done);
       });
     });
@@ -602,6 +604,9 @@ describe('Translate v2', () => {
       });
 
       it('should make the correct request', done => {
+        translate.request = () => {
+          done();
+        };
         const userAgent = 'user-agent/0.0.0';
 
         const getUserAgentFn = fakeUtil.getUserAgentFromPackageJson;
