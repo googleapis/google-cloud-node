@@ -18,7 +18,7 @@
 
 'use strict';
 
-function main(parent) {
+function main(parent, apiEndpoint) {
   // [START modelarmor_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -47,12 +47,16 @@ function main(parent) {
    *  Optional. Hint for how to order the results
    */
   // const orderBy = 'abc123'
+  /**
+   * Required. Regional endpoint.
+   */
+  // const apiEndpoint = modelarmor.us-central1.rep.googleapis.com
 
   // Imports the Modelarmor library
   const {ModelArmorClient} = require('@google-cloud/modelarmor').v1;
 
   // Instantiates a client
-  const modelarmorClient = new ModelArmorClient();
+  const modelarmorClient = new ModelArmorClient({apiEndpoint});
 
   async function callListTemplates() {
     // Construct request
