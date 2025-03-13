@@ -67,7 +67,7 @@
     "codecov": "^3.0.2",
     "gapic-tools": "^1.0.1",
     "google-auth-library": "^10.0.0-rc.1",
-    "gts": "^5.0.0",
+    "gts": "^6.0.2",
     "http2spy": "^2.0.0",
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^3.0.0",
